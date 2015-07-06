@@ -65,6 +65,10 @@ A block used to quickly send emails to members of a class, replicating similar f
 
 A course report which displays the user pictures for everyone enrolled in a course.
 
+### Ad-hoc database queries (customsql)
+
+This report plugin, developed by Tim Hunt at the Open University,  allows Administrators to set up arbitrary database queries to act as ad-hoc reports.
+
 ## Downloading the LAE
 
 You can get the LAE in two ways:
