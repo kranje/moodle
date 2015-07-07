@@ -1,4 +1,4 @@
-# [Moodle Liberal Arts Edition v2.7.8-LAE7.0.6]
+# [Moodle Liberal Arts Edition v2.7.9-LAE7.0.7]
 
 Welcome to the Moodle Liberal Arts Edition. The goal of the LAE is to provide a coherent package for modules, patches, and code developed (or improved) by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -16,7 +16,7 @@ Questions about the LAE can be sent to Ken Newquist at <newquisk@lafayette.edu> 
 
 ## Contents
 
-Moodle 2.7.8+LAE7.0.6 consists of the core Moodle 2.7.8 release plus a number of CLAMP-developed features and bug fixes.
+Moodle 2.7.9+LAE7.0.7 consists of the core Moodle 2.7.9 release plus a number of CLAMP-developed features and bug fixes.
 
 The following core features are included:
 
@@ -65,6 +65,10 @@ A block used to quickly send emails to members of a class, replicating similar f
 
 A course report which displays the user pictures for everyone enrolled in a course.
 
+### Ad-hoc database queries (customsql)
+
+This report plugin, developed by Tim Hunt at the Open University,  allows Administrators to set up arbitrary database queries to act as ad-hoc reports.
+
 ## Downloading the LAE
 
 You can get the LAE in two ways:
@@ -72,10 +76,10 @@ You can get the LAE in two ways:
 * Download the tar and zip packages from the CLAMP web site: <http://www.clamp-it.org/code/>
 * Download the current release branch from the CLAMP code repository:
 
-    git clone https://github.com/CLAMP-IT/moodle v2.7.8-LAE7.0.6
-    git checkout -b v2.7.8-LAE7.0.6
+    git clone https://github.com/CLAMP-IT/moodle v2.7.9-LAE7.0.7
+    git checkout -b v2.7.9-LAE7.0.7
 
-By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v2.7.8-LAE7.0.6-base tag instead.
+By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v2.7.9-LAE7.0.7-base tag instead.
 
 CLAMP maintains two branches for each major version:
 
