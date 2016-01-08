@@ -30,25 +30,25 @@ if ($ADMIN->fulltree) {
 
     $roles = $DB->get_records('role', null, 'sortorder ASC');
 
-    $default_sns = array('editingteacher', 'teacher', 'student');
-    $defaults = array_filter($roles, function ($role) use ($default_sns) {
-        return in_array($role->shortname, $default_sns);
+    $defaultroles = array('editingteacher', 'teacher', 'student');
+    $defaults = array_filter($roles, function ($role) use ($defaultroles) {
+        return in_array($role->shortname, $defaultroles);
     });
 
-    $only_names = function ($role) { return $role->shortname; };
+    $onlynames = function ($role) { return $role->shortname;
+    };
 
-    $select_roles = clampmail::_s('select_roles');
     $settings->add(
         new admin_setting_configmultiselect('block_clampmail_roleselection',
-            $select_roles, $select_roles,
+            get_string('select_roles', 'block_clampmail'), get_string('select_roles', 'block_clampmail'),
             array_keys($defaults),
-            array_map($only_names, $roles)
+            array_map($onlynames, $roles)
         )
     );
 
     $settings->add(
         new admin_setting_configselect('block_clampmail_receipt',
-        clampmail::_s('receipt'), clampmail::_s('receipt_help'),
+        get_string('receipt', 'block_clampmail'), get_string('receipt_help', 'block_clampmail'),
         0, $select
         )
     );
@@ -61,7 +61,7 @@ if ($ADMIN->fulltree) {
 
     $settings->add(
         new admin_setting_configselect('block_clampmail_prepend_class',
-            clampmail::_s('prepend_class'), clampmail::_s('prepend_class_desc'),
+            get_string('prepend_class', 'block_clampmail'), get_string('prepend_class_desc', 'block_clampmail'),
             0, $options
         )
     );

@@ -58,12 +58,12 @@ if (!has_capability('block/clampmail:cansend', $context)) {
 $sigs = $DB->get_records('block_clampmail_signatures',
     array('userid' => $USER->id), 'default_flag DESC');
 
-$alt_params = array('courseid' => $course->id, 'valid' => 1);
+$altparams = array('courseid' => $course->id, 'valid' => 1);
 $alternates = $DB->get_records_menu('block_clampmail_alternate',
-    $alt_params, '', 'id, address');
+    $altparams, '', 'id, address');
 
-$blockname = clampmail::_s('pluginname');
-$header = clampmail::_s('email');
+$blockname = get_string('pluginname', 'block_clampmail');
+$header = get_string('email', 'block_clampmail');
 
 $PAGE->set_context($context);
 $PAGE->set_course($course);
@@ -79,10 +79,10 @@ $PAGE->requires->js('/blocks/clampmail/js/jquery.js');
 $PAGE->requires->js('/blocks/clampmail/js/selection.js');
 
 // Build role arrays.
-$course_roles = get_roles_used_in_context($context);
-$filter_roles = $DB->get_records_select('role',
+$courseroles = get_roles_used_in_context($context);
+$filterroles = $DB->get_records_select('role',
     sprintf('id IN (%s)', $config['roleselection']));
-$roles = clampmail::filter_roles($course_roles, $filter_roles);
+$roles = clampmail::filter_roles($courseroles, $filterroles);
 
 // Add role names.
 foreach ($roles as $id => $role) {
@@ -100,26 +100,22 @@ if (!has_capability('moodle/site:accessallgroups', $context)) {
     $mastercap = false;
     $mygroups = groups_get_user_groups($courseid);
     $gids = implode(',', array_values($mygroups['0']));
-    $groups = empty($gids) ?
-        array() :
-        $DB->get_records_select('groups', 'id IN ('.$gids.')');
+    $groups = empty($gids) ? array() : $DB->get_records_select('groups', 'id IN ('.$gids.')');
 }
 
 $globalaccess = empty($allgroups);
 
 // Fill the course users by.
 $users = array();
-$users_to_roles = array();
-$users_to_groups = array();
+$userstoroles = array();
+$userstogroups = array();
 
 $everyone = get_enrolled_users($context, '', 0, user_picture::fields('u', array('mailformat', 'maildisplay')), "", 0, 0, true);
 
 foreach ($everyone as $userid => $user) {
     $usergroups = groups_get_user_groups($courseid, $userid);
 
-    $gids = ($globalaccess or $mastercap) ?
-        array_values($usergroups['0']) :
-        array_intersect(array_values($mygroups['0']), array_values($usergroups['0']));
+    $gids = ($globalaccess or $mastercap) ? array_values($usergroups['0']) : array_intersect(array_values($mygroups['0']), array_values($usergroups['0']));
 
     $userroles = get_user_roles($context, $userid);
     $filterd = clampmail::filter_roles($userroles, $roles);
@@ -130,10 +126,11 @@ foreach ($everyone as $userid => $user) {
         continue;
     }
 
-    $groupmapper = function($id) use ($allgroups) { return $allgroups[$id]; };
+    $groupmapper = function($id) use ($allgroups) { return $allgroups[$id];
+    };
 
-    $users_to_groups[$userid] = array_map($groupmapper, $gids);
-    $users_to_roles[$userid] = $filterd;
+    $userstogroups[$userid] = array_map($groupmapper, $gids);
+    $userstoroles[$userid] = $filterd;
     $users[$userid] = $user;
 }
 
@@ -149,28 +146,27 @@ if (!empty($type)) {
     $email->subject = optional_param('subject', '', PARAM_TEXT);
     $email->message = optional_param('message_editor[text]', '', PARAM_RAW);
     $email->mailto = optional_param('mailto', '', PARAM_TEXT);
-    $email->format = $USER->mailformat;
 }
-$email->messageformat = $email->format;
+$email->messageformat = editors_get_preferred_format();
 $email->messagetext = $email->message;
 
-$default_sigid = $DB->get_field('block_clampmail_signatures', 'id', array(
+$defaultsigid = $DB->get_field('block_clampmail_signatures', 'id', array(
     'userid' => $USER->id, 'default_flag' => 1
 ));
-$email->sigid = $default_sigid ? $default_sigid : -1;
+$email->sigid = $defaultsigid ? $defaultsigid : -1;
 
 // Some setters for the form.
 $email->type = $type;
 $email->typeid = $typeid;
 
-$editor_options = array(
+$editoroptions = array(
     'trusttext' => true,
     'subdirs' => true,
     'maxfiles' => EDITOR_UNLIMITED_FILES,
     'context' => $context
 );
 
-$email = file_prepare_standard_editor($email, 'message', $editor_options,
+$email = file_prepare_standard_editor($email, 'message', $editoroptions,
     $context, 'block_clampmail', $type, $email->id);
 
 $selected = array();
@@ -183,14 +179,15 @@ if (!empty($email->mailto)) {
 
 $form = new email_form(null,
     array(
-        'editor_options' => $editor_options,
+        'editor_options' => $editoroptions,
         'selected' => $selected,
         'users' => $users,
         'roles' => $roles,
         'groups' => $groups,
-        'users_to_roles' => $users_to_roles,
-        'users_to_groups' => $users_to_groups,
-        'sigs' => array_map(function($sig) { return $sig->title; }, $sigs),
+        'users_to_roles' => $userstoroles,
+        'users_to_groups' => $userstogroups,
+        'sigs' => array_map(function($sig) { return $sig->title;
+        }, $sigs),
         'alternates' => $alternates
     )
 );
@@ -231,7 +228,7 @@ if ($form->is_cancelled()) {
             }
         }
 
-        $data = file_postupdate_standard_editor($data, 'message', $editor_options,
+        $data = file_postupdate_standard_editor($data, 'message', $editoroptions,
             $context, 'block_clampmail', $table, $data->id);
 
         $DB->update_record('block_clampmail_'.$table, $data);
@@ -253,7 +250,7 @@ if ($form->is_cancelled()) {
                 clampmail::draft_cleanup($context->id, $typeid);
             }
 
-            list($filename, $file, $actual_file) = clampmail::process_attachments(
+            list($filename, $file, $actualfile) = clampmail::process_attachments(
                 $context, $data, $table, $data->id
             );
 
@@ -262,7 +259,7 @@ if ($form->is_cancelled()) {
 
                 $signaturetext = file_rewrite_pluginfile_urls($sig->signature,
                     'pluginfile.php', $context->id, 'block_clampmail',
-                    'signature', $sig->id, $editor_options);
+                    'signature', $sig->id, $editoroptions);
 
                 $data->message .= $signaturetext;
             }
@@ -270,7 +267,7 @@ if ($form->is_cancelled()) {
             // Prepare html content of message.
             $data->message = file_rewrite_pluginfile_urls($data->message, 'pluginfile.php',
                 $context->id, 'block_clampmail', $table, $data->id,
-                $editor_options);
+                $editoroptions);
 
             // Same user, alternate email.
             if (!empty($data->alternateid)) {
@@ -294,8 +291,8 @@ if ($form->is_cancelled()) {
                     strip_tags($data->message), $data->message, $file, $filename);
             }
 
-            if (!empty($actual_file)) {
-                unlink($actual_file);
+            if (!empty($actualfile)) {
+                unlink($actualfile);
             }
         }
     }
