@@ -51,10 +51,6 @@ A block used to quickly send emails to members of a class, replicating similar f
 
 A course report which displays the user pictures for everyone enrolled in a course.
 
-### News Forum
-
-This local module creates a news forum on course creation. It resolves the issue described in <https://tracker.moodle.org/browse/MDL-26707>.
-
 ### Ad-hoc database queries (customsql)
 
 This report plugin, developed by Tim Hunt at the Open University,  allows Administrators to set up arbitrary database queries to act as ad-hoc reports.
