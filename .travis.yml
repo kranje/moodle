@@ -89,6 +89,10 @@ install:
             echo 'extension="redis.so"' > /tmp/redis.ini
             phpenv config-add /tmp/redis.ini
 
+            # Disable opcache
+            echo 'opcache.enable_cli = 0' > /tmp/opcache.ini
+            phpenv config-add /tmp/opcache.ini
+
             # Install composer dependencies.
             # We need --no-interaction in case we hit API limits for composer. This causes it to fall back to a standard clone.
             # Typically it should be able to use the Composer cache if any other job has already completed before we started here.
