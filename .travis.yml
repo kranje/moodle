@@ -269,7 +269,7 @@ script:
       if [ "$TASK" = 'BEHAT' ];
       then
         (php -S localhost:8000 &) 2> /dev/null > /dev/null;
-        vendor/bin/behat --config /home/travis/roots/behat/behat/behat.yml --tags @local_lae;
+        vendor/bin/behat --config /home/travis/roots/behat/behatrun/behat/behat.yml --tags @local_lae;
       fi
 
     - >
