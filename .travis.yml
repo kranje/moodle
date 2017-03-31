@@ -74,7 +74,7 @@ cache:
 
 install:
     - >
-        if [ "$TASK" = "BEHAT"];
+        if [ "$TASK" = 'BEHAT' ];
         then
             # Set always_populate_raw_post_data to -1
             echo 'always_populate_raw_post_data = -1' > /tmp/custom.ini
