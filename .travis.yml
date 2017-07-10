@@ -55,6 +55,10 @@ matrix:
         - php: 7
           env: DB=none     TASK=GRUNT   NVM_VERSION='node'
 
+    allow_failures:
+        - php: 7
+          env: DB=none     TASK=GRUNT   NVM_VERSION='node'
+
     exclude:
         # MySQL - it's just too slow.
         # Exclude it on all versions except for 7.0
