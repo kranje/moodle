@@ -139,15 +139,6 @@ install:
         fi
 
 before_script:
-    - sudo apt-get update
-    - sudo apt-get -y install haveged
-    - sudo service haveged start
-    - sudo mkdir /mnt/ramdisk
-    - sudo mount -t tmpfs -o size=1024m tmpfs /mnt/ramdisk
-    - sudo stop mysql
-    - sudo mv /var/lib/mysql /mnt/ramdisk
-    - sudo ln -s /mnt/ramdisk/mysql /var/lib/mysql
-    - sudo start mysql
     - phpenv config-rm xdebug.ini
     - >
       if [ "$TASK" = 'PHPUNIT' -o "$TASK" = 'UPGRADE' -o "$TASK" = 'BEHAT' ];
