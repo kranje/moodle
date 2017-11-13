@@ -95,7 +95,7 @@ install:
             sudo service postgresql stop
             sudo mv /var/lib/postgresql /mnt/ramdisk
             sudo ln -s /mnt/ramdisk/postgresql /var/lib/postgresql
-            sudo service postgresql start 9.6
+            sudo service postgresql start 9.5
         fi
     - >
         if [ "$TASK" = 'BEHAT' ];
