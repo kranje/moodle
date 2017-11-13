@@ -325,7 +325,7 @@ class backup_section_structure_step extends backup_structure_step {
 
         $section = new backup_nested_element('section', array('id'), array(
                 'number', 'name', 'summary', 'summaryformat', 'sequence', 'visible',
-                'availabilityjson'));
+                'availabilityjson', 'timemodified'));
 
         // attach format plugin structure to $section element, only one allowed
         $this->add_plugin_structure('format', $section, false);
@@ -529,7 +529,7 @@ class backup_enrolments_structure_step extends backup_structure_step {
         $enrol->annotate_ids('role', 'roleid');
 
         // Add enrol plugin structure.
-        $this->add_plugin_structure('enrol', $enrol, false);
+        $this->add_plugin_structure('enrol', $enrol, true);
 
         return $enrolments;
     }
@@ -1419,8 +1419,9 @@ class backup_block_instance_structure_step extends backup_structure_step {
         // Define each element separated
 
         $block = new backup_nested_element('block', array('id', 'contextid', 'version'), array(
-            'blockname', 'parentcontextid', 'showinsubcontexts', 'pagetypepattern',
-            'subpagepattern', 'defaultregion', 'defaultweight', 'configdata'));
+                'blockname', 'parentcontextid', 'showinsubcontexts', 'pagetypepattern',
+                'subpagepattern', 'defaultregion', 'defaultweight', 'configdata',
+                'timecreated', 'timemodified'));
 
         $positions = new backup_nested_element('block_positions');
 
