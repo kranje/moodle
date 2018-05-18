@@ -107,9 +107,12 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
     public function test_delete_context_data() {
         global $DB;
 
+        $usercount = $DB->count_records('user');
+        $enrolcount = $DB->count_records('user_enrolments');
+
         // We have 2 predictions for model1 and 4 predictions for model2.
         $this->assertEquals(6, $DB->count_records('analytics_predictions'));
-        $this->assertEquals(14, $DB->count_records('analytics_indicator_calc'));
+        $this->assertEquals($usercount + $enrolcount, $DB->count_records('analytics_indicator_calc'));
 
         // We have 1 prediction action.
         $this->assertEquals(1, $DB->count_records('analytics_prediction_actions'));
