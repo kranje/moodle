@@ -17,6 +17,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = '2018051700';
-$plugin->cron      = 0;
+$plugin->requires  = '2017111300';
 $plugin->component = 'local_lae';
 $plugin->maturity  = MATURITY_STABLE;
