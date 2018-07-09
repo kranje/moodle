@@ -125,4 +125,28 @@ class format_weeks_upgrade_testcase extends advanced_testcase {
         // The module is still visible.
         $this->assertEquals(1, $DB->get_field('course_modules', 'visible', ['id' => $cm->cmid]));
     }
+
+    /**
+     * Test upgrade step to add empty sections.
+     */
+    public function test_numsections_add_empty_sections() {
+        global $DB;
+
+        $this->resetAfterTest(true);
+
+        $params = array('format' => 'weeks', 'numsections' => 16, 'startdate' => 1445644800);
+        $course = $this->getDataGenerator()->create_course($params);
+
+        // This test is executed after 'numsections' option was already removed.
+        $DB->insert_record('course_format_options', ['courseid' => $course->id, 'format' => 'weeks',
+            'sectionid' => 0, 'name' => 'numsections', 'value' => '16']);
+
+        // There are 16 sections.
+        $this->assertEquals(17, $DB->count_records('course_sections', ['course' => $course->id]));
+
+        format_weeks_upgrade_remove_numsections();
+
+        // There should still be 16 sections.
+        $this->assertEquals(17, $DB->count_records('course_sections', ['course' => $course->id]));
+    }
 }
