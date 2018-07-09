@@ -51,7 +51,7 @@ matrix:
     include:
           # Run grunt/npm install on highest version ('node' is an alias for the latest node.js version.)
         - php: 7
-          env: DB=none     TASK=GRUNT   NVM_VERSION='lts/carbon'
+          env: DB=none     TASK=GRUNT   NVM_VERSION='0.10'
 
     allow_failures:
         - php: 7
