@@ -23,6 +23,7 @@ The following core features are included:
 * Anonymous Forums
 * Grace period for classifying in progress courses
 * Per-course resource display options
+* Preserve empty sections on upgrade
 
 ### Anonymous Forums
 
@@ -35,6 +36,10 @@ A backporting of the core feature in [MDL-61161](https://tracker.moodle.org/brow
 ### Per-course resource display options
 
 You may choose a default resource display option at the course level now instead of at the site-level.
+
+### Preserve empty sections on upgrade
+
+Implementation of the patch in [MDL-62534](https://tracker.moodle.org/browse/MDL-62534). Moodle changed the way it handles course section management in Moodle 3.4; courses which were created prior to Moodle 3.4 and then upgraded could lose empty sections. This patch prevents the deletion of empty sections for the topic and weeks course formats.
 
 ## Contributed modules
 
