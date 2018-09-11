@@ -24,6 +24,7 @@
 namespace tool_dataprivacy;
 
 use coding_exception;
+use context_course;
 use context_system;
 use core\invalid_persistent_exception;
 use core\message\message;
@@ -75,7 +76,7 @@ class api {
     /** The request is now being processed. */
     const DATAREQUEST_STATUS_PROCESSING = 4;
 
-    /** Data request completed. */
+    /** Information/other request completed. */
     const DATAREQUEST_STATUS_COMPLETE = 5;
 
     /** Data request cancelled by the user. */
@@ -83,6 +84,15 @@ class api {
 
     /** Data request rejected by the DPO. */
     const DATAREQUEST_STATUS_REJECTED = 7;
+
+    /** Data request download ready. */
+    const DATAREQUEST_STATUS_DOWNLOAD_READY = 8;
+
+    /** Data request expired. */
+    const DATAREQUEST_STATUS_EXPIRED = 9;
+
+    /** Data delete request completed, account is removed. */
+    const DATAREQUEST_STATUS_DELETED = 10;
 
     /**
      * Determines whether the user can contact the site's Data Protection Officer via Moodle.
@@ -124,6 +134,25 @@ class api {
         }
 
         require_capability('tool/dataprivacy:managedataregistry', $context);
+    }
+
+    /**
+     * Fetches the role shortnames of Data Protection Officer roles.
+     *
+     * @return array An array of the DPO role shortnames
+     */
+    public static function get_dpo_role_names() : array {
+        global $DB;
+
+        $dporoleids = explode(',', str_replace(' ', '', get_config('tool_dataprivacy', 'dporoles')));
+        $dponames = array();
+
+        if (!empty($dporoleids)) {
+            list($insql, $inparams) = $DB->get_in_or_equal($dporoleids);
+            $dponames = $DB->get_fieldset_select('role', 'shortname', "id {$insql}", $inparams);
+        }
+
+        return $dponames;
     }
 
     /**
@@ -299,6 +328,18 @@ class api {
             }
         }
 
+        // If any are due to expire, expire them and re-fetch updated data.
+        if (empty($statuses)
+                || in_array(self::DATAREQUEST_STATUS_DOWNLOAD_READY, $statuses)
+                || in_array(self::DATAREQUEST_STATUS_EXPIRED, $statuses)) {
+            $expiredrequests = data_request::get_expired_requests($userid);
+
+            if (!empty($expiredrequests)) {
+                data_request::expire($expiredrequests);
+                $results = self::get_data_requests($userid, $statuses, $types, $sort, $offset, $limit);
+            }
+        }
+
         return $results;
     }
 
@@ -380,6 +421,9 @@ class api {
             self::DATAREQUEST_STATUS_COMPLETE,
             self::DATAREQUEST_STATUS_CANCELLED,
             self::DATAREQUEST_STATUS_REJECTED,
+            self::DATAREQUEST_STATUS_DOWNLOAD_READY,
+            self::DATAREQUEST_STATUS_EXPIRED,
+            self::DATAREQUEST_STATUS_DELETED,
         ];
         list($insql, $inparams) = $DB->get_in_or_equal($nonpendingstatuses, SQL_PARAMS_NAMED);
         $select = 'type = :type AND userid = :userid AND status NOT ' . $insql;
@@ -403,6 +447,9 @@ class api {
             self::DATAREQUEST_STATUS_COMPLETE,
             self::DATAREQUEST_STATUS_CANCELLED,
             self::DATAREQUEST_STATUS_REJECTED,
+            self::DATAREQUEST_STATUS_DOWNLOAD_READY,
+            self::DATAREQUEST_STATUS_EXPIRED,
+            self::DATAREQUEST_STATUS_DELETED,
         ];
 
         return !in_array($status, $finalstatuses);
@@ -426,7 +473,22 @@ class api {
         if ($dpoid) {
             $datarequest->set('dpo', $dpoid);
         }
-        $datarequest->set('dpocomment', $comment);
+        // Update the comment if necessary.
+        if (!empty(trim($comment))) {
+            $params = [
+                'date' => userdate(time()),
+                'comment' => $comment
+            ];
+            $commenttosave = get_string('datecomment', 'tool_dataprivacy', $params);
+            // Check if there's an existing DPO comment.
+            $currentcomment = trim($datarequest->get('dpocomment'));
+            if ($currentcomment) {
+                // Append the new comment to the current comment and give them 1 line space in between.
+                $commenttosave = $currentcomment . PHP_EOL . PHP_EOL . $commenttosave;
+            }
+            $datarequest->set('dpocomment', $commenttosave);
+        }
+
         return $datarequest->update();
     }
 
@@ -521,7 +583,6 @@ class api {
      * @param data_request $request The data request
      * @return int|false
      * @throws coding_exception
-     * @throws dml_exception
      * @throws moodle_exception
      */
     public static function notify_dpo($dpo, data_request $request) {
@@ -591,6 +652,54 @@ class api {
     public static function can_create_data_request_for_user($user, $requester = null) {
         $usercontext = \context_user::instance($user);
         return has_capability('tool/dataprivacy:makedatarequestsforchildren', $usercontext, $requester);
+    }
+
+    /**
+     * Checks whether a user can download a data request.
+     *
+     * @param int $userid Target user id (subject of data request)
+     * @param int $requesterid Requester user id (person who requsted it)
+     * @param int|null $downloaderid Person who wants to download user id (default current)
+     * @return bool
+     * @throws coding_exception
+     */
+    public static function can_download_data_request_for_user($userid, $requesterid, $downloaderid = null) {
+        global $USER;
+
+        if (!$downloaderid) {
+            $downloaderid = $USER->id;
+        }
+
+        $usercontext = \context_user::instance($userid);
+        // If it's your own and you have the right capability, you can download it.
+        if ($userid == $downloaderid && has_capability('tool/dataprivacy:downloadownrequest', $usercontext, $downloaderid)) {
+            return true;
+        }
+        // If you can download anyone's in that context, you can download it.
+        if (has_capability('tool/dataprivacy:downloadallrequests', $usercontext, $downloaderid)) {
+            return true;
+        }
+        // If you can have the 'child access' ability to request in that context, and you are the one
+        // who requested it, then you can download it.
+        if ($requesterid == $downloaderid && self::can_create_data_request_for_user($userid, $requesterid)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Gets an action menu link to download a data request.
+     *
+     * @param \context_user $usercontext User context (of user who the data is for)
+     * @param int $requestid Request id
+     * @return \action_menu_link_secondary Action menu link
+     * @throws coding_exception
+     */
+    public static function get_download_link(\context_user $usercontext, $requestid) {
+        $downloadurl = moodle_url::make_pluginfile_url($usercontext->id,
+                'tool_dataprivacy', 'export', $requestid, '/', 'export.zip', true);
+        $downloadtext = get_string('download', 'tool_dataprivacy');
+        return new \action_menu_link_secondary($downloadurl, null, $downloadtext);
     }
 
     /**
