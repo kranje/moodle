@@ -107,6 +107,8 @@ if ($mform->is_cancelled()) {
     foreach ($data as $key => $value) {
         if ($key == "coursestartdate") {
             $course->startdate = $value;
+        } else if ($key == "courseenddate") {
+            $course->enddate = $value;
         } else {
             // It is a module. Need to extract date settings for each module.
             $cmsettings = explode('_', $key);
@@ -130,7 +132,7 @@ if ($mform->is_cancelled()) {
                                     && ($cmsettings['3'] == "completionexpected"
                                     || $cmsettings['3'] == "availablefrom"
                                     || $cmsettings['3'] == "availableuntil") ) {
-                                $forceddatesettings[$cmsettings['2']][$cmsettings['3']]=$value;
+                                $forceddatesettings[$cmsettings['2']][$cmsettings['3']] = $value;
                             } else {
                                 // Module date setting.
                                 $moddatesettings[$cmsettings['2']][$cmsettings['3']] = $value;
@@ -157,6 +159,7 @@ if ($mform->is_cancelled()) {
     // Allow to update only if user is capable.
     if (has_capability('moodle/course:update', $coursecontext)) {
         $DB->set_field('course', 'startdate', $course->startdate, array('id' => $course->id));
+        $DB->set_field('course', 'enddate', $course->enddate, array('id' => $course->id));
     }
 
     // Update forced date settings.
@@ -172,17 +175,17 @@ if ($mform->is_cancelled()) {
 
     // Update section date settings.
     foreach ($sectiondatesettings as $sectionid => $datesettings) {
-       $sectionsettings = array('availablefrom', 'availableuntil');
-       $section = new stdClass();
-       $section->id = $sectionid;
-       foreach($sectionsettings as $setting) {
-           if (isset($datesettings[$setting])) {
-               $section->{$setting} = $datesettings[$setting];
-           } else {
-               $section->{$setting} = 0;
-           }
-       }
-       $DB->update_record('course_sections', $section, true);
+        $sectionsettings = array('availablefrom', 'availableuntil');
+        $section = new stdClass();
+        $section->id = $sectionid;
+        foreach ($sectionsettings as $setting) {
+            if (isset($datesettings[$setting])) {
+                $section->{$setting} = $datesettings[$setting];
+            } else {
+                $section->{$setting} = 0;
+            }
+        }
+        $DB->update_record('course_sections', $section, true);
     }
 
     // Update mod date settings.
