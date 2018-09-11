@@ -1,4 +1,4 @@
-# [Moodle Liberal Arts Edition v3.5.1-LAE15.0.1]
+# [Moodle Liberal Arts Edition v3.5.2-LAE15.0.2]
 
 Welcome to the Moodle Liberal Arts Edition. The goal of the LAE is to provide a coherent package for modules, patches, and code developed (or improved) by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -16,14 +16,13 @@ Questions about the LAE can be sent to Ken Newquist at <newquisk@lafayette.edu> 
 
 ## Contents
 
-Moodle 3.5.1+LAE15.0.1 consists of the core Moodle 3.5.1 release plus a number of CLAMP-developed features and bug fixes.
+Moodle 3.5.2+LAE15.0.2 consists of the core Moodle 3.5.2 release plus a number of CLAMP-developed features and bug fixes.
 
 The following core features are included:
 
 * Anonymous Forums
 * Grace period for classifying in progress courses
 * Per-course resource display options
-* Preserve empty sections on upgrade
 
 ### Anonymous Forums
 
@@ -36,10 +35,6 @@ A backporting of the core feature in [MDL-61161](https://tracker.moodle.org/brow
 ### Per-course resource display options
 
 You may choose a default resource display option at the course level now instead of at the site-level.
-
-### Preserve empty sections on upgrade
-
-Implementation of the patch in [MDL-62534](https://tracker.moodle.org/browse/MDL-62534). Moodle changed the way it handles course section management in Moodle 3.4; courses which were created prior to Moodle 3.4 and then upgraded could lose empty sections. This patch prevents the deletion of empty sections for the topic and weeks course formats.
 
 ## Contributed modules
 
@@ -72,10 +67,10 @@ You can get the LAE in two ways:
 * Download the tar and zip packages from the CLAMP web site: <http://www.clamp-it.org/code/>
 * Download the current release branch from the CLAMP code repository:
 
-    git clone https://github.com/CLAMP-IT/moodle v3.5.1-LAE15.0.1
-    git checkout -b v3.5.1-LAE15.0.1
+    git clone https://github.com/CLAMP-IT/moodle v3.5.2-LAE15.0.2
+    git checkout -b v3.5.2-LAE15.0.2
 
-By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v3.5.1-LAE15.0.1-base tag instead.
+By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v3.5.2-LAE15.0.2-base tag instead.
 
 CLAMP maintains two branches for each major version:
 
