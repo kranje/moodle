@@ -13,32 +13,29 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Install code for report_customsql.
+ * Privacy Subsystem implementation for report_customsql.
  *
- * @package report_customsql
- * @copyright 2013 The Open University
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    report_customsql
+ * @copyright  2018 The Open University
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+namespace report_customsql\privacy;
 defined('MOODLE_INTERNAL') || die();
-
-
 /**
- * Install code for report_customsql.
+ * Privacy Subsystem for report_customsql implementing null_provider.
  *
- * @return bool true on success.
+ * @copyright  2018 The Open University
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function xmldb_report_customsql_install() {
-    global $CFG, $DB;
-
-    // Create the default 'Miscellaneous' category.
-    $category = new stdClass();
-    $category->name = get_string('defaultcategory', 'report_customsql');
-    if (!$DB->record_exists('report_customsql_categories', array('name' => $category->name))) {
-        $DB->insert_record('report_customsql_categories', $category);
+class provider implements \core_privacy\local\metadata\null_provider {
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
     }
-
-    return true;
 }
