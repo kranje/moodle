@@ -15,36 +15,41 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file explains this plugins status in relation to the GDPR.
+ * This file contains the class used to handle regex filters.
  *
  * @package    block_filtered_course_list
  * @copyright  2018 CLAMP
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_filtered_course_list\privacy;
+namespace block_filtered_course_list;
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
 /**
- * A provider class to address GDPR
+ * A class to construct rubrics based on shortname regex matches
  *
  * @package    block_filtered_course_list
- * @copyright  2018 CLAMP
+ * @copyright  2016 CLAMP
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\null_provider {
-
-    // Support PHP back to 5.6 (for Moodle 3.3 and lower).
-    use \core_privacy\local\legacy_polyfill;
+class regex_filter extends \block_filtered_course_list\shortname_filter {
 
     /**
-     * Get the language string identifier from the component's language
-     * file to explain why this plugin stores no data.
+     * Populate the array of rubrics for this filter type
      *
-     * @return string
+     * @return array The list of rubric objects corresponding to the filter
      */
-    public static function _get_reason() {
-        return 'privacy:metadata';
+    public function get_rubrics() {
+        $courselist = array_filter($this->courselist, function($course) {
+            $teststring = str_replace('`', '', $this->line['match']);
+            return (preg_match("`$teststring`", $course->shortname) == 1);
+        });
+        if (empty($courselist)) {
+            return null;
+        }
+        $this->rubrics[] = new \block_filtered_course_list_rubric($this->line['label'],
+                                        $courselist, $this->config, $this->line['expanded']);
+        return $this->rubrics;
     }
 }
