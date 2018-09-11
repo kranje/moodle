@@ -22,7 +22,7 @@ Feature: Edit course plugin dates
       | student3 | C1     | student        |
       | student4 | C1     | student        |
     And I log in as "teacher1"
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     And I turn editing mode on
     And I add a "Quiz" to section "1" and I fill the form with:
       | Name        | Test quiz name 1       |
@@ -38,8 +38,7 @@ Feature: Edit course plugin dates
   @javascript @_switch_iframe
   Scenario: Test edit dates report can be used to change plugin instance dates
     When I log in as "admin"
-    And I am on site homepage
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     And I navigate to "Dates" node in "Course administration > Reports"
     And I follow "Dates"
     Then I should see "Course 1"
@@ -50,10 +49,10 @@ Feature: Edit course plugin dates
     And I should see "Test quiz name 2"
     And I should see "Test quiz name 3"
     # test to see whether we can pick up xpath element
-    And I set the field with xpath "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[2]/fieldset[1]/span/input" to "1"
-    And I set the field with xpath "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[3]/fieldset[1]/span/input" to "1"
-    And I set the field with xpath "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[2]/fieldset[1]/span/input" to "1"
-    And I set the field with xpath "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[3]/fieldset[1]/span/input" to "1"
+    And I set the field with xpath "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[2]/div[2]/div[1]/label/input" to "1"
+    And I set the field with xpath "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[3]/div[2]/div[1]/label/input" to "1"
+    And I set the field with xpath "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[2]/div[2]/div[1]/label/input" to "1"
+    And I set the field with xpath "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[2]/div[2]/div[1]/label/input" to "1"
     And I press "Save changes"
     Then I should see "Course 1"
     And I should see "Activity view filter "
@@ -62,7 +61,7 @@ Feature: Edit course plugin dates
     And I should see "Test quiz name 1"
     And I should see "Test quiz name 2"
     And I should see "Test quiz name 3"
-    And the "value" attribute of "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[2]/fieldset[1]/span/input" "xpath_element" should contain "1"
-    And the "value" attribute of "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[3]/fieldset[1]/span/input" "xpath_element" should contain "1"
-    And the "value" attribute of "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[2]/fieldset[1]/span/input" "xpath_element" should contain "1"
-    And the "value" attribute of "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[3]/fieldset[1]/span/input" "xpath_element" should contain "1"
+    And the "value" attribute of "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[2]/div[2]/div[1]/label/input" "xpath_element" should contain "1"
+    And the "value" attribute of "//fieldset[@id='id_section2header']/div[@class='fcontainer clearfix']/div[3]/div[2]/div[1]/label/input" "xpath_element" should contain "1"
+    And the "value" attribute of "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[2]/div[2]/div[1]/label/input" "xpath_element" should contain "1"
+    And the "value" attribute of "//fieldset[@id='id_section3header']/div[@class='fcontainer clearfix']/div[3]/div[2]/div[1]/label/input" "xpath_element" should contain "1"
