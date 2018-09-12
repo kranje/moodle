@@ -14,7 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || die;
+
 require_once($CFG->dirroot.'/mod/assign/locallib.php');
+
 
 class report_editdates_mod_assign_date_extractor
 extends report_editdates_mod_date_extractor {
@@ -40,6 +43,10 @@ extends report_editdates_mod_date_extractor {
                         get_string('cutoffdate', 'assign'),
                         $assign->cutoffdate,
                         self::DATETIME, true, 5),
+                'gradingduedate' => new report_editdates_date_setting(
+                        get_string('gradingduedate', 'assign'),
+                        $assign->gradingduedate,
+                        self::DATETIME, true, 5),
                 );
     }
 
@@ -53,6 +60,15 @@ extends report_editdates_mod_date_extractor {
         if ($dates['duedate'] && $dates['cutoffdate'] && $dates['duedate'] > $dates['cutoffdate']) {
             $errors['cutoffdate'] = get_string('cutoffdatevalidation', 'assign');
         }
+
+        if ($dates['duedate'] && $dates['gradingduedate'] && $dates['duedate'] > $dates['gradingduedate']) {
+            $errors['gradingduedate'] = get_string('gradingdueduedatevalidation', 'assign');
+        }
+
+        if ($dates['allowsubmissionsfromdate'] && $dates['gradingduedate'] &&
+            $dates['allowsubmissionsfromdate'] > $dates['gradingduedate']) {
+            $errors['gradingduedate'] = get_string('gradingduefromdatevalidation', 'assign');
+        }
         return $errors;
     }
 
@@ -64,6 +80,7 @@ extends report_editdates_mod_date_extractor {
         $update->duedate = $dates['duedate'];
         $update->allowsubmissionsfromdate = $dates['allowsubmissionsfromdate'];
         $update->cutoffdate = $dates['cutoffdate'];
+        $update->gradingduedate = $dates['gradingduedate'];
 
         $result = $DB->update_record('assign', $update);
 
