@@ -227,7 +227,7 @@ before_script:
     - >
       if [ "$TASK" = 'GRUNT' ];
       then
-        npm install --no-spin;
+        npm install --no-spin --no-shrinkwrap;
         npm install --no-spin -g grunt ;
       fi
 
