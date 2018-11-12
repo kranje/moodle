@@ -98,6 +98,12 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         $prediction->action_executed('notuseful', $this->model2->get_target());
 
         $this->setAdminUser();
+
+        // Remove analytics related to the LAE anonymous user.
+        $systemcontext = \context_system::instance();
+        $anonymousid = core_user::get_user_by_username('anonymous_user', 'id')->id;
+        $approvedlist = new approved_userlist($systemcontext, 'core_analytics', [$anonymousid]);
+        provider::delete_data_for_users($approvedlist);
     }
 
     /**
@@ -143,6 +149,9 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
      */
     public function test_delete_context_data() {
         global $DB;
+
+        // Drop the LAE anonymous user.
+        $DB->delete_records('user', ['username' => 'anonymous_user']);
 
         $usercount = $DB->count_records('user');
         $enrolcount = $DB->count_records('user_enrolments');

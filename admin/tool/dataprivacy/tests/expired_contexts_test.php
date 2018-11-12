@@ -291,6 +291,9 @@ class tool_dataprivacy_expired_contexts_testcase extends advanced_testcase {
         global $DB;
         $this->resetAfterTest();
 
+        // Drop the LAE anonymous user.
+        $DB->delete_records('user', ['username' => 'anonymous_user']);
+
         $purposes = $this->setup_basics('PT1H', 'PT1H', 'PT1H');
 
         $user = $this->getDataGenerator()->create_user(['lastaccess' => time() - YEARSECS]);
