@@ -2167,7 +2167,7 @@ function xmldb_main_upgrade($oldversion) {
         $table = new xmldb_table('message_user_actions');
 
         // Conditionally launch add index.
-        $index = new xmldb_index('userid_messageid_action', XMLDB_INDEX_UNIQUE, array('userid, messageid, action'));
+        $index = new xmldb_index('userid_messageid_action', XMLDB_INDEX_UNIQUE, array('userid', 'messageid', 'action'));
         if (!$dbman->index_exists($table, $index)) {
             $dbman->add_index($table, $index);
         }
@@ -2181,7 +2181,7 @@ function xmldb_main_upgrade($oldversion) {
         $table = new xmldb_table('messages');
 
         // Conditionally launch add index.
-        $index = new xmldb_index('conversationid_timecreated', XMLDB_INDEX_NOTUNIQUE, array('conversationid, timecreated'));
+        $index = new xmldb_index('conversationid_timecreated', XMLDB_INDEX_NOTUNIQUE, array('conversationid', 'timecreated'));
         if (!$dbman->index_exists($table, $index)) {
             $dbman->add_index($table, $index);
         }
@@ -2304,6 +2304,14 @@ function xmldb_main_upgrade($oldversion) {
         }
         // Main savepoint reached.
         upgrade_main_savepoint(true, 2018051701.10);
+    }
+
+    if ($oldversion < 2018051702.02) {
+        // Remove unused setting.
+        unset_config('messaginghidereadnotifications');
+
+        // Main savepoint reached.
+        upgrade_main_savepoint(true, 2018051702.02);
     }
 
     return true;
