@@ -19,14 +19,14 @@ Feature: Add an anonymous forum
       | student1  | C1      | student         |
       | student2  | C1      | student         |
     And I log in as "admin"
-    And I navigate to "Forum" node in "Site administration > Plugins > Activity modules"
+    And I navigate to "Plugins > Activity modules > Forum" in site administration
     And I set the following fields to these values:
       | Post anonymously | 1 |
     And I press "Save changes"
     And I am on site homepage
     And I log out
     And I log in as "teacher1"
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     And I turn editing mode on
 
   Scenario: Set anonymous forums option to always and create one
@@ -36,7 +36,7 @@ Feature: Add an anonymous forum
       | Anonymize posts? | Yes, always |
     And I log out
     And I log in as "student1"
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     And I follow "Test forum name"
     And I add a new discussion to "Test forum name" forum with:
       | Subject | Post 1 subject |
@@ -46,8 +46,7 @@ Feature: Add an anonymous forum
     Then I should see "by Anonymous User"
     And I log out
     And I log in as "student2"
-    And I am on site homepage
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     And I follow "Test forum name"
     Then I should see "Anonymous User"
     And I follow "Post 1 subject"
@@ -60,7 +59,7 @@ Feature: Add an anonymous forum
       | Anonymize posts? | Yes, let the user decide |
     And I log out
     And I log in as "student1"
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     And I follow "Test forum 2 name"
     And I add a new discussion to "Test forum 2 name" forum with:
       | Subject | Post 2 subject |
@@ -69,8 +68,7 @@ Feature: Add an anonymous forum
     Then I should see "Anonymous User"
     And I log out
     And I log in as "student2"
-    And I am on site homepage
-    And I follow "Course 1"
+    And I am on "Course 1" course homepage
     And I follow "Test forum 2 name"
     Then I should see "Anonymous User"
     And I follow "Post 2 subject"
