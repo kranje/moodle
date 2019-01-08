@@ -4137,7 +4137,7 @@ function course_check_updates($course, $tocheck, $filter = array()) {
  * @return string (one of COURSE_TIMELINE_FUTURE, COURSE_TIMELINE_INPROGRESS or COURSE_TIMELINE_PAST)
  */
 function course_classify_for_timeline($course, $user = null, $completioninfo = null) {
-    global $CFG, $USER;
+    global $USER;
 
     if ($user == null) {
         $user = $USER;
@@ -4145,7 +4145,7 @@ function course_classify_for_timeline($course, $user = null, $completioninfo = n
 
     $today = time();
     // End date past.
-    if (!empty($course->enddate) && ($course->enddate + ($CFG->coursegraceperiodafter * DAYSECS)) < $today) {
+    if (!empty($course->enddate) && $course->enddate < $today) {
         return COURSE_TIMELINE_PAST;
     }
 
@@ -4159,7 +4159,7 @@ function course_classify_for_timeline($course, $user = null, $completioninfo = n
     }
 
     // Start date not reached.
-    if (!empty($course->startdate) && ($course->startdate - ($CFG->coursegraceperiodbefore * DAYSECS)) > $today) {
+    if (!empty($course->startdate) && $course->startdate > $today) {
         return COURSE_TIMELINE_FUTURE;
     }
 
