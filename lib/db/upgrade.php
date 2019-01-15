@@ -2864,7 +2864,7 @@ function xmldb_main_upgrade($oldversion) {
 
         $updatesql = "UPDATE {oauth2_issuer}
                          SET image = :newimage
-                       WHERE image = :oldimage";
+                       WHERE " . $DB->sql_compare_text('image', 100). " = :oldimage";
         $params = [
             'newimage' => $newurl,
             'oldimage' => $oldurl
@@ -2882,6 +2882,11 @@ function xmldb_main_upgrade($oldversion) {
         $DB->execute($updatesql, ['enabled' => 1, 'type' => 1]);
 
         upgrade_main_savepoint(true, 2018120300.02);
+    }
+
+    if ($oldversion < 2018120301.02) {
+        upgrade_delete_orphaned_file_records();
+        upgrade_main_savepoint(true, 2018120301.02);
     }
 
     return true;
