@@ -99,7 +99,7 @@ class block_filtered_course_list extends block_base {
      * @return stdClass The block contents
      */
     public function get_content() {
-        global $CFG, $PAGE;
+        global $PAGE;
 
         if ($this->content !== null) {
             return $this->content;
@@ -137,7 +137,7 @@ class block_filtered_course_list extends block_base {
 
         if ($this->liststyle != 'empty_block') {
             if ($this->liststyle == 'generic_list') {
-                $this->fclconfig->filters = 'generic|e';
+                $this->fclconfig->filters = BLOCK_FILTERED_COURSE_LIST_GENERIC_CONFIG;
             }
             $this->_process_filtered_list();
         }
@@ -176,24 +176,19 @@ class block_filtered_course_list extends block_base {
     private function _set_liststyle() {
         global $CFG;
 
-        // The default liststyle is 'generic_list' but ...
-        $liststyle = 'generic_list';
+        // The default liststyle is 'filtered_list' but ...
+        $liststyle = 'filtered_list';
 
-        if ($this->usertype == 'user' && empty($CFG->disablemycourses)) {
-            $liststyle = "filtered_list";
+        if (!empty($CFG->disablemycourses) && $this->usertype != 'manager') {
+            $liststyle = 'generic_list';
         }
 
         if ($this->usertype == 'manager' &&
-            $this->fclconfig->managerview == BLOCK_FILTERED_COURSE_LIST_ADMIN_VIEW_OWN &&
-            $this->mycourses ) {
-            $liststyle = "filtered_list";
+            $this->fclconfig->managerview != BLOCK_FILTERED_COURSE_LIST_ADMIN_VIEW_OWN) {
+            $liststyle = "generic_list";
         }
 
         if ($this->fclconfig->hidefromguests == BLOCK_FILTERED_COURSE_LIST_TRUE && $this->usertype == 'guest') {
-            $liststyle = "empty_block";
-        }
-
-        if ($this->usertype == 'user' && !$this->mycourses) {
             $liststyle = "empty_block";
         }
 
@@ -218,7 +213,7 @@ class block_filtered_course_list extends block_base {
         $this->rubrics = array_reduce(
             array_filter(
                 array_map(function($config) {
-                    $classname = "\\block_filtered_course_list\\{$config[0]}_filter";
+                    $classname = get_filter($config[0], $this->fclconfig->externalfilters);
                     if (class_exists($classname)) {
                         $item = new $classname($config, $this->mycourses, $this->fclconfig);
                         return $item->get_rubrics();
@@ -251,6 +246,10 @@ class block_filtered_course_list extends block_base {
         if (count($this->rubrics) > 0) {
             $content = new \block_filtered_course_list\output\content($this->rubrics, $this->instance->id);
             $this->content->text = $output->render($content);
+        } else if ($this->fclconfig->filters != BLOCK_FILTERED_COURSE_LIST_GENERIC_CONFIG) {
+            $this->liststyle = 'generic_list';
+            $this->fclconfig->filters = 'generic|e';
+            $this->_process_filtered_list();
         }
     }
 }
