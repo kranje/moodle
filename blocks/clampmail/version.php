@@ -18,15 +18,14 @@
  * block_clampmail version information.
  *
  * @package   block_clampmail
- * @copyright 2013 Collaborative Liberal Arts Moodle Project
- * @copyright 2012 Louisiana State University (original Quickmail block)
+ * @copyright 2012 Louisiana State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2018060100; // The current module version (Date: YYYYMMDDXX).
+$plugin->version   = 2019010800; // The current module version (Date: YYYYMMDDXX).
 $plugin->requires  = 2017051500; // Requires this Moodle version.
 $plugin->component = 'block_clampmail'; // Full name of the plugin (used for diagnostics).
 $plugin->maturity  = MATURITY_STABLE; // The current stability of this version (used for diagnostics).
-$plugin->release   = 'v3.3.4'; // The release name of this version (used for diagnostics).
+$plugin->release   = 'v3.3.5'; // The release name of this version (used for diagnostics).
