@@ -78,6 +78,7 @@ $string['guestnoeditmessage'] = 'Guest user can not edit messaging options';
 $string['guestnoeditmessageother'] = 'Guest user can not edit other user messaging options';
 $string['groupinfo'] = 'Group info';
 $string['groupconversations'] = 'Group';
+$string['groupmessages'] = 'Group';
 $string['hidemessagewindow'] = 'Hide message window';
 $string['hidenotificationwindow'] = 'Hide notification window';
 $string['individualconversations'] = 'Private';
@@ -116,6 +117,7 @@ $string['nocontactrequests'] = 'No contact requests';
 $string['nocontacts'] = 'No contacts';
 $string['nocontactsgetstarted'] = 'No contacts';
 $string['nogroupconversations'] = 'No group conversations';
+$string['nogroupmessages'] = 'No group conversations';
 $string['nomessages'] = 'No messages';
 $string['noindividualconversations'] = 'No private conversations';
 $string['nomessagesfound'] = 'No messages were found';
@@ -253,7 +255,7 @@ $string['viewunreadmessageswith'] = 'View unread messages with {$a}';
 $string['writeamessage'] = 'Write a message...';
 $string['wouldliketocontactyou'] = 'Would like to contact you';
 $string['you'] = 'You:';
-$string['youhaveblockeduser'] = 'You have blocked this user in the past';
+$string['youhaveblockeduser'] = 'You have blocked this user.';
 $string['yourcontactrequestpending'] = 'Your contact request is pending with {$a}';
 
 // Deprecated since Moodle 3.6.
