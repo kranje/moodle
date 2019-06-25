@@ -59,7 +59,8 @@ class mod_forum_entities_post_testcase extends advanced_testcase {
             0,
             false,
             false,
-            false
+            false,
+            0
         );
 
         $this->assertEquals(4, $post->get_id());

@@ -102,7 +102,8 @@ class entity {
             $record->displaywordcount,
             $record->lockdiscussionafter,
             $record->duedate,
-            $record->cutoffdate
+            $record->cutoffdate,
+            $record->anonymous
         );
     }
 
@@ -154,7 +155,8 @@ class entity {
             $record->totalscore,
             $record->mailnow,
             $record->deleted,
-            $record->privatereplyto
+            $record->privatereplyto,
+            $record->hiddenuserid
         );
     }
 

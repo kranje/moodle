@@ -95,6 +95,7 @@ class mod_forum_entities_forum_testcase extends advanced_testcase {
         $lockdiscussionafter = 0;
         $duedate = 0;
         $cutoffdate = 0;
+        $anonymous = FORUM_ANONYMOUS_NEVER;
 
         $forum = new forum_entity(
             $context,
@@ -127,7 +128,8 @@ class mod_forum_entities_forum_testcase extends advanced_testcase {
             $displaywordcount,
             $lockdiscussionafter,
             $duedate,
-            $cutoffdate
+            $cutoffdate,
+            $anonymous
         );
 
         $this->assertEquals($context, $forum->get_context());

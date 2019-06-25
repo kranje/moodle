@@ -329,7 +329,7 @@ if (!empty($forum)) {
             print_error('maxtimehaspassed', 'forum', '', format_time($CFG->maxeditingtime));
         }
     }
-    if (($post->userid <> $USER->id) and
+    if ((($post->userid <> $USER->id) && ($post->hiddenuserid <> $USER->id)) and
         !has_capability('mod/forum:editanypost', $modcontext)) {
         print_error('cannoteditposts', 'forum');
     }
@@ -710,7 +710,8 @@ file_prepare_draft_area($draftitemid, $modcontext->id, 'mod_forum', 'attachment'
 
 // Load data into form NOW!
 
-if ($USER->id != $post->userid) {   // Not the original author, so add a message to the end.
+
+if (($USER->id != $post->userid) && ($USER->id != $post->hiddenuserid)) {   // Not the original author, so add a message to the end.
     $data = new stdClass();
     $data->date = userdate($post->created);
     if ($post->messageformat == FORMAT_HTML) {
@@ -755,6 +756,7 @@ $mformpost->set_data(
             'itemid' => $draftideditor
         ),
         'discussionsubscribe' => $discussionsubscribe,
+        'anonymous' => $forum->anonymous == FORUM_ANONYMOUS_ALWAYS ? 1 : 0,
         'mailnow' => !empty($post->mailnow),
         'userid' => $post->userid,
         'parent' => $post->parent,

@@ -136,6 +136,9 @@ if ($ADMIN->fulltree) {
         $settings->hide_if('forum_rssarticles', 'forum_enablerssfeeds', 'neq', '1');
     }
 
+    $settings->add(new admin_setting_configcheckbox('forum_enableanonymousposts', get_string('forum:anonymouspost', 'local_lae'),
+                       get_string('forum:configenableanonymouspost', 'local_lae'), 0));
+
     $settings->add(new admin_setting_configcheckbox('forum_enabletimedposts', get_string('timedposts', 'forum'),
                        get_string('configenabletimedposts', 'forum'), 1));
 }

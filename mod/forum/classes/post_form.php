@@ -155,6 +155,12 @@ class mod_forum_post_form extends moodleform {
                 $mform->addElement('checkbox', 'mailnow', get_string('mailnow', 'forum'));
             }
 
+            if ($forum->anonymous == FORUM_ANONYMOUS_ALLOWED && ($post->userid != $CFG->anonymous_userid) && empty($post->id)) {
+                $mform->addElement('checkbox', 'anonymous', get_string('forum:anonymouspost', 'local_lae'));
+            } else if ($forum->anonymous == FORUM_ANONYMOUS_ALWAYS && ($post->userid != $CFG->anonymous_userid) && empty($post->id)) {
+                $mform->addElement('checkbox', 'anonymous', get_string('forum:anonymouspost', 'local_lae'), null, array('disabled' => 1));
+            }
+
             if ((empty($post->id) && $canreplyprivately) || (!empty($post) && !empty($post->privatereplyto))) {
                 // Only show the option to change private reply settings if this is a new post and the user can reply
                 // privately, or if this is already private reply, in which case the state is shown but is not editable.
@@ -319,6 +325,9 @@ class mod_forum_post_form extends moodleform {
 
         $mform->addElement('hidden', 'reply');
         $mform->setType('reply', PARAM_INT);
+
+        $mform->addElement('hidden', 'hiddenuserid');
+        $mform->setType('hiddenuserid', PARAM_INT);
     }
 
     /**

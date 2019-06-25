@@ -103,6 +103,8 @@ class forum {
     private $duedate;
     /** @var int $cutoffdate Timestamp after which forum posts will no longer be accepted */
     private $cutoffdate;
+    /** @var int $anonymous The level of anonymity allowed in this forum */
+    private $anonymous;
 
     /**
      * Constructor
@@ -138,6 +140,7 @@ class forum {
      * @param int $lockdiscussionafter Timestamp after which discussions should be locked
      * @param int $duedate Timestamp that represents the due date for forum posts
      * @param int $cutoffdate Timestamp after which forum posts will no longer be accepted
+     * @param int $anonymous The level of anonymity allowed in this forum
      */
     public function __construct(
         context $context,
@@ -170,7 +173,8 @@ class forum {
         bool $displaywordcount,
         int $lockdiscussionafter,
         int $duedate,
-        int $cutoffdate
+        int $cutoffdate,
+        int $anonymous
     ) {
         $this->context = $context;
         $this->coursemodule = $coursemodule;
@@ -203,6 +207,7 @@ class forum {
         $this->lockdiscussionafter = $lockdiscussionafter;
         $this->duedate = $duedate;
         $this->cutoffdate = $cutoffdate;
+        $this->anonymous = $anonymous;
     }
 
     /**
@@ -617,6 +622,15 @@ class forum {
         }
 
         return false;
+    }
+
+    /**
+     * Get the level of anonymity.
+     *
+     * @return int
+     */
+    public function get_anonymity() : int {
+        return $this->anonymous;
     }
 
     /**

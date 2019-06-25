@@ -67,6 +67,8 @@ class post {
     private $deleted;
     /** @var int $privatereplyto The user being privately replied to */
     private $privatereplyto;
+    /** @var int $hiddenuserid The actual user id when anonymity is active */
+    private $hiddenuserid;
 
     /**
      * Constructor.
@@ -87,6 +89,7 @@ class post {
      * @param bool $mailnow Should this post be mailed immediately
      * @param bool $deleted Is the post deleted
      * @param int $privatereplyto Which user this reply is intended for in a private reply situation
+     * @param int $hiddenuserid The actual user id when anonymity is active
      */
     public function __construct(
         int $id,
@@ -104,7 +107,8 @@ class post {
         int $totalscore,
         bool $mailnow,
         bool $deleted,
-        int $privatereplyto
+        int $privatereplyto,
+        int $hiddenuserid
     ) {
         $this->id = $id;
         $this->discussionid = $discussionid;
@@ -122,6 +126,7 @@ class post {
         $this->mailnow = $mailnow;
         $this->deleted = $deleted;
         $this->privatereplyto = $privatereplyto;
+        $this->hiddenuserid = $hiddenuserid;
     }
 
     /**
@@ -278,6 +283,26 @@ class post {
     }
 
     /**
+     * Is this post owned by the anonymous user?
+     *
+     * @return bool
+     */
+    public function is_anonymous() : bool {
+        global $CFG;
+
+        return ($this->hiddenuserid != 0 && $this->authorid == $CFG->anonymous_userid);
+    }
+
+    /**
+     * Get the hidden user id, if set.
+     *
+     * @return int
+     */
+    public function get_hiddenuserid() : int {
+        return $this->hiddenuserid;
+    }
+
+    /**
      * Get the id of the user that this post was intended for.
      *
      * @return int
@@ -297,13 +322,17 @@ class post {
     }
 
     /**
-     * Check if the given user authored this post.
+     * Check if the given user authored this post. Checks hiddenuserid if set.
      *
      * @param stdClass $user The user to check.
      * @return bool
      */
     public function is_owned_by_user(stdClass $user) : bool {
-        return $this->get_author_id() == $user->id;
+        if ($this->get_hiddenuserid() != 0) {
+            return $this->get_hiddenuserid() == $user->id;
+        } else {
+            return $this->get_author_id() == $user->id;
+        }
     }
 
     /**

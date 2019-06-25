@@ -91,7 +91,8 @@ class mod_forum_entities_discussion_summary_testcase extends advanced_testcase {
             0,
             false,
             false,
-            false
+            false,
+            0
         );
 
         $discussionsummary = new discussion_summary_entity($discussion, $firstpost, $firstauthor, $lastauthor);

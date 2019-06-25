@@ -501,6 +501,10 @@ class capability {
             // You cannot reply privately to a post which is, itself, a private reply.
             return false;
         }
+        if ($post->is_anonymous()) {
+            // You cannot make a private reply to an anonymous post.
+            return false;
+        }
 
         return has_capability('mod/forum:postprivatereply', $this->get_context(), $user);
     }
