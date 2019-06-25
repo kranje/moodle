@@ -135,9 +135,5 @@ if ($ADMIN->fulltree) {
     }
 
     $settings->add(new admin_setting_configcheckbox('forum_enabletimedposts', get_string('timedposts', 'forum'),
-                       get_string('configenabletimedposts', 'forum'), 0));
-
-    $settings->add(new admin_setting_configcheckbox('forum_enableanonymousposts', get_string('forum:anonymouspost', 'local_lae'),
-                       get_string('forum:configenableanonymouspost', 'local_lae'), 0));
+                       get_string('configenabletimedposts', 'forum'), 1));
 }
-

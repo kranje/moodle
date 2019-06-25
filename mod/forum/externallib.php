@@ -148,7 +148,6 @@ class mod_forum_external extends external_api {
                     'numdiscussions' => new external_value(PARAM_INT, 'Number of discussions in the forum', VALUE_OPTIONAL),
                     'cancreatediscussions' => new external_value(PARAM_BOOL, 'If the user can create discussions', VALUE_OPTIONAL),
                     'lockdiscussionafter' => new external_value(PARAM_INT, 'After what period a discussion is locked', VALUE_OPTIONAL),
-                    'anonymous' => new external_value(PARAM_INT, 'Allow anonymity'),
                     'istracked' => new external_value(PARAM_BOOL, 'If the user is tracking the forum', VALUE_OPTIONAL),
                     'unreadpostscount' => new external_value(PARAM_INT, 'The number of unread posts for tracked forums',
                         VALUE_OPTIONAL),

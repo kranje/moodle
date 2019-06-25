@@ -147,12 +147,6 @@ class mod_forum_post_form extends moodleform {
             $mform->addElement('checkbox', 'mailnow', get_string('mailnow', 'forum'));
         }
 
-        if ($forum->anonymous == FORUM_ANONYMOUS_ALLOWED && ($post->userid != $CFG->anonymous_userid) && empty($post->id)) {
-            $mform->addElement('checkbox', 'anonymous', get_string('forum:anonymouspost', 'local_lae'));
-        } else if ($forum->anonymous == FORUM_ANONYMOUS_ALWAYS && ($post->userid != $CFG->anonymous_userid) && empty($post->id)) {
-            $mform->addElement('checkbox', 'anonymous', get_string('forum:anonymouspost', 'local_lae'), null, array('disabled' => 1));
-        }
-
         if ($groupmode = groups_get_activity_groupmode($cm, $course)) {
             $groupdata = groups_get_activity_allowed_groups($cm);
 
@@ -281,9 +275,6 @@ class mod_forum_post_form extends moodleform {
 
         $mform->addElement('hidden', 'reply');
         $mform->setType('reply', PARAM_INT);
-
-        $mform->addElement('hidden', 'hiddenuserid');
-        $mform->setType('hiddenuserid', PARAM_INT);
     }
 
     /**

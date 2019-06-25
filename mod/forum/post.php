@@ -267,7 +267,7 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum.
             print_error('maxtimehaspassed', 'forum', '', format_time($CFG->maxeditingtime));
         }
     }
-    if ((($post->userid <> $USER->id) && ($post->hiddenuserid <> $USER->id)) and
+    if (($post->userid <> $USER->id) and
         !has_capability('mod/forum:editanypost', $modcontext)) {
         print_error('cannoteditposts', 'forum');
     }
@@ -305,7 +305,7 @@ if (!empty($forum)) {      // User is starting a new discussion in a forum.
     require_login($course, false, $cm);
     $modcontext = context_module::instance($cm->id);
 
-    if ( !((($post->userid == $USER->id || $post->hiddenuserid == $USER->id) && has_capability('mod/forum:deleteownpost', $modcontext))
+    if ( !(($post->userid == $USER->id && has_capability('mod/forum:deleteownpost', $modcontext))
         || has_capability('mod/forum:deleteanypost', $modcontext)) ) {
         print_error('cannotdeletepost', 'forum');
     }
@@ -591,7 +591,7 @@ file_prepare_draft_area($draftitemid, $modcontext->id, 'mod_forum', 'attachment'
 
 // Load data into form NOW!
 
-if (($USER->id != $post->userid) && ($USER->id != $post->hiddenuserid)) {   // Not the original author, so add a message to the end.
+if ($USER->id != $post->userid) {   // Not the original author, so add a message to the end.
     $data = new stdClass();
     $data->date = userdate($post->created);
     if ($post->messageformat == FORMAT_HTML) {
@@ -653,7 +653,6 @@ $mformpost->set_data(
             'itemid' => $draftideditor
         ),
         'discussionsubscribe' => $discussionsubscribe,
-        'anonymous' => $forum->anonymous == FORUM_ANONYMOUS_ALWAYS ? 1 : 0,
         'mailnow' => !empty($post->mailnow),
         'userid' => $post->userid,
         'parent' => $post->parent,
@@ -715,10 +714,10 @@ if ($mformpost->is_cancelled()) {
         // If user has edit any post capability
         // or has either startnewdiscussion or reply capability and is editting own post
         // then he can proceed
-        // MDL-7066
-        if ( !(((($realpost->userid == $USER->id) || ($realpost->hiddenuserid == $USER->id)) && (has_capability('mod/forum:replypost', $modcontext)
-                            || has_capability('mod/forum:startdiscussion', $modcontext))) ||
-                            has_capability('mod/forum:editanypost', $modcontext)) ) {
+        // MDL-7066.
+        if ( !(($realpost->userid == $USER->id && (has_capability('mod/forum:replypost', $modcontext)
+                    || has_capability('mod/forum:startdiscussion', $modcontext))) ||
+            has_capability('mod/forum:editanypost', $modcontext)) ) {
             print_error('cannotupdatepost', 'forum');
         }
 
