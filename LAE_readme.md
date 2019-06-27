@@ -1,4 +1,4 @@
-# [Moodle Liberal Arts Edition v3.6.4-LAE16.0.3]
+# [Moodle Liberal Arts Edition v3.7.0-LAE17.0.0]
 
 Welcome to the Moodle Liberal Arts Edition. The goal of the LAE is to provide a coherent package for modules, patches, and code developed (or improved) by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -10,19 +10,18 @@ The LAE is offered "as is", with no warranty. The institutions that comprise CLA
 
 ## Contact
 
-Questions about the LAE can be sent to Ken Newquist at <newquisk@lafayette.edu> or 610-330-5759. CLAMP members may participate in the development of the LAE by joining the Development Project in Redmine (our collaboration web site) at:
+Questions about the LAE can be sent to Charles Fulton at fultonc@lafayette.edu or 610-330-3046. CLAMP members may participate in the development of the LAE by joining CLAMP's Slack team. Please see CLAMP's collaboration and development tools page for more information:
 
-<http://redmine.clamp-it.org/projects/development>
+https://www.clamp-it.org/collaboration-and-development-tools/
 
 ## Contents
 
-Moodle 3.6.4+LAE16.0.3 consists of the core Moodle 3.6.4 release plus a number of CLAMP-developed features and bug fixes.
+Moodle 3.7.0+LAE17.0.0 consists of the core Moodle 3.7.0 release plus a number of CLAMP-developed features and bug fixes.
 
 The following core features are included:
 
 * Anonymous Forums
-* Per-course resource display options
-* Backported fix for MDL-64609 
+* Per-course resource display options 
 
 ### Anonymous Forums
 
@@ -31,10 +30,6 @@ A completely new version of the Anonymous Forums option in Moodle. This version 
 ### Per-course resource display options
 
 You may choose a default resource display option at the course level now instead of at the site-level.
-
-### Backported fix for MDL-64609
-
-Under certain conditions regrading a course can cause Moodle to get stuck in an infinite loop, leading to significant performance issues. This was identified and fixed in [MDL-64609](https://tracker.moodle.org/browse/MDL-64609) following the core 3.6.4 release and will be included in the core 3.6.4 release.
 
 ## Contributed modules
 
@@ -67,15 +62,15 @@ You can get the LAE in two ways:
 * Download the tar and zip packages from the CLAMP web site: <http://www.clamp-it.org/code/>
 * Download the current release branch from the CLAMP code repository:
 
-    git clone https://github.com/CLAMP-IT/moodle v3.6.4-LAE16.0.3
-    git checkout -b v3.6.4-LAE16.0.3
+    git clone https://github.com/CLAMP-IT/moodle v3.7.0-LAE17.0.0
+    git checkout -b v3.7.0-LAE17.0.0
 
-By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout thev3.6.4-LAE16.0.3-base tag instead.
+By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout thev3.7.0-LAE17.0.0-base tag instead.
 
 CLAMP maintains two branches for each major version:
 
-* LAE\_36\_STABLE contains the core code only
-* LAE\_36\_PACKAGE includes the contributed modules
+* LAE\_37\_STABLE contains the core code only
+* LAE\_37\_PACKAGE includes the contributed modules
 
 ## Installing the LAE
 
