@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.5.0 (July 9, 2019)
+
+- Added internal navigation element so that user can navigate between all Quickmail pages without returning to the course page.
+- Added a link to Quickmail from the course administration; Quickmail may now be used without explicitly adding the block to the course.
+- Various internal code cleanup fixes
+- Dropped support for Moodle 3.3-3.4 and added support for Moodle 3.7
+
+## 3.3.7 (April 5, 2019)
+
+- Add activity modules as a default applicable format (supports the Poster module).
+
+## 3.3.6 (January 30, 2019)
+
+- Refactor email form to remove outdated jQuery dependency.
+
 ## 3.3.5 (January 8, 2019)
 
 - Further support for GDPR compliance
