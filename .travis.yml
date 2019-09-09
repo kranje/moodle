@@ -11,7 +11,7 @@ notifications:
 
 language: php
 
-dist: xenial
+dist: trusty
 
 services:
     - mysql
@@ -23,6 +23,9 @@ php:
 
 addons:
   postgresql: "9.6"
+  apt:
+    packages:
+      - chromium-chromedriver
 
 # Redis tests are currently failing on php 7.2 due to https://bugs.php.net/bug.php?id=75628
 # services:
@@ -214,8 +217,8 @@ before_script:
           config.php ;
 
         # Get and launch selenium
-        wget http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar;
-        xvfb-run -a --server-args="-screen 0 1024x768x24" java -Dwebdriver.chrome.driver=/usr/lib/chromium-browser/chromedriver -jar selenium-server-standalone-3.4.0.jar -log /tmp/selenium.log &
+        wget http://selenium-release.storage.googleapis.com/3.9/selenium-server-standalone-3.9.1.jar;
+        xvfb-run -a --server-args="-screen 0 1024x768x24" java -Dwebdriver.chrome.driver=/usr/lib/chromium-browser/chromedriver -jar selenium-server-standalone-3.9.1.jar -log /tmp/selenium.log &
 
         # Initialise Behat for Moodle.
         php admin/tool/behat/cli/init.php
