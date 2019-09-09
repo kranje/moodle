@@ -1,4 +1,4 @@
-# [Moodle Liberal Arts Edition v3.6.5-LAE16.0.4]
+# [Moodle Liberal Arts Edition v3.6.6-LAE16.0.5]
 
 Welcome to the Moodle Liberal Arts Edition. The goal of the LAE is to provide a coherent package for modules, patches, and code developed (or improved) by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -16,7 +16,7 @@ Questions about the LAE can be sent to Ken Newquist at <newquisk@lafayette.edu> 
 
 ## Contents
 
-Moodle 3.6.5+LAE16.0.4 consists of the core Moodle 3.6.5 release plus a number of CLAMP-developed features and bug fixes.
+Moodle 3.6.6+LAE16.0.5 consists of the core Moodle 3.6.6 release plus a number of CLAMP-developed features and bug fixes.
 
 The following core features are included:
 
@@ -34,7 +34,7 @@ You may choose a default resource display option at the course level now instead
 
 ### Backported fix for MDL-64609
 
-Under certain conditions regrading a course can cause Moodle to get stuck in an infinite loop, leading to significant performance issues. This was identified and fixed in [MDL-64609](https://tracker.moodle.org/browse/MDL-64609) following the core 3.6.5 release and will be included in the core 3.6.5 release.
+Under certain conditions regrading a course can cause Moodle to get stuck in an infinite loop, leading to significant performance issues. This was identified and fixed in [MDL-64609](https://tracker.moodle.org/browse/MDL-64609) following the core 3.6.6 release and will be included in the core 3.6.6 release.
 
 ## Contributed modules
 
@@ -67,10 +67,10 @@ You can get the LAE in two ways:
 * Download the tar and zip packages from the CLAMP web site: <http://www.clamp-it.org/code/>
 * Download the current release branch from the CLAMP code repository:
 
-    git clone https://github.com/CLAMP-IT/moodle v3.6.5-LAE16.0.4
-    git checkout -b v3.6.5-LAE16.0.4
+    git clone https://github.com/CLAMP-IT/moodle v3.6.6-LAE16.0.5
+    git checkout -b v3.6.6-LAE16.0.5
 
-By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout thev3.6.5-LAE16.0.4-base tag instead.
+By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout thev3.6.6-LAE16.0.5-base tag instead.
 
 CLAMP maintains two branches for each major version:
 
