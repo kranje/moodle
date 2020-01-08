@@ -76,6 +76,8 @@ class mod_forum_entities_discussion_testcase extends advanced_testcase {
             false,
             false,
             false,
+            null,
+            null,
             0
         );
         $notfirstpost = new post_entity(
@@ -95,6 +97,8 @@ class mod_forum_entities_discussion_testcase extends advanced_testcase {
             false,
             false,
             false,
+            null,
+            null,
             0
         );
 

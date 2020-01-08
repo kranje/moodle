@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee640e103837d18775219772bd0bfb92",
+    "content-hash": "600fedc8f12613afd8255889ea1447f5",
     "packages": [],
     "packages-dev": [
         {
@@ -916,16 +916,16 @@
         },
         {
             "name": "moodlehq/behat-extension",
-            "version": "v3.37.3",
+            "version": "v3.38.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moodlehq/moodle-behat-extension.git",
-                "reference": "c4b69596142fa297ba049e13f04f3b158dcc94e6"
+                "reference": "e6335ec200e539e6d9f44713edc201b54d76eff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moodlehq/moodle-behat-extension/zipball/c4b69596142fa297ba049e13f04f3b158dcc94e6",
-                "reference": "c4b69596142fa297ba049e13f04f3b158dcc94e6",
+                "url": "https://api.github.com/repos/moodlehq/moodle-behat-extension/zipball/e6335ec200e539e6d9f44713edc201b54d76eff2",
+                "reference": "e6335ec200e539e6d9f44713edc201b54d76eff2",
                 "shasum": ""
             },
             "require": {
@@ -961,7 +961,7 @@
                 "Behat",
                 "moodle"
             ],
-            "time": "2019-10-28T11:41:43+00:00"
+            "time": "2019-10-28T11:40:15+00:00"
         },
         {
             "name": "myclabs/deep-copy",

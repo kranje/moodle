@@ -70,6 +70,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         $this->u2 = $this->getDataGenerator()->create_user(['firstname' => 'a222222222222', 'lastname' => 'a']);
         $this->u3 = $this->getDataGenerator()->create_user(['firstname' => 'b333333333333', 'lastname' => 'b']);
         $this->u4 = $this->getDataGenerator()->create_user(['firstname' => 'b444444444444', 'lastname' => 'b']);
+        $this->u5 = $this->getdatagenerator()->create_user(['firstname' => 'a555555555555', 'lastname' => 'a']);
+        $this->u6 = $this->getdatagenerator()->create_user(['firstname' => 'a666666666666', 'lastname' => 'a']);
+        $this->u7 = $this->getdatagenerator()->create_user(['firstname' => 'b777777777777', 'lastname' => 'b']);
+        $this->u8 = $this->getDataGenerator()->create_user(['firstname' => 'b888888888888', 'lastname' => 'b']);
 
         $this->c1 = $this->getDataGenerator()->create_course(['visible' => false]);
         $this->c2 = $this->getDataGenerator()->create_course();
@@ -78,10 +82,18 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         $this->getDataGenerator()->enrol_user($this->u2->id, $this->c1->id, 'student');
         $this->getDataGenerator()->enrol_user($this->u3->id, $this->c1->id, 'student');
         $this->getDataGenerator()->enrol_user($this->u4->id, $this->c1->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u5->id, $this->c1->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u6->id, $this->c1->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u7->id, $this->c1->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u8->id, $this->c1->id, 'student');
         $this->getDataGenerator()->enrol_user($this->u1->id, $this->c2->id, 'student');
         $this->getDataGenerator()->enrol_user($this->u2->id, $this->c2->id, 'student');
         $this->getDataGenerator()->enrol_user($this->u3->id, $this->c2->id, 'student');
         $this->getDataGenerator()->enrol_user($this->u4->id, $this->c2->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u5->id, $this->c2->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u6->id, $this->c2->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u7->id, $this->c2->id, 'student');
+        $this->getDataGenerator()->enrol_user($this->u8->id, $this->c2->id, 'student');
 
         $this->setAdminUser();
 
@@ -96,7 +108,7 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
 
         $this->setUser($this->u3);
         $prediction = reset($predictions);
-        $prediction->action_executed('notuseful', $this->model2->get_target());
+        $prediction->action_executed(\core_analytics\prediction::ACTION_INCORRECTLY_FLAGGED, $this->model2->get_target());
 
         $this->setAdminUser();
 
@@ -117,7 +129,8 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         $course1context = \context_course::instance($this->c1->id);
         $course2context = \context_course::instance($this->c2->id);
         $systemcontext = \context_system::instance();
-        $expected = [$this->u1->id, $this->u2->id, $this->u3->id, $this->u4->id];
+        $expected = [$this->u1->id, $this->u2->id, $this->u3->id, $this->u4->id, $this->u5->id, $this->u6->id,
+            $this->u7->id, $this->u8->id];
 
         // Check users exist in the relevant contexts.
         $userlist = new \core_privacy\local\request\userlist($course1context, $component);
@@ -157,9 +170,9 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         $usercount = $DB->count_records('user');
         $enrolcount = $DB->count_records('user_enrolments');
 
-        // We have 2 predictions for model1 and 4 predictions for model2.
-        $this->assertEquals(6, $DB->count_records('analytics_predictions'));
-        $this->assertEquals($usercount + $enrolcount, $DB->count_records('analytics_indicator_calc'));
+        // We have 4 predictions for model1 and 8 predictions for model2.
+        $this->assertEquals(12, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(26, $DB->count_records('analytics_indicator_calc'));
 
         // We have 1 prediction action.
         $this->assertEquals(1, $DB->count_records('analytics_prediction_actions'));
@@ -169,8 +182,8 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         // Delete the course that was used for prediction.
         provider::delete_data_for_all_users_in_context($coursecontext);
 
-        // The course predictions are deleted.
-        $this->assertEquals(4, $DB->count_records('analytics_predictions'));
+        // The course1 predictions are deleted.
+        $this->assertEquals(8, $DB->count_records('analytics_predictions'));
 
         // Calculations related to that context are deleted.
         $this->assertEmpty($DB->count_records('analytics_indicator_calc', ['contextid' => $coursecontext->id]));
@@ -193,7 +206,7 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         provider::delete_data_for_user($contextlist);
 
         // The site level prediction for u3 was deleted.
-        $this->assertEquals(3, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(9, $DB->count_records('analytics_predictions'));
         $this->assertEquals(0, $DB->count_records('analytics_prediction_actions'));
 
         $usercontexts = provider::get_contexts_for_userid($this->u1->id);
@@ -201,13 +214,13 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
                                                                             $usercontexts->get_contextids());
         provider::delete_data_for_user($contextlist);
         // We have nothing for u1.
-        $this->assertEquals(3, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(9, $DB->count_records('analytics_predictions'));
 
         $usercontexts = provider::get_contexts_for_userid($this->u4->id);
         $contextlist = new \core_privacy\local\request\approved_contextlist($this->u4, 'core_analytics',
                                                                             $usercontexts->get_contextids());
         provider::delete_data_for_user($contextlist);
-        $this->assertEquals(0, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(6, $DB->count_records('analytics_predictions'));
     }
 
     /**
@@ -230,6 +243,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             $this->u2->id => provider::get_contexts_for_userid($this->u2->id)->get_contextids(),
             $this->u3->id => provider::get_contexts_for_userid($this->u3->id)->get_contextids(),
             $this->u4->id => provider::get_contexts_for_userid($this->u4->id)->get_contextids(),
+            $this->u5->id => provider::get_contexts_for_userid($this->u5->id)->get_contextids(),
+            $this->u6->id => provider::get_contexts_for_userid($this->u6->id)->get_contextids(),
+            $this->u7->id => provider::get_contexts_for_userid($this->u7->id)->get_contextids(),
+            $this->u8->id => provider::get_contexts_for_userid($this->u8->id)->get_contextids(),
         ];
 
         foreach ($actualcontexts as $userid => $unused) {
@@ -238,9 +255,9 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         }
 
         // Test initial record counts are as expected.
-        $this->assertEquals(6, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(12, $DB->count_records('analytics_predictions'));
         $this->assertEquals(1, $DB->count_records('analytics_prediction_actions'));
-        $this->assertEquals(14, $DB->count_records('analytics_indicator_calc'));
+        $this->assertEquals(26, $DB->count_records('analytics_indicator_calc'));
 
         // Delete u1 and u3 from system context.
         $approveduserids = [$this->u1->id, $this->u3->id];
@@ -253,6 +270,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             $this->u2->id => [$systemcontext->id, $course1context->id, $course2context->id],
             $this->u3->id => [$course1context->id, $course2context->id],
             $this->u4->id => [$systemcontext->id, $course1context->id, $course2context->id],
+            $this->u5->id => [$systemcontext->id, $course1context->id, $course2context->id],
+            $this->u6->id => [$systemcontext->id, $course1context->id, $course2context->id],
+            $this->u7->id => [$systemcontext->id, $course1context->id, $course2context->id],
+            $this->u8->id => [$systemcontext->id, $course1context->id, $course2context->id],
         ];
 
         $actualcontexts = [
@@ -260,6 +281,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             $this->u2->id => provider::get_contexts_for_userid($this->u2->id)->get_contextids(),
             $this->u3->id => provider::get_contexts_for_userid($this->u3->id)->get_contextids(),
             $this->u4->id => provider::get_contexts_for_userid($this->u4->id)->get_contextids(),
+            $this->u5->id => provider::get_contexts_for_userid($this->u5->id)->get_contextids(),
+            $this->u6->id => provider::get_contexts_for_userid($this->u6->id)->get_contextids(),
+            $this->u7->id => provider::get_contexts_for_userid($this->u7->id)->get_contextids(),
+            $this->u8->id => provider::get_contexts_for_userid($this->u8->id)->get_contextids(),
         ];
 
         foreach ($actualcontexts as $userid => $unused) {
@@ -269,12 +294,13 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         }
 
         // Test expected number of records have been deleted.
-        $this->assertEquals(5, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(11, $DB->count_records('analytics_predictions'));
         $this->assertEquals(1, $DB->count_records('analytics_prediction_actions'));
-        $this->assertEquals(12, $DB->count_records('analytics_indicator_calc'));
+        $this->assertEquals(24, $DB->count_records('analytics_indicator_calc'));
 
-        // Delete for all 4 users in course 2 context.
-        $approveduserids = [$this->u1->id, $this->u2->id, $this->u3->id, $this->u4->id];
+        // Delete for all 8 users in course 2 context.
+        $approveduserids = [$this->u1->id, $this->u2->id, $this->u3->id, $this->u4->id, $this->u5->id, $this->u6->id,
+            $this->u7->id, $this->u8->id];
         $approvedlist = new approved_userlist($course2context, $component, $approveduserids);
         provider::delete_data_for_users($approvedlist);
 
@@ -284,6 +310,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             $this->u2->id => [$systemcontext->id, $course1context->id],
             $this->u3->id => [$course1context->id],
             $this->u4->id => [$systemcontext->id, $course1context->id],
+            $this->u5->id => [$systemcontext->id, $course1context->id],
+            $this->u6->id => [$systemcontext->id, $course1context->id],
+            $this->u7->id => [$systemcontext->id, $course1context->id],
+            $this->u8->id => [$systemcontext->id, $course1context->id],
         ];
 
         $actualcontexts = [
@@ -291,6 +321,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             $this->u2->id => provider::get_contexts_for_userid($this->u2->id)->get_contextids(),
             $this->u3->id => provider::get_contexts_for_userid($this->u3->id)->get_contextids(),
             $this->u4->id => provider::get_contexts_for_userid($this->u4->id)->get_contextids(),
+            $this->u5->id => provider::get_contexts_for_userid($this->u5->id)->get_contextids(),
+            $this->u6->id => provider::get_contexts_for_userid($this->u6->id)->get_contextids(),
+            $this->u7->id => provider::get_contexts_for_userid($this->u7->id)->get_contextids(),
+            $this->u8->id => provider::get_contexts_for_userid($this->u8->id)->get_contextids(),
         ];
 
         foreach ($actualcontexts as $userid => $unused) {
@@ -300,9 +334,9 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         }
 
         // Test expected number of records have been deleted.
-        $this->assertEquals(3, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(7, $DB->count_records('analytics_predictions'));
         $this->assertEquals(1, $DB->count_records('analytics_prediction_actions'));
-        $this->assertEquals(8, $DB->count_records('analytics_indicator_calc'));
+        $this->assertEquals(16, $DB->count_records('analytics_indicator_calc'));
 
         $approveduserids = [$this->u3->id];
         $approvedlist = new approved_userlist($course1context, $component, $approveduserids);
@@ -314,6 +348,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             $this->u2->id => [$systemcontext->id, $course1context->id],
             $this->u3->id => [],
             $this->u4->id => [$systemcontext->id, $course1context->id],
+            $this->u5->id => [$systemcontext->id, $course1context->id],
+            $this->u6->id => [$systemcontext->id, $course1context->id],
+            $this->u7->id => [$systemcontext->id, $course1context->id],
+            $this->u8->id => [$systemcontext->id, $course1context->id],
         ];
 
         $actualcontexts = [
@@ -321,6 +359,10 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             $this->u2->id => provider::get_contexts_for_userid($this->u2->id)->get_contextids(),
             $this->u3->id => provider::get_contexts_for_userid($this->u3->id)->get_contextids(),
             $this->u4->id => provider::get_contexts_for_userid($this->u4->id)->get_contextids(),
+            $this->u5->id => provider::get_contexts_for_userid($this->u5->id)->get_contextids(),
+            $this->u6->id => provider::get_contexts_for_userid($this->u6->id)->get_contextids(),
+            $this->u7->id => provider::get_contexts_for_userid($this->u7->id)->get_contextids(),
+            $this->u8->id => provider::get_contexts_for_userid($this->u8->id)->get_contextids(),
         ];
         foreach ($actualcontexts as $userid => $unused) {
             sort($actualcontexts[$userid]);
@@ -329,9 +371,9 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
         }
 
         // Test expected number of records have been deleted.
-        $this->assertEquals(2, $DB->count_records('analytics_predictions'));
+        $this->assertEquals(6, $DB->count_records('analytics_predictions'));
         $this->assertEquals(0, $DB->count_records('analytics_prediction_actions'));
-        $this->assertEquals(7, $DB->count_records('analytics_indicator_calc'));
+        $this->assertEquals(15, $DB->count_records('analytics_indicator_calc'));
     }
 
     /**
@@ -351,7 +393,7 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             }
         }
         $this->setUser($this->u3);
-        $otheruserprediction->action_executed('notuseful', $this->model1->get_target());
+        $otheruserprediction->action_executed(\core_analytics\prediction::ACTION_INCORRECTLY_FLAGGED, $this->model1->get_target());
         $this->setAdminUser();
 
         $this->export_context_data_for_user($this->u3->id, $system, 'core_analytics');
@@ -381,7 +423,7 @@ class core_analytics_privacy_model_testcase extends \core_privacy\tests\provider
             get_string('privacy:metadata:analytics:predictionactions', 'analytics'), $u3action->id]);
         $this->assertEquals(get_string('adminhelplogs'), $data->target);
         $this->assertEquals(get_string('coresystem'), $data->context);
-        $this->assertEquals('notuseful', $data->action);
+        $this->assertEquals(\core_analytics\prediction::ACTION_INCORRECTLY_FLAGGED, $data->action);
 
     }
 }

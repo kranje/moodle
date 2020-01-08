@@ -59,6 +59,8 @@ class mod_forum_entities_post_read_receipt_collection_testcase extends advanced_
             false,
             false,
             false,
+            null,
+            null,
             0
         );
         $post = new post_entity(
@@ -78,6 +80,8 @@ class mod_forum_entities_post_read_receipt_collection_testcase extends advanced_
             false,
             false,
             false,
+            null,
+            null,
             0
         );
         $collection = new collection_entity([
