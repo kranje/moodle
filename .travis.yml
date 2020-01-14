@@ -58,8 +58,9 @@ matrix:
         - php: 7.3
           env: DB=mysqli   TASK=PHPUNIT
           # Run grunt/npm install on highest version ('node' is an alias for the latest node.js version.)
-        - php: 7.2
-          env: DB=none     TASK=GRUNT   NVM_VERSION='lts/carbon'
+          # We have disabled the GRUNT test temporarily because of an upstream failure
+          # - php: 7.2
+          # - env: DB=none     TASK=GRUNT   NVM_VERSION='lts/carbon'
 
 cache:
     directories:
