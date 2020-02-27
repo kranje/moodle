@@ -104,6 +104,7 @@ define([
             var subject = form.elements.subject.value;
             var currentRoot = submitButton.closest(Selectors.post.post);
             var isprivatereply = form.elements.privatereply != undefined ? form.elements.privatereply.checked : false;
+            var isanonymousreply = form.elements.anonymousreply != undefined ? form.elements.anonymousreply.checked : false;
             var modeSelector = root.find(Selectors.post.modeSelect);
             var mode = modeSelector.length ? parseInt(modeSelector.get(0).value) : null;
             var newid;
@@ -112,7 +113,8 @@ define([
                 showSubmitButtonLoadingIcon(submitButton);
                 allButtons.prop('disabled', true);
 
-                Repository.addDiscussionPost(postid, subject, message, messageformat, isprivatereply, topreferredformat)
+                Repository.addDiscussionPost(postid, subject, message, messageformat, isprivatereply,
+                    topreferredformat, isanonymousreply)
                     .then(function(context) {
                         var message = context.messages.reduce(function(carry, message) {
                             if (message.type == 'success') {

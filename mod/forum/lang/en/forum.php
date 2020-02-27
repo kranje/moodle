@@ -39,6 +39,7 @@ $string['allsubscribe'] = 'Subscribe to all forums';
 $string['allunsubscribe'] = 'Unsubscribe from all forums';
 $string['allusers'] = 'All users';
 $string['alreadyfirstpost'] = 'This is already the first post in the discussion';
+$string['anonymousreply'] = 'Reply anonymously';
 $string['anyfile'] = 'Any file';
 $string['areaattachment'] = 'Attachments';
 $string['areapost'] = 'Messages';
