@@ -63,7 +63,7 @@
                 <div class="form-check form-check-inline">
                     <input
                         {{#mustreplyanonymously}}
-                        disabled="disabled"
+                        disabled="disabled", checked="checked"
                         {{/mustreplyanonymously}}
                         type="checkbox" class="form-check-input" id="anonymous-reply-checkbox-{{uniqid}}" title="{{#str}} anonymousreply, forum {{/str}}" name="anonymousreply"/>
                     <label class="form-check-label" for="anonymous-reply-checkbox-{{uniqid}}">{{#str}} anonymousreply, forum {{/str}}</label>

@@ -39,12 +39,11 @@ Feature: Add an anonymous forum
     And I log in as "student1"
     And I am on "Course 1" course homepage
     And I follow "Test forum name"
-    Then "input[name=anonymous]" "css_element" should not be visible
     And I follow "Add a new discussion topic"
-    Then "input[name=anonymous]" "css_element" should be visible
+    Then "input[name=anonymous]" "css_element" should not be visible
     And I set the field "subject" to "Post 1 subject"
     And I set the field "id_message" to "Body 1 content"
-    And the "input[name=anonymous]" "css_element" should be disabled
+    And the "input[id=id_anonymous]" "css_element" should be disabled
     And I press "Post to forum"
     Then I should see "Anonymous User"
     And I follow "Post 1 subject"
