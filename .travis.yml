@@ -2,8 +2,6 @@
 # process (which uses our internal CI system) this file is here for the benefit
 # of community developers git clones - see MDL-51458.
 
-sudo: required
-
 # We currently disable Travis notifications entirely until https://github.com/travis-ci/travis-ci/issues/4976
 # is fixed.
 notifications:
@@ -11,7 +9,9 @@ notifications:
 
 language: php
 
-dist: trusty
+os: linux
+
+dist: xenial
 
 services:
     - mysql
@@ -47,7 +47,7 @@ env:
     # Run acceptance tests on Postgres
     - DB=mysqli    TASK=BEHAT
 
-matrix:
+jobs:
     # Enable fast finish.
     # This will fail the build if a single job fails (except those in allow_failures).
     # It will not stop the jobs from running.
