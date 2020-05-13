@@ -2,8 +2,6 @@
 # process (which uses our internal CI system) this file is here for the benefit
 # of community developers git clones - see MDL-51458.
 
-sudo: required
-
 # We currently disable Travis notifications entirely until https://github.com/travis-ci/travis-ci/issues/4976
 # is fixed.
 notifications:
@@ -11,18 +9,21 @@ notifications:
 
 language: php
 
-dist: trusty
+os: linux
+
+dist: bionic
 
 services:
     - mysql
 
 php:
     # We only run the highest and lowest supported versions to reduce the load on travis-ci.org.
-    - 7.3
+    - 7.4
     - 7.1.30 # Make this sticky because current default version (7.1.11) has a bug with redis-extension output (MDL-66062)
 
 addons:
   postgresql: "9.6"
+  chrome: stable
   apt:
     packages:
       - chromium-chromedriver
@@ -47,15 +48,15 @@ env:
     # Run acceptance tests on Postgres
     - DB=mysqli    TASK=BEHAT
 
-matrix:
+jobs:
     # Enable fast finish.
     # This will fail the build if a single job fails (except those in allow_failures).
     # It will not stop the jobs from running.
     fast_finish: true
 
     include:
-          # Run mysql only on 7.3 - it's just too slow
-        - php: 7.3
+          # Run mysql only on highest - it's just too slow
+        - php: 7.4
           env: DB=mysqli   TASK=PHPUNIT
           # Run grunt/npm install on highest version ('node' is an alias for the latest node.js version.)
           # We have disabled the GRUNT test temporarily because of an upstream failure
@@ -128,6 +129,9 @@ install:
         fi
 
 before_script:
+    # Disable IPv6
+    - sudo sh -c 'echo 0 > /proc/sys/net/ipv6/conf/all/disable_ipv6'
+      
     - phpenv config-rm xdebug.ini
     - >
       if [ "$TASK" = 'PHPUNIT' -o "$TASK" = 'UPGRADE' -o "$TASK" = 'BEHAT' ];
@@ -204,6 +208,10 @@ before_script:
     - >
       if [ "$TASK" = 'BEHAT' ];
       then
+        # We need to use openjdk8
+        export JAVA_HOME='/usr/local/lib/jvm/openjdk8'
+        export PATH="$JAVA_HOME/bin:$PATH"
+
         # Create a directory for the behat database
         mkdir -p "$HOME"/roots/behat
 
@@ -294,6 +302,7 @@ script:
       if [ "$TASK" = 'BEHAT' ];
       then
         (php -S localhost:8000 &) 2> /dev/null > /dev/null;
+        sleep 5
         vendor/bin/behat --config /home/travis/roots/behat/behatrun/behat/behat.yml --tags @local_lae;
       fi
 
