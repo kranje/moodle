@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.6.2 (June 15, 2020)
+
+- Code cleanup
+- Streamlined unit testing matrix
+
+## 3.6.1 (January 15, 2020)
+
+- [Improvement] More robust user image size defaulting
+- [Bugfix] All fields now display, not just the last one
+
+## 3.6.0 (January 10, 2020)
+
+- Dropped support for Moodle 3.5
+- [Feature] Make the displayed user fields configurable
+
+## 3.5.0 (September 16, 2019)
+
+- Dropped support for Moodle 3.4
+- [Feature] Add role filtering
+- [Feature] Add image size setting
+
 ## 3.4.2 (May 17, 2019)
 
 - Add support for flat navigation
