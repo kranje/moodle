@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.5.0 (September 16, 2019)
+
+- Dropped support for Moodle 3.4
+- [Feature] Add role filtering
+- [Feature] Add image size setting
+
+## 3.4.2 (May 17, 2019)
+
+- Add support for flat navigation
+- Add option to display username in report
+
 ## 3.4.1 (November 26, 2018)
 
 - Replaced the YUI Javascript module with an AMD module
