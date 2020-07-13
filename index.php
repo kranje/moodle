@@ -46,6 +46,8 @@ $PAGE->set_pagelayout('admin');
 $coursecontext = context_course::instance($course->id);
 require_capability('report/editdates:view', $coursecontext);
 
+raise_memory_limit(MEMORY_EXTRA);
+
 // Fetching all modules in the course.
 $modinfo = get_fast_modinfo($course);
 $cms = $modinfo->get_cms();
@@ -205,7 +207,7 @@ if ($mform->is_cancelled()) {
     // Commit transaction and finish up.
     $transaction->allow_commit();
     rebuild_course_cache($course->id);
-    redirect($PAGE->url);
+    redirect($PAGE->url, get_string('changessaved'));
 }
 
 // Prepare activity type menu.
