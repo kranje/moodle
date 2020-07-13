@@ -25,13 +25,13 @@
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
-$id          = required_param('id', PARAM_INT);
-$mode        = optional_param('mode', ROSTER_MODE_DISPLAY, PARAM_TEXT);
-$group       = optional_param('group', 0, PARAM_INT);
-$role        = optional_param('role', 0, PARAM_INT);
-$defaultsize = get_config('report_roster', 'size_' . get_config('report_roster', 'size_default'));
-$size        = optional_param('size', $defaultsize, PARAM_INT);
-$course      = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
+$id       = required_param('id', PARAM_INT);
+$mode     = optional_param('mode', ROSTER_MODE_DISPLAY, PARAM_TEXT);
+$group    = optional_param('group', 0, PARAM_INT);
+$role     = optional_param('role', 0, PARAM_INT);
+$autosize = report_roster_resolve_auto_size();
+$size     = optional_param('size', $autosize, PARAM_INT);
+$course   = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 
 require_login($course);
 
@@ -50,7 +50,15 @@ require_capability('report/roster:view', $coursecontext);
 
 // Get all the users.
 if ($role > 0) {
-    $userlist = get_role_users($role, $coursecontext, false, user_picture::fields('u', ['username'], 0, 0, true), null, null, $group);
+    $userlist = get_role_users(
+        $role,
+        $coursecontext,
+        false,
+        user_picture::fields('u', ['username'], 0, 0, true),
+        null,
+        null,
+        $group
+    );
 } else {
     $userlist = get_enrolled_users($coursecontext, '', $group, user_picture::fields('u', ['username'], 0, 0, true));
 }
