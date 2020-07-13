@@ -229,7 +229,9 @@ class block_filtered_course_list_block_testcase extends advanced_testcase {
         ));
 
         // Regular users should see links to visible courses in visible categories under 'Other courses'.
+        // This includes visible courses in visible categories in hidden categories.
         // Teachers should see links to all their courses, visible or hidden, and under hidden categories.
+        // Students should see links to visible courses in hidden categories under 'Other courses'.
         $this->_courseunderrubric( array(
             'user1' => array(
                 'c_1'   => 'Other courses',
@@ -237,12 +239,14 @@ class block_filtered_course_list_block_testcase extends advanced_testcase {
                 'gc1_1' => 'Other courses',
                 'sc_2'  => 'Other courses',
                 'øthér' => 'Other courses',
+                'hcvc_1' => 'Other courses',
             ),
             'user2' => array(
                 'c_1'   => 'Other courses',
                 'cc1_3' => 'Other courses',
                 'gc1_1' => 'Other courses',
                 'hc_1'  => 'Other courses',
+                'hcc_2' => 'Other courses',
                 'hcc_3' => 'Other courses',
                 'sc_2'  => 'Other courses',
             )
@@ -250,7 +254,7 @@ class block_filtered_course_list_block_testcase extends advanced_testcase {
 
         // Students should not see links to hidden courses or visible courses under hidden categories.
         $this->_courselistexcludes( array(
-            'user1' => array( 'cc1_3', 'gc1_3', 'hc_1', 'hcc_2' )
+            'user1' => array( 'cc1_3', 'gc1_3' )
         ));
 
     }
@@ -302,6 +306,8 @@ EOF;
                 'cc1_2' => 'Child category 1',
                 'gc1_1' => 'Grandchild category 1',
                 'sc_2'  => 'Sibling category',
+                'hc_1'  => 'Other courses',
+                'hcc_2' => 'Other courses',
             ),
             'user2' => array(
                 'c_1'   => 'Miscellaneous',
@@ -323,9 +329,10 @@ EOF;
             'user2' => array ( 'gc1_1' => 'Child category 1' )
         ) , 'not' );
 
-        // Students should not see links to hidden courses or visible courses under hidden categories.
+        // Students should not see links to hidden courses.
+        // Students shoudl see links to visible courses even if they are in hidden categories.
         $this->_courselistexcludes( array(
-            'user1' => array( 'cc1_3', 'gc1_3', 'hc_1', 'hcc_2' )
+            'user1' => array( 'cc1_3', 'gc1_3' )
         ));
 
         // Now try switching the root category setting.
@@ -394,6 +401,74 @@ EOF;
             'Child category 1' => 'expanded',
             'Sibling category' => 'collapsed',
         ));
+
+        // Test the behavior of hidden categories and their potentially visible descendants.
+        // Set the filter target to the be the visible child of the hidden category.
+        // It should behave like any other visible category.
+        $hcvcid = $this->categories['hcvc']->id;
+        $filterconfig = <<<EOF
+category | expanded | $hcvcid | 0
+EOF;
+        set_config('filters', $filterconfig, 'block_filtered_course_list');
+
+        $this->_courseunderrubric( array(
+            'user1' => array(
+                'hcvc_1' => 'Hidden category visible child',
+            ),
+            'user2' => array(
+                'hcvc_1' => 'Hidden category visible child',
+                'hcvc_3' => 'Hidden category visible child',
+            ),
+        ));
+
+        $this->_courselistexcludes( array(
+            'user1' => array(
+                'hcvc_3',
+            ),
+        ));
+
+        // Test the behavior of hidden categories and their potentially visible descendants.
+        // Set the filter target to the be the hidden category itself.
+        // We should get a rubric for the visible child.
+        // We should get no rubric for the hidden category.
+        // Accessible courses in the hidden category should appear under "Other courses".
+        $hcid = $this->categories['hc']->id;
+        $filterconfig = <<<EOF
+category | expanded | $hcid | 0
+EOF;
+        set_config('filters', $filterconfig, 'block_filtered_course_list');
+
+        $this->_courseunderrubric( array(
+            'user1' => array(
+                'hcvc_1' => 'Hidden category visible child',
+                'hc_1'   => 'Other courses',
+            ),
+            'user2' => array(
+                'hcvc_1' => 'Hidden category visible child',
+                'hcvc_3' => 'Hidden category visible child',
+                'hc_1'   => 'Other courses',
+                'hc_3'   => 'Other courses',
+            ),
+        ));
+
+        $this->_courselistexcludes( array(
+            'user1' => array(
+                'hcvc_3',
+            ),
+        ));
+
+        // Test that we can display a visible child category of a hidden parent category.
+        // We can do this by pointing directly to the top-level category.
+        $filterconfig = <<<EOF
+category | expanded | 0 | 0
+EOF;
+        set_config('filters', $filterconfig, 'block_filtered_course_list');
+
+        $this->_courseunderrubric( array(
+            'user1' => array(
+                'hcvc_1' => 'Hidden category visible child'
+            ),
+        ));
     }
 
     /**
@@ -401,15 +476,38 @@ EOF;
      */
     public function test_shortnames() {
 
+        $this->_shared_test('shortname');
+
+    }
+
+    /**
+     * Test idnumber filtering
+     */
+    public function test_idnumbers() {
+
+        $this->_shared_test('idnumber');
+
+    }
+
+    /**
+     * Generic test for shortname or idnumber filters
+     *
+     * @param string $filter 'shortname' or 'idnumber'
+     */
+    public function _shared_test($filter) {
+
         $this->_create_rich_site();
 
-        // Set a current and future shortname.
+        // We'll need to use uppercase for the idnumber_filter.
+        $transformation = ($filter == 'idnumber') ? 'mb_strtoupper' : 'mb_strtolower';
+
+        // Set up some idnumber filters.
         $filterconfig = <<<EOF
-shortname | expanded | Current courses       | _1
-shortname | expanded | Future courses        | _2
-shortname | expanded | Non-ascii             | ø
-shortname | expanded | Child courses         | cc
-shortname | expanded | Unnumbered categories | c_
+$filter | expanded | Current courses       | _1
+$filter | expanded | Future courses        | _2
+$filter | expanded | Non-ascii             | {$transformation('ø')}
+$filter | expanded | Child courses         | {$transformation('cc')}
+$filter | expanded | Unnumbered categories | {$transformation('c_')}
 EOF;
         set_config('filters', $filterconfig, 'block_filtered_course_list');
 
@@ -814,9 +912,9 @@ EOF;
 
         // Any tags should be stripped.
         $longrubric = 'Grandchild category 1 - gc1 - Child category 2 - Miscellaneous :: Child category 2 :: Grandchild category 1';
-        $htmlentities = '&uuml;&amp;: HTML Entities (&uuml;&amp;shortname) : &uuml;&amp;idnumber < Sibling category';
+        $htmlentities = '&uuml;&amp;: HTML Entities (&uuml;&amp;shortname) : &uuml;&amp;IDNUMBER &lt; Sibling category';
         $this->_courselistincludes ( array (
-            'user1' => array( 'Non-ascii matching (øthér) : ØTHÉR < Sibling category',
+            'user1' => array( 'Non-ascii matching (øthér) : ØTHÉR &lt; Sibling category',
                 'Miscellaneous -  - Top - Miscellaneous',
                 $longrubric,
                 $htmlentities,
@@ -1007,7 +1105,7 @@ EOF;
             $this->courses["c_$i"] = $this->getDataGenerator()->create_course(array(
                 'fullname' => "Course $i in Misc",
                 'shortname' => "c_$i",
-                'idnumber' => "c_$i"
+                'idnumber' => strtoupper("c_$i"),
             ));
         }
     }
@@ -1040,6 +1138,10 @@ EOF;
      *       Course 1 in Hidden category child, hcc_1
      *       ...
      *       Course 3 in Hidden category child, hcc_3, hidden
+     *     Hidden category visible Child
+     *       Course 1 in Hidden category child, hcvc_1
+     *       ...
+     *       Course 3 in Hidden category child, hcvc_3, hidden
      * Sibling category
      *   Course 1 in Sibling category, sc_1
      *   ...
@@ -1081,6 +1183,12 @@ EOF;
             'parent'   => $hcid,
             'idnumber' => 'hcc'
         ));
+        $this->categories['hcvc'] = $this->getDataGenerator()->create_category( array(
+            'name'     => 'Hidden category visible child',
+            'parent'   => $hcid,
+            'idnumber' => 'hcvc',
+        ));
+        $this->categories['hcvc']->show();
         $this->categories['sc'] = $this->getDataGenerator()->create_category( array(
             'name'     => 'Sibling category',
             'idnumber' => 'sc'
@@ -1098,6 +1206,8 @@ EOF;
                 );
                 if ( $i % 3 == 0 ) {
                     $params['visible'] = 0;
+                } else {
+                    $params['visible'] = 1;
                 }
                 $this->courses[$shortname] = $this->getDataGenerator()->create_course( $params );
             }
@@ -1116,7 +1226,7 @@ EOF;
         $params = array(
             'fullname'  => '&uuml;&amp;: HTML Entities',
             'shortname' => '&uuml;&amp;shortname',
-            'idnumber'  => '&uuml;&amp;idnumber',
+            'idnumber'  => '&uuml;&amp;IDNUMBER',
             'category'  => $this->categories['sc']->id
         );
         $this->courses['&uuml;&amp;shortname'] = $this->getDataGenerator()->create_course( $params );
@@ -1125,7 +1235,7 @@ EOF;
         $params = array(
             'fullname'  => 'Guest enrolment enabled',
             'shortname' => 'guestenrolment',
-            'idnumber'  => 'guestenrolment',
+            'idnumber'  => 'GUESTENROLMENT',
             'category'  => $this->categories['sc']->id
         );
         $this->courses['guestenrolment'] = $this->getDataGenerator()->create_course($params);
@@ -1140,7 +1250,7 @@ EOF;
         $params = array(
             'fullname'  => 'Self enrolment enabled',
             'shortname' => 'selfenrolment',
-            'idnumber'  => 'selfenrolment',
+            'idnumber'  => 'SELFENROLMENT',
             'category'  => $this->categories['sc']->id
         );
         $this->courses['selfenrolment'] = $this->getDataGenerator()->create_course($params);

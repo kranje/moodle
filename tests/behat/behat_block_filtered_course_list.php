@@ -48,7 +48,7 @@ class behat_block_filtered_course_list extends behat_base {
         $frompath = __DIR__ . '/data/external_filter.php';
         $topath = __DIR__ . '/data/fcl_filter.php';
         if (file_exists($frompath)) {
-            rename($frompath, $topath);
+            copy($frompath, $topath);
         }
     }
 
@@ -59,22 +59,20 @@ class behat_block_filtered_course_list extends behat_base {
      * @AfterSuite
      */
     public static function after_suite(AfterSuiteScope $scope) {
-        $frompath = __DIR__ . '/data/fcl_filter.php';
-        $topath = __DIR__ . '/data/external_filter.php';
-        if (file_exists($frompath)) {
-            rename($frompath, $topath);
+        $rmpath = __DIR__ . '/data/fcl_filter.php';
+        if (file_exists($rmpath)) {
+            unlink($rmpath);
         }
     }
 
     /**
      * Sets a multiline config value as admin
      *
-     * @Given /^I set the multiline "(?P<plugin_string>(?:[^"]|\\")*)" "(?P<name_string>(?:[^"]|\\")*)" setting as admin to:$/
-     * @param string $plugin The plugins Frankenstyle name
-     * @param string $name The name of the setting to be set_config
+     * @Given /^I set the multiline FCL "(?P<name_string>(?:[^"]|\\")*)" setting as admin to:$/
+     * @param string $name The name of the FCL setting to be set
      * @param PyStringNode $value A triple-quote delimited text block to be set as the value of the setting
      */
-    public function i_set_the_multiline_setting_as_admin_to($plugin, $name, PyStringNode $value) {
-        set_config($name, $value->getRaw(), $plugin);
+    public function i_set_the_multiline_fcl_setting_as_admin_to($name, PyStringNode $value) {
+        set_config($name, $value->getRaw(), 'block_filtered_course_list');
     }
 }

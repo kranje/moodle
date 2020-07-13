@@ -24,13 +24,14 @@ Feature: We can filter courses by completion status
     And the following "blocks" exist:
       | blockname            | contextlevel | reference |
       | filtered_course_list | Course       | test      |
-    And I set the multiline "block_filtered_course_list" "filters" setting as admin to:
+    And I set the multiline FCL "filters" setting as admin to:
     """
     completion | collapsed | Completed courses  | complete
     completion | collapsed | Incomplete courses | incomplete
     """
     And the following config values are set as admin:
-      | enablecompletion | 0 |
+      | enablecompletion | 0 | |
+      | persistentexpansion | 0 | block_filtered_course_list |
     When I log in as "testuser"
     And I am on site homepage
     And I follow "Test"

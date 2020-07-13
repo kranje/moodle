@@ -1,8 +1,8 @@
-# [Filtered course list v3.4.1]
+# [Filtered course list v3.6.1]
 
 [![Build Status](https://travis-ci.org/CLAMP-IT/moodle-blocks_filtered_course_list.svg?branch=MOODLE_35)](https://travis-ci.org/CLAMP-IT/moodle-blocks_filtered_course_list)
 
-For Moodle 3.3, 3.4, or 3.5
+For Moodle 3.5
 
 The _Filtered course list_ block displays a configurable list of a user's courses. It is intended as a replacement for the _My courses_ block, although both may be used. It is maintained by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -33,6 +33,7 @@ Most of the configuration will be done in the _textarea_ near the top of the pag
 category   | expanded  | 0 (category id) | 1 (depth)
 shortname  | exp       | Current courses | S17
 regex      | collapsed | Upcoming        | (Su|F)17$
+idnumber   | col       | History courses | HIST_
 completion | exp       | Incomplete      | incomplete
 completion | col       | Completed       | complete
 generic    | exp       | Categories      | Courses
@@ -51,6 +52,7 @@ Please see the usage guide for fuller details: https://github.com/CLAMP-IT/moodl
 | Hide "All courses" link | Check the box to suppress the "All courses" link that otherwise appears at the bottom of the block. This link takes the user to the main course index page. Note that this setting does not remove the link from an administrator's view. |
 | Hide from guests | Check this box to hide the block from guests and anonymous visitors. |
 | Hide other courses | By default an "Other courses" rubric appears at the end of the list and displays any of the user's courses that have not already been mentioned under some other heading. Check the box here to suppress that rubric. |
+| Persistent expansion | If activated, we will use cookies to persist expansion states for the duration of a session. |
 | Max for single category | On a site with only one category, admins and guests will see all courses, but above the number specified here they will see a category link instead. [Choose an integer between 0 and 999.] Unless you have a single-category installation there is no need to adjust this setting. |
 | Course name template | Use replacement tokens (FULLNAME, SHORTNAME, IDNUMBER or CATEGORY) to control the way links to courses are displayed. Add a character limit to any token by suffixing it in curly braces to the token. For instance: FULLNAME{20} |
 | Category rubric template | Use replacement tokens (NAME, IDNUMBER, PARENT or ANCESTRY) to control the way rubrics display when using a category filter. Add a character limit to any token by suffixing it in curly braces to the token. For instance: NAME{20} |
@@ -71,6 +73,31 @@ Please report any bugs or feature requests to the public repository page: <https
 Use Grunt to manage LESS/CSS and Javascript as described in the Moodle dev documentation: https://docs.moodle.org/dev/Grunt
 
 ## Changelog
+
+### [v3.6.1]
+* Bug: Instance config defaults to empty, multilang fix
+* Dev: npm update
+*
+### [v3.6.0]
+* Feature: Adds filtering by idnumber
+
+### [v3.5.2]
+* Testing: Isolates/namespaces our custom behat step
+
+### [v3.5.1]
+* Bug: Hops over hidden categories when drilling down category trees
+
+### [v3.5.0]
+* Requires: Moodle 3.4
+* Bug: handles visible categories nested within hidden categories
+
+### [v3.4.3]
+* Bug: Fixes some inconsistent persistence behaviours
+* Bug: Applies content filters when appropriate to rubric and course titles
+* Backend: adds thirdpartylibs.xml
+
+### [v3.4.2]
+* Feature: Enables persistent expansions states
 
 ### [v3.4.1]
 * Feature: Adds enrolment filter
