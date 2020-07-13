@@ -15,19 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * report_editdates version information.
+ * Settings that allow different methods for image placement.
  *
  * @package   report_editdates
  * @copyright 2011 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019111100;
-$plugin->requires  = 2018051700;
-$plugin->component = 'report_editdates';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.8 for Moodle 3.5+';
+if ($ADMIN->fulltree) {
 
-$plugin->outestssufficient = true;
+    $options = [
+        0 => get_string('timelinedonotshow', 'report_editdates'),
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+        5 => 5,
+    ];
+    $settings->add(new admin_setting_configselect('report_editdates/timelinemax',
+            get_string('timelinemax', 'report_editdates'),
+            get_string('timelinemaxdesc', 'report_editdates'),
+            3,
+            $options));
+}
