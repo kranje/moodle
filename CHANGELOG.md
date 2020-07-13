@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.6.2 (June 15, 2020)
+
+- Code cleanup
+- Streamlined unit testing matrix
+
+## 3.6.1 (January 15, 2020)
+
+- [Improvement] More robust user image size defaulting
+- [Bugfix] All fields now display, not just the last one
+
 ## 3.6.0 (January 10, 2020)
 
 - Dropped support for Moodle 3.5
