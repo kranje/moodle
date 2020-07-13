@@ -29,12 +29,13 @@ Feature: Each instance of the block can have custom settings
       | admin | course22 | student |
       | admin | course23 | student |
       | admin | test     | student |
-    And I set the multiline "block_filtered_course_list" "filters" setting as admin to:
+    And I set the multiline FCL "filters" setting as admin to:
     """
     category | collapsed | 0
     """
     And the following config values are set as admin:
       | managerview | own | block_filtered_course_list |
+      | persistentexpansion | 0 | block_filtered_course_list |
     And the following "blocks" exist:
       | blockname            | contextlevel | reference |
       | filtered_course_list | Course       | test      |
@@ -48,6 +49,8 @@ Feature: Each instance of the block can have custom settings
     And I should not see "Course 12"
     When I turn editing mode on
     And I configure the "Filtered course list" block
+    Then the field "Block title" matches value ""
+    And the field "Filter configuration" matches value ""
     And I set the following fields to these values:
       | config_title | My custom title |
     And I set the field "config_filters" to multiline:
