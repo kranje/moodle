@@ -1,6 +1,9 @@
 name: Core
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - '*PACKAGE*'
 
 env:
   php: 7.4
