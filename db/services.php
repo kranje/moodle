@@ -15,19 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * version.php file for the Custom SQL admin report.
+ * Web service declarations.
  *
  * @package   report_customsql
- * @copyright 2015 The Open University
+ * @copyright 2020 the Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021070700;
-$plugin->requires  = 2020061500;
-$plugin->component = 'report_customsql';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '4.1 for Moodle 3.9+';
-
-$plugin->outestssufficient = true;
+$functions = [
+    'report_customsql_get_users' => [
+        'classname' => 'report_customsql\external\get_users',
+        'methodname' => 'execute',
+        'classpath' => '',
+        'description' => 'Use by form autocomplete for selecting users to receive emails.',
+        'capabilities' => 'report/customsql:definequeries',
+        'type' => 'read',
+        'ajax' => true,
+    ],
+];
