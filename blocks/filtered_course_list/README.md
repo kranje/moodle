@@ -1,8 +1,9 @@
-# [Filtered course list v4.3.0]
+# [Filtered course list v4.4.2]
 
-[![Build Status](https://travis-ci.org/CLAMP-IT/moodle-blocks_filtered_course_list.svg?branch=master)](https://travis-ci.org/CLAMP-IT/moodle-blocks_filtered_course_list)
+For Moodle 3.8, 3.9, 3.10, and 3.11
 
-For Moodle 3.6 and 3.7
+![Moodle Plugin
+CI](https://github.com/CLAMP-IT/moodle-blocks_filtered_course_list/workflows/Moodle%20Plugin%20CI/badge.svg)
 
 The _Filtered course list_ block displays a configurable list of a user's courses. It is intended as a replacement for the _My courses_ block, although both may be used. It is maintained by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -74,6 +75,19 @@ Please report any bugs or feature requests to the public repository page: <https
 Use Grunt to manage LESS/CSS and Javascript as described in the Moodle dev documentation: https://docs.moodle.org/dev/Grunt
 
 ## Changelog
+
+### [v4.4.2]
+* Add support for Moodle 3.11
+* Ensure PHPUnit test can access renderer
+
+### [v4.4.1]
+* Migrates CI to Github Actions
+* Adds method to facilitate mobile rendering
+
+### [v4.4.0]
+* Drops support for Moodle 3.7
+* Adds support for Moodle 3.10
+* Converts to plugin CI from Moodle HQ
 
 ### [v4.3.0]
 * Drops support for Moodle 3.6
