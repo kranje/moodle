@@ -1,4 +1,4 @@
-# [Moodle Liberal Arts Edition v3.9.7-LAE19.0.6]
+# [Moodle Liberal Arts Edition v3.9.8-LAE19.0.7]
 
 Welcome to the Moodle Liberal Arts Edition. The goal of the LAE is to provide a coherent package for modules, patches, and code developed (or improved) by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -16,12 +16,12 @@ https://www.clamp-it.org/collaboration-and-development-tools/
 
 ## Contents
 
-Moodle 3.9.7+LAE19.0.6 consists of the core Moodle 3.9.7 release plus a number of CLAMP-developed features and bug fixes.
+Moodle 3.9.8+LAE19.0.7 consists of the core Moodle 3.9.8 release plus a number of CLAMP-developed features and bug fixes.
 
 The following core features are included:
 
 * Anonymous Forums
-* Per-course resource display options 
+* Per-course resource display options
 
 ### Anonymous Forums
 
@@ -62,10 +62,10 @@ You can get the LAE in two ways:
 * Download the tar and zip packages from the CLAMP web site: <http://www.clamp-it.org/code/>
 * Download the current release branch from the CLAMP code repository:
 
-    git clone https://github.com/CLAMP-IT/moodle v3.9.7-LAE19.0.6
-    git checkout -b v3.9.7-LAE19.0.6
+    git clone https://github.com/CLAMP-IT/moodle v3.9.8-LAE19.0.7
+    git checkout -b v3.9.8-LAE19.0.7
 
-By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v3.9.7-LAE19.0.6-base tag instead.
+By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v3.9.8-LAE19.0.7-base tag instead.
 
 CLAMP maintains two branches for each major version:
 
