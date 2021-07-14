@@ -21,11 +21,16 @@ Moodle 3.10.5+LAE20.0.4 consists of the core Moodle 3.10.5 release plus a number
 The following core features are included:
 
 * Anonymous Forums
+* Custom user fields in the participants list
 * Per-course resource display options
 
 ### Anonymous Forums
 
 A completely new version of the Anonymous Forums option in Moodle. This version introduces a new "Anonymous User" who is attached to forum posts, allowing faculty to back up and restore a forum without losing anonymity. This feature is disabled by default.
+
+### Custom user fields in the participants list
+
+CLAMP has backported this new feature from Moodle 3.11 to Moodle 3.10. Custom user text fields may be show in the participants page. Thanks to Sam Marshall of the Open University for preparing the patch.
 
 ### Per-course resource display options
 
