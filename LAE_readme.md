@@ -69,8 +69,8 @@ By default this is the "Package" version which includes the contributed modules.
 
 CLAMP maintains two branches for each major version:
 
-* LAE\_310\_STABLE contains the core code only
-* LAE\_310\_PACKAGE includes the contributed modules
+* LAE\_311\_STABLE contains the core code only
+* LAE\_311\_PACKAGE includes the contributed modules
 
 ## Installing the LAE
 
