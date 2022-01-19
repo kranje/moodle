@@ -115,7 +115,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
 
         // Remove analytics related to the LAE anonymous user.
         $systemcontext = \context_system::instance();
-        $anonymousid = core_user::get_user_by_username('anonymous_user', 'id')->id;
+        $anonymousid = \core_user::get_user_by_username('anonymous_user', 'id')->id;
         $approvedlist = new approved_userlist($systemcontext, 'core_analytics', [$anonymousid]);
         provider::delete_data_for_users($approvedlist);
     }
