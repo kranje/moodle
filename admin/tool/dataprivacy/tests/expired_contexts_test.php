@@ -716,7 +716,7 @@ class tool_dataprivacy_expired_contexts_testcase extends advanced_testcase {
 
         $unexpiredroles = $expiredrecord->get('unexpiredroles');
         $this->assertCount(1, $unexpiredroles);
-        $this->assertContains($role->id, $unexpiredroles);
+        $this->assertContainsEquals($role->id, $unexpiredroles);
     }
 
     /**
@@ -823,7 +823,7 @@ class tool_dataprivacy_expired_contexts_testcase extends advanced_testcase {
         // The teacher is not expired.
         $unexpiredroles = $expiredrecord->get('unexpiredroles');
         $this->assertCount(1, $unexpiredroles);
-        $this->assertContains($role->id, $unexpiredroles);
+        $this->assertContainsEquals($role->id, $unexpiredroles);
         $this->assertTrue((bool) $expiredrecord->get('defaultexpired'));
     }
 
