@@ -71,6 +71,10 @@ class groupconcat_test extends core_reportbuilder_testcase {
                 'c1_lastname' => 'User',
             ],
             [
+                'c0_firstname' => 'Anonymous',
+                'c1_lastname' => 'User',
+            ],
+            [
                 'c0_firstname' => 'Bob',
                 'c1_lastname' => 'Apple, Banana, Banana',
             ],
@@ -108,6 +112,10 @@ class groupconcat_test extends core_reportbuilder_testcase {
             [
                 'c0_firstname' => 'Admin',
                 'c1_confirmed' => 'Yes',
+            ],
+            [
+                'c0_firstname' => 'Anonymous',
+                'c1_confirmed' => 'No',
             ],
             [
                 'c0_firstname' => 'Bob',

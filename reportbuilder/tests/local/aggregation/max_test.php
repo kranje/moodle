@@ -69,6 +69,10 @@ class max_test extends core_reportbuilder_testcase {
                 'c1_suspended' => 'No',
             ],
             [
+                'c0_firstname' => 'Anonymous',
+                'c1_suspended' => 'No',
+            ],
+            [
                 'c0_firstname' => 'Bob',
                 'c1_suspended' => 'Yes',
             ],

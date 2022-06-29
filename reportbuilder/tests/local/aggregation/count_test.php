@@ -70,6 +70,10 @@ class count_test extends core_reportbuilder_testcase {
                 'c1_lastname' => 1,
             ],
             [
+                'c0_firstname' => 'Anonymous',
+                'c1_lastname' => 1,
+            ],
+            [
                 'c0_firstname' => 'Bob',
                 'c1_lastname' => 3,
             ],
