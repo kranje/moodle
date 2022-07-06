@@ -238,9 +238,9 @@ class schedule_test extends advanced_testcase {
         $report = $generator->create_report(['name' => 'My report', 'source' => users::class]);
         $schedule = $generator->create_schedule(['reportid' => $report->get('id'), 'name' => 'My schedule']);
 
-        // There is only one row in the report (the only user on the site).
+        // There are only two rows in the report (admin and anonymous users).
         $count = schedule::get_schedule_report_count($schedule);
-        $this->assertEquals(1, $count);
+        $this->assertEquals(2, $count);
     }
 
     /**

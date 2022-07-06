@@ -122,7 +122,7 @@ class allusers_test extends advanced_testcase {
      * Test that sql generated is correct
      */
     public function test_get_sql(): void {
-        global $DB;
+        global $CFG, $DB;
         $this->resetAfterTest();
 
         /** @var core_reportbuilder_generator $generator */
@@ -146,7 +146,7 @@ class allusers_test extends advanced_testcase {
         $query = 'SELECT u.* FROM {user} u ' . $join . ' WHERE ' . $where;
         $records = $DB->get_records_sql($query, $params);
 
-        $this->assertEqualsCanonicalizing([get_admin()->id, $user1->id, $user2->id, $user3->id],
+        $this->assertEqualsCanonicalizing([get_admin()->id, $CFG->anonymous_userid, $user1->id, $user2->id, $user3->id],
             array_column($records, 'id'));
     }
 }

@@ -70,6 +70,10 @@ class countdistinct_test extends core_reportbuilder_testcase {
                 'c1_lastname' => 1,
             ],
             [
+                'c0_firstname' => 'Anonymous',
+                'c1_lastname' => 1,
+            ],
+            [
                 'c0_firstname' => 'Bob',
                 'c1_lastname' => 2,
             ],
@@ -97,8 +101,8 @@ class countdistinct_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertCount(1, $content);
 
-        // There are two distinct fullnames ("Admin User" & "Admin Test").
+        // There are three distinct fullnames ("Admin User", "Admin Test", & "Anonymous User").
         $countdistinct = reset($content[0]);
-        $this->assertEquals(2, $countdistinct);
+        $this->assertEquals(3, $countdistinct);
     }
 }
