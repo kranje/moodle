@@ -215,7 +215,7 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             ],
             [
                 'c0_firstname' => 'Anonymous',
-                'c1_data' => 'No',
+                'c1_data' => '',
                 'c2_data' => 'Not set',
                 'c3_data' => '',
                 'c4_data' => '',
