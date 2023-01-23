@@ -54,14 +54,17 @@ class custom_report_data_exporter_test extends advanced_testcase {
 
         $reportinstance = manager::get_report_from_persistent($report);
 
-        $exporter = new custom_report_data_exporter(null, ['report' => $reportinstance, 'page' => 0, 'perpage' => 2]);
+        $exporter = new custom_report_data_exporter(null, ['report' => $reportinstance, 'page' => 0, 'perpage' => 3]);
         $export = $exporter->export($PAGE->get_renderer('core_reportbuilder'));
 
-        // There are three users (admin plus the two previouly created), but we're paging the first two only.
+        // There are four users (admin, anonymous, plus the two previouly created), but we're paging the first three only.
         $this->assertEquals(['Lovely user', 'Email address'], $export->headers);
         $this->assertEquals([
             [
                 'columns' => ['Admin User', 'admin@example.com'],
+            ],
+            [
+                'columns' => ['Anonymous User', 'Somebody@example.com'],
             ],
             [
                 'columns' => ['Charlie Carrot', 'u2@example.com'],
