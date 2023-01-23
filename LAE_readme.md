@@ -1,4 +1,4 @@
-# [Moodle Liberal Arts Edition v4.0.4-LAE22.0.3]
+# [Moodle Liberal Arts Edition v4.1.0-LAE23.0.0]
 
 Welcome to the Moodle Liberal Arts Edition. The goal of the LAE is to provide a coherent package for modules, patches, and code developed (or improved) by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -16,7 +16,7 @@ https://www.clamp-it.org/collaboration-and-development-tools/
 
 ## Contents
 
-Moodle 4.0.4+LAE22.0.3 consists of the core Moodle 4.0.4 release plus a number of CLAMP-developed features and bug fixes.
+Moodle 4.1.0+LAE23.0.0 consists of the core Moodle 4.1.0 release plus a number of CLAMP-developed features and bug fixes.
 
 The following core features are included:
 
@@ -62,15 +62,15 @@ You can get the LAE in two ways:
 * Download the tar and zip packages from the CLAMP web site: <http://www.clamp-it.org/code/>
 * Download the current release branch from the CLAMP code repository:
 
-    git clone https://github.com/CLAMP-IT/moodle v4.0.4-LAE22.0.3
-    git checkout -b v4.0.4-LAE22.0.3
+    git clone https://github.com/CLAMP-IT/moodle v4.1.0-LAE23.0.0
+    git checkout -b v4.1.0-LAE23.0.0
 
-By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v4.0.4-LAE22.0.3-base tag instead.
+By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v4.1.0-LAE23.0.0-base tag instead.
 
 CLAMP maintains two branches for each major version:
 
-* LAE\_400\_STABLE contains the core code only
-* LAE\_400\_PACKAGE includes the contributed modules
+* LAE\_401\_STABLE contains the core code only
+* LAE\_401\_PACKAGE includes the contributed modules
 
 ## Installing the LAE
 
