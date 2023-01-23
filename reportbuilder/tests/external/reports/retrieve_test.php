@@ -82,7 +82,7 @@ class retrieve_test extends externallib_advanced_testcase {
         $this->assertEmpty($result['warnings']);
 
         // Retrieve the second set of pages results.
-        $result = retrieve::execute($report->get('id'), 1, 2);
+        $result = retrieve::execute($report->get('id'), 1, 3);
         $result = external_api::clean_returnvalue(retrieve::execute_returns(), $result);
 
         $this->assertArrayHasKey('details', $result);
