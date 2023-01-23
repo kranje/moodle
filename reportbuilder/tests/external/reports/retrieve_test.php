@@ -78,7 +78,7 @@ class retrieve_test extends externallib_advanced_testcase {
                 'columns' => ['Charlie Carrot', 'u2@example.com'],
             ],
         ], $result['data']['rows']);
-        $this->assertEquals(3, $result['data']['totalrowcount']);
+        $this->assertEquals(4, $result['data']['totalrowcount']);
         $this->assertEmpty($result['warnings']);
 
         // Retrieve the second set of pages results.

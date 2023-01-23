@@ -55,7 +55,7 @@ class users_test extends core_reportbuilder_testcase {
         $this->assertCount(4, $content);
 
         // Default columns are fullname, username, email. Results are sorted by the fullname.
-        [$adminrow, $userrow1, $userrow2] = array_map('array_values', $content);
+        [$adminrow, $anonrow, $userrow1, $userrow2] = array_map('array_values', $content);
 
         $this->assertEquals(['Admin User', 'admin', 'admin@example.com'], $adminrow);
         $this->assertEquals([fullname($user4), $user4->username, $user4->email], $userrow1);
@@ -88,7 +88,7 @@ class users_test extends core_reportbuilder_testcase {
         core_collator::asort_array_of_arrays_by_key($content, 'c0_firstname');
         $content = array_values($content);
 
-        [$adminrow, $userrow] = array_map('array_values', $content);
+        [$adminrow, $anonrow, $userrow] = array_map('array_values', $content);
 
         $this->assertEquals('Admin', $adminrow[0]);
         $this->assertEmpty($adminrow[1]);

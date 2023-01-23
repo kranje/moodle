@@ -121,7 +121,7 @@ class sum_test extends core_reportbuilder_testcase {
             ],
             [
                 'c0_firstname' => 'Anonymous',
-                'c1_suspended' => 0,
+                'c1_suspended' => '0 suspended',
             ],
             [
                 'c0_firstname' => 'Bob',
