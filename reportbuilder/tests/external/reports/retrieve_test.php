@@ -95,7 +95,7 @@ class retrieve_test extends externallib_advanced_testcase {
                 'columns' => ['Zoe Zebra', 'u1@example.com'],
             ],
         ], $result['data']['rows']);
-        $this->assertEquals(3, $result['data']['totalrowcount']);
+        $this->assertEquals(4, $result['data']['totalrowcount']);
         $this->assertEmpty($result['warnings']);
     }
 

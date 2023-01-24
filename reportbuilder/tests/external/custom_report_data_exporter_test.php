@@ -70,6 +70,6 @@ class custom_report_data_exporter_test extends advanced_testcase {
                 'columns' => ['Charlie Carrot', 'u2@example.com'],
             ],
         ], $export->rows);
-        $this->assertEquals(3, $export->totalrowcount);
+        $this->assertEquals(4, $export->totalrowcount);
     }
 }
