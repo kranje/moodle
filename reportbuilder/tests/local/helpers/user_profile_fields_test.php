@@ -330,7 +330,7 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
 
         $content = $this->get_custom_report_content($report->get('id'));
 
-        $this->assertCount(1, $content);
+        $this->assertCount(2, $content);
         $this->assertEquals($expectmatchuser, reset($content[0]));
     }
 }

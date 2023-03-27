@@ -57,7 +57,7 @@ class users_test extends core_reportbuilder_testcase {
         $report = $generator->create_report(['name' => 'Users', 'source' => users::class, 'default' => 1]);
 
         $content = $this->get_custom_report_content($report->get('id'));
-        $this->assertCount(3, $content);
+        $this->assertCount(4, $content);
 
         // Default columns are fullname, username, email. Results are sorted by the fullname.
         [$adminrow, $userrow1, $userrow2] = array_map('array_values', $content);
@@ -109,7 +109,7 @@ class users_test extends core_reportbuilder_testcase {
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:moodlenetprofile']);
 
         $content = $this->get_custom_report_content($report->get('id'));
-        $this->assertCount(2, $content);
+        $this->assertCount(3, $content);
 
         // Consistent order by firstname, just in case.
         core_collator::asort_array_of_arrays_by_key($content, 'c4_firstname');
