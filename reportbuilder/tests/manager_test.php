@@ -94,6 +94,7 @@ class manager_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['admin'],
+            ['anonymous_user'],
             ['usertwo'],
         ], array_map('array_values', $content));
     }
