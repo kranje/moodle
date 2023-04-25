@@ -343,7 +343,7 @@ class users_test extends core_reportbuilder_testcase {
             ], true],
             'Filter confirmed (no match)' => ['user:confirmed', [
                 'user:confirmed_operator' => boolean_select::NOT_CHECKED,
-            ], false],
+            ], true, 'anonymous_user'],
             'Filter timecreated' => ['user:timecreated', [
                 'user:timecreated_operator' => date::DATE_RANGE,
                 'user:timecreated_from' => 1622502000,
@@ -382,7 +382,7 @@ class users_test extends core_reportbuilder_testcase {
      *
      * @dataProvider datasource_filters_provider
      */
-    public function test_datasource_filters(string $filtername, array $filtervalues, bool $expectmatch): void {
+    public function test_datasource_filters(string $filtername, array $filtervalues, bool $expectmatch, string $expectmatchuser = 'zoe1'): void {
         $this->resetAfterTest();
 
         $user = $this->getDataGenerator()->create_user([
@@ -423,7 +423,7 @@ class users_test extends core_reportbuilder_testcase {
 
             // Merge report usernames into easily traversable array.
             $usernames = array_merge(...array_map('array_values', $content));
-            $this->assertContains($user->username, $usernames);
+            $this->assertContains($expectmatchuser, $usernames);
         } else {
             $this->assertEmpty($content);
         }
