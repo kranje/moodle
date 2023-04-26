@@ -60,7 +60,7 @@ class users_test extends core_reportbuilder_testcase {
         $this->assertCount(4, $content);
 
         // Default columns are fullname, username, email. Results are sorted by the fullname.
-        [$adminrow, $userrow1, $userrow2] = array_map('array_values', $content);
+        [$adminrow, $annrow, $userrow1, $userrow2] = array_map('array_values', $content);
 
         $this->assertEquals(['Admin User', 'admin', 'admin@example.com'], $adminrow);
         $this->assertEquals([fullname($user3), $user3->username, $user3->email], $userrow1);
@@ -115,7 +115,7 @@ class users_test extends core_reportbuilder_testcase {
         core_collator::asort_array_of_arrays_by_key($content, 'c4_firstname');
         $content = array_values($content);
 
-        [$adminrow, $userrow] = array_map('array_values', $content);
+        [$adminrow, $anonrow, $userrow] = array_map('array_values', $content);
 
         $this->assertStringContainsString('Admin User', $adminrow[0]);
         $this->assertStringContainsString('Admin User', $adminrow[1]);
@@ -312,7 +312,7 @@ class users_test extends core_reportbuilder_testcase {
             ], true],
             'Filter confirmed (no match)' => ['user:confirmed', [
                 'user:confirmed_operator' => boolean_select::NOT_CHECKED,
-            ], false],
+            ], true, 'anonymous_user'],
             'Filter lastaccess' => ['user:lastaccess', [
                 'user:lastaccess_operator' => date::DATE_EMPTY,
             ], true],
@@ -330,10 +330,11 @@ class users_test extends core_reportbuilder_testcase {
      * @param string $filtername
      * @param array $filtervalues
      * @param bool $expectmatch
+     * @param string $expectmatchuser
      *
      * @dataProvider datasource_filters_provider
      */
-    public function test_datasource_filters(string $filtername, array $filtervalues, bool $expectmatch): void {
+    public function test_datasource_filters(string $filtername, array $filtervalues, bool $expectmatch, string $expectmatchuser = 'zoe1'): void {
         $this->resetAfterTest();
 
         $user = $this->getDataGenerator()->create_user([
@@ -375,7 +376,7 @@ class users_test extends core_reportbuilder_testcase {
 
             // Merge report usernames into easily traversable array.
             $usernames = array_merge(...array_map('array_values', $content));
-            $this->assertContains($user->username, $usernames);
+            $this->assertContains($expectmatchuser, $usernames);
         } else {
             $this->assertEmpty($content);
         }

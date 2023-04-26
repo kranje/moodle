@@ -279,14 +279,14 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             ], 'testuser'],
             'Filter by checkbox profile field (empty)' => ['user:profilefield_checkbox', [
                 'user:profilefield_checkbox_operator' => boolean_select::NOT_CHECKED,
-            ], 'admin'],
+            ], 'anonymous_user', 2],
             'Filter by datetime profile field' => ['user:profilefield_datetime', [
                 'user:profilefield_datetime_operator' => date::DATE_RANGE,
                 'user:profilefield_datetime_from' => 1622502000,
             ], 'testuser'],
             'Filter by datetime profile field (empty)' => ['user:profilefield_datetime', [
                 'user:profilefield_datetime_operator' => date::DATE_EMPTY,
-            ], 'admin'],
+            ], 'anonymous_user', 2],
             'Filter by menu profile field' => ['user:profilefield_menu', [
                 'user:profilefield_menu_operator' => select::EQUAL_TO,
                 'user:profilefield_menu_value' => 'Dog',
@@ -294,14 +294,14 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by menu profile field (empty)' => ['user:profilefield_menu', [
                 'user:profilefield_menu_operator' => select::NOT_EQUAL_TO,
                 'user:profilefield_menu_value' => 'Dog',
-            ], 'admin'],
+            ], 'anonymous_user', 2],
             'Filter by social profile field' => ['user:profilefield_Social', [
                 'user:profilefield_Social_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_Social_value' => '12345',
             ], 'testuser'],
             'Filter by social profile field (empty)' => ['user:profilefield_Social', [
                 'user:profilefield_Social_operator' => text::IS_EMPTY,
-            ], 'admin'],
+            ], 'anonymous_user', 2],
             'Filter by text profile field' => ['user:profilefield_text', [
                 'user:profilefield_text_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_text_value' => 'Hello',
@@ -309,7 +309,7 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by text profile field (empty)' => ['user:profilefield_text', [
                 'user:profilefield_text_operator' => text::IS_NOT_EQUAL_TO,
                 'user:profilefield_text_value' => 'Hello',
-            ], 'admin'],
+            ], 'anonymous_user', 2],
             'Filter by textarea profile field' => ['user:profilefield_textarea', [
                 'user:profilefield_textarea_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_textarea_value' => 'Goodbye',
@@ -317,7 +317,7 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by textarea profile field (empty)' => ['user:profilefield_textarea', [
                 'user:profilefield_textarea_operator' => text::DOES_NOT_CONTAIN,
                 'user:profilefield_textarea_value' => 'Goodbye',
-            ], 'admin'],
+            ], 'anonymous_user', 2],
         ];
     }
 
@@ -327,10 +327,11 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
      * @param string $filtername
      * @param array $filtervalues
      * @param string $expectmatchuser
+     * @param int $expectmatchnumber
      *
      * @dataProvider custom_report_filter_provider
      */
-    public function test_custom_report_filter(string $filtername, array $filtervalues, string $expectmatchuser): void {
+    public function test_custom_report_filter(string $filtername, array $filtervalues, string $expectmatchuser, int $expectmatchnumber = 1): void {
         $this->resetAfterTest();
 
         $userprofilefields = $this->generate_userprofilefields();
@@ -359,7 +360,11 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
 
         $content = $this->get_custom_report_content($report->get('id'));
 
-        $this->assertCount(2, $content);
+        // Normalize output.
+        $usernames = array_column($content, 'c0_username');
+        array_multisort($usernames, SORT_DESC, $content);
+
+        $this->assertCount($expectmatchnumber, $content);
         $this->assertEquals($expectmatchuser, reset($content[0]));
     }
 }
