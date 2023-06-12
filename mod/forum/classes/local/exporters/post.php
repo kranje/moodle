@@ -527,7 +527,7 @@ class post extends exporter {
 
     /**
      * This method returns the parameters for the post's message to
-     * use with the function external_format_text().
+     * use with the function \core_external\util::format_text().
      *
      * @return array
      */

@@ -195,6 +195,9 @@ class assign {
     /** @var mixed This var can vary between false for no overrides to a stdClass of the overrides for a group */
     private $overridedata;
 
+    /** @var float grade value. */
+    public $grade;
+
     /**
      * Constructor for the base assign class.
      *
@@ -210,8 +213,6 @@ class assign {
      *                      otherwise this class will load one from the context as required.
      */
     public function __construct($coursemodulecontext, $coursemodule, $course) {
-        global $SESSION;
-
         $this->context = $coursemodulecontext;
         $this->course = $course;
 
@@ -226,10 +227,6 @@ class assign {
 
         // Extra entropy is required for uniqid() to work on cygwin.
         $this->useridlistid = clean_param(uniqid('', true), PARAM_ALPHANUM);
-
-        if (!isset($SESSION->mod_assign_useridlist)) {
-            $SESSION->mod_assign_useridlist = [];
-        }
     }
 
     /**
@@ -2750,7 +2747,7 @@ class assign {
 
                 // Override the language and timezone of the "current" user, so that
                 // mail is customised for the receiver.
-                cron_setup_user($user, $course);
+                \core\cron::setup_user($user, $course);
 
                 // Context lookups are already cached.
                 $coursecontext = context_course::instance($course->id);
@@ -2830,7 +2827,7 @@ class assign {
             }
             mtrace('Done processing ' . count($submissions) . ' assignment submissions');
 
-            cron_setup_user();
+            \core\cron::setup_user();
 
             // Free up memory just to be sure.
             unset($courses);
@@ -3351,7 +3348,7 @@ class assign {
         }
 
         $grouping = $this->get_instance()->teamsubmissiongroupingid;
-        $return = groups_get_all_groups($this->get_course()->id, $userid, $grouping);
+        $return = groups_get_all_groups($this->get_course()->id, $userid, $grouping, 'g.*', false, true);
 
         $this->usergroups[$userid] = $return;
 
@@ -4335,9 +4332,11 @@ class assign {
      * @return string
      */
     protected function view_remove_submission_confirm() {
-        global $USER;
+        global $USER, $PAGE;
 
         $userid = optional_param('userid', $USER->id, PARAM_INT);
+
+        $PAGE->set_pagelayout('standard');
 
         if (!$this->can_edit_submission($userid, $USER->id)) {
             throw new \moodle_exception('nopermission');
@@ -4545,7 +4544,10 @@ class assign {
                                  'context'=>$this->get_context(),
                                  'markingworkflow'=>$markingworkflow,
                                  'markingallocation'=>$markingallocation);
-        $classoptions = array('class'=>'gradingbatchoperationsform');
+        $classoptions = [
+            'class' => 'gradingbatchoperationsform',
+            'data-double-submit-protection' => 'off',
+        ];
 
         $gradingbatchoperationsform = new mod_assign_grading_batch_operations_form(null,
                                                                                    $batchformparams,
@@ -5023,7 +5025,11 @@ class assign {
                                  'context'=>$this->get_context(),
                                  'markingworkflow'=>$this->get_instance()->markingworkflow,
                                  'markingallocation'=>$markingallocation);
-        $formclasses = array('class'=>'gradingbatchoperationsform');
+        $formclasses = [
+            'class' => 'gradingbatchoperationsform',
+            'data-double-submit-protection' => 'off'
+        ];
+
         $mform = new mod_assign_grading_batch_operations_form(null,
                                                               $batchformparams,
                                                               'post',
@@ -5229,9 +5235,11 @@ class assign {
      * @return string
      */
     protected function check_submit_for_grading($mform) {
-        global $USER, $CFG;
+        global $USER, $CFG, $PAGE;
 
         require_once($CFG->dirroot . '/mod/assign/submissionconfirmform.php');
+
+        $PAGE->set_pagelayout('standard');
 
         // Check that all of the submission plugins are ready for this submission.
         // Also check whether there is something to be submitted as well against atleast one.
@@ -9354,6 +9362,13 @@ class assign {
      * @return string The key for the id, or new entry if no $id is passed.
      */
     public function get_useridlist_key($id = null) {
+        global $SESSION;
+
+        // Ensure the user id list cache is initialised.
+        if (!isset($SESSION->mod_assign_useridlist)) {
+            $SESSION->mod_assign_useridlist = [];
+        }
+
         if ($id === null) {
             $id = $this->get_useridlist_key_id();
         }
@@ -9625,8 +9640,8 @@ class assign {
      * Get the correct submission statement depending on single submisison, team submission or team submission
      * where all team memebers must submit.
      *
-     * @param array $adminconfig
-     * @param assign $instance
+     * @param stdClass $adminconfig
+     * @param stdClass $instance
      * @param context $context
      *
      * @return string

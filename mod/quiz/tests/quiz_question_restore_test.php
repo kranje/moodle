@@ -259,7 +259,7 @@ class quiz_question_restore_test extends \advanced_testcase {
         // Get the information about the resulting course and check that it is set up correctly.
         $modinfo = get_fast_modinfo($newcourseid);
         $quiz = array_values($modinfo->get_instances_of('quiz'))[0];
-        $quizobj = \quiz::create($quiz->instance);
+        $quizobj = \mod_quiz\quiz_settings::create($quiz->instance);
         $structure = structure::create_for_quiz($quizobj);
 
         // Are the correct slots returned?
@@ -302,7 +302,7 @@ class quiz_question_restore_test extends \advanced_testcase {
         // Get the information about the resulting course and check that it is set up correctly.
         $modinfo = get_fast_modinfo($newcourseid);
         $quiz = array_values($modinfo->get_instances_of('quiz'))[0];
-        $quizobj = \quiz::create($quiz->instance);
+        $quizobj = \mod_quiz\quiz_settings::create($quiz->instance);
         $structure = structure::create_for_quiz($quizobj);
 
         // Are the correct slots returned?
@@ -354,7 +354,7 @@ class quiz_question_restore_test extends \advanced_testcase {
         // Get the information about the resulting course and check that it is set up correctly.
         $modinfo = get_fast_modinfo($newcourseid);
         $quiz = array_values($modinfo->get_instances_of('quiz'))[0];
-        $quizobj = \quiz::create($quiz->instance);
+        $quizobj = \mod_quiz\quiz_settings::create($quiz->instance);
         $structure = \mod_quiz\structure::create_for_quiz($quizobj);
 
         // Count the questions in quiz qbank.
@@ -378,6 +378,59 @@ class quiz_question_restore_test extends \advanced_testcase {
             $this->assertEquals([], array_diff($randomtags[$slot->slot], $tags));
         }
 
+    }
+
+    /**
+     * Test pre 4.0 quiz restore for random question used on multiple quizzes.
+     *
+     * @covers ::process_quiz_question_legacy_instance
+     */
+    public function test_pre_4_quiz_restore_shared_random_question() {
+        global $USER, $DB;
+        $this->resetAfterTest();
+
+        $backupid = 'abc';
+        $backuppath = make_backup_temp_directory($backupid);
+        get_file_packer('application/vnd.moodle.backup')->extract_to_pathname(
+                __DIR__ . "/fixtures/pre-40-shared-random-question.mbz", $backuppath);
+
+        // Do the restore to new course with default settings.
+        $categoryid = $DB->get_field_sql("SELECT MIN(id) FROM {course_categories}");
+        $newcourseid = \restore_dbops::create_new_course('Test fullname', 'Test shortname', $categoryid);
+        $rc = new \restore_controller($backupid, $newcourseid, \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $USER->id,
+                \backup::TARGET_NEW_COURSE);
+
+        $this->assertTrue($rc->execute_precheck());
+        $rc->execute_plan();
+        $rc->destroy();
+
+        // Get the information about the resulting course and check that it is set up correctly.
+        // Each quiz should contain an instance of the random question.
+        $modinfo = get_fast_modinfo($newcourseid);
+        $quizzes = $modinfo->get_instances_of('quiz');
+        $this->assertCount(2, $quizzes);
+        foreach ($quizzes as $quiz) {
+            $quizobj = \mod_quiz\quiz_settings::create($quiz->instance);
+            $structure = structure::create_for_quiz($quizobj);
+
+            // Are the correct slots returned?
+            $slots = $structure->get_slots();
+            $this->assertCount(1, $slots);
+
+            $quizobj->preload_questions();
+            $quizobj->load_questions();
+            $questions = $quizobj->get_questions();
+            $this->assertCount(1, $questions);
+        }
+
+        // Count the questions for course question bank.
+        // We should have a single question, the random question should have been deleted after the restore.
+        $this->assertEquals(1, $this->question_count(\context_course::instance($newcourseid)->id));
+        $this->assertEquals(1, $this->question_count(\context_course::instance($newcourseid)->id,
+                "AND q.qtype <> 'random'"));
+
+        // Count the questions in quiz qbank.
+        $this->assertEquals(0, $this->question_count($quizobj->get_context()->id));
     }
 
     /**
@@ -419,9 +472,13 @@ class quiz_question_restore_test extends \advanced_testcase {
         quiz_add_quiz_question($matchq->id, $quiz, 3, 1);
         quiz_add_random_questions($quiz, 3, $randomcat->id, 2, false);
 
-        $quizobj = \quiz::create($quiz->id, $user1->id);
+        $quizobj = quiz_settings::create($quiz->id, $user1->id);
         $originalstructure = \mod_quiz\structure::create_for_quiz($quizobj);
+
+        // Set one slot to a non-default display number.
         $originalslots = $originalstructure->get_slots();
+        $firstslot = reset($originalslots);
+        $originalstructure->update_slot_display_number($firstslot->id, rand(5, 10));
 
         // Set one slot to requireprevious.
         $lastslot = end($originalslots);
@@ -435,7 +492,7 @@ class quiz_question_restore_test extends \advanced_testcase {
         $modinfo = get_fast_modinfo($course2);
         $quizzes = $modinfo->get_instances_of('quiz');
         $restoredquiz = reset($quizzes);
-        $restoredquizobj = \quiz::create($restoredquiz->instance, $user1->id);
+        $restoredquizobj = quiz_settings::create($restoredquiz->instance, $user1->id);
         $restoredstructure = \mod_quiz\structure::create_for_quiz($restoredquizobj);
         $restoredslots = array_values($restoredstructure->get_slots());
         $originalstructure = \mod_quiz\structure::create_for_quiz($quizobj);
@@ -446,6 +503,7 @@ class quiz_question_restore_test extends \advanced_testcase {
             $this->assertEquals($restoredslot->quizid, $restoredquiz->instance);
             $this->assertEquals($originalslot->slot, $restoredslot->slot);
             $this->assertEquals($originalslot->page, $restoredslot->page);
+            $this->assertEquals($originalslot->displaynumber, $restoredslot->displaynumber);
             $this->assertEquals($originalslot->requireprevious, $restoredslot->requireprevious);
             $this->assertEquals($originalslot->maxmark, $restoredslot->maxmark);
         }
