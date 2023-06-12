@@ -59,7 +59,7 @@ class users_test extends core_reportbuilder_testcase {
         $report = $generator->create_report(['name' => 'Badges', 'source' => users::class, 'default' => 1]);
 
         $content = $this->get_custom_report_content($report->get('id'));
-        $this->assertCount(3, $content);
+        $this->assertCount(4, $content);
 
         // Default columns are user, badge, description, issued time. Sorted by user, badge, issued time.
         [$userfullname, $badgename, $badgedescription, $badgeissued] = array_values($content[0]);
@@ -68,13 +68,13 @@ class users_test extends core_reportbuilder_testcase {
         $this->assertEmpty($badgedescription);
         $this->assertEmpty($badgeissued);
 
-        [$userfullname, $badgename, $badgedescription, $badgeissued] = array_values($content[1]);
+        [$userfullname, $badgename, $badgedescription, $badgeissued] = array_values($content[2]);
         $this->assertEquals(fullname($user), $userfullname);
         $this->assertEquals($badgeone->name, $badgename);
         $this->assertEquals($badgeone->description, $badgedescription);
         $this->assertNotEmpty($badgeissued);
 
-        [$userfullname, $badgename, $badgedescription, $badgeissued] = array_values($content[2]);
+        [$userfullname, $badgename, $badgedescription, $badgeissued] = array_values($content[3]);
         $this->assertEquals(fullname($user), $userfullname);
         $this->assertEquals($badgetwo->name, $badgename);
         $this->assertEquals($badgetwo->description, $badgedescription);
@@ -124,7 +124,7 @@ class users_test extends core_reportbuilder_testcase {
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'course:fullname']);
 
         $content = $this->get_custom_report_content($report->get('id'));
-        $this->assertCount(3, $content);
+        $this->assertCount(4, $content);
 
         // Admin user, no badge issued.
         [, , $criteria, $image, $language, $version, $status, $expiry, $expires, $visible, $coursename] = array_values($content[0]);
@@ -139,7 +139,7 @@ class users_test extends core_reportbuilder_testcase {
         $this->assertEmpty($coursename);
 
         // Site badge issued.
-        [, , $criteria, $image, $language, $version, $status, $expiry, $expires, $visible, $coursename] = array_values($content[1]);
+        [, , $criteria, $image, $language, $version, $status, $expiry, $expires, $visible, $coursename] = array_values($content[2]);
         $this->assertStringContainsString('Awarded by: Manager', $criteria);
         $this->assertStringContainsString('Image caption', $image);
         $this->assertEquals('German', $language);
@@ -151,7 +151,7 @@ class users_test extends core_reportbuilder_testcase {
         $this->assertEquals('PHPUnit test site', $coursename);
 
         // Course badge issued.
-        [, , $criteria, $image, $language, $version, $status, $expiry, $expires, $visible, $coursename] = array_values($content[2]);
+        [, , $criteria, $image, $language, $version, $status, $expiry, $expires, $visible, $coursename] = array_values($content[3]);
         $this->assertEquals('Criteria for this badge have not been set up yet.', $criteria);
         $this->assertStringContainsString('Image caption', $image);
         $this->assertEquals('English', $language);
