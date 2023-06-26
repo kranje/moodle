@@ -328,6 +328,165 @@ Base Media skin Setting Integration
     src: url('https://fonts.googleapis.com/css?family=Indie+Flower');
 }
 
+/* minimal recorder */
+
+.poodll_mediarecorderholder_minimal .settingsicon button {
+    border: none !important;
+    background: transparent !important;
+}
+
+.poodll_mediarecorderholder_minimal .settingsicon button i {
+    font-size: 18px !important;
+    color: #333 !important;
+}
+
+.poodll_mediarecorderholder_minimal .settingsicon {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1;
+}
+
+.poodll_mediarecorderbox_minimal .poodll_playback_minimal {
+    width: 280px;
+}
+.poodll_mediarecorderbox_minimal .minimal-restart-button-wrapper {
+    text-align: center;
+}
+.poodll_mediarecorderbox_minimal {
+    width: 280px;
+    position: relative;
+}
+
+.poodll_mediarecorderholder_minimal .settingsicon button:focus {
+    border: none;
+    background: transparent;
+}
+
+.poodll_mediarecorderholder_minimal .settingsicon button i:hover {
+    cursor: pointer;
+}
+
+.poodll_mediarecorderbox_minimal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    position: relative;
+    background-color: #f5f3ff;
+    border-radius: 14px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+
+.poodll_mediarecorder_minimal_counter {
+    font-family: RobotoMono;
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    border: 1px solid #6F58DE;
+    border-radius: 8px;
+    padding: 10px 22px;
+    display: inline-block;
+    margin-bottom: 36px;
+    background-color: #fff;
+}
+
+.poodll_mediarecorder_button_minimal {
+    width: 64px;
+    height: 64px;
+    background-color: #6F58DE;
+    /*box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);*/
+    box-shadow: 0 3px 14px rgb(133, 108, 255, .28);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 100%;
+    border-width: 0px;
+    margin-bottom: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    z-index: 2;
+    top: 129px;
+    display: block;
+}
+
+.poodll_mediarecorder_minimal_start_button {
+    background-image: url([[pix:filter_poodll|fpminimal-mic]]);
+}
+
+.poodll_mediarecorder_minimal_start_button:hover {
+    background: #5943c6;
+    background-image: url([[pix:filter_poodll|fpminimal-mic]]);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.poodll_mediarecorder_minimal_start_button:active {
+    background: #5943c6;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0);
+}
+
+.poodll_mediarecorder_minimal_start_button.button_visible {
+    display: block;
+}
+
+.poodll_mediarecorder_minimal_start_button.button_hidden {
+    display: none;
+}
+
+.poodll_mediarecorder_minimal_stop_button {
+    background-image: url([[pix:filter_poodll|fpminimal-stop]]);
+    position: sticky;
+}
+
+.poodll_mediarecorder_minimal_stop_button.button_inactive {
+    background-color: #b5b2c4;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0);
+}
+
+.poodll_mediarecorder_minimal_upload_button {
+   /* background-image: url([[pix:filter_poodll|fpminimal-stop]]);*/
+    color: white;
+    font-size: 11px;
+}
+
+.poodll_mediarecorder_minimal_animaton.animation_running {
+    position: absolute;
+    left: 108px;
+    top: 129px;
+    background-color: #DCD4FF;;
+    animation-name: pmr-recording-waves;
+    animation-duration: 2s;
+    animation-iteration-count:infinite;
+    transform: scale(1);
+    opacity: 1;
+    z-index: 1;
+
+}
+
+
+@keyframes pmr-recording-waves {
+    0% 	{ transform: scale(1); opacity: 1;}
+    45%	{ transform: scale(1.6); opacity: 1;}
+    50% 	{ transform: scale(1.6); opacity: 1;}
+    100%	{ transform: scale(2.3); opacity: 0;}
+}
+
+.poodll_status_minimal {
+    font-family: RobotoMono;
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    border: 1px solid #6F58DE;
+    border-radius: 8px;
+    padding: 10px 22px;
+    display: inline-block;
+    margin-bottom: 36px;
+    background-color: #fff;
+}
+
+/* GOLD Recorder */
+
 .poodll_mediarecorderholder_gold .poodll_preview_gold {
     height: 100px;
     width: 100px;
@@ -858,98 +1017,108 @@ button.poodll_mediarecorder_button_readseed {
 	The Read Aloud Audio Recorders
 */
 
-.poodll_mediarecorderholder_readaloud {
-    position: relative;
+/*
+	The Read Aloud Audio Recorders
+*/
+
+
+
+.poodll_mediarecorderbox_readaloud .poodll_status_readaloud {
+    font-size: 1em;
+    font-family: georgia;
+    margin-top: 2px;
+    margin-bottom: 20px;
 }
 
-.poodll_mediarecorderholder_readaloud .settingsicon {
+.poodll_mediarecorderholder_readaloud{
+    position:relative;
+}
+
+.poodll_mediarecorderholder_readaloud .settingsicon{
     position: absolute;
     bottom: 75px;
     right: 250px;
 }
-
-.poodll_mediarecorderholder_readaloud .settingsicon button {
+.poodll_mediarecorderholder_readaloud .settingsicon button{
     border: none !important;
     background: transparent !important;
 }
-
-.poodll_mediarecorderholder_readaloud .settingsicon button i {
+.poodll_mediarecorderholder_readaloud .settingsicon button i{
     font-size: 18px !important;
     color: #333 !important;
 }
-
-.poodll_mediarecorderholder_readaloud .settingsicon button:focus {
+.poodll_mediarecorderholder_readaloud .settingsicon button:focus{
     border: none;
     background: transparent;
 }
-
-.poodll_mediarecorderholder_readaloud .settingsicon button i:hover {
+.poodll_mediarecorderholder_readaloud .settingsicon button i:hover{
     cursor: pointer;
 }
 
-.poodll_mediarecorder_audio .poodll_mediarecorderbox_readaloud {
+.poodll_mediarecorder_audio .poodll_mediarecorderbox_readaloud{
     text-align: center;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    padding: 5px;
+    max-width: 200px;
+    min-width: 200px;
 }
 
-.poodll_mediarecorderbox_readaloud button:hover {
+.poodll_mediarecorderbox_readaloud button:hover{
     cursor: pointer;
     filter: brightness(120%);
 }
-
-.poodll_mediarecorderbox_readaloud .poodll_start-recording_readaloud {
-    background-color: #93c47d;
+.poodll_mediarecorderbox_readaloud .poodll_start-recording_readaloud{
+    background-color: #FBB040;
+    color: black;
 }
-
-.poodll_mediarecorderbox_readaloud .poodll_stop-recording_readaloud {
+.poodll_mediarecorderbox_readaloud .poodll_stop-recording_readaloud{
     background-color: #ea9999;
 }
-
-.poodll_mediarecorderbox_readaloud .poodll_test-recording_readaloud {
+.poodll_mediarecorderbox_readaloud .poodll_test-recording_readaloud{
     background-color: #9fc5f8;
 }
 
-.poodll_mediarecorderbox_readaloud canvas {
+.poodll_mediarecorderbox_readaloud canvas{
     margin-bottom: 5px;
 }
 
-button.poodll_mediarecorder_button_readaloud {
 
-    transition: filter 0.5s ease;
-    margin: auto;
-    width: 200px;
-    color: #fff;
-    background-color: #00acdf;
-    border-color: #00acdf;
-    background-image: none;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.25;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
+.poodll_mediarecorder_button_readaloud {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #000;
+    font-size: 26px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .5rem 1rem;
-    font-size: 1rem;
-    border-radius: .25rem;
+    background-color: red;
 }
 
-.poodll_mediarecorderholder_readaloud .poodll_mediarecorderbox_readaloud {
+
+.poodll_mediarecorderholder_readaloud .poodll_mediarecorderbox_readaloud{
     position: relative;
 }
-
-.poodll_mediarecorderholder_readaloud .poodll_mediarecorderbox_readaloud .pmr_disabled {
+.poodll_mediarecorderholder_readaloud .poodll_mediarecorderbox_readaloud .pmr_disabled{
     display: none;
 }
 
 .poodll_mediarecorderholder_readaloud .poodll_mediarecorderbox_readaloud button:focus {
     outline-style: none;
 }
-
 /*********************************************END****************************************/
 
 /*
@@ -4950,4 +5119,154 @@ video.poodll_multivideoplayer_video {
 .filter_poodll_rtl {
     direction: rtl;
     /* text-align: right; */
+}
+
+
+/* Audio player */
+
+.fpminimal_audioplayer {
+    /*background-color: #EFF1FF;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 42px 12px 32px 12px;
+  /*  margin-bottom: 48px; */
+    position: relative;
+}
+
+@media screen and (min-width: 576px) {
+    .fpminimal_audioplayer {
+        padding: 36px;
+    }
+}
+
+.fpminimal_audioplayer_play_button {
+    width: 48px;
+    height: 48px;
+    background-color: #6F58DE;
+    color: #fff;
+    background-image: url([[pix:filter_poodll|fpminimal-play]]);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    top: 36px;
+}
+
+.fpminimal_audioplayer_play_button[data-state="playing"] {
+    background-image: url([[pix:filter_poodll|fpminimal-pause]]);
+}
+
+.fpminimal_audioplayer_skip_buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+@media screen and (min-width: 576px) {
+    .fpminimal_audioplayer_skip_buttons {
+        margin-bottom: 14px;
+        margin-top: 36px;
+        position: relative;
+        top: 32px;
+    }
+}
+
+.fpminimal_audioplayer_skip_button_back,
+.fpminimal_audioplayer_skip_button_forward {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    font-weight: 500;
+    color: #6F58DE;
+    border: none;
+    background-color: transparent;
+}
+
+@media screen and (min-width: 576px) {
+    .fpminimal_audioplayer_skip_button_back,
+    .fpminimal_audioplayer_skip_button_forward {
+        transform: scale(1.3);
+    }
+}
+
+.fpminimal_audioplayer_skip_button_back:hover,
+.fpminimal_audioplayer_skip_button_forward:hover,
+.fpminimal_audioplayer_skip_button_back:active,
+.fpminimal_audioplayer_skip_button_forward:active {
+    background: #DCDFF5;
+}
+
+
+.fpminimal_audioplayer_skip_button_back::before,
+.fpminimal_audioplayer_skip_button_forward::before {
+    content: ' ';
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 19px;
+    height: 21px;
+    display: block;
+    position: absolute;
+    top: 7px;
+}
+
+.fpminimal_audioplayer_skip_button_back::before {
+    background-image: url([[pix:filter_poodll|fpminimal-back]]);
+}
+
+.fpminimal_audioplayer_skip_button_forward::before {
+    background-image: url([[pix:filter_poodll|fpminimal-forward]]);
+}
+
+.fpminimal_audioplayer_time {
+    font-weight: 600;
+    font-size: 13px;
+    color: #2D225D;
+}
+
+@media screen and (min-width: 576px) {
+    .fpminimal_audioplayer_time {
+        font-size: 15px;
+    }
+}
+
+.fpminimal_audioplayer_bar {
+    position: relative;
+    height: 4px;
+    width: 95%;
+    margin-bottom: 6px;
+}
+
+@media screen and (min-width: 576px) {
+    .fpminimal_audioplayer_bar {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .fpminimal_audioplayer_bar {
+        width: 70%;
+    }
+}
+
+.fpminimal_audioplayer_bar_behind {
+    height: 2px;
+    width: 100%;
+    background-color: #2D225D;
+    position: absolute;
+}
+
+.fpminimal_audioplayer_bar_front {
+    height: 4px;
+    width: 45%;
+    background-color: #2D225D;
+    position: absolute;
+    top: -1px;
 }
