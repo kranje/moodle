@@ -15,19 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details.
+ * Behat plugin generator
  *
  * @package    format_flexsections
- * @copyright  2022 Marina Glancy
+ * @category   test
+ * @copyright  2023 Marina Glancy
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2023070200;             // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2022041900.00;          // Requires Moodle 4.0 or above.
-$plugin->release   = "4.0.4";
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->component = 'format_flexsections';  // Full name of the plugin (used for diagnostics).
-$plugin->supported = [400, 402];
-
+class behat_format_flexsections_generator extends behat_generator_base {
+    /**
+     * Get a list of the entities that can be created for this component.
+     *
+     * @return array entity name => information about how to generate.
+     */
+    protected function get_creatable_entities(): array {
+        return [
+            'sections' => [
+                'singular' => 'section',
+                'datagenerator' => 'section',
+                'required' => ['name', 'course'],
+                'switchids' => ['course' => 'courseid'],
+            ],
+        ];
+    }
+}

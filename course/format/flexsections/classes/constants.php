@@ -14,23 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace format_flexsections;
+
 /**
- * Plugin version information.
+ * Constants
  *
- * @package local_o365
- * @author James McQuillan <james.mcquillan@remote-learner.net>
- * @author Lai Wei <lai.wei@enovation.ie>
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright (C) 2014 onwards Microsoft, Inc. (http://microsoft.com/)
+ * @package    format_flexsections
+ * @copyright  2023 Marina Glancy
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version = 2022112810;
-$plugin->requires = 2022112800;
-$plugin->release = '4.1.2';
-$plugin->component = 'local_o365';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = [
-    'auth_oidc' => 2022112810,
-];
+class constants {
+    /** @var int */
+    const COURSEINDEX_FULL = 0;
+    /** @var int */
+    const COURSEINDEX_SECTIONS = 1;
+    /** @var int */
+    const COURSEINDEX_NONE = 2;
+}
