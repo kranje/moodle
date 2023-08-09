@@ -23,25 +23,53 @@
  * @author    Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
+namespace mod_vpl;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once(dirname(__FILE__).'/../locallib.php');
 
 /**
- * Unit tests for \mod_vpl\util\phpconfig class.
+ * Unit tests for the \mod_vpl\util\phpconfig class.
  *
  * @group mod_vpl
+ * @covers \mod_vpl\util\phpconfig
  */
-class mod_vpl_util_phpconfig extends advanced_testcase {
+class util_phpconfig_test extends \advanced_testcase {
     /**
      * Method to test function get_bytes(string $value): int
      */
     public function test_get_bytes() {
-        $cases = [[123, '123'], [13 * 1024, '13k'], [7 * 1024 * 1024, '7M'], [1024 * 1024 * 1024, '1G']];
+        $cases = [
+            [0, '0'],
+            [123, '123'],
+            [13 * 1024, '13k'],
+            [7 * 1024 * 1024, '7  Mb'],
+            [1024 * 1024 * 1024, '  1G']
+        ];
         foreach ($cases as $case) {
             $this->assertEquals( $case[0], \mod_vpl\util\phpconfig::get_bytes($case[1]), $case[1]);
         }
 
+    }
+    /**
+     * Method to test function get_post_max_size(): int
+     */
+    public function test_get_post_max_size_internal() {
+        // Untestable, checks only callable.
+        $cases = [
+            [PHP_INT_MAX, '0'],
+            [123, '123'],
+            [13 * 1024, '13k'],
+            [7 * 1024 * 1024, '7  Mb'],
+            [1024 * 1024 * 1024, '  1G']
+        ];
+        foreach ($cases as $case) {
+            $this->assertEquals( $case[0], \mod_vpl\util\phpconfig::get_post_max_size_internal($case[1]), $case[1]);
+        }
+        if (PHP_INT_SIZE == 4) {
+            $this->assertEquals(PHP_INT_MAX, \mod_vpl\util\phpconfig::get_post_max_size_internal('  1999999 G'));
+        }
     }
     /**
      * Method to test function get_post_max_size(): int
@@ -57,6 +85,7 @@ class mod_vpl_util_phpconfig extends advanced_testcase {
         $maxpost = \mod_vpl\util\phpconfig::get_post_max_size();
         \mod_vpl\util\phpconfig::increase_memory_limit();
         $memorylimit = \mod_vpl\util\phpconfig::get_bytes(ini_get('memory_limit'));
-        $this->assertTrue($maxpost * 3 <= $memorylimit);
+        $memoryused = memory_get_usage();
+        $this->assertTrue($maxpost * 3 <= max($memorylimit, $memoryused) );
     }
 }

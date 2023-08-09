@@ -63,6 +63,17 @@ class mod_vpl_mod_form extends moodleform_mod {
         ) );
         $mform->setDefault( 'duedate', $endtime );
 
+
+       //must complete code
+        $mform->addElement("text","percent_drop","Drop by Percentage", //get_string('percent_drop',VPL),
+                           array('optional'=>true));
+        $mform->setType('percent_drop',PARAM_FLOAT);
+        $mform->setDefault('percent_drop',0);
+
+        $mform->addElement('advcheckbox', 'must_complete', "Must Complete?", 'Only perfect evaluations will be recorded');
+        $mform->setDefault('must_complete',0);
+
+
         $mform->addElement( 'header', 'submissionrestrictions', get_string( 'submissionrestrictions', VPL ) );
         $mform->addElement( 'text', 'maxfiles', get_string( 'maxfiles', VPL ) );
         $mform->setType( 'maxfiles', PARAM_INT);
@@ -77,7 +88,7 @@ class mod_vpl_mod_form extends moodleform_mod {
         $mform->addElement( 'selectyesno', 'example', get_string( 'isexample', VPL ) );
         $mform->setDefault( 'example', false );
         $mform->setAdvanced( 'example' );
-        $max = vpl_get_max_post_size();
+        $max = \mod_vpl\util\phpconfig::get_post_max_size();
         if ($plugincfg->maxfilesize > 0 && $plugincfg->maxfilesize < $max) {
             $max = $plugincfg->maxfilesize;
         }

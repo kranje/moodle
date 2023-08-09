@@ -41,11 +41,12 @@ class vpl_jailserver_manager {
         }
         $plugincfg = get_config('mod_vpl');
         $ch = curl_init();
+        $contenttype = $request[0] == '{' ? 'application/json' : 'text/xml';
         curl_setopt( $ch, CURLOPT_URL, $server );
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
         curl_setopt( $ch, CURLOPT_POST, 1 );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array (
-                'Content-type: text/xml;charset=UTF-8',
+                "Content-type: {$contenttype};charset=UTF-8",
                 'User-Agent: VPL ' . vpl_get_version()
         ) );
         curl_setopt( $ch, CURLOPT_POSTFIELDS, $request );
@@ -61,6 +62,27 @@ class vpl_jailserver_manager {
         }
         return $ch;
     }
+
+    static private $lastjsonrpcid = '';
+
+    /**
+     * Encode action and data as JSONRPC adding an automatic id.
+     *
+     * @param string $method
+     * @param object $data
+     * @return string
+     */
+    public static function jsonrpc_encode($method, $data) {
+        global $USER;
+        $rpcobject = new stdclass;
+        $rpcobject->method = $method;
+        $rpcobject->params = $data;
+        $idtime = hrtime();
+        self::$lastjsonrpcid = $USER->id . '-' . $idtime[0] . '-' . $idtime[1];
+        $rpcobject->id = self::$lastjsonrpcid;
+        return json_encode($rpcobject, JSON_UNESCAPED_UNICODE);
+    }
+
     public static function get_response($server, $request, &$error = null, $fresh = false) {
         $ch = self::get_curl( $server, $request, $fresh );
         $rawresponse = curl_exec( $ch );
@@ -71,15 +93,34 @@ class vpl_jailserver_manager {
         } else {
             curl_close( $ch );
             $error = '';
-            $response = xmlrpc_decode( $rawresponse, "UTF-8" );
-            if (is_array( $response )) {
-                if (xmlrpc_is_fault( $response )) {
-                    $error = 'xmlrpc is fault: ' . s( $response ["faultString"] );
+            if ($rawresponse[0] == '{') {
+                $response = json_decode($rawresponse, null, 512, JSON_INVALID_UTF8_SUBSTITUTE);
+                if (json_last_error() != JSON_ERROR_NONE) {
+                    $error = 'JSONRPC response is fault: ' . json_last_error_msg();
                 } else {
-                    return $response;
+                    if ($response->id != self::$lastjsonrpcid) {
+                        $error = 'JSONRPC response mismatch ID';
+                    } else {
+                        return (array) ($response->result);
+                    }
                 }
             } else {
-                $error = 'http error ' . s( strip_tags( $rawresponse ) );
+                $xmlrpcdecode = 'xmlrpc_decode';
+                if (! function_exists($xmlrpcdecode)) {
+                    $error = 'Requires execution server version >= 3 or PHP with XML-RPC support';
+                } else {
+                    $response = $xmlrpcdecode( $rawresponse, "UTF-8" );
+                    if (is_array( $response )) {
+                        $xmlrpcisfault = 'xmlrpc_is_fault';
+                        if ($xmlrpcisfault( $response )) {
+                            $error = 'XML-RPC is fault: ' . s( $response["faultString"] );
+                        } else {
+                            return $response;
+                        }
+                    } else {
+                        $error = 'HTTP error ' . s( strip_tags( $rawresponse ) );
+                    }
+                }
             }
             return false;
         }
@@ -154,11 +195,11 @@ class vpl_jailserver_manager {
         // Clean temp server list and search for 'end_of_jails'.
         foreach ($tempserverlist as $server) {
             $server = trim( $server );
-            if ($server > '' && $server [0] != '#') {
+            if ($server > '' && $server[0] != '#') {
                 if (strtolower( $server ) == 'end_of_jails') {
                     break;
                 } else {
-                    $serverlist [] = $server;
+                    $serverlist[] = $server;
                 }
             }
         }
@@ -166,26 +207,54 @@ class vpl_jailserver_manager {
     }
 
     /**
+     * Returns action request XMLRPC or JSONRPC.
+     * @param string action
+     * @param object data
+     * @return string
+     */
+    public static function get_action_request(string $action, object $data): string {
+        global $CFG;
+        $plugincfg = get_config('mod_vpl');
+        if ( empty($plugincfg->use_xmlrpc) ) {
+            $plugincfg->use_xmlrpc = false;
+        }
+        $xmlrpcencoderequest = 'xmlrpc_encode_request';
+        if ($plugincfg->use_xmlrpc && function_exists($xmlrpcencoderequest)) {
+            $outputoptions = [
+                'escaping' => 'markup',
+                'encoding' => 'UTF-8',
+                'verbosity' => 'newlines_only'
+            ];
+            return $xmlrpcencoderequest( $action, $data, $outputoptions);
+        } else {
+            return self::jsonrpc_encode( $action, $data);
+        }
+    }
+
+    /**
+     * Returns available request XMLRPC or JSONRPC.
+     * @param int $maxmemory, required
+     * @return string
+     */
+    public static function get_available_request(int $maxmemory): string {
+        $data = new stdClass();
+        $data->maxmemory = $maxmemory;
+        return self::get_action_request('available', $data);
+    }
+
+    /**
      * Return a valid server to be used, May tag some servers as faulty
      *
-     * @param int $maxmemory
-     *            required
-     * @param string $localserverlisttext=''
-     *            List of local server in text
-     * @param string $feedback
-     *            info about jail servers response
+     * @param int $maxmemory. Required
+     * @param string $localserverlisttext=''. List of local server in text.
+     * @param string $feedback. Info about jail servers response
      * @return string
      */
     public static function get_server(int $maxmemory, string $localserverlisttext = '',
                                       string &$feedback = null): string {
-        if (! function_exists( 'xmlrpc_encode_request' )) {
-            throw new Exception( 'PHP XMLRPC required' );
-        }
         $serverlist = self::get_server_list( $localserverlisttext );
         shuffle( $serverlist );
-        $data = new stdClass();
-        $data->maxmemory = $maxmemory;
-        $requestready = xmlrpc_encode_request( 'available', $data, array ( 'encoding' => 'UTF-8' ) );
+        $requestready = self::get_available_request($maxmemory);
         $feedback = '';
         $error = '';
         $planb = array ();
@@ -195,16 +264,16 @@ class vpl_jailserver_manager {
                 if ($response === false) {
                     self::server_fail( $server, $error );
                     $feedback .= parse_url( $server, PHP_URL_HOST ) . ' ' . $error . "\n";
-                } else if (! isset( $response ['status'] )) {
+                } else if (! isset( $response['status'] )) {
                     self::server_fail( $server, $error );
                     $feedback .= parse_url( $server, PHP_URL_HOST ) . " protocol error (No status)\n";
                 } else {
-                    if ($response ['status'] == 'ready') {
+                    if ($response['status'] == 'ready') {
                         return $server;
                     }
                 }
             } else {
-                $planb [] = $server;
+                $planb[] = $server;
             }
         }
         foreach ($planb as $server) {
@@ -212,11 +281,11 @@ class vpl_jailserver_manager {
             if ($response === false) {
                 self::server_fail( $server, $error );
                 $feedback .= parse_url( $server, PHP_URL_HOST ) . ' ' . $error . "\n";
-            } else if (! isset( $response ['status'] )) {
+            } else if (! isset( $response['status'] )) {
                 self::server_fail( $server, $error );
                 $feedback .= parse_url( $server, PHP_URL_HOST ) . " protocol error (No status)\n";
             } else {
-                if ($response ['status'] == 'ready') {
+                if ($response['status'] == 'ready') {
                     return $server;
                 }
             }
@@ -254,14 +323,7 @@ class vpl_jailserver_manager {
      */
     public static function check_servers(string $localserverlisttext = ''): array {
         global $DB;
-        if (! function_exists( 'xmlrpc_encode_request' )) {
-            throw new Exception( 'PHP XMLRPC required' );
-        }
-        $data = new stdClass();
-        $data->maxmemory = ( int ) 1024 * 10;
-        $requestready = xmlrpc_encode_request( 'available', $data, array (
-                'encoding' => 'UTF-8'
-        ) );
+        $requestready = self::get_available_request(1024 * 10);
         $serverlist = array_unique( self::get_server_list( $localserverlisttext ) );
         $feedback = array ();
         foreach ($serverlist as $server) {
@@ -272,7 +334,7 @@ class vpl_jailserver_manager {
             if ($response === false) {
                 self::server_fail( $server, $status );
             } else {
-                $status = s( $response ['status'] );
+                $status = s( $response['status'] );
             }
             if ($info == null) {
                 $info = new stdClass();
@@ -289,7 +351,7 @@ class vpl_jailserver_manager {
                 $message = 'WARNING: not accessible from the internet';
                 $info->server = "{$info->server}\n[$message]";
             }
-            $feedback [] = $info;
+            $feedback[] = $info;
         }
         return $feedback;
     }
@@ -302,14 +364,7 @@ class vpl_jailserver_manager {
      * @return array of URLs
      */
     public static function get_https_server_list(string $localserverlisttext = ''): array {
-        if (! function_exists( 'xmlrpc_encode_request' )) {
-            throw new Exception( 'PHP XMLRPC required' );
-        }
-        $data = new stdClass();
-        $data->maxmemory = ( int ) 1024 * 10;
-        $requestready = xmlrpc_encode_request( 'available', $data, array (
-                'encoding' => 'UTF-8'
-        ) );
+        $requestready = self::get_available_request(1024 * 10);
         $error = '';
         $serverlist = array_unique( self::get_server_list( $localserverlisttext ) );
         $list = array ();
@@ -318,12 +373,12 @@ class vpl_jailserver_manager {
                 $response = self::get_response( $server, $requestready, $error );
                 if ($response === false) {
                     self::server_fail( $server, $error );
-                } else if (! isset( $response ['status'] )) {
+                } else if (! isset( $response['status'] )) {
                     self::server_fail( $server, $error );
                 } else {
-                    if ($response ['status'] == 'ready') {
+                    if ($response['status'] == 'ready') {
                         $parsed = parse_url( $server );
-                        $list [] = 'https://' . $parsed ['host'] . ':' . $response ['secureport'] . '/OK';
+                        $list[] = 'https://' . $parsed['host'] . ':' . $response['secureport'] . '/OK';
                     }
                 }
             }

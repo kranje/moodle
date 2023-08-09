@@ -23,7 +23,6 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
-defined( 'MOODLE_INTERNAL' ) || die();
 class vpl_list_util {
     static protected $fields; // Field to compare.
     static protected $ascending; // Value to return when ascending or descending order.
@@ -69,10 +68,10 @@ class vpl_list_util {
                         'name'
                 )
         );
-        if (isset( $sortfields [$field] )) {
-            self::$fields = $sortfields [$field];
+        if (isset( $sortfields[$field] )) {
+            self::$fields = $sortfields[$field];
         } else { // Unknow field.
-            self::$fields = $sortfields ['duedate'];
+            self::$fields = $sortfields['duedate'];
         }
         if ($ascending) {
             self::$ascending = - 1;
@@ -117,7 +116,7 @@ class vpl_list_util {
         }
         $students = $vpl->get_students();
         foreach ($subs as $sub) {
-            if (isset( $students [$sub->userid] )) {
+            if (isset( $students[$sub->userid] )) {
                 $numsubs ++;
                 if ($sub->dategraded > 0) { // Is graded.
                     $numgraded ++;

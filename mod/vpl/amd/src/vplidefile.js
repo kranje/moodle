@@ -16,7 +16,6 @@
 /**
  * File management
  *
- * @package mod_vpl
  * @copyright 2013 Juan Carlos Rodríguez-del-Pino
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
@@ -38,6 +37,7 @@ define(
             var fileName = name;
             var modified = true;
             var opened = false;
+            var langType = 'text';
             var self = this;
             this.getContent = function() {
                 return value;
@@ -76,6 +76,12 @@ define(
             };
             this.getTabPos = function() {
                 return fileManager.getTabPos(this);
+            };
+            this.setLang = function(lang) {
+                langType = lang;
+            };
+            this.getLang = function() {
+                return langType;
             };
             this.isOpen = function() {
                 return opened;

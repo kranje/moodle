@@ -65,14 +65,16 @@ class restore_vpl_activity_structure_step extends restore_activity_structure_ste
         $paths = array ();
         $userinfo = $this->get_setting_value ( 'userinfo' );
 
-        $paths [] = new restore_path_element ( 'vpl', '/activity/vpl' );
-        $paths [] = new restore_path_element ( 'required_file', '/activity/vpl/required_files/required_file' );
-        $paths [] = new restore_path_element ( 'execution_file', '/activity/vpl/execution_files/execution_file' );
-        $paths [] = new restore_path_element ( 'variation', '/activity/vpl/variations/variation' );
+        $paths[] = new restore_path_element ( 'vpl', '/activity/vpl' );
+        $paths[] = new restore_path_element ( 'required_file', '/activity/vpl/required_files/required_file' );
+        $paths[] = new restore_path_element ( 'execution_file', '/activity/vpl/execution_files/execution_file' );
+        $paths[] = new restore_path_element ( 'variation', '/activity/vpl/variations/variation' );
+        $paths[] = new restore_path_element ( 'override', '/activity/vpl/overrides/override' );
         if ($userinfo) {
-            $paths [] = new restore_path_element ( 'assigned_variation', '/activity/vpl/assigned_variations/assigned_variation' );
-            $paths [] = new restore_path_element ( 'submission', '/activity/vpl/submissions/submission' );
-            $paths [] = new restore_path_element (
+            $paths[] = new restore_path_element ( 'assigned_variation', '/activity/vpl/assigned_variations/assigned_variation' );
+            $paths[] = new restore_path_element ( 'assigned_override', '/activity/vpl/assigned_overrides/assigned_override' );
+            $paths[] = new restore_path_element ( 'submission', '/activity/vpl/submissions/submission' );
+            $paths[] = new restore_path_element (
                     'submission_file',
                     '/activity/vpl/submissions/submission/submission_files/submission_file'
             );
@@ -98,7 +100,7 @@ class restore_vpl_activity_structure_step extends restore_activity_structure_ste
         // Insert the choice record.
         $newitemid = $DB->insert_record ( 'vpl', $data );
         // Immediately after inserting "activity" record, call this.
-        if (isset($data->basedon) and $data->basedon > 0 and isset($data->basedonname)) {
+        if (isset($data->basedon) && $data->basedon > 0 && isset($data->basedonname)) {
             $this->basedonnames[$newitemid] = $data->basedonname;
         }
         $this->apply_activity_instance ( $newitemid );
@@ -112,7 +114,7 @@ class restore_vpl_activity_structure_step extends restore_activity_structure_ste
     private function process_groupfile($data, $path) {
         $data = ( object ) $data;
         $filename = $data->name;
-        if ( isset($data->encoding) and ($data->encoding == 1) ) {
+        if ( isset($data->encoding) && ($data->encoding == 1) ) {
             $content = base64_decode($data->content);
             if ( substr($filename, -4) === '.b64' ) { // For backware compatibility.
                 $filename = substr($filename, 0, strlen($filename) - 4);
@@ -171,6 +173,37 @@ class restore_vpl_activity_structure_step extends restore_activity_structure_ste
     }
 
     /**
+     * Restore an override
+     * @param array $data override instance
+     */
+    protected function process_override($data) {
+        global $DB;
+        $data = ( object ) $data;
+        $data->vpl = $this->get_new_parentid ( 'vpl' );
+        $data->startdate = $this->apply_date_offset ( $data->startdate );
+        $data->duedate = $this->apply_date_offset ( $data->duedate );
+        $newid = $DB->insert_record ( 'vpl_overrides', $data );
+        $this->set_mapping('override', $data->id, $newid); // Map new id to be used by process_assigned_override().
+    }
+
+    /**
+     * Restore an override assignation
+     * @param array $data assigned override instance
+     */
+    protected function process_assigned_override($data) {
+        global $DB;
+        $data = ( object ) $data;
+        $newid = $this->get_mappingid('override', $data->override, null); // Fetch new override id.
+        if ($newid !== null) {
+            $data->vpl = $this->get_new_parentid ( 'vpl' );
+            $data->override = $newid;
+            $data->userid = $this->get_mappingid ( 'user', $data->userid, null );
+            $data->groupid = $this->get_mappingid ( 'group', $data->groupid, null );
+            $DB->insert_record ( 'vpl_assigned_overrides', $data );
+        }
+    }
+
+    /**
      * Restore a submission
      * @param array $data submission instance
      */
@@ -195,7 +228,6 @@ class restore_vpl_activity_structure_step extends restore_activity_structure_ste
         global $DB;
         global $CFG;
         static $sub = false;
-        $data = ( object ) $data;
         $vplid = $this->get_new_parentid ( 'vpl' );
         $subid = $this->get_new_parentid ( 'submission' );
         if ($sub === false || $sub->id != $subid) {

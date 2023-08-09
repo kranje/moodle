@@ -35,25 +35,29 @@ Feature: List submissions of students
   Scenario: An editing teacher sees Submissions list
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    And I follow "VPL activity 1"
+    And I click on "VPL activity 1" "link" in the "region-main" "region"
     When I follow "Submissions list"
     Then I should see "VPL activity 1"
-    And I should see "Surname"
+    And I should see "Submitted on"
+    But I should not see "Error"
+    And I should not see " is deprecated"
 
   @javascript
   Scenario: An non-editing teacher sees Submissions list
     Given I log in as "teacher2"
     And I am on "Course 1" course homepage
-    And I follow "VPL activity 1"
+    And I click on "VPL activity 1" "link" in the "region-main" "region"
     When I follow "Submissions list"
     Then I should see "VPL activity 1"
-    And I should see "Surname"
+    And I should see "Submitted on"
+    But I should not see "Error"
+    And I should not see " is deprecated"
 
   @javascript
   Scenario: An editing teacher download submissions
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    And I follow "VPL activity 1"
+    And I click on "VPL activity 1" "link" in the "region-main" "region"
     And I follow "Submissions list"
     And I click on "th a.dropdown-toggle" in VPL
     When I follow "Download submissions"
@@ -63,7 +67,7 @@ Feature: List submissions of students
   Scenario: A non-editing teacher download submissions
     Given I log in as "teacher2"
     And I am on "Course 1" course homepage
-    And I follow "VPL activity 1"
+    And I click on "VPL activity 1" "link" in the "region-main" "region"
     And I follow "Submissions list"
     And I click on "th a.dropdown-toggle" in VPL
     When I follow "Download submissions"
@@ -73,7 +77,7 @@ Feature: List submissions of students
   Scenario: An editing teacher download all submissions
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    And I follow "VPL activity 1"
+    And I click on "VPL activity 1" "link" in the "region-main" "region"
     And I follow "Submissions list"
     And I click on "th a.dropdown-toggle" in VPL
     When I follow "Download all submissions"
@@ -83,7 +87,7 @@ Feature: List submissions of students
   Scenario: A non-editing teacher download all submissions
     Given I log in as "teacher2"
     And I am on "Course 1" course homepage
-    And I follow "VPL activity 1"
+    And I click on "VPL activity 1" "link" in the "region-main" "region"
     And I follow "Submissions list"
     And I click on "th a.dropdown-toggle" in VPL
     When I follow "Download all submissions"

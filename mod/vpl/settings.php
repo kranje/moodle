@@ -33,7 +33,7 @@ require_once(dirname(__FILE__) . '/lib.php');
 $kbyte = 1024;
 $megabyte = 1024 * $kbyte;
 $minute = 60;
-$listmaxfilesize = vpl_get_select_sizes( 64 * $kbyte, vpl_get_max_post_size() );
+$listmaxfilesize = vpl_get_select_sizes( 64 * $kbyte, \mod_vpl\util\phpconfig::get_post_max_size() );
 $listmaxtime = vpl_get_select_time( 120 * $minute );
 $listmaxexefilesize = vpl_get_select_sizes( 16 * $megabyte );
 $listmaxexememory = vpl_get_select_sizes( 16 * $megabyte );
@@ -93,8 +93,11 @@ $settings->add(
         new admin_setting_configtextarea( $prefix . 'jail_servers', get_string( 'jail_servers', VPL ),
                 get_string( 'jail_servers_description', VPL ), $default ) );
 $settings->add(
+        new admin_setting_configcheckbox( $prefix . 'use_xmlrpc', get_string( 'use_xmlrpc', VPL ),
+                get_string( 'use_xmlrpc_description', VPL ), 0 ) );
+$settings->add(
         new admin_setting_configcheckbox( $prefix . 'acceptcertificates', get_string( 'acceptcertificates', VPL ),
-                get_string( 'acceptcertificates_description', VPL ), 1 ) );
+                        get_string( 'acceptcertificates_description', VPL ), 1 ) );
 $wsoptions = array (
         'always_use_wss' => get_string( 'always_use_wss', VPL ),
         'always_use_ws' => get_string( 'always_use_ws', VPL ),
@@ -157,7 +160,7 @@ $list = array(
 );
 $themelist = array();
 foreach ($list as $theme) {
-    $themelist [$theme] = $theme;
+    $themelist[$theme] = $theme;
 }
 $settings->add(
         new admin_setting_configselect( $prefix . 'editor_theme', get_string( 'editortheme', VPL ),

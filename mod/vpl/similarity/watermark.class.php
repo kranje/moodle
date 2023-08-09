@@ -23,8 +23,6 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 class vpl_watermark {
     const PRE = "\t \t  ";
     const POST = "  \t \t";
@@ -41,7 +39,7 @@ class vpl_watermark {
         $wm = ( int ) $wm;
         $ret = '';
         while ( $wm > 0 ) {
-            $ret = self::$encoder [$wm % 7] . $ret;
+            $ret = self::$encoder[$wm % 7] . $ret;
             $wm = ( int ) ($wm / 7);
         }
         return $ret;
@@ -104,7 +102,7 @@ class vpl_watermark {
      */
     public static function getfilewm($filename) {
         if (file_exists( $filename )) {
-            return self::getwm( get_file_content( $filename ) );
+            return self::getwm( file_get_contents( $filename ) );
         }
         return false;
     }
@@ -129,7 +127,7 @@ class vpl_watermark {
                 if ($countnwm > 35) { // If 35 lines without wm try to add one.
                     $lclean = rtrim( $line );
                     $l = strlen( $lclean );
-                    if ($l > 0 && ($lclean [$l - 1] == '}' || $lclean [$l - 1] == '{')) {
+                    if ($l > 0 && ($lclean[$l - 1] == '}' || $lclean[$l - 1] == '{')) {
                         $line = $lclean . $wm;
                         $wmadded ++;
                         $countnwm = 0;

@@ -28,7 +28,6 @@ require_once(dirname(__FILE__).'/locallib.php');
 require_once(dirname(__FILE__).'/views/sh_factory.class.php');
 require_once(dirname(__FILE__).'/similarity/watermark.class.php');
 
-
 class file_group_process {
     /**
      * Name of file list
@@ -170,7 +169,7 @@ class file_group_process {
         if (count( $filelist ) >= $this->maxnumfiles) {
             return false;
         }
-        $filelist [] = $filename;
+        $filelist[] = $filename;
         $this->setFileList( $filelist );
         if ($data !== null) {
             vpl_fwrite( $path, $data );
@@ -189,7 +188,7 @@ class file_group_process {
         $filelist = $this->getFileList();
         $filehash = array();
         foreach ($filelist as $f) {
-            $filehash [$f] = 1;
+            $filehash[$f] = 1;
         }
         vpl_create_dir($this->dir);
         foreach ($files as $filename => $data) {
@@ -259,9 +258,9 @@ class file_group_process {
         foreach ($filelist as $filename) {
             $fullname = $this->dir . self::encodeFileName( $filename );
             if (is_file( $fullname )) {
-                 $files [$filename] = file_get_contents( $fullname );
+                 $files[$filename] = file_get_contents( $fullname );
             } else {
-                 $files [$filename] = '';
+                 $files[$filename] = '';
             }
         }
         return $files;
@@ -297,7 +296,7 @@ class file_group_process {
             $num = $mix;
             $filelist = $this->getFileList();
             if ($num >= 0 && $num < count( $filelist )) {
-                $filename = $this->dir . self::encodeFileName( $filelist [$num] );
+                $filename = $this->dir . self::encodeFileName( $filelist[$num] );
                 if (is_file( $filename )) {
                     return file_get_contents( $filename );
                 } else {
@@ -330,7 +329,7 @@ class file_group_process {
             $fullname = $this->dir . self::encodeFileName( $filename );
             if (is_file( $fullname )) {
                 $info = stat( $fullname );
-                if ($info ['size'] > 0) {
+                if ($info['size'] > 0) {
                     return true;
                 }
             }
@@ -410,19 +409,24 @@ class file_group_process {
             mkdir($dir, $CFG->directorypermissions, true);
         }
         $zipfilename = tempnam( $dir, 'zip' );
-        if ($zip->open( $zipfilename, ZipArchive::OVERWRITE )) {
-            foreach ($this->getFileList() as $filename) {
-                $data = $this->getFileData( $filename );
-                if ($watermark) {
-                    $data = vpl_watermark::addwm( $data, $filename, $USER->id );
+        $filelist = $this->getFileList();
+        if (count($filelist) > 0) {
+            if ($zip->open( $zipfilename, ZipArchive::OVERWRITE ) === true) {
+                foreach ($filelist as $filename) {
+                    $data = $this->getFileData( $filename );
+                    if ($watermark) {
+                        $data = vpl_watermark::addwm( $data, $filename, $USER->id );
+                    }
+                    $zip->addFromString( $filename, $data );
                 }
-                $zip->addFromString( $filename, $data );
+                $zip->close();
+            } else {
+                return false;
             }
-            $zip->close();
-            return $zipfilename;
         } else {
-            return false;
+            vpl_fwrite($zipfilename, base64_decode("UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA=="));
         }
+        return $zipfilename;
     }
 
     /**
@@ -438,4 +442,3 @@ class file_group_process {
         }
     }
 }
-

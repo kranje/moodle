@@ -42,6 +42,9 @@ if ($userid && ! $copy) {
 if ($copy) {
     $pageparms['privatecopy'] = 1;
 }
+if ($subid) {
+    $pageparms['submissionid'] = $subid;
+}
 $vpl->prepare_page( 'forms/edit.php', $pageparms );
 if (! $vpl->is_visible()) {
     vpl_redirect('?id=' . $id, get_string( 'notavailable' ), 'error' );
@@ -98,9 +101,10 @@ if ( $copy ) {
     $options['loadajaxurl'] = $loadajaxurl . '&action=';
 }
 $options['download'] = "../views/downloadsubmission.php?id={$id}&userid={$linkuserid}";
-$timeleft = $instance->duedate - time();
+$duedate = $vpl->get_effective_setting('duedate', $linkuserid);
+$timeleft = $duedate - time();
 $hour = 60 * 60;
-if ( $instance->duedate > 0 && $timeleft > -$hour ) {
+if ( $duedate > 0 && $timeleft > -$hour ) {
     $options['timeLeft'] = $timeleft;
 }
 if ( $subid ) {
@@ -130,6 +134,6 @@ $vpl->print_view_tabs( basename( __FILE__ ) );
 
 vpl_editor_util::print_tag();
 vpl_editor_util::print_js_i18n();
-vpl_editor_util::print_js_description($vpl);
+vpl_editor_util::print_js_description($vpl, $userid);
 
 $vpl->print_footer();

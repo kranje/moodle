@@ -33,7 +33,7 @@ abstract class base extends \core\event\base {
                 'id' => $this->contextinstanceid
         );
         if (($this->relateduserid) && $this->relateduserid != $this->userid) {
-            $parms ['userid'] = $this->relateduserid;
+            $parms['userid'] = $this->relateduserid;
         }
         return new \moodle_url( '/mod/vpl/' . $script, $parms );
     }
@@ -46,20 +46,5 @@ abstract class base extends \core\event\base {
     public static function log($eventinfo) {
         $event = self::create( $eventinfo );
         $event->trigger();
-    }
-    public function get_legacy_logdata() {
-        $urltext = '';
-        $url = $this->get_url();
-        if ($url != null) {
-            $urltext = $url->out( false );
-        }
-        return array (
-                $this->courseid,
-                VPL,
-                $this->legacyaction,
-                $urltext,
-                $this->get_description(),
-                $this->contextinstanceid
-        );
     }
 }

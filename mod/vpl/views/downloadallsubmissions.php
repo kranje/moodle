@@ -121,7 +121,7 @@ foreach ($asortedsubmissions as $instance) {
 // Get all information by user.
 $alldata = array ();
 foreach ($list as $uginfo) {
-    if (! isset($submissions [$uginfo->id])) {
+    if (! isset($submissions[$uginfo->id])) {
         continue;
     }
     $data = new stdClass();
@@ -132,11 +132,11 @@ foreach ($list as $uginfo) {
         $data->uginfo->lastname = $uginfo->name;
     }
     $usersubmissions = array();
-    foreach ($submissions [$uginfo->id] as $subinstance) {
+    foreach ($submissions[$uginfo->id] as $subinstance) {
         $usersubmissions[] = new mod_vpl_submission_CE( $vpl, $subinstance );
     }
     $data->submissions = $usersubmissions;
-    $alldata [] = $data;
+    $alldata[] = $data;
 }
 
 $zip = new ZipArchive();
@@ -148,7 +148,7 @@ $zipfilename = tempnam( $dir, 'zip' );
 if ( $zipfilename === false || ! file_exists($zipfilename) ) {
     throw new moodle_exception('cannotopenzip');
 }
-if ($zip->open( $zipfilename, ZipArchive::OVERWRITE )) {
+if ($zip->open( $zipfilename, ZipArchive::OVERWRITE ) === true) {
     $ziperrors = '';
     $nsubmissions = 0;
     foreach ($alldata as $data) {

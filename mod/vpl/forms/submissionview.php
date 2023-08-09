@@ -35,6 +35,7 @@ global $DB, $USER, $PAGE;
 require_login();
 $id = required_param( 'id', PARAM_INT );
 $userid = optional_param( 'userid', false, PARAM_INT );
+
 $vpl = new mod_vpl( $id );
 if ($userid) {
     $vpl->prepare_page( 'forms/submissionview.php', array (
@@ -114,7 +115,6 @@ if ($vpl->get_visiblegrade() || $vpl->has_capability( VPL_GRADE_CAPABILITY )) {
         \mod_vpl\event\submission_grade_viewed::log($submission);
     }
 }
-$vpl->print_variation( $subinstance->userid );
 $submission->print_submission();
 $vpl->print_footer();
 \mod_vpl\event\submission_viewed::log( $submission );

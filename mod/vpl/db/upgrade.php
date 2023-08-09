@@ -21,7 +21,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
-defined( 'MOODLE_INTERNAL' ) || die();
 
 /**
  * Migrate data_vpl dir to upgrades VPL to 2.2 (2012060112) version
@@ -378,6 +377,105 @@ function xmldb_vpl_upgrade_2021011014() {
 }
 
 /**
+ * Upgrades VPL to 2021061600 version (overrides).
+ *
+ * @return void
+ */
+function xmldb_vpl_upgrade_2021061600() {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+
+    // Define table vpl_overrides to be created.
+    $table = new xmldb_table('vpl_overrides');
+
+    // Adding fields to table vpl_overrides.
+    $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    $table->add_field('vpl', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    $table->add_field('startdate', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    $table->add_field('duedate', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    $table->add_field('freeevaluations', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    $table->add_field('reductionbyevaluation', XMLDB_TYPE_CHAR, '10', null, null, null, null);
+
+    // Adding keys to table vpl_overrides.
+    $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+    // Adding indexes to table vpl_assigned_overrides.
+    $table->add_index('vpl', XMLDB_INDEX_NOTUNIQUE, ['vpl']);
+
+    // Conditionally launch create table for vpl_overrides.
+    if (!$dbman->table_exists($table)) {
+        $dbman->create_table($table);
+    }
+
+    // Define table vpl_assigned_overrides to be created.
+    $table = new xmldb_table('vpl_assigned_overrides');
+
+    // Adding fields to table vpl_assigned_overrides.
+    $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    $table->add_field('vpl', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    $table->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+    $table->add_field('override', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+
+    // Adding keys to table vpl_assigned_overrides.
+    $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+    // Adding indexes to table vpl_assigned_overrides.
+    $table->add_index('vpl', XMLDB_INDEX_NOTUNIQUE, ['vpl']);
+    $table->add_index('override', XMLDB_INDEX_NOTUNIQUE, ['override']);
+
+    // Conditionally launch create table for vpl_assigned_overrides.
+    if (!$dbman->table_exists($table)) {
+        $dbman->create_table($table);
+    }
+}
+
+/**
+ * Upgrades VPL to 4.0.0 (2022080312) version
+ *
+ * @return void
+ */
+function xmldb_vpl_upgrade_2022080312() {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+    // Define field type of process to be added to vpl_running_processes.
+    $table = new xmldb_table('vpl_running_processes');
+    $field = new xmldb_field('type', XMLDB_TYPE_INTEGER, '4', null, true, false, '0', 'vpl');
+
+    if (!$dbman->field_exists($table, $field)) {
+        $dbman->add_field($table, $field);
+    }
+}
+
+/**
+ * Upgrades VPL to 4.0.2 (2022110512) version
+ *
+ * @return void
+ */
+function xmldb_vpl_upgrade_2022110512() {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+    // Change/reset of nullability for fields timemodified, freeevaluations, and reductionbyevaluation.
+    $table = new xmldb_table('vpl');
+    $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'emailteachers');
+    $dbman->change_field_notnull($table, $field);
+
+    $field = new xmldb_field('freeevaluations', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'timemodified');
+    $dbman->change_field_notnull($table, $field);
+
+    $field = new xmldb_field('reductionbyevaluation', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, '0', 'freeevaluations');
+    $dbman->change_field_notnull($table, $field);
+
+    // Change/reset of default for field type.
+    $table = new xmldb_table('vpl_running_processes');
+    $field = new xmldb_field('type', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, null, 'vpl');
+    $dbman->change_field_default($table, $field);
+}
+
+/**
  * Upgrades VPL DB and data to the new version
  *
  * @param int $oldversion Current version
@@ -416,5 +514,45 @@ function xmldb_vpl_upgrade($oldversion = 0) {
         xmldb_vpl_upgrade_2021011014();
         upgrade_mod_savepoint(true, $vpl34, 'vpl');
     }
-    return true;
+
+    if ($oldversion < 2021061600) {
+        xmldb_vpl_upgrade_2021061600();
+        upgrade_mod_savepoint(true, 2021061600, 'vpl');
+    }
+    if ($oldversion < 2022080312) {
+        xmldb_vpl_upgrade_2022080312();
+        upgrade_mod_savepoint(true, 2022080312, 'vpl');
+    }
+    if ($oldversion < 2022110512) {
+        xmldb_vpl_upgrade_2022110512();
+        upgrade_mod_savepoint(true, 2022110512, 'vpl');
+    }
+
+if ($oldversion <  2023061713) {
+
+       	global $DB;
+
+        $dbman = $DB->get_manager();
+
+        // Define field must_complete to be added to vpl.
+        $table = new xmldb_table('vpl');
+        $complete_field = new xmldb_field('must_complete', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', null);
+
+        $percent_drop_field = new xmldb_field('percent_drop', XMLDB_TYPE_NUMBER, '5,4', null, XMLDB_NOTNULL, null, '0', null);
+
+        // Conditionally launch add field must_complete.
+        if (!$dbman->field_exists($table, $complete_field)) {
+            $dbman->add_field($table, $complete_field);
+        }
+
+        if (!$dbman->field_exists($table, $percent_drop_field)) {
+            $dbman->add_field($table, $percent_drop_field);
+        }
+
+        // Vpl savepoint reached.
+        upgrade_mod_savepoint(true, 2023061713, 'vpl');
+    }
+
+
+return true;
 }

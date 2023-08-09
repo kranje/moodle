@@ -23,6 +23,8 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
+namespace mod_vpl;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once(dirname(__FILE__).'/../locallib.php');
@@ -30,8 +32,9 @@ require_once(dirname(__FILE__).'/../locallib.php');
 /**
  * Unit tests for \mod_vpl\util\lock class.
  * @group mod_vpl
+ * @covers \mod_vpl\util\lock
  */
-class mod_vpl_util_lock_testcase extends advanced_testcase {
+class util_lock_test extends \advanced_testcase {
 
     private $basedir;
 
@@ -49,6 +52,7 @@ class mod_vpl_util_lock_testcase extends advanced_testcase {
      */
     protected function tearDown(): void {
         $this->assertTrue(vpl_delete_dir($this->basedir));
+        parent::tearDown();
     }
     /**
      * Method to test creating locks

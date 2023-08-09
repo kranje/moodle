@@ -47,7 +47,7 @@ Feature: Create and change VPL activity settings
   Scenario: An editing teacher sees default VPL setting values
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    When I follow "VPL activity default"
+    When I click on "VPL activity default" "link" in the "region-main" "region"
     Then I should see "Due date:"
     And I should not see "Available from:"
     And I should see "Maximum number of files: 1"
@@ -60,7 +60,7 @@ Feature: Create and change VPL activity settings
     And I should not see "Allowed submission from net:"
     And I should not see "SEB browser required:"
     And I should not see "SEB exam Key/s:"
-    And I should not see "Dissable external file upload"
+    And I should not see "Disable external file upload"
     And I should see "Run: No"
     And I should see "Evaluate: No"
 
@@ -68,7 +68,7 @@ Feature: Create and change VPL activity settings
   Scenario: A non-editing teacher sees default VPL setting values
     Given I log in as "teacher2"
     And I am on "Course 1" course homepage
-    When I follow "VPL activity default"
+    When I click on "VPL activity default" "link" in the "region-main" "region"
     Then I should see "Due date:"
     And I should not see "Available from:"
     And I should see "Maximum number of files: 1"
@@ -81,7 +81,7 @@ Feature: Create and change VPL activity settings
     And I should not see "Allowed submission from net:"
     And I should not see "SEB browser required:"
     And I should not see "SEB exam Key/s:"
-    And I should not see "Dissable external file upload"
+    And I should not see "Disable external file upload"
     And I should see "Run: No"
     And I should see "Evaluate: No"
 
@@ -89,7 +89,7 @@ Feature: Create and change VPL activity settings
   Scenario: A non-editing teacher sees default VPL setting values
     Given I log in as "student1"
     And I am on "Course 1" course homepage
-    When I follow "VPL activity default"
+    When I click on "VPL activity default" "link" in the "region-main" "region"
     Then I should see "Due date:"
     And I should see "Maximum number of files: 1"
     And I should see "Type of work:"
@@ -101,7 +101,7 @@ Feature: Create and change VPL activity settings
     And I should not see "Allowed submission from net:"
     And I should not see "SEB browser required:"
     And I should not see "SEB exam Key/s:"
-    And I should not see "Dissable external file upload"
+    And I should not see "Disable external file upload"
     And I should not see "Run: No"
     And I should not see "Evaluate: No"
 
@@ -110,7 +110,7 @@ Feature: Create and change VPL activity settings
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     Then I should see "Full description"
-    And I follow "VPL activity full setting"
+    And I click on "VPL activity full setting" "link" in the "region-main" "region"
     And I should not see "VPL activity short description"
     And I should see "Full description"
     And I should see "Available from:"
@@ -125,7 +125,7 @@ Feature: Create and change VPL activity settings
     And I should see "Allowed submission from net: 10.10.10.13"
     And I should see "SEB browser required: Yes"
     And I should see "SEB exam Key/s: Yes"
-    And I should see "Dissable external file upload"
+    And I should see "Disable external file upload"
     And I should see "Run: No"
     And I should see "Evaluate: No"
 
@@ -134,7 +134,7 @@ Feature: Create and change VPL activity settings
     Given I log in as "teacher2"
     And I am on "Course 1" course homepage
     And I should see "Full description"
-    When I follow "VPL activity full setting"
+    When I click on "VPL activity full setting" "link" in the "region-main" "region"
     Then I should not see "VPL activity short description"
     And I should see "Full description"
     And I should see "Available from:"
@@ -149,7 +149,7 @@ Feature: Create and change VPL activity settings
     And I should see "Allowed submission from net: 10.10.10.13"
     And I should see "SEB browser required: Yes"
     And I should see "SEB exam Key/s: Yes"
-    And I should see "Dissable external file upload"
+    And I should see "Disable external file upload"
     And I should see "Run: No"
     And I should see "Evaluate: No"
 
@@ -158,15 +158,16 @@ Feature: Create and change VPL activity settings
     Given I log in as "student1"
     And I am on "Course 1" course homepage
     And I should see "Full description"
-    When I follow "VPL activity full setting"
+    When I click on "VPL activity full setting" "link" in the "region-main" "region"
     Then I should see "Action not allowed from"
 
   @javascript
   Scenario: A student sees default VPL full setting values
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    And I follow "VPL activity full setting"
-    And I navigate to "Edit settings" in current page administration
+    And I click on "VPL activity full setting" "link" in the "region-main" "region"
+    # "Edit setting" for Moodle < 4 and "Setting" for Moodle >= 4
+    And I navigate to "ettings" in current page administration
     And I expand all fieldsets
     And I set the following fields to these values:
       | id_name | VPL activity changed setting |
@@ -190,13 +191,13 @@ Feature: Create and change VPL activity settings
     And I should not see "Allowed submission from net:"
     And I should not see "SEB browser required:"
     And I should not see "SEB exam Key/s:"
-    And I should see "Dissable external file upload"
+    And I should see "Disable external file upload"
     And I should see "Run: No"
     And I should see "Evaluate: No"
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
-    When I follow "VPL activity changed setting"
+    When I click on "VPL activity changed setting" "link" in the "region-main" "region"
     Then I should see "A password is required"
     And I set the following fields to these values:
     | id_password | key |

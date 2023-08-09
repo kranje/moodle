@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/vpl/db" VERSION="20201227" COMMENT="XMLDB file for Moodle mod/vpl"
+<XMLDB PATH="mod/vpl/db" VERSION="20210616" COMMENT="XMLDB file for Moodle mod/vpl"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -14,6 +14,8 @@
         <FIELD NAME="introformat" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Intro format"/>
         <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Date the vpl will be avaliable"/>
         <FIELD NAME="duedate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="After this date this vpl instance will not be available"/>
+        <FIELD NAME="percent_drop" TYPE="number" LENGTH="5" NOTNULL="true" DEFAULT="0" SEQUENCE="false" DECIMALS="3" COMMENT="The precentage that the grade should drop for each day the lab is late"/>
+        <FIELD NAME="must_complete" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Indicates that no grade will be recorded unless the assignment has a perfect score (before late penalties)"/>
         <FIELD NAME="maxfiles" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false" COMMENT="Maximum number of files"/>
         <FIELD NAME="maxfilesize" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Maximum number of bytes per file"/>
         <FIELD NAME="requirednet" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Allowed submissions from"/>
@@ -128,6 +130,7 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="User id"/>
         <FIELD NAME="vpl" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="VPL id"/>
+        <FIELD NAME="type" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false" COMMENT="Type of process (0 run, 1 debug, 2 evalaute, 3 directrun)"/>
         <FIELD NAME="server" TYPE="char" LENGTH="256" NOTNULL="true" SEQUENCE="false" COMMENT="URL jail server"/>
         <FIELD NAME="start_time" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Start time of process"/>
         <FIELD NAME="adminticket" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" COMMENT="Admin ticket to control process"/>
@@ -137,6 +140,38 @@
       </KEYS>
       <INDEXES>
         <INDEX NAME="userid_id" UNIQUE="true" FIELDS="userid, id" COMMENT="Index for userid id"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="vpl_overrides" COMMENT="Overrides to VPL settings">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="vpl" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="VPL id"/>
+        <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, date the vpl will be available"/>
+        <FIELD NAME="duedate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, after this date this vpl instance will not be available"/>
+        <FIELD NAME="freeevaluations" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, number of automatic evaluations that do not reduce final score"/>
+        <FIELD NAME="reductionbyevaluation" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, reduce final score by a value or percentage for each automatic evaluation"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="vpl" UNIQUE="false" FIELDS="vpl"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="vpl_assigned_overrides" COMMENT="Overrides assignations to users and groups">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="vpl" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="VPL id"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User this override applies to"/>
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Group this override applies to"/>
+        <FIELD NAME="override" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Override id"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="vpl" UNIQUE="false" FIELDS="vpl"/>
+        <INDEX NAME="override" UNIQUE="false" FIELDS="override"/>
       </INDEXES>
     </TABLE>
   </TABLES>

@@ -36,8 +36,6 @@ use \core_privacy\local\request\content_writer;
 use \core_privacy\local\request\userlist;
 use \core_privacy\local\request\approved_userlist;
 
-defined( 'MOODLE_INTERNAL' ) || die();
-
 /**
  * VPL provider class
  *
@@ -81,6 +79,11 @@ class provider implements \core_privacy\local\metadata\provider,
             'vpl' => 'privacy:metadata:vpl_assigned_variations:vplid',
             'variation' => 'privacy:metadata:vpl_assigned_variations:description',
         ];
+        $overridesfields = [
+            'vpl' => 'privacy:metadata:vpl_assigned_overrides:vplid',
+            'userid' => 'privacy:metadata:vpl_assigned_overrides:userid',
+            'override' => 'privacy:metadata:vpl_assigned_overrides:overrideid',
+        ];
         $runningfields = [
             'userid' => 'privacy:metadata:vpl_running_processes:userid',
             'vpl' => 'privacy:metadata:vpl_running_processes:vplid',
@@ -91,6 +94,7 @@ class provider implements \core_privacy\local\metadata\provider,
         $collection->add_database_table('vpl', $vplfields, 'privacy:metadata:vpl');
         $collection->add_database_table('vpl_submissions', $submisionsfields, 'privacy:metadata:vpl_submissions');
         $collection->add_database_table('vpl_assigned_variations', $variationsfields, 'privacy:metadata:vpl_assigned_variations');
+        $collection->add_database_table('vpl_assigned_overrides', $overridesfields, 'privacy:metadata:vpl_assigned_overrides');
         $collection->add_database_table('vpl_running_processes', $runningfields, 'privacy:metadata:vpl_running_processes');
         // IDE user preferences.
         $collection->add_user_preference('vpl_editor_fontsize', 'privacy:metadata:vpl_editor_fontsize');
@@ -113,6 +117,7 @@ class provider implements \core_privacy\local\metadata\provider,
         self::add_contexts_for_submissions($contextlist, $userid);
         self::add_contexts_for_evaluations($contextlist, $userid);
         self::add_contexts_for_variations($contextlist, $userid);
+        self::add_contexts_for_overrides($contextlist, $userid);
         self::add_contexts_for_running($contextlist, $userid);
 
         return $contextlist;
@@ -142,6 +147,7 @@ class provider implements \core_privacy\local\metadata\provider,
             $contentwriter = writer::with_context($context);
             self::export_vpl_data($contentwriter, $vplinstance);
             self::export_user_assigned_variation_data($contentwriter, $vplid, $userid);
+            self::export_user_assigned_override_data($contentwriter, $vplid, $userid);
             self::export_user_submissions_data($contentwriter, $vplid, $userid);
             self::export_user_running_processes_data($contentwriter, $vplid, $userid);
         }
@@ -173,6 +179,23 @@ class provider implements \core_privacy\local\metadata\provider,
             $contentwriter->export_data([get_string('privacy:variationpath', 'vpl')], $variationoutput);
         }
     }
+
+    /**
+     * Export override for related personal data.
+     *
+     * @param content_writer $contentwriter data writer object.
+     * @param int $vplid vpl DB id
+     * @param int $userid user DB id
+     */
+    public static function export_user_assigned_override_data(content_writer $contentwriter, int $vplid, int $userid) {
+        // Get assigned override related to the user if any.
+        $override = self::get_assigned_override_by_vpl_and_user($vplid, $userid);
+        if (count($override) == 1) {
+            $overrideoutput = self::get_vpl_assigned_override_output(reset($override));
+            $contentwriter->export_data([get_string('privacy:overridepath', 'vpl')], $overrideoutput);
+        }
+    }
+
     /**
      * Export submissions personal data.
      *
@@ -221,7 +244,6 @@ class provider implements \core_privacy\local\metadata\provider,
     public static function export_user_running_processes_data(content_writer $contentwriter, int $vplid, int $userid) {
         // Get the vpl submissions related to the user.
         $runningprocesses = self::get_running_processes_by_vpl_and_user($vplid, $userid);
-        $zipfilename = get_string('submission', 'vpl') . '.zip';
         $subcontextsecuence = 1;
         foreach ($runningprocesses as $runningprocess) {
             $subcontext = [ get_string('privacy:runningprocesspath', 'vpl', $subcontextsecuence++) ];
@@ -310,6 +332,9 @@ class provider implements \core_privacy\local\metadata\provider,
         // Delete asigned variations.
         self::delete_assigned_variations_by_contextlist($contextlist, $userid);
 
+        // Delete asigned overrides.
+        self::delete_assigned_overrides_by_contextlist($contextlist, $userid);
+
         // Delete running processes.
         self::delete_running_processes_by_contextlist($contextlist, $userid);
     }
@@ -328,8 +353,8 @@ class provider implements \core_privacy\local\metadata\provider,
         }
 
         $params = [
-                'instanceid'    => $context->instanceid,
-                'modulename'    => 'vpl',
+            'instanceid' => $context->instanceid,
+            'modulename' => 'vpl',
         ];
 
         // Submissions.
@@ -352,6 +377,14 @@ class provider implements \core_privacy\local\metadata\provider,
         $sql = "SELECT DISTINCT av.userid
                   FROM {vpl_assigned_variations} av
                   JOIN {course_modules} cm ON av.vpl = cm.instance
+                  JOIN {modules} m ON m.id = cm.module
+                 WHERE cm.id = :instanceid AND m.name = :modulename";
+        $userlist->add_from_sql('userid', $sql, $params);
+
+        // Assigned overrides.
+        $sql = "SELECT DISTINCT ao.userid
+                  FROM {vpl_assigned_overrides} ao
+                  JOIN {course_modules} cm ON ao.vpl = cm.instance
                   JOIN {modules} m ON m.id = cm.module
                  WHERE cm.id = :instanceid AND m.name = :modulename";
         $userlist->add_from_sql('userid', $sql, $params);
@@ -408,6 +441,11 @@ class provider implements \core_privacy\local\metadata\provider,
                   FROM {vpl_assigned_variations}
                  WHERE vpl = :vplid AND userid {$userssql}";
         $DB->execute($sql, $params + $usersparams);
+        // Delete related assigned overrides.
+        $sql = "DELETE
+                  FROM {vpl_assigned_overrides}
+                 WHERE vpl = :vplid AND userid {$userssql}";
+        $DB->execute($sql, $params + $usersparams);
         // Delete related running processes.
         $sql = "DELETE
                   FROM {vpl_running_processes}
@@ -433,9 +471,9 @@ class provider implements \core_privacy\local\metadata\provider,
                  WHERE s.userid = :userid";
 
         $params = [
-                'contextmodule' => CONTEXT_MODULE,
-                'modulename'    => 'vpl',
-                'userid'       => $userid,
+            'contextmodule' => CONTEXT_MODULE,
+            'modulename'    => 'vpl',
+            'userid'       => $userid,
         ];
 
         $list->add_from_sql($sql, $params);
@@ -457,9 +495,9 @@ class provider implements \core_privacy\local\metadata\provider,
                  WHERE s.grader = :userid";
 
         $params = [
-                'contextmodule' => CONTEXT_MODULE,
-                'modulename'    => 'vpl',
-                'userid'       => $userid,
+            'contextmodule' => CONTEXT_MODULE,
+            'modulename'    => 'vpl',
+            'userid'        => $userid,
         ];
 
         $list->add_from_sql($sql, $params);
@@ -481,9 +519,33 @@ class provider implements \core_privacy\local\metadata\provider,
                  WHERE va.userid = :userid";
 
         $params = [
-                'contextmodule' => CONTEXT_MODULE,
-                'modulename'    => 'vpl',
-                'userid'       => $userid,
+            'contextmodule' => CONTEXT_MODULE,
+            'modulename'    => 'vpl',
+            'userid'        => $userid,
+        ];
+
+        $list->add_from_sql($sql, $params);
+    }
+
+    /**
+     * Add contexts for assigned overrides to the specified user.
+     *
+     * @param contextlist $list the list of context.
+     * @param int $userid the userid.
+     * @return void.
+     */
+    protected static function add_contexts_for_overrides(contextlist $list, int $userid) : void {
+        $sql = "SELECT DISTINCT ctx.id
+                  FROM {context} ctx
+                  JOIN {course_modules} cm ON cm.id = ctx.instanceid AND ctx.contextlevel = :contextmodule
+                  JOIN {modules} m ON cm.module = m.id AND m.name = :modulename
+                  JOIN {vpl_assigned_overrides} ao ON ao.vpl = cm.instance
+                 WHERE ao.userid = :userid";
+
+        $params = [
+            'contextmodule' => CONTEXT_MODULE,
+            'modulename'    => 'vpl',
+            'userid'        => $userid,
         ];
 
         $list->add_from_sql($sql, $params);
@@ -505,9 +567,9 @@ class provider implements \core_privacy\local\metadata\provider,
                  WHERE rp.userid = :userid";
 
         $params = [
-                'contextmodule' => CONTEXT_MODULE,
-                'modulename'    => 'vpl',
-                'userid'       => $userid,
+            'contextmodule' => CONTEXT_MODULE,
+            'modulename'    => 'vpl',
+            'userid'        => $userid,
         ];
 
         $list->add_from_sql($sql, $params);
@@ -541,9 +603,9 @@ class provider implements \core_privacy\local\metadata\provider,
         global $DB;
 
         $params = [
-                'modulename' => 'vpl',
-                'contextmodule' => CONTEXT_MODULE,
-                'coursemoduleid' => $context->instanceid
+            'modulename' => 'vpl',
+            'contextmodule' => CONTEXT_MODULE,
+            'coursemoduleid' => $context->instanceid
         ];
         $sql = "SELECT v.*
                   FROM {vpl} v
@@ -614,6 +676,37 @@ class provider implements \core_privacy\local\metadata\provider,
         $params += $contextparams;
         $DB->execute($sql, $params);
     }
+
+    /**
+     * Delete the assigned overrides for the user and their contextlist.
+     *
+     * @param object $contextlist Object with the contexts related to a userid.
+     * @param int $userid The user ID.
+     */
+    protected static function delete_assigned_overrides_by_contextlist($contextlist, $userid) {
+        global $DB;
+        // Get sql partial where of contexts.
+        list($contextsql, $contextparams) = $DB->get_in_or_equal($contextlist->get_contextids(), SQL_PARAMS_NAMED);
+
+        $params = [
+            'contextmodule' => CONTEXT_MODULE,
+            'modulename' => 'vpl',
+            'userid' => $userid,
+        ];
+
+        $sql = "DELETE
+                  FROM {vpl_assigned_overrides}
+                 WHERE userid = :userid AND
+                          vpl IN (
+                       SELECT cm.instance
+                         FROM {course_modules} cm
+                         JOIN {modules} m ON cm.module = m.id AND m.name = :modulename
+                         JOIN {context} ctx ON cm.id = ctx.instanceid AND ctx.contextlevel = :contextmodule
+                        WHERE ctx.id {$contextsql} )";
+        $params += $contextparams;
+        $DB->execute($sql, $params);
+    }
+
     /**
      * Delete running processes for the user and their contextlist.
      *
@@ -686,6 +779,27 @@ class provider implements \core_privacy\local\metadata\provider,
                   FROM {vpl_variations} v
                   JOIN {vpl_assigned_variations} av ON v.id = av.variation
                  WHERE av.vpl = :vplid AND av.userid = :userid";
+        return $DB->get_records_sql($sql, $params);
+    }
+
+    /**
+     * Helper function to retrieve assigned override related with user.
+     *
+     * @param int $vplid The vpl id to retrieve override.
+     * @param int $userid The user id to retrieve assigned override.
+     * @return array Array of assigned override details.
+     * @throws \dml_exception
+     */
+    protected static function get_assigned_override_by_vpl_and_user($vplid, $userid) {
+        global $DB;
+        $params = [
+            'vplid' => $vplid,
+            'userid' => $userid,
+        ];
+        $sql = "SELECT ao.id as aoid, ao.userid, o.*
+                    FROM {vpl_assigned_overrides} ao
+                    JOIN {vpl_overrides} o ON ao.override = o.id
+                    WHERE ao.vpl = :vplid AND ao.userid = :userid";
         return $DB->get_records_sql($sql, $params);
     }
 
@@ -800,6 +914,22 @@ class provider implements \core_privacy\local\metadata\provider,
         $data->variation = $assignedvariation->description;
         return $data;
     }
+
+    /**
+     * Helper function generate assigned override output object for exporting.
+     *
+     * @param object $assignedoverride Object containing an instance record of assigned override.
+     * @return object Formatted assigned override output for exporting.
+     */
+    protected static function get_vpl_assigned_override_output($assignedoverride) {
+        $fields = ['userid', 'vpl', 'reductionbyevaluation', 'freeevaluations'];
+        $datefields = ['startdate', 'duedate'];
+        $data = new \stdClass();
+        self::copy_fields($assignedoverride, $data, $fields);
+        self::copy_date_fields($assignedoverride, $data, $datefields);
+        return $data;
+    }
+
     /**
      * Helper function generate running process output object for exporting.
      *

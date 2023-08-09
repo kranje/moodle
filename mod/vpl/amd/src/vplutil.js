@@ -14,8 +14,8 @@
 // along with VPL for Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Tools for IDE and related
- * @package mod_vpl
+ * Tools for the VPL IDE
+ *
  * @copyright 2016 Juan Carlos Rodríguez-del-Pino
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
@@ -227,10 +227,10 @@ define(
             unzipper.readEntries();
             var out = unzipper.entries.length;
             /**
-            * Process each entry in the zip file.
-            * Recursive process.
-            * @param {int} i Entry to process.
-            */
+             * Process each entry in the zip file.
+             * Recursive process.
+             * @param {int} i Entry to process.
+             */
             function process(i) {
                 if (i >= out || progressBar.isClosed()) {
                     end();
@@ -290,10 +290,10 @@ define(
                 pb.setLabel(name);
             };
             /**
-            * Read each file in filesToReas
-            * Recursive process.
-            * @param {int} sec secuencial file to read
-            */
+             * Read each file in filesToReas
+             * Recursive process.
+             * @param {int} sec secuencial file to read
+             */
             function readSecuencial(sec) {
                 if (sec >= filesToRead.length || pb.isClosed()) {
                     end();
@@ -417,6 +417,7 @@ define(
                 'htm': 'html', 'html': 'html',
                 'hx': 'haxe',
                 'java': 'java',
+                'jl': 'julia',
                 'js': 'javascript',
                 'json': 'json',
                 'jsp': 'jsp',
@@ -496,7 +497,7 @@ define(
             var shortTimeout = 20;
             var longTimeout = 100;
             var numberDelayed = 0;
-            VPLUtil.delay = function(id, func, arg1, arg2) {
+            var internalDelay = function(timeout, id, func, arg1, arg2) {
                 if (typeof delayedActions[id] != 'undefined') {
                     clearTimeout(delayedActions[id]);
                     numberDelayed--;
@@ -506,25 +507,19 @@ define(
                     numberDelayed--;
                     func(arg1, arg2);
                     delete delayedActions[id];
-                }, shortTimeout);
+                }, timeout);
+            };
+            VPLUtil.delay = function(id, func, arg1, arg2) {
+                internalDelay(shortTimeout, id, func, arg1, arg2);
             };
             VPLUtil.longDelay = function(id, func, arg1, arg2) {
-                if (typeof delayedActions[id] != 'undefined') {
-                    clearTimeout(delayedActions[id]);
-                    numberDelayed--;
-                }
-                numberDelayed++;
-                delayedActions[id] = setTimeout(function() {
-                    numberDelayed--;
-                    func(arg1, arg2);
-                    delete delayedActions[id];
-                }, longTimeout);
+                internalDelay(longTimeout, id, func, arg1, arg2);
             };
             var setAfterTimeout = function(id, func, arg1, arg2) {
                 if (typeof afterAllActions[id] != 'undefined') {
                     clearTimeout(afterAllActions[id]);
                 }
-                return setTimeout(function() {
+                afterAllActions[id] = setTimeout(function() {
                         if (numberDelayed > 0) {
                             afterAllActions[id] = setAfterTimeout(id, func, arg1, arg2);
                         } else {
@@ -534,7 +529,7 @@ define(
                     }, longTimeout);
             };
             VPLUtil.afterAll = function(id, func, arg1, arg2) {
-                afterAllActions[id] = setAfterTimeout(id, func, arg1, arg2);
+                setAfterTimeout(id, func, arg1, arg2);
             };
         })();
         VPLUtil.iconModified = function() {
@@ -562,8 +557,8 @@ define(
         };
         (function() {
             var menuIcons = {
-                'filelist': 'folder-o',
-                'filelistclose': 'folder-open-o',
+                'filelist': 'folder-open-o',
+                'filelistclose': 'folder-o',
                 'new': 'file-code-o',
                 'rename': 'pencil',
                 'delete': 'trash',
@@ -609,7 +604,9 @@ define(
                 'send': 'send',
                 'theme':  'paint-brush',
                 'user': 'user',
-                'fontsize': 'text-height'
+                'fontsize': 'text-height',
+                'close-rightpanel': 'caret-square-o-right',
+                'open-rightpanel': 'caret-square-o-left'
             };
             VPLUtil.genIcon = function(icon, size) {
                 if (!menuIcons[icon]) {
@@ -633,10 +630,10 @@ define(
         VPLUtil.setTitleBar = function(dialog, type, icon, buttons, handler) {
             var title = $(dialog).parent().find("span.ui-dialog-title");
             /**
-            * Generate HTML for a button with icon
-            * @param {string} e name of botton.
-            * @returns {string} Html tag <a> as a button.
-            */
+             * Generate HTML for a button with icon
+             * @param {string} e name of botton.
+             * @returns {string} Html tag <a> as a button.
+             */
             function genButton(e) {
                 var html = "<a id='vpl_" + type + "_" + e + "' href='#' title='" + VPLUtil.str(e) + "'>";
                 html += VPLUtil.genIcon(e, 'fw') + "</a>";
@@ -799,21 +796,32 @@ define(
             }
             return VPLUtil.showMessage(message, currentOptions);
         };
-
-        VPLUtil.requestAction = function(action, title, data, URL) {
+        /**
+         * Request an action to de server: save, run, debug, evaluate, update, getresult, etc.
+         * @param {string} action Name of action to request.
+         * @param {string} title The title that shows the progress dialog
+         * @param {object} data Data to send to the server
+         * @param {string} URL URL to the server entry point, lacking action
+         * @param {boolean} noDialog If true then no dialog is shown
+         * @returns {deferred} Defferred object
+         */
+        VPLUtil.requestAction = function(action, title, data, URL, noDialog) {
             var deferred = $.Deferred();
             var request = null;
             var xhr = false;
-            if (title === '') {
-                title = 'connecting';
-            }
-            var apb = new VPLUtil.progressBar(action, title, function() {
-                if (request.readyState != 4) {
-                    if (xhr && xhr.abort) {
-                        xhr.abort();
-                    }
+            var apb = false;
+            if (!noDialog) {
+                if (title === '') {
+                    title = 'connecting';
                 }
-            });
+                apb = new VPLUtil.progressBar(action, title, function() {
+                    if (request.readyState != 4) {
+                        if (xhr && xhr.abort) {
+                            xhr.abort();
+                        }
+                    }
+                });
+            }
             request = $.ajax({
                 beforeSend: function(jqXHR) {
                     xhr = jqXHR;
@@ -826,7 +834,9 @@ define(
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).always(function() {
-                apb.close();
+                if (!noDialog) {
+                    apb.close();
+                }
             }).done(function(response) {
                 if (!response.success) {
                     deferred.reject(response.error);
@@ -835,9 +845,8 @@ define(
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 var message = VPLUtil.str('connection_fail') + ': ' + textStatus;
-                if (debugMode) {
-                    message += '<br>' + errorThrown.message;
-                    message += '<br>' + jqXHR.responseText.substr(0, 80);
+                if (debugMode && errorThrown.message != undefined) {
+                    message += ': ' + errorThrown.message;
                 }
                 VPLUtil.log(message);
                 deferred.reject(message);
@@ -912,8 +921,18 @@ define(
             }
         };
         VPLUtil.monitorRunning = VPLUtil.returnFalse;
+        (function() {
+            var lastProccessID = -1;
+            VPLUtil.setProcessId = function(id) {
+                lastProccessID = id;
+            };
+            VPLUtil.getProcessId = function() {
+                return lastProccessID;
+            };
+        })();
         VPLUtil.webSocketMonitor = function(coninfo, title, running, externalActions) {
             VPLUtil.setProtocol(coninfo);
+            VPLUtil.setProcessId(coninfo.processid);
             var ws = null;
             var pb = null;
             var deferred = $.Deferred();
@@ -949,9 +968,10 @@ define(
                     }
                 },
                 'retrieve': function() {
+                    var data = {"processid": VPLUtil.getProcessId()};
                     pb.close();
                     delegated = true;
-                    VPLUtil.requestAction('retrieve', '', '', externalActions.ajaxurl)
+                    VPLUtil.requestAction('retrieve', '', data, externalActions.ajaxurl)
                     .done(
                         function(response) {
                             deferred.resolve();
@@ -968,6 +988,8 @@ define(
                 'close': function() {
                     VPLUtil.log('ws close message from jail');
                     ws.close();
+                    var data = {"processid": VPLUtil.getProcessId()};
+                    VPLUtil.requestAction('cancel', '', data, externalActions.ajaxurl, true);
                 }
             };
             try {
@@ -1045,6 +1067,84 @@ define(
             };
             return deferred;
         };
+
+        /**
+         * Run a command in a execution server with input/output using a WebSocket
+         * @param {string} URL to VPL editor services in Moodle server
+         * @param {string} command Command to run in execution server
+         * @param {array.<{name: string, contents: string, encoding: number}>} files
+         *         array of objects name, contents and encoding 0 => UTF-8, 1 => Base64
+         * @returns {object} deferred.
+         *         Use done() to set handler to receive the WebSocket. Use fail to set error handler.
+         */
+        VPLUtil.directRun = function(URL, command, files) {
+            var deferred = $.Deferred();
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: URL + 'directrun',
+                'data': JSON.stringify({"command": command, "files": files}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).done(function(result) {
+                if (!result.success) {
+                    deferred.reject(result.error);
+                } else {
+                    var response = result.response;
+                    VPLUtil.setProtocol(response);
+                    var ws = new WebSocket(response.executionURL);
+                    log.debug('Conecting with:' + response.executionURL);
+                    deferred.resolve({processid: response.processid, homepath: response.homepath, connection: ws});
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                var message = 'Connection fail' + ': ' + textStatus;
+                if (errorThrown.message != undefined) {
+                    message += ': ' + errorThrown.message;
+                }
+                log.debug(message);
+                deferred.reject(message);
+            });
+            return deferred;
+        };
+        /**
+         * Function to experiment with Direct run.
+         * Limits: one data send and 10 messages received and 10 minutes connected
+         * @param {string} URL to server
+         * @param {string} command Command to prepare direct run. Execution of command must generate vpl_execution
+         * @param {object} data to send to server
+         */
+         VPLUtil.directRunTest = function(URL, command, data) {
+            var files = [{name: 'a.c', contents: 'int main(){return 0;}', encoding: 0},
+                         {name: 'b.c', contents: 'int f(){return 1;}', encoding: 0}];
+            VPLUtil.directRun(URL, command, files)
+                .done(function(result) {
+                    var mcount = 0;
+                    result.connection.onopen = function() {
+                        log.debug("Ws open " + result.homepath + " processid " + result.processid);
+                        if (data != undefined) {
+                            result.connection.send(data);
+                        }
+                        setTimeout(function() { //  Close test if open for more than 10 minutes.
+                            result.connection.close();
+                        }, 60 * 10 * 1000);
+                    };
+                    result.connection.onmessage = function(event) {
+                        log.debug("WS Message (" + ++mcount + "): " + event.data);
+                        if (mcount >= 10) {
+                            result.connection.close();
+                        }
+                    };
+                    result.connection.onerror = function(event) {
+                        log.debug("WS error: " + event);
+                    };
+                    result.connection.onclose = function(event) {
+                        log.debug("WS close: " + event.code + " " + event.reason);
+                    };
+                })
+                .fail(function(message) {
+                    log.debug("Direct run fail. URL: " + URL + " command: " + command + " message: " + message);
+                });
+        };
         VPLUtil.processResult = function(text, filenames, sh, noFormat, folding) {
             if (typeof text == 'undefined' || text.replace(/^\s+$/gm, '') == '') {
                 return '';
@@ -1076,7 +1176,7 @@ define(
             /**
              * Generate attribute href for the editor in sh
              * @param {int} i Index of sh
-             * @return {strng} href
+             * @return {string} href
              */
             function getHref(i) {
                 if (typeof sh[i].getTagId === 'undefined') {
@@ -1090,8 +1190,8 @@ define(
                     var regf = escReg(filenames[i]);
                     // Filename:N, filename(N), filename N, filename line N, filename on line N.
                     // N=#|#:#|#,#.
-                    var reg = "(^|.* |.*/)" + regf + "( on line | line |:|\\()(\\d+)(:|,)?(\\d+)?(\\))?";
-                    regFiles[i] = new RegExp(reg, '');
+                    var reg = "(^| |/)" + regf + "( on line | line |:|\\()(\\d+)(:|,)?(\\d+)?(\\))?";
+                    regFiles[i] = new RegExp(reg, 'm');
                 }
             })();
             /**
@@ -1321,20 +1421,24 @@ define(
             var files = [];
             var results = [];
             var shs = [];
+            var nFileGroupHighlighter = 0;
             /**
              * Constructor for submission highlighter
              * @param {Array} files Files to show highlighted
              * @param {Array} results Output
              */
-            function SubmissionHighlighter(files, results) {
-                var self = this;
-                this.files = files;
-                this.results = results;
-                setTimeout(function() {
-                              self.highlight();
-                           }, 10);
+            function FileGroupHighlighter(files, results) {
+                this.files = files.slice();
+                this.results = results.slice();
+                files = [];
+                results = [];
+                this.shFiles = [];
+                this.shFileNames = [];
+                nFileGroupHighlighter++;
+                this.highlight();
             }
-            SubmissionHighlighter.prototype.highlightBlockly = function(preid) {
+
+            FileGroupHighlighter.prototype.highlightBlockly = function(preid) {
                 VPLUtil.loadScript(['../editor/blockly/blockly_compressed.js',
                     '../editor/blockly/msg/js/en.js',
                     '../editor/blockly/blocks_compressed.js']
@@ -1364,7 +1468,8 @@ define(
                     tag.html(h);
                 });
             };
-            SubmissionHighlighter.prototype.highlight = function() {
+
+            FileGroupHighlighter.prototype.highlight = function() {
                 var self = this;
                 var needAce = false;
                 var files = this.files;
@@ -1384,16 +1489,21 @@ define(
                         });
                     return;
                 }
-                var results = this.results;
-                var shFiles = [];
-                var shFileNames = [];
-                for (let i = 0; i < files.length; i++) {
-                    let file = files[i];
-                    let preid = 'code' + file.tagId;
-                    if (VPLUtil.isBlockly(file.fileName)) {
-                        self.highlightBlockly(preid);
-                        continue;
-                    }
+                VPLUtil.delay("FFGH." + nFileGroupHighlighter, function() {
+                    self.highlightStep(0);
+                });
+            };
+
+            FileGroupHighlighter.prototype.highlightStep = function(pos) {
+                if (pos >= this.files.length) {
+                    this.resultStep(0);
+                    return;
+                }
+                let file = this.files[pos];
+                let preid = 'code' + file.tagId;
+                if (VPLUtil.isBlockly(file.fileName)) {
+                    this.highlightBlockly(preid);
+                } else {
                     var ext = VPLUtil.fileExtension(file.fileName);
                     var lang = VPLUtil.langType(ext);
                     $('#' + preid).show();
@@ -1416,16 +1526,29 @@ define(
                         return this.vplTagId;
                     };
                     sh.vplTagId = file.tagId;
-                    shFiles.push(sh);
-                    shFileNames.push(file.fileName);
+                    this.shFiles.push(sh);
+                    this.shFileNames.push(file.fileName);
                     shs[file.tagId] = sh;
                 }
-                for (var ri = 0; ri < results.length; ri++) {
-                    var tag = document.getElementById(results[ri].tagId);
-                    var text = tag.textContent || tag.innerText;
-                    tag.innerHTML = VPLUtil.processResult(text, shFileNames, shFiles,
-                                                           results[ri].noFormat, results[ri].folding);
+                var self = this;
+                VPLUtil.delay(preid + ".next", function() {
+                    self.highlightStep(pos + 1);
+                });
+            };
+
+            FileGroupHighlighter.prototype.resultStep = function(pos) {
+                if (pos >= this.results.length) {
+                    return;
                 }
+                var self = this;
+                var result = this.results[pos];
+                var tag = document.getElementById(result.tagId);
+                var text = tag.textContent || tag.innerText;
+                tag.innerHTML = VPLUtil.processResult(text, this.shFileNames, this.shFiles,
+                    result.noFormat, result.folding);
+                VPLUtil.delay(tag + ".next", function() {
+                    self.resultStep(pos + 1);
+                });
             };
 
             VPLUtil.addResults = function(tagId, noFormat, folding) {
@@ -1441,9 +1564,7 @@ define(
                  });
             };
             VPLUtil.syntaxHighlight = function() {
-                new SubmissionHighlighter(files, results);
-                files = [];
-                results = [];
+                new FileGroupHighlighter(files, results);
             };
             VPLUtil.flEventHandler = function(event) {
                 var tag = event.target.getAttribute('href').substring(1);

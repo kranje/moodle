@@ -23,6 +23,8 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
+use mod_vpl\similarity\similarity_base;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once(dirname(__FILE__).'/tokenizer_factory.class.php');
@@ -33,198 +35,9 @@ require_once(dirname(__FILE__).'/../views/status_box.class.php');
 /**
  * Similarity preprocesing information of a file
  * from any source (directory, zip file or vpl activity)
- *
  */
-class vpl_similarity_base {
-    protected $from;
-    protected $size;
-    protected $sizeh;
-    static protected $valueconverter = array (); // Array to convert string operators to numbers.
-    protected $vecfrec;
-    protected $hashses;
-    protected static function get_value_id($value) {
-        if (! isset( self::$valueconverter [$value] )) {
-            self::$valueconverter [$value] = count( self::$valueconverter );
-        }
-        return self::$valueconverter [$value];
-    }
-    public function get_type() {
-        return 0;
-    }
-    public function get_size() {
-        return $this->size;
-    }
-    public function get_sizeh() {
-        return $this->sizeh;
-    }
-    public function get_tokenizer() {
-        return vpl_tokenizer_factory::get( 'base' );
-    }
-    public function sintax_normalize(&$tokens) {
-        return $tokens;
-    }
-    const HASH_SIZE = 4;
-    const HASH_REDUCTION = 1000;
-    public function init(&$data, $from, $toremove = null) {
-        $this->from = $from;
-        $this->size = 0;
-        $this->sizeh = 0;
-        $this->vecfrec = array ();
-        $this->hashes = array ();
-        // Get tokenizer for this language.
-        $tok = $this->get_tokenizer();
-        // Parse code.
-        $tok->parse( $data );
-        // Normalize parsed data transforming or removing code.
-        $tokens = $tok->get_tokens();
-        $tokens = $this->sintax_normalize( $tokens );
-        // Process tokens to get vector of frecuencies and size.
-        // Calculate hashes.
-        $last = array ();
-        for ($i = 0; $i < self::HASH_SIZE; $i ++) {
-            $last [$i] = '';
-        }
-        foreach ($tokens as $token) {
-            if ($token->type == vpl_token_type::OPERATOR) {
-                // Calculate hashes table.
-                for ($i = 0; $i < self::HASH_SIZE - 1; $i ++) {
-                    $last [$i] = $last [$i + 1];
-                }
-                $last [self::HASH_SIZE - 1] = $token->value;
-                $item = '';
-                for ($i = 0; $i < self::HASH_SIZE; $i ++) {
-                    $item .= $last [$i];
-                }
-                $hash = crc32( $item ) % self::HASH_REDUCTION;
-                if (isset( $this->hashes [$hash] )) {
-                    $this->hashes [$hash] ++;
-                } else {
-                    $this->hashes [$hash] = 1;
-                }
-                $this->sizeh ++;
-                // Get operator id.
-                $vid = self::get_value_id( $token->value );
-                if (isset( $this->vecfrec [$vid] )) {
-                    $this->vecfrec [$vid] ++;
-                } else {
-                    $this->vecfrec [$vid] = 1;
-                }
-                $this->size ++;
-            }
-        }
-        if ($toremove != null) {
-            foreach ($toremove->vecfrec as $id => $frec) {
-                if (isset( $this->vecfrec [$id] )) {
-                    $this->vecfrec [$id] = $this->vecfrec [$id] > $frec ? $this->vecfrec [$id] - $frec : 0;
-                }
-            }
-            foreach ($toremove->hashes as $id => $frec) {
-                if (isset( $this->hashes [$id] )) {
-                    $this->hashes [$id] = $this->hashes [$id] > $frec ? $this->hashes [$id] - $frec : 0;
-                }
-            }
-            $newsize = 0;
-            foreach ($this->vecfrec as $frec) {
-                $newsize += $frec;
-            }
-            $this->size = $newsize;
-            $newsize = 0;
-            foreach ($this->hashes as $frec) {
-                $newsize += $frec;
-            }
-            $this->sizeh = $newsize;
-        }
-    }
-    public function show_info($ext = false) {
-        $ret = $this->from->show_info();
-        if ($ext) {
-            $htmls = vpl_s( self::$valueconverter );
-            $ret .= 'valueconverter=' . $htmls . '<br>';
-            $htmls = vpl_s( $this->vecfrec );
-            $ret .= 'vecfrec=' . $htmls . '<br>';
-            $htmls = vpl_s( $this->hashes );
-            $ret .= 'hashses=' . $htmls . '<br>';
-        }
-        return $ret;
-    }
-    public function can_access() {
-        return $this->from->can_access();
-    }
-    public function get_userid() {
-        return $this->from->get_userid();
-    }
-    public function link_parms($t) {
-        return $this->from->link_parms( $t );
-    }
+abstract class vpl_similarity_base extends similarity_base {
 
-    /**
-     * Get similarity-1 among this file and other
-     *
-     * @param Object $other with the file info
-     * @return number 0-100 %
-     */
-    public function similarity1(&$other) {
-        $dif1 = 0;
-        $taken = 0;
-        foreach ($this->vecfrec as $op => $frec) {
-            if (isset( $other->vecfrec [$op] )) {
-                if ($frec != $other->vecfrec [$op]) {
-                    $dif1 ++;
-                }
-                $taken ++;
-            } else {
-                $dif1 ++;
-            }
-        }
-        $dif2 = count( $other->vecfrec ) - $taken;
-        return 100 * (1 - (($dif1 + $dif2) / (count( $this->vecfrec ) + count( $other->vecfrec ))));
-    }
-
-    /**
-     * Get similarity-2 among this file and other
-     *
-     * @param Object $other with the file info
-     * @return number 0-100 %
-     */
-    public function similarity2(&$other) {
-        $dif = 0;
-        $taken = 0;
-        foreach ($this->vecfrec as $op => $frec) {
-            if (isset( $other->vecfrec [$op] )) {
-                $dif += abs( $other->vecfrec [$op] - $frec );
-                $taken += $other->vecfrec [$op];
-            } else {
-                $dif += $frec;
-            }
-        }
-        $dif += $other->get_size() - $taken;
-        return 100 * (1 - ($dif / ($this->size + $other->get_size())));
-    }
-
-    /**
-     * Get similarity-3 among this file and other
-     *
-     * @param Object $other with the file info
-     * @return number 0-100 %
-     */
-    public function similarity3(&$other) {
-        $dif = 0;
-        $taken = 0;
-        foreach ($this->hashes as $hash => $frec) {
-            if (isset( $other->hashes [$hash] )) {
-                $dif += abs( $other->hashes [$hash] - $frec );
-                $taken += $other->hashes [$hash];
-            } else {
-                $dif += $frec;
-            }
-        }
-        $dif += $other->get_sizeh() - $taken;
-        return 100 * (1 - ($dif / ($this->sizeh + $other->get_sizeh())));
-    }
-
-    public static function clone_token($token, $value) {
-        return new vpl_token($token->type, $value, $token->line);
-    }
 }
 
 // TODO refactor to a protected class.
@@ -382,11 +195,11 @@ class vpl_similarity {
         $spb->set_max( $slimit );
         for ($i = 0; $i < $slimit; $i ++) { // Search similarity with.
             $spb->set_value( $i + 1 );
-            $current = $files [$i];
+            $current = $files[$i];
             $currenttype = $current->get_type();
             $userid = $current->get_userid();
             for ($j = $i + 1; $j < $jlimit; $j ++) { // Compare with all others.
-                $other = $files [$j];
+                $other = $files[$j];
                 // If not the same language then skip.
                 if ($currenttype != $other->get_type() || ($userid != '' && $userid == $other->get_userid())) {
                     continue;
@@ -396,24 +209,24 @@ class vpl_similarity {
                 $s2 = $current->similarity2( $other );
                 $s3 = $current->similarity3( $other );
                 if ($s1 >= $minlevel1 || $s2 >= $minlevel2 || $s3 >= $minlevel3) {
-                    $case = new vpl_files_pair( $files [$i], $files [$j], $s1, $s2, $s3 );
+                    $case = new vpl_files_pair( $files[$i], $files[$j], $s1, $s2, $s3 );
                     $maxlevel1 = max( $s1, $maxlevel1 );
                     $maxlevel2 = max( $s2, $maxlevel2 );
                     $maxlevel3 = max( $s3, $maxlevel3 );
                     if ($s1 >= $minlevel1) {
-                        $vs1 [] = $case;
+                        $vs1[] = $case;
                         if (count( $vs1 ) > 2 * $maxselected) {
                             self::filter_selected( $vs1, $maxselected, $minlevel1, 1 );
                         }
                     }
                     if ($s2 >= $minlevel2) {
-                        $vs2 [] = $case;
+                        $vs2[] = $case;
                         if (count( $vs2 ) > 2 * $maxselected) {
                             self::filter_selected( $vs2, $maxselected, $minlevel2, 2 );
                         }
                     }
                     if ($s3 >= $minlevel3) {
-                        $vs3 [] = $case;
+                        $vs3[] = $case;
                         if (count( $vs3 ) > 2 * $maxselected) {
                             self::filter_selected( $vs3, $maxselected, $minlevel3, 3 );
                         }
@@ -429,17 +242,17 @@ class vpl_similarity {
         // Merge vs1, vs2 and vs3.
         $max = count( $vs1 );
         for ($i = 0; $i < $max; $i ++) {
-            if (! $vs1 [$i]->selected) {
-                $selected [] = $vs1 [$i];
-                $vs1 [$i]->selected = true;
+            if (! $vs1[$i]->selected) {
+                $selected[] = $vs1[$i];
+                $vs1[$i]->selected = true;
             }
-            if (! $vs2 [$i]->selected) {
-                $selected [] = $vs2 [$i];
-                $vs2 [$i]->selected = true;
+            if (! $vs2[$i]->selected) {
+                $selected[] = $vs2[$i];
+                $vs2[$i]->selected = true;
             }
-            if (! $vs3 [$i]->selected) {
-                $selected [] = $vs3 [$i];
-                $vs3 [$i]->selected = true;
+            if (! $vs3[$i]->selected) {
+                $selected[] = $vs3[$i];
+                $vs3[$i]->selected = true;
             }
         }
         return $selected;
@@ -458,7 +271,7 @@ class vpl_similarity {
             }
             $field = 's' . $sid;
             $vec = array_slice( $vec, 0, $maxselected );
-            $minlevel = $vec [count( $vec ) - 1]->$field;
+            $minlevel = $vec[count( $vec ) - 1]->$field;
         }
     }
     public static function cmp_selected1($a, $b) {

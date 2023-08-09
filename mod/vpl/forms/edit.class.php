@@ -38,20 +38,20 @@ require_once(dirname(__FILE__).'/../vpl_example_CE.class.php');
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
-class mod_vpl_edit{
+class mod_vpl_edit {
     /**
      * Translates files from IDE to internal format
      *
-     * @param Object[] $postfiles atributes encoding, name and contents
-     * @return string[string] contents indexed by filenames
+     * @param array $postfiles atributes encoding, name and contents
+     * @return array contents indexed by filenames
      */
     public static function filesfromide(& $postfiles) {
         $files = Array ();
         foreach ($postfiles as $file) {
             if ( $file->encoding == 1 ) {
-                $files [$file->name] = base64_decode( $file->contents );
+                $files[$file->name] = base64_decode( $file->contents );
             } else {
-                $files [$file->name] = $file->contents;
+                $files[$file->name] = $file->contents;
             }
         }
         return $files;
@@ -75,7 +75,7 @@ class mod_vpl_edit{
                 $file->contents = $data;
                 $file->encoding = 0;
             }
-            $files [] = $file;
+            $files[] = $file;
         }
         return $files;
     }
@@ -92,7 +92,7 @@ class mod_vpl_edit{
                     'name' => $name,
                     'data' => $data
             );
-            $files [] = $file;
+            $files[] = $file;
         }
         return $files;
     }
@@ -146,17 +146,13 @@ class mod_vpl_edit{
      *
      * @param mod_vpl $vpl VPL instance
      * @param int $userid
+     * @param int $processid
      * @param string[string] $files internal format
      * @throws Exception
      * @return boolean True if updated
      */
-    public static function update(mod_vpl $vpl, int $userid, array & $files) {
-        $lastsub = $vpl->last_user_submission( $userid );
-        if (! $lastsub) {
-            throw new Exception( get_string( 'nosubmission', VPL ) );
-        }
-        $submission = new mod_vpl_submission_CE( $vpl, $lastsub );
-        return $submission->update($vpl, $files);
+    public static function update(mod_vpl $vpl, int $userid, int $processid, array & $files, $filestodelete = []) {
+        return mod_vpl_submission_CE::update($vpl, $userid, $processid, $files, $filestodelete);
     }
 
     /**
@@ -189,9 +185,8 @@ class mod_vpl_edit{
             $files = self::get_requested_files( $vpl );
             $compilationexecution = new stdClass();
             $compilationexecution->nevaluations = 0;
-            $vplinstance = $vpl->get_instance();
-            $compilationexecution->freeevaluations = $vplinstance->freeevaluations;
-            $compilationexecution->reductionbyevaluation = $vplinstance->reductionbyevaluation;
+            $compilationexecution->freeevaluations = $vpl->get_effective_setting('freeevaluations', $userid);
+            $compilationexecution->reductionbyevaluation = $vpl->get_effective_setting('reductionbyevaluation', $userid);
 
         }
         return $files;
@@ -236,15 +231,15 @@ class mod_vpl_edit{
             $compilationexecution = new stdClass();
             $compilationexecution->grade = '';
             $compilationexecution->nevaluations = 0;
-            $compilationexecution->freeevaluations = $vplinstance->freeevaluations;
-            $compilationexecution->reductionbyevaluation = $vplinstance->reductionbyevaluation;
+            $compilationexecution->freeevaluations = $vpl->get_effective_setting('freeevaluations', $userid);
+            $compilationexecution->reductionbyevaluation = $vpl->get_effective_setting('reductionbyevaluation', $userid);
             $response->compilationexecution = $compilationexecution;
         }
         return $response;
     }
 
     /**
-     * Request the execution (run|debug|evaluate)of a user's submission
+     * Request the execution (run|debug|evaluate) of a user's submission
      * @param mod_vpl $vpl
      * @param int $userid
      * @param string $action
@@ -273,44 +268,153 @@ class mod_vpl_edit{
                 'debug' => 'debugged',
                 'evaluate' => 'evaluated'
         );
-        $eventclass = '\mod_vpl\event\submission_' . $traslate [$action];
+        $eventclass = '\mod_vpl\event\submission_' . $traslate[$action];
         $eventclass::log( $submission );
-        return $submission->run( $code [$action], $options );
+        return $submission->run( $code[$action], $options );
     }
 
     /**
      * Request the retrieve of the evaluation result
      * @param mod_vpl $vpl
      * @param int $userid
+     * @param int $processid
      * @throws Exception
      * @return stdClass
      */
-    public static function retrieve_result($vpl, $userid) {
+    public static function retrieve_result(mod_vpl $vpl, int $userid, $processid = -1) {
+        if ($processid == -1) { // To keep previous behaviour.
+            $processinfo = vpl_running_processes::get_run($userid, $vpl->get_instance()->id);
+            if ($processinfo == false) { // No process to cancel.
+                throw new Exception( get_string( 'serverexecutionerror', VPL ) );
+            } else {
+                $processid = $processinfo->id;
+            }
+        }
         $lastsub = $vpl->last_user_submission( $userid );
         if (! $lastsub) {
             throw new Exception( get_string( 'nosubmission', VPL ) );
         }
         $submission = new mod_vpl_submission_CE( $vpl, $lastsub );
-        return $submission->retrieveResult();
+        return $submission->retrieveResult($processid);
     }
 
     /**
-     * Request the cancel of a evaluation/execution in progress
+     * Request the cancel of a evaluation/execution in progress.
      * @param mod_vpl $vpl
      * @param int $userid
-     * @throws Exception
+     * @param int $processid
+     * @return string The message of not canceled or empty string
      */
-    public static function cancel($vpl, $userid) {
+    public static function cancel($vpl, $userid, int $processid) {
         $example = $vpl->get_instance()->example;
         $lastsub = $vpl->last_user_submission( $userid );
         if (! $lastsub && ! $example) {
-            throw new Exception( get_string( 'nosubmission', VPL ) );
+            return get_string( 'nosubmission', VPL );
         }
-        if ($example) {
-            $submission = new mod_vpl_example_CE( $vpl );
-        } else {
-            $submission = new mod_vpl_submission_CE( $vpl, $lastsub );
+        try {
+            if ($example) {
+                $submission = new mod_vpl_example_CE( $vpl );
+            } else {
+                $submission = new mod_vpl_submission_CE( $vpl, $lastsub );
+            }
+            $submission->cancelProcess($processid);
+        } catch ( Exception $e ) {
+            return $e->getMessage();
         }
-        return $submission->cancelProcess();
+        return '';
+    }
+
+    /**
+     * Request to stop the direct run for this user and vpl activity if any
+     * @param mod_vpl $vpl
+     * @param int $userid
+     */
+    public static function stopdirectrun($vplid, $userid) {
+        $processes = vpl_running_processes::get_directrun($userid, $vplid);
+        foreach ($processes as $process) {
+            try {
+                $data = new \stdClass();
+                $data->adminticket = $process->adminticket;
+                $request = vpl_jailserver_manager::get_action_request('stop', $data);
+                vpl_jailserver_manager::get_response( $data->server, $request, $error );
+            } catch ( Exception $e ) {
+                debugging( "Process directrun in execution server not sttoped or not found", DEBUG_DEVELOPER );
+            }
+            vpl_running_processes::delete( $userid, $vplid, $process->adminticket);
+        }
+    }
+
+    /**
+     * Request the direct run code in an execution server
+     * @param mod_vpl $vpl
+     * @param int $userid
+     * @param string $command
+     * @throws Exception
+     */
+    public static function directrun($vpl, $userid, $command, $files) {
+        $vplid = $vpl->get_instance()->id;
+        self::stopdirectrun($vplid, $userid);
+        $executefilename = '.vpl_directrun.sh';
+        $maxmemory = 2000 * 1000 * 1000;
+        $localservers = $vpl->get_instance()->jailservers;
+        $error = '';
+        $server = vpl_jailserver_manager::get_server( $maxmemory, $localservers, $error );
+        if ($server == '') {
+            $manager = $vpl->has_capability( VPL_MANAGE_CAPABILITY );
+            $men = get_string( 'nojailavailable', VPL );
+            if ($manager) {
+                $men .= ": " . $error;
+            }
+            throw new Exception( $men );
+        }
+        $data = new stdClass();
+        mod_vpl_submission_CE::adaptbinaryfiles($data, $files);
+        $data->files[$executefilename] = <<<DIRECTRUNCODE
+#!/bin/bash
+cat > vpl_execution <<CONTENTS
+#!/bin/bash
+$command
+CONTENTS
+chmod +x vpl_execution
+DIRECTRUNCODE;
+        $data->filestodelete[$executefilename] = 1;
+        $data->fileencoding[$executefilename] = 0;
+        $data->execute = $executefilename;
+        $plugin = new stdClass();
+        require(dirname( __FILE__ ) . '/../version.php');
+        $pluginversion = $plugin->version;
+        $data->pluginversion = $pluginversion;
+        $data->interactive = 1;
+        $data->lang = vpl_get_lang( true );
+        $data->maxtime = 1000000;
+        $data->maxfilesize = $maxmemory;
+        $data->maxmemory = $maxmemory;
+        $data->maxprocesses = 10000;
+        $request = vpl_jailserver_manager::get_action_request('directrun', $data);
+        $error = '';
+        $jailresponse = vpl_jailserver_manager::get_response( $server, $request, $error );
+        if ($jailresponse === false) {
+            $manager = $vpl->has_capability( VPL_MANAGE_CAPABILITY );
+            if ($manager) {
+                throw new Exception( get_string( 'serverexecutionerror', VPL ) . "\n" . $error . ' ' . $server . ' ' . $request );
+            }
+            throw new Exception( get_string( 'serverexecutionerror', VPL ) );
+        }
+        $parsed = parse_url( $server );
+        $response = new stdClass();
+        $response->server = $parsed['host'];
+        $response->executionPath = $jailresponse['executionticket'] . '/execute';
+        $response->port = $jailresponse['port'];
+        $response->securePort = $jailresponse['secureport'];
+        $response->wsProtocol = get_config('mod_vpl')->websocket_protocol;
+        $response->homepath = $jailresponse['homepath'];
+        $process = new stdClass();
+        $process->userid = $userid;
+        $process->vpl = $vplid;
+        $process->adminticket = $jailresponse['adminticket'];
+        $process->server = $server;
+        $process->type = 3;
+        $response->processid = vpl_running_processes::set( $process );
+        return $response;
     }
 }

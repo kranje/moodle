@@ -55,22 +55,22 @@ class vpl_file_from_dir extends vpl_file_from_base {
             $apellidos = '';
             $lines = explode( "\n", file_get_contents( $filepath ) );
             if (count( $lines ) > 3) {
-                if (strpos( $lines [1], 'NIF=' ) !== false) {
-                    $nif = substr( $lines [1], 4 );
+                if (strpos( $lines[1], 'NIF=' ) !== false) {
+                    $nif = substr( $lines[1], 4 );
                 }
-                if (strpos( $lines [2], 'Nombre=' ) !== false) {
-                    $nombre = substr( $lines [2], 7 );
+                if (strpos( $lines[2], 'Nombre=' ) !== false) {
+                    $nombre = substr( $lines[2], 7 );
                 }
-                if (strpos( $lines [3], 'Apellidos=' ) !== false) {
-                    $apellidos = substr( $lines [3], 10 );
+                if (strpos( $lines[3], 'Apellidos=' ) !== false) {
+                    $apellidos = substr( $lines[3], 10 );
                 }
             }
             if ($nif > '' && $nombre > '' && $apellidos > '') {
                 global $CFG;
                 if ($CFG->fullnamedisplay == 'lastname firstname') {
-                    self::$usersname [$nif] = mb_convert_encoding( $apellidos . ', ' . $nombre, 'utf-8' );
+                    self::$usersname[$nif] = mb_convert_encoding( $apellidos . ', ' . $nombre, 'utf-8' );
                 } else {
-                    self::$usersname [$nif] = mb_convert_encoding( $nombre . ' ' . $apellidos, 'utf-8' );
+                    self::$usersname[$nif] = mb_convert_encoding( $nombre . ' ' . $apellidos, 'utf-8' );
                 }
             }
         }
@@ -103,7 +103,7 @@ class vpl_file_from_dir extends vpl_file_from_base {
         $ret .= s( $this->filename ) . ' ';
         $ret .= '</a>';
         if ($this->userid != '') {
-            $ret .= ' ' . self::$usersname [$this->userid];
+            $ret .= ' ' . self::$usersname[$this->userid];
         }
         return $ret;
     }
@@ -117,7 +117,7 @@ class vpl_file_from_dir extends vpl_file_from_base {
                 'filename' . $t => $this->filename
         );
         if ($this->userid != '') {
-            $res ['username' . $t] = self::$usersname [$this->userid];
+            $res['username' . $t] = self::$usersname[$this->userid];
         }
         return $res;
     }
@@ -131,7 +131,7 @@ class vpl_file_from_zipfile extends vpl_file_from_dir {
         $ret = '';
         $ret .= s( $this->filename );
         if ($this->userid != '') {
-            $ret .= ' ' . self::$usersname [$this->userid];
+            $ret .= ' ' . self::$usersname[$this->userid];
         }
         return $ret;
     }
@@ -146,7 +146,7 @@ class vpl_file_from_zipfile extends vpl_file_from_dir {
                 'filename' . $t => $this->filename
         );
         if ($this->userid != '') {
-            $res ['username' . $t] = self::$usersname [$this->userid];
+            $res['username' . $t] = self::$usersname[$this->userid];
         }
         return $res;
     }
@@ -163,8 +163,8 @@ class vpl_file_from_activity extends vpl_file_from_base {
     protected $userid;
     public function __construct(&$filename, &$vpl, $subinstance) {
         $id = $vpl->get_instance()->id;
-        if (! isset( self::$vpls [$id] )) {
-            self::$vpls [$id] = $vpl;
+        if (! isset( self::$vpls[$id] )) {
+            self::$vpls[$id] = $vpl;
         }
         $this->vplid = $id;
         $this->filename = $filename;
@@ -173,7 +173,7 @@ class vpl_file_from_activity extends vpl_file_from_base {
     }
     public function show_info() {
         global $DB;
-        $vpl = self::$vpls [$this->vplid];
+        $vpl = self::$vpls[$this->vplid];
         $cmid = $vpl->get_course_module()->id;
         $ret = '';
         if ($this->userid >= 0) {
@@ -229,16 +229,16 @@ class vpl_similarity_preprocess {
     const MINTOKENS = 10;
 
     /**
-     * Preprocesses activity, loading activity files into $simil array
+     * Preprocesses a submission, returning processed files
      *
-     * @param array $simil of file processed objects
-     * @param object $vpl of activity to process
-     * @param array $filesselected if set only files selected
-     * @param boolean $allfiles preprocess all files
-     * @param boolean $joinedfiles join files as one
-     * @param $subinstance
-     * @param $toremove $toremove with filenames as keys to remove from comparation
-     * @return void
+     * @param object $fgm Object to manage the file of a submission
+     * @param array $filesselected List of files to processes
+     * @param boolean $allfiles If true preprocess all files
+     * @param boolean $joinedfiles If true join files as one
+     * @param object $vpl Activity to process (optional)
+     * @param object $subinstance (optional)
+     * @param array $toremove Array with filenames as keys to remove from comparation (optional)
+     * @return array Asociative array with file name as key and simil object as value
      */
     public static function proccess_files($fgm, $filesselected, $allfiles, $joinedfiles
                                           , $vpl = false, $subinstance = false, $toremove = array()) {
@@ -248,7 +248,7 @@ class vpl_similarity_preprocess {
         $from = null;
         $joinedfilesdata = '';
         foreach ($filelist as $filename) {
-            if (! isset( $filesselected [ basename($filename) ] ) && ! $allfiles) {
+            if (! isset( $filesselected[basename($filename)] ) && ! $allfiles) {
                 continue;
             }
             $sim = vpl_similarity_factory::get( $filename );
@@ -263,13 +263,13 @@ class vpl_similarity_preprocess {
                     if ($vpl) {
                         $from = new vpl_file_from_activity( $filename, $vpl, $subinstance );
                     }
-                    if (isset( $toremove [$filename] )) {
-                        $sim->init( $data, $from, $toremove [$filename] );
+                    if (isset( $toremove[$filename] )) {
+                        $sim->init( $data, $from, $toremove[$filename] );
                     } else {
                         $sim->init( $data, $from );
                     }
                     if ($sim->get_size() > self::MINTOKENS) {
-                        $files [$filename] = $sim;
+                        $files[$filename] = $sim;
                     }
                 }
             }
@@ -279,18 +279,29 @@ class vpl_similarity_preprocess {
             if ($vpl) {
                 $from = new vpl_file_from_activity( $filename, $vpl, $subinstance );
             }
-            if (isset( $toremove [$filename] )) {
-                $simjf->init( $joinedfilesdata, $from, $toremove [$filename] );
+            if (isset( $toremove[$filename] )) {
+                $simjf->init( $joinedfilesdata, $from, $toremove[$filename] );
             } else {
                 $simjf->init( $joinedfilesdata, $from );
             }
             if ($simjf->get_size() > self::MINTOKENS) {
-                $files [self::JOINEDFILENAME] = $simjf;
+                $files[self::JOINEDFILENAME] = $simjf;
             }
         }
         return $files;
     }
-    public static function activity(&$simil, $vpl, $filesselected = array(), $allfiles, $joinedfiles, $spb) {
+    /**
+     * Preprocesses an activity loading and preprocessing the students' files
+     *
+     * @param array& $simil $simil Input/output array that saves the new files found to process
+     * @param object $vpl Activity to process
+     * @param array $filesselected Files to process
+     * @param bool $allfiles If true process all files
+     * @param bool $joinedfiles If true process files as a joined file
+     * @param object $spb Progress bar to show activity load
+     * @return void
+     */
+    public static function activity(&$simil, $vpl, $filesselected, $allfiles, $joinedfiles, $spb) {
         $vpl->require_capability( VPL_SIMILARITY_CAPABILITY );
         $cm = $vpl->get_course_module();
         $groupmode = groups_get_activity_groupmode( $cm );
@@ -319,13 +330,13 @@ class vpl_similarity_preprocess {
         foreach ($list as $user) {
             $i ++;
             $spb->set_value( $i );
-            if (isset( $submissions [$user->id] )) {
-                $subinstance = $submissions [$user->id];
+            if (isset( $submissions[$user->id] )) {
+                $subinstance = $submissions[$user->id];
                 $submission = new mod_vpl_submission( $vpl, $subinstance );
                 $subf = $submission->get_submitted_fgm();
                 $files = self::proccess_files( $subf, $filesselected, $allfiles, $joinedfiles, $vpl, $subinstance, $toremove );
                 foreach ($files as $file) {
-                    $simil [] = $file;
+                    $simil[] = $file;
                 }
             }
         }
@@ -354,7 +365,7 @@ class vpl_similarity_preprocess {
             if ($sim) {
                 $data = $reqf->getFileData( $filename );
                 $sim->init( $data, null );
-                $toremove [$filename] = $sim;
+                $toremove[$filename] = $sim;
             }
         }
         $submission = new mod_vpl_submission( $vpl, $subinstance );
@@ -365,13 +376,13 @@ class vpl_similarity_preprocess {
             if ($sim) {
                 $data = $subf->getFileData( $filename );
                 $from = new vpl_file_from_activity( $filename, $vpl, $subinstance );
-                if (isset( $toremove [$filename] )) {
-                    $sim->init( $data, $from, $toremove [$filename] );
+                if (isset( $toremove[$filename] )) {
+                    $sim->init( $data, $from, $toremove[$filename] );
                 } else {
                     $sim->init( $data, $from );
                 }
                 if ($sim->get_size() > self::MINTOKENS) {
-                    $simil [] = $sim;
+                    $simil[] = $sim;
                 }
             }
         }
@@ -389,15 +400,17 @@ class vpl_similarity_preprocess {
     /**
      * Preprocesses ZIP file, loading processesed files into $simil array
      *
-     * @param array $simil of file processed objects
-     * @param object $vpl activity to process
-     * @param array $filesselected if set only files selected
-     * @param boolean $allfiles preprocess all files
-     * @param boolean $joinedfiles join files as one
-     * @param $spb
+     * @param array &$simil Input/output array that saves the new files found to process
+     * @param string $zipname Zip file name
+     * @param string $zipdata Zip file content
+     * @param object $vpl Current VPL activity
+     * @param array $filesselected Files to process
+     * @param bool $allfiles If true process all files.
+     * @param bool $joinedfiles If true process files as a joined file
+     * @param object $spb Progress bar to show Zip file load
      * @return void
      */
-    public static function zip(&$simil, $zipname, $zipdata, $vpl, $filesselected = array(), $allfiles, $joinedfiles, $spb) {
+    public static function zip(&$simil, $zipname, $zipdata, $vpl, $filesselected, $allfiles, $joinedfiles, $spb) {
         $ext = strtoupper( pathinfo( $zipname, PATHINFO_EXTENSION ) );
         if ($ext != 'ZIP') {
             throw new moodle_exception('wrongzipfilename');
@@ -407,7 +420,7 @@ class vpl_similarity_preprocess {
         $zip = new ZipArchive();
         $zipfilename = self::get_zip_filepath( $vplid, $zipname );
         $spb->set_value( get_string( 'unzipping', VPL ) );
-        if ($zip->open( $zipfilename )) {
+        if ($zip->open( $zipfilename ) === true) {
             $spb->set_max( $zip->numFiles );
             for ($i = 0; $i < $zip->numFiles; $i ++) {
                 $spb->set_value( $i + 1 );
@@ -419,7 +432,7 @@ class vpl_similarity_preprocess {
                 if ($data) {
                     // TODO remove if no GAP file.
                     vpl_file_from_zipfile::process_gap_userfile( $filename );
-                    if (! isset( $filesselected [basename( $filename )] ) && ! $allfiles) {
+                    if (! isset( $filesselected[basename( $filename )] ) && ! $allfiles) {
                         continue;
                     }
                     $sim = vpl_similarity_factory::get( $filename );
@@ -427,7 +440,7 @@ class vpl_similarity_preprocess {
                         $from = new vpl_file_from_zipfile( $filename, $vplid, $zipname );
                         $sim->init( $data, $from );
                         if ($sim->get_size() > self::MINTOKENS) {
-                            $simil [] = $sim;
+                            $simil[] = $sim;
                         }
                     }
                 }

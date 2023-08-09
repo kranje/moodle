@@ -35,9 +35,9 @@ class vpl_base extends base {
         return false;
     }
     protected function init() {
-        $this->data ['crud'] = 'u';
-        $this->data ['edulevel'] = self::LEVEL_TEACHING;
-        $this->data ['objecttable'] = VPL;
+        $this->data['crud'] = 'u';
+        $this->data['edulevel'] = self::LEVEL_TEACHING;
+        $this->data['objecttable'] = VPL;
     }
     public static function log($vpl) {
         if (is_array( $vpl )) {
@@ -45,7 +45,7 @@ class vpl_base extends base {
         } else {
             $einfo = array (
                     'objectid' => $vpl->get_instance()->id,
-                    'contextid' => $vpl->get_context()->id,
+                    'context' => $vpl->get_context(),
             );
             parent::log( $einfo );
         }

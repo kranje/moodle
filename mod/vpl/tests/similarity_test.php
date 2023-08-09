@@ -23,6 +23,10 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
+namespace mod_vpl;
+
+use \vpl_similarity_preprocess;
+
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -37,8 +41,11 @@ require_once($CFG->dirroot . '/mod/vpl/similarity/similarity_sources.class.php')
 /**
  * Unit tests for vpl_similarity_preprocess class.
  * @group mod_vpl
+ * @group mod_vpl_vplt
+ * @group mod_vpl_similarity
+ * @group mod_vpl_similarity_preprocess
  */
-class mod_vpl_similarity_preprocess_testcase extends mod_vpl_base_testcase {
+class similarity_test extends base_test {
 
     /**
      * Method to create test fixture
@@ -49,6 +56,7 @@ class mod_vpl_similarity_preprocess_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_similarity_preprocess::get_zip_filepath
+     * @covers \vpl_similarity_preprocess::get_zip_filepath
      */
     public function test_get_zip_filepath() {
         global $CFG;
@@ -66,6 +74,7 @@ class mod_vpl_similarity_preprocess_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_similarity_preprocess::create_zip_file
+     * @covers \vpl_similarity_preprocess::create_zip_file
      */
     public function test_create_zip_file() {
         $path = vpl_similarity_preprocess::get_zip_filepath(434, '/asg/z1');

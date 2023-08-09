@@ -41,11 +41,11 @@ require_once(dirname(__FILE__).'/../jail/running_processes.class.php');
 function get_currentjailservers($vpl, &$already = array()) {
     $serverlist = '';
     $vplinstance = $vpl->get_instance();
-    if (isset( $already [$vplinstance->id] )) {
+    if (isset( $already[$vplinstance->id] )) {
         throw new moodle_exception('error:recursivedefinition', 'mod_vpl');
     }
     $call = count( $already );
-    $already [$vplinstance->id] = true;
+    $already[$vplinstance->id] = true;
     if ($vplinstance->basedon) {
         $basedon = new mod_vpl( null, $vplinstance->basedon );
         $serverlist = get_currentjailservers( $basedon, $already );
@@ -122,7 +122,7 @@ foreach ($servers as $server) {
     } else {
         $status = $server->current_status;
     }
-    $serverstable->data [] = array (
+    $serverstable->data[] = array (
             $num,
             $serverurl,
             $status,
@@ -156,9 +156,7 @@ foreach ($processes as $process) {
     $data = new stdClass();
     $data->adminticket = $process->adminticket;
     $data->pluginversion = $pluginversion;
-    $request = xmlrpc_encode_request( 'running', $data, array (
-            'encoding' => 'UTF-8'
-    ) );
+    $request = vpl_jailserver_manager::get_action_request('running', $data);
     $error = '';
     $response = vpl_jailserver_manager::get_response( $process->server, $request, $error );
     if ($response === false || ( isset($response['running']) && $response['running'] != 1)) {
@@ -175,7 +173,7 @@ foreach ($processes as $process) {
     $user = $DB->get_record( 'user', array (
             'id' => $process->userid
     ) );
-    $processestable->data [] = array (
+    $processestable->data[] = array (
             $num,
             $vpl->fullname($user),
             $vpl->get_printable_name(),

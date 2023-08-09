@@ -22,17 +22,21 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace mod_vpl;
+
+use \stdClass;
+
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/vpl/lib.php');
 require_once($CFG->dirroot . '/mod/vpl/locallib.php');
 
+
 /**
  * Code based on mod/assign/tests/base_test.php
- *
  */
-class mod_vpl_base_testcase extends advanced_testcase {
+class base_test extends \advanced_testcase {
     /** @const Default number of students to create */
     const DEFAULT_STUDENT_COUNT = 7;
     /** @const Default number of teachers to create */
@@ -158,6 +162,7 @@ class mod_vpl_base_testcase extends advanced_testcase {
     protected $vplonefile = null;
     protected $vplmultifile = null;
     protected $vplvariations = null;
+    protected $vploverrides = null;
     protected $vplteamwork = null;
     protected $vpls = null;
 
@@ -168,6 +173,7 @@ class mod_vpl_base_testcase extends advanced_testcase {
         $this->setup_onefile_instance();
         $this->setup_multifile_instance();
         $this->setup_variations_instance();
+        $this->setup_overrides_instance();
         $this->setup_vplteamwork_instance();
         $this->vpls = [
                 $this->vpldefault,
@@ -175,6 +181,7 @@ class mod_vpl_base_testcase extends advanced_testcase {
                 $this->vplonefile,
                 $this->vplmultifile,
                 $this->vplvariations,
+                $this->vploverrides,
                 $this->vplteamwork,
         ];
         return;
@@ -182,7 +189,7 @@ class mod_vpl_base_testcase extends advanced_testcase {
 
     protected function setup_default_instance() {
         $this->setUser($this->editingteachers[0]);
-        $parms = array('name' => 'default');
+        $parms = ['name' => 'default', 'evaluate' => 1];
         $this->vpldefault = $this->create_instance($parms);
     }
 
@@ -295,7 +302,6 @@ class mod_vpl_base_testcase extends advanced_testcase {
         // Add a submission.
         $this->setUser($this->students[0]);
         $userid = $this->students[0]->id;
-        $this->vplvariations->get_variation($userid);
         $files = array(
                 'a.c' => "int main(){\nprintf(\"Hola3\");\n}",
                 'b.c' => "inf f(int n){\n if (n<1) return 1;\n else return n+f(n-1);\n}\n",
@@ -309,7 +315,6 @@ class mod_vpl_base_testcase extends advanced_testcase {
         // Add other submission.
         $this->setUser($this->students[1]);
         $userid = $this->students[1]->id;
-        $this->vplvariations->get_variation($userid);
         $files = array(
                 'a.c' => "int main(){\nprintf(\"Hola4\");\n}",
                 'b.c' => "inf f(int n){\n if (n<1) return 1;\n else return n+f(n-1);\n}\n",
@@ -320,6 +325,95 @@ class mod_vpl_base_testcase extends advanced_testcase {
         if ($submissionid == false || $error != '' ) {
             $this->fail($error);
         }
+    }
+
+    protected function setup_overrides_instance() {
+        global $DB;
+        $this->setUser($this->editingteachers[0]);
+        $now = time();
+        $baseduedate = $now + DAYSECS;
+        $parms = array(
+                'name' => 'Overrides',
+                'startdate' => 0,
+                'duedate' => $baseduedate,
+                'freeevaluations' => 0,
+                'reductionbyevaluation' => 0,
+                'maxfiles' => 10,
+                'maxfilesize' => 1000,
+                'grade' => 10,
+                'worktype' => 0
+        );
+        $this->vploverrides = $this->create_instance($parms);
+
+        // Create overrides such that:
+        // - Student 0 has default settings,
+        // - Student 1 has everything (due date is postponed by 1 day) overriden (by user),
+        // - Student 2 has everything (due date is postponed by 1 day) overriden (by user),
+        // - Student 3 has due date (due date is postponed by 2 days) overriden (by user),
+        // - Teacher 0 has due date (due date is postponed by 2 days) overriden (by group),
+        // - Editing teacher 0 has due date (due date is postponed by 2 days) overriden (by group),
+        // - Teacher 1 has due date (due date is disabled) overriden (by group and by user, latter should prevail).
+
+        $override = new stdClass();
+        $override->vpl = $this->vploverrides->get_instance()->id;
+        $override->startdate = $now - 3600;
+        $override->duedate = $baseduedate + DAYSECS;
+        $override->freeevaluations = 10;
+        $override->reductionbyevaluation = 1;
+        $override->id = $DB->insert_record( VPL_OVERRIDES, $override );
+        $assignedoverride = new stdClass();
+        $assignedoverride->vpl = $override->vpl;
+        $assignedoverride->override = $override->id;
+        $userids = array($this->students[1]->id, $this->students[2]->id);
+        foreach ($userids as $userid) {
+            $assignedoverride->userid = $userid;
+            $assignedoverride->groupid = null;
+            $DB->insert_record( VPL_ASSIGNED_OVERRIDES, $assignedoverride );
+        }
+        $override->userids = implode(',', $userids);
+        $override->groupids = null;
+        $this->vploverrides->update_override_calendar_events($override);
+
+        $override = new stdClass();
+        $override->vpl = $this->vploverrides->get_instance()->id;
+        $override->startdate = null;
+        $override->duedate = $baseduedate + 2 * DAYSECS;
+        $override->freeevaluations = null;
+        $override->reductionbyevaluation = null;
+        $override->id = $DB->insert_record( VPL_OVERRIDES, $override );
+        $assignedoverride = new stdClass();
+        $assignedoverride->vpl = $override->vpl;
+        $assignedoverride->override = $override->id;
+        $assignedoverride->userid = $this->students[3]->id;
+        $assignedoverride->groupid = null;
+        $DB->insert_record( VPL_ASSIGNED_OVERRIDES, $assignedoverride );
+        $groupids = array($this->groups[2]->id, $this->groups[3]->id);
+        foreach ($groupids as $groupid) {
+            $assignedoverride->userid = null;
+            $assignedoverride->groupid = $groupid;
+            $DB->insert_record( VPL_ASSIGNED_OVERRIDES, $assignedoverride );
+        }
+        $override->userids = $this->students[3]->id;
+        $override->groupids = implode(',', $groupids);
+        $this->vploverrides->update_override_calendar_events($override);
+
+        $override = new stdClass();
+        $override->vpl = $this->vploverrides->get_instance()->id;
+        $override->groupids = null;
+        $override->startdate = null;
+        $override->duedate = 0;
+        $override->freeevaluations = null;
+        $override->reductionbyevaluation = null;
+        $override->id = $DB->insert_record( VPL_OVERRIDES, $override );
+        $assignedoverride = new stdClass();
+        $assignedoverride->vpl = $override->vpl;
+        $assignedoverride->override = $override->id;
+        $assignedoverride->userid = $this->teachers[1]->id;
+        $assignedoverride->groupid = null;
+        $DB->insert_record( VPL_ASSIGNED_OVERRIDES, $assignedoverride );
+        $override->userids = $this->teachers[1]->id;
+        $override->groupids = null;
+        $this->vploverrides->update_override_calendar_events($override);
     }
 
     protected function setup_vplteamwork_instance() {
@@ -384,10 +478,28 @@ class mod_vpl_base_testcase extends advanced_testcase {
         return new testable_vpl($cm->id);
     }
 
+    /**
+     * @covers \mod_vpl\base_test
+     */
     public function test_create_instance() {
         if (isset($this->course)) { // No fixture => don't check.
             $this->assertNotEmpty($this->create_instance());
         }
+    }
+
+    /**
+     * Call protected method of passed object
+     *
+     * @param $obj object with protected methods
+     * @param $name name of the method
+     * @param array $args list of parameters
+     * @return mixed
+     */
+    public static function call_method($obj, $name, array $args) {
+        $class = new \ReflectionClass($obj);
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+        return $method->invokeArgs($obj, $args);
     }
 }
 
@@ -395,6 +507,98 @@ class mod_vpl_base_testcase extends advanced_testcase {
  * Class to use instead of mod_vpl.
  * This derived class of mod_vpl expose protected methods as public to test it.
  */
-class testable_vpl extends mod_vpl {
+class testable_vpl extends \mod_vpl {
 
+}
+
+/**
+ * Utilities for tokenizer/similarity tests
+ */
+class tokenizer_similarity_utils {
+    public static function get_tokenizer_langs(): array {
+        $dir = dirname(__FILE__) . '/../similarity/tokenizer_rules';
+        $scanarr = scandir($dir);
+        $filesarr = array_diff($scanarr, array('.', '..'));
+
+        $tokenizerlangs = array();
+
+        foreach ($filesarr as $filename) {
+            if (!is_dir($dir . '/' . $filename)) {
+                $namelang = preg_split("/_/", $filename)[0];
+                $tokenizerlangs[] = $namelang;
+            }
+        }
+
+        return $tokenizerlangs;
+    }
+}
+
+/**
+ * Class to use instead of tokenizer_base.
+ * This derived class of tokenizer_base expose protected methods as public to test it
+ */
+class testable_tokenizer_base extends \mod_vpl\tokenizer\tokenizer_base {
+    public static function get_states_from($tokenizer): array {
+        return $tokenizer->get_states();
+    }
+
+    public static function get_matchmappings_from($tokenizer): array {
+        return $tokenizer->get_matchmappings();
+    }
+
+    public static function get_regexprs_from($tokenizer): array {
+        return $tokenizer->get_regexprs();
+    }
+
+    public static function check_type($value, string $typename) {
+        return \mod_vpl\tokenizer\tokenizer_base::check_type($value, $typename);
+    }
+
+    public static function contains_rule(array $state, object $rule): bool {
+        return \mod_vpl\tokenizer\tokenizer_base::contains_rule($state, $rule);
+    }
+
+    public static function check_token($token, array $availabletokens): bool {
+        return \mod_vpl\tokenizer\tokenizer_base::check_token($token, $availabletokens);
+    }
+
+    public static function remove_capturing_groups(string $src): string {
+        return \mod_vpl\tokenizer\tokenizer_base::remove_capturing_groups($src);
+    }
+
+    public static function get_token_array(int $numline, array $type, string $value, string $regex): array {
+        return \mod_vpl\tokenizer\tokenizer_base::get_token_array($numline, $type, $value, $regex);
+    }
+}
+
+/**
+ * Class to use instead of tokenizer.
+ * This derived class of tokenizer expose protected methods as public to test it
+ */
+class testable_tokenizer extends \mod_vpl\tokenizer\tokenizer {
+    public static function get_max_token_count_from($tokenizer): int {
+        return $tokenizer->get_max_token_count();
+    }
+
+    public static function get_name($tokenizer): string {
+        return $tokenizer->name;
+    }
+
+    public static function get_extensions($tokenizer): array {
+        return $tokenizer->extension;
+    }
+
+    public static function get_available_tokens($tokenizer): array {
+        return $tokenizer->availabletokens;
+    }
+}
+
+/**
+ * Class to use instead of similarity_factory.
+ * This derived class of similarity expose protected methods as public to test it
+ */
+class testable_similarity_factory extends \mod_vpl\similarity\similarity_factory {
+    public static function get_available_languages(): array {
+        return \mod_vpl\similarity\similarity_factory::get_available_languages();
+    }
 }

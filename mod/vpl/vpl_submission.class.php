@@ -60,16 +60,14 @@ class mod_vpl_submission {
      * @param mod_vpl $vpl
      * @param Object/id $mix submission DB record instance object or record id
      */
-    public function __construct(mod_vpl $vpl, $mix = false) {
+    public function __construct(mod_vpl $vpl, $rid) {
         global $DB;
         $this->vpl = $vpl;
-        if (is_object( $mix )) {
-            $this->instance = $mix;
-        } else if ($mix === false) {
-            throw new Exception( 'vpl_submission id error' );
+        if (is_object( $rid )) {
+            $this->instance = $rid;
         } else {
             $this->instance = $DB->get_record( 'vpl_submissions', array (
-                    'id' => $mix
+                    'id' => $rid
             ) );
             if (! $this->instance) {
                 throw new Exception( 'vpl_submission id error' );
@@ -188,15 +186,15 @@ class mod_vpl_submission {
         $oldnames = array_keys( $subfiles );
         $newnames = array_keys( $files );
         foreach ($oldnames as $pos => $name) {
-            if ( $name != $newnames [$pos] ) {
+            if ( $name != $newnames[$pos] ) {
                 return false;
             }
         }
         foreach ($files as $name => $data) {
-            if ( ! isset ($subfiles [$name]) ) {
+            if ( ! isset ($subfiles[$name]) ) {
                 return false;
             }
-            if ($subfiles [$name] != $data ) {
+            if ($subfiles[$name] != $data ) {
                 return false;
             }
         }
@@ -239,7 +237,7 @@ class mod_vpl_submission {
         if ($this->vpl->is_group_activity()) {
             $usersid = array ();
             foreach ($this->vpl->get_group_members( $this->instance->groupid ) as $user) {
-                $usersid [] = $user->id;
+                $usersid[] = $user->id;
             }
         } else {
             $usersid = array (
@@ -248,12 +246,12 @@ class mod_vpl_submission {
         }
         $grades = array ();
         $gradeinfo = array ();
-        $gradeinfo ['userid'] = $this->instance->userid;
-        $gradeinfo ['rawgrade'] = null;
-        $gradeinfo ['feedback'] = '';
+        $gradeinfo['userid'] = $this->instance->userid;
+        $gradeinfo['rawgrade'] = null;
+        $gradeinfo['feedback'] = '';
         foreach ($usersid as $userid) {
-            $gradeinfo ['userid'] = $userid;
-            $grades [$userid] = $gradeinfo;
+            $gradeinfo['userid'] = $userid;
+            $grades[$userid] = $gradeinfo;
         }
         $vplinstance = $this->vpl->get_instance();
         if (vpl_grade_item_update( $vplinstance, $grades ) != GRADE_UPDATE_OK) {
@@ -367,6 +365,71 @@ class mod_vpl_submission {
         return $grade;
     }
 
+
+	/**
+	   calculates the number of days this assignment is late rounded up.
+	   @return int
+	 */
+	function days_late()
+	{
+	  $info = $this->vpl->get_instance();
+	  $late = time() - $info->duedate;
+	  
+	  if($late<0) {return 0; }
+	  //calc days late
+	  $day = 60*60*24;
+	  $lateDays = (int) (($late /$day)+1);
+	  return $lateDays;
+
+	}
+
+
+	
+	/**
+	   Return the grade calculated using the percent_drop field
+	   return original grade if not late or percent_drop ==0
+	   returns 0 if too late
+	   returns grade *(1-percentage lost) if late
+	   @param $grade raw gradeof student
+	   @return float
+
+	 */
+	function get_late_grade($grade)
+	{
+	  $lateDays = $this->days_late();
+
+	  //if($late <0) { return $grade; }
+
+	  $info = $this->vpl->get_instance();
+
+	  $percent = $info->percent_drop*$lateDays;
+	  //return altered grade
+	  if($percent >= 1) { return 0; }
+	  return $grade*(1-$percent); 
+
+	}
+
+
+	/**
+	   Returns true if the grade should be recorded
+	   If onlyComplete is set grades are only recorded if completed.
+	   @param $grade
+	 */
+	function should_record($grade)
+	{
+	  $info = $this->vpl->get_instance();
+	  //check if must_complete is set
+	  if($info->must_complete==1)
+	    {
+	      //	      print("$grade vs $info->grade");
+	      return $grade == $info->grade;
+	    }
+	  else { return true; }
+	}
+
+
+
+
     /**
      * Set/update grade
      *
@@ -391,7 +454,7 @@ class mod_vpl_submission {
         if ($this->vpl->is_group_activity()) {
             $usersid = array ();
             foreach ($this->vpl->get_group_members( $this->instance->groupid ) as $user) {
-                $usersid [] = $user->id;
+                $usersid[] = $user->id;
             }
         } else {
             $usersid = array (
@@ -403,7 +466,7 @@ class mod_vpl_submission {
             // Sanitize grade.
             if ($scaleid > 0) {
                  $floatn = unformat_float($info->grade);
-                if ( $floatn !== null && $floatn !== false ) {
+                if ( $floatn !== false ) {
                     $info->grade = $floatn;
                 }
             } else {
@@ -412,31 +475,70 @@ class mod_vpl_submission {
             $this->instance->grade = $info->grade;
             // Save assessment comments.
             $comments = $info->comments;
+
+	    // Update gradebook.
+            $grades = array ();
+            $gradeinfo = array ();
+            //If no grade then don't set rawgrade and feedback.
+	    if ( $scaleid != 0 ) {
+
+	       $feedback ="";
+	       $commentAdded="";
+
+	       if($this->should_record($info->grade))
+	       {
+	       	$adjustedGradeTries = $this->reduce_grade($info->grade); 
+		$adjustedGradeLate = $this->get_late_grade($adjustedGradeTries);
+		$gradeinfo['rawgrade'] = $adjustedGradeLate;
+		}
+	       else //Warn students their assignment is not done yet.
+	       {
+		  $incompleteMessage = "Assignment must work at 100% to get credit";
+		  $feedback .="<b>".$incompleteMessage."</b><br/><br/>";
+		  $commentAdded .= "-".$incompleteMessage."\n";
+	       }
+		$daysLate = $this->days_late();
+		if($daysLate>0)
+		{
+		   $lateMessage = "Work was $daysLate day(s) late";				    
+		   $feedback .="<b>$lateMessage</b><br/>";
+		   $commentAdded .="-".$lateMessage."\n";
+		}
+
+		
+		$gradeinfo['feedback'] = $feedback.$this->result_to_html( $comments, false );
+
+		$comments = $commentAdded.$comments;
+		
+                $gradeinfo['feedbackformat'] = FORMAT_HTML;
+            }
+
+	    //save comments to file here!
+	    
+
             $fn = $this->get_gradecommentsfilename();
-            if ($comments) {
+//	    if($feedback)
+//	    {
+//	        vpl_fwrite( $fn, $feedback );
+//	    }
+	    if ($comments) {
                 vpl_fwrite( $fn, $comments );
             } else if (file_exists( $fn )) {
                 unlink( $fn );
             }
-            // Update gradebook.
-            $grades = array ();
-            $gradeinfo = array ();
-            // If no grade then don't set rawgrade and feedback.
-            if ( $scaleid != 0 ) {
-                $gradeinfo ['rawgrade'] = $this->reduce_grade($info->grade);
-                $gradeinfo ['feedback'] = $this->result_to_html( $comments, false );
-                $gradeinfo ['feedbackformat'] = FORMAT_HTML;
-            }
+
+
+
             if ($this->instance->grader > 0) { // Don't add grader if automatic.
-                $gradeinfo ['usermodified'] = $this->instance->grader;
+                $gradeinfo['usermodified'] = $this->instance->grader;
             } else { // This avoid to use an unexisting userid (0) in the gradebook.
-                $gradeinfo ['usermodified'] = $USER->id;
+                $gradeinfo['usermodified'] = $USER->id;
             }
-            $gradeinfo ['datesubmitted'] = $this->instance->datesubmitted;
-            $gradeinfo ['dategraded'] = $this->instance->dategraded;
+            $gradeinfo['datesubmitted'] = $this->instance->datesubmitted;
+            $gradeinfo['dategraded'] = $this->instance->dategraded;
             foreach ($usersid as $userid) {
-                $gradeinfo ['userid'] = $userid;
-                $grades [$userid] = $gradeinfo;
+                $gradeinfo['userid'] = $userid;
+                $grades[$userid] = $gradeinfo;
             }
             if (vpl_grade_item_update( $this->vpl->get_instance(), $grades ) != GRADE_UPDATE_OK ) {
                 return false;
@@ -452,7 +554,7 @@ class mod_vpl_submission {
             } catch (Exception $e) {
                 return false;
             }
-            if ($dategraded != $gradeinfo ['dategraded']) {
+            if ($dategraded != $gradeinfo['dategraded']) {
                 return false;
             }
         }
@@ -465,9 +567,9 @@ class mod_vpl_submission {
                     foreach (array_keys($gradinginfo->outcomes) as $oid) {
                         $field = 'outcome_grade_' . $oid;
                         if (isset( $info->$field )) {
-                            $outcomes [$oid] = $info->$field;
+                            $outcomes[$oid] = $info->$field;
                         } else {
-                            $outcomes [$oid] = null;
+                            $outcomes[$oid] = null;
                         }
                     }
                     $ret = grade_update_outcomes( 'mod/vpl'
@@ -489,6 +591,18 @@ class mod_vpl_submission {
     }
 
     /**
+     * Removes in title grade reduction if exists
+     *
+     * @param string title
+     *
+     * @return string
+     */
+    public static function remove_grade_reduction($title) {
+        $regexp = '/^(-.*)(\([ \t]*-[ \t]*[0-9]*\.?[0-9]*[ \t]*\)[ \t]*)$/m';
+        return preg_replace($regexp, '$1', $title);
+    }
+
+    /**
      * Get grade comments
      *
      * @param bool $forceremove True removes grade reduction information from titles
@@ -502,14 +616,14 @@ class mod_vpl_submission {
             $ret = file_get_contents( $fn );
             // Remove grade reduction information from titles [-*(-#)].
             if ( $forceremove || ! $this->vpl->has_capability(VPL_GRADE_CAPABILITY) ) {
-                $ret = preg_replace('/^(-.*)(\([ \t]*-[0-9]*\.?[0-9]+[ \t]*\)[ \t]*)$/m', '$1', $ret);
+                $ret = self::remove_grade_reduction($ret);
             }
         }
         return $ret;
     }
 
     /**
-     * is visible this submission instance
+     * is visible this submission instance?
      *
      * @return bool
      */
@@ -553,24 +667,23 @@ class mod_vpl_submission {
 
     /**
      *
-     * @var array of users(graders) objects
+     * @var array cache of users(graders) objects
      */
     protected static $graders = array ();
 
     /**
      * Return user from DB with cache (automatic grader info for $id===0)
      *
-     * @param
-     *            $id
-     * @return FALSE/user object
+     * @param $id Grader id (user id record) or 0 for automatic grader
+     * @return false/user object
      */
     public static function get_grader($id) {
         global $DB;
         if ($id === null) {
             $id = 0;
         }
-        if (isset( self::$graders [$id] )) {
-            $graderuser = self::$graders [$id];
+        if (isset( self::$graders[$id] )) {
+            $graderuser = self::$graders[$id];
         } else {
             if ($id <= 0) { // Automatic grading.
                 $graderuser = new StdClass();
@@ -587,7 +700,7 @@ class mod_vpl_submission {
                         'id' => $id
                 ) );
             }
-            self::$graders [$id] = $graderuser;
+            self::$graders[$id] = $graderuser;
         }
         return $graderuser;
     }
@@ -642,10 +755,10 @@ class mod_vpl_submission {
                 $grade = ( int ) $grade;
                 if ($scale = $this->vpl->get_scale()) {
                     $options = array ();
-                    $options [- 1] = get_string( 'nograde' );
+                    $options[- 1] = get_string( 'nograde' );
                     $options = $options + make_menu_from_list( $scale->scale );
-                    if (isset( $options [$grade] )) {
-                        $ret = $options [$grade];
+                    if (isset( $options[$grade] )) {
+                        $ret = $options[$grade];
                     }
                 }
             }
@@ -720,7 +833,7 @@ class mod_vpl_submission {
                     $ret .= '<b>' . get_string( 'outcomes', 'core_grades' ) . '</b><br>';
                     foreach ($gradinginfo->outcomes as $outcome) {
                         $ret .= s( $outcome->name );
-                        $ret .= ' ' . s( $outcome->grades [$inst->userid]->str_grade ) . '<br>';
+                        $ret .= ' ' . s( $outcome->grades[$inst->userid]->str_grade ) . '<br>';
                     }
                 }
             }
@@ -810,7 +923,7 @@ class mod_vpl_submission {
     public function print_ce($return = false) {
         global $OUTPUT, $PAGE;
         $ce = $this->getce();
-        if ($ce ['compilation'] === 0) {
+        if ($ce['compilation'] === 0) {
             return '';
         }
         $ret = '';
@@ -827,10 +940,10 @@ class mod_vpl_submission {
                 $ret .= '<b>' . $grade . '</b><br>';
                 $ret .= $this->reduce_grade_string() . '<br>';
             }
-            $compilation = $ce ['compilation'];
+            $compilation = $ce['compilation'];
             $ret .= $this->get_processed_comment('compilation', $compilation);
             if (strlen( $execution ) > 0) {
-                $proposedcomments = $this->proposedcomment( $ce ['execution'] );
+                $proposedcomments = $this->proposedcomment( $ce['execution'] );
                 $ret .= $this->get_processed_comment( 'comments', $proposedcomments, true);
             }
             $ret .= $OUTPUT->box_end();
@@ -849,6 +962,9 @@ class mod_vpl_submission {
      */
     public function print_submission() {
         $this->print_info();
+        if ($this->vpl->has_capability( VPL_GRADE_CAPABILITY )) {
+            $this->vpl->print_variation( $this->instance->userid );
+        }
         // Not automatic graded show proposed evaluation.
         if (! $this->is_graded() || ! $this->vpl->get_visiblegrade() || $this->vpl->has_capability( VPL_GRADE_CAPABILITY )) {
             $this->print_CE();
@@ -913,14 +1029,14 @@ class mod_vpl_submission {
         $regexps = array ();
         foreach ($list as $filename) {
             $escapefilename = preg_quote( $filename, "/" );
-            $regexps [] = '/(.*?)(' . $escapefilename . ')\:( *)([0-9]+)(.*)/';
+            $regexps[] = '/(.*?)(' . $escapefilename . ')\:( *)([0-9]+)(.*)/';
         }
         // Process lines.
         foreach ($lines as $line) {
             foreach ($regexps as $regexp) {
                 $r = array();
                 if (preg_match( $regexp, $line, $r )) {
-                    $line = $r [1] . '<a href="#' . $r [2] . '.' . $r [4] . '">' . $r [2] . ':' . $r [3] . $r [4] . '</a>' . $r [5];
+                    $line = $r[1] . '<a href="#' . $r[2] . '.' . $r[4] . '">' . $r[2] . ':' . $r[3] . $r[4] . '</a>' . $r[5];
                     break;
                 }
             }
@@ -977,17 +1093,17 @@ class mod_vpl_submission {
         foreach ($lines as $line) {
             $clean = trim( $line );
             // End of case?
-            if (strlen( $casetoshow ) > 0 && ! (strlen( $clean ) > 0 && $clean [0] == '>')) {
+            if (strlen( $casetoshow ) > 0 && ! (strlen( $clean ) > 0 && $clean[0] == '>')) {
                 $comment .= '<pre><i>';
                 $comment .= s( $casetoshow );
                 $comment .= '</i></pre>';
                 $casetoshow = '';
             }
             // Is title line.
-            if (strlen( $line ) > 1 && $line [0] == '-') { // Title.
+            if (strlen( $line ) > 1 && $line[0] == '-') { // Title.
                 $html .= $this->get_last_comment( $title, $comment, $dropdown );
                 $line = trim( substr( $line, 1 ) );
-                if ($line [strlen( $line ) - 1] == ')') { // Has grade?
+                if ($line[strlen( $line ) - 1] == ')') { // Has grade?
                     $posopen = strrpos( $line, '(' );
                     if ($posopen !== false) {
                         $grade = substr( $line, $posopen + 1, strlen( $line ) - $posopen - 2 );
@@ -1000,7 +1116,7 @@ class mod_vpl_submission {
                     }
                 }
                 $title = $line;
-            } else if (strlen( $clean ) > 0 && $clean [0] == '>') { // Case.
+            } else if (strlen( $clean ) > 0 && $clean[0] == '>') { // Case.
                 $pos = strpos( $line, '>' );
                 $rest = substr( $line, $pos + 1 );
                 $casetoshow .= $rest . "\n";
@@ -1043,13 +1159,13 @@ class mod_vpl_submission {
      */
     public function filter_feedback_add(&$list, $text, $grade = 0) {
         $text = trim( $text );
-        if (! isset( $list [$text] )) {
-            $list [$text] = new StdClass();
-            $list [$text]->count = 0;
-            $list [$text]->grades = array ();
+        if (! isset( $list[$text] )) {
+            $list[$text] = new StdClass();
+            $list[$text]->count = 0;
+            $list[$text]->grades = array ();
         }
-        $list [$text]->count ++;
-        $list [$text]->grades [$grade] = true;
+        $list[$text]->count ++;
+        $list[$text]->grades[$grade] = true;
     }
     /**
      * Filter Convert compilation/execution result to HTML
@@ -1065,9 +1181,9 @@ class mod_vpl_submission {
         foreach ($lines as $line) {
             $line = rtrim( $line );
             // Is title line.
-            if (strlen( $line ) > 2 && $line [0] == '-') { // Title.
+            if (strlen( $line ) > 2 && $line[0] == '-') { // Title.
                 $line = substr( $line, 1 );
-                if ($line [strlen( $line ) - 1] == ')') { // Has grade?
+                if ($line[strlen( $line ) - 1] == ')') { // Has grade?
                     $posopen = strrpos( $line, '(' );
                     if ($posopen !== false) {
                         $grade = substr( $line, $posopen + 1, strlen( $line ) - $posopen - 2 );
@@ -1116,9 +1232,9 @@ class mod_vpl_submission {
         if (file_exists( $execfn )) {
             unlink( $execfn );
         }
-        file_put_contents( $compfn, $result ['compilation'] );
-        if ($result ['executed'] > 0) {
-            file_put_contents( $execfn, $result ['execution'] );
+        file_put_contents( $compfn, $result['compilation'] );
+        if ($result['executed'] > 0) {
+            file_put_contents( $execfn, $result['execution'] );
         }
         if ( $newevaluation ) {
             $this->instance->nevaluations ++;
@@ -1135,21 +1251,21 @@ class mod_vpl_submission {
         $ret = array ();
         $compfn = $this->get_data_directory() . '/' . self::COMPILATIONFN;
         if (file_exists( $compfn )) {
-            $ret ['compilation'] = file_get_contents( $compfn );
+            $ret['compilation'] = file_get_contents( $compfn );
         } else {
-            $ret ['compilation'] = 0;
+            $ret['compilation'] = 0;
         }
         $execfn = $this->get_data_directory() . '/' . self::EXECUTIONFN;
         if (file_exists( $execfn )) {
-            $ret ['executed'] = 1;
-            $ret ['execution'] = file_get_contents( $execfn );
+            $ret['executed'] = 1;
+            $ret['execution'] = file_get_contents( $execfn );
         } else {
-            $ret ['executed'] = 0;
+            $ret['executed'] = 0;
         }
-        $ret ['nevaluations'] = $this->instance->nevaluations;
+        $ret['nevaluations'] = $this->instance->nevaluations;
         $vplinstance = $this->vpl->get_instance();
-        $ret ['freeevaluations'] = $vplinstance->freeevaluations;
-        $ret ['reductionbyevaluation'] = $vplinstance->reductionbyevaluation;
+        $ret['freeevaluations'] = $vplinstance->freeevaluations;
+        $ret['reductionbyevaluation'] = $vplinstance->reductionbyevaluation;
         return $ret;
     }
 
@@ -1170,14 +1286,14 @@ class mod_vpl_submission {
         $compilation = '';
         $execution = '';
         $grade = '';
-        if ($response ['compilation']) {
-            $compilation = $this->result_to_html( $response ['compilation'], $dropdown );
+        if ($response['compilation']) {
+            $compilation = $this->result_to_html( $response['compilation'], $dropdown );
             if (strlen( $compilation )) {
                 $compilation = '<b>' . get_string( 'compilation', VPL ) . '</b><br>' . $compilation;
             }
         }
-        if ($response ['executed'] > 0) {
-            $rawexecution = $response ['execution'];
+        if ($response['executed'] > 0) {
+            $rawexecution = $response['execution'];
             $proposedcomments = $this->proposedcomment( $rawexecution );
             $proposedgrade = $this->proposedgrade( $rawexecution );
             $execution = $this->result_to_html( $proposedcomments, $dropdown );
@@ -1219,11 +1335,11 @@ class mod_vpl_submission {
         if ($response == null) {
             $response = $this->getce();
         }
-        if ($response ['compilation']) {
-            $ce->compilation = $response ['compilation'];
+        if ($response['compilation']) {
+            $ce->compilation = $response['compilation'];
         }
-        if ($response ['executed'] > 0) {
-            $rawexecution = $response ['execution'];
+        if ($response['executed'] > 0) {
+            $rawexecution = $response['execution'];
             $evaluation = $this->proposedcomment( $rawexecution );
             $proposedgrade = $this->proposedgrade( $rawexecution );
             $ce->evaluation = $evaluation;

@@ -16,7 +16,6 @@
 /**
  * Code files extension method using ACE editorfiles. Add to VPLFile object.
  *
- * @package mod_vpl
  * @copyright 2013 Juan Carlos Rodríguez-del-Pino
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
@@ -176,11 +175,9 @@ define(
                     return;
                 }
                 var ext = VPLUtil.fileExtension(this.getFileName());
-                var lang = 'text';
-                if (ext !== '') {
-                    lang = VPLUtil.langType(ext);
-                }
+                var lang = (ext !== '') ? VPLUtil.langType(ext) : 'text';
                 session.setMode("ace/mode/" + lang);
+                this.setLang(lang);
             };
             this.getEditor = function() {
                 if (!this.isOpen()) {

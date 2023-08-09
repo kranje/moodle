@@ -50,12 +50,12 @@ try {
             'action' => $action
     ) ) );
     echo $OUTPUT->header(); // Send headers.
-    $actiondata = json_decode( file_get_contents( 'php://input' ) );
+    $actiondata = json_decode(file_get_contents( 'php://input' ), null, 512, JSON_INVALID_UTF8_SUBSTITUTE);
     switch ($action) {
         case 'save' :
             $filename = 'vpl_evaluate.cases';
             $postfiles = mod_vpl_edit::filesfromide($actiondata->files);
-            if (count( $postfiles ) != 1 || ! isset( $postfiles [$filename] )) {
+            if (count( $postfiles ) != 1 || ! isset( $postfiles[$filename] )) {
                 throw new Exception( get_string( 'incorrect_file_name', VPL ) );
             }
             $fgm = $vpl->get_execution_fgm();
@@ -67,7 +67,7 @@ try {
                 $result->response->version = $oldversion;
                 break;
             }
-            $fgm->addFile( $filename, $postfiles [$filename] );
+            $fgm->addFile( $filename, $postfiles[$filename] );
             $result->response->version = $fgm->getversion();
             $vpl->update();
             break;

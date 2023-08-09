@@ -23,6 +23,10 @@
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
  */
 
+namespace mod_vpl;
+
+use \stdClass;
+
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -36,7 +40,7 @@ require_once($CFG->dirroot . '/mod/vpl/vpl_submission_CE.class.php');
  * Unit tests for mod/vpl/lib.php functions.
  * @group mod_vpl
  */
-class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
+class lib_test extends base_test {
 
     /**
      * Method to create lib test fixture
@@ -48,6 +52,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_grade_item_update() function
+     * @covers \vpl_grade_item_update
      */
     public function test_vpl_grade_item_update() {
         $this->setUser($this->editingteachers[0]);
@@ -119,6 +124,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_update_grades() function
+     * @covers \vpl_update_grades
      */
     public function test_vpl_update_grades() {
         global $DB;
@@ -171,6 +177,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_delete_grade_item() function
+     * @covers \vpl_delete_grade_item
      */
     public function test_vpl_delete_grade_item() {
         $this->setUser($this->editingteachers[0]);
@@ -191,6 +198,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl calendar events
+     * @covers \vpl_update_instance
      */
     public function test_vpl_events() {
         global $DB;
@@ -198,14 +206,14 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
         foreach ($this->vpls as $vpl) {
             $instance = $vpl->get_instance();
             $instance->instance = $instance->id;
-            $sparms = array ('modulename' => VPL, 'instance' => $instance->id );
+            $sparms = array ('modulename' => VPL, 'instance' => $instance->id, 'priority' => null );
             $event = $DB->get_record( 'event', $sparms );
             $this->assertTrue(($event != false && $instance->duedate == $event->timestart) ||
                     ($event == false && $instance->duedate == 0),
                     $instance->name);
             $instance->duedate = time() + 1000;
             vpl_update_instance($instance);
-            $sparms = array ('modulename' => VPL, 'instance' => $instance->id );
+            $sparms = array ('modulename' => VPL, 'instance' => $instance->id, 'priority' => null );
             $event = $DB->get_record( 'event', $sparms );
             $this->assertTrue(($event != false && $instance->duedate == $event->timestart) ||
                     ($event == false && $instance->duedate == 0),
@@ -219,6 +227,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_update_instance() function
+     * @covers \vpl_update_instance
      */
     public function test_vpl_update_instance() {
         // Events change tested at test_vpl_events.
@@ -252,6 +261,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_delete_instance() function
+     * @covers \vpl_delete_instance
      */
     public function test_vpl_delete_instance() {
         global $DB, $CFG;
@@ -274,7 +284,9 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
                     VPL_SUBMISSIONS,
                     VPL_VARIATIONS,
                     VPL_ASSIGNED_VARIATIONS,
-                    VPL_RUNNING_PROCESSES
+                    VPL_RUNNING_PROCESSES,
+                    VPL_OVERRIDES,
+                    VPL_ASSIGNED_OVERRIDES
             ];
             $parms = array('vpl' => $instance->id);
             foreach ($tables as $table) {
@@ -295,12 +307,12 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_supports() function
+     * @covers \vpl_supports
      */
     public function test_vpl_supports() {
         $supp = [
                 FEATURE_GROUPS,
                 FEATURE_GROUPINGS,
-                FEATURE_GROUPMEMBERSONLY,
                 FEATURE_MOD_INTRO,
                 FEATURE_GRADE_HAS_GRADE,
                 FEATURE_GRADE_OUTCOMES,
@@ -323,6 +335,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_reset_gradebook() function
+     * @covers \vpl_reset_gradebook
      */
     public function test_vpl_reset_gradebook() {
         global $DB;
@@ -374,6 +387,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_reset_instance_userdata() function
+     * @covers \vpl_reset_instance_userdata
      */
     public function test_vpl_reset_instance_userdata() {
         global $DB, $CFG;
@@ -388,6 +402,9 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
             $parms = array( 'vpl' => $instance->id);
             $count = $DB->count_records(VPL_ASSIGNED_VARIATIONS, $parms);
             $this->assertEquals(0, $count, $instance->name);
+            $parms = array( 'vpl' => $instance->id);
+            $count = $DB->count_records(VPL_ASSIGNED_OVERRIDES, $parms);
+            $this->assertEquals(0, $count, $instance->name);
             $directory = $CFG->dataroot . '/vpl_data/'. $instance->id . '/usersdata';
             $this->assertFalse(file_exists($directory) && is_dir($directory), $instance->name);
         }
@@ -395,6 +412,7 @@ class mod_vpl_lib_testcase extends mod_vpl_base_testcase {
 
     /**
      * Method to test vpl_reset_userdata() function
+     * @covers \vpl_reset_userdata
      */
     public function test_vpl_reset_userdata() {
         $nsubs = array();

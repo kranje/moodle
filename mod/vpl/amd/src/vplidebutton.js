@@ -15,7 +15,7 @@
 
 /**
  * IDE Buttons
- * @package mod_vpl
+ *
  * @copyright 2016 Juan Carlos Rodríguez-del-Pino
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author Juan Carlos Rodríguez-del-Pino <jcrodriguez@dis.ulpgc.es>
@@ -124,7 +124,7 @@ define(
                     }
 
                     var html = "<a id='vpl_ide_" + buttonName + "' href='#' title='" + title + "'>";
-                    html += VPLUtil.genIcon(buttonName) + "</a>";
+                    html += VPLUtil.genIcon(buttons[buttonName].icon) + "</a>";
                     return html;
                 }
             };

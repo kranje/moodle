@@ -15,7 +15,7 @@
 // along with VPL for Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Grade submission
+ * Grade a submission
  *
  * @package mod_vpl
  * @copyright 2012 Juan Carlos Rodríguez-del-Pino
@@ -129,7 +129,12 @@ if ($subinstance->dategraded == 0 || $subinstance->grader == $USER->id || $subin
             $badgrade = $badgrade || $fromform->grade == -1;
         } else {
             $badgrade = $badgrade || trim($fromform->grade) == '';
-            $badgrade = $badgrade || $fromform->grade > $vpl->get_instance()->grade;
+            $floatn = unformat_float($fromform->grade);
+            if ($floatn === false) {
+                $badgrade = true;
+            } else {
+                $badgrade = $badgrade || $floatn > $vpl->get_instance()->grade;
+            }
         }
         if ($badgrade) {
             vpl_redirect( $link, get_string( 'badgrade', 'grades' ), 'error' );
@@ -182,14 +187,14 @@ if ($subinstance->dategraded == 0 || $subinstance->grader == $USER->id || $subin
             $data->comments = $submission->get_grade_comments();
         } else {
             $res = $submission->getCE();
-            if ($res ['executed']) {
+            if ($res['executed']) {
                 $graderaw = $submission->proposedGrade($res['execution']);
                 if ( $graderaw > '' ) {
                     $data->grade = format_float(floatval($graderaw), 5, true, true);
                 } else {
                     $data->grade = '';
                 }
-                $data->comments = $submission->proposedComment( $res ['execution'] );
+                $data->comments = $submission->proposedComment( $res['execution'] );
             }
         }
         if (! empty( $CFG->enableoutcomes )) {
@@ -198,7 +203,7 @@ if ($subinstance->dategraded == 0 || $subinstance->grader == $USER->id || $subin
             if (! empty( $gradinginfo->outcomes )) {
                 foreach ($gradinginfo->outcomes as $oid => $outcome) {
                     $field = 'outcome_grade_' . $oid;
-                    $data->$field = $outcome->grades [$userid]->grade;
+                    $data->$field = $outcome->grades[$userid]->grade;
                 }
             }
         }
@@ -223,7 +228,6 @@ if ($subinstance->dategraded == 0 || $subinstance->grader == $USER->id || $subin
         $hours = vpl_user_total_working_time($vpl, $userid);
         echo get_string('numhours', '', sprintf('%3.2f', $hours));
         echo '<br>';
-        $vpl->print_variation( $subinstance->userid );
         $submission->print_submission();
         echo '</div>';
         $jscript .= 'VPL.hlrow(' . $submissionid . ');';
