@@ -77,10 +77,6 @@ class content extends content_base {
         $course = $format->get_course();
         $currentsectionid = 0;
 
-        if ($editing) {
-            $data->coursesettings = new \moodle_url('/course/edit.php', array('id' => $course->id));
-        }
-
         if (!empty($sections)) {
             // Most formats uses section 0 as a separate section so we remove from the list.
             $initialsection = array_shift($sections);
@@ -182,7 +178,7 @@ class content extends content_base {
                 }
 
                 if ($editing) {
-                    if (!empty($data->sections[$section->num])) {
+                    if (!empty($data->sections[$datasectionmap[$section->id]])) {
                         // Add the image to the section content.
                         $data->sections[$datasectionmap[$section->id]]->gridimage = $sectionimages[$section->id];
                         $headerimages = true;

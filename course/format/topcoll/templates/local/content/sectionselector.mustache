@@ -15,37 +15,36 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_grid/local/content/sectionselector
+    @template format_topcoll/local/content/sectionselector
 
     Displays the course section navigation.
 
     Example context (json):
     {
-        "hasnext": true,
         "hasprevious": true,
-        "nextname": "Section 8",
-        "nexturl": "#",
-        "previousname": "Section 6",
         "previousurl": "#",
-        "rtl": false,
+        "previousname": "Section 6",
+        "hasnext": true,
+        "nexturl": "#",
+        "nextname": "Section 8",
         "selector": "<select><option>Section 4</option></select>"
     }
 }}
-<div class="section-navigation mdl-bottom gd-selection-selector-container">
-    <div class="gd-selection-selector-item prevsection">
+<div class="section-navigation mdl-bottom tc-selection-selector-container">
+    <div class="tc-selection-selector-item prevsection">
         {{#hasprevious}}
         <a href="{{{previousurl}}}"{{#previoushidden}} class="dimmed_text"{{/previoushidden}}>
-            <span class="fa-regular {{^rtl}}fa-circle-left{{/rtl}}{{#rtl}}fa-circle-right{{/rtl}} mr-1"></span>{{{previousname}}}
+            <span class="fa fa-arrow-circle-o-left mr-1"></span>{{{previousname}}}
         </a>
         {{/hasprevious}}
     </div>
-    <div class="gd-selection-selector-item jumpto">
+    <div class="tc-selection-selector-item jumpto">
         {{{selector}}}
     </div>
-    <div class="gd-selection-selector-item nextsection">
+    <div class="tc-selection-selector-item nextsection">
         {{#hasnext}}
         <a href="{{{nexturl}}}"{{#nexthidden}} class="dimmed_text"{{/nexthidden}}>
-            {{{nextname}}}<span class="fa-regular {{^rtl}}fa-circle-right{{/rtl}}{{#rtl}}fa-circle-left{{/rtl}} ml-1"></span>
+            {{{nextname}}}<span class="fa fa-arrow-circle-o-right ml-1"></span>
         </a>
         {{/hasnext}}
     </div>
