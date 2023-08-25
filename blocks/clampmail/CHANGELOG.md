@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.0.1 (August 21, 2023)
+
+- Fix for sesskey validation
+- Install.xml cleanup
+
+## 4.0.0 (August 14, 2023)
+
+- Various code cleanup and test fixes
+- Refactor classes and namespaces
+- Full rebranding as CLAMPMail
+- Change internal references from Quickmail to CLAMPMail
+
 ## 3.11.1 (January 31, 2023)
 
 - Drop support for Moodle 3.11

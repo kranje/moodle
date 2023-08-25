@@ -24,8 +24,6 @@
 
 namespace block_clampmail;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * User functions.
  *
@@ -56,10 +54,10 @@ class users {
      */
     public static function get_users($courseid, $groupmode) {
         $context = \context_course::instance($courseid);
-        $users   = array();
+        $users = array();
 
         $fieldsapi = \core_user\fields::for_userpic();
-        $fields    = $fieldsapi->get_sql('u', false, '', '', false)->selects . ',u.mailformat, u.maildisplay, u.emailstop';
+        $fields = $fieldsapi->get_sql('u', false, '', '', false)->selects . ',u.mailformat, u.maildisplay, u.emailstop';
 
         $usersfromdb = get_enrolled_users(
             $context, '', 0, $fields, "", 0, 0, true
@@ -106,7 +104,7 @@ class users {
      * @return array
      */
     private static function get_user_group_ids($courseid, $userid, $groupmode) {
-        // When NOGROUPS is set, we use 0 to indicate "not in a group."
+        // When NOGROUPS is set, we use 0 to indicate "not in a group".
         if ($groupmode == NOGROUPS) {
             return array(0);
         }
