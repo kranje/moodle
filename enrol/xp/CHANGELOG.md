@@ -1,6 +1,16 @@
 Changelog
 =========
 
+v1.0.4
+------
+
+- Minor coding style and depreciation updates
+
+v1.0.3
+------
+
+- Renamed the plugin to Level Up XP Enrolment
+
 v1.0.2
 ------
 

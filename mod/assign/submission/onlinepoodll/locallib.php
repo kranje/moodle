@@ -94,7 +94,6 @@ class assign_submission_onlinepoodll extends assign_submission_plugin {
         if($CFG->version < 2017111300) {
             $mform->addElement('static', constants::M_COMPONENT . '_divider', '', $divider);
         }
-
         $recordertype = $this->get_config('recordertype');
 
         //convert old Red5 refs to audio media type option
@@ -1077,23 +1076,6 @@ class assign_submission_onlinepoodll extends assign_submission_plugin {
 
 
         return true;
-    }
-
-
-    /**
-     * Formatting for log info
-     *
-     * @param stdClass $submission The new submission
-     * @return string
-     */
-    public function format_for_log(stdClass $submission) {
-        // format the info for each submission plugin add_to_log
-      //  $onlinepoodllsubmission = $this->get_onlinepoodll_submission($submission->id);
-        $onlinepoodllloginfo = '';
-
-        $onlinepoodllloginfo .= "submission id:" . $submission->id . " added.";
-
-        return $onlinepoodllloginfo;
     }
 
     /**

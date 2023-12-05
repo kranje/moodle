@@ -100,9 +100,14 @@ class panopto_user_soap_client extends PanoptoTimeoutSoapClient {
      * @param string $lastname user last name
      * @param string $email user email address
      * @param array $externalgroupids array of group ids the user needs to be in
-     * @param boolean $sendemailnotifications whether user gets emails from Panopto updates
+     * @param string $username panopto username
      */
-    public function sync_external_user($firstname, $lastname, $email, $externalgroupids, $sendemailnotifications = false) {
+    public function sync_external_user($firstname, $lastname, $email, $externalgroupids, $username = "") {
+
+        // Get user from panopto, and send notifications status.
+        $instancename = \get_config('block_panopto', 'instance_name');
+        $panoptouser = $this->get_user_by_key($instancename . '\\' . $username);
+        $sendemailnotifications = $panoptouser->EmailSessionNotifications ?? false;
 
         if (!isset($this->usermanagementservicesync)) {
             $this->usermanagementservicesync = new UserManagementServiceSync($this->serviceparams);
@@ -144,9 +149,19 @@ class panopto_user_soap_client extends PanoptoTimeoutSoapClient {
         if ($this->usermanagementserviceget->GetUserByKey($getuserbykeyparams)) {
             $result = $this->usermanagementserviceget->getResult()->GetUserByKeyResult;
         } else {
-            $lasterror = $this->usermanagementserviceget->getLastError()['UserManagementServiceGet::GetUserByKey'];
-            \panopto_data::print_log(var_export($lasterror, true));
-            throw $lasterror;
+            // Try again in case if username is unified i.e unified\user, but user from moodle DB is still server\user.
+            $username = preg_replace('/^[^\\\\]*\\\\/', 'unified\\', $userkey);
+            $getuserbykeyparams = new UserManagementStructGetUserByKey(
+                $this->authparam,
+                $username
+            );
+            if ($this->usermanagementserviceget->GetUserByKey($getuserbykeyparams)) {
+                $result = $this->usermanagementserviceget->getResult()->GetUserByKeyResult;
+            } else {
+                $lasterror = $this->usermanagementserviceget->getLastError()['UserManagementServiceGet::GetUserByKey'];
+                \panopto_data::print_log(var_export($lasterror, true));
+                throw $lasterror;
+            }
         }
         return $result;
     }

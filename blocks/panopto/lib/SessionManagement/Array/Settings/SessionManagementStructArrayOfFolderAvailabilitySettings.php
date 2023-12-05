@@ -79,8 +79,9 @@ class SessionManagementStructArrayOfFolderAvailabilitySettings extends SessionMa
     /**
      * Returns the current element
      * @see SessionManagementWsdlClass::current()
-     * @return SessionManagementStructFolderAvailabilitySettings
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return parent::current();
@@ -117,8 +118,9 @@ class SessionManagementStructArrayOfFolderAvailabilitySettings extends SessionMa
      * Returns the element at the offset
      * @see SessionManagementWsdlClass::last()
      * @param int $_offset
-     * @return SessionManagementStructFolderAvailabilitySettings
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($_offset)
     {
         return parent::offsetGet($_offset);

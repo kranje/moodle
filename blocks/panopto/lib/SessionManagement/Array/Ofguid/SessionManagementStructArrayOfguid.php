@@ -79,8 +79,9 @@ class SessionManagementStructArrayOfguid extends SessionManagementWsdlClass
     /**
      * Returns the current element
      * @see SessionManagementWsdlClass::current()
-     * @return guid
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return parent::current();
@@ -117,8 +118,9 @@ class SessionManagementStructArrayOfguid extends SessionManagementWsdlClass
      * Returns the element at the offset
      * @see SessionManagementWsdlClass::last()
      * @param int $_offset
-     * @return guid
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($_offset)
     {
         return parent::offsetGet($_offset);
