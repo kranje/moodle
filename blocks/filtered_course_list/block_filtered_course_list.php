@@ -232,7 +232,7 @@ class block_filtered_course_list extends block_base {
             array_filter(
                 array_map(function($config) {
                     $classname = get_filter($config[0], $this->fclconfig->externalfilters);
-                    if (class_exists($classname)) {
+                    if (!empty($classname) && class_exists($classname)) {
                         $item = new $classname($config, $this->mycourses, $this->fclconfig);
                         return $item->get_rubrics();
                     }
@@ -262,7 +262,7 @@ class block_filtered_course_list extends block_base {
         }
 
         if (count($this->rubrics) > 0) {
-            $content = new \block_filtered_course_list\output\content($this->rubrics, $this->instance->id);
+            $content = new \block_filtered_course_list\output\content($this->instance->id, $this->rubrics);
             $this->content->text = $output->render($content);
         } else if ($this->fclconfig->filters != BLOCK_FILTERED_COURSE_LIST_GENERIC_CONFIG) {
             $this->liststyle = 'generic_list';
