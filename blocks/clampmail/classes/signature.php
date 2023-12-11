@@ -15,31 +15,33 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Upgrade functions.
+ * Configuration functions.
  *
  * @package   block_clampmail
  * @copyright 2017 Collaborative Liberal Arts Moodle Project
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+namespace block_clampmail;
 
 /**
- * Migrate plugin settings to correct namespace.
+ * Signature functions.
+ *
+ * @package   block_clampmail
+ * @copyright 2023 Collaborative Liberal Arts Moodle Project
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function block_clampmail_migrate_settings() {
-    // Existing settings.
-    $roleselection = get_config('moodle', 'block_clampmail_roleselection');
-    $prependclass = get_config('moodle', 'block_clampmail_prepend_class');
-    $receipt = get_config('moodle', 'block_clampmail_receipt');
-
-    // Copy to new settings.
-    set_config('roleselection', $roleselection, 'block_clampmail');
-    set_config('prepend_class', $prependclass, 'block_clampmail');
-    set_config('receipt', $receipt, 'block_clampmail');
-
-    // Remove existing settings.
-    unset_config('block_clampmail_roleselection');
-    unset_config('block_clampmail_prepend_class');
-    unset_config('block_clampmail_receipt');
+class signature {
+    /**
+     * Get the user's signatures.
+     *
+     * @param int $userid the userid
+     * @return array
+     */
+    public static function get_signatures($userid) {
+        global $DB;
+        $signatures = $DB->get_records('block_clampmail_signatures',
+            array('userid' => $userid), 'default_flag DESC');
+        return $signatures;
+    }
 }

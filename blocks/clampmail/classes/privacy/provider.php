@@ -35,15 +35,7 @@ use \core_privacy\local\request\transform;
 use \core_privacy\local\request\userlist;
 use \core_privacy\local\request\approved_userlist;
 
-// Workaround for 3.3.
-if (interface_exists('\core_privacy\local\request\core_userlist_provider')) {
-    interface my_userlist extends \core_privacy\local\request\core_userlist_provider {
-
-    }
-} else {
-    interface my_userlist {
-
-    };
+interface my_userlist extends \core_privacy\local\request\core_userlist_provider {
 }
 
 /**
@@ -126,7 +118,7 @@ class provider implements
                        bcd.userid = :draftuserid
                    )";
         $params = [
-            'loguserid'   => $userid,
+            'loguserid' => $userid,
             'draftuserid' => $userid
         ];
         $contextlist->add_from_sql($sql, $params);
@@ -228,7 +220,7 @@ class provider implements
 
         $userid = $contextlist->get_user()->id;
 
-        // Get all courses where the user has Quickmail data.
+        // Get all courses where the user has CLAMPMail data.
         list($contextsql, $contextparams) = $DB->get_in_or_equal($contextlist->get_contextids(), SQL_PARAMS_NAMED);
         $sql = "SELECT
                     ctx.id AS contextid,
@@ -326,7 +318,7 @@ class provider implements
 
         $userid = $contextlist->get_user()->id;
 
-        // Get all courses where the user has Quickmail data.
+        // Get all courses where the user has CLAMPMail data.
         list($contextsql, $contextparams) = $DB->get_in_or_equal($contextlist->get_contextids(), SQL_PARAMS_NAMED);
         $sql = "SELECT
                     ctx.id AS contextid,
@@ -413,10 +405,10 @@ class provider implements
             $mailto = implode(',', $mailto);
 
             $message = (object) [
-                'subject'   => format_string($record->subject, true),
-                'mailto'    => $mailto,
-                'message'   => $record->message,
-                'time'      => transform::datetime($record->time),
+                'subject' => format_string($record->subject, true),
+                'mailto' => $mailto,
+                'message' => $record->message,
+                'time' => transform::datetime($record->time),
             ];
             array_push($messages, $message);
         }
