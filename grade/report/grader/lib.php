@@ -621,6 +621,9 @@ class grade_report_grader extends grade_report {
     public function get_left_rows($displayaverages) {
         global $CFG, $OUTPUT;
 
+        // Course context to determine how the user details should be displayed.
+        $coursecontext = context_course::instance($this->courseid);
+
         $rows = [];
 
         $showuserimage = $this->get_pref('showuserimage');
@@ -703,14 +706,16 @@ class grade_report_grader extends grade_report {
             $usercell->scope = 'row';
 
             if ($showuserimage) {
-                $usercell->text = $OUTPUT->user_picture($user, ['link' => false, 'visibletoscreenreaders' => false]);
+                $usercell->text = $OUTPUT->render(\core_user::get_profile_picture($user, $coursecontext, [
+                    'link' => false, 'visibletoscreenreaders' => false
+                ]));
             }
 
             $fullname = fullname($user, $viewfullnames);
             $usercell->text = html_writer::link(
-                    new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $this->course->id]),
-                    $usercell->text . $fullname,
-                    ['class' => 'username']
+                \core_user::get_profile_url($user, $coursecontext),
+                $usercell->text . $fullname,
+                ['class' => 'username']
             );
 
             if (!empty($user->suspendedenrolment)) {
@@ -766,7 +771,7 @@ class grade_report_grader extends grade_report {
 
         $rows = [];
         $this->rowcount = 0;
-        $strgrade = \grade_helper::get_lang_string('gradenoun');
+        $strgrade = get_string('gradenoun');
         $this->get_sort_arrows();
 
         // Get preferences once.
@@ -1046,9 +1051,9 @@ class grade_report_grader extends grade_report {
                         if ($quickgrading && $grade->is_editable()) {
                             $context->iseditable = true;
                             if (empty($item->outcomeid)) {
-                                $nogradestr = \grade_helper::get_lang_string('nograde');
+                                $nogradestr = get_string('nograde');
                             } else {
-                                $nogradestr = \grade_helper::get_lang_string('nooutcome', 'grades');
+                                $nogradestr = get_string('nooutcome', 'grades');
                             }
                             $attributes = [
                                 'id' => 'grade_' . $userid . '_' . $item->id
@@ -1242,7 +1247,7 @@ class grade_report_grader extends grade_report {
             $controlscell->attributes['class'] = 'header controls';
             $controlscell->header = true;
             $controlscell->colspan = $colspan;
-            $controlscell->text = \grade_helper::get_lang_string('controls', 'grades');
+            $controlscell->text = get_string('controls', 'grades');
             $controlsrow->cells[] = $controlscell;
 
             $rows[] = $controlsrow;
@@ -1267,7 +1272,7 @@ class grade_report_grader extends grade_report {
             $rangecell->colspan = $colspan;
             $rangecell->header = true;
             $rangecell->scope = 'row';
-            $rangecell->text = \grade_helper::get_lang_string('range', 'grades');
+            $rangecell->text = get_string('range', 'grades');
             $rangerow->cells[] = $rangecell;
             $rows[] = $rangerow;
         }
@@ -1886,7 +1891,7 @@ class grade_report_grader extends grade_report {
         if (!empty($requirednames)) {
             foreach ($requirednames as $name) {
                 $arrows['studentname'] .= html_writer::link(
-                    new moodle_url($this->baseurl, array('sortitemid' => $name)), \grade_helper::get_lang_string($name)
+                    new moodle_url($this->baseurl, array('sortitemid' => $name)), get_string($name)
                 );
                 if ($this->sortitemid == $name) {
                     $sortlink->param('sortitemid', $name);
@@ -2072,9 +2077,9 @@ function gradereport_grader_get_report_link(context_course $context, int $course
         $categoryid = $element['object']->id;
 
         // Load language strings.
-        $strswitchminus = grade_helper::get_lang_string('aggregatesonly', 'grades');
-        $strswitchplus = grade_helper::get_lang_string('gradesonly', 'grades');
-        $strswitchwhole = grade_helper::get_lang_string('fullmode', 'grades');
+        $strswitchminus = get_string('aggregatesonly', 'grades');
+        $strswitchplus = get_string('gradesonly', 'grades');
+        $strswitchwhole = get_string('fullmode', 'grades');
 
         $url = new moodle_url($gpr->get_return_url(null, ['target' => $element['eid'], 'sesskey' => sesskey()]));
 

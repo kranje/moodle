@@ -24,6 +24,8 @@
 
 $string['accessdenied'] = 'Access denied';
 $string['accounts'] = 'Accounts';
+$string['accountunlocked'] = 'Your account is unlocked. You can log in.';
+$string['accountlocked'] = 'Your account is locked. An unlock link has been sent via email.';
 $string['addcategory'] = 'Add a category';
 $string['additionalhtml'] = 'Additional HTML';
 $string['additionalhtml_heading'] = 'Additional HTML to be added to every page.';
@@ -198,7 +200,6 @@ $string['configautologinguests'] = 'Should visitors be logged in as guests autom
 $string['configbloglevel'] = 'This setting allows you to restrict the level to which user blogs can be viewed on this site.  Note that they specify the maximum context of the VIEWER not the poster or the types of blog posts.  Blogs can also be disabled completely if you don\'t want them at all.';
 $string['configcalendarcustomexport'] = 'Enable custom date range export of calendar';
 $string['configcalendarexportsalt'] = 'This random text is used for improving of security of authentication tokens used for exporting of calendars. Please note that all current tokens are invalidated if you change this hash salt.';
-$string['configcookiehttponly'] = 'Enables new PHP 5.2.0 feature - browsers are instructed to send cookie with real http requests only, cookies should not be accessible by scripting languages. This is not supported in all browsers and it may not be fully compatible with current code. It helps to prevent some types of XSS attacks.';
 $string['configcookiesecure'] = 'If server is accepting only https connections it is recommended to enable sending of secure cookies. If enabled please make sure that web server is not accepting http:// or set up permanent redirection to https:// address and ideally send HSTS headers. When <em>wwwroot</em> address does not start with https:// this setting is ignored.';
 $string['configcountry'] = 'If you set a country here, then this country will be selected by default on new user accounts.  To force users to choose a country, just leave this unset.';
 $string['configcoursegraceperiodafter'] = 'Classify past courses as in progress for these many days after the course end date.';
@@ -237,7 +238,6 @@ $string['configdeleteunconfirmed'] = 'For certain authentication methods, such a
 $string['configdenyemailaddresses'] = 'To deny email addresses from particular domains list them here in the same way.  All other domains will be accepted. To deny subdomains add the domain with a preceding \'.\'. eg <strong>hotmail.com yahoo.co.uk .live.com</strong>';
 $string['configenableanalytics'] = 'Analytics models, such as \'Students at risk of dropping out\' or \'Upcoming activities due\', can generate predictions, send insight notifications and offer further actions such as messaging users.';
 $string['configenableblogs'] = 'This switch provides all site users with their own blog.';
-$string['configenabledevicedetection'] = 'Enables detection of mobiles, smartphones, tablets or default devices (desktop PCs, laptops, etc) for the application of themes and other features.';
 $string['configdisableuserimages'] = 'Disable the ability for users to change user profile images.';
 $string['configdisplayloginfailures'] = 'This will display information to users about previous failed logins.';
 $string['configdndallowtextandlinks'] = 'Enable or disable the dragging and dropping of text and links onto a course page, alongside the dragging and dropping of files. Note that the dragging of text into Firefox or between different browsers is unreliable and may result in no data being uploaded, or corrupted text being uploaded.';
@@ -427,7 +427,6 @@ $string['contextlocking'] = 'Context freezing';
 $string['contextlocking_desc'] = 'This setting enables read-only access to be set for selected categories, courses, activities or blocks.';
 $string['contextlockappliestoadmin'] = 'Context freezing applies to administrators';
 $string['contextlockappliestoadmin_desc'] = 'If disabled, administrators remain with write access to any frozen contexts.';
-$string['cookiehttponly'] = 'Only http cookies';
 $string['cookiesecure'] = 'Secure cookies only';
 $string['contenttypeuninstalling'] = 'There are {$a->count} contents supported by {$a->type}. They will be deleted. Are you sure you want to proceed?';
 $string['country'] = 'Default country';
@@ -523,11 +522,6 @@ $string['density'] = 'Density';
 $string['denyemailaddresses'] = 'Denied email domains';
 $string['devlibdirpresent'] = 'Directories with development libraries, especially <em>/vendor</em> and <em>/node_modules</em>, should not be present on public sites. See the <a href="{$a->moreinfourl}">security overview report</a> for more details.';
 $string['development'] = 'Development';
-$string['devicedetectregex'] = 'Device detection regular expressions';
-$string['devicedetectregex_desc'] = '<p>By default, Moodle can detect devices of the type default (desktop PCs, laptops, etc), mobile (phones and small hand held devices), tablet (iPads, Android tablets) and legacy (Internet Explorer 6 users).  The theme selector can be used to apply separate themes to all of these.  This setting allows regular expressions that allow the detection of extra device types (these take precedence over the default types).</p>
-<p>For example, you could enter the regular expression \'/(MIDP-1.0|Maemo|Windows CE)/\' to detect some commonly used feature phones add the return value \'featurephone\'.  This adds \'featurephone\' on the theme selector that would allow you to add a theme that would be used on these devices.  Other phones would still use the theme selected for the mobile device type.</p>';
-$string['devicedetectregexexpression'] = 'Regular expression';
-$string['devicedetectregexvalue'] = 'Return value';
 $string['devicetype'] = 'Device type';
 $string['disabled'] = 'Disabled';
 $string['disableplugin'] = 'Disable {$a}';
@@ -591,13 +585,14 @@ $string['enableanalytics'] = 'Analytics';
 $string['enableblogs'] = 'Enable blogs';
 $string['enablecalendarexport'] = 'Enable calendar export';
 $string['enablecomments'] = 'Enable comments';
+$string['enablecommunicationsubsystem'] = 'Enable communication providers';
+$string['enablecommunicationsubsystem_desc'] = 'Allow integration with communication providers such as Matrix so teachers and students can communicate more easily. You can manage these integrations in <a href="settings.php?section=managecommunicationproviders">Plugins</a>.';
 $string['enablecourserelativedates'] = 'Enable course relative dates';
 $string['enablecourserelativedates_desc'] = 'Allow courses to be set up to display dates relative to the user\'s start date in the course.';
 $string['enablecourserequests'] = 'Enable course requests';
 $string['enabled'] = 'Enabled';
 $string['enabledashboard'] = 'Enable Dashboard';
 $string['enabledashboard_help'] = 'The Dashboard shows Timeline, Calendar and Recently accessed items by default. You can set a different default Dashboard for everyone and allow users to customise their own Dashboard. If disabled, you need to set \'Start page for users\' to a value other than Dashboard.';
-$string['enabledevicedetection'] = 'Enable device detection';
 $string['enableglobalsearch'] = 'Enable global search';
 $string['enableglobalsearch_desc'] = 'If enabled, data will be indexed and synchronised by a scheduled task.';
 $string['enablegravatar'] = 'Enable Gravatar';
@@ -697,6 +692,8 @@ $string['globalsearch'] = 'Global search';
 $string['globalsearchmanage'] = 'Manage global search';
 $string['groupenrolmentkeypolicy'] = 'Group enrolment key policy';
 $string['groupenrolmentkeypolicy_desc'] = 'If enabled, group enrolment keys will be checked against the password policy as specified in the settings above.';
+$string['grouping_customfield'] = 'Grouping custom fields';
+$string['group_customfield'] = 'Group custom fields';
 $string['googlemapkey3'] = 'Google Maps API V3 key';
 $string['googlemapkey3_help'] = 'You need to enter a special key to use Google Maps for IP address lookup visualization. You can obtain the key free of charge at <a href="https://developers.google.com/maps/documentation/javascript/tutorial#api_key" target="_blank">https://developers.google.com/maps/documentation/javascript/tutorial#api_key</a>';
 $string['gotofirst'] = 'Go to first missing string';
@@ -722,6 +719,24 @@ $string['hiddenuserfields'] = 'Hide user fields';
 $string['hidefromall'] = 'Hide from all users';
 $string['hidefromnone'] = 'Hide from nobody';
 $string['hidefromstudents'] = 'Hide from students';
+$string['hookcallbacks'] = 'Callbacks';
+$string['hookcallbacks_help'] = 'The list of callbacks which will be called when the hook is dispatched.
+
+The order shown is the order in which callbacks are called.
+
+A callback with a higher priority will be called before one with lower priority.';
+$string['hookcallbacknotcallable'] = 'This callback is not callable. This could be because the class or method does not exist, or because the method is not public.';
+$string['hookconfigoverride'] = 'Overridden';
+$string['hookconfigoverride_help'] = 'The definition of this callback has been overridden in the site configuration file, config.php';
+$string['hookdeprecates'] = 'Deprecated lib.php callbacks';
+$string['hookdescription'] = 'Description';
+$string['hookdescriptionmissing'] = 'Hook does not have a description method';
+$string['hookclassmissing'] = 'Hook class not found';
+$string['hookclassmissing_desc'] = 'The hook discovery agent has returned a class that does not exist.';
+$string['hookunknown'] = 'Hook not found';
+$string['hookunknown_desc'] = 'The object that this callback listens to is not available. It may have been removed or renamed, or it may not be available in this version of Moodle.';
+$string['hookname'] = 'Hook';
+$string['hooksoverview'] = 'Hooks overview';
 $string['hostname'] = 'Host name';
 $string['htmleditor'] = 'HTML editor';
 $string['htmleditorsettings'] = 'HTML editor settings';
@@ -930,6 +945,7 @@ $string['neverdeleteruns'] = 'Never delete runs';
 $string['newestdocindexed'] = 'Newest document indexed';
 $string['nobookmarksforuser'] = 'You do not have any bookmarks.';
 $string['nodatabase'] = 'No database';
+$string['noemaileverwarning'] = '<strong>Note:</strong> All outgoing emails have been disabled';
 $string['nohttpsformobilewarning'] = 'It is recommended to enable HTTPS with a valid certificate. The Moodle app will always try to use a secured connection first.';
 $string['nomissingstrings'] = 'No missing strings';
 $string['none'] = 'None';
@@ -1008,6 +1024,7 @@ $string['pathtosassc'] = 'Path to SassC';
 $string['pathtosassc_help'] = 'Specifying the location of the SassC binary will switch the SASS compiler from Moodle\'s PHP implementation to SassC. See https://github.com/sass/sassc for more information.';
 $string['pcreunicodewarning'] = 'It is strongly recommended to use PCRE PHP extension that is compatible with Unicode characters.';
 $string['perfdebug'] = 'Performance info';
+$string['perfdebugdeferred'] = 'Waiting until the script ends to show the performance debugging ...';
 $string['performance'] = 'Performance';
 $string['pgcluster'] = 'PostgreSQL Cluster';
 $string['pgclusterdescription'] = 'PostgreSQL version/cluster parameter for command line operations. If you only have one postgresql on your system or you are not sure what this is, leave this blank.';
@@ -1247,9 +1264,7 @@ $string['searchupdateindex'] = 'Update indexed contents';
 $string['sectionerror'] = 'Section error!';
 $string['secureforms'] = 'Use additional form security';
 $string['security'] = 'Security';
-$string['selectdevice'] = 'Select device';
 $string['selectsearchengine'] = 'Select search engine';
-$string['selecttheme'] = 'Select theme for {$a} device';
 $string['server'] = 'Server';
 $string['serverchecks'] = 'Server checks';
 $string['serverlimit'] = 'Server limit';
@@ -1418,7 +1433,7 @@ $string['taskplagiarismcron'] = 'Background processing for legacy cron in plagia
 $string['taskportfoliocron'] = 'Background processing for portfolio plugins';
 $string['taskprocessing'] = 'Task processing';
 $string['taskquestioncron'] = 'Background processing for cleaning up question previews';
-$string['taskquestionstatscleanupcron'] = 'Former background question statistics clean-up (no longer required)';
+$string['taskquestionstatscleanupcron'] = 'Background processing for cleaning up question statistics caches';
 $string['taskrefreshsystemtokens'] = 'Refresh OAuth tokens for service accounts';
 $string['taskregistrationcron'] = 'Site registration';
 $string['tasksendfailedloginnotifications'] = 'Send failed login notifications';
@@ -1441,10 +1456,10 @@ $string['testoutgoingmailconf_sentmail'] = 'This site has successfully sent a te
 $string['testoutgoingmailconf_subject'] = '{$a->site}: test message. {$a->additional} Sent: {$a->time}';
 $string['testoutgoingmailconf_subjectadditional'] = 'Additional subject';
 $string['testoutgoingmailconf_toemail'] = 'To email address';
+$string['themedefinedinconfigphp'] = 'The theme cannot be changed because it is set to {$a} in config.php.';
 $string['themedesignermode'] = 'Theme designer mode';
 $string['themedesignermodewarning'] = 'Theme designer mode is enabled. This should not be enabled on production sites as it can significantly reduce performance.';
 $string['themelist'] = 'Theme list';
-$string['themenoselected'] = 'No theme selected';
 $string['themeresetcaches'] = 'Clear theme caches';
 $string['themeselect'] = 'Change theme';
 $string['themeselector'] = 'Theme selector';
@@ -1472,7 +1487,6 @@ $string['unicoderequired'] = 'It is required that you store all your data in Uni
 $string['uninstallplugin'] = 'Uninstall';
 $string['unlockaccount'] = 'Unlock account';
 $string['unoconvwarning'] = 'The version of unoconv you have installed is not supported.';
-$string['unsettheme'] = 'Unset theme';
 $string['unsupported'] = 'Unsupported';
 $string['unsupporteddbfileformat'] = 'Your database uses Antelope as the file format. Full UTF-8 support in MySQL and MariaDB requires the Barracuda file format. Please switch to the Barracuda file format. See the documentation <a href="https://docs.moodle.org/en/admin/environment/custom check/mysql full unicode support">MySQL full unicode support</a> for details.';
 $string['unsupporteddbfilepertable'] = 'For full support of UTF-8 both MySQL and MariaDB require you to change your MySQL setting \'innodb_file_per_table\' to \'ON\'. See the documentation for further details.';
@@ -1602,12 +1616,6 @@ $string['cachesessionhelp'] = 'User specific cache that expires when the user\'s
 $string['cacheapplication'] = 'Application cache';
 $string['cacheapplicationhelp'] = 'Cached items are shared among all users and expire by a determined time to live (ttl).';
 
-// Deprecated since Moodle 3.11.
-$string['configenableactivitychooser'] = 'The activity chooser is a dialog box with a short description of each activity and resource. If disabled, separate resource and activity drop-down menus are provided instead.';
-$string['enableactivitychooser'] = 'Enable activity chooser';
-$string['configmodchooserdefault'] = 'Should the activity chooser be presented to users by default?';
-$string['modchooserdefault'] = 'Activity chooser default';
-
 // Deprecated since Moodle 4.0.
 $string['coursepage'] = 'Course page';
 $string['mediapluginswf'] = 'Enable .swf filter';
@@ -1618,3 +1626,16 @@ $string['multilangforceold'] = 'Force old multilang syntax: &lt;span&gt; without
 
 // Deprecated since Moodle 4.2.
 $string['blockunprotect'] = 'Unprotect';
+
+// Deprecated since Moodle 4.3.
+$string['configenabledevicedetection'] = 'Enables detection of mobiles, smartphones, tablets or default devices (desktop PCs, laptops, etc) for the application of themes and other features.';
+$string['devicedetectregex'] = 'Device detection regular expressions';
+$string['devicedetectregex_desc'] = '<p>By default, Moodle can detect devices of the type default (desktop PCs, laptops, etc), mobile (phones and small hand held devices), tablet (iPads, Android tablets) and legacy (Internet Explorer 6 users).  The theme selector can be used to apply separate themes to all of these.  This setting allows regular expressions that allow the detection of extra device types (these take precedence over the default types).</p>
+<p>For example, you could enter the regular expression \'/(MIDP-1.0|Maemo|Windows CE)/\' to detect some commonly used feature phones add the return value \'featurephone\'.  This adds \'featurephone\' on the theme selector that would allow you to add a theme that would be used on these devices.  Other phones would still use the theme selected for the mobile device type.</p>';
+$string['devicedetectregexexpression'] = 'Regular expression';
+$string['devicedetectregexvalue'] = 'Return value';
+$string['enabledevicedetection'] = 'Enable device detection';
+$string['selectdevice'] = 'Select device';
+$string['selecttheme'] = 'Select theme for {$a} device';
+$string['themenoselected'] = 'No theme selected';
+$string['unsettheme'] = 'Unset theme';

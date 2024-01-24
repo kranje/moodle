@@ -372,6 +372,7 @@ function drop_plugin_tables($name, $file, $feedback=true) {
     // first try normal delete
     if (file_exists($file)) {
         $DB->get_manager()->delete_tables_from_xmldb_file($file);
+        return true;
     }
 
     // then try to find all tables that start with name and are not in any xml file
@@ -2195,9 +2196,9 @@ class admin_setting_flag {
     private $shortname = '';
     /** @var string String used as the label for this flag */
     private $displayname = '';
-    /** @const Checkbox for this flag is displayed in admin page */
+    /** @var Checkbox for this flag is displayed in admin page */
     const ENABLED = true;
-    /** @const Checkbox for this flag is not displayed in admin page */
+    /** @var Checkbox for this flag is not displayed in admin page */
     const DISABLED = false;
 
     /**
@@ -4943,6 +4944,29 @@ class admin_setting_sitesettext extends admin_setting_configtext {
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_requiredtext extends admin_setting_configtext {
+
+    /**
+     * Validate data before storage.
+     *
+     * @param string $data The string to be validated.
+     * @return bool|string true for success or error string if invalid.
+     */
+    public function validate($data) {
+        $cleaned = clean_param($data, PARAM_TEXT);
+        if ($cleaned === '') {
+            return get_string('required');
+        }
+
+        return parent::validate($data);
+    }
+}
+
+/**
+ * This type of field should be used for mandatory config settings where setting password is required.
+ *
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class admin_setting_requiredpasswordunmask extends admin_setting_configpasswordunmask {
 
     /**
      * Validate data before storage.
@@ -8767,39 +8791,65 @@ function admin_get_root($reload=false, $requirefulltree=true) {
 /// settings utility functions
 
 /**
- * This function applies default settings.
- * Because setting the defaults of some settings can enable other settings,
- * this function is called recursively until no more new settings are found.
+ * This function applies default settings recursively.
  *
- * @param object $node, NULL means complete tree, null by default
- * @param bool $unconditional if true overrides all values with defaults, true by default
- * @param array $admindefaultsettings default admin settings to apply. Used recursively
- * @param array $settingsoutput The names and values of the changed settings. Used recursively
- * @return array $settingsoutput The names and values of the changed settings
+ * Because setting the defaults of some settings can enable other settings,
+ * this function calls itself repeatedly (max 4 times) until no more new settings are saved.
+ *
+ * NOTE: previous "internal" parameters $admindefaultsettings, $settingsoutput were removed in Moodle 4.3.
+ *
+ * @param part_of_admin_tree|null $node NULL means apply all settings with repeated recursion
+ * @param bool $unconditional if true overrides all values with defaults (true for installation, false for CLI upgrade)
+ * @return array The names and values of the applied setting defaults
  */
-function admin_apply_default_settings($node=null, $unconditional=true, $admindefaultsettings=array(), $settingsoutput=array()) {
-    $counter = 0;
-
-    // This function relies heavily on config cache, so we need to enable in-memory caches if it
-    // is used during install when normal caching is disabled.
-    $token = new \core_cache\allow_temporary_caches();
-
+function admin_apply_default_settings(?part_of_admin_tree $node = null, bool $unconditional = true): array {
     if (is_null($node)) {
+        // This function relies heavily on config cache, so we need to enable in-memory caches if it
+        // is used during install when normal caching is disabled.
+        $token = new \core_cache\allow_temporary_caches(); // Value not used intentionally, see its destructor.
+
         core_plugin_manager::reset_caches();
-        $node = admin_get_root(true, true);
-        $counter = count($settingsoutput);
+        $root = admin_get_root(true, true);
+        $saved = admin_apply_default_settings($root, $unconditional);
+        if (!$saved) {
+            return [];
+        }
+
+        for ($i = 1; $i <= 3; $i++) {
+            core_plugin_manager::reset_caches();
+            $root = admin_get_root(true, true);
+            // No need to force defaults in repeated runs.
+            $moresaved = admin_apply_default_settings($root, false);
+            if (!$moresaved) {
+                // No more setting defaults to save.
+                return $saved;
+            }
+            $saved += $moresaved;
+        }
+
+        // We should not get here unless there are some problematic settings.php files.
+        core_plugin_manager::reset_caches();
+        return $saved;
     }
 
+    // Recursive applying of defaults in admin tree.
+    $saved = [];
     if ($node instanceof admin_category) {
-        $entries = array_keys($node->children);
-        foreach ($entries as $entry) {
-            $settingsoutput = admin_apply_default_settings(
-                    $node->children[$entry], $unconditional, $admindefaultsettings, $settingsoutput
-                    );
+        foreach ($node->children as $child) {
+            if ($child === null) {
+                // This should not happen,
+                // this is to prevent theoretical infinite loops.
+                continue;
+            }
+            if ($child instanceof admin_externalpage) {
+                continue;
+            }
+            $saved += admin_apply_default_settings($child, $unconditional);
         }
 
     } else if ($node instanceof admin_settingpage) {
-        foreach ($node->settings as $setting) {
+        /** @var admin_setting $setting */
+        foreach ((array)$node->settings as $setting) {
             if ($setting->nosave) {
                 // Not a real setting, must be a heading or description.
                 continue;
@@ -8813,30 +8863,28 @@ function admin_apply_default_settings($node=null, $unconditional=true, $admindef
                 // No value yet - default maybe applied after admin user creation or in upgradesettings.
                 continue;
             }
-
-            $settingname = $node->name . '_' . $setting->name; // Get a unique name for the setting.
-
-            if (!array_key_exists($settingname, $admindefaultsettings)) {  // Only update a setting if not already processed.
-                $admindefaultsettings[$settingname] = $settingname;
-                $settingsoutput[$settingname] = $defaultsetting;
-
-                // Set the default for this setting.
-                $setting->write_setting($defaultsetting);
-                $setting->write_setting_flags(null);
+            // This should be unique-enough setting name that matches administration UI.
+            if ($setting->plugin === null) {
+                $settingname = $setting->name;
             } else {
-                unset($admindefaultsettings[$settingname]); // Remove processed settings.
+                $settingname = $setting->plugin . '/' . $setting->name;
+            }
+            // Set the default for this setting.
+            $error = $setting->write_setting($defaultsetting);
+            if ($error === '') {
+                $setting->write_setting_flags(null);
+                if (is_int($defaultsetting) || $defaultsetting instanceof lang_string
+                    || $defaultsetting instanceof moodle_url) {
+                    $defaultsetting = (string)$defaultsetting;
+                }
+                $saved[$settingname] = $defaultsetting;
+            } else {
+                debugging("Error applying default setting '$settingname': " . $error, DEBUG_DEVELOPER);
             }
         }
     }
 
-    // Call this function recursively until all settings are processed.
-    if (($node instanceof admin_root) && ($counter != count($settingsoutput))) {
-        $settingsoutput = admin_apply_default_settings(null, $unconditional, $admindefaultsettings, $settingsoutput);
-    }
-    // Just in case somebody modifies the list of active plugins directly.
-    core_plugin_manager::reset_caches();
-
-    return $settingsoutput;
+    return $saved;
 }
 
 /**
@@ -10533,7 +10581,7 @@ class admin_setting_configstoredfile extends admin_setting {
 
         // Let's not deal with validation here, this is for admins only.
         $current = $this->get_setting();
-        if (empty($data) && $current === null) {
+        if (empty($data) && ($current === null || $current === '')) {
             // This will be the case when applying default settings (installation).
             return ($this->config_write($this->name, '') ? '' : get_string('errorsetting', 'admin'));
         } else if (!is_number($data)) {
@@ -10641,6 +10689,8 @@ class admin_setting_configstoredfile extends admin_setting {
 /**
  * Administration interface for user specified regular expressions for device detection.
  *
+ * @deprecated Moodle 4.3 MDL-78468 - No longer used since the devicedetectregex was removed.
+ * @todo Final deprecation on Moodle 4.7 MDL-79052
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_devicedetectregex extends admin_setting {
@@ -10648,12 +10698,19 @@ class admin_setting_devicedetectregex extends admin_setting {
     /**
      * Calls parent::__construct with specific args
      *
+     * @deprecated Moodle 4.3 MDL-78468 - No longer used since the devicedetectregex was removed.
+     * @todo Final deprecation on Moodle 4.7 MDL-79052
      * @param string $name
      * @param string $visiblename
      * @param string $description
      * @param mixed $defaultsetting
      */
     public function __construct($name, $visiblename, $description, $defaultsetting = '') {
+        debugging(
+            __FUNCTION__ . '() is deprecated.' .
+                'All functions associated with devicedetectregex theme setting are being removed.',
+            DEBUG_DEVELOPER
+        );
         global $CFG;
         parent::__construct($name, $visiblename, $description, $defaultsetting);
     }
@@ -10661,9 +10718,16 @@ class admin_setting_devicedetectregex extends admin_setting {
     /**
      * Return the current setting(s)
      *
+     * @deprecated Moodle 4.3 MDL-78468 - No longer used since the devicedetectregex was removed.
+     * @todo Final deprecation on Moodle 4.7 MDL-79052
      * @return array Current settings array
      */
     public function get_setting() {
+        debugging(
+            __FUNCTION__ . '() is deprecated.' .
+                'All functions associated with devicedetectregex theme setting are being removed.',
+            DEBUG_DEVELOPER
+        );
         global $CFG;
 
         $config = $this->config_read($this->name);
@@ -10677,10 +10741,17 @@ class admin_setting_devicedetectregex extends admin_setting {
     /**
      * Save selected settings
      *
+     * @deprecated Moodle 4.3 MDL-78468 - No longer used since the devicedetectregex was removed.
+     * @todo Final deprecation on Moodle 4.7 MDL-79052
      * @param array $data Array of settings to save
      * @return bool
      */
     public function write_setting($data) {
+        debugging(
+            __FUNCTION__ . '() is deprecated.' .
+                'All functions associated with devicedetectregex theme setting are being removed.',
+            DEBUG_DEVELOPER
+        );
         if (empty($data)) {
             $data = array();
         }
@@ -10695,10 +10766,17 @@ class admin_setting_devicedetectregex extends admin_setting {
     /**
      * Return XHTML field(s) for regexes
      *
+     * @deprecated Moodle 4.3 MDL-78468 - No longer used since the devicedetectregex was removed.
+     * @todo Final deprecation on Moodle 4.7 MDL-79052
      * @param array $data Array of options to set in HTML
      * @return string XHTML string for the fields and wrapping div(s)
      */
     public function output_html($data, $query='') {
+        debugging(
+            __FUNCTION__ . '() is deprecated.' .
+                'All functions associated with devicedetectregex theme setting are being removed.',
+            DEBUG_DEVELOPER
+        );
         global $OUTPUT;
 
         $context = (object) [

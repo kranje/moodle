@@ -205,6 +205,7 @@ ini_set('log_errors', '1');
 $CFG->themerev = 1;
 $CFG->jsrev = 1;
 
+
 (function () {
     // Determine if this test is being run with isolation.
     // This is tricky because neither PHPUnit, nor PHP provide an official way to work this out.
@@ -236,6 +237,10 @@ if (PHPUNIT_UTIL) {
     // we are not going to do testing, this is 'true' in utility scripts that only init database
     return;
 }
+
+// Make sure the hook manager gets initialised before anybody tries to override callbacks,
+// this is not using caches intentionally to help with development.
+\core\hook\manager::get_instance();
 
 // is database and dataroot ready for testing?
 list($errorcode, $message) = phpunit_util::testing_ready_problem();

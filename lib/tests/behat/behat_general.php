@@ -372,7 +372,7 @@ class behat_general extends behat_base {
     /**
      * Generic mouse over action. Mouse over a element of the specified type.
      *
-     * @When /^I hover over the "(?P<element_string>(?:[^"]|\\")*)" "(?P<selector_string>[^"]*) in the "(?P<container_element_string>(?:[^"]|\\")*)" "(?P<container_selector_string>[^"]*)"$/
+     * @When I hover over the :element :selectortype in the :containerelement :containerselectortype
      * @param string $element Element we look for
      * @param string $selectortype The type of what we look for
      * @param string $containerelement Element we look for
@@ -380,7 +380,7 @@ class behat_general extends behat_base {
      */
     public function i_hover_in_the(string $element, $selectortype, string $containerelement, $containerselectortype): void {
         // Gets the node based on the requested selector type and locator.
-        $node = $this->get_node_in_container($selectortype, $element, $containerselectortype, $containerselectortype);
+        $node = $this->get_node_in_container($selectortype, $element, $containerselectortype, $containerelement);
         $this->execute_js_on_node($node, '{{ELEMENT}}.scrollIntoView();');
         $node->mouseOver();
     }
@@ -1455,9 +1455,9 @@ EOF;
 
         // Check if value exists in specific row/column.
         // Get row xpath.
-        // GoutteDriver uses DomCrawler\Crawler and it is making XPath relative to the current context, so use descendant.
-        $rowxpath = $tablexpath."/tbody/tr[descendant::th[normalize-space(.)=" . $rowliteral .
-                    "] | descendant::td[normalize-space(.)=" . $rowliteral . "]]";
+        // Some drivers make XPath relative to the current context, so use descendant.
+        $rowxpath = $tablexpath . "/tbody/tr[descendant::*[@class='rowtitle'][normalize-space(.)=" . $rowliteral . "] | " . "
+            descendant::th[normalize-space(.)=" . $rowliteral . "] | descendant::td[normalize-space(.)=" . $rowliteral . "]]";
 
         $columnvaluexpath = $rowxpath . $columnpositionxpath . "[contains(normalize-space(.)," . $valueliteral . ")]";
 
@@ -1802,7 +1802,7 @@ EOF;
 
     /**
      * Presses a given button in the browser.
-     * NOTE: Phantomjs and goutte driver reloads page while navigating back and forward.
+     * NOTE: Phantomjs and browserkit driver reloads page while navigating back and forward.
      *
      * @Then /^I press the "(back|forward|reload)" button in the browser$/
      * @param string $button the button to press.

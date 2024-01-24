@@ -2984,6 +2984,18 @@ class global_navigation extends navigation_node {
             }
         }
 
+        // Add link for configuring communication.
+        if ($navoptions->communication) {
+            $url = new moodle_url('/communication/configure.php', [
+                'contextid' => \core\context\course::instance($course->id)->id,
+                'instanceid' => $course->id,
+                'instancetype' => 'coursecommunication',
+                'component' => 'core_course',
+            ]);
+            $coursenode->add(get_string('communication', 'communication'), $url,
+                navigation_node::TYPE_SETTING, null, 'communication');
+        }
+
         return true;
     }
     /**
@@ -4628,6 +4640,33 @@ class settings_navigation extends navigation_node {
             $coursenode->force_open();
         }
 
+        // MoodleNet links.
+        if ($this->page->user_is_editing()) {
+            $this->page->requires->js_call_amd('core/moodlenet/mutations', 'init');
+        }
+        $usercanshare = utilities::can_user_share($coursecontext, $USER->id, 'course');
+        $issuerid = get_config('moodlenet', 'oauthservice');
+        try {
+            $issuer = \core\oauth2\api::get_issuer($issuerid);
+            $isvalidinstance = utilities::is_valid_instance($issuer);
+            if ($usercanshare && $isvalidinstance) {
+                $this->page->requires->js_call_amd('core/moodlenet/send_resource', 'init');
+                $action = new action_link(new moodle_url(''), '', null, [
+                    'data-action' => 'sendtomoodlenet',
+                    'data-type' => 'course',
+                ]);
+                // Share course to MoodleNet link.
+                $coursenode->add(get_string('moodlenet:sharetomoodlenet', 'moodle'),
+                    $action, self::TYPE_SETTING, null, 'exportcoursetomoodlenet')->set_force_into_more_menu(true);
+                // MoodleNet share progress link.
+                $url = new moodle_url('/moodlenet/shareprogress.php');
+                $coursenode->add(get_string('moodlenet:shareprogress'),
+                    $url, self::TYPE_SETTING, null, 'moodlenetshareprogress')->set_force_into_more_menu(true);
+            }
+        } catch (dml_missing_record_exception $e) {
+            debugging("Invalid MoodleNet OAuth 2 service set in site administration: 'moodlenet | oauthservice'. " .
+                "This must be a valid issuer.");
+        }
 
         if ($adminoptions->update) {
             // Add the course settings link
@@ -4895,7 +4934,7 @@ class settings_navigation extends navigation_node {
             $function($this, $modulenode);
         }
 
-        // Send to MoodleNet.
+        // Send activity to MoodleNet.
         $usercanshare = utilities::can_user_share($this->context->get_course_context(), $USER->id);
         $issuerid = get_config('moodlenet', 'oauthservice');
         try {
@@ -4906,7 +4945,6 @@ class settings_navigation extends navigation_node {
                 $action = new action_link(new moodle_url(''), '', null, [
                     'data-action' => 'sendtomoodlenet',
                     'data-type' => 'activity',
-                    'data-sharetype' => 'resource',
                 ]);
                 $modulenode->add(get_string('moodlenet:sharetomoodlenet', 'moodle'),
                     $action, self::TYPE_SETTING, null, 'exportmoodlenet')->set_force_into_more_menu(true);

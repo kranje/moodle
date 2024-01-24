@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 import ajax from 'core/ajax';
-import {get_string as getString} from "core/str";
+import {getString} from "core/str";
 import SRLogger from "core/local/reactive/srlogger";
 
 /**
@@ -442,6 +442,33 @@ export default class {
     }
 
     /**
+     * Set cms group mode to NOGROUPS.
+     * @param {StateManager} stateManager the current state manager
+     * @param {array} cmIds the list of cm ids
+     */
+    async cmNoGroups(stateManager, cmIds) {
+        await this._cmBasicAction(stateManager, 'cm_nogroups', cmIds);
+    }
+
+    /**
+     * Set cms group mode to VISIBLEGROUPS.
+     * @param {StateManager} stateManager the current state manager
+     * @param {array} cmIds the list of cm ids
+     */
+    async cmVisibleGroups(stateManager, cmIds) {
+        await this._cmBasicAction(stateManager, 'cm_visiblegroups', cmIds);
+    }
+
+    /**
+     * Set cms group mode to SEPARATEGROUPS.
+     * @param {StateManager} stateManager the current state manager
+     * @param {array} cmIds the list of cm ids
+     */
+    async cmSeparateGroups(stateManager, cmIds) {
+        await this._cmBasicAction(stateManager, 'cm_separategroups', cmIds);
+    }
+
+    /**
      * Lock or unlock course modules.
      *
      * @param {StateManager} stateManager the current state manager
@@ -547,6 +574,17 @@ export default class {
         }
         const course = stateManager.get('course');
         await this._callEditWebservice('section_index_collapsed', course.id, collapsedIds);
+    }
+
+    /**
+     * Update the course index collapsed attribute of all sections.
+     *
+     * @param {StateManager} stateManager the current state manager
+     * @param {boolean} collapsed the new collapsed value
+     */
+    async allSectionsIndexCollapsed(stateManager, collapsed) {
+        const sectionIds = stateManager.getIds('section');
+        this.sectionIndexCollapsed(stateManager, sectionIds, collapsed);
     }
 
     /**

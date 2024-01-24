@@ -487,6 +487,26 @@ abstract class advanced_testcase extends base_testcase {
     }
 
     /**
+     * Override hook callbacks.
+     *
+     * @param string $hookname
+     * @param callable $callback
+     * @return void
+     */
+    public function redirectHook(string $hookname, callable $callback): void {
+        \core\hook\manager::get_instance()->phpunit_redirect_hook($hookname, $callback);
+    }
+
+    /**
+     * Remove all hook overrides.
+     *
+     * @return void
+     */
+    public function stopHookRedirections(): void {
+        \core\hook\manager::get_instance()->phpunit_stop_redirections();
+    }
+
+    /**
      * Reset all database tables, restore global state and clear caches and optionally purge dataroot dir.
      *
      * @param bool $detectchanges
@@ -705,5 +725,16 @@ abstract class advanced_testcase extends base_testcase {
             unset($task);
         }
         $tasks->close();
+    }
+
+    /**
+     * Run adhoc tasks.
+     */
+    protected function run_all_adhoc_tasks(): void {
+        // Run the adhoc task.
+        while ($task = \core\task\manager::get_next_adhoc_task(time())) {
+            $task->execute();
+            \core\task\manager::adhoc_task_complete($task);
+        }
     }
 }

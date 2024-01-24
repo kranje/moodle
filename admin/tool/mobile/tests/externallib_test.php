@@ -230,6 +230,8 @@ class externallib_test extends externallib_advanced_testcase {
             array('name' => 'tool_mobile_custommenuitems', 'value' => ''),
             array('name' => 'tool_mobile_apppolicy', 'value' => ''),
             array('name' => 'tool_mobile_autologinmintimebetweenreq', 'value' => 6 * MINSECS),
+            array('name' => 'tool_mobile_autologout', 'value' => get_config('tool_mobile', 'autologout')),
+            array('name' => 'tool_mobile_autologouttime', 'value' => get_config('tool_mobile', 'autologouttime')),
             array('name' => 'calendartype', 'value' => $CFG->calendartype),
             array('name' => 'calendar_site_timeformat', 'value' => $CFG->calendar_site_timeformat),
             array('name' => 'calendar_startwday', 'value' => $CFG->calendar_startwday),
@@ -256,6 +258,14 @@ class externallib_test extends externallib_advanced_testcase {
         $expected[] = ['name' => 'customusermenuitems', 'value' => $CFG->customusermenuitems];
         $expected[] = ['name' => 'timezone', 'value' => $CFG->timezone];
         $expected[] = ['name' => 'forcetimezone', 'value' => $CFG->forcetimezone];
+
+        $expected[] = ['name' => 'searchengine', 'value' => $CFG->searchengine];
+        $expected[] = ['name' => 'searchenablecategories', 'value' => $CFG->searchenablecategories];
+        $expected[] = ['name' => 'searchdefaultcategory', 'value' => $CFG->searchdefaultcategory];
+        $expected[] = ['name' => 'searchhideallcategory', 'value' => $CFG->searchhideallcategory];
+        $expected[] = ['name' => 'searchmaxtopresults', 'value' => $CFG->searchmaxtopresults];
+        $expected[] = ['name' => 'searchbannerenable', 'value' => $CFG->searchbannerenable];
+        $expected[] = ['name' => 'searchbanner', 'value' => $CFG->searchbanner];
 
         $this->assertCount(0, $result['warnings']);
         $this->assertEquals($expected, $result['settings']);

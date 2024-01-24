@@ -25,8 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-use mod_quiz\local\reports\report_base;
 use core_question\statistics\responses\analyser;
+use mod_quiz\local\reports\report_base;
 use core_question\statistics\questions\all_calculated_for_qubaid_condition;
 
 require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');

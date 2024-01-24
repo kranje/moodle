@@ -301,33 +301,6 @@ function theme_set_designer_mod($state) {
 }
 
 /**
- * Checks if the given device has a theme defined in config.php.
- *
- * @return bool
- */
-function theme_is_device_locked($device) {
-    global $CFG;
-    $themeconfigname = core_useragent::get_device_type_cfg_var_name($device);
-    return isset($CFG->config_php_settings[$themeconfigname]);
-}
-
-/**
- * Returns the theme named defined in config.php for the given device.
- *
- * @return string or null
- */
-function theme_get_locked_theme_for_device($device) {
-    global $CFG;
-
-    if (!theme_is_device_locked($device)) {
-        return null;
-    }
-
-    $themeconfigname = core_useragent::get_device_type_cfg_var_name($device);
-    return $CFG->config_php_settings[$themeconfigname];
-}
-
-/**
  * This class represents the configuration variables of a Moodle theme.
  *
  * All the variables with access: public below (with a few exceptions that are marked)
@@ -2120,8 +2093,7 @@ class theme_config {
      *
      * @param string $image name of image, may contain relative path
      * @param string $component
-     * @param bool $svg|null Should SVG images also be looked for? If null, resorts to $CFG->svgicons if that is set; falls back to
-     * auto-detection of browser support otherwise
+     * @param bool $svg|null Should SVG images also be looked for? If null, falls back to auto-detection of browser support
      * @return string full file path
      */
     public function resolve_image_location($image, $component, $svg = false) {
@@ -2278,16 +2250,10 @@ class theme_config {
      * @return bool
      */
     public function use_svg_icons() {
-        global $CFG;
         if ($this->usesvg === null) {
-
-            if (!isset($CFG->svgicons)) {
-                $this->usesvg = core_useragent::supports_svg();
-            } else {
-                // Force them on/off depending upon the setting.
-                $this->usesvg = (bool)$CFG->svgicons;
-            }
+            $this->usesvg = core_useragent::supports_svg();
         }
+
         return $this->usesvg;
     }
 

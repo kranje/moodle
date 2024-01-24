@@ -513,6 +513,15 @@ function upgrade_stale_php_files_present(): bool {
     global $CFG;
 
     $someexamplesofremovedfiles = [
+        // Removed in 4.3.
+        '/badges/ajax.php',
+        '/course/editdefaultcompletion.php',
+        '/grade/amd/src/searchwidget/group.js',
+        '/lib/behat/extension/Moodle/BehatExtension/Locator/FilesystemSkipPassedListLocator.php',
+        '/lib/classes/task/legacy_plugin_cron_task.php',
+        '/mod/lti/ajax.php',
+        '/pix/f/archive.png',
+        '/user/repository.php',
         // Removed in 4.2.
         '/admin/auth_config.php',
         '/auth/yui/passwordunmask/passwordunmask.js',
@@ -2550,7 +2559,7 @@ function check_igbinary322_version(environment_results $result) {
 }
 
 /**
- * This function checks that the database prefix ($CFG->prefix) is <= 10
+ * This function checks that the database prefix ($CFG->prefix) is <= xmldb_table::PREFIX_MAX_LENGTH
  *
  * @param environment_results $result
  * @return environment_results|null updated results object, or null if the prefix check is passing ok.
@@ -2558,9 +2567,10 @@ function check_igbinary322_version(environment_results $result) {
 function check_db_prefix_length(environment_results $result) {
     global $CFG;
 
+    require_once($CFG->libdir.'/ddllib.php');
     $prefixlen = strlen($CFG->prefix) ?? 0;
-    if ($prefixlen > 10) {
-        $parameters = (object)['current' => $prefixlen, 'maximum' => 10];
+    if ($prefixlen > xmldb_table::PREFIX_MAX_LENGTH) {
+        $parameters = (object)['current' => $prefixlen, 'maximum' => xmldb_table::PREFIX_MAX_LENGTH];
         $result->setFeedbackStr(['dbprefixtoolong', 'admin', $parameters]);
         $result->setInfo('db prefix too long');
         $result->setStatus(false);

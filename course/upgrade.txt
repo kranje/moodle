@@ -1,7 +1,7 @@
 This files describes API changes in /course/*,
 information provided here is intended especially for developers.
 
-=== 4.3.1 ===
+=== 4.4 ===
 * set_coursemodule_visible() has a new $rebuildcache parameter. If this is being called multiple times in the same request,
   consider passing `false` for this parameter and rebuilding the cache once after all the course modules have been updated.
   See course_update_section() for an example.

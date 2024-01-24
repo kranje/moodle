@@ -79,6 +79,12 @@ class flexible_table {
     var $column_suppress = array();
     var $column_nosort   = array('userpic');
     private $column_textsort = array();
+
+    /**
+     * @var array The sticky attribute of each table column.
+     */
+    protected $columnsticky = [];
+
     /** @var boolean Stores if setup has already been called on this flixible table. */
     var $setup           = false;
     var $baseurl         = NULL;
@@ -441,6 +447,17 @@ class flexible_table {
     }
 
     /**
+     * Sets a sticky attribute to a column.
+     * @param string $column Column name
+     * @param bool $sticky
+     */
+    public function column_sticky(string $column, bool $sticky = true): void {
+        if (isset($this->columnsticky[$column])) {
+            $this->columnsticky[$column] = $sticky == true ? ' sticky-column' : '';
+        }
+    }
+
+    /**
      * Sets the given $attributes to $this->columnsattributes.
      * Column attributes will be added to every cell in the column.
      *
@@ -478,6 +495,7 @@ class flexible_table {
         $this->columns = array();
         $this->column_style = array();
         $this->column_class = array();
+        $this->columnsticky = [];
         $this->columnsattributes = [];
         $colnum = 0;
 
@@ -485,6 +503,7 @@ class flexible_table {
             $this->columns[$column]         = $colnum++;
             $this->column_style[$column]    = array();
             $this->column_class[$column]    = '';
+            $this->columnsticky[$column]    = '';
             $this->columnsattributes[$column] = [];
             $this->column_suppress[$column] = false;
         }
@@ -1160,7 +1179,7 @@ class flexible_table {
             }
 
             $attributes = [
-                'class' => "cell c{$index}" . $this->column_class[$column],
+                'class' => "cell c{$index}" . $this->column_class[$column] . $this->columnsticky[$column],
                 'id' => "{$rowid}_c{$index}",
                 'style' => $this->make_styles_string($this->column_style[$column]),
             ];
@@ -1342,7 +1361,7 @@ class flexible_table {
             }
 
             $attributes = array(
-                'class' => 'header c' . $index . $this->column_class[$column],
+                'class' => 'header c' . $index . $this->column_class[$column] . $this->columnsticky[$column],
                 'scope' => 'col',
             );
             if ($this->headers[$index] === NULL) {

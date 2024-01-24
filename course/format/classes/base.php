@@ -747,6 +747,37 @@ abstract class base {
     }
 
     /**
+     * Return the old non-ajax activity action url.
+     *
+     * BrowserKit behats tests cannot trigger javascript events,
+     * so we must translate to an old non-ajax url while non-ajax
+     * course editing is still supported.
+     *
+     * @param string $action action name the reactive action
+     * @param cm_info $cm course module
+     * @return moodle_url
+     */
+    public function get_non_ajax_cm_action_url(string $action, cm_info $cm): moodle_url {
+        $nonajaxactions = [
+            'cmDelete' => 'delete',
+            'cmDuplicate' => 'duplicate',
+            'cmHide' => 'hide',
+            'cmShow' => 'show',
+            'cmStealth' => 'stealth',
+        ];
+        if (!isset($nonajaxactions[$action])) {
+            throw new coding_exception('Unknown activity action: ' . $action);
+        }
+        $nonajaxaction = $nonajaxactions[$action];
+        $nonajaxurl = new moodle_url(
+            '/course/mod.php',
+            ['sesskey' => sesskey(), $nonajaxaction => $cm->id]
+        );
+        $nonajaxurl->param('sr', $this->get_section_number());
+        return $nonajaxurl;
+    }
+
+    /**
      * Loads all of the course sections into the navigation
      *
      * This method is called from global_navigation::load_course_sections()
@@ -1435,6 +1466,21 @@ abstract class base {
             $capabilities = ['moodle/course:manageactivities'];
         }
         return $PAGE->user_is_editing() && has_all_capabilities($capabilities, $coursecontext);
+    }
+
+    /**
+     * Check if the group mode can be displayed.
+     * @param cm_info $cm the activity module
+     * @return bool
+     */
+    public function show_groupmode(cm_info $cm): bool {
+        if (!plugin_supports('mod', $cm->modname, FEATURE_GROUPS, false)) {
+            return false;
+        }
+        if (!has_capability('moodle/course:manageactivities', $cm->context)) {
+            return false;
+        }
+        return true;
     }
 
     /**
