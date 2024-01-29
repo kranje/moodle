@@ -24,9 +24,18 @@
  */
 
 $string['pluginname'] = 'Mass Actions';
+
+$string['massaction:activityshowhide'] = 'MassAction: Show/Hide modules';
 $string['massaction:addinstance'] = 'Add a new Mass Actions Block';
+$string['massaction:delete'] = 'MassAction: Delete modules';
+$string['massaction:descriptionshowhide'] = 'MassAction: Show/Hide Descriptions';
+$string['massaction:duplicate'] = 'MassAction: Duplicate modules';
+$string['massaction:duplicatetocourse'] = 'MassAction: Duplicate to Course';
+$string['massaction:indent'] = 'MassAction: Indent modules';
+$string['massaction:movetosection'] = 'MassAction: Move to Section';
 $string['massaction:use'] = 'Use the Mass Actions block';
 $string['massaction:sendcontentchangednotifications'] = 'Send content changed notifications';
+
 $string['blockname'] = 'Mass Actions';
 $string['blocktitle'] = 'Mass Actions';
 $string['privacy:metadata'] = 'This block only offers the possibility to apply standard operations on multiple course modules at the same time.
@@ -63,8 +72,17 @@ $string['confirmcourseselect'] = 'Choose course';
 $string['confirmsectionselect'] = 'Choose section';
 $string['deletecheck'] = 'Confirm mass deletion';
 $string['deletecheckconfirm'] = 'Are you sure you want to delete the following module(s)?';
+$string['duplicatefailed'] = 'Could not duplicate course module from id {$a}';
 $string['duplicatemaxactivities'] = 'Maximum amount of course modules to duplicate';
 $string['duplicatemaxactivities_description'] = 'Maximum amount of course modules which can be duplicated at the same time without running the process as background task. If set to "0" all duplication operations will be run as background task.';
+$string['enablebulkediting'] = 'Enable bulk editing';
+$string['event:course_modules_duplicated'] = 'Course modules duplicated';
+$string['event:course_modules_duplicated_failed'] = 'Course modules failed to duplicate';
+$string['event:duplicated_description'] = 'cmid from \'{$a->src}\' to \'{$a->dst}\'';
+$string['event:duplicated_summary'] = 'Course module duplication has been completed. Summary: {$a->countcomplete} Completed, {$a->countfailed} Failed.';
+$string['event:duplicated_completed_list'] = 'Completed {$a->list}.';
+$string['event:duplicated_failed_list'] = 'Failed {$a->list}.';
+$string['event:duplicated_failed_description'] = 'Course module duplication failed. cmid: {$a->cmid} error: {$a->error}';
 $string['invalidaction'] = 'Unknown action: {$a}';
 $string['invalidmoduleid'] = 'Invalid module ID: {$a}';
 $string['invalidcoursemodule'] = 'Invalid course module';
@@ -85,6 +103,7 @@ $string['nocaptorestore'] = 'You do not have sufficient permissions to perform a
 $string['nomovingtargetselected'] = 'Please select a target section';
 $string['notargetcourseidspecified'] = 'No target course id has been specified';
 $string['sectionnotexist'] = 'Target section does not exist';
+$string['sectionrestricted'] = 'Source section is restricted';
 $string['sourcecourseidlost'] = 'Source course id could not be found';
 $string['applicablecourseformats'] = 'Applicable course formats';
 $string['applicablecourseformats_description'] = 'Mass Actions block will only be available for the selected course formats. <br />Preselected defaults are the ones tested and supported by the plugin maintainer. Add other formats at your own risk.';

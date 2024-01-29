@@ -176,21 +176,21 @@ class assign_submission_onlinepoodll extends assign_submission_plugin {
 		//(iii) set the draft area info as the "default" value for the file manager
 		if(array_search(constants::M_REPLYWHITEBOARD,$allowed_recorders)!==false){
 			$itemid = 0;
+            $maxfiles=1;
 			$draftitemid = file_get_submitted_draft_itemid(constants::M_WB_FILEAREA);
 			$context =  $this->assignment->get_context();
 			if($context) {
 				$contextid = $context->id;
 			}else{
-				$contextid = 0;
+				$contextid = null;
 			}
 			file_prepare_draft_area($draftitemid, $contextid, constants::M_CONFIG_COMPONENT, constants::M_WB_FILEAREA,
-			$itemid,
-			array('subdirs' => 0, 'maxbytes' => 0, 'maxfiles' => 1));
-			$mform->addElement('filemanager', 'backimage', get_string('backimage', constants::M_COMPONENT), null,array('subdirs' => 0, 'maxbytes' => 0, 'maxfiles' => 1));
-			$mform->setDefault('backimage', $backimage);
-			//commented 20130120 bcause was broken with moodle 2.6. Errors saying "must attach no more than one file" when tried to save, empty, disabled
-			//$mform->disabledIf('backimage', constants::M_COMPONENT . '_enabled', 'eq', 0);
-			//$mform->disabledIf('backimage', constants::M_COMPONENT . '_recordertype', 'ne', constants::M_REPLYWHITEBOARD );
+			$itemid, array('subdirs' => 0, 'maxbytes' => 0, 'maxfiles' => $maxfiles));
+			$mform->addElement('filemanager', 'backimage', get_string('backimage', constants::M_COMPONENT),
+                null,array('subdirs' => 0, 'maxbytes' => 0, 'maxfiles' => $maxfiles));
+			$mform->setDefault('backimage', $draftitemid);
+			$mform->disabledIf('backimage', constants::M_COMPONENT . '_enabled', 'eq', 0);
+			$mform->disabledIf('backimage', constants::M_COMPONENT . '_recordertype', 'ne', constants::M_REPLYWHITEBOARD );
 		}else{
 			$mform->addElement('hidden', 'backimage',$backimage);
 		}
