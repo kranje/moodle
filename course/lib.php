@@ -399,7 +399,7 @@ function course_integrity_check($courseid, $rawmods = null, $sections = null, $f
 function get_module_types_names($plural = false, $resetcache = false) {
     static $modnames = null;
     global $DB, $CFG;
-    if ($modnames === null || $resetcache) {
+    if ($modnames === null || empty($modnames[0]) || $resetcache) {
         $modnames = array(0 => array(), 1 => array());
         if ($allmods = $DB->get_records("modules")) {
             foreach ($allmods as $mod) {
@@ -1810,7 +1810,7 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
     }
 
     // Groupmode.
-    if ($courseformat->show_groupmode($mod) && $usecomponents) {
+    if ($courseformat->show_groupmode($mod) && $usecomponents  && !$mod->coursegroupmodeforce) {
         $groupmodeclass = $courseformat->get_output_classname('content\\cm\\groupmode');
         /** @var core_courseformat\output\local\content\cm\groupmode */
         $groupmode = new $groupmodeclass($courseformat, $sectioninfo, $mod);

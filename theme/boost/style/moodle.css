@@ -29272,7 +29272,7 @@ span.editinstructions .alert-link {
   }
 }
 .activity-item .activity-grid.noname-grid {
-  grid-template-columns: min-content min-content 1fr min-content;
+  grid-template-columns: min-content 1fr min-content min-content;
   grid-template-areas: "visibility    groupmode        completion    actions" "altcontent    altcontent       altcontent    altcontent" "afterlink     afterlink        afterlink     afterlink" "availability  availability     availability  availability";
 }
 @media (max-width: 575.98px) {
@@ -29987,12 +29987,14 @@ span.editinstructions .alert-link {
   [data-region=drawer] {
     padding: 20px 20px;
   }
+  .jsenabled .popover-process-monitor,
   .jsenabled .btn-footer-popover,
   .jsenabled .btn-footer-communication {
     transition: 0.2s;
   }
 }
 @media (min-width: 576px) and (prefers-reduced-motion: reduce) {
+  .jsenabled .popover-process-monitor,
   .jsenabled .btn-footer-popover,
   .jsenabled .btn-footer-communication {
     transition: none;
@@ -30163,6 +30165,10 @@ body.drawer-ease {
 .drawer.drawer-bottom.show {
   bottom: 0;
 }
+.drawer.drawer-primary .drawertoggle {
+  margin-right: 16px;
+  margin-left: 5px;
+}
 
 @media (min-width: 992px) {
   .drawer#theme_boost-drawers-blocks:focus-within {
@@ -30182,6 +30188,12 @@ body.drawer-ease {
   height: 60px;
   display: flex;
   align-items: center;
+}
+.drawerheader .sitename {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 16px;
 }
 
 .drawer.scrolled .drawerheader {
@@ -30268,6 +30280,12 @@ body.drawer-ease {
     bottom: 0;
   }
 }
+@media (max-width: 991.98px) {
+  .drawer-md.drawer-primary .drawertoggle {
+    margin-right: 16px;
+    margin-left: 5px;
+  }
+}
 @media (max-width: 767.98px) {
   .drawer-sm {
     display: block;
@@ -30346,6 +30364,12 @@ body.drawer-ease {
   }
   .drawer-sm.drawer-bottom.show {
     bottom: 0;
+  }
+}
+@media (max-width: 767.98px) {
+  .drawer-sm.drawer-primary .drawertoggle {
+    margin-right: 16px;
+    margin-left: 5px;
   }
 }
 .drawercontent {
@@ -35878,11 +35902,11 @@ p.arrow_button {
 .path-grade-report-grader .gradeparent tr.userrow th.actions-menu-active {
   z-index: 3;
 }
-.path-grade-report-grader .gradeparent tr.lastrow {
+.path-grade-report-grader .gradeparent tr.lastrow:not(.userrow) {
   position: sticky;
   bottom: -1px;
 }
-.path-grade-report-grader .gradeparent tr.lastrow.pinned {
+.path-grade-report-grader .gradeparent tr.lastrow:not(.userrow).pinned {
   z-index: 4;
 }
 .path-grade-report-grader .gradeparent tr.lastrow td,
@@ -37128,7 +37152,7 @@ span[data-flexitour=container][x-placement=right] div[data-role=arrow]:after, sp
     margin-right: 315px;
     padding-right: 1rem;
   }
-  .jsenabled #page.drawers.show-drawer-right .btn-footer-popover, .jsenabled #page.drawers.show-drawer-right .btn-footer-communication {
+  .jsenabled #page.drawers.show-drawer-right .popover-process-monitor, .jsenabled #page.drawers.show-drawer-right .btn-footer-popover, .jsenabled #page.drawers.show-drawer-right .btn-footer-communication {
     right: calc(315px + 2rem);
   }
 }
@@ -37765,6 +37789,16 @@ div.editor_atto_toolbar button .icon {
 
 .pagelayout-embedded #page {
   margin-top: 0;
+}
+
+.navbar-bootswatch .navbar-brand {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.navbar-bootswatch .navbar-brand .sitename {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 :root {
