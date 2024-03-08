@@ -1,13 +1,23 @@
+### Date:       2024-February-06
+### Release:    v2024020601
+
+#### Anonymous Marking Fixed
+An issue has been resolved with anonymous marking, where previously when an instructor made a request to reveal a student’s name prior to the feedback release date, the required reason field for the early reveal was not actually being enforced. Instructors will now be required to fill in this field when deciding to reveal a student name early.
+
+#### Removed Summary Content in Moodle Direct V2 Assignment Inbox
+In versions 4.0+ of Moodle, the assignment summary content was being displayed twice in two separate locations. This update removes the display of the summary content from the Moodle Direct V2 inbox and it is now only displayed just above the inbox.
+
+#### Resolved Deprecated Warning Messages
+This release resolves the issue with deprecated SOAP warnings displaying in PHP 8+.
+
 ### Date:       2023-March-27
 ### Release:    v2023032701
 
-#### UI improvements for PHP 8+ users
-There was a bug with PHP 8+ users that casued the assignment inbox to be stuck in a loading state. This happens when users select to view grades as a percentage in the
-assignment's settings. We have fixed this bug and the assignment inbox loads as normal.
+#### Percentage grades now display in the assignment inbox
+We have fixed an issue for institutions using PHP 8+ which prevented the assignment inbox from loading when the assignment grade was set to display as a percentage.
 
-#### PeerMark manager modal size change
-We've updated the size of the PeerMark manager modal so that all buttons and features are more accessible without having to scroll to the left or right side of the modal.
-
+#### The PeerMark UI has been improved
+We have fixed an issue with the PeerMark manager modal, which previously caused the ‘+’ icon to appear cut off in the user interface.
 ---
 
 ### Date:		2022-May-12
