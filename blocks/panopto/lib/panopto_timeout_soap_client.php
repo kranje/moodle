@@ -128,7 +128,7 @@ class PanoptoTimeoutSoapClient extends SoapClient {
 
             $lastresponseheaders = $this->__getLastResponseHeaders();
             preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $lastresponseheaders, $matches);
-            $this->panoptocookies = array();
+            $this->panoptocookies = [];
             foreach ($matches[1] as $item) {
                 parse_str($item, $cookie);
                 $this->panoptocookies = array_merge($this->panoptocookies, $cookie);
@@ -140,8 +140,8 @@ class PanoptoTimeoutSoapClient extends SoapClient {
                 'CURLOPT_VERBOSE' => false,
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => true,
-                'CURLOPT_HTTPHEADER' => array('Content-Type: text/xml',
-                                              'SoapAction: ' . $action)
+                'CURLOPT_HTTPHEADER' => ['Content-Type: text/xml',
+                                              'SoapAction: ' . $action]
             ];
 
             if (!is_null($this->socket_timeout)) {
@@ -161,14 +161,20 @@ class PanoptoTimeoutSoapClient extends SoapClient {
             }
 
             // Depending on Moodle settings Moodle will not include  connect headers in the header size. This will break all curl calls from here.
+<<<<<<< HEAD
             $options['CURLOPT_SUPPRESS_CONNECT_HEADERS'] = 0;
+=======
+            if (defined('CURLOPT_SUPPRESS_CONNECT_HEADERS')) {
+                $options['CURLOPT_SUPPRESS_CONNECT_HEADERS'] = 0;
+            }
+>>>>>>> 08502363a581bab802582571a6419ac663447936
 
             $response = $curl->post($location, $request, $options);
 
             // Get cookies.
             $actualresponseheaders = (isset($curl->info["header_size"])) ? substr($response, 0, $curl->info["header_size"]) : "";
             preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $actualresponseheaders, $matches);
-            $this->panoptocookies = array();
+            $this->panoptocookies = [];
             foreach ($matches[1] as $item) {
                 parse_str($item, $cookie);
                 $this->panoptocookies = array_merge($this->panoptocookies, $cookie);

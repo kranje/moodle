@@ -162,11 +162,11 @@ class panopto_session_soap_client extends PanoptoTimeoutSoapClient {
             $this->sessionmanagementserviceprovision = new SessionManagementServiceProvision($this->serviceparams);
         }
 
-        $rolestoensure = array(
+        $rolestoensure = [
             "Viewer",
             "Creator",
             "Publisher"
-        );
+        ];
         $rolelist = new SessionManagementStructArrayOfAccessRole($rolestoensure);
 
         $provisionparams = new SessionManagementStructProvisionExternalCourseWithRoles(
@@ -201,16 +201,16 @@ class panopto_session_soap_client extends PanoptoTimeoutSoapClient {
         }
 
         if (!is_array($folderids)) {
-            $folderids = array($folderids);
+            $folderids = [$folderids];
         }
 
         $folderidlist = new SessionManagementStructArrayOfguid($folderids);
 
-        $rolestoensure = array(
+        $rolestoensure = [
             "Viewer",
             "Creator",
             "Publisher"
-        );
+        ];
         $rolelist = new SessionManagementStructArrayOfAccessRole($rolestoensure);
 
         $courseaccessparams = new SessionManagementStructSetExternalCourseAccessForRoles(
@@ -246,16 +246,16 @@ class panopto_session_soap_client extends PanoptoTimeoutSoapClient {
         }
 
         if (!is_array($folderids)) {
-            $folderids = array($folderids);
+            $folderids = [$folderids];
         }
 
         $folderidlist = new SessionManagementStructArrayOfguid($folderids);
 
-        $rolestoensure = array(
+        $rolestoensure = [
             "Viewer",
             "Creator",
             "Publisher"
-        );
+        ];
         $rolelist = new SessionManagementStructArrayOfAccessRole($rolestoensure);
 
         $copiedaccessparams = new SessionManagementStructSetCopiedExternalCourseAccessForRoles(
@@ -289,7 +289,7 @@ class panopto_session_soap_client extends PanoptoTimeoutSoapClient {
         }
 
         if (!is_array($folderids)) {
-            $folderids = array($folderids);
+            $folderids = [$folderids];
         }
 
         $folderidlist = new SessionManagementStructArrayOfguid($folderids);
@@ -317,7 +317,7 @@ class panopto_session_soap_client extends PanoptoTimeoutSoapClient {
         }
 
         if (!is_array($folderids)) {
-            $folderids = array($folderids);
+            $folderids = [$folderids];
         }
 
         $folderidlist = new SessionManagementStructArrayOfstring($folderids);
@@ -415,7 +415,97 @@ class panopto_session_soap_client extends PanoptoTimeoutSoapClient {
                 }
             } else if ($totalresults === 0) {
                 // In this case folderlist will be null but that is handled poorly in the UI.
-                $folderlist = array();
+                $folderlist = [];
+            }
+
+            return $folderlist;
+        } else {
+            return $this->handle_error(
+                $this->sessionmanagementserviceget->getLastError()['SessionManagementServiceGet::GetCreatorFoldersList']
+            );
+        }
+    }
+
+    /**
+     * Attempts to get all extended folders the user has creator access to.
+     */
+    public function get_extended_creator_folders_list() {
+
+        if (!isset($this->sessionmanagementserviceget)) {
+            $this->sessionmanagementserviceget = new SessionManagementServiceGet($this->serviceparams);
+        }
+
+        $resultsperpage = 1000;
+        $currentpage = 0;
+        $pagination = new SessionManagementStructPagination($resultsperpage, $currentpage);
+        $parentfolderid = null;
+        $publiconly = false;
+        $sortby = SessionManagementEnumFolderSortField::VALUE_NAME;
+        $sortincreasing = true;
+        $wildcardsearchnameonly = false;
+        $unmappedonly = true;
+
+        $folderlistrequest = new SessionManagementStructListFoldersRequest(
+            $pagination,
+            $parentfolderid,
+            $publiconly,
+            $sortby,
+            $sortincreasing,
+            $wildcardsearchnameonly,
+            $unmappedonly
+        );
+        $searchquery = null;
+
+        $folderlistparams = new SessionManagementStructGetExtendedCreatorFoldersList(
+            $this->authparam,
+            $folderlistrequest,
+            $searchquery
+        );
+
+        if ($this->sessionmanagementserviceget->GetExtendedCreatorFoldersList($folderlistparams)) {
+            $retobj = $this->sessionmanagementserviceget->getResult();
+            $totalresults = $retobj->GetExtendedCreatorFoldersListResult->TotalNumberResults;
+
+            $folderlist = $retobj->GetExtendedCreatorFoldersListResult->Results->ExtendedFolder;
+
+            if ($totalresults > $resultsperpage) {
+
+                $folderstoget = $totalresults - $resultsperpage;
+                ++$currentpage;
+                while ($folderstoget > 0) {
+                    $pagination = new SessionManagementStructPagination($resultsperpage, $currentpage);
+
+                    $folderlistrequest = new SessionManagementStructListFoldersRequest(
+                        $pagination,
+                        $parentfolderid,
+                        $publiconly,
+                        $sortby,
+                        $sortincreasing,
+                        $wildcardsearchnameonly
+                    );
+
+                    $folderlistparams = new SessionManagementStructGetExtendedCreatorFoldersList(
+                        $this->authparam,
+                        $folderlistrequest,
+                        $searchquery
+                    );
+
+                    if ($this->sessionmanagementserviceget->GetExtendedCreatorFoldersList($folderlistparams)) {
+                        $retobj = $this->sessionmanagementserviceget->getResult();
+                        $folderlist =
+                            array_merge($folderlist, $retobj->GetExtendedCreatorFoldersListResult->Results->ExtendedFolder);
+                    } else {
+                        return $this->handle_error(
+                            $this->sessionmanagementserviceget->getLastError()['SessionManagementServiceGet::GetCreatorFoldersList']
+                        );
+                    }
+
+                    ++$currentpage;
+                    $folderstoget -= $resultsperpage;
+                }
+            } else if ($totalresults === 0) {
+                // In this case folderlist will be null but that is handled poorly in the UI.
+                $folderlist = [];
             }
 
             return $folderlist;
@@ -621,11 +711,11 @@ class panopto_session_soap_client extends PanoptoTimeoutSoapClient {
             : SessionManagementEnumSessionSortField::VALUE_DATE;
         $sortincreasing = $sessionshavespecificorder;
         $states = new SessionManagementStructArrayOfSessionState(
-            array(
+            [
                 SessionManagementEnumSessionState::VALUE_BROADCASTING,
                 SessionManagementEnumSessionState::VALUE_COMPLETE,
                 SessionManagementEnumSessionState::VALUE_RECORDING
-            )
+            ]
         );
 
         $sessionrequest = new SessionManagementStructListSessionsRequest(

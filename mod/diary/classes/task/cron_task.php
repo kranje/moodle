@@ -20,7 +20,7 @@ use context_module;
 use stdClass;
 
 /**
- * A schedule task for diary cron.
+ * A scheduled task for diary cron.
  *
  * @package   mod_diary
  * @copyright 2021 AL Rachels <drachels@drachels.com>
@@ -126,7 +126,7 @@ class cron_task extends \core\task\scheduled_task {
                     // This is already cached internally.
                     $context = context_module::instance($mod->id);
                     $canadd = has_capability('mod/diary:addentries', $context, $user);
-                    $entriesmanager = has_capability('mod/diary:manageentries', $context, $user);
+                    $entriesmanager = has_capability('mod/diary:rate', $context, $user);
 
                     if (!$canadd && $entriesmanager) {
                         continue; // Not an active participant. Cannot add entries, but can manage them.

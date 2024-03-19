@@ -351,9 +351,6 @@ class filter_poodll extends moodle_text_filter {
             $alternate_content = $conf['templatealternate_end_' . $tempindex];
         }
 
-        //fetch alternate content
-        $alternate_content = $conf['templatealternate_' . $tempindex];
-
         //fetch dataset info
         $dataset_body = $conf['dataset_' . $tempindex];
         $dataset_vars = $conf['datasetvars_' . $tempindex];
@@ -426,6 +423,22 @@ class filter_poodll extends moodle_text_filter {
             $poodlltemplate = str_replace('@@CLOUDPOODLLTOKEN@@', $token, $poodlltemplate);
             //stash this for passing to js
             $filterprops['CLOUDPOODLLTOKEN'] = $token;
+        }
+
+        //If this is a renderer call, lets do it
+        //it will be a function in a renderer with a name that begins with "embed_" .. e.g "embed_something"
+        //the args filterprops will be a pipe delimited string of args, eg {POODLL:type="mod_ogte",function="embed_table",args="arg1|arg2|arg3"}
+        //if the args string contains "cloudpoodlltoken" it will be replaced with the actual cloud poodll token.
+        if(isset($filterprops['renderer']) && isset($filterprops['function']) && strpos($filterprops['function'],'embed_')===0){
+            if(!isset($token)){$token=false;}
+            $somerenderer = $PAGE->get_renderer($filterprops['renderer']);
+            $args=[];
+            if(isset($filterprops['args'])){
+                $args_string =str_replace('cloudpoodlltoken',$token,$filterprops['args']);
+                $args_array = explode('|',$args_string);
+            }
+            $renderedcontent=call_user_func_array([$somerenderer, $filterprops['function']], $args_array);
+            $poodlltemplate = str_replace('@@renderedcontent@@',$renderedcontent, $poodlltemplate);
         }
 
         //If template requires a MOODLEPAGEID lets give them one

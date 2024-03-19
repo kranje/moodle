@@ -304,6 +304,10 @@ class results {
             get_string('teacher', 'diary'),
             get_string('timemarked', 'diary'),
             get_string('mailed', 'diary'),
+<<<<<<< HEAD
+=======
+            get_string('diarytitle', 'diary'),
+>>>>>>> 08502363a581bab802582571a6419ac663447936
             get_string('entry', 'diary'),
         ];
 
@@ -317,6 +321,7 @@ class results {
                            de.userid AS userid,
                            to_char(to_timestamp(de.timecreated), 'YYYY-MM-DD HH24:MI:SS') AS timecreated,
                            to_char(to_timestamp(de.timemodified), 'YYYY-MM-DD HH24:MI:SS') AS timemodified,
+                           de.title AS title,
                            de.text AS text,
                            de.format AS format,
                            de.rating AS rating,
@@ -339,6 +344,7 @@ class results {
                            de.userid AS userid,
                            FROM_UNIXTIME(de.timecreated) AS TIMECREATED,
                            FROM_UNIXTIME(de.timemodified) AS TIMEMODIFIED,
+                           de.title AS title,
                            de.text AS text,
                            de.format AS format,
                            de.rating AS rating,
@@ -385,6 +391,10 @@ class results {
                     $d->teacher,
                     $d->timemarked,
                     $d->mailed,
+<<<<<<< HEAD
+=======
+                    $d->title,
+>>>>>>> 08502363a581bab802582571a6419ac663447936
                     strip_tags($d->text),
                 ];
 
@@ -484,7 +494,11 @@ class results {
 
                 $output = [$d->firstname, $d->lastname, $d->diary, $d->promptid, $d->userid,
                     $d->timecreated, $d->timemodified, $d->format, $d->rating, $cleanedentrycomment,
+<<<<<<< HEAD
                     $d->teacher, $d->timemarked, $d->mailed, $cleanedentry,
+=======
+                    $d->teacher, $d->timemarked, $d->mailed, $d->title, $cleanedentry,
+>>>>>>> 08502363a581bab802582571a6419ac663447936
                 ];
 
                 $csv->add_data($output);
@@ -523,6 +537,15 @@ class results {
             // 20211109 needed for, Add to feedback/Clear feedback, buttons. 20211219 Moved here.
             $param1 = optional_param('button1'.$entry->id, '', PARAM_TEXT); // Transfer entry.
             $param2 = optional_param('button2'.$entry->id, '', PARAM_TEXT); // Clear entry.
+
+            // 20231110 Add a title for the entry, only if there is one.
+            if ($entry->title) {
+                echo '<tr>';
+                echo '<td style="width:35px;"><h6>'.get_string('diarytitle', 'diary').':</h6></td>';
+                echo '<td><h6>'.$entry->title.'</h6></td>';
+                echo '<td></td>';
+                echo '</tr>';
+            }
 
             // Add an entry label followed by the date of the entry.
             echo '<tr>';
@@ -878,6 +901,7 @@ class results {
             'timeclose' => $diary->timeclose,
             'editall' => $diary->editall,
             'editdates' => $diary->editdates,
+            'enabletitles' => $diary->enabletitles,
             'action' => $action,
             'firstkey' => $firstkey,
             'trusttext' => true,

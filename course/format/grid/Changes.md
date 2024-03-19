@@ -1,11 +1,27 @@
 History
 =============
 
+<<<<<<< HEAD
 Version 401.2.1b - 14/10/2023
 ----------------------------
 1. Fix 'Webp image causes an error and makes course unaccessible' - #190.
 2. Fix "Hidden sections are shown as not available" doesn't seem to work. - #192.
 3. Add 'Flex containers' justify-content property options' - #191.  Sponsored by AAU.
+=======
+Version 401.2.2 - 22/01/2024
+----------------------------
+1. Fix 'Import a format_grid course into a format_topics course fails and produces "undefined method"' - #193,
+   thanks to @Syxton(Matt Davidson).
+2. Fix 'Sections showing beyond the number set in the settings', related to #196.
+3. Improved backup and restore logic.
+4. Show warning if there is a stealth section with content, related to #196.
+
+Version 401.2.1b - 14/10/2023
+-----------------------------
+1. Fix 'Webp image causes an error and makes course unaccessible' - #190.
+2. Fix "Hidden sections are shown as not available" doesn't seem to work. - #192.
+3. Add 'Flex containers' justify-content property options' - #191.
+>>>>>>> 08502363a581bab802582571a6419ac663447936
 4. Fix 'Problems with creating multiple courses from template via CSV in Grid Format' - #189.
 5. Make 'Main content page' link on single section page more accessible.
 6. Fix 'Mouseover for shortened titles' - #187.

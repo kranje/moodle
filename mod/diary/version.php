@@ -24,9 +24,19 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 $plugin->version = 2023092501;      // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2019052000;      // Requires Moodle 3.7 version.
 $plugin->cron = 60;              // Period for cron to check this module (secs).
 $plugin->component = 'mod_diary';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '3.7.6+ (Build: 2023092501)'; // User-friendly version number.
+=======
+$plugin->version = 2023111100; // The current module version (Date: YYYYMMDDXX).
+$plugin->requires = 2019052000; // Requires Moodle 3.7 version.
+$plugin->cron = 60; // Period for cron to check this module (secs).
+$plugin->component = 'mod_diary';
+$plugin->maturity = MATURITY_STABLE;
+$plugin->release = '3.7.7 (Build: 2023111100)'; // User-friendly version number.
+$plugin->supported = [37, 403];
+>>>>>>> 08502363a581bab802582571a6419ac663447936

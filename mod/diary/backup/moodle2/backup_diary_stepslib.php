@@ -66,6 +66,10 @@ class backup_diary_activity_structure_step extends backup_activity_structure_ste
                 'entrybgc',
                 'entrytextbgc',
                 'enablestats',
+<<<<<<< HEAD
+=======
+                'enabletitles',
+>>>>>>> 08502363a581bab802582571a6419ac663447936
                 'teacheremail',
                 'studentemail',
                 'mincharacterlimit',
@@ -127,6 +131,10 @@ class backup_diary_activity_structure_step extends backup_activity_structure_ste
                 'userid',
                 'timecreated',
                 'timemodified',
+<<<<<<< HEAD
+=======
+                'title',
+>>>>>>> 08502363a581bab802582571a6419ac663447936
                 'text',
                 'format',
                 'rating',

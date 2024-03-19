@@ -105,6 +105,7 @@ $data->tags = core_tag_tag::get_item_tags_array('mod_diary', 'diary_entries', $f
 if ($action == 'currententry' && $entry) {
     $data->entryid = $entry->id;
     $data->timecreated = $entry->timecreated;
+    $data->title = $entry->title;
     $data->text = $entry->text;
     $data->textformat = $entry->format;
 
@@ -114,12 +115,14 @@ if ($action == 'currententry' && $entry) {
         $entry = '';
         $data->entryid = null;
         $data->timecreated = time();
+        $data->title = '';
         $data->text = '';
         $data->textformat = FORMAT_HTML;
     }
 } else if ($action == 'editentry' && $entry) {
     $data->entryid = $entry->id;
     $data->timecreated = $entry->timecreated;
+    $data->title = $entry->title;
     $data->text = $entry->text;
     $data->textformat = $entry->format;
     // Think I might need to add a check for currententry && !entry to justify starting a new entry, else error.
@@ -127,6 +130,7 @@ if ($action == 'currententry' && $entry) {
     // There are no entries for this user, so start the first one.
     $data->entryid = null;
     $data->timecreated = time();
+    $data->title = '';
     $data->text = '';
     $data->textformat = FORMAT_HTML;
 } else {
@@ -183,6 +187,7 @@ if ($form->is_cancelled()) {
     $newentry = new stdClass();
     $newentry->timecreated = $fromform->timecreated;
     $newentry->timemodified = $timenow;
+    $newentry->title = $fromform->title;
     $newentry->text = $fromform->text_editor['text'];
     $newentry->format = $fromform->text_editor['format'];
 
@@ -255,6 +260,7 @@ if ($form->is_cancelled()) {
                                                 'entry',
                                                 $newentry->id);
     $newentry->promptid = $promptid;
+    $newentry->title = $fromform->title;
     $newentry->text = $fromform->text;
     $newentry->format = $fromform->textformat;
     $newentry->timecreated = $fromform->timecreated;
@@ -299,14 +305,24 @@ if ($form->is_cancelled()) {
 
     // Add confirmation of record being saved.
     echo $OUTPUT->notification(get_string('entrysuccess', 'diary'), 'notifysuccess');
+<<<<<<< HEAD
     // Start new code to send teachers note when diary is done.
     $role = $DB->get_record('role', ['shortname' => 'editingteacher']);
+=======
+    // Start new code to send teachers email note when diary entry is made.
+    // 20231105 Modified code so non-editing teachers get an email, too.
+    $role1 = $DB->get_record('role', ['shortname' => 'editingteacher']);
+    $role2 = $DB->get_record('role', ['shortname' => 'teacher']);
+>>>>>>> 08502363a581bab802582571a6419ac663447936
     $contextcourse = context_course::instance($course->id);
 
-    $teachers = get_role_users($role->id, $contextcourse);
+    $teachers1 = get_role_users($role1->id, $contextcourse);
+    $teachers2 = get_role_users($role2->id, $contextcourse);
+    $teachers = array_merge($teachers1, $teachers2);
     $admin = get_admin();
+
     // BEFORE we do any email creation, we need to see if we even need to do it!
-    // The foreeach $teachers needs to be before the email wording creation.
+    // The foreach $teachers needs to be before the email wording creation.
     // This move will allow me to use the diarymail and diarymailhtml greetings strings.
 
     // Now send an email for each teacher in the course.
@@ -335,8 +351,7 @@ if ($form->is_cancelled()) {
                     // If user wants HTML format, use this code.
                     if ($USER->mailformat == 1) {  // HTML.
                         $posthtml = "<p><font face=\"sans-serif\">".
-                            "Hi $teacher->firstname $teacher->lastname,<br>".
-
+                            "Hi there $teacher->firstname $teacher->lastname,<br>".
                             "<p>".fullname($USER).'&nbsp;'.get_string("diarymailhtmluser", "diary", $diaryinfo)."</p>".
                             "<p>The ".$SITE->shortname." Team</p>".
                             "<br /><hr /><font face=\"sans-serif\">".
@@ -350,7 +365,6 @@ if ($form->is_cancelled()) {
                         $posthtml = "";
                     }
                     $testemail = email_to_user($teacher, $admin, $postsubject, $posttext, $posthtml);
-
                 }
             }
         }

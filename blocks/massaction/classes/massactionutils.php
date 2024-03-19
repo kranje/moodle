@@ -159,6 +159,26 @@ class massactionutils {
                 }
             }
         }
+        if (empty($newcmid)) {
+            throw new \moodle_exception('duplicatefailed', 'block_massaction', $cm->id);
+        }
         return $newcmid;
+    }
+
+    /**
+     * Get array of restricted sections from course format callback.
+     * Example return values from pluginname_massaction_restricted_sections: [1, 3, 5]
+     *
+     * @param int $courseid
+     * @param string $format
+     * @return array
+     */
+    public static function get_restricted_sections($courseid, $format): array {
+        $sectionsrestricted = [];
+        $callbacks = get_plugins_with_function('massaction_restricted_sections');
+        if (!empty($callbacks['format'][$format])) {
+            $sectionsrestricted = $callbacks['format'][$format]($courseid);
+        }
+        return $sectionsrestricted;
     }
 }

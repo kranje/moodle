@@ -31,7 +31,11 @@ jobs:
       matrix:
         include:
           - php: '8.2'
+<<<<<<< HEAD
             moodle-branch: 'master'
+=======
+            moodle-branch: 'MOODLE_403_STABLE'
+>>>>>>> 08502363a581bab802582571a6419ac663447936
             database: 'mariadb'
           - php: '8.1'
             moodle-branch: 'MOODLE_402_STABLE'
@@ -80,6 +84,7 @@ jobs:
         env:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
+          MUSTACHE_IGNORE_NAMES: 'mobile_view_checklist.mustache'
 
       - name: PHP Lint
         if: ${{ always() }}

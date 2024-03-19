@@ -27,24 +27,54 @@ defined('MOODLE_INTERNAL') || die;
 if ($hassiteconfig) {
     $pluginname = get_string('pluginname', 'local_adminer');
 
+<<<<<<< HEAD
     $ADMIN->add('server', new admin_externalpage(
         'local_adminer',
         $pluginname,
         new moodle_url('/local/adminer/index.php'),
         'local/adminer:useadminer')
     );
+=======
+    $adminersecret = $CFG->local_adminer_secret ?? '';
+    if ($adminersecret !== \local_adminer\util::DISABLED_SECRET) {
+        $ADMIN->add('server', new admin_externalpage(
+            'local_adminer',
+            $pluginname,
+            new moodle_url('/local/adminer/index.php'),
+            'local/adminer:useadminer')
+        );
+    }
+>>>>>>> 08502363a581bab802582571a6419ac663447936
 
     $settings = new admin_settingpage('local_adminer_settings', $pluginname);
     $ADMIN->add('localplugins', $settings);
 
     $configs = [];
 
+<<<<<<< HEAD
     $configs[] = new admin_setting_heading(
         'local_adminer',
         get_string('settings'),
         ''
     );
 
+=======
+    $templatecontext = [
+        'disabledsecret' => \local_adminer\util::DISABLED_SECRET,
+    ];
+    $configs[] = new admin_setting_heading(
+        'local_adminer_securitynote',
+        '',
+        $OUTPUT->render_from_template('local_adminer/security_note', $templatecontext)
+    );
+
+    $configs[] = new admin_setting_heading(
+        'local_adminer_settings',
+        get_string('settings'),
+        ''
+    );
+
+>>>>>>> 08502363a581bab802582571a6419ac663447936
     $options   = [0 => get_string('no'), 1 => get_string('yes')];
     $configs[] = new admin_setting_configselect(
         'startwithdb',
