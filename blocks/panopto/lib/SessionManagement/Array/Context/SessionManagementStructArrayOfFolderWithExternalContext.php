@@ -79,8 +79,9 @@ class SessionManagementStructArrayOfFolderWithExternalContext extends SessionMan
     /**
      * Returns the current element
      * @see SessionManagementWsdlClass::current()
-     * @return SessionManagementStructFolderWithExternalContext
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return parent::current();
@@ -117,8 +118,9 @@ class SessionManagementStructArrayOfFolderWithExternalContext extends SessionMan
      * Returns the element at the offset
      * @see SessionManagementWsdlClass::last()
      * @param int $_offset
-     * @return SessionManagementStructFolderWithExternalContext
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($_offset)
     {
         return parent::offsetGet($_offset);

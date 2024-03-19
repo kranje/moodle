@@ -79,8 +79,9 @@ class UserManagementStructArrayOfGroup extends UserManagementWsdlClass
     /**
      * Returns the current element
      * @see UserManagementWsdlClass::current()
-     * @return UserManagementStructGroup
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return parent::current();
@@ -117,8 +118,9 @@ class UserManagementStructArrayOfGroup extends UserManagementWsdlClass
      * Returns the element at the offset
      * @see UserManagementWsdlClass::last()
      * @param int $_offset
-     * @return UserManagementStructGroup
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($_offset)
     {
         return parent::offsetGet($_offset);

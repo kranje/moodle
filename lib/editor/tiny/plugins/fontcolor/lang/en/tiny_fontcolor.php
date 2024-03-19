@@ -37,6 +37,7 @@ $string['colorPickerColor'] = 'Colour';
 $string['colorPickerSave'] = 'Apply';
 $string['colorPickerCancel'] = 'Cancel';
 $string['colorPickerErrHexCode'] = 'Invalid hex colour code: {0}';
+$string['colorPickerErrRgbCode'] = 'Invalid rgb value: {0}';
 $string['pluginname'] = 'Tiny font colour';
 $string['privacy:metadata'] = 'Tiny font colour does not store any personal data';
 $string['settings'] = 'Tiny text colour/text background colour settings';
@@ -50,6 +51,7 @@ $string['textcolors'] = 'Available text colours';
 $string['textcolors_desc'] = 'A list of colour names on the left and their RGB colour code, e.g. "#000000". The values are the colours displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colours.';
 $string['placeholdercolorname'] = 'Descriptive name of colour';
 $string['placeholdercolorvalue'] = 'Hex code of colour value';
+$string['helplinktext'] = 'Tiny font colour';
 
 // PRIVACY.
 $string['privacy:metadata'] = 'The Tiny font color plugin does not store any personal data about any user.';

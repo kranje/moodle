@@ -630,7 +630,7 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * @uses SessionManagementWsdlClass::getInternArrayToIterateIsArray()
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return $this->getInternArrayToIterateIsArray()?count($this->getInternArrayToIterate()):-1;
     }
@@ -639,6 +639,7 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * @uses SessionManagementWsdlClass::offsetGet()
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->offsetGet($this->internArrayToIterateOffset);
@@ -647,20 +648,20 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * Method moving the current position to the next element
      * @uses SessionManagementWsdlClass::getInternArrayToIterateOffset()
      * @uses SessionManagementWsdlClass::setInternArrayToIterateOffset()
-     * @return int
+     * @return void
      */
-    public function next()
+    public function next(): void
     {
-        return $this->setInternArrayToIterateOffset($this->getInternArrayToIterateOffset() + 1);
+        $this->setInternArrayToIterateOffset($this->getInternArrayToIterateOffset() + 1);
     }
     /**
      * Method resetting itemOffset
      * @uses SessionManagementWsdlClass::setInternArrayToIterateOffset()
-     * @return int
+     * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
-        return $this->setInternArrayToIterateOffset(0);
+        $this->setInternArrayToIterateOffset(0);
     }
     /**
      * Method checking if current itemOffset points to an existing item
@@ -668,7 +669,7 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * @uses SessionManagementWsdlClass::offsetExists()
      * @return bool true|false
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->offsetExists($this->getInternArrayToIterateOffset());
     }
@@ -677,6 +678,7 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * @uses SessionManagementWsdlClass::getInternArrayToIterateOffset()
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->getInternArrayToIterateOffset();
@@ -766,7 +768,7 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * @param int $_offset
      * @return bool true|false
      */
-    public function offsetExists($_offset)
+    public function offsetExists($_offset): bool
     {
         return ($this->getInternArrayToIterateIsArray() && array_key_exists($_offset,$this->getInternArrayToIterate()));
     }
@@ -776,6 +778,7 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * @param int $_offset
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($_offset)
     {
         return $this->offsetExists($_offset)?$this->internArrayToIterate[$_offset]:null;
@@ -784,21 +787,17 @@ class SessionManagementWsdlClass extends stdClass implements ArrayAccess,Iterato
      * Method useless but necessarly overridden, can't set
      * @param mixed $_offset
      * @param mixed $_value
-     * @return null
+     * @return void
      */
-    public function offsetSet($_offset,$_value)
-    {
-        return null;
-    }
+    public function offsetSet($_offset,$_value): void
+    {}
     /**
      * Method useless but necessarly overridden, can't unset
      * @param mixed $_offset
-     * @return null
+     * @return void
      */
-    public function offsetUnset($_offset)
-    {
-        return null;
-    }
+    public function offsetUnset($_offset): void
+    {}
     /**
      * Method returning current result from Soap call
      * @return mixed
@@ -1007,7 +1006,7 @@ class SessionManagementSoapClient extends PanoptoTimeoutSoapClient {
      * @param string $version
      * @param int $one_way
      */
-    public function __doRequest($request, $location, $action, $version, $one_way = 0) {
+    public function __doRequest($request, $location, $action, $version, $one_way = 0): ?string {
         if (get_config('block_panopto', 'enforce_https_on_wsdl')) {
             $location = str_replace('http://', 'https://', $location);
         }

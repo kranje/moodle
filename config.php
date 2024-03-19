@@ -18,7 +18,7 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_0900_ai_ci',
 );
 
-$CFG->wwwroot   = 'https://courses.centre.edu';
+$CFG->wwwroot   = 'https://courses-test.centre.edu';
 $CFG->dataroot  = '/var/moodledata';
 $CFG->admin     = 'admin';
 

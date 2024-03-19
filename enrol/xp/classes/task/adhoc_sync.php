@@ -23,7 +23,6 @@
  */
 
 namespace enrol_xp\task;
-defined('MOODLE_INTERNAL') || die();
 
 use context_course;
 use moodle_exception;
@@ -74,12 +73,15 @@ class adhoc_sync extends \core\task\adhoc_task {
         $sql = "
             SELECT x.userid
               FROM {block_xp} x
+              JOIN {user} u
+                ON u.id = x.userid
              WHERE x.courseid = :courseid
                AND x.xp >= :xp
+               AND u.deleted = 0
                AND x.userid NOT IN ($enrolledsql)";
         $params = $enrolledparams + [
             'courseid' => $instance->customint2,
-            'xp' => $xprequired
+            'xp' => $xprequired,
         ];
 
         $plugin = enrol_get_plugin('xp');

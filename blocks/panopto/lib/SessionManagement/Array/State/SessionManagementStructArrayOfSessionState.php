@@ -78,8 +78,9 @@ class SessionManagementStructArrayOfSessionState extends SessionManagementWsdlCl
     /**
      * Returns the current element
      * @see SessionManagementWsdlClass::current()
-     * @return SessionManagementEnumSessionState
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return parent::current();
@@ -116,8 +117,9 @@ class SessionManagementStructArrayOfSessionState extends SessionManagementWsdlCl
      * Returns the element at the offset
      * @see SessionManagementWsdlClass::last()
      * @param int $_offset
-     * @return SessionManagementEnumSessionState
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($_offset)
     {
         return parent::offsetGet($_offset);

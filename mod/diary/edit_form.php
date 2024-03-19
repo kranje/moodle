@@ -140,10 +140,10 @@ class mod_diary_entry_form extends moodleform {
             $mform->addElement(
                 'tags',
                 'tags',
-                get_string('tags'),
+                null,
                 [
                     'itemtype' => 'diary_entries',
-                    'component' => 'mod_diary'
+                    'component' => 'mod_diary',
                 ]
             );
         }

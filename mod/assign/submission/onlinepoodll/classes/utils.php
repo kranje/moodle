@@ -33,7 +33,6 @@ class utils
 
     public static function fetch_options_recorders(){
         return  array( constants::M_REPLYMP3VOICE => get_string("replymp3voice", constants::M_COMPONENT),
-                constants::M_REPLYVOICE => get_string("replyvoice", constants::M_COMPONENT),
                 constants::M_REPLYVIDEO => get_string("replyvideo", constants::M_COMPONENT),
                 constants::M_REPLYWHITEBOARD => get_string("replywhiteboard", constants::M_COMPONENT),
                 constants::M_REPLYSNAPSHOT => get_string("replysnapshot", constants::M_COMPONENT));

@@ -34,7 +34,7 @@ require_once(__DIR__ .'/../../lib/gradelib.php');
 
 $id = required_param('id', PARAM_INT); // Course Module ID (cmid).
 $cm = get_coursemodule_from_id('diary', $id, 0, false, MUST_EXIST); // Complete details for cmid.
-$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST); // Complete details about this course.
+$course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST); // Complete details about this course.
 $action = optional_param('action', 'currententry', PARAM_ACTION); // Action(default to current entry).
 
 if (!$cm) {
@@ -74,19 +74,19 @@ foreach ($diarys as $temp) {
     }
 }
 
+// 20230511 Following two lines are for View, Automatic Completion marking.
+$completion = new completion_info($course);
+$completion->set_module_viewed($cm);
+
 // Need to call a prompt function that returns the current promptid, if there is one that is current.
 $promptid = prompts::get_current_promptid($diary);
 
-if (!$cw = $DB->get_record("course_sections", array(
-    "id" => $cm->section
-))) {
+if (!$cw = $DB->get_record('course_sections', ['id' => $cm->section])) {
     throw new moodle_exception(get_string('incorrectmodule', 'diary'));
 }
 
 // Get the name for this diary activity.
-$diaryname = format_string($diary->name, true, array(
-    'context' => $context
-));
+$diaryname = format_string($diary->name, true, ['context' => $context]);
 
 // Get local renderer.
 $output = $PAGE->get_renderer('mod_diary');
@@ -98,6 +98,8 @@ if (!empty($action)) {
         case 'download':
             if (has_capability('mod/diary:addentries', $context)) {
                 // Call download entries function in results.php.
+                // 20231007 Added set_url to fix error.
+                $PAGE->set_url('/mod/diary/view.php', ['id' => $cm->id]);
                 results::download_entries($context, $course, $diary);
             }
             break;
@@ -107,10 +109,13 @@ if (!empty($action)) {
             if (has_capability('mod/diary:addentries', $context)) {
                 // Reload the current page.
                 $sortorderinfo = (get_string('sortcurrententry', 'diary'));
-                $entrys = $DB->get_records('diary_entries', array(
-                    'userid' => $USER->id,
-                    'diary' => $diary->id
-                ), $sort = 'timecreated DESC');
+                $entrys = $DB->get_records('diary_entries',
+                    [
+                        'userid' => $USER->id,
+                        'diary' => $diary->id,
+                    ],
+                    $sort = 'timecreated DESC'
+                );
                 $firstkey = ''; // Fixes error if user has no entries at all.
                 foreach ($entrys as $firstkey => $firstvalue) {
                     break;
@@ -123,10 +128,13 @@ if (!empty($action)) {
             if (has_capability('mod/diary:addentries', $context)) {
                 // Reload the current page.
                 $sortorderinfo = (get_string('sortcurrententry', 'diary'));
-                $entrys = $DB->get_records('diary_entries', array(
-                    'userid' => $USER->id,
-                    'diary' => $diary->id
-                ), $sort = 'timecreated DESC');
+                $entrys = $DB->get_records('diary_entries',
+                    [
+                        'userid' => $USER->id,
+                        'diary' => $diary->id,
+                    ],
+                    $sort = 'timecreated DESC'
+                );
                 $firstkey = ''; // Fixes error if user has no entries at all.
                 foreach ($entrys as $firstkey => $firstvalue) {
                     break;
@@ -138,10 +146,13 @@ if (!empty($action)) {
         case 'sortfirstentry':
             if (has_capability('mod/diary:addentries', $context)) {
                 $sortorderinfo = (get_string('sortfirstentry', 'diary'));
-                $entrys = $DB->get_records("diary_entries", array(
-                    'userid' => $USER->id,
-                    'diary' => $diary->id
-                ), $sort = 'timecreated ASC');
+                $entrys = $DB->get_records("diary_entries",
+                    [
+                        'userid' => $USER->id,
+                        'diary' => $diary->id,
+                    ],
+                    $sort = 'timecreated ASC'
+                );
                 $firstkey = ''; // Fixes error if user has no entries at all.
                 foreach ($entrys as $firstkey => $firstvalue) {
                     break;
@@ -153,10 +164,13 @@ if (!empty($action)) {
         case 'lowestgradeentry':
             if (has_capability('mod/diary:addentries', $context)) {
                 $sortorderinfo = (get_string('sortlowestentry', 'diary'));
-                $entrys = $DB->get_records("diary_entries", array(
-                    'userid' => $USER->id,
-                    'diary' => $diary->id
-                ), $sort = 'rating ASC, timemodified ASC');
+                $entrys = $DB->get_records("diary_entries",
+                    [
+                        'userid' => $USER->id,
+                        'diary' => $diary->id,
+                    ],
+                    $sort = 'rating ASC, timemodified ASC'
+                );
                 $firstkey = ''; // Fixes error if user has no entries at all.
                 foreach ($entrys as $firstkey => $firstvalue) {
                     break;
@@ -168,10 +182,13 @@ if (!empty($action)) {
         case 'highestgradeentry':
             if (has_capability('mod/diary:addentries', $context)) {
                 $sortorderinfo = (get_string('sorthighestentry', 'diary'));
-                $entrys = $DB->get_records("diary_entries", array(
-                    'userid' => $USER->id,
-                    'diary' => $diary->id
-                ), $sort = 'rating DESC, timecreated DESC');
+                $entrys = $DB->get_records("diary_entries",
+                    [
+                        'userid' => $USER->id,
+                        'diary' => $diary->id,
+                    ],
+                    $sort = 'rating DESC, timecreated DESC'
+                );
                 $firstkey = ''; // Fixes error if user has no entries at all.
                 foreach ($entrys as $firstkey => $firstvalue) {
                     break;
@@ -184,10 +201,13 @@ if (!empty($action)) {
             if (has_capability('mod/diary:addentries', $context)) {
                 $sortorderinfo = (get_string('sortlastentry', 'diary'));
                 // May be needed for future version if editing old entries is allowed.
-                $entrys = $DB->get_records("diary_entries", array(
-                    'userid' => $USER->id,
-                    'diary' => $diary->id
-                ), $sort = 'timemodified DESC');
+                $entrys = $DB->get_records("diary_entries",
+                    [
+                        'userid' => $USER->id,
+                        'diary' => $diary->id,
+                    ],
+                    $sort = 'timemodified DESC'
+                );
                 $firstkey = ''; // Fixes error if user has no entries at all.
                 foreach ($entrys as $firstkey => $firstvalue) {
                     break;
@@ -199,10 +219,13 @@ if (!empty($action)) {
             if (has_capability('mod/diary:addentries', $context)) {
                 // Reload the current page.
                 $sortorderinfo = (get_string('sortcurrententry', 'diary'));
-                $entrys = $DB->get_records('diary_entries', array(
-                    'userid' => $USER->id,
-                    'diary' => $diary->id
-                ), $sort = 'timecreated DESC');
+                $entrys = $DB->get_records('diary_entries',
+                    [
+                        'userid' => $USER->id,
+                        'diary' => $diary->id,
+                    ],
+                    $sort = 'timecreated DESC'
+                );
                 $firstkey = ''; // Fixes error if user has no entries at all.
                 foreach ($entrys as $firstkey => $firstvalue) {
                     break;
@@ -212,9 +235,7 @@ if (!empty($action)) {
 }
 
 // Header.
-$PAGE->set_url('/mod/diary/view.php', array(
-    'id' => $cm->id
-));
+$PAGE->set_url('/mod/diary/view.php', ['id' => $cm->id]);
 $PAGE->navbar->add(get_string("viewentries", "diary"));
 $PAGE->set_title($diaryname);
 $PAGE->set_heading($course->fullname);
@@ -236,8 +257,9 @@ if (($diary->intro) && ($CFG->branch < 400)) {
 if (prompts::diary_available($diary)) {
     list($tcount, $past, $current, $future) = prompts::diary_count_prompts($diary);
     if ($current > 1) {
-        $url1 = $CFG->wwwroot . '/mod/diary/prompt_edit.php?id='.$cm->id;
-        echo '</a> <a href="'.$url1
+        // 20230810 Changed via pull request #29.
+        $url1 = new moodle_url($CFG->wwwroot.'/mod/diary/prompt_edit.php', ['id' => $cm->id]);
+        echo '</a> <a href="'.$url1->out(true)
             .'" class="btn btn-success" style="border-radius: 8px">'
             .get_string('warning', 'diary', $current)
             .'</a> ';
@@ -261,12 +283,12 @@ if ($entriesmanager) {
     $entrycount = results::diary_count_entries($diary, $currentgroup);
 
     // 20200827 Add link to index.php page right after the report.php link. 20210501 modified to remove div.
+    // 20230810 Added current group to index.php href.
     $temp = '<span class="reportlink"><a href="report.php?id='.$cm->id.'&action=currententry">';
     $temp .= get_string('viewallentries', 'diary', $entrycount).'</a>&nbsp;&nbsp;|&nbsp;&nbsp;';
-    $temp .= '<a href="index.php?id='.$course->id.'">'.get_string('viewalldiaries', 'diary').'</a>';
+    $temp .= '<a href="index.php?id='.$course->id.'&currentgroup='.$currentgroup.'">'.get_string('viewalldiaries', 'diary').'</a>';
     $temp .= '</a></span>';
     echo $temp;
-
 } else {
     // 20200831 Added to show link to only index.php page for students. 20210501 modified to remove div.
     echo '<a class="reportlink" href="index.php?id='.$course->id.'">'.get_string('viewalldiaries', 'diary').'</a>';
@@ -337,16 +359,16 @@ if ($timenow > $timestart) {
                 // 20210425 Add button for starting a new entry.
                 echo $OUTPUT->single_button('edit.php?id='.$cm->id
                     .'&firstkey='.$firstkey
-                    .'&action=currententry', get_string('startnewentry', 'diary'), 'get', array(
-                    "class" => "singlebutton diarystart"
-                ));
+                    .'&action=currententry', get_string('startnewentry', 'diary'), 'get',
+                    ["class" => "singlebutton diarystart"]
+                );
             } else {
                 // Add button for editing current entry or starting a new entry.
                 echo $OUTPUT->single_button('edit.php?id='.$cm->id
                     .'&firstkey='.$firstkey
-                    .'&action=currententry', get_string('startoredit', 'diary'), 'get', array(
-                    "class" => "singlebutton diarystart"
-                ));
+                    .'&action=currententry', get_string('startoredit', 'diary'), 'get',
+                    ["class" => "singlebutton diarystart"]
+                );
             }
             // Print user toolbar icons only if there is at least one entry for this user.
             if ($entrys) {
@@ -363,7 +385,7 @@ if ($timenow > $timestart) {
                 set_user_preference('diary_perpage_'.$diary->id, $perpage);
             }
 
-            $pagesizes = array(
+            $pagesizes = [
                 1 => 1,
                 2 => 2,
                 3 => 3,
@@ -384,13 +406,12 @@ if ($timenow > $timestart) {
                 300 => 300,
                 400 => 400,
                 500 => 500,
-                1000 => 1000
-            );
+                1000 => 1000,
+            ];
             // This creates the dropdown list for how many entries to show on the page.
-            $selection = html_writer::select($pagesizes, 'perpage', $perpage, false, array(
-                'id' => 'pref_perpage',
-                'class' => 'custom-select'
-            ));
+            $selection = html_writer::select($pagesizes, 'perpage', $perpage, false,
+                ['id' => 'pref_perpage', 'class' => 'custom-select']
+            );
 
             echo get_string('pagesize', 'diary').': <select onchange="this.form.submit()" name="perpage">';
             echo '<option selected="true" value="'.$selection.'</option>';
@@ -403,15 +424,14 @@ if ($timenow > $timestart) {
                 set_user_preference('diary_statspreference_'.$diary->id, $statspreference);
             }
 
-            $listoptions = array(
+            $listoptions = [
                 1 => get_string('statsshow', 'diary'),
-                2 => get_string('statshide', 'diary')
-            );
+                2 => get_string('statshide', 'diary'),
+            ];
             // This creates the dropdown list for how many entries to show on the page.
-            $selection = html_writer::select($listoptions, 'statspreference', $statspreference, false, array(
-                'id' => 'pref_stats',
-                'class' => 'custom-select'
-            ));
+            $selection = html_writer::select($listoptions, 'statspreference', $statspreference, false,
+                ['id' => 'pref_stats', 'class' => 'custom-select']
+            );
 
             echo ' | '.get_string('statshdr', 'diary').': <select onchange="this.form.submit()" name="statspreference">';
             echo '<option selected="true" value="'.$selection.'</option>';
@@ -424,15 +444,14 @@ if ($timenow > $timestart) {
                     set_user_preference('diary_emailpreference_'.$diary->id, $emailpreference);
                 }
 
-                $listoptions = array(
+                $listoptions = [
                     1 => get_string('emailnow', 'diary'),
-                    2 => get_string('emaillater', 'diary')
-                );
+                    2 => get_string('emaillater', 'diary'),
+                ];
                 // This creates the dropdown list for email preference on the page above the first entry.
-                $selection = html_writer::select($listoptions, 'emailpreference', $emailpreference, false, array(
-                    'id' => 'pref_emails',
-                    'class' => 'custom-select'
-                ));
+                $selection = html_writer::select($listoptions, 'emailpreference', $emailpreference, false,
+                    ['id' => 'pref_emails', 'class' => 'custom-select']
+                );
 
                 echo ' | '.get_string('emailpreference', 'diary').': <select onchange="this.form.submit()" name="emailpreference">';
                 echo '<option selected="true" value="'.$selection.'</option>';
@@ -479,7 +498,7 @@ if ($timenow > $timestart) {
                 // 20201015 Enable/disable check of the edit old entries editing tool.
                 if ($timenow < $timefinish && $diary->editall) {
                     $editthisentry = html_writer::link($url, $output->pix_icon('i/edit', get_string('editthisentry', 'diary')),
-                        array('class' => 'toolbutton'));
+                        ['class' => 'toolbutton']);
                 } else {
                     $editthisentry = ' ';
                 }
@@ -490,7 +509,7 @@ if ($timenow > $timestart) {
                 // 20230314 If one exists, display the apllicable prompt.
                 if ($entry->promptid > 0) {
                     $promptused = get_string('writingpromptused', 'diary', $entry->promptid);
-                    $prompt = $DB->get_record('diary_prompts', array('id' => $entry->promptid, 'diaryid' => $diary->id));
+                    $prompt = $DB->get_record('diary_prompts', ['id' => $entry->promptid, 'diaryid' => $diary->id]);
                     // 20230321 Use contrasting color for the prompt used background.
                     echo '<div class="entry" style="background: '.$promptbgc.';">';
 
@@ -584,10 +603,12 @@ if ($timenow > $timestart) {
 }
 
 // Trigger module viewed event.
-$event = \mod_diary\event\course_module_viewed::create(array(
-    'objectid' => $diary->id,
-    'context' => $context
-));
+$event = \mod_diary\event\course_module_viewed::create(
+    [
+        'objectid' => $diary->id,
+        'context' => $context,
+    ]
+);
 $event->add_record_snapshot('course_modules', $cm);
 $event->add_record_snapshot('course', $course);
 $event->add_record_snapshot('diary', $diary);

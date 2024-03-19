@@ -25,7 +25,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
  */
 
-use \mod_diary\event\course_module_viewed;
+use mod_diary\event\course_module_viewed;
 
 require_once('../../config.php');
 require_once(__DIR__ . '/lib.php');
@@ -39,13 +39,11 @@ $xfrcountxfrd = 0;
 if (! $cm = get_coursemodule_from_id('diary', $id)) {
     throw new moodle_exception(get_string('incorrectmodule', 'diary'));
 }
-$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
 
 require_login($course, true, $cm);
-
 $context = context_module::instance($cm->id);
-
-$diary = $DB->get_record('diary', array('id' => $cm->instance) , '*', MUST_EXIST);
+$diary = $DB->get_record('diary', ['id' => $cm->instance], '*', MUST_EXIST);
 
 // 20211109 Check to see if Transfer the entries button is clicked and returning 'Transfer the entries' to trigger insert record.
 $param1 = optional_param('button1', '', PARAM_TEXT); // Transfer entry.
@@ -55,22 +53,22 @@ $param4 = optional_param('transferwfb', '', PARAM_TEXT); // Transfer with feedba
 
 // DB transfer.
 if (isset($param1) && get_string('transfer', 'diary') == $param1) {
-    $journalfromid = optional_param('journalid', '', PARAM_RAW);
-    $diarytoid = optional_param('diaryid', '', PARAM_RAW);
+    $journalfromid = optional_param('journalid', '', PARAM_INT);
+    $diarytoid = optional_param('diaryid', '', PARAM_INT);
 
     $sql = 'SELECT *
               FROM {journal_entries} je
-             WHERE je.journal = '.$journalfromid.'
+             WHERE je.journal = :journalid
           ORDER BY je.id ASC';
 
     // 20211112 Check and make sure journal transferring from and diary transferring too, actually exist.
     // Verify journal and diary exists.
-    if (($journalck = $DB->get_record('journal', array('id' => $journalfromid), '*', MUST_EXIST))
-        && ($diaryto = $DB->get_record('diary', array('id' => $diarytoid), '*', MUST_EXIST))) {
+    if (($journalck = $DB->get_record('journal', ['id' => $journalfromid], '*', MUST_EXIST))
+        && ($diaryto = $DB->get_record('diary', ['id' => $diarytoid], '*', MUST_EXIST))) {
 
         // 20211113 Adding transferred from note to the feedback via $feedbacktag, below.
-        $journalck = $DB->get_record('journal', array('id' => $journalfromid), '*', MUST_EXIST);
-        $journalentries = $DB->get_records_sql($sql);
+        $journalck = $DB->get_record('journal', ['id' => $journalfromid], '*', MUST_EXIST);
+        $journalentries = $DB->get_records_sql($sql, ['journalid' => $journalfromid]);
 
         foreach ($journalentries as $journalentry) {
             $feedbacktag = new stdClass();
@@ -111,9 +109,13 @@ if (isset($param1) && get_string('transfer', 'diary') == $param1) {
                        AND de.userid = $journalentry->userid
                        AND de.timemodified = $journalentry->modified
                   ORDER BY de.id ASC';
-            if (!$DB->record_exists('diary_entries', ['diary' => $diarytoid,
-                                                     'userid' => $journalentry->userid,
-                                                     'timemodified' => $journalentry->modified])) {
+            if (!$DB->record_exists('diary_entries',
+                [
+                    'diary' => $diarytoid,
+                    'userid' => $journalentry->userid,
+                    'timemodified' => $journalentry->modified,
+                ]
+            )) {
                 // 20211228 Bump count of transfers.
                 $xfrcountxfrd++;
                 // 20211228 Create and insert a new Diary entry from the old Journal entry.
@@ -124,16 +126,20 @@ if (isset($param1) && get_string('transfer', 'diary') == $param1) {
     }
 
     // Trigger transferred journal entries to diary entries event.
-    $event = \mod_diary\event\journal_to_diary_entries_transfer::create(array(
-        'objectid' => $diary->id,
-        'context' => $context,
-        'other' => array(
-            'journalname' => $param1,
-            'diaryname' => $diaryto->name,
-            'diaryto' => $diaryto->id,
-            'jeprocessed' => $xfrcountck,
-            'jexfrd' => $xfrcountxfrd)
-    ));
+    $event = \mod_diary\event\journal_to_diary_entries_transfer::create(
+        [
+            'objectid' => $diary->id,
+            'context' => $context,
+            'other' =>
+                [
+                    'journalname' => $param1,
+                    'diaryname' => $diaryto->name,
+                    'diaryto' => $diaryto->id,
+                    'jeprocessed' => $xfrcountck,
+                    'jexfrd' => $xfrcountxfrd,
+                ],
+        ]
+    );
     $event->add_record_snapshot('course_modules', $cm);
     $event->add_record_snapshot('course', $course);
     $event->add_record_snapshot('diary', $diary);
@@ -141,7 +147,7 @@ if (isset($param1) && get_string('transfer', 'diary') == $param1) {
 }
 
 // Print the page header.
-$PAGE->set_url('/mod/diary/journaltodiaryxfr.php', array('id' => $id));
+$PAGE->set_url('/mod/diary/journaltodiaryxfr.php', ['id' => $id]);
 
 $PAGE->set_heading($course->fullname);
 // Output starts here.
@@ -161,8 +167,9 @@ echo '<div class="w-75 p-3" style="font-size:1em;
 echo '<form method="POST">';
 
 // 20211105 Setup a url that takes you back to the Diary you came from.
-$url1 = $CFG->wwwroot . '/mod/diary/view.php?id='.$id;
-$url2 = $CFG->wwwroot . '/mod/diary/journaltodiaryxfr.php?id='.$cm->id;
+// 20230810 Changed based on pull request #29.
+$url1 = new moodle_url($CFG->wwwroot.'/mod/diary/view.php', ['id' => $id]);
+$url2 = new moodle_url($CFG->wwwroot.'/mod/diary/journaltodiaryxfr.php', ['id' => $cm->id]);
 
 // 20211202 Add some instructions and information to the page.
 echo '<h3 style="text-align:center;"><b>'.get_string('journaltodiaryxfrtitle', 'diary').'</b></h3>';
@@ -174,10 +181,10 @@ echo get_string('journaltodiaryxfrp5', 'diary');
 
 $jsql = 'SELECT *
            FROM {journal} j
-          WHERE j.course = '.$cm->course.'
+          WHERE j.course = :course
        ORDER BY j.id ASC';
 
-$journals = $DB->get_records_sql($jsql);
+$journals = $DB->get_records_sql($jsql, ['course' => $cm->course]);
 
 echo get_string('journaltodiaryxfrjid', 'diary');
 
@@ -191,10 +198,10 @@ if ($journals) {
 
 $dsql = 'SELECT *
            FROM {diary} d
-          WHERE d.course = '.$cm->course.'
+          WHERE d.course = :course
        ORDER BY d.id ASC';
 
-$diarys = $DB->get_records_sql($dsql);
+$diarys = $DB->get_records_sql($dsql, ['course' => $cm->course]);
 
 echo get_string('journaltodiaryxfrdid', 'diary');
 
@@ -228,13 +235,13 @@ foreach ($diarys as $diary) {
 
 // Add a transfer button.
 // Add a cancel button that clears the input boxes and reloads the page.
+// 20230810 Changed based on pull request #29.
 echo '<br><br><input class="btn btn-warning"
                      style="border-radius: 8px"
                      name="button1"
                      onClick="return clClick()"
                      type="submit" value="'
-                     .get_string('transfer', 'diary').'"> <a href="'.$url2.'"
-
+                     .get_string('transfer', 'diary').'"> <a href="'.$url2->out(false).'"
                      class="btn btn-secondary"
                      style="border-radius: 8px">'
                      .get_string('cancel', 'diary').'</a></input>';
@@ -245,7 +252,8 @@ if ($xfrcountck > 0) {
 } else {
     $xfrresults = '';
 }
-echo '<br><br><a href="'.$url1
+// 20230810 Changed based on pull request #29.
+echo '<br><br><a href="'.$url1->out(false)
     .'" class="btn btn-success" style="border-radius: 8px">'
     .get_string('returnto', 'diary', $diary->name)
     .'</a> '.$xfrresults;
