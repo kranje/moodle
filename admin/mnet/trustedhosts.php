@@ -10,7 +10,11 @@
 
     if (!extension_loaded('openssl')) {
         echo $OUTPUT->header();
+<<<<<<< HEAD
         throw new \moodle_exception('requiresopenssl', 'mnet', '', null, true);
+=======
+        print_error('requiresopenssl', 'mnet', '', NULL, true);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $site = get_site();

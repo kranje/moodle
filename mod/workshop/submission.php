@@ -37,7 +37,11 @@ $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST)
 
 require_login($course, false, $cm);
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('guestsarenotallowed');
+=======
+    print_error('guestsarenotallowed');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $workshoprecord = $DB->get_record('workshop', array('id' => $cm->instance), '*', MUST_EXIST);
@@ -121,7 +125,11 @@ if ($submission->id and ($ownsubmission or $canviewall or $isreviewer)) {
 } elseif (is_null($submission->id) and $cansubmit) {
     // ok you can go
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('nopermissions', 'error', $workshop->view_url(), 'view or create submission');
+=======
+    print_error('nopermissions', 'error', $workshop->view_url(), 'view or create submission');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($submission->id) {

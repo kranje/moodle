@@ -35,7 +35,11 @@ $cm         = get_coursemodule_from_instance('workshop', $workshop->id, $course-
 
 require_login($course, false, $cm);
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('guestsarenotallowed');
+=======
+    print_error('guestsarenotallowed');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $workshop = new workshop($workshop, $cm, $course);
 
@@ -52,7 +56,11 @@ $isreviewer = ($USER->id == $assessment->reviewerid);
 if ($isreviewer or $canmanage) {
     // such a user can continue
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('nopermissions', 'error', $workshop->view_url(), 'assess example submission');
+=======
+    print_error('nopermissions', 'error', $workshop->view_url(), 'assess example submission');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // only the reviewer is allowed to modify the assessment

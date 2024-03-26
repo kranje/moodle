@@ -29,8 +29,12 @@ ns.SelectorHub = function (libraries, selectedLibrary, changeLibraryDialog) {
     contentTypes: libraries,
     getAjaxUrl: H5PEditor.getAjaxUrl,
     expanded: true,
+<<<<<<< HEAD
     canPaste: false,
     enableContentHub: H5PEditor.enableContentHub || false,
+=======
+    canPaste: false
+>>>>>>> forked/LAE_400_PACKAGE
   };
 
   if (selectedLibrary) {

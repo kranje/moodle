@@ -51,17 +51,30 @@ class recentlyaccesseditems_item_exporter extends \core\external\exporter {
     protected function get_other_values(renderer_base $output) {
         global $CFG;
         require_once($CFG->libdir.'/modinfolib.php');
+<<<<<<< HEAD
 
+=======
+        $iconurl = get_fast_modinfo($this->data->courseid)->cms[$this->data->cmid]->get_icon_url();
+        $iconclass = $iconurl->get_param('filtericon') ? '' : 'nofilter';
+>>>>>>> forked/LAE_400_PACKAGE
         return array(
             'viewurl' => (new moodle_url('/mod/'.$this->data->modname.'/view.php',
                 array('id' => $this->data->cmid)))->out(false),
             'courseviewurl' => (new moodle_url('/course/view.php', array('id' => $this->data->courseid)))->out(false),
             'icon' => \html_writer::img(
+<<<<<<< HEAD
                 get_fast_modinfo($this->data->courseid)->cms[$this->data->cmid]->get_icon_url(),
                 get_string('pluginname', $this->data->modname),
                 ['title' => get_string('pluginname', $this->data->modname), 'class' => 'icon']
             ),
             'purpose' => plugin_supports('mod', $this->data->modname, FEATURE_MOD_PURPOSE, MOD_PURPOSE_OTHER)
+=======
+                $iconurl,
+                get_string('pluginname', $this->data->modname),
+                ['title' => get_string('pluginname', $this->data->modname), 'class' => "icon $iconclass"]
+            ),
+            'purpose' => plugin_supports('mod', $this->data->modname, FEATURE_MOD_PURPOSE, MOD_PURPOSE_OTHER),
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 

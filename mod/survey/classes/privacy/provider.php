@@ -227,7 +227,11 @@ class provider implements
                 'options' => $record->qoptions
             ]);
             $qtype = $record->qtype;
+<<<<<<< HEAD
             $options = explode(',', $q->options ?? '');
+=======
+            $options = explode(',', $q->options);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $carry[] = [
                 'question' => array_merge((array) $q, [

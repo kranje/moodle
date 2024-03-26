@@ -114,7 +114,10 @@ class PolynomialBestFit extends BestFit
 
     public function getCoefficients($dp = 0)
     {
+<<<<<<< HEAD
         // @phpstan-ignore-next-line
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return array_merge([$this->getIntersect($dp)], $this->getSlope($dp));
     }
 

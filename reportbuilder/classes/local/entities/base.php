@@ -139,8 +139,12 @@ abstract class base {
     }
 
     /**
+<<<<<<< HEAD
      * Override the default alias for given database table used in entity queries, to avoid table alias clashes that may occur
      * if multiple entities of a report each define the same default alias for one of their tables
+=======
+     * Override the default alias for given database table used in entity queries
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param string $tablename
      * @param string $alias
@@ -157,6 +161,7 @@ abstract class base {
     }
 
     /**
+<<<<<<< HEAD
      * Override multiple default database table aliases used in entity queries as per {@see set_table_alias}, typically when
      * you're adding an entity multiple times to a report you'd want to override the table aliases in the second instance to
      * avoid clashes with the first
@@ -172,6 +177,8 @@ abstract class base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns an alias used in the queries for a given table
      *
      * @param string $tablename
@@ -216,7 +223,11 @@ abstract class base {
      *
      * @return string[]
      */
+<<<<<<< HEAD
     final public function get_joins(): array {
+=======
+    final protected function get_joins(): array {
+>>>>>>> forked/LAE_400_PACKAGE
         return array_values($this->joins);
     }
 

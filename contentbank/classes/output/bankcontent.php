@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * core_contentbank specific renderers
  *
@@ -24,16 +25,29 @@
 
 namespace core_contentbank\output;
 
+=======
+namespace core_contentbank\output;
+
+use context_coursecat;
+use core_contentbank\content;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_contentbank\contentbank;
 use renderable;
 use templatable;
 use renderer_base;
 use stdClass;
+<<<<<<< HEAD
 use core_contentbank\content;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Class containing data for bank content
  *
+<<<<<<< HEAD
+=======
+ * @package    core_contentbank
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright  2020 Ferran Recio <ferran@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -138,7 +152,13 @@ class bankcontent implements renderable, templatable {
         }
         $options = [];
         foreach ($this->allowedcategories as $allowedcategory) {
+<<<<<<< HEAD
             $options[$allowedcategory->ctxid] = $allowedcategory->name;
+=======
+            $options[$allowedcategory->ctxid] = format_string($allowedcategory->name, true, [
+                'context' => context_coursecat::instance($allowedcategory->ctxinstance),
+            ]);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if (!empty($options)) {
             $allowedcontexts['categories'] = [get_string('coursecategories') => $options];
@@ -154,6 +174,7 @@ class bankcontent implements renderable, templatable {
             $allowedcontexts['courses'] = [get_string('courses') => $options];
         }
         if (!empty($allowedcontexts)) {
+<<<<<<< HEAD
             $url = new \moodle_url('/contentbank/index.php');
             $singleselect = new \single_select(
                 $url,
@@ -162,6 +183,17 @@ class bankcontent implements renderable, templatable {
                 $this->context->id,
                 get_string('choosecontext', 'core_contentbank')
             );
+=======
+            $strchoosecontext = get_string('choosecontext', 'core_contentbank');
+            $singleselect = new \single_select(
+                new \moodle_url('/contentbank/index.php'),
+                'contextid',
+                $allowedcontexts,
+                $this->context->id,
+                $strchoosecontext
+            );
+            $singleselect->set_label($strchoosecontext, ['class' => 'sr-only']);
+>>>>>>> forked/LAE_400_PACKAGE
             $data->allowedcontexts = $singleselect->export_for_template($output);
         }
 

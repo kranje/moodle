@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Attr.IDBlacklist
 TYPE: list
 DEFAULT: array()
 DESCRIPTION: Array of IDs not allowed in the document.
 --# vim: et sw=4 sts=4
+=======
+Attr.IDBlacklist
+TYPE: list
+DEFAULT: array()
+DESCRIPTION: Array of IDs not allowed in the document.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

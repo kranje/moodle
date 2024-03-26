@@ -46,7 +46,11 @@ $PAGE->navbar->add(get_string('editlangpack', 'tool_customlang'), $PAGE->url);
 
 if (empty($lng)) {
     // PARAM_LANG validation failed
+<<<<<<< HEAD
     throw new \moodle_exception('missingparameter');
+=======
+    print_error('missingparameter');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // pre-output processing

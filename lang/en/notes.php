@@ -29,7 +29,10 @@ $string['addbulknotesingle'] = 'Add a new note to 1 person';
 $string['addbulknotedone'] = 'Note added to {$a} people';
 $string['addbulknotedonesingle'] = 'Note added to 1 person';
 $string['addnewnoteselect'] = 'Select users to write notes about';
+<<<<<<< HEAD
 $string['author'] = 'Author';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['bynameondate'] = 'by {$a->name} - {$a->date}';
 $string['configenablenotes'] = 'Enable storing of notes about individual users.';
 $string['content'] = 'Content';
@@ -72,7 +75,10 @@ $string['publishstate_help'] = 'A note\'s context determines who can see the not
 * Personal - The note will be visible only to you
 * Course - The note will be visible to teachers in this course
 * Site - The note will be visible to teachers in all courses';
+<<<<<<< HEAD
 $string['recipient'] = 'Recipient';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['site'] = 'site';
 $string['sitenotes'] = 'Site notes';
 $string['unknown'] = 'unknown';

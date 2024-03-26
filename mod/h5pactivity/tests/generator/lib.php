@@ -55,7 +55,12 @@ class mod_h5pactivity_generator extends testing_module_generator {
         // Fill in optional values if not specified.
         if (!isset($record->packagefilepath)) {
             $record->packagefilepath = $CFG->dirroot.'/h5p/tests/fixtures/h5ptest.zip';
+<<<<<<< HEAD
         } else if (strpos($record->packagefilepath, $CFG->dirroot) !== 0) {
+=======
+        }
+        if (strpos($record->packagefilepath, $CFG->dirroot) !== 0) {
+>>>>>>> forked/LAE_400_PACKAGE
             $record->packagefilepath = "{$CFG->dirroot}/{$record->packagefilepath}";
         }
         if (!isset($record->grade)) {

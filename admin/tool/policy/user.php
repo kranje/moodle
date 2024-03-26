@@ -31,7 +31,11 @@ $returnurl = optional_param('returnurl', null, PARAM_LOCALURL);
 require_login();
 $userid = $userid ?: $USER->id;
 if (isguestuser() || isguestuser($userid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('noguest');
+=======
+    print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $context = context_user::instance($userid);
 if ($userid != $USER->id) {

@@ -6,7 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +28,10 @@ use MongoDB\Driver\Session;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\CachingIterator;
 use MongoDB\Operation\Executable;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_array;
 use function is_bool;
 use function is_integer;
@@ -34,7 +41,11 @@ use function is_object;
  * Wrapper for the listCollections command.
  *
  * @internal
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/listCollections/
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/listCollections/
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class ListCollections implements Executable
 {
@@ -49,6 +60,7 @@ class ListCollections implements Executable
      *
      * Supported options:
      *
+<<<<<<< HEAD
      *  * authorizedCollections (boolean): Determines which collections are
      *    returned based on the user privileges.
      *
@@ -58,6 +70,8 @@ class ListCollections implements Executable
      *
      *    This is not supported for servers versions < 4.4.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *  * filter (document): Query by which to filter collections.
      *
      *  * maxTimeMS (integer): The maximum amount of time to allow the query to
@@ -69,16 +83,26 @@ class ListCollections implements Executable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $databaseName Database name
      * @param array  $options      Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, array $options = [])
     {
         if (isset($options['authorizedCollections']) && ! is_bool($options['authorizedCollections'])) {
             throw InvalidArgumentException::invalidType('"authorizedCollections" option', $options['authorizedCollections'], 'boolean');
         }
 
+=======
+    public function __construct($databaseName, array $options = [])
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['filter']) && ! is_array($options['filter']) && ! is_object($options['filter'])) {
             throw InvalidArgumentException::invalidType('"filter" option', $options['filter'], 'array or object');
         }
@@ -95,7 +119,11 @@ class ListCollections implements Executable
             throw InvalidArgumentException::invalidType('"session" option', $options['session'], Session::class);
         }
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
+=======
+        $this->databaseName = (string) $databaseName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->options = $options;
     }
 
@@ -103,6 +131,7 @@ class ListCollections implements Executable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server): CachingIterator
@@ -117,6 +146,13 @@ class ListCollections implements Executable
      * Create the listCollections command.
      */
     private function createCommand(): Command
+=======
+     * @param Server $server
+     * @return CachingIterator
+     * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
+     */
+    public function execute(Server $server)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $cmd = ['listCollections' => 1];
 
@@ -124,6 +160,7 @@ class ListCollections implements Executable
             $cmd['filter'] = (object) $this->options['filter'];
         }
 
+<<<<<<< HEAD
         foreach (['authorizedCollections', 'comment', 'maxTimeMS', 'nameOnly'] as $option) {
             if (isset($this->options[$option])) {
                 $cmd[$option] = $this->options[$option];
@@ -131,6 +168,20 @@ class ListCollections implements Executable
         }
 
         return new Command($cmd);
+=======
+        if (isset($this->options['maxTimeMS'])) {
+            $cmd['maxTimeMS'] = $this->options['maxTimeMS'];
+        }
+
+        if (isset($this->options['nameOnly'])) {
+            $cmd['nameOnly'] = $this->options['nameOnly'];
+        }
+
+        $cursor = $server->executeReadCommand($this->databaseName, new Command($cmd), $this->createOptions());
+        $cursor->setTypeMap(['root' => 'array', 'document' => 'array']);
+
+        return new CachingIterator($cursor);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -139,9 +190,16 @@ class ListCollections implements Executable
      * Note: read preference is intentionally omitted, as the spec requires that
      * the command be executed on the primary.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-server.executecommand.php
      */
     private function createOptions(): array
+=======
+     * @see http://php.net/manual/en/mongodb-driver-server.executecommand.php
+     * @return array
+     */
+    private function createOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 

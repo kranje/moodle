@@ -88,7 +88,10 @@ class recordset_walk implements \Iterator {
      *
      * @return mixed|bool The returned value type will depend on the callback.
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
 
         if (!$this->recordset->valid()) {
@@ -112,8 +115,13 @@ class recordset_walk implements \Iterator {
      *
      * @return void
      */
+<<<<<<< HEAD
     public function next(): void {
         $this->recordset->next();
+=======
+    public function next() {
+        return $this->recordset->next();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -121,7 +129,10 @@ class recordset_walk implements \Iterator {
      *
      * @return int
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->recordset->key();
     }
@@ -135,7 +146,11 @@ class recordset_walk implements \Iterator {
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!$valid = $this->recordset->valid()) {
             $this->close();
         }
@@ -147,7 +162,11 @@ class recordset_walk implements \Iterator {
      *
      * @return void
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         // No rewind as it is not implemented in moodle_recordset.
         return;
     }

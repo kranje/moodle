@@ -307,7 +307,11 @@ abstract class engine {
                 if ($now - $lastprogress >= manager::DISPLAY_INDEXING_PROGRESS_EVERY) {
                     $lastprogress = $now;
                     // The first date format is the same used in cron_trace_time_and_memory().
+<<<<<<< HEAD
                     $options['progress']->output(date('H:i:s', (int)$now) . ': Done to ' . userdate(
+=======
+                    $options['progress']->output(date('H:i:s', $now) . ': Done to ' . userdate(
+>>>>>>> forked/LAE_400_PACKAGE
                             $lastindexeddoc, get_string('strftimedatetimeshort', 'langconfig')), 1);
                 }
             }

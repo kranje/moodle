@@ -34,7 +34,11 @@ $completelist = report_eventlist_list_generator::get_all_events_list(false);
 
 // Check that $eventname is a valid event.
 if (!array_key_exists($eventname, $completelist)) {
+<<<<<<< HEAD
     throw new \moodle_exception('errorinvalidevent', 'report_eventlist');
+=======
+    print_error('errorinvalidevent', 'report_eventlist');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Break up the full event name to usable parts.
@@ -45,7 +49,11 @@ $directory = core_component::get_component_directory($component[1]);
 $directory = $directory . '/classes/event';
 // Verify that the directory is valid.
 if (!is_dir($directory)) {
+<<<<<<< HEAD
     throw new \moodle_exception('errorinvaliddirectory', 'report_eventlist');
+=======
+    print_error('errorinvaliddirectory', 'report_eventlist');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $filename = end($component);
 $eventfiles = $directory . '/' . $filename . '.php';

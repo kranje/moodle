@@ -274,9 +274,13 @@ class modinfolib_test extends advanced_testcase {
         $prevcacherev = $cacherev;
 
         // Little trick to check that cache is not rebuilt druing the next step - substitute the value in MUC and later check that it is still there.
+<<<<<<< HEAD
         $cache->acquire_lock($course->id);
         $cache->set_versioned($course->id, $cacherev, (object)array_merge((array)$cachedvalue, array('secretfield' => 1)));
         $cache->release_lock($course->id);
+=======
+        $cache->set_versioned($course->id, $cacherev, (object)array_merge((array)$cachedvalue, array('secretfield' => 1)));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Clear static cache and call get_fast_modinfo() again (pretend we are in another request). Cache should not be rebuilt.
         course_modinfo::clear_instance_cache();
@@ -803,7 +807,11 @@ class modinfolib_test extends advanced_testcase {
             get_course_and_cm_from_cmid($page->cmid, 'forum');
             $this->fail();
         } catch (moodle_exception $e) {
+<<<<<<< HEAD
             $this->assertEquals('invalidcoursemoduleid', $e->errorcode);
+=======
+            $this->assertEquals('invalidcoursemodule', $e->errorcode);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Invalid module name.
@@ -1100,6 +1108,7 @@ class modinfolib_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test get_cm() method to output course module id in the exception text.
      *
      * @covers \course_modinfo::get_cm
@@ -1130,6 +1139,8 @@ class modinfolib_test extends advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Tests that if the modinfo cache returns a newer-than-expected version, Moodle won't rebuild
      * it.
      *

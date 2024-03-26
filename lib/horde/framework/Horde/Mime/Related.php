@@ -153,7 +153,10 @@ class Horde_Mime_Related implements IteratorAggregate
 
     /* IteratorAggregate method. */
 
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_cids);

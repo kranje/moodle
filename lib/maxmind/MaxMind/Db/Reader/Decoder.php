@@ -7,6 +7,16 @@ namespace MaxMind\Db\Reader;
 // @codingStandardsIgnoreLine
 use RuntimeException;
 
+<<<<<<< HEAD
+=======
+/*
+ * @ignore
+ *
+ * We subtract 1 from the log to protect against precision loss.
+ */
+\define(__NAMESPACE__ . '\_MM_MAX_INT_BYTES', (int) ((log(\PHP_INT_MAX, 2) - 1) / 8));
+
+>>>>>>> forked/LAE_400_PACKAGE
 class Decoder
 {
     /**
@@ -309,11 +319,19 @@ class Decoder
 
         $integer = 0;
 
+<<<<<<< HEAD
         // PHP integers are signed. PHP_INT_SIZE - 1 is the number of
         // complete bytes that can be converted to an integer. However,
         // we can convert another byte if the leading bit is zero.
         $useRealInts = $byteLength <= \PHP_INT_SIZE - 1
             || ($byteLength === \PHP_INT_SIZE && (\ord($bytes[0]) & 0x80) === 0);
+=======
+        // PHP integers are signed. _MM_MAX_INT_BYTES is the number of
+        // complete bytes that can be converted to an integer. However,
+        // we can convert another byte if the leading bit is zero.
+        $useRealInts = $byteLength <= _MM_MAX_INT_BYTES
+            || ($byteLength === _MM_MAX_INT_BYTES + 1 && (\ord($bytes[0]) & 0x80) === 0);
+>>>>>>> forked/LAE_400_PACKAGE
 
         for ($i = 0; $i < $byteLength; ++$i) {
             $part = \ord($bytes[$i]);
@@ -337,7 +355,11 @@ class Decoder
 
     private function sizeFromCtrlByte(int $ctrlByte, int $offset): array
     {
+<<<<<<< HEAD
         $size = $ctrlByte & 0x1F;
+=======
+        $size = $ctrlByte & 0x1f;
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($size < 29) {
             return [$size, $offset];

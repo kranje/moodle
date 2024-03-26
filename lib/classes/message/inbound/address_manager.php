@@ -459,8 +459,15 @@ class address_manager {
      */
     protected function pack_int($int) {
         if (PHP_INT_SIZE === 8) {
+<<<<<<< HEAD
             $l = intdiv($int, pow(2, 32)); // 32-bit integer quotient.
             $r = $int % pow(2, 32); // 32-bit integer remaining.
+=======
+            $left = 0xffffffff00000000;
+            $right = 0x00000000ffffffff;
+            $l = ($int & $left) >>32;
+            $r = $int & $right;
+>>>>>>> forked/LAE_400_PACKAGE
 
             return pack('NN', $l, $r);
         } else {

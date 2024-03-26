@@ -73,7 +73,11 @@ if (!empty($CFG->recaptchapublickey) && !empty($CFG->recaptchaprivatekey)) {
     // To use reCAPTCHA you must have an API key.
     require_once($CFG->libdir . '/filelib.php');
     send_header_404();
+<<<<<<< HEAD
     throw new \moodle_exception('cannotusepage2');
+=======
+    print_error('cannotusepage2');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $output = <<<OET

@@ -24,9 +24,15 @@
  */
 
 $string['action'] = 'Action';
+<<<<<<< HEAD
 $string['actionsmenu'] = 'Actions menu';
 $string['add'] = 'Add entry';
 $string['addcomment'] = 'Add comment';
+=======
+$string['add'] = 'Add entry';
+$string['addcomment'] = 'Add comment';
+$string['addentries'] = 'Add entries';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['addtemplate'] = 'Add entry template';
 $string['advancedsearch'] = 'Advanced search';
 $string['allowcomments'] = 'Allow comments on entries';
@@ -38,8 +44,13 @@ $string['areacontent'] = 'Fields';
 $string['ascending'] = 'Ascending';
 $string['asearchtemplate'] = 'Advanced search template';
 $string['atmaxentry'] = 'You have entered the maximum number of entries allowed!';
+<<<<<<< HEAD
 $string['authorfirstname'] = 'First name';
 $string['authorlastname'] = 'Last name';
+=======
+$string['authorfirstname'] = 'Author first name';
+$string['authorlastname'] = 'Author last name';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['autogenallforms'] = 'Generate all default templates';
 $string['autolinkurl'] = 'Autolink the URL';
 $string['availablefromdate'] = 'Available from';
@@ -51,6 +62,11 @@ Fields have the format [[fieldname]]. All other tags have the format ##sometag##
 Only the tags that are in the "Available tags" list may be used for the current template.';
 $string['availabletodate'] = 'Available to';
 $string['availabletodatevalidation'] = 'The available to date cannot be before the available from date.';
+<<<<<<< HEAD
+=======
+$string['blank'] = 'Blank';
+$string['buttons'] = 'Actions';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['bynameondate'] = 'by {$a->name} - {$a->date}';
 $string['calendarend'] = '{$a} closes';
 $string['calendarstart'] = '{$a} opens';
@@ -60,7 +76,10 @@ $string['cannotadd'] = 'Can not add entries!';
 $string['cannotdeletepreset'] = 'Error deleting preset';
 $string['cannotoverwritepreset'] = 'Error overwriting preset';
 $string['cannotunziptopreset'] = 'Cannot unzip to the preset directory';
+<<<<<<< HEAD
 $string['cannotapplypreset'] = 'Error applying the preset.';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['closebeforeopen'] = 'You have specified an end date before the start date.';
 $string['columns'] = 'columns';
 $string['comment'] = 'Comment';
@@ -78,9 +97,12 @@ $string['configenablerssfeeds'] = 'This switch will enable the possibility of RS
 $string['confirmdeletefield'] = 'You are about to delete this field, are you sure?';
 $string['confirmdeleterecord'] = 'Are you sure you want to delete this entry?';
 $string['confirmdeleterecords'] = 'Are you sure you want to delete these entries?';
+<<<<<<< HEAD
 $string['createactivity'] = 'Create your own fields to collect data, or use a preset which includes fields already.';
 $string['createfields'] = 'Create fields to collect different types of data.';
 $string['createtemplates'] = 'Templates define the interface of your activity. Once you create fields, templates will be created automatically. Alternatively, you can use a preset, which includes fields and templates.';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['csstemplate'] = 'Custom CSS';
 $string['csvfailed'] = 'Unable to read the raw data from the CSV file';
 $string['csvfile'] = 'CSV file';
@@ -109,7 +131,10 @@ $string['data:writeentry'] = 'Write entries';
 $string['data:view'] = 'View database activity';
 $string['date'] = 'Date';
 $string['dateentered'] = 'Date entered';
+<<<<<<< HEAD
 $string['datemodified'] = 'Last edited:';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['defaultfielddelimiter'] = '(default is the comma character)';
 $string['defaultfieldenclosure'] = '(default is none)';
 $string['defaultsortfield'] = 'Default sort field';
@@ -117,12 +142,19 @@ $string['delcheck'] = 'Bulk delete checkbox';
 $string['delete'] = 'Delete';
 $string['deleteallentries'] = 'Delete all entries';
 $string['deletecomment'] = 'Are you sure you want to delete this comment?';
+<<<<<<< HEAD
 $string['deleteconfirm'] = 'Delete preset {$a}?';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['deleted'] = 'deleted';
 $string['deleteentry'] = 'Delete entry';
 $string['deletefield'] = 'Delete field';
 $string['deletenotenrolled'] = 'Delete entries by users not enrolled';
+<<<<<<< HEAD
 $string['deletewarning'] = 'Deleting a preset removes it from the list of available presets in all courses.';
+=======
+$string['deletewarning'] = 'Are you sure you want to delete this preset?';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['descending'] = 'Descending';
 $string['directorynotapreset'] = '{$a->directory} Not a preset: missing files: {$a->missing_files}';
 $string['disapprove'] = 'Undo approval';
@@ -132,8 +164,12 @@ $string['editcomment'] = 'Edit comment';
 $string['editentry'] = 'Edit entry';
 $string['editfield'] = 'Edit field';
 $string['editordisable'] = 'Disable editor';
+<<<<<<< HEAD
 $string['editorenable'] = 'Enable code editor';
 $string['editpreset'] = 'Edit preset';
+=======
+$string['editorenable'] = 'Enable editor';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['emptyadd'] = 'The Add template is empty, generating a default form...';
 $string['emptyaddform'] = 'You did not fill out any fields!';
 $string['enabletemplateeditorcheck'] = 'Are you sure you want to enable the editor? This may result in content being altered when the template is saved.';
@@ -146,17 +182,25 @@ $string['eventrecordupdated'] = 'Record updated';
 $string['eventtemplateupdated'] = 'Template updated';
 $string['eventtemplateviewed'] = 'Templates viewed';
 $string['fileencoding'] = 'Encoding';
+<<<<<<< HEAD
 $string['emptypresetname'] = 'Preset name or file cannot be empty';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['entries'] = 'Entries';
 $string['entrieslefttoadd'] = 'You must add {$a->entriesleft} more entry/entries to complete this activity.';
 $string['entrieslefttoaddtoview'] = 'You must add {$a->entrieslefttoview} more entry/entries before you can view other participants\' entries.';
 $string['entry'] = 'Entry';
 $string['entrysaved'] = 'Your entry has been saved';
 $string['errormustbeteacher'] = 'You need to be a teacher to use this page!';
+<<<<<<< HEAD
 $string['errorpresetexists'] = 'A preset with this name already exists.';
 $string['errorpresetexistsbutnotoverwrite'] = 'A preset with this name already exists. Choose a different name.';
 $string['errormustsupplyvalue'] = 'You must supply a value here.';
 $string['errorpresetnotfound'] = 'Preset with name {$a} not found.';
+=======
+$string['errorpresetexists'] = 'There is already a preset with the selected name';
+$string['errormustsupplyvalue'] = 'You must supply a value here.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['example'] = 'Database module example';
 $string['excel'] = 'Excel';
 $string['export'] = 'Export';
@@ -168,7 +212,11 @@ $string['exportformat'] = 'Export format';
 $string['exportoptions'] = 'Export options';
 $string['exportownentries'] = 'Export your own entries only? ({$a->mine}/{$a->all})';
 $string['exportpreset'] = 'Export preset';
+<<<<<<< HEAD
 $string['failedpresetdelete'] = 'An error was encountered while trying to delete the preset.';
+=======
+$string['failedpresetdelete'] = 'Error deleting a preset!';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['fieldadded'] = 'Field added';
 $string['fieldallowautolink'] = 'Allow autolink';
 $string['fielddeleted'] = 'Field deleted';
@@ -187,7 +235,10 @@ $string['fieldnametype'] = '{$a->name} ({$a->type})';
 $string['fieldnotmatched'] = 'The following fields in your file are not known in this database: {$a}';
 $string['fieldoptions'] = 'Options (one per line)';
 $string['fields'] = 'Fields';
+<<<<<<< HEAD
 $string['fieldshelp'] = 'Create fields to collect different types of data. Fields define the structure of the entries in your database.';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['fieldsnavigation'] = 'Fields tertiary navigation';
 $string['fieldupdated'] = 'Field updated';
 $string['fieldwidth'] = 'Width';
@@ -198,8 +249,13 @@ $string['filesnotgenerated'] = 'Not all files were generated: {$a}';
 $string['filtername'] = 'Database auto-linking';
 $string['footer'] = 'Footer';
 $string['forcelinkname'] = 'Forced name for the link';
+<<<<<<< HEAD
 $string['foundnorecords'] = 'No records found. <a href="{$a->reseturl}">Clear all</a>';
 $string['foundrecords'] = 'Found {$a->num} out of {$a->max} records. <a href="{$a->reseturl}">Clear all</a>';
+=======
+$string['foundnorecords'] = 'No records found (<a href="{$a->reseturl}">Reset filters</a>)';
+$string['foundrecords'] = 'Found records: {$a->num}/{$a->max} (<a href="{$a->reseturl}">Reset filters</a>)';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['fromfile'] = 'Import from zip file';
 $string['fromfile_help'] = 'The import from zip file feature allows you to browse for and upload a preset zip of templates and fields.';
 $string['generateerror'] = 'Not all files generated!';
@@ -212,6 +268,7 @@ $string['headerlisttemplate'] = 'Define the appearance of List view.';
 $string['headerrsstemplate'] = 'Define the appearance of entries in RSS feeds.';
 $string['headersingletemplate'] = 'Define the appearance of Single view.';
 $string['checkbox'] = 'Checkboxes';
+<<<<<<< HEAD
 $string['id'] = 'Entry ID';
 $string['chooseexportfields'] = 'Choose the fields you wish to export';
 $string['chooseexportformat'] = 'Choose the format you wish to export to';
@@ -223,6 +280,15 @@ $string['importpreset'] = 'Import preset';
 $string['importapreset'] = 'Import a preset';
 $string['importsuccess'] = 'Preset applied.';
 $string['importpresetmissingcapability'] = 'You don\'t have permission to import a preset.';
+=======
+$string['chooseexportfields'] = 'Choose the fields you wish to export';
+$string['chooseexportformat'] = 'Choose the format you wish to export to';
+$string['chooseorupload'] = 'Choose file';
+$string['expired'] = 'Sorry, this activity closed on {$a} and is no longer available';
+$string['importentries'] = 'Import entries';
+$string['importpreset'] = 'Import a preset';
+$string['importsuccess'] = 'The preset has been successfully applied.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['includeapproval'] = 'Include approval status';
 $string['includetags'] = 'Include tags';
 $string['includetime'] = 'Include time added/modified';
@@ -251,9 +317,12 @@ $string['unknown'] = 'Unknown field';
 $string['invalidpreset'] = '{$a} is not a preset.';
 $string['invalidrecord'] = 'Incorrect record';
 $string['invalidurl'] = 'The URL you just entered is not valid';
+<<<<<<< HEAD
 $string['importandapply'] = 'Import preset and apply';
 $string['importpreset_desc'] = 'The preset will be applied to this activity, creating fields and templates.
  It won\'t appear in the list of presets.';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['jstemplate'] = 'Custom JavaScript';
 $string['latitude'] = 'Latitude';
 $string['latlong'] = 'Coordinates';
@@ -267,6 +336,7 @@ $string['listview'] = 'List view';
 $string['listtemplate'] = 'List view template';
 $string['longitude'] = 'Longitude';
 $string['manageapproved'] = 'Allow editing of approved entries';
+<<<<<<< HEAD
 $string['manageapproved_help'] = 'Allow students to edit or delete their entries after they’ve been approved. Edited entries will need to be reapproved.';
 $string['managefields'] = 'Manage fields';
 $string['mapexistingfield'] = 'Map to {$a}';
@@ -279,6 +349,13 @@ $string['mapping:warningmessagedelete'] = 'If fields to be deleted are of the sa
 $string['mapping:mapfields'] = 'Map fields';
 $string['mapping:applypresets'] = 'Apply preset';
 $string['mapping:dialogtitle:usepreset'] = 'Apply preset {$a}?';
+=======
+$string['managefields'] = 'Manage fields';
+$string['manageapproved_help'] = 'Allow students to edit or delete their entries after they’ve been approved. Edited entries will need to be reapproved.';
+$string['mapexistingfield'] = 'Map to {$a}';
+$string['mapnewfield'] = 'Create a new field';
+$string['mappingwarning'] = 'All old fields not mapped to a new field will be lost and all data in that field will be removed.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['maxentries'] = 'Maximum number of entries';
 $string['maxentries_help'] = 'The maximum number of entries a student is allowed to submit for this activity.';
 $string['maxsize'] = 'Maximum size';
@@ -308,7 +385,11 @@ $string['multientry'] = 'Repeated entry';
 $string['multimenu'] = 'Menu (Multi-select)';
 $string['multipletags'] = 'Multiple tags found! Template not saved';
 $string['newentry'] = 'New entry';
+<<<<<<< HEAD
 $string['newfield'] = 'Create a field';
+=======
+$string['newfield'] = 'Create a new field';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['newfield_help'] = 'A field allows the input of data. Each entry in a database activity can have multiple fields of multiple types such as a date field, which allows participants to select a day, month and year from a drop-down menu, a picture field, which allows participants to upload an image file, or a checkbox field, which allows participants to select one or more options.
 
 Each field must have a unique field name. The field description is optional.';
@@ -316,6 +397,7 @@ $string['noaccess'] = 'You do not have access to this page';
 $string['nodefinedfields'] = 'New preset has no defined fields!';
 $string['nofieldcontent'] = 'Field content not found';
 $string['nofieldindatabase'] = 'There are no fields defined for this database.';
+<<<<<<< HEAD
 $string['nofields'] = 'No fields yet';
 $string['nolisttemplate'] = 'List view template is not yet defined';
 $string['nomatch'] = 'No matching entries found!';
@@ -326,6 +408,15 @@ $string['notapproved'] = 'Pending approval';
 $string['notapprovederror'] = 'Entry is not approved yet.';
 $string['notinjectivemap'] = 'Not an injective map';
 $string['notemplates'] = 'No templates yet';
+=======
+$string['nolisttemplate'] = 'List template is not yet defined';
+$string['nomatch'] = 'No matching entries found!';
+$string['nomaximum'] = 'No maximum';
+$string['norecords'] = 'No entries in database';
+$string['nosingletemplate'] = 'Single template is not yet defined';
+$string['notapproved'] = 'Entry is not approved yet.';
+$string['notinjectivemap'] = 'Not an injective map';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['notopenyet'] = 'Sorry, this activity is not available until {$a}';
 $string['number'] = 'Number';
 $string['numberrssarticles'] = 'Entries in the RSS feed';
@@ -337,12 +428,18 @@ $string['optionaldescription'] = 'Short description (optional)';
 $string['optionalfilename'] = 'Filename (optional)';
 $string['other'] = 'Other';
 $string['overwrite'] = 'Overwrite';
+<<<<<<< HEAD
 $string['overrwritedesc'] = 'Replace existing preset with this name and overwrite its contents';
 $string['overwritesettings'] = 'Overwrite current settings such as comments, ratings, etc.';
+=======
+$string['overrwritedesc'] = 'Overwrite the preset if it already exists';
+$string['overwritesettings'] = 'Overwrite current settings';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['page-mod-data-x'] = 'Any database activity module page';
 $string['pagesize'] = 'Entries per page';
 $string['participants'] = 'Participants';
 $string['picture'] = 'Picture';
+<<<<<<< HEAD
 $string['pluginadministration'] = 'Database activity administration';
 $string['pluginname'] = 'Database';
 $string['portfolionotfile'] = 'Export to a portfolio rather than a file (csv and leap2a only)';
@@ -352,6 +449,15 @@ $string['presetnotselected'] = 'No preset has been selected.';
 $string['presets'] = 'Presets';
 $string['presetshelp'] = 'Choose a preset to use as a starting point.';
 $string['preview'] = 'Preview of {$a}';
+=======
+$string['pleaseaddsome'] = 'Please create some below or <a href="{$a}">choose a predefined set</a> to get started.';
+$string['pluginadministration'] = 'Database activity administration';
+$string['pluginname'] = 'Database';
+$string['portfolionotfile'] = 'Export to a portfolio rather than a file (csv and leap2a only)';
+$string['presetinfo'] = 'Saving as a preset will publish this template. Other users may be able to use it in their databases.';
+$string['presetnotselected'] = 'No preset has been selected.';
+$string['presets'] = 'Presets';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['privacy:metadata:commentpurpose'] = 'Comments on database records';
 $string['privacy:metadata:data_content'] = 'The content of a field';
 $string['privacy:metadata:data_content:fieldid'] = 'Field definition ID';
@@ -391,6 +497,7 @@ $string['requiredentriestoview_help'] = 'The number of entries a student is requ
 
 This is not compatible with the database auto-linking filter.';
 $string['requiredfield'] = 'Required field';
+<<<<<<< HEAD
 $string['resetalltemplates'] = 'Reset all templates';
 $string['resetalltemplatesconfirmtitle'] = 'Reset all templates?';
 $string['resetalltemplatesconfirm'] = 'You\'re about to remove all templates for your current preset. If you want to restore the templates later, you need to choose the preset again in the \'Presets\' tab.';
@@ -398,6 +505,10 @@ $string['resetsettings'] = 'Reset filters';
 $string['resettemplate'] = 'Reset template';
 $string['resettemplateconfirmtitle'] = 'Reset template?';
 $string['resettemplateconfirm'] = 'This will permanently remove the {$a} for your current preset.';
+=======
+$string['resetsettings'] = 'Reset filters';
+$string['resettemplate'] = 'Reset template';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['resizingimages'] = 'Resizing image thumbnails...';
 $string['rows'] = 'rows';
 $string['rssglobaldisabled'] = 'Disabled. See site configuration variables.';
@@ -407,12 +518,21 @@ $string['rsstype'] = 'RSS feed for this activity';
 $string['save'] = 'Save';
 $string['saveandadd'] = 'Save and add another';
 $string['saveandview'] = 'Save and view';
+<<<<<<< HEAD
 $string['saveaspreset'] = 'Publish preset on this site';
+=======
+$string['saveaspreset'] = 'Save as preset';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['saveaspreset_help'] = 'The save as preset feature publishes the templates and fields as a preset which others on the site can then use. (You may delete it from the list of presets at any time.)';
 $string['savedataaspreset'] = 'Save all fields and templates and publish as preset on this site';
 $string['saveaspresetmissingcapability'] = 'The user does not have permission to save the database as a preset.';
 $string['savesettings'] = 'Save settings';
+<<<<<<< HEAD
 $string['savesuccess'] = 'Preset saved. <a href="{$a->url}">Preview preset</a>';
+=======
+$string['savesuccess'] = 'Saved successfully. Your preset will now be available across the site.';
+$string['savetemplate'] = 'Save template';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['search'] = 'Search';
 $string['search:activity'] = 'Database - activity information';
 $string['search:entry'] = 'Database - entries';
@@ -420,11 +540,17 @@ $string['selectedrequired'] = 'All selected required';
 $string['selectfields'] = 'Select fields';
 $string['selectexportoptions'] = 'Select export options';
 $string['showall'] = 'Show all entries';
+<<<<<<< HEAD
 $string['showmore'] = 'Show more';
 $string['single'] = 'View single';
 $string['singleview'] = 'Single view';
 $string['singletemplate'] = 'Single view template';
 $string['startbuilding'] = 'Start building your activity';
+=======
+$string['single'] = 'View single';
+$string['singleview'] = 'Single view';
+$string['singletemplate'] = 'Single view template';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['subplugintype_datafield'] = 'Database field type';
 $string['subplugintype_datafield_plural'] = 'Database field types';
 $string['subplugintype_datapreset'] = 'Preset';
@@ -434,14 +560,21 @@ $string['tags'] = 'Tags';
 $string['tagsdeleted'] = 'Database tags have been deleted';
 $string['teachersandstudents'] = '{$a->teachers} and {$a->students}';
 $string['templates'] = 'Templates';
+<<<<<<< HEAD
 $string['templatereset'] = 'Template reset';
 $string['templateresetall'] = 'All templates reset';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['templatesnavigation'] = 'Templates tertiary navigation';
 $string['templatesaved'] = 'Template saved';
 $string['text'] = 'Text';
 $string['textarea'] = 'Text area';
 $string['timeadded'] = 'Time added';
 $string['timemodified'] = 'Time modified';
+<<<<<<< HEAD
+=======
+$string['todatabase'] = 'to this database.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['type'] = 'Field type';
 $string['undefinedprocessactionmethod'] = 'No action method defined in Data_Preset to handle action "{$a}".';
 $string['unsupportedfields'] = 'Unsupported fields';
@@ -460,18 +593,26 @@ $string['uploadrecords_link'] = 'mod/data/import';
 $string['url'] = 'URL';
 $string['usedate'] = 'Include in search.';
 $string['usepredefinedset'] = 'Use predefined set';
+<<<<<<< HEAD
 $string['usepreset'] = 'Use this preset';
+=======
+$string['usepreset'] = 'Use preset';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['usestandard'] = 'Use a preset';
 $string['usestandard_help'] = 'To use a preset available to the whole site, select it from the list. (If you have added a preset to the list using the save as preset feature then you have the option of deleting it.)';
 $string['viewfromdate'] = 'Read only from';
 $string['viewnavigation'] = 'View mode tertiary navigation';
+<<<<<<< HEAD
 $string['viewtemplates'] = 'View templates';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['viewtodate'] = 'Read only to';
 $string['viewtodatevalidation'] = 'The read only to date cannot be before the read only from date.';
 $string['wrongdataid'] = 'Wrong data ID provided';
 
 // Deprecated since Moodle 3.11.
 $string['unsupportedexport'] = '({$a->fieldtype}) cannot be exported.';
+<<<<<<< HEAD
 
 // Deprecated since Moodle 4.1.
 $string['buttons'] = 'Actions';
@@ -483,3 +624,5 @@ $string['savetemplate'] = 'Save template';
 $string['addedby'] = 'Added by';
 $string['addentries'] = 'Add entries';
 $string['todatabase'] = 'to this database.';
+=======
+>>>>>>> forked/LAE_400_PACKAGE

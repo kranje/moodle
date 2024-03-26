@@ -104,7 +104,11 @@ class editor {
         // Load the present content.
         $this->oldcontent = $this->core->loadContent($id);
         if ($this->oldcontent === null) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidelementid');
+=======
+            print_error('invalidelementid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Identify the content type library.
@@ -115,7 +119,11 @@ class editor {
         $fs = get_file_storage();
         $oldfile = $fs->get_file_by_hash($pathnamehash);
         if (!$oldfile) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidelementid');
+=======
+            print_error('invalidelementid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $this->set_filearea(
             $oldfile->get_contextid(),

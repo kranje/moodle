@@ -21,10 +21,13 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 require_once($CFG->dirroot.'/lib/filelib.php');
 require_once($CFG->dirroot.'/repository/lib.php');
 
@@ -38,6 +41,7 @@ class data_field_textarea extends data_field_base {
      */
     protected static $priority = self::LOW_PRIORITY;
 
+<<<<<<< HEAD
     public function supports_preview(): bool {
         return true;
     }
@@ -55,6 +59,8 @@ class data_field_textarea extends data_field_base {
         ];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Returns options for embedded files
      *
@@ -120,7 +126,11 @@ class data_field_textarea extends data_field_base {
             $text = file_prepare_draft_area($draftitemid, $this->context->id, 'mod_data', 'content', $content->id, $options, $text);
         } else {
             $draftitemid = file_get_unused_draft_itemid();
+<<<<<<< HEAD
             $format = FORMAT_HTML;
+=======
+            $format = editors_get_preferred_format();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // get filepicker info
@@ -272,6 +282,7 @@ class data_field_textarea extends data_field_base {
      * @return bool|string
      */
     function display_browse_field($recordid, $template) {
+<<<<<<< HEAD
         $content = $this->get_data_content($recordid);
         if (!$content || !isset($content->content)) {
             return '';
@@ -292,6 +303,25 @@ class data_field_textarea extends data_field_base {
         );
         $str = format_text($str, $content->content1, $options);
         return '<div class="data-field-html">' . $str . '</div>';
+=======
+        global $DB;
+
+        if ($content = $DB->get_record('data_content', array('fieldid' => $this->field->id, 'recordid' => $recordid))) {
+            if (isset($content->content)) {
+                $options = new stdClass();
+                if ($this->field->param1 == '1') {  // We are autolinking this field, so disable linking within us
+                    $options->filter = false;
+                }
+                $options->para = false;
+                $str = file_rewrite_pluginfile_urls($content->content, 'pluginfile.php', $this->context->id, 'mod_data', 'content', $content->id, $this->get_options());
+                $str = format_text($str, $content->content1, $options);
+            } else {
+                $str = '';
+            }
+            return $str;
+        }
+        return false;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

@@ -135,6 +135,13 @@ $courseindex-item-current: $primary !default;
                 color: $danger;
             }
         }
+<<<<<<< HEAD
+=======
+
+        &.indented {
+            margin-left: map-get($spacers, 3);
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // The full section collapsable.

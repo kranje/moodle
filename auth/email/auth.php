@@ -139,7 +139,11 @@ class auth_plugin_email extends auth_plugin_base {
         \core\event\user_created::create_from_userid($user->id)->trigger();
 
         if (! send_confirmation_email($user, $confirmationurl)) {
+<<<<<<< HEAD
             throw new \moodle_exception('auth_emailnoemail', 'auth_email');
+=======
+            print_error('auth_emailnoemail', 'auth_email');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($notify) {

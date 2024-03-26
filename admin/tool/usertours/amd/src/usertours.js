@@ -14,6 +14,11 @@ import {eventTypes} from './events';
 
 let currentTour = null;
 let tourId = null;
+<<<<<<< HEAD
+=======
+let restartTourAndKeepProgress = false;
+let currentStepNo = null;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Find the first matching tour.
@@ -75,6 +80,23 @@ export const init = async(tourDetails, filters) => {
             resetTourState(tourId);
         }
     });
+<<<<<<< HEAD
+=======
+
+    // Watch for the resize event.
+    window.addEventListener("resize", () => {
+        // Only listen for the running tour.
+        if (currentTour && currentTour.tourRunning) {
+            clearTimeout(window.resizedFinished);
+            window.resizedFinished = setTimeout(() => {
+                // Wait until the resize event has finished.
+                currentStepNo = currentTour.getCurrentStepNumber();
+                restartTourAndKeepProgress = true;
+                resetTourState(tourId);
+            }, 250);
+        }
+    });
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**
@@ -187,7 +209,17 @@ const startBootstrapTour = (tourId, template, tourConfig) => {
     });
 
     currentTour = new BootstrapTour(tourConfig);
+<<<<<<< HEAD
     return currentTour.startTour();
+=======
+    let startAt = 0;
+    if (restartTourAndKeepProgress && currentStepNo) {
+        startAt = currentStepNo;
+        restartTourAndKeepProgress = false;
+        currentStepNo = null;
+    }
+    return currentTour.startTour(startAt);
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**

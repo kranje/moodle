@@ -122,5 +122,8 @@ class SimplePie_Rating
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Rating', 'SimplePie\Rating', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

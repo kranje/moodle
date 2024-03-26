@@ -19,7 +19,10 @@ declare(strict_types=1);
 namespace core_reportbuilder\table;
 
 use action_menu;
+<<<<<<< HEAD
 use action_menu_filler;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_table\local\filter\filterset;
 use html_writer;
 use moodle_exception;
@@ -224,6 +227,7 @@ class system_report_table extends base_report_table {
 
         $menu = new action_menu();
         $menu->set_menu_trigger($OUTPUT->pix_icon('a/setting', get_string('actions', 'core_reportbuilder')));
+<<<<<<< HEAD
 
         $actions = array_filter($this->report->get_actions(), function($action) use ($row) {
             // Only return dividers and action items who can be displayed for current users.
@@ -251,6 +255,11 @@ class system_report_table extends base_report_table {
                 $actionlink = $action->get_action_link($row);
             }
 
+=======
+        foreach ($this->report->get_actions() as $action) {
+            // Ensure the action link can be displayed for the current row.
+            $actionlink = $action->get_action_link($row);
+>>>>>>> forked/LAE_400_PACKAGE
             if ($actionlink) {
                 $menu->add($actionlink);
             }

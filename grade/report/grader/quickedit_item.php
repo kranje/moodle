@@ -44,11 +44,19 @@ $PAGE->set_url($url);
 
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
 }
 
 if (!$item = $DB->get_record('grade_items', array('id' => $itemid))) {
     throw new \moodle_exception('noitemid', 'grades');
+=======
+    print_error('invalidcourseid');
+}
+
+if (!$item = $DB->get_record('grade_items', array('id' => $itemid))) {
+    print_error('noitemid', 'grades');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);

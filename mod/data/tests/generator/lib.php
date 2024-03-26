@@ -23,9 +23,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 use mod_data\manager;
 use mod_data\preset;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die();
 
 
@@ -120,11 +123,14 @@ class mod_data_generator extends testing_module_generator {
             $record['description'] = " This is testField - " . $this->databasefieldcount;
         }
 
+<<<<<<< HEAD
         if (isset($record['param1']) && !empty($record['param1'])) {
             // Some fields have multiline entries.
             $record['param1'] = str_replace('\n', "\n", $record['param1']);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (!isset($record['param1'])) {
             if ($record['type'] == 'checkbox') {
                 $record['param1'] = implode("\n", array('opt1', 'opt2', 'opt3', 'opt4'));
@@ -183,6 +189,11 @@ class mod_data_generator extends testing_module_generator {
         $field = data_get_field($record, $data);
         $field->insert_field();
 
+<<<<<<< HEAD
+=======
+        data_generate_default_template($data, 'addtemplate', 0, false, true);
+
+>>>>>>> forked/LAE_400_PACKAGE
         return $field;
     }
 
@@ -211,6 +222,7 @@ class mod_data_generator extends testing_module_generator {
      * @param int $groupid
      * @param array $tags
      * @param array $options
+<<<<<<< HEAD
      * @param int $userid if defined, it will be the author of the entry
      * @return int id of the generated record in table {data_records}
      */
@@ -224,6 +236,13 @@ class mod_data_generator extends testing_module_generator {
             $this->set_user($user);
         }
 
+=======
+     * @return int id of the generated record in table {data_records}
+     */
+    public function create_entry($data, array $contents, $groupid = 0, $tags = [], array $options = null) {
+        global $DB, $USER, $CFG;
+
+>>>>>>> forked/LAE_400_PACKAGE
         $this->databaserecordcount++;
 
         $recordid = data_add_record($data, $groupid);
@@ -373,6 +392,7 @@ class mod_data_generator extends testing_module_generator {
                 context_module::instance($cm->id), $tags);
         }
 
+<<<<<<< HEAD
         if (isset($currentuser)) {
             $this->set_user($currentuser);
         }
@@ -421,4 +441,8 @@ class mod_data_generator extends testing_module_generator {
 
         return $preset;
     }
+=======
+        return $recordid;
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

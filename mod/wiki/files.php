@@ -34,7 +34,11 @@ $userid       = optional_param('uid', 0, PARAM_INT); // User ID
 $groupanduser = optional_param('groupanduser', null, PARAM_TEXT);
 
 if (!$page = wiki_get_page($pageid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectpageid', 'wiki');
+=======
+    print_error('incorrectpageid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($groupanduser) {
@@ -46,7 +50,11 @@ if ($groupanduser) {
 if ($wid) {
     // in group mode
     if (!$wiki = wiki_get_wiki($wid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if (!$subwiki = wiki_get_subwiki_by_group($wiki->id, $currentgroup, $userid)) {
         // create subwiki if doesn't exist
@@ -56,18 +64,30 @@ if ($wid) {
 } else {
     // no group
     if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+=======
+        print_error('incorrectsubwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Checking wiki instance of that subwiki
     if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
 // Checking course module instance
 if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Checking course instance
@@ -80,7 +100,11 @@ $PAGE->set_url($url);
 require_course_login($course, true, $cm);
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotviewfiles', 'wiki');
+=======
+    print_error('cannotviewfiles', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->set_title(get_string('wikifiles', 'wiki'));

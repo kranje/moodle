@@ -41,7 +41,11 @@ $feedbackstructure = new mod_feedback_structure($feedback, $cm);
 $context = context_module::instance($cm->id);
 
 if (!$feedbackstructure->can_view_analysis()) {
+<<<<<<< HEAD
     throw new \moodle_exception('error');
+=======
+    print_error('error');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /// Print the page header

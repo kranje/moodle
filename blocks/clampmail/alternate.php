@@ -23,6 +23,11 @@
  */
 
 require_once('../../config.php');
+<<<<<<< HEAD
+=======
+require_once('lib.php');
+require_once('alt_lib.php');
+>>>>>>> forked/LAE_400_PACKAGE
 
 $courseid = required_param('courseid', PARAM_INT);
 $action = optional_param('action', 'view', PARAM_TEXT);
@@ -55,12 +60,20 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 $PAGE->set_pagetype($blockname);
 
+<<<<<<< HEAD
 if (!method_exists('block_clampmail\alternate', $action)) {
+=======
+if (!method_exists('clampmail_alternate', $action)) {
+>>>>>>> forked/LAE_400_PACKAGE
     // Always fallback on view.
     $action = 'view';
 }
 
+<<<<<<< HEAD
 $body = block_clampmail\alternate::$action($course, $id);
+=======
+$body = clampmail_alternate::$action($course, $id);
+>>>>>>> forked/LAE_400_PACKAGE
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading($blockname);

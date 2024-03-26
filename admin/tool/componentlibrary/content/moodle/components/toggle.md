@@ -19,7 +19,10 @@ The parameters for the template context are:
 * checked: If the initial status is checked.
 * disabled: If toggle input is disabled.
 * dataattributes: Array of name/value elements added as data-attributes.
+<<<<<<< HEAD
 * title: Title text.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 * label: Label text.
 * labelclasses: Any extra classes added to the label container.
 
@@ -36,7 +39,10 @@ Checked toggle and with "sr-only" label.
             "name": "action",
             "value": "toggle-status"
         }],
+<<<<<<< HEAD
         "title": "Toggle Enabled",
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         "label": "Enable/disable status",
         "labelclasses": "sr-only"
     }
@@ -54,7 +60,10 @@ Disabled toggle with extra classes.
             "name": "action",
             "value": "toggle-status"
         }],
+<<<<<<< HEAD
         "title": "Toggle Disabled",
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         "label": "Enable/disable status"
     }
 {{< /mustache >}}
@@ -71,7 +80,10 @@ The parameters that you can define are:
     * disabled
 * labelmarkup: Label element code block.
   * Should include *class="custom-control-label"*.
+<<<<<<< HEAD
 * title: Title text.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 * label: Label text.
 * labelclasses: Any extra classes added to the label container.
 

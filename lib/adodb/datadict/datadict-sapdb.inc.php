@@ -30,6 +30,7 @@ class ADODB2_sapdb extends ADODB_DataDict {
 
  	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		$meta = strtoupper($meta);
 		
 		/*
@@ -39,6 +40,8 @@ class ADODB2_sapdb extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		switch($meta) {
 		case 'C': return 'VARCHAR';
 		case 'XL':
@@ -74,12 +77,15 @@ class ADODB2_sapdb extends ADODB_DataDict {
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 		
 		$t = strtoupper($t);
 		
 		if (array_key_exists($t,$this->connection->customActualTypes))
 			return  $this->connection->customActualTypes[$t];
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		static $maxdb_type2adodb = array(
 			'VARCHAR'	=> 'C',
 			'CHARACTER'	=> 'C',

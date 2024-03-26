@@ -46,16 +46,28 @@ if ($qid !== 0) {
 $PAGE->set_url($url);
 
 if (!$cm = get_coursemodule_from_id('survey', $id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
 }
 
 if (!$course = $DB->get_record("course", array("id" => $cm->course))) {
     throw new \moodle_exception('coursemisconf');
+=======
+    print_error('invalidcoursemodule');
+}
+
+if (!$course = $DB->get_record("course", array("id" => $cm->course))) {
+    print_error('coursemisconf');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($sid) {
     if (!$user = $DB->get_record("user", array("id" => $sid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invaliduserid');
+=======
+        print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -66,14 +78,24 @@ $context = context_module::instance($cm->id);
 
 if (!has_capability('mod/survey:readresponses', $context)) {
     if ($type != "student.png" or $sid != $USER->id) {
+<<<<<<< HEAD
         throw new \moodle_exception('nopermissiontoshow');
     } else if ($groupmode and !groups_is_member($group)) {
         throw new \moodle_exception('nopermissiontoshow');
+=======
+        print_error('nopermissiontoshow');
+    } else if ($groupmode and !groups_is_member($group)) {
+        print_error('nopermissiontoshow');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
 if (!$survey = $DB->get_record("survey", array("id" => $cm->instance))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidsurveyid', 'survey');
+=======
+    print_error('invalidsurveyid', 'survey');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Check to see if groups are being used in this survey.

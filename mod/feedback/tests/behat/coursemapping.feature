@@ -35,6 +35,14 @@ Feature: Mapping courses in a feedback
       | feedback   | Course feedback  | Acceptance test site | feedback0 | 1         | 1             | 1       |
       | feedback   | Another feedback | C1                   | feedback1 | 1         | 1             | 0       |
     And I enable "feedback" "block" plugin
+<<<<<<< HEAD
+=======
+    And the following "blocks" exist:
+      | blockname | contextlevel | reference | pagetypepattern | defaultregion |
+      | feedback  | Course       | C1        | course-view-*   | side-pre      |
+      | feedback  | Course       | C2        | course-view-*   | side-pre      |
+      | feedback  | Course       | C3        | course-view-*   | side-pre      |
+>>>>>>> forked/LAE_400_PACKAGE
     When I log in as "manager"
     And I am on site homepage
     And I follow "Course feedback"
@@ -54,6 +62,7 @@ Feature: Mapping courses in a feedback
       | Multiple choice type   | Multiple choice - single answer allowed (drop-down menu) |
       | Multiple choice values | option d\noption e\noption f                           |
     And I log out
+<<<<<<< HEAD
     And I log in as "teacher"
     And I am on "Course 1" course homepage with editing mode on
     And I add the "Feedback" block
@@ -62,6 +71,8 @@ Feature: Mapping courses in a feedback
     And I am on "Course 3" course homepage
     And I add the "Feedback" block
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Course feedback can not be mapped
     And I log in as "manager"

@@ -578,6 +578,7 @@ abstract class restore_dbops {
             CONTEXT_SYSTEM => CONTEXT_COURSE,
             CONTEXT_COURSECAT => CONTEXT_COURSE);
 
+<<<<<<< HEAD
         $rc = restore_controller_dbops::load_controller($restoreid);
         $restoreinfo = $rc->get_info();
         $rc->destroy(); // Always need to destroy.
@@ -588,6 +589,13 @@ abstract class restore_dbops {
         if (version_compare($backuprelease, '3.5', '>=') && $backupbuild > 20180205) {
             $after35 = true;
         }
+=======
+        /** @var restore_controller $rc */
+        $rc = restore_controller_dbops::load_controller($restoreid);
+        $plan = $rc->get_plan();
+        $after35 = $plan->backup_release_compare('3.5', '>=') && $plan->backup_version_compare(20180205, '>');
+        $rc->destroy(); // Always need to destroy.
+>>>>>>> forked/LAE_400_PACKAGE
 
         // For any contextlevel, follow this process logic:
         //
@@ -1019,6 +1027,7 @@ abstract class restore_dbops {
                 continue;
             }
 
+<<<<<<< HEAD
             // Updated the times of the new record.
             // The file record should reflect when the file entered the system,
             // and when this record was created.
@@ -1039,6 +1048,23 @@ abstract class restore_dbops {
                 'author'       => $file->author,
                 'license'      => $file->license,
                 'sortorder'    => $file->sortorder
+=======
+            // The file record to restore.
+            $file_record = array(
+                'contextid'   => $newcontextid,
+                'component'   => $component,
+                'filearea'    => $filearea,
+                'itemid'      => $rec->newitemid,
+                'filepath'    => $file->filepath,
+                'filename'    => $file->filename,
+                'timecreated' => $file->timecreated,
+                'timemodified'=> $file->timemodified,
+                'userid'      => $mappeduserid,
+                'source'      => $file->source,
+                'author'      => $file->author,
+                'license'     => $file->license,
+                'sortorder'   => $file->sortorder
+>>>>>>> forked/LAE_400_PACKAGE
             );
 
             if (empty($file->repositoryid)) {

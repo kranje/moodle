@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CSS.Proprietary
 TYPE: bool
 VERSION: 3.0.0
@@ -8,3 +9,15 @@ DEFAULT: false
     Whether or not to allow safe, proprietary CSS values.
 </p>
 --# vim: et sw=4 sts=4
+=======
+CSS.Proprietary
+TYPE: bool
+VERSION: 3.0.0
+DEFAULT: false
+--DESCRIPTION--
+
+<p>
+    Whether or not to allow safe, proprietary CSS values.
+</p>
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

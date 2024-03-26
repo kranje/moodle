@@ -23,7 +23,13 @@
  * @author     T.J.Hunt@open.ac.uk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
+<<<<<<< HEAD
 class weblib_test extends advanced_testcase {
+=======
+
+class weblib_test extends advanced_testcase {
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * @covers ::format_string
      */
@@ -46,10 +52,13 @@ class weblib_test extends advanced_testcase {
         // Unicode entities.
         $this->assertSame("&#4475;", format_string("&#4475;"));
 
+<<<<<<< HEAD
         // Nulls.
         $this->assertSame('', format_string(null));
         $this->assertSame('', format_string(null, true, ['escape' => false]));
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // < and > signs.
         $originalformatstringstriptags = $CFG->formatstringstriptags;
 
@@ -957,6 +966,7 @@ EXPECTED;
 
         $this->assertNotEquals($policydisabled, print_password_policy());
     }
+<<<<<<< HEAD
 
     /**
      * Data provider for the testing get_html_lang_attribute_value().
@@ -1011,4 +1021,6 @@ EXPECTED;
     public function test_strip_querystring($value, $expected): void {
         $this->assertEquals($expected, strip_querystring($value));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

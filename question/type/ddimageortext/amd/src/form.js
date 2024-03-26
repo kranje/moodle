@@ -55,20 +55,39 @@ define(['jquery', 'core/dragdrop'], function($, dragDrop) {
          */
         init: function() {
             dragDropToImageForm.fp = dragDropToImageForm.filePickers();
+<<<<<<< HEAD
 
             $('#id_previewareaheader').append(
                 '<div class="ddarea que ddimageortext">' +
                 '  <div class="droparea">' +
+=======
+            dragDropToImageForm.updateVisibilityOfFilePickers();
+            dragDropToImageForm.setOptionsForDragItemSelectors();
+            dragDropToImageForm.setupEventHandlers();
+            dragDropToImageForm.waitForFilePickerToInitialise();
+        },
+
+        /**
+         * Add html for the preview area.
+         */
+        setupPreviewArea: function() {
+            $('#id_previewareaheader').append(
+                '<div class="ddarea que ddimageortext">' +
+                '  <div id="id_droparea" class="droparea">' +
+>>>>>>> forked/LAE_400_PACKAGE
                 '    <img class="dropbackground" />' +
                 '    <div class="dropzones"></div>' +
                 '  </div>' +
                 '  <div class="dragitems"></div>' +
                 '</div>');
+<<<<<<< HEAD
 
             dragDropToImageForm.updateVisibilityOfFilePickers();
             dragDropToImageForm.setOptionsForDragItemSelectors();
             dragDropToImageForm.setupEventHandlers();
             dragDropToImageForm.waitForFilePickerToInitialise();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         },
 
         /**
@@ -90,8 +109,18 @@ define(['jquery', 'core/dragdrop'], function($, dragDrop) {
                 M.util.js_pending('dragDropToImageForm');
                 dragDropToImageForm.loadPreviewImage();
             });
+<<<<<<< HEAD
 
             dragDropToImageForm.loadPreviewImage();
+=======
+            if ($('#id_droparea').length) {
+                dragDropToImageForm.loadPreviewImage();
+            } else {
+                // Setup preview area when the background image is uploaded the first time.
+                dragDropToImageForm.setupPreviewArea();
+                dragDropToImageForm.loadPreviewImage();
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         },
 
         /**

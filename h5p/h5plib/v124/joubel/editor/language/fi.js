@@ -49,12 +49,20 @@ H5PEditor.language.core = {
   selectFiletoUpload: 'Valitse ladattava tiedosto',
   or: 'tai',
   enterAudioUrl: 'Anna äänen osoite',
+<<<<<<< HEAD
   enterVideoUrl: 'Enter video URL',
+=======
+  enterVideoUrl: 'Anna videon osoite tai YouTube linkki',
+>>>>>>> forked/LAE_400_PACKAGE
   enterAudioTitle: 'Liitä linkki tai muu äänen osoite',
   enterVideoTitle: 'Liitä YouTube linkki tai muu videon osoite',
   uploadAudioTitle: 'Lataa äänitiedosto',
   uploadVideoTitle: 'Lataa videotiedosto',
+<<<<<<< HEAD
   addVideoDescription: 'H5P supports all external video sources formatted as mp4, webm or ogv, like Vimeo Pro, and has support for YouTube and Panopto links.',
+=======
+  addVideoDescription: 'H5P tukee mp4, webm or ogv videomuotoja, kuten Vimeo Pro, ja myös YouTube linkkejä.',
+>>>>>>> forked/LAE_400_PACKAGE
   insert: 'Lisää',
   cancel: 'Peruuta',
   height: 'korkeus',
@@ -93,7 +101,11 @@ H5PEditor.language.core = {
   contentTypeInstallButtonLabel: 'Asenna',
   contentTypeInstallingButtonLabel: 'Asentaa',
   contentTypeUseButtonLabel: 'Valitse',
+<<<<<<< HEAD
   contentTypeDetailButtonLabel: 'Yksityiskohdat',
+=======
+  contentTypeDetailButtonLabel: 'Ykstyiskohdat',
+>>>>>>> forked/LAE_400_PACKAGE
   contentTypeUpdateButtonLabel: 'Päivitä',
   contentTypeUpdatingButtonLabel: 'Päivittää',
   contentTypeGetButtonLabel: 'Hae',
@@ -213,8 +225,12 @@ H5PEditor.language.core = {
   unknownLibrary: 'Valitettavasti valittua sisältötyyppiä \'%lib\' ei ole asennettuna tähän järjestelmään. Olethan yhteydessä ylläpitoon.',
   proceedButtonLabel: 'Proceed to save',
   enterFullscreenButtonLabel: 'Enter fullscreen',
+<<<<<<< HEAD
   exitFullscreenButtonLabel: 'Exit fullscreen',
   a11yTitleShowLabel: 'Show label for AT',
   a11yTitleHideLabel: 'Hide label for AT',
   reuseSuccess: ':title was successfully imported from the H5P Hub.',
+=======
+  exitFullscreenButtonLabel: 'Exit fullscreen'
+>>>>>>> forked/LAE_400_PACKAGE
 };

@@ -55,7 +55,11 @@ if (!is_null($sesskey)) {
 if (!is_null($discussionid)) {
     $url->param('d', $discussionid);
     if (!$discussion = $DB->get_record('forum_discussions', array('id' => $discussionid, 'forum' => $id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invaliddiscussionid', 'forum');
+=======
+        print_error('invaliddiscussionid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 $PAGE->set_url($url);
@@ -68,7 +72,11 @@ $context = context_module::instance($cm->id);
 if ($user) {
     require_sesskey();
     if (!has_capability('mod/forum:managesubscriptions', $context)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nopermissiontosubscribe', 'forum');
+=======
+        print_error('nopermissiontosubscribe', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $user = $DB->get_record('user', array('id' => $user), '*', MUST_EXIST);
 } else {
@@ -86,7 +94,11 @@ $issubscribed = \mod_forum\subscriptions::is_subscribed($user->id, $forum, $disc
 // For a user to subscribe when a groupmode is set, they must have access to at least one group.
 if ($groupmode && !$issubscribed && !has_capability('moodle/site:accessallgroups', $context)) {
     if (!groups_get_all_groups($course->id, $USER->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotsubscribe', 'forum');
+=======
+        print_error('cannotsubscribe', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -170,7 +182,11 @@ if (!is_null($mode) and has_capability('mod/forum:managesubscriptions', $context
             );
             break;
         default:
+<<<<<<< HEAD
             throw new \moodle_exception(get_string('invalidforcesubscribe', 'forum'));
+=======
+            print_error(get_string('invalidforcesubscribe', 'forum'));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -214,7 +230,11 @@ if ($issubscribed) {
                 \core\output\notification::NOTIFY_SUCCESS
             );
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotunsubscribe', 'forum', get_local_referer(false));
+=======
+            print_error('cannotunsubscribe', 'forum', get_local_referer(false));
+>>>>>>> forked/LAE_400_PACKAGE
         }
     } else {
         if (\mod_forum\subscriptions::unsubscribe_user_from_discussion($user->id, $discussion, $context)) {
@@ -226,16 +246,27 @@ if ($issubscribed) {
                 \core\output\notification::NOTIFY_SUCCESS
             );
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotunsubscribe', 'forum', get_local_referer(false));
+=======
+            print_error('cannotunsubscribe', 'forum', get_local_referer(false));
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
 } else {  // subscribe
     if (\mod_forum\subscriptions::subscription_disabled($forum) && !has_capability('mod/forum:managesubscriptions', $context)) {
+<<<<<<< HEAD
         throw new \moodle_exception('disallowsubscribe', 'forum', get_local_referer(false));
     }
     if (!has_capability('mod/forum:viewdiscussion', $context)) {
         throw new \moodle_exception('noviewdiscussionspermission', 'forum', get_local_referer(false));
+=======
+        print_error('disallowsubscribe', 'forum', get_local_referer(false));
+    }
+    if (!has_capability('mod/forum:viewdiscussion', $context)) {
+        print_error('noviewdiscussionspermission', 'forum', get_local_referer(false));
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if (is_null($sesskey)) {
         // We came here via link in email.

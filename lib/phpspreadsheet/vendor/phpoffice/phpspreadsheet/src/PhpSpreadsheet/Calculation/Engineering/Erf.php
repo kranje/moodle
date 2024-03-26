@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,12 @@ class Erf
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Erf
+{
+>>>>>>> forked/LAE_400_PACKAGE
     private static $twoSqrtPi = 1.128379167095512574;
 
     /**
@@ -26,6 +33,7 @@ class Erf
      *        ERF(lower[,upper])
      *
      * @param mixed $lower Lower bound float for integrating ERF
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $upper Upper bound float for integrating ERF.
      *                           If omitted, ERF integrates between zero and lower_limit
@@ -40,6 +48,17 @@ class Erf
         if (is_array($lower) || is_array($upper)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $lower, $upper);
         }
+=======
+     * @param mixed $upper Upper bound float for integrating ERF.
+     *                           If omitted, ERF integrates between zero and lower_limit
+     *
+     * @return float|string
+     */
+    public static function ERF($lower, $upper = null)
+    {
+        $lower = Functions::flattenSingleValue($lower);
+        $upper = Functions::flattenSingleValue($upper);
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (is_numeric($lower)) {
             if ($upper === null) {
@@ -50,7 +69,11 @@ class Erf
             }
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -62,6 +85,7 @@ class Erf
      *        ERF.PRECISE(limit)
      *
      * @param mixed $limit Float bound for integrating ERF, other bound is zero
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|float|string
@@ -73,6 +97,14 @@ class Erf
         if (is_array($limit)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $limit);
         }
+=======
+     *
+     * @return float|string
+     */
+    public static function ERFPRECISE($limit)
+    {
+        $limit = Functions::flattenSingleValue($limit);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return self::ERF($limit);
     }

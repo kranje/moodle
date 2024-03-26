@@ -260,9 +260,15 @@ class xml_writer {
      * ignores the rest of characters. Also normalize linefeeds and return chars.
      */
     protected function xml_safe_utf8($content) {
+<<<<<<< HEAD
         $content = preg_replace('/[\x-\x8\xb-\xc\xe-\x1f\x7f]/is', '', $content ?? ''); // clean CTRL chars.
         $content = preg_replace("/\r\n|\r/", "\n", $content); // Normalize line&return=>line
         return $content;
+=======
+        $content = preg_replace('/[\x-\x8\xb-\xc\xe-\x1f\x7f]/is','', $content); // clean CTRL chars
+        $content = preg_replace("/\r\n|\r/", "\n", $content); // Normalize line&return=>line
+        return fix_utf8($content);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

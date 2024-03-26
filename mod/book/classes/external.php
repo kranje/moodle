@@ -24,8 +24,11 @@
  * @since      Moodle 3.0
  */
 
+<<<<<<< HEAD
 use core_course\external\helper_for_get_mods_by_courses;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
@@ -91,7 +94,10 @@ class mod_book_external extends external_api {
 
         $chapters = book_preload_chapters($book);
         $firstchapterid = 0;
+<<<<<<< HEAD
         $lastchapterid = 0;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($chapters as $ch) {
             if ($ch->hidden) {
@@ -100,7 +106,10 @@ class mod_book_external extends external_api {
             if (!$firstchapterid) {
                 $firstchapterid = $ch->id;
             }
+<<<<<<< HEAD
             $lastchapterid = $ch->id;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (!$chapterid) {
@@ -126,8 +135,12 @@ class mod_book_external extends external_api {
             }
 
             // Trigger the chapter viewed event.
+<<<<<<< HEAD
             $islastchapter = ($chapter->id == $lastchapterid) ? true : false;
             book_view($book, $chapter, $islastchapter, $course, $cm, $context);
+=======
+            book_view($book, $chapter, \mod_book\helper::is_last_visible_chapter($chapterid, $chapters), $course, $cm, $context);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $result = array();
@@ -176,6 +189,10 @@ class mod_book_external extends external_api {
      * @since Moodle 3.0
      */
     public static function get_books_by_courses($courseids = array()) {
+<<<<<<< HEAD
+=======
+        global $CFG;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $returnedbooks = array();
         $warnings = array();
@@ -197,16 +214,43 @@ class mod_book_external extends external_api {
             // We can avoid then additional validate_context calls.
             $books = get_all_instances_in_courses("book", $courses);
             foreach ($books as $book) {
+<<<<<<< HEAD
                 // Entry to return.
                 $bookdetails = helper_for_get_mods_by_courses::standard_coursemodule_element_values($book, 'mod_book');
+=======
+                $context = context_module::instance($book->coursemodule);
+                // Entry to return.
+                $bookdetails = array();
+                // First, we return information that any user can see in the web interface.
+                $bookdetails['id'] = $book->id;
+                $bookdetails['coursemodule']      = $book->coursemodule;
+                $bookdetails['course']            = $book->course;
+                $bookdetails['name']              = external_format_string($book->name, $context->id);
+                // Format intro.
+                $options = array('noclean' => true);
+                list($bookdetails['intro'], $bookdetails['introformat']) =
+                    external_format_text($book->intro, $book->introformat, $context->id, 'mod_book', 'intro', null, $options);
+                $bookdetails['introfiles'] = external_util::get_area_files($context->id, 'mod_book', 'intro', false, false);
+>>>>>>> forked/LAE_400_PACKAGE
                 $bookdetails['numbering']         = $book->numbering;
                 $bookdetails['navstyle']          = $book->navstyle;
                 $bookdetails['customtitles']      = $book->customtitles;
 
+<<<<<<< HEAD
                 if (has_capability('moodle/course:manageactivities', context_module::instance($book->coursemodule))) {
                     $bookdetails['revision']      = $book->revision;
                     $bookdetails['timecreated']   = $book->timecreated;
                     $bookdetails['timemodified']  = $book->timemodified;
+=======
+                if (has_capability('moodle/course:manageactivities', $context)) {
+                    $bookdetails['revision']      = $book->revision;
+                    $bookdetails['timecreated']   = $book->timecreated;
+                    $bookdetails['timemodified']  = $book->timemodified;
+                    $bookdetails['section']       = $book->section;
+                    $bookdetails['visible']       = $book->visible;
+                    $bookdetails['groupmode']     = $book->groupmode;
+                    $bookdetails['groupingid']    = $book->groupingid;
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 $returnedbooks[] = $bookdetails;
             }
@@ -227,20 +271,45 @@ class mod_book_external extends external_api {
         return new external_single_structure(
             array(
                 'books' => new external_multiple_structure(
+<<<<<<< HEAD
                     new external_single_structure(array_merge(
                         helper_for_get_mods_by_courses::standard_coursemodule_elements_returns(),
                         [
+=======
+                    new external_single_structure(
+                        array(
+                            'id' => new external_value(PARAM_INT, 'Book id'),
+                            'coursemodule' => new external_value(PARAM_INT, 'Course module id'),
+                            'course' => new external_value(PARAM_INT, 'Course id'),
+                            'name' => new external_value(PARAM_RAW, 'Book name'),
+                            'intro' => new external_value(PARAM_RAW, 'The Book intro'),
+                            'introformat' => new external_format_value('intro'),
+                            'introfiles' => new external_files('Files in the introduction text', VALUE_OPTIONAL),
+>>>>>>> forked/LAE_400_PACKAGE
                             'numbering' => new external_value(PARAM_INT, 'Book numbering configuration'),
                             'navstyle' => new external_value(PARAM_INT, 'Book navigation style configuration'),
                             'customtitles' => new external_value(PARAM_INT, 'Book custom titles type'),
                             'revision' => new external_value(PARAM_INT, 'Book revision', VALUE_OPTIONAL),
                             'timecreated' => new external_value(PARAM_INT, 'Time of creation', VALUE_OPTIONAL),
                             'timemodified' => new external_value(PARAM_INT, 'Time of last modification', VALUE_OPTIONAL),
+<<<<<<< HEAD
                         ]
                     ), 'Books')
+=======
+                            'section' => new external_value(PARAM_INT, 'Course section id', VALUE_OPTIONAL),
+                            'visible' => new external_value(PARAM_BOOL, 'Visible', VALUE_OPTIONAL),
+                            'groupmode' => new external_value(PARAM_INT, 'Group mode', VALUE_OPTIONAL),
+                            'groupingid' => new external_value(PARAM_INT, 'Group id', VALUE_OPTIONAL),
+                        ), 'Books'
+                    )
+>>>>>>> forked/LAE_400_PACKAGE
                 ),
                 'warnings' => new external_warnings(),
             )
         );
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
 }

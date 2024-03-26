@@ -3,7 +3,11 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 
 class ConvertOctal extends ConvertBase
 {
@@ -15,7 +19,11 @@ class ConvertOctal extends ConvertBase
      * Excel Function:
      *        OCT2BIN(x[,places])
      *
+<<<<<<< HEAD
      * @param array|string $value The octal number you want to convert. Number may not
+=======
+     * @param string $value The octal number you want to convert. Number may not
+>>>>>>> forked/LAE_400_PACKAGE
      *                          contain more than 10 characters. The most significant
      *                          bit of number is the sign bit. The remaining 29 bits
      *                          are magnitude bits. Negative numbers are represented
@@ -28,8 +36,12 @@ class ConvertOctal extends ConvertBase
      *                          the #NUM! error value.
      *                      If OCT2BIN requires more than places characters, it
      *                          returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param array|int $places The number of characters to use. If places is omitted,
+=======
+     * @param int $places The number of characters to use. If places is omitted,
+>>>>>>> forked/LAE_400_PACKAGE
      *                          OCT2BIN uses the minimum number of characters necessary.
      *                          Places is useful for padding the return value with
      *                          leading 0s (zeros).
@@ -38,6 +50,7 @@ class ConvertOctal extends ConvertBase
      *                          error value.
      *                      If places is negative, OCT2BIN returns the #NUM! error
      *                          value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|string Result, or an error
@@ -54,6 +67,15 @@ class ConvertOctal extends ConvertBase
             $value = self::validateValue($value);
             $value = self::validateOctal($value);
             $places = self::validatePlaces($places);
+=======
+     */
+    public static function toBinary($value, $places = null): string
+    {
+        try {
+            $value = self::validateValue(Functions::flattenSingleValue($value));
+            $value = self::validateOctal($value);
+            $places = self::validatePlaces(Functions::flattenSingleValue($places));
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -69,13 +91,18 @@ class ConvertOctal extends ConvertBase
      * Excel Function:
      *        OCT2DEC(x)
      *
+<<<<<<< HEAD
      * @param array|string $value The octal number you want to convert. Number may not contain
+=======
+     * @param string $value The octal number you want to convert. Number may not contain
+>>>>>>> forked/LAE_400_PACKAGE
      *                          more than 10 octal characters (30 bits). The most significant
      *                          bit of number is the sign bit. The remaining 29 bits are
      *                          magnitude bits. Negative numbers are represented using
      *                          two's-complement notation.
      *                      If number is not a valid octal number, OCT2DEC returns the
      *                          #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|string Result, or an error
@@ -90,6 +117,13 @@ class ConvertOctal extends ConvertBase
 
         try {
             $value = self::validateValue($value);
+=======
+     */
+    public static function toDecimal($value): string
+    {
+        try {
+            $value = self::validateValue(Functions::flattenSingleValue($value));
+>>>>>>> forked/LAE_400_PACKAGE
             $value = self::validateOctal($value);
         } catch (Exception $e) {
             return $e->getMessage();
@@ -118,7 +152,11 @@ class ConvertOctal extends ConvertBase
      * Excel Function:
      *        OCT2HEX(x[,places])
      *
+<<<<<<< HEAD
      * @param array|string $value The octal number you want to convert. Number may not contain
+=======
+     * @param string $value The octal number you want to convert. Number may not contain
+>>>>>>> forked/LAE_400_PACKAGE
      *                          more than 10 octal characters (30 bits). The most significant
      *                          bit of number is the sign bit. The remaining 29 bits are
      *                          magnitude bits. Negative numbers are represented using
@@ -129,13 +167,18 @@ class ConvertOctal extends ConvertBase
      *                          #NUM! error value.
      *                      If OCT2HEX requires more than places characters, it returns
      *                          the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param array|int $places The number of characters to use. If places is omitted, OCT2HEX
+=======
+     * @param int $places The number of characters to use. If places is omitted, OCT2HEX
+>>>>>>> forked/LAE_400_PACKAGE
      *                          uses the minimum number of characters necessary. Places is useful
      *                          for padding the return value with leading 0s (zeros).
      *                      If places is not an integer, it is truncated.
      *                      If places is nonnumeric, OCT2HEX returns the #VALUE! error value.
      *                      If places is negative, OCT2HEX returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|string Result, or an error
@@ -152,12 +195,25 @@ class ConvertOctal extends ConvertBase
             $value = self::validateValue($value);
             $value = self::validateOctal($value);
             $places = self::validatePlaces($places);
+=======
+     */
+    public static function toHex($value, $places = null): string
+    {
+        try {
+            $value = self::validateValue(Functions::flattenSingleValue($value));
+            $value = self::validateOctal($value);
+            $places = self::validatePlaces(Functions::flattenSingleValue($places));
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
 
         $hexVal = strtoupper(dechex((int) self::toDecimal($value)));
+<<<<<<< HEAD
         $hexVal = (PHP_INT_SIZE === 4 && strlen($value) === 10 && $value[0] >= '4') ? "FF{$hexVal}" : $hexVal;
+=======
+        $hexVal = (PHP_INT_SIZE === 4 && strlen($value) === 10 && $value[0] >= '4') ? "FF$hexVal" : $hexVal;
+>>>>>>> forked/LAE_400_PACKAGE
 
         return self::nbrConversionFormat($hexVal, $places);
     }
@@ -166,7 +222,11 @@ class ConvertOctal extends ConvertBase
     {
         $numDigits = (int) preg_match_all('/[01234567]/', $value);
         if (strlen($value) > $numDigits || $numDigits > 10) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $value;

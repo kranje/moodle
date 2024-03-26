@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_completion @javascript
+=======
+@core @core_completion
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: Students will be marked as completed if they have achieved a passing grade.
 
   Background:
@@ -27,6 +31,7 @@ Feature: Students will be marked as completed if they have achieved a passing gr
       | completionpassgrade                 | 1                       |
       | completionusegrade                  | 1                       |
       | gradepass                           | 50                      |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And "Student First" user has not completed "Test assignment name" activity
@@ -36,10 +41,18 @@ Feature: Students will be marked as completed if they have achieved a passing gr
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    And I am on the "Course 1" course page logged in as teacher1
+    And "Student First" user has not completed "Test assignment name" activity
+
+  Scenario: Passing grade completion
+    Given I am on the "Course 1" "grades > Grader report > View" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     And I give the grade "21" to the user "Student First" for the grade item "Test assignment name"
     And I give the grade "50" to the user "Student Second" for the grade item "Test assignment name"
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
     When I log in as "student1"
     And I am on "Course 1" course homepage
@@ -48,5 +61,11 @@ Feature: Students will be marked as completed if they have achieved a passing gr
     And I log out
     And I log in as "student2"
     And I am on "Course 1" course homepage
+=======
+    When I am on the "Course 1" course page logged in as student1
+    Then the "Receive a grade" completion condition of "Test assignment name" is displayed as "done"
+    And the "Receive a passing grade" completion condition of "Test assignment name" is displayed as "failed"
+    And I am on the "Course 1" course page logged in as student2
+>>>>>>> forked/LAE_400_PACKAGE
     And the "Receive a grade" completion condition of "Test assignment name" is displayed as "done"
     And the "Receive a passing grade" completion condition of "Test assignment name" is displayed as "done"

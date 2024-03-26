@@ -33,7 +33,11 @@ require_once($CFG->dirroot.'/repository/lib.php');
 $PAGE->set_context(context_system::instance());
 require_login();
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('noguest');
+=======
+    print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 require_sesskey();
 

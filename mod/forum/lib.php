@@ -239,11 +239,19 @@ function forum_update_instance($forum, $mform) {
             forum_add_discussion($discussion, null, $message);
 
             if (! $discussion = $DB->get_record('forum_discussions', array('forum'=>$forum->id))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotadd', 'forum');
             }
         }
         if (! $post = $DB->get_record('forum_posts', array('id'=>$discussion->firstpost))) {
             throw new \moodle_exception('cannotfindfirstpost', 'forum');
+=======
+                print_error('cannotadd', 'forum');
+            }
+        }
+        if (! $post = $DB->get_record('forum_posts', array('id'=>$discussion->firstpost))) {
+            print_error('cannotfindfirstpost', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $cm         = get_coursemodule_from_instance('forum', $forum->id);
@@ -503,7 +511,11 @@ function forum_user_complete($course, $user, $mod, $forum) {
 
     if ($posts = forum_get_user_posts($forum->id, $user->id)) {
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $course->id)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
+=======
+            print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $context = context_module::instance($cm->id);
         $discussions = forum_get_user_involved_discussions($forum->id, $user->id);
@@ -1013,7 +1025,11 @@ function forum_get_readable_forums($userid, $courseid=0) {
     require_once($CFG->dirroot.'/course/lib.php');
 
     if (!$forummod = $DB->get_record('modules', array('name' => 'forum'))) {
+<<<<<<< HEAD
         throw new \moodle_exception('notinstalled', 'forum');
+=======
+        print_error('notinstalled', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if ($courseid) {
@@ -2342,7 +2358,11 @@ function forum_print_discussion_header(&$post, $forum, $group = -1, $datestring 
 
     if (empty($modcontext)) {
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
+=======
+            print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $modcontext = context_module::instance($cm->id);
     }
@@ -3694,7 +3714,11 @@ function forum_user_can_post_discussion($forum, $currentgroup=null, $unused=-1, 
     if (!$cm) {
         debugging('missing cm', DEBUG_DEVELOPER);
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
+=======
+            print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -3786,14 +3810,22 @@ function forum_user_can_post($forum, $discussion, $user=NULL, $cm=NULL, $course=
     if (!$cm) {
         debugging('missing cm', DEBUG_DEVELOPER);
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
+=======
+            print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
     if (!$course) {
         debugging('missing course', DEBUG_DEVELOPER);
         if (!$course = $DB->get_record('course', array('id' => $forum->course))) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcourseid');
+=======
+            print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -3930,7 +3962,11 @@ function forum_user_can_see_discussion($forum, $discussion, $context, $user=NULL
         }
     }
     if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!has_capability('mod/forum:viewdiscussion', $context)) {
@@ -3994,7 +4030,11 @@ function forum_user_can_see_post($forum, $discussion, $post, $user = null, $cm =
     if (!$cm) {
         debugging('missing cm', DEBUG_DEVELOPER);
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
+=======
+            print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -5144,7 +5184,11 @@ function forum_check_throttling($forum, $cm = null) {
  */
 function forum_check_blocking_threshold($thresholdwarning) {
     if (!empty($thresholdwarning) && !$thresholdwarning->canpost) {
+<<<<<<< HEAD
         throw new \moodle_exception($thresholdwarning->errorcode,
+=======
+        print_error($thresholdwarning->errorcode,
+>>>>>>> forked/LAE_400_PACKAGE
                     $thresholdwarning->module,
                     $thresholdwarning->link,
                     $thresholdwarning->additional);
@@ -5886,7 +5930,11 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
             if (!is_viewing($coursecontext, $user) && !is_enrolled($coursecontext, $user)) {
                 // Need to have full access to a course to see the rest of own info
                 if ($musthaveaccess) {
+<<<<<<< HEAD
                     throw new \moodle_exception('errorenrolmentrequired', 'forum');
+=======
+                    print_error('errorenrolmentrequired', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 continue;
             }
@@ -5895,7 +5943,11 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
             // if they don't we immediately have a problem.
             if (!can_access_course($course)) {
                 if ($musthaveaccess) {
+<<<<<<< HEAD
                     throw new \moodle_exception('errorenrolmentrequired', 'forum');
+=======
+                    print_error('errorenrolmentrequired', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 continue;
             }
@@ -5925,7 +5977,11 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
                     // But they're not... if it was a specific course throw an error otherwise
                     // just skip this course so that it is not searched.
                     if ($musthaveaccess) {
+<<<<<<< HEAD
                         throw new \moodle_exception("groupnotamember", '', $CFG->wwwroot."/course/view.php?id=$course->id");
+=======
+                        print_error("groupnotamember", '', $CFG->wwwroot."/course/view.php?id=$course->id");
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                     continue;
                 }
@@ -5945,7 +6001,11 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
         // user doesn't have access to any courses is which the requested user has posted.
         // Although we do know at this point that the requested user has posts.
         if ($musthaveaccess) {
+<<<<<<< HEAD
             throw new \moodle_exception('permissiondenied');
+=======
+            print_error('permissiondenied');
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             return $return;
         }

@@ -55,7 +55,11 @@ $external = new stdClass();
 // Retrieve the external blog record.
 if (!empty($id)) {
     if (!$external = $DB->get_record('blog_external', array('id' => $id, 'userid' => $USER->id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('wrongexternalid', 'blog');
+=======
+        print_error('wrongexternalid', 'blog');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $external->autotags = core_tag_tag::get_item_tags_array('core', 'blog_external', $id);
 }
@@ -122,13 +126,21 @@ if ($externalblogform->is_cancelled()) {
                 core_tag_tag::set_item_tags('core', 'blog_external', $external->id,
                         context_user::instance($external->userid), $data->autotags);
             } else {
+<<<<<<< HEAD
                 throw new \moodle_exception('wrongexternalid', 'blog');
+=======
+                print_error('wrongexternalid', 'blog');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             break;
 
         default :
+<<<<<<< HEAD
             throw new \moodle_exception('invalidaction');
+=======
+            print_error('invalidaction');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     redirect($returnurl);

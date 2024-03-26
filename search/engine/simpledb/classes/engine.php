@@ -181,7 +181,11 @@ class engine extends \core_search\engine {
         }
 
         // It is limited to $limit, no need to use recordsets.
+<<<<<<< HEAD
         $documents = $DB->get_records_select('search_simpledb_index', implode(' AND ', $ands), $params, 'docid', '*', 0, $limit);
+=======
+        $documents = $DB->get_records_select('search_simpledb_index', implode(' AND ', $ands), $params, '', '*', 0, $limit);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Hopefully database cached results as this applies the same filters than above.
         $this->totalresults = $DB->count_records_select('search_simpledb_index', implode(' AND ', $ands), $params);

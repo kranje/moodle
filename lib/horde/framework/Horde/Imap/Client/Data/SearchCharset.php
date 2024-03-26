@@ -133,7 +133,10 @@ implements Serializable, SplSubject
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function attach(SplObserver $observer)
     {
         $this->detach($observer);
@@ -142,7 +145,10 @@ implements Serializable, SplSubject
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function detach(SplObserver $observer)
     {
         if (($key = array_search($observer, $this->_observers, true)) !== false) {
@@ -154,7 +160,10 @@ implements Serializable, SplSubject
      * Notification is triggered internally whenever the object's internal
      * data storage is altered.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function notify()
     {
         foreach ($this->_observers as $val) {
@@ -168,13 +177,18 @@ implements Serializable, SplSubject
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        return json_encode($this->_charsets);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
     public function unserialize($data)
     {
+<<<<<<< HEAD
         $data = @unserialize($data);
         if (!is_array($data)) {
             throw new Exception('Cache version change');
@@ -193,6 +207,9 @@ implements Serializable, SplSubject
     public function __unserialize(array $data)
     {
         $this->_charsets = $data;
+=======
+        $this->_charsets = json_decode($data, true);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 }

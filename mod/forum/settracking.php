@@ -32,6 +32,7 @@ $returnpage = optional_param('returnpage', 'index.php', PARAM_FILE);    // Page 
 require_sesskey();
 
 if (! $forum = $DB->get_record("forum", array("id" => $id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidforumid', 'forum');
 }
 
@@ -41,6 +42,17 @@ if (! $course = $DB->get_record("course", array("id" => $forum->course))) {
 
 if (! $cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidforumid', 'forum');
+}
+
+if (! $course = $DB->get_record("course", array("id" => $forum->course))) {
+    print_error('invalidcoursemodule');
+}
+
+if (! $cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 require_login($course, false, $cm);
 $returnpageurl = new moodle_url('/mod/forum/' . $returnpage, array('id' => $course->id, 'f' => $forum->id));
@@ -66,7 +78,11 @@ if (forum_tp_is_tracked($forum) ) {
         $event->trigger();
         redirect($returnto, get_string("nownottracking", "forum", $info), 1);
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('cannottrack', '', get_local_referer(false));
+=======
+        print_error('cannottrack', '', get_local_referer(false));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else { // subscribe
@@ -75,6 +91,10 @@ if (forum_tp_is_tracked($forum) ) {
         $event->trigger();
         redirect($returnto, get_string("nowtracking", "forum", $info), 1);
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('cannottrack', '', get_local_referer(false));
+=======
+        print_error('cannottrack', '', get_local_referer(false));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

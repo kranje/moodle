@@ -177,7 +177,11 @@ class CFArray extends CFType implements Iterator, ArrayAccess
    * @return void
    * @uses $iteratorPosition set to 0
    */
+<<<<<<< HEAD
     public function rewind(): void
+=======
+    public function rewind()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->iteratorPosition = 0;
     }
@@ -185,10 +189,16 @@ class CFArray extends CFType implements Iterator, ArrayAccess
   /**
    * Get Iterator's current {@link CFType} identified by {@link $iteratorPosition}
    * @link http://php.net/manual/en/iterator.current.php
+<<<<<<< HEAD
    * @return mixed current Item
    * @uses $iteratorPosition identify current key
    */
    #[\ReturnTypeWillChange]
+=======
+   * @return CFType current Item
+   * @uses $iteratorPosition identify current key
+   */
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->value[$this->iteratorPosition];
@@ -197,10 +207,16 @@ class CFArray extends CFType implements Iterator, ArrayAccess
   /**
    * Get Iterator's current key identified by {@link $iteratorPosition}
    * @link http://php.net/manual/en/iterator.key.php
+<<<<<<< HEAD
    * @return mixed key of the current Item: mixed
    * @uses $iteratorPosition identify current key
    */
     #[\ReturnTypeWillChange]
+=======
+   * @return string key of the current Item
+   * @uses $iteratorPosition identify current key
+   */
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return $this->iteratorPosition;
@@ -212,7 +228,11 @@ class CFArray extends CFType implements Iterator, ArrayAccess
    * @return void
    * @uses $iteratorPosition increment by 1
    */
+<<<<<<< HEAD
     public function next(): void
+=======
+    public function next()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->iteratorPosition++;
     }
@@ -220,11 +240,19 @@ class CFArray extends CFType implements Iterator, ArrayAccess
   /**
    * Test if {@link $iteratorPosition} addresses a valid element of {@link $value}
    * @link http://php.net/manual/en/iterator.valid.php
+<<<<<<< HEAD
    * @return bool true if current position is valid, false else
    * @uses $iteratorPosition test if within {@link $iteratorKeys}
    * @uses $iteratorPosition test if within {@link $value}
    */
     public function valid(): bool
+=======
+   * @return boolean true if current position is valid, false else
+   * @uses $iteratorPosition test if within {@link $iteratorKeys}
+   * @uses $iteratorPosition test if within {@link $value}
+   */
+    public function valid()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return isset($this->value[$this->iteratorPosition]);
     }
@@ -235,54 +263,93 @@ class CFArray extends CFType implements Iterator, ArrayAccess
 
   /**
    * Determine if the array's key exists
+<<<<<<< HEAD
    * @param string $offset the key to check
+=======
+   * @param string $key the key to check
+>>>>>>> forked/LAE_400_PACKAGE
    * @return bool true if the offset exists, false if not
    * @link http://php.net/manual/en/arrayaccess.offsetexists.php
    * @uses $value to check if $key exists
    * @author Sean Coates <sean@php.net>
    */
+<<<<<<< HEAD
     public function offsetExists($offset): bool
     {
         return isset($this->value[$offset]);
+=======
+    public function offsetExists($key)
+    {
+        return isset($this->value[$key]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
   /**
    * Fetch a specific key from the CFArray
+<<<<<<< HEAD
    * @param mixed $offset the key to check
+=======
+   * @param string $key the key to check
+>>>>>>> forked/LAE_400_PACKAGE
    * @return mixed the value associated with the key; null if the key is not found
    * @link http://php.net/manual/en/arrayaccess.offsetget.php
    * @uses get() to get the key's value
    * @author Sean Coates <sean@php.net>
    */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->get($offset);
+=======
+    public function offsetGet($key)
+    {
+        return $this->get($key);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
   /**
    * Set a value in the array
+<<<<<<< HEAD
    * @param mixed $offset the key to set
    * @param mixed $value the value to set
+=======
+   * @param string $key the key to set
+   * @param string $value the value to set
+>>>>>>> forked/LAE_400_PACKAGE
    * @return void
    * @link http://php.net/manual/en/arrayaccess.offsetset.php
    * @uses setValue() to set the key's new value
    * @author Sean Coates <sean@php.net>
    */
+<<<<<<< HEAD
     public function offsetSet($offset, $value): void
     {
         $this->setValue($value);
+=======
+    public function offsetSet($key, $value)
+    {
+        return $this->setValue($value);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
   /**
    * Unsets a value in the array
    * <b>Note:</b> this dummy does nothing
+<<<<<<< HEAD
    * @param mixed $offset the key to set
+=======
+   * @param string $key the key to set
+>>>>>>> forked/LAE_400_PACKAGE
    * @return void
    * @link http://php.net/manual/en/arrayaccess.offsetunset.php
    * @author Sean Coates <sean@php.net>
    */
+<<<<<<< HEAD
     public function offsetUnset($offset): void
+=======
+    public function offsetUnset($key)
+>>>>>>> forked/LAE_400_PACKAGE
     {
     }
 }

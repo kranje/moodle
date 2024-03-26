@@ -149,7 +149,11 @@ class externallib_test extends externallib_advanced_testcase {
         $returndescription = mod_folder_external::get_folders_by_courses_returns();
 
         // Create what we expect to be returned when querying the two courses.
+<<<<<<< HEAD
         $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'lang', 'revision',
+=======
+        $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'revision',
+>>>>>>> forked/LAE_400_PACKAGE
                                 'timemodified', 'display', 'showexpanded', 'showdownloadfolder', 'section', 'visible',
                                 'forcedownload', 'groupmode', 'groupingid');
 
@@ -161,7 +165,10 @@ class externallib_test extends externallib_advanced_testcase {
         $folder1->groupmode = 0;
         $folder1->groupingid = 0;
         $folder1->introfiles = [];
+<<<<<<< HEAD
         $folder1->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $folder2->coursemodule = $folder2->cmid;
         $folder2->introformat = 1;
@@ -170,7 +177,10 @@ class externallib_test extends externallib_advanced_testcase {
         $folder2->groupmode = 0;
         $folder2->groupingid = 0;
         $folder2->introfiles = [];
+<<<<<<< HEAD
         $folder2->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($expectedfields as $field) {
             $expected1[$field] = $folder1->{$field};

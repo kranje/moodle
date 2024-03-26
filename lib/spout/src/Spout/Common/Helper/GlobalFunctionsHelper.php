@@ -243,10 +243,17 @@ class GlobalFunctionsHelper
      * @see basename()
      *
      * @param string $path
+<<<<<<< HEAD
      * @param string $suffix
      * @return string
      */
     public function basename($path, $suffix = '')
+=======
+     * @param string|null $suffix
+     * @return string
+     */
+    public function basename($path, $suffix = null)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return \basename($path, $suffix);
     }

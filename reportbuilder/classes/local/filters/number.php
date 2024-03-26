@@ -123,8 +123,13 @@ class number extends base {
             return ['', []];
         }
 
+<<<<<<< HEAD
         [$param, $param2] = database::generate_param_names(2);
 
+=======
+        $param = database::generate_param_name();
+        $param2 = database::generate_param_name();
+>>>>>>> forked/LAE_400_PACKAGE
         $fieldsql = $this->filter->get_field_sql();
         $params = $this->filter->get_field_params();
 
@@ -132,10 +137,17 @@ class number extends base {
             case self::ANY_VALUE:
                 return ['', []];
             case self::IS_NOT_EMPTY:
+<<<<<<< HEAD
                 $res = "{$fieldsql} IS NOT NULL AND {$fieldsql} <> 0";
                 break;
             case self::IS_EMPTY:
                 $res = "{$fieldsql} IS NULL OR {$fieldsql} = 0";
+=======
+                $res = "COALESCE({$fieldsql}, 0) <> 0";
+                break;
+            case self::IS_EMPTY:
+                $res = "COALESCE({$fieldsql}, 0) = 0";
+>>>>>>> forked/LAE_400_PACKAGE
                 break;
             case self::LESS_THAN:
                 $res = "{$fieldsql} < :{$param}";
@@ -158,7 +170,11 @@ class number extends base {
                 $params[$param] = $value1;
                 break;
             case self::RANGE:
+<<<<<<< HEAD
                 $res = "({$fieldsql} >= :{$param} AND {$fieldsql} <= :{$param2})";
+=======
+                $res = "{$fieldsql} BETWEEN :{$param} AND :{$param2}";
+>>>>>>> forked/LAE_400_PACKAGE
                 $params[$param] = $value1;
                 $params[$param2] = $value2;
                 break;

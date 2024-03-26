@@ -415,6 +415,7 @@ class event_vault implements event_vault_interface {
             return null;
         }
 
+<<<<<<< HEAD
         $parts = preg_split('/\s+/', $searchvalue);
         $wherecoursenameconditions = [];
         $whereactivitynameconditions = [];
@@ -427,6 +428,15 @@ class event_vault implements event_vault_interface {
             $whereactivitynameconditions[] = $DB->sql_like('e.name', ':eventname' . $index, false);
             $params['eventname'. $index] = '%' . $DB->sql_like_escape($part) . '%';
         }
+=======
+        // Course searching.
+        $whereconditions[] = $DB->sql_like('c.fullname', ':cfullname', false);
+        $params['cfullname'] = '%' . $DB->sql_like_escape($searchvalue) . '%';
+
+        // Activity name searching.
+        $whereconditions[] = $DB->sql_like('e.name', ':eventname', false);
+        $params['eventname'] = '%' . $DB->sql_like_escape($searchvalue) . '%';
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Activity type searching.
         $whereconditions[] = $DB->sql_like('e.modulename', ':modulename', false);
@@ -445,11 +455,15 @@ class event_vault implements event_vault_interface {
             $params += $inparams;
         }
 
+<<<<<<< HEAD
         $whereclause = '(';
         $whereclause .= implode(' OR ', $whereconditions);
         $whereclause .= ' OR (' . implode(' AND ', $wherecoursenameconditions) . ')';
         $whereclause .= ' OR (' . implode(' AND ', $whereactivitynameconditions) . ')';
         $whereclause .= ')';
+=======
+        $whereclause = '(' . implode(' OR ', $whereconditions) . ')';
+>>>>>>> forked/LAE_400_PACKAGE
 
         return ['where' => $whereclause, 'params' => $params];
     }

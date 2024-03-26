@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * Unit tests for (some of) mod/h5pactivity/lib.php.
  *
@@ -29,6 +30,14 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/mod/h5pactivity/lib.php');
 
+=======
+
+namespace mod_h5pactivity;
+
+use advanced_testcase;
+use mod_h5pactivity\local\manager;
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Unit tests for (some of) mod/h5pactivity/lib.php.
  *
@@ -38,7 +47,21 @@ require_once($CFG->dirroot . '/mod/h5pactivity/lib.php');
 class lib_test extends advanced_testcase {
 
     /**
+<<<<<<< HEAD
      * Test that assign_print_recent_activity shows ungraded submitted assignments.
+=======
+     * Load required test libraries
+     */
+    public static function setUpBeforeClass(): void {
+        global $CFG;
+        require_once("{$CFG->dirroot}/mod/h5pactivity/lib.php");
+    }
+
+    /**
+     * Test that assign_print_recent_activity shows ungraded submitted assignments.
+     *
+     * @covers ::h5pactivity_print_recent_activity
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function test_print_recent_activity() {
         $this->resetAfterTest();
@@ -64,6 +87,11 @@ class lib_test extends advanced_testcase {
 
     /**
      * Test that h5pactivity_print_recent_activity does not display any warnings when a custom fullname has been configured.
+<<<<<<< HEAD
+=======
+     *
+     * @covers ::h5pactivity_print_recent_activity
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function test_print_recent_activity_fullname() {
         $this->resetAfterTest();
@@ -93,6 +121,11 @@ class lib_test extends advanced_testcase {
 
     /**
      * Test that h5pactivity_get_recent_mod_activity fetches the h5pactivity correctly.
+<<<<<<< HEAD
+=======
+     *
+     * @covers ::h5pactivity_get_recent_mod_activity
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function test_h5pactivity_get_recent_mod_activity() {
         $this->resetAfterTest();
@@ -131,6 +164,11 @@ class lib_test extends advanced_testcase {
 
     /**
      * Test that h5pactivity_get_recent_mod_activity fetches activity correctly.
+<<<<<<< HEAD
+=======
+     *
+     * @covers ::h5pactivity_fetch_recent_activity
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function test_h5pactivity_fetch_recent_activity() {
         global $DB;

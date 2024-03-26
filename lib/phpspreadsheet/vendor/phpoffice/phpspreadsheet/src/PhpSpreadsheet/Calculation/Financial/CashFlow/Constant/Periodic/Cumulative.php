@@ -6,7 +6,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\CashFlow\CashFlowValidations;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\Constants as FinancialConstants;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Cumulative
 {
@@ -58,7 +61,11 @@ class Cumulative
 
         // Validate parameters
         if ($start < 1 || $start > $end) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Calculate
@@ -123,7 +130,11 @@ class Cumulative
 
         // Validate parameters
         if ($start < 1 || $start > $end) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Calculate

@@ -183,7 +183,11 @@ class chart_series implements JsonSerializable {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function jsonSerialize(): array {
+=======
+    public function jsonSerialize() {
+>>>>>>> forked/LAE_400_PACKAGE
         $data = [
             'label' => $this->label,
             'labels' => $this->labels,

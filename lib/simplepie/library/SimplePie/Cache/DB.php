@@ -134,5 +134,8 @@ abstract class SimplePie_Cache_DB implements SimplePie_Cache_Base
 		return array(serialize($data->data), $items_by_id);
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Cache_DB', 'SimplePie\Cache\DB', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

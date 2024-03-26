@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 namespace qtype_truefalse\privacy;
 
 use core_privacy\local\metadata\collection;
@@ -22,11 +23,16 @@ use core_privacy\local\request\writer;
 
 /**
  * Privacy Subsystem implementation for qtype_truefalse
+=======
+/**
+ * Privacy Subsystem implementation for qtype_truefalse.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * @package    qtype_truefalse
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class provider implements
     \core_privacy\local\metadata\provider,
     \core_privacy\local\request\user_preference_provider {
@@ -53,5 +59,28 @@ class provider implements
             writer::export_user_preference('qtype_truefalse', 'showstandardinstruction', transform::yesno($preference),
                 get_string('privacy:preference:showstandardinstruction', 'qtype_truefalse'));
         }
+=======
+
+namespace qtype_truefalse\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Privacy Subsystem for qtype_truefalse implementing null_provider.
+ *
+ * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

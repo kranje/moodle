@@ -2951,7 +2951,11 @@ class Horde_Imap_Client_Socket extends Horde_Imap_Client_Base
             case Horde_Imap_Client::FETCH_BODYPART:
             case Horde_Imap_Client::FETCH_HEADERS:
                 foreach ($c_val as $key => $val) {
+<<<<<<< HEAD
                     $cmd = ((int)$key == 0)
+=======
+                    $cmd = ($key == 0)
+>>>>>>> forked/LAE_400_PACKAGE
                         ? ''
                         : $key . '.';
                     $main_cmd = 'BODY';

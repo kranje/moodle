@@ -26,71 +26,132 @@
  * @author Dan Cech
  */
 
+<<<<<<< HEAD
 /**
  * Debug on or off
  */
+=======
+function _file_get_contents($file)
+{
+ 	if (function_exists('file_get_contents')) return file_get_contents($file);
+
+	$f = fopen($file,'r');
+	if (!$f) return '';
+	$t = '';
+
+	while ($s = fread($f,100000)) $t .= $s;
+	fclose($f);
+	return $t;
+}
+
+
+/**
+* Debug on or off
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_DEBUG' ) ) {
 	define( 'XMLS_DEBUG', FALSE );
 }
 
 /**
+<<<<<<< HEAD
  * Default prefix key
  */
+=======
+* Default prefix key
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_PREFIX' ) ) {
 	define( 'XMLS_PREFIX', '%%P' );
 }
 
 /**
+<<<<<<< HEAD
  * Maximum length allowed for object prefix
  */
+=======
+* Maximum length allowed for object prefix
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_PREFIX_MAXLEN' ) ) {
 	define( 'XMLS_PREFIX_MAXLEN', 10 );
 }
 
 /**
+<<<<<<< HEAD
  * Execute SQL inline as it is generated
  */
+=======
+* Execute SQL inline as it is generated
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_EXECUTE_INLINE' ) ) {
 	define( 'XMLS_EXECUTE_INLINE', FALSE );
 }
 
 /**
+<<<<<<< HEAD
  * Continue SQL Execution if an error occurs?
  */
+=======
+* Continue SQL Execution if an error occurs?
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_CONTINUE_ON_ERROR' ) ) {
 	define( 'XMLS_CONTINUE_ON_ERROR', FALSE );
 }
 
 /**
+<<<<<<< HEAD
  * Current Schema Version
  */
+=======
+* Current Schema Version
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_SCHEMA_VERSION' ) ) {
 	define( 'XMLS_SCHEMA_VERSION', '0.2' );
 }
 
 /**
+<<<<<<< HEAD
  * Default Schema Version.  Used for Schemas without an explicit version set.
  */
+=======
+* Default Schema Version.  Used for Schemas without an explicit version set.
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_DEFAULT_SCHEMA_VERSION' ) ) {
 	define( 'XMLS_DEFAULT_SCHEMA_VERSION', '0.1' );
 }
 
 /**
+<<<<<<< HEAD
  * Default Schema Version.  Used for Schemas without an explicit version set.
  */
+=======
+* Default Schema Version.  Used for Schemas without an explicit version set.
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( 'XMLS_DEFAULT_UPGRADE_METHOD' ) ) {
 	define( 'XMLS_DEFAULT_UPGRADE_METHOD', 'ALTER' );
 }
 
 /**
+<<<<<<< HEAD
  * Include the main ADODB library
  */
+=======
+* Include the main ADODB library
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 if( !defined( '_ADODB_LAYER' ) ) {
 	require( 'adodb.inc.php' );
 	require( 'adodb-datadict.inc.php' );
 }
 
 /**
+<<<<<<< HEAD
  * Abstract DB Object. This class provides basic methods for database objects, such
  * as tables and indexes.
  *
@@ -113,32 +174,77 @@ class dbObject {
 	 * NOP
 	 */
 	function __construct( $parent, $attributes = NULL ) {
+=======
+* Abstract DB Object. This class provides basic methods for database objects, such
+* as tables and indexes.
+*
+* @package axmls
+* @access private
+*/
+class dbObject {
+
+	/**
+	* var object Parent
+	*/
+	var $parent;
+
+	/**
+	* var string current element
+	*/
+	var $currentElement;
+
+	/**
+	* NOP
+	*/
+	function __construct( &$parent, $attributes = NULL ) {
+>>>>>>> forked/LAE_400_PACKAGE
 		$this->parent = $parent;
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process start elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process start elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_open( &$parser, $tag, $attributes ) {
 
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process CDATA elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process CDATA elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_cdata( &$parser, $cdata ) {
 
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process end elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process end elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_close( &$parser, $tag ) {
 
 	}
@@ -148,44 +254,75 @@ class dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Destroys the object
 	 */
+=======
+	* Destroys the object
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function destroy() {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Checks whether the specified RDBMS is supported by the current
 	 * database object or its ranking ancestor.
 	 *
 	 * @param string $platform RDBMS platform name (from ADODB platform list).
 	 * @return boolean TRUE if RDBMS is supported; otherwise returns FALSE.
 	 */
+=======
+	* Checks whether the specified RDBMS is supported by the current
+	* database object or its ranking ancestor.
+	*
+	* @param string $platform RDBMS platform name (from ADODB platform list).
+	* @return boolean TRUE if RDBMS is supported; otherwise returns FALSE.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function supportedPlatform( $platform = NULL ) {
 		return is_object( $this->parent ) ? $this->parent->supportedPlatform( $platform ) : TRUE;
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the prefix set by the ranking ancestor of the database object.
 	 *
 	 * @param string $name Prefix string.
 	 * @return string Prefix.
 	 */
+=======
+	* Returns the prefix set by the ranking ancestor of the database object.
+	*
+	* @param string $name Prefix string.
+	* @return string Prefix.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function prefix( $name = '' ) {
 		return is_object( $this->parent ) ? $this->parent->prefix( $name ) : $name;
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Extracts a field ID from the specified field.
 	 *
 	 * @param string $field Field.
 	 * @return string Field ID.
 	 */
+=======
+	* Extracts a field ID from the specified field.
+	*
+	* @param string $field Field.
+	* @return string Field ID.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function FieldID( $field ) {
 		return strtoupper( preg_replace( '/^`(.+)`$/', '$1', $field ) );
 	}
 }
 
 /**
+<<<<<<< HEAD
  * Creates a table object in ADOdb's datadict format
  *
  * This class stores information about a database table. As charactaristics
@@ -242,16 +379,82 @@ class dbTable extends dbObject {
 	 * @param array $attributes Array of table attributes.
 	 */
 	function __construct( $parent, $attributes = NULL ) {
+=======
+* Creates a table object in ADOdb's datadict format
+*
+* This class stores information about a database table. As charactaristics
+* of the table are loaded from the external source, methods and properties
+* of this class are used to build up the table description in ADOdb's
+* datadict format.
+*
+* @package axmls
+* @access private
+*/
+class dbTable extends dbObject {
+
+	/**
+	* @var string Table name
+	*/
+	var $name;
+
+	/**
+	* @var array Field specifier: Meta-information about each field
+	*/
+	var $fields = array();
+
+	/**
+	* @var array List of table indexes.
+	*/
+	var $indexes = array();
+
+	/**
+	* @var array Table options: Table-level options
+	*/
+	var $opts = array();
+
+	/**
+	* @var string Field index: Keeps track of which field is currently being processed
+	*/
+	var $current_field;
+
+	/**
+	* @var boolean Mark table for destruction
+	* @access private
+	*/
+	var $drop_table;
+
+	/**
+	* @var boolean Mark field for destruction (not yet implemented)
+	* @access private
+	*/
+	var $drop_field = array();
+
+	/**
+	* Iniitializes a new table object.
+	*
+	* @param string $prefix DB Object prefix
+	* @param array $attributes Array of table attributes.
+	*/
+	function __construct( &$parent, $attributes = NULL ) {
+>>>>>>> forked/LAE_400_PACKAGE
 		$this->parent = $parent;
 		$this->name = $this->prefix($attributes['NAME']);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process start elements. Elements currently
 	 * processed are: INDEX, DROP, FIELD, KEY, NOTNULL, AUTOINCREMENT & DEFAULT.
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process start elements. Elements currently
+	* processed are: INDEX, DROP, FIELD, KEY, NOTNULL, AUTOINCREMENT & DEFAULT.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_open( &$parser, $tag, $attributes ) {
 		$this->currentElement = strtoupper( $tag );
 
@@ -307,10 +510,17 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process CDATA elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process CDATA elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_cdata( &$parser, $cdata ) {
 		switch( $this->currentElement ) {
 			// Table constraint
@@ -331,10 +541,17 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process end elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process end elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_close( &$parser, $tag ) {
 		$this->currentElement = '';
 
@@ -352,11 +569,19 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds an index to a table object
 	 *
 	 * @param array $attributes Index attributes
 	 * @return object dbIndex object
 	 */
+=======
+	* Adds an index to a table object
+	*
+	* @param array $attributes Index attributes
+	* @return object dbIndex object
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addIndex( $attributes ) {
 		$name = strtoupper( $attributes['NAME'] );
 		$this->indexes[$name] = new dbIndex( $this, $attributes );
@@ -364,11 +589,19 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds data to a table object
 	 *
 	 * @param array $attributes Data attributes
 	 * @return object dbData object
 	 */
+=======
+	* Adds data to a table object
+	*
+	* @param array $attributes Data attributes
+	* @return object dbData object
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addData( $attributes ) {
 		if( !isset( $this->data ) ) {
 			$this->data = new dbData( $this, $attributes );
@@ -377,6 +610,7 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds a field to a table object
 	 *
 	 * $name is the name of the table to which the field should be added.
@@ -405,6 +639,36 @@ class dbTable extends dbObject {
 	 * @param array $opts	Field options array
 	 * @return array Field specifier array
 	 */
+=======
+	* Adds a field to a table object
+	*
+	* $name is the name of the table to which the field should be added.
+	* $type is an ADODB datadict field type. The following field types
+	* are supported as of ADODB 3.40:
+	* 	- C:  varchar
+	*	- X:  CLOB (character large object) or largest varchar size
+	*	   if CLOB is not supported
+	*	- C2: Multibyte varchar
+	*	- X2: Multibyte CLOB
+	*	- B:  BLOB (binary large object)
+	*	- D:  Date (some databases do not support this, and we return a datetime type)
+	*	- T:  Datetime or Timestamp
+	*	- L:  Integer field suitable for storing booleans (0 or 1)
+	*	- I:  Integer (mapped to I4)
+	*	- I1: 1-byte integer
+	*	- I2: 2-byte integer
+	*	- I4: 4-byte integer
+	*	- I8: 8-byte integer
+	*	- F:  Floating point number
+	*	- N:  Numeric or decimal number
+	*
+	* @param string $name Name of the table to which the field will be added.
+	* @param string $type	ADODB datadict field type.
+	* @param string $size	Field size
+	* @param array $opts	Field options array
+	* @return array Field specifier array
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addField( $name, $type, $size = NULL, $opts = NULL ) {
 		$field_id = $this->FieldID( $name );
 
@@ -429,6 +693,7 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds a field option to the current field specifier
 	 *
 	 * This method adds a field option allowed by the ADOdb datadict
@@ -439,6 +704,18 @@ class dbTable extends dbObject {
 	 * @param mixed $value Field option value
 	 * @return array Field specifier array
 	 */
+=======
+	* Adds a field option to the current field specifier
+	*
+	* This method adds a field option allowed by the ADOdb datadict
+	* and appends it to the given field.
+	*
+	* @param string $field	Field name
+	* @param string $opt ADOdb field option
+	* @param mixed $value Field option value
+	* @return array Field specifier array
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addFieldOpt( $field, $opt, $value = NULL ) {
 		if( !isset( $value ) ) {
 			$this->fields[$this->FieldID( $field )]['OPTS'][] = $opt;
@@ -449,6 +726,7 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds an option to the table
 	 *
 	 * This method takes a comma-separated list of table-level options
@@ -457,6 +735,16 @@ class dbTable extends dbObject {
 	 * @param string $opt Table option
 	 * @return array Options
 	 */
+=======
+	* Adds an option to the table
+	*
+	* This method takes a comma-separated list of table-level options
+	* and appends them to the table object.
+	*
+	* @param string $opt Table option
+	* @return array Options
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addTableOpt( $opt ) {
 		if(isset($this->currentPlatform)) {
 			$this->opts[$this->parent->db->databaseType] = $opt;
@@ -466,11 +754,19 @@ class dbTable extends dbObject {
 
 
 	/**
+<<<<<<< HEAD
 	 * Generates the SQL that will create the table in the database
 	 *
 	 * @param object $xmls adoSchema object
 	 * @return array Array containing table creation SQL
 	 */
+=======
+	* Generates the SQL that will create the table in the database
+	*
+	* @param object $xmls adoSchema object
+	* @return array Array containing table creation SQL
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function create( &$xmls ) {
 		$sql = array();
 
@@ -578,8 +874,13 @@ class dbTable extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Marks a field or table for destruction
 	 */
+=======
+	* Marks a field or table for destruction
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function drop() {
 		if( isset( $this->current_field ) ) {
 			// Drop the current field
@@ -596,6 +897,7 @@ class dbTable extends dbObject {
 }
 
 /**
+<<<<<<< HEAD
  * Creates an index object in ADOdb's datadict format
  *
  * This class stores information about a database index. As charactaristics
@@ -638,12 +940,57 @@ class dbIndex extends dbObject {
 	 * @internal
 	 */
 	function __construct( $parent, $attributes = NULL ) {
+=======
+* Creates an index object in ADOdb's datadict format
+*
+* This class stores information about a database index. As charactaristics
+* of the index are loaded from the external source, methods and properties
+* of this class are used to build up the index description in ADOdb's
+* datadict format.
+*
+* @package axmls
+* @access private
+*/
+class dbIndex extends dbObject {
+
+	/**
+	* @var string	Index name
+	*/
+	var $name;
+
+	/**
+	* @var array	Index options: Index-level options
+	*/
+	var $opts = array();
+
+	/**
+	* @var array	Indexed fields: Table columns included in this index
+	*/
+	var $columns = array();
+
+	/**
+	* @var boolean Mark index for destruction
+	* @access private
+	*/
+	var $drop = FALSE;
+
+	/**
+	* Initializes the new dbIndex object.
+	*
+	* @param object $parent Parent object
+	* @param array $attributes Attributes
+	*
+	* @internal
+	*/
+	function __construct( &$parent, $attributes = NULL ) {
+>>>>>>> forked/LAE_400_PACKAGE
 		$this->parent = $parent;
 
 		$this->name = $this->prefix ($attributes['NAME']);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process start elements
 	 *
 	 * Processes XML opening tags.
@@ -651,6 +998,15 @@ class dbIndex extends dbObject {
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process start elements
+	*
+	* Processes XML opening tags.
+	* Elements currently processed are: DROP, CLUSTERED, BITMAP, UNIQUE, FULLTEXT & HASH.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_open( &$parser, $tag, $attributes ) {
 		$this->currentElement = strtoupper( $tag );
 
@@ -672,12 +1028,21 @@ class dbIndex extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process CDATA elements
 	 *
 	 * Processes XML cdata.
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process CDATA elements
+	*
+	* Processes XML cdata.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_cdata( &$parser, $cdata ) {
 		switch( $this->currentElement ) {
 			// Index field name
@@ -690,10 +1055,17 @@ class dbIndex extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process end elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process end elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_close( &$parser, $tag ) {
 		$this->currentElement = '';
 
@@ -705,11 +1077,19 @@ class dbIndex extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds a field to the index
 	 *
 	 * @param string $name Field name
 	 * @return string Field list
 	 */
+=======
+	* Adds a field to the index
+	*
+	* @param string $name Field name
+	* @return string Field list
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addField( $name ) {
 		$this->columns[$this->FieldID( $name )] = $name;
 
@@ -718,11 +1098,19 @@ class dbIndex extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds options to the index
 	 *
 	 * @param string $opt Comma-separated list of index options.
 	 * @return string Option list
 	 */
+=======
+	* Adds options to the index
+	*
+	* @param string $opt Comma-separated list of index options.
+	* @return string Option list
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addIndexOpt( $opt ) {
 		$this->opts[] = $opt;
 
@@ -731,11 +1119,19 @@ class dbIndex extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Generates the SQL that will create the index in the database
 	 *
 	 * @param object $xmls adoSchema object
 	 * @return array Array containing index creation SQL
 	 */
+=======
+	* Generates the SQL that will create the index in the database
+	*
+	* @param object $xmls adoSchema object
+	* @return array Array containing index creation SQL
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function create( &$xmls ) {
 		if( $this->drop ) {
 			return NULL;
@@ -752,14 +1148,20 @@ class dbIndex extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Marks an index for destruction
 	 */
+=======
+	* Marks an index for destruction
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function drop() {
 		$this->drop = TRUE;
 	}
 }
 
 /**
+<<<<<<< HEAD
  * Creates a data object in ADOdb's datadict format
  *
  * This class stores information about table data.
@@ -767,6 +1169,15 @@ class dbIndex extends dbObject {
  * @package axmls
  * @access private
  */
+=======
+* Creates a data object in ADOdb's datadict format
+*
+* This class stores information about table data.
+*
+* @package axmls
+* @access private
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 class dbData extends dbObject {
 
 	var $data = array();
@@ -774,6 +1185,7 @@ class dbData extends dbObject {
 	var $row;
 
 	/**
+<<<<<<< HEAD
 	 * Initializes the new dbIndex object.
 	 *
 	 * @param object $parent Parent object
@@ -782,10 +1194,21 @@ class dbData extends dbObject {
 	 * @internal
 	 */
 	function __construct( $parent, $attributes = NULL ) {
+=======
+	* Initializes the new dbIndex object.
+	*
+	* @param object $parent Parent object
+	* @param array $attributes Attributes
+	*
+	* @internal
+	*/
+	function __construct( &$parent, $attributes = NULL ) {
+>>>>>>> forked/LAE_400_PACKAGE
 		$this->parent = $parent;
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process start elements
 	 *
 	 * Processes XML opening tags.
@@ -793,6 +1216,15 @@ class dbData extends dbObject {
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process start elements
+	*
+	* Processes XML opening tags.
+	* Elements currently processed are: DROP, CLUSTERED, BITMAP, UNIQUE, FULLTEXT & HASH.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_open( &$parser, $tag, $attributes ) {
 		$this->currentElement = strtoupper( $tag );
 
@@ -809,12 +1241,21 @@ class dbData extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process CDATA elements
 	 *
 	 * Processes XML cdata.
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process CDATA elements
+	*
+	* Processes XML cdata.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_cdata( &$parser, $cdata ) {
 		switch( $this->currentElement ) {
 			// Index field name
@@ -827,10 +1268,17 @@ class dbData extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process end elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process end elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_close( &$parser, $tag ) {
 		$this->currentElement = '';
 
@@ -842,11 +1290,19 @@ class dbData extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds a field to the index
 	 *
 	 * @param string $name Field name
 	 * @return string Field list
 	 */
+=======
+	* Adds a field to the index
+	*
+	* @param string $name Field name
+	* @return string Field list
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addField( $attributes ) {
 		if( isset( $attributes['NAME'] ) ) {
 			$name = $attributes['NAME'];
@@ -859,11 +1315,19 @@ class dbData extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds options to the index
 	 *
 	 * @param string $opt Comma-separated list of index options.
 	 * @return string Option list
 	 */
+=======
+	* Adds options to the index
+	*
+	* @param string $opt Comma-separated list of index options.
+	* @return string Option list
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addData( $cdata ) {
 		if( !isset( $this->data[$this->row] ) ) {
 			$this->data[$this->row] = array();
@@ -877,11 +1341,19 @@ class dbData extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Generates the SQL that will create the index in the database
 	 *
 	 * @param object $xmls adoSchema object
 	 * @return array Array containing index creation SQL
 	 */
+=======
+	* Generates the SQL that will create the index in the database
+	*
+	* @param object $xmls adoSchema object
+	* @return array Array containing index creation SQL
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function create( &$xmls ) {
 		$table = $xmls->dict->TableName($this->parent->name);
 		$table_field_count = count($this->parent->fields);
@@ -895,8 +1367,12 @@ class dbData extends dbObject {
 			foreach( $row as $field_id => $field_data ) {
 				if( !array_key_exists( $field_id, $table_fields ) ) {
 					if( is_numeric( $field_id ) ) {
+<<<<<<< HEAD
 						$keys = array_keys($table_fields);
 						$field_id = reset($keys);
+=======
+						$field_id = reset( array_keys( $table_fields ) );
+>>>>>>> forked/LAE_400_PACKAGE
 					} else {
 						continue;
 					}
@@ -948,6 +1424,7 @@ class dbData extends dbObject {
 }
 
 /**
+<<<<<<< HEAD
  * Creates the SQL to execute a list of provided SQL queries
  *
  * @package axmls
@@ -982,6 +1459,42 @@ class dbQuerySet extends dbObject {
 	 * @param array $attributes Attributes
 	 */
 	function __construct( $parent, $attributes = NULL ) {
+=======
+* Creates the SQL to execute a list of provided SQL queries
+*
+* @package axmls
+* @access private
+*/
+class dbQuerySet extends dbObject {
+
+	/**
+	* @var array	List of SQL queries
+	*/
+	var $queries = array();
+
+	/**
+	* @var string	String used to build of a query line by line
+	*/
+	var $query;
+
+	/**
+	* @var string	Query prefix key
+	*/
+	var $prefixKey = '';
+
+	/**
+	* @var boolean	Auto prefix enable (TRUE)
+	*/
+	var $prefixMethod = 'AUTO';
+
+	/**
+	* Initializes the query set.
+	*
+	* @param object $parent Parent object
+	* @param array $attributes Attributes
+	*/
+	function __construct( &$parent, $attributes = NULL ) {
+>>>>>>> forked/LAE_400_PACKAGE
 		$this->parent = $parent;
 
 		// Overrides the manual prefix key
@@ -1006,11 +1519,19 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process start elements. Elements currently
 	 * processed are: QUERY.
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process start elements. Elements currently
+	* processed are: QUERY.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_open( &$parser, $tag, $attributes ) {
 		$this->currentElement = strtoupper( $tag );
 
@@ -1031,8 +1552,13 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process CDATA elements
 	 */
+=======
+	* XML Callback to process CDATA elements
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_cdata( &$parser, $cdata ) {
 		switch( $this->currentElement ) {
 			// Line of queryset SQL data
@@ -1045,10 +1571,17 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process end elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process end elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_close( &$parser, $tag ) {
 		$this->currentElement = '';
 
@@ -1068,10 +1601,17 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Re-initializes the query.
 	 *
 	 * @return boolean TRUE
 	 */
+=======
+	* Re-initializes the query.
+	*
+	* @return boolean TRUE
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function newQuery() {
 		$this->query = '';
 
@@ -1079,10 +1619,17 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Discards the existing query.
 	 *
 	 * @return boolean TRUE
 	 */
+=======
+	* Discards the existing query.
+	*
+	* @return boolean TRUE
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function discardQuery() {
 		unset( $this->query );
 
@@ -1090,11 +1637,19 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Appends a line to a query that is being built line by line
 	 *
 	 * @param string $data Line of SQL data or NULL to initialize a new query
 	 * @return string SQL query string.
 	 */
+=======
+	* Appends a line to a query that is being built line by line
+	*
+	* @param string $data Line of SQL data or NULL to initialize a new query
+	* @return string SQL query string.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function buildQuery( $sql = NULL ) {
 		if( !isset( $this->query ) OR empty( $sql ) ) {
 			return FALSE;
@@ -1106,10 +1661,17 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds a completed query to the query list
 	 *
 	 * @return string	SQL of added query
 	 */
+=======
+	* Adds a completed query to the query list
+	*
+	* @return string	SQL of added query
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addQuery() {
 		if( !isset( $this->query ) ) {
 			return FALSE;
@@ -1123,11 +1685,19 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Creates and returns the current query set
 	 *
 	 * @param object $xmls adoSchema object
 	 * @return array Query set
 	 */
+=======
+	* Creates and returns the current query set
+	*
+	* @param object $xmls adoSchema object
+	* @return array Query set
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function create( &$xmls ) {
 		foreach( $this->queries as $id => $query ) {
 			switch( $this->prefixMethod ) {
@@ -1163,6 +1733,7 @@ class dbQuerySet extends dbObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Rebuilds the query with the prefix attached to any objects
 	 *
 	 * @param string $regex Regex used to add prefix
@@ -1170,6 +1741,15 @@ class dbQuerySet extends dbObject {
 	 * @param string $prefix Prefix to be appended to tables, indices, etc.
 	 * @return string Prefixed SQL query string.
 	 */
+=======
+	* Rebuilds the query with the prefix attached to any objects
+	*
+	* @param string $regex Regex used to add prefix
+	* @param string $query SQL query string
+	* @param string $prefix Prefix to be appended to tables, indices, etc.
+	* @return string Prefixed SQL query string.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function prefixQuery( $regex, $query, $prefix = NULL ) {
 		if( !isset( $prefix ) ) {
 			return $query;
@@ -1199,6 +1779,7 @@ class dbQuerySet extends dbObject {
 }
 
 /**
+<<<<<<< HEAD
  * Loads and parses an XML file, creating an array of "ready-to-run" SQL statements
  *
  * This class is used to load and parse the XML file, to create an array of SQL statements
@@ -1291,6 +1872,100 @@ class adoSchema {
 	 *
 	 * @param object $db ADOdb database connection object.
 	 */
+=======
+* Loads and parses an XML file, creating an array of "ready-to-run" SQL statements
+*
+* This class is used to load and parse the XML file, to create an array of SQL statements
+* that can be used to build a database, and to build the database using the SQL array.
+*
+* @tutorial getting_started.pkg
+*
+* @author Richard Tango-Lowy & Dan Cech
+* @version $Revision: 1.12 $
+*
+* @package axmls
+*/
+class adoSchema {
+
+	/**
+	* @var array	Array containing SQL queries to generate all objects
+	* @access private
+	*/
+	var $sqlArray;
+
+	/**
+	* @var object	ADOdb connection object
+	* @access private
+	*/
+	var $db;
+
+	/**
+	* @var object	ADOdb Data Dictionary
+	* @access private
+	*/
+	var $dict;
+
+	/**
+	* @var string Current XML element
+	* @access private
+	*/
+	var $currentElement = '';
+
+	/**
+	* @var string If set (to 'ALTER' or 'REPLACE'), upgrade an existing database
+	* @access private
+	*/
+	var $upgrade = '';
+
+	/**
+	* @var string Optional object prefix
+	* @access private
+	*/
+	var $objectPrefix = '';
+
+	/**
+	* @var long	System debug
+	* @access private
+	*/
+	var $debug;
+
+	/**
+	* @var string Regular expression to find schema version
+	* @access private
+	*/
+	var $versionRegex = '/<schema.*?( version="([^"]*)")?.*?>/';
+
+	/**
+	* @var string Current schema version
+	* @access private
+	*/
+	var $schemaVersion;
+
+	/**
+	* @var int	Success of last Schema execution
+	*/
+	var $success;
+
+	/**
+	* @var bool	Execute SQL inline as it is generated
+	*/
+	var $executeInline;
+
+	/**
+	* @var bool	Continue SQL execution if errors occur
+	*/
+	var $continueOnError;
+
+	/**
+	* Creates an adoSchema object
+	*
+	* Creating an adoSchema object is the first step in processing an XML schema.
+	* The only parameter is an ADOdb database connection object, which must already
+	* have been created.
+	*
+	* @param object $db ADOdb database connection object.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function __construct( $db ) {
 		$this->db = $db;
 		$this->debug = $this->db->debug;
@@ -1303,6 +1978,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Sets the method to be used for upgrading an existing database
 	 *
 	 * Use this method to specify how existing database objects should be upgraded.
@@ -1318,6 +1994,23 @@ class adoSchema {
 	 * @param string $method Upgrade method (ALTER|REPLACE|BEST|NONE)
 	 * @returns string Upgrade method used
 	 */
+=======
+	* Sets the method to be used for upgrading an existing database
+	*
+	* Use this method to specify how existing database objects should be upgraded.
+	* The method option can be set to ALTER, REPLACE, BEST, or NONE. ALTER attempts to
+	* alter each database object directly, REPLACE attempts to rebuild each object
+	* from scratch, BEST attempts to determine the best upgrade method for each
+	* object, and NONE disables upgrading.
+	*
+	* This method is not yet used by AXMLS, but exists for backward compatibility.
+	* The ALTER method is automatically assumed when the adoSchema object is
+	* instantiated; other upgrade methods are not currently supported.
+	*
+	* @param string $method Upgrade method (ALTER|REPLACE|BEST|NONE)
+	* @returns string Upgrade method used
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function SetUpgradeMethod( $method = '' ) {
 		if( !is_string( $method ) ) {
 			return FALSE;
@@ -1348,6 +2041,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Enables/disables inline SQL execution.
 	 *
 	 * Call this method to enable or disable inline execution of the schema. If the mode is set to TRUE (inline execution),
@@ -1361,6 +2055,20 @@ class adoSchema {
 	 * @see ParseSchema()
 	 * @see ExecuteSchema()
 	 */
+=======
+	* Enables/disables inline SQL execution.
+	*
+	* Call this method to enable or disable inline execution of the schema. If the mode is set to TRUE (inline execution),
+	* AXMLS applies the SQL to the database immediately as each schema entity is parsed. If the mode
+	* is set to FALSE (post execution), AXMLS parses the entire schema and you will need to call adoSchema::ExecuteSchema()
+	* to apply the schema to the database.
+	*
+	* @param bool $mode execute
+	* @return bool current execution mode
+	*
+	* @see ParseSchema(), ExecuteSchema()
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ExecuteInline( $mode = NULL ) {
 		if( is_bool( $mode ) ) {
 			$this->executeInline = $mode;
@@ -1370,6 +2078,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Enables/disables SQL continue on error.
 	 *
 	 * Call this method to enable or disable continuation of SQL execution if an error occurs.
@@ -1383,6 +2092,20 @@ class adoSchema {
 	 * @see addSQL()
 	 * @see ExecuteSchema()
 	 */
+=======
+	* Enables/disables SQL continue on error.
+	*
+	* Call this method to enable or disable continuation of SQL execution if an error occurs.
+	* If the mode is set to TRUE (continue), AXMLS will continue to apply SQL to the database, even if an error occurs.
+	* If the mode is set to FALSE (halt), AXMLS will halt execution of generated sql if an error occurs, though parsing
+	* of the schema will continue.
+	*
+	* @param bool $mode execute
+	* @return bool current continueOnError mode
+	*
+	* @see addSQL(), ExecuteSchema()
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ContinueOnError( $mode = NULL ) {
 		if( is_bool( $mode ) ) {
 			$this->continueOnError = $mode;
@@ -1392,6 +2115,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Loads an XML schema from a file and converts it to SQL.
 	 *
 	 * Call this method to load the specified schema (see the DTD for the proper format) from
@@ -1402,11 +2126,24 @@ class adoSchema {
 	 * @param bool $returnSchema Return schema rather than parsing.
 	 * @return array Array of SQL queries, ready to execute
 	 */
+=======
+	* Loads an XML schema from a file and converts it to SQL.
+	*
+	* Call this method to load the specified schema (see the DTD for the proper format) from
+	* the filesystem and generate the SQL necessary to create the database described.
+	* @see ParseSchemaString()
+	*
+	* @param string $file Name of XML schema file.
+	* @param bool $returnSchema Return schema rather than parsing.
+	* @return array Array of SQL queries, ready to execute
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ParseSchema( $filename, $returnSchema = FALSE ) {
 		return $this->ParseSchemaString( $this->ConvertSchemaFile( $filename ), $returnSchema );
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Loads an XML schema from a file and converts it to SQL.
 	 *
 	 * Call this method to load the specified schema from a file (see the DTD for the proper format)
@@ -1420,6 +2157,20 @@ class adoSchema {
 	 * @see ParseSchema()
 	 * @see ParseSchemaString()
 	 */
+=======
+	* Loads an XML schema from a file and converts it to SQL.
+	*
+	* Call this method to load the specified schema from a file (see the DTD for the proper format)
+	* and generate the SQL necessary to create the database described by the schema.
+	*
+	* @param string $file Name of XML schema file.
+	* @param bool $returnSchema Return schema rather than parsing.
+	* @return array Array of SQL queries, ready to execute.
+	*
+	* @deprecated Replaced by adoSchema::ParseSchema() and adoSchema::ParseSchemaString()
+	* @see ParseSchema(), ParseSchemaString()
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ParseSchemaFile( $filename, $returnSchema = FALSE ) {
 		// Open the file
 		if( !($fp = fopen( $filename, 'r' )) ) {
@@ -1462,6 +2213,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Converts an XML schema string to SQL.
 	 *
 	 * Call this method to parse a string containing an XML schema (see the DTD for the proper format)
@@ -1472,6 +2224,18 @@ class adoSchema {
 	 * @param bool $returnSchema Return schema rather than parsing.
 	 * @return array Array of SQL queries, ready to execute.
 	 */
+=======
+	* Converts an XML schema string to SQL.
+	*
+	* Call this method to parse a string containing an XML schema (see the DTD for the proper format)
+	* and generate the SQL necessary to create the database described by the schema.
+	* @see ParseSchema()
+	*
+	* @param string $xmlstring XML schema string.
+	* @param bool $returnSchema Return schema rather than parsing.
+	* @return array Array of SQL queries, ready to execute.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ParseSchemaString( $xmlstring, $returnSchema = FALSE ) {
 		if( !is_string( $xmlstring ) OR empty( $xmlstring ) ) {
 			return FALSE;
@@ -1505,6 +2269,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Loads an XML schema from a file and converts it to uninstallation SQL.
 	 *
 	 * Call this method to load the specified schema (see the DTD for the proper format) from
@@ -1515,11 +2280,24 @@ class adoSchema {
 	 * @param bool $returnSchema Return schema rather than parsing.
 	 * @return array Array of SQL queries, ready to execute
 	 */
+=======
+	* Loads an XML schema from a file and converts it to uninstallation SQL.
+	*
+	* Call this method to load the specified schema (see the DTD for the proper format) from
+	* the filesystem and generate the SQL necessary to remove the database described.
+	* @see RemoveSchemaString()
+	*
+	* @param string $file Name of XML schema file.
+	* @param bool $returnSchema Return schema rather than parsing.
+	* @return array Array of SQL queries, ready to execute
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function RemoveSchema( $filename, $returnSchema = FALSE ) {
 		return $this->RemoveSchemaString( $this->ConvertSchemaFile( $filename ), $returnSchema );
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Converts an XML schema string to uninstallation SQL.
 	 *
 	 * Call this method to parse a string containing an XML schema (see the DTD for the proper format)
@@ -1530,6 +2308,18 @@ class adoSchema {
 	 * @param bool $returnSchema Return schema rather than parsing.
 	 * @return array Array of SQL queries, ready to execute.
 	 */
+=======
+	* Converts an XML schema string to uninstallation SQL.
+	*
+	* Call this method to parse a string containing an XML schema (see the DTD for the proper format)
+	* and generate the SQL necessary to uninstall the database described by the schema.
+	* @see RemoveSchema()
+	*
+	* @param string $schema XML schema string.
+	* @param bool $returnSchema Return schema rather than parsing.
+	* @return array Array of SQL queries, ready to execute.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function RemoveSchemaString( $schema, $returnSchema = FALSE ) {
 
 		// grab current version
@@ -1541,6 +2331,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Applies the current XML schema to the database (post execution).
 	 *
 	 * Call this method to apply the current schema (generally created by calling
@@ -1555,6 +2346,20 @@ class adoSchema {
 	 * @param boolean $continueOnErr Continue to apply the schema even if an error occurs.
 	 * @returns integer 0 if failure, 1 if errors, 2 if successful.
 	 */
+=======
+	* Applies the current XML schema to the database (post execution).
+	*
+	* Call this method to apply the current schema (generally created by calling
+	* ParseSchema() or ParseSchemaString() ) to the database (creating the tables, indexes,
+	* and executing other SQL specified in the schema) after parsing.
+	* @see ParseSchema(), ParseSchemaString(), ExecuteInline()
+	*
+	* @param array $sqlArray Array of SQL statements that will be applied rather than
+	*		the current schema.
+	* @param boolean $continueOnErr Continue to apply the schema even if an error occurs.
+	* @returns integer 0 if failure, 1 if errors, 2 if successful.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ExecuteSchema( $sqlArray = NULL, $continueOnErr =  NULL ) {
 		if( !is_bool( $continueOnErr ) ) {
 			$continueOnErr = $this->ContinueOnError();
@@ -1574,6 +2379,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the current SQL array.
 	 *
 	 * Call this method to fetch the array of SQL queries resulting from
@@ -1582,12 +2388,23 @@ class adoSchema {
 	 * @param string $format Format: HTML, TEXT, or NONE (PHP array)
 	 * @return array Array of SQL statements or FALSE if an error occurs
 	 */
+=======
+	* Returns the current SQL array.
+	*
+	* Call this method to fetch the array of SQL queries resulting from
+	* ParseSchema() or ParseSchemaString().
+	*
+	* @param string $format Format: HTML, TEXT, or NONE (PHP array)
+	* @return array Array of SQL statements or FALSE if an error occurs
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function PrintSQL( $format = 'NONE' ) {
 		$sqlArray = null;
 		return $this->getSQL( $format, $sqlArray );
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Saves the current SQL array to the local filesystem as a list of SQL queries.
 	 *
 	 * Call this method to save the array of SQL queries (generally resulting from a
@@ -1596,6 +2413,16 @@ class adoSchema {
 	 * @param string $filename Path and name where the file should be saved.
 	 * @return boolean TRUE if save is successful, else FALSE.
 	 */
+=======
+	* Saves the current SQL array to the local filesystem as a list of SQL queries.
+	*
+	* Call this method to save the array of SQL queries (generally resulting from a
+	* parsed XML schema) to the filesystem.
+	*
+	* @param string $filename Path and name where the file should be saved.
+	* @return boolean TRUE if save is successful, else FALSE.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function SaveSQL( $filename = './schema.sql' ) {
 
 		if( !isset( $sqlArray ) ) {
@@ -1614,12 +2441,21 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Create an xml parser
 	 *
 	 * @return object PHP XML parser object
 	 *
 	 * @access private
 	 */
+=======
+	* Create an xml parser
+	*
+	* @return object PHP XML parser object
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function create_parser() {
 		// Create the parser
 		$xmlParser = xml_parser_create();
@@ -1633,10 +2469,17 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process start elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process start elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_open( &$parser, $tag, $attributes ) {
 		switch( strtoupper( $tag ) ) {
 			case 'TABLE':
@@ -1656,24 +2499,40 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process CDATA elements
 	 *
 	 * @access private
 	 */
+=======
+	* XML Callback to process CDATA elements
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_cdata( &$parser, $cdata ) {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * XML Callback to process end elements
 	 *
 	 * @access private
 	 * @internal
 	 */
+=======
+	* XML Callback to process end elements
+	*
+	* @access private
+	* @internal
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function _tag_close( &$parser, $tag ) {
 
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Converts an XML schema string to the specified DTD version.
 	 *
 	 * Call this method to convert a string containing an XML schema to a different AXMLS
@@ -1689,6 +2548,23 @@ class adoSchema {
 	 * @param string $newFile File name of (converted) output file.
 	 * @return string Converted XML schema or FALSE if an error occurs.
 	 */
+=======
+	* Converts an XML schema string to the specified DTD version.
+	*
+	* Call this method to convert a string containing an XML schema to a different AXMLS
+	* DTD version. For instance, to convert a schema created for an pre-1.0 version for
+	* AXMLS (DTD version 0.1) to a newer version of the DTD (e.g. 0.2). If no DTD version
+	* parameter is specified, the schema will be converted to the current DTD version.
+	* If the newFile parameter is provided, the converted schema will be written to the specified
+	* file.
+	* @see ConvertSchemaFile()
+	*
+	* @param string $schema String containing XML schema that will be converted.
+	* @param string $newVersion DTD version to convert to.
+	* @param string $newFile File name of (converted) output file.
+	* @return string Converted XML schema or FALSE if an error occurs.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ConvertSchemaString( $schema, $newVersion = NULL, $newFile = NULL ) {
 
 		// grab current version
@@ -1714,6 +2590,7 @@ class adoSchema {
 		return $result;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Converts an XML schema file to the specified DTD version.
 	 *
@@ -1730,6 +2607,31 @@ class adoSchema {
 	 * @param string $newFile File name of (converted) output file.
 	 * @return string Converted XML schema or FALSE if an error occurs.
 	 */
+=======
+	// compat for pre-4.3 - jlim
+	function _file_get_contents($path)
+	{
+		if (function_exists('file_get_contents')) return file_get_contents($path);
+		return join('',file($path));
+	}
+
+	/**
+	* Converts an XML schema file to the specified DTD version.
+	*
+	* Call this method to convert the specified XML schema file to a different AXMLS
+	* DTD version. For instance, to convert a schema created for an pre-1.0 version for
+	* AXMLS (DTD version 0.1) to a newer version of the DTD (e.g. 0.2). If no DTD version
+	* parameter is specified, the schema will be converted to the current DTD version.
+	* If the newFile parameter is provided, the converted schema will be written to the specified
+	* file.
+	* @see ConvertSchemaString()
+	*
+	* @param string $filename Name of XML schema file that will be converted.
+	* @param string $newVersion DTD version to convert to.
+	* @param string $newFile File name of (converted) output file.
+	* @return string Converted XML schema or FALSE if an error occurs.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ConvertSchemaFile( $filename, $newVersion = NULL, $newFile = NULL ) {
 
 		// grab current version
@@ -1742,7 +2644,11 @@ class adoSchema {
 		}
 
 		if( $version == $newVersion ) {
+<<<<<<< HEAD
 			$result = file_get_contents( $filename );
+=======
+			$result = _file_get_contents( $filename );
+>>>>>>> forked/LAE_400_PACKAGE
 
 			// remove unicode BOM if present
 			if( substr( $result, 0, 3 ) == sprintf( '%c%c%c', 239, 187, 191 ) ) {
@@ -1781,7 +2687,11 @@ class adoSchema {
 					return FALSE;
 				}
 
+<<<<<<< HEAD
 				$schema = file_get_contents( $schema );
+=======
+				$schema = _file_get_contents( $schema );
+>>>>>>> forked/LAE_400_PACKAGE
 				break;
 			case 'string':
 			default:
@@ -1792,14 +2702,22 @@ class adoSchema {
 
 		$arguments = array (
 			'/_xml' => $schema,
+<<<<<<< HEAD
 			'/_xsl' => file_get_contents( $xsl_file )
+=======
+			'/_xsl' => _file_get_contents( $xsl_file )
+>>>>>>> forked/LAE_400_PACKAGE
 		);
 
 		// create an XSLT processor
 		$xh = xslt_create ();
 
 		// set error handler
+<<<<<<< HEAD
 		xslt_set_error_handler ($xh, array ($this, 'xslt_error_handler'));
+=======
+		xslt_set_error_handler ($xh, array (&$this, 'xslt_error_handler'));
+>>>>>>> forked/LAE_400_PACKAGE
 
 		// process the schema
 		$result = xslt_process ($xh, 'arg:/_xml', 'arg:/_xsl', NULL, $arguments);
@@ -1810,6 +2728,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Processes XSLT transformation errors
 	 *
 	 * @param object $parser XML parser object
@@ -1819,6 +2738,17 @@ class adoSchema {
 	 *
 	 * @access private
 	 */
+=======
+	* Processes XSLT transformation errors
+	*
+	* @param object $parser XML parser object
+	* @param integer $errno Error number
+	* @param integer $level Error level
+	* @param array $fields Error information fields
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function xslt_error_handler( $parser, $errno, $level, $fields ) {
 		if( is_array( $fields ) ) {
 			$msg = array(
@@ -1863,6 +2793,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the AXMLS Schema Version of the requested XML schema file.
 	 *
 	 * Call this method to obtain the AXMLS DTD version of the requested XML schema file.
@@ -1871,6 +2802,16 @@ class adoSchema {
 	 * @param string $filename AXMLS schema file
 	 * @return string Schema version number or FALSE on error
 	 */
+=======
+	* Returns the AXMLS Schema Version of the requested XML schema file.
+	*
+	* Call this method to obtain the AXMLS DTD version of the requested XML schema file.
+	* @see SchemaStringVersion()
+	*
+	* @param string $filename AXMLS schema file
+	* @return string Schema version number or FALSE on error
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function SchemaFileVersion( $filename ) {
 		// Open the file
 		if( !($fp = fopen( $filename, 'r' )) ) {
@@ -1889,6 +2830,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the AXMLS Schema Version of the provided XML schema string.
 	 *
 	 * Call this method to obtain the AXMLS DTD version of the provided XML schema string.
@@ -1897,6 +2839,16 @@ class adoSchema {
 	 * @param string $xmlstring XML schema string
 	 * @return string Schema version number or FALSE on error
 	 */
+=======
+	* Returns the AXMLS Schema Version of the provided XML schema string.
+	*
+	* Call this method to obtain the AXMLS DTD version of the provided XML schema string.
+	* @see SchemaFileVersion()
+	*
+	* @param string $xmlstring XML schema string
+	* @return string Schema version number or FALSE on error
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function SchemaStringVersion( $xmlstring ) {
 		if( !is_string( $xmlstring ) OR empty( $xmlstring ) ) {
 			return FALSE;
@@ -1910,6 +2862,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Extracts an XML schema from an existing database.
 	 *
 	 * Call this method to create an XML schema string from an existing database.
@@ -1919,6 +2872,17 @@ class adoSchema {
 	 * @param boolean $data Include data in schema dump
 	 * @return string Generated XML schema
 	 */
+=======
+	* Extracts an XML schema from an existing database.
+	*
+	* Call this method to create an XML schema string from an existing database.
+	* If the data parameter is set to TRUE, AXMLS will include the data from the database
+	* in the schema.
+	*
+	* @param boolean $data Include data in schema dump
+	* @return string Generated XML schema
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function ExtractSchema( $data = FALSE ) {
 		$old_mode = $this->db->SetFetchMode( ADODB_FETCH_NUM );
 
@@ -2017,6 +2981,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Sets a prefix for database objects
 	 *
 	 * Call this method to set a standard prefix that will be prepended to all database tables
@@ -2026,6 +2991,17 @@ class adoSchema {
 	 * @param boolean $underscore If TRUE, automatically append an underscore character to the prefix.
 	 * @return boolean TRUE if successful, else FALSE
 	 */
+=======
+	* Sets a prefix for database objects
+	*
+	* Call this method to set a standard prefix that will be prepended to all database tables
+	* and indices when the schema is parsed. Calling setPrefix with no arguments clears the prefix.
+	*
+	* @param string $prefix Prefix that will be prepended.
+	* @param boolean $underscore If TRUE, automatically append an underscore character to the prefix.
+	* @return boolean TRUE if successful, else FALSE
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function SetPrefix( $prefix = '', $underscore = TRUE ) {
 		switch( TRUE ) {
 			// clear prefix
@@ -2052,6 +3028,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns an object name with the current prefix prepended.
 	 *
 	 * @param string	$name Name
@@ -2059,6 +3036,15 @@ class adoSchema {
 	 *
 	 * @access private
 	 */
+=======
+	* Returns an object name with the current prefix prepended.
+	*
+	* @param string	$name Name
+	* @return string	Prefixed name
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function prefix( $name = '' ) {
 		// if prefix is set
 		if( !empty( $this->objectPrefix ) ) {
@@ -2072,6 +3058,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Checks if element references a specific platform
 	 *
 	 * @param string $platform Requested platform
@@ -2079,6 +3066,15 @@ class adoSchema {
 	 *
 	 * @access private
 	 */
+=======
+	* Checks if element references a specific platform
+	*
+	* @param string $platform Requested platform
+	* @returns boolean TRUE if platform check succeeds
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function supportedPlatform( $platform = NULL ) {
 		$regex = '/^(\w*\|)*' . $this->db->databaseType . '(\|\w*)*$/';
 
@@ -2092,15 +3088,23 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Clears the array of generated SQL.
 	 *
 	 * @access private
 	 */
+=======
+	* Clears the array of generated SQL.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function clearSQL() {
 		$this->sqlArray = array();
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Adds SQL into the SQL array.
 	 *
 	 * @param mixed $sql SQL to Add
@@ -2108,6 +3112,15 @@ class adoSchema {
 	 *
 	 * @access private
 	 */
+=======
+	* Adds SQL into the SQL array.
+	*
+	* @param mixed $sql SQL to Add
+	* @return boolean TRUE if successful, else FALSE.
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function addSQL( $sql = NULL ) {
 		if( is_array( $sql ) ) {
 			foreach( $sql as $line ) {
@@ -2143,6 +3156,7 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Gets the SQL array in the specified format.
 	 *
 	 * @param string $format Format
@@ -2150,6 +3164,15 @@ class adoSchema {
 	 *
 	 * @access private
 	 */
+=======
+	* Gets the SQL array in the specified format.
+	*
+	* @param string $format Format
+	* @return mixed SQL
+	*
+	* @access private
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function getSQL( $format = NULL, $sqlArray = NULL ) {
 		if( !is_array( $sqlArray ) ) {
 			$sqlArray = $this->sqlArray;
@@ -2171,19 +3194,34 @@ class adoSchema {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Destroys an adoSchema object.
 	 *
 	 * Call this method to clean up after an adoSchema object that is no longer in use.
 	 * @deprecated adoSchema now cleans up automatically.
 	 */
+=======
+	* Destroys an adoSchema object.
+	*
+	* Call this method to clean up after an adoSchema object that is no longer in use.
+	* @deprecated adoSchema now cleans up automatically.
+	*/
+>>>>>>> forked/LAE_400_PACKAGE
 	function Destroy() {}
 }
 
 /**
+<<<<<<< HEAD
  * Message logging function
  *
  * @access private
  */
+=======
+* Message logging function
+*
+* @access private
+*/
+>>>>>>> forked/LAE_400_PACKAGE
 function logMsg( $msg, $title = NULL, $force = FALSE ) {
 	if( XMLS_DEBUG or $force ) {
 		echo '<pre>';

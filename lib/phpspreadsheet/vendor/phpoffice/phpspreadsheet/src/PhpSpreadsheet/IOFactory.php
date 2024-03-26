@@ -14,6 +14,7 @@ use PhpOffice\PhpSpreadsheet\Writer\IWriter;
  */
 abstract class IOFactory
 {
+<<<<<<< HEAD
     public const READER_XLSX = 'Xlsx';
     public const READER_XLS = 'Xls';
     public const READER_XML = 'Xml';
@@ -47,6 +48,25 @@ abstract class IOFactory
         self::WRITER_ODS => Writer\Ods::class,
         self::WRITER_CSV => Writer\Csv::class,
         self::WRITER_HTML => Writer\Html::class,
+=======
+    private static $readers = [
+        'Xlsx' => Reader\Xlsx::class,
+        'Xls' => Reader\Xls::class,
+        'Xml' => Reader\Xml::class,
+        'Ods' => Reader\Ods::class,
+        'Slk' => Reader\Slk::class,
+        'Gnumeric' => Reader\Gnumeric::class,
+        'Html' => Reader\Html::class,
+        'Csv' => Reader\Csv::class,
+    ];
+
+    private static $writers = [
+        'Xls' => Writer\Xls::class,
+        'Xlsx' => Writer\Xlsx::class,
+        'Ods' => Writer\Ods::class,
+        'Csv' => Writer\Csv::class,
+        'Html' => Writer\Html::class,
+>>>>>>> forked/LAE_400_PACKAGE
         'Tcpdf' => Writer\Pdf\Tcpdf::class,
         'Dompdf' => Writer\Pdf\Dompdf::class,
         'Mpdf' => Writer\Pdf\Mpdf::class,
@@ -86,6 +106,7 @@ abstract class IOFactory
      * Loads Spreadsheet from file using automatic Reader\IReader resolution.
      *
      * @param string $filename The name of the spreadsheet file
+<<<<<<< HEAD
      * @param int $flags the optional second parameter flags may be used to identify specific elements
      *                       that should be loaded, but which won't be loaded by default, using these values:
      *                            IReader::LOAD_WITH_CHARTS - Include any charts that are defined in the loaded file
@@ -98,6 +119,12 @@ abstract class IOFactory
     public static function load(string $filename, int $flags = 0, ?array $readers = null): Spreadsheet
     {
         $reader = self::createReaderForFile($filename, $readers);
+=======
+     */
+    public static function load(string $filename, int $flags = 0): Spreadsheet
+    {
+        $reader = self::createReaderForFile($filename);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $reader->load($filename, $flags);
     }
@@ -105,9 +132,15 @@ abstract class IOFactory
     /**
      * Identify file type using automatic IReader resolution.
      */
+<<<<<<< HEAD
     public static function identify(string $filename, ?array $readers = null): string
     {
         $reader = self::createReaderForFile($filename, $readers);
+=======
+    public static function identify(string $filename): string
+    {
+        $reader = self::createReaderForFile($filename);
+>>>>>>> forked/LAE_400_PACKAGE
         $className = get_class($reader);
         $classType = explode('\\', $className);
         unset($reader);
@@ -117,6 +150,7 @@ abstract class IOFactory
 
     /**
      * Create Reader\IReader for file using automatic IReader resolution.
+<<<<<<< HEAD
      *
      * @param string[] $readers An array of Readers to use to identify the file type. By default, load() will try
      *                             all possible Readers until it finds a match; but this allows you to pass in a
@@ -143,6 +177,16 @@ abstract class IOFactory
         // First, lucky guess by inspecting file extension
         $guessedReader = self::getReaderTypeFromExtension($filename);
         if (($guessedReader !== null) && array_key_exists($guessedReader, $testReaders)) {
+=======
+     */
+    public static function createReaderForFile(string $filename): IReader
+    {
+        File::assertFile($filename);
+
+        // First, lucky guess by inspecting file extension
+        $guessedReader = self::getReaderTypeFromExtension($filename);
+        if ($guessedReader !== null) {
+>>>>>>> forked/LAE_400_PACKAGE
             $reader = self::createReader($guessedReader);
 
             // Let's see if we are lucky
@@ -152,11 +196,19 @@ abstract class IOFactory
         }
 
         // If we reach here then "lucky guess" didn't give any result
+<<<<<<< HEAD
         // Try walking through all the options in self::$readers (or the selected subset)
         foreach ($testReaders as $readerType => $class) {
             //    Ignore our original guess, we know that won't work
             if ($readerType !== $guessedReader) {
                 $reader = self::createReader($readerType);
+=======
+        // Try walking through all the options in self::$autoResolveClasses
+        foreach (self::$readers as $type => $class) {
+            //    Ignore our original guess, we know that won't work
+            if ($type !== $guessedReader) {
+                $reader = self::createReader($type);
+>>>>>>> forked/LAE_400_PACKAGE
                 if ($reader->canRead($filename)) {
                     return $reader;
                 }

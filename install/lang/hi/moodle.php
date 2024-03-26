@@ -32,4 +32,8 @@ defined('MOODLE_INTERNAL') || die();
 $string['language'] = 'भाषा';
 $string['moodlelogo'] = 'Moodle लोगो';
 $string['next'] = 'अगला';
+<<<<<<< HEAD
+=======
+$string['previous'] = 'पिछला';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['reload'] = 'सीमा से अधिक लादना';

@@ -43,6 +43,7 @@ if ($newonly !== 0) {
 $PAGE->set_url($url);
 
 if (!$chat = $DB->get_record('chat', array('id' => $id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidid', 'chat');
 }
 
@@ -52,6 +53,17 @@ if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
 
 if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidid', 'chat');
+}
+
+if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
+    print_error('invalidcourseid');
+}
+
+if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context = context_module::instance($cm->id);
@@ -64,7 +76,11 @@ $PAGE->set_popup_notification_allowed(false);
 if ($groupmode = groups_get_activity_groupmode($cm)) { // Groups are being used.
     if ($groupid = groups_get_activity_group($cm)) {
         if (!$group = groups_get_group($groupid)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidgroupid');
+=======
+            print_error('invalidgroupid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $groupname = ': '.$group->name;
     } else {
@@ -79,11 +95,19 @@ $strchat  = get_string('modulename', 'chat'); // Must be before current_language
 $strchats = get_string('modulenameplural', 'chat');
 $stridle  = get_string('idle', 'chat');
 if (!$chatsid = chat_login_user($chat->id, 'basic', $groupid, $course)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cantlogin', 'chat');
 }
 
 if (!$chatusers = chat_get_users($chat->id, $groupid, $cm->groupingid)) {
     throw new \moodle_exception('errornousers', 'chat');
+=======
+    print_error('cantlogin', 'chat');
+}
+
+if (!$chatusers = chat_get_users($chat->id, $groupid, $cm->groupingid)) {
+    print_error('errornousers', 'chat');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $DB->set_field('chat_users', 'lastping', time(), array('sid' => $chatsid));

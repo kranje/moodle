@@ -67,7 +67,11 @@ class report_codehighlight extends \tool_brickfield\local\htmlchecker\brickfield
             }
         }
         $this->dom->formatOutput = true;
+<<<<<<< HEAD
         $html = htmlspecialchars($this->dom->saveHTML(), ENT_COMPAT);
+=======
+        $html = htmlspecialchars($this->dom->saveHTML());
+>>>>>>> forked/LAE_400_PACKAGE
         $html = str_replace('&quot;', '"', $html);
         foreach ($this->classnames as $name) {
             $html = preg_replace('/&lt;'. $name .'([^&]+)+\&gt;/', '<span \\1>', $html);

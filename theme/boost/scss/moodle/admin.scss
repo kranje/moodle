@@ -109,6 +109,10 @@
     margin: 1em 0 2em;
 }
 
+<<<<<<< HEAD
+=======
+#page-admin-roles-override .capcurrent,
+>>>>>>> forked/LAE_400_PACKAGE
 #page-admin-roles-define .capdefault {
     background-color: $table-hover-bg;
 }
@@ -250,14 +254,22 @@
 .path-admin,
 .format-site {
     .header-maxwidth,
+<<<<<<< HEAD
     .secondary-navigation .navigation .nav-tabs {
+=======
+    .secondary-navigation {
+>>>>>>> forked/LAE_400_PACKAGE
         max-width: none;
     }
 }
 .path-admin.path-admin-roles:not(.format-site),
 .path-admin.path-admin-tool-lp {
     .header-maxwidth,
+<<<<<<< HEAD
     .secondary-navigation .navigation .nav-tabs {
+=======
+    .secondary-navigation {
+>>>>>>> forked/LAE_400_PACKAGE
         max-width: $course-content-maxwidth;
     }
 }

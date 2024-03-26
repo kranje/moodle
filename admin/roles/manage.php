@@ -68,7 +68,11 @@ $confirmed = (optional_param('confirm', false, PARAM_BOOL) && data_submitted() &
 switch ($action) {
     case 'delete':
         if (isset($undeletableroles[$roleid])) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotdeletethisrole', '', $baseurl);
+=======
+            print_error('cannotdeletethisrole', '', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if (!$confirmed) {
             // Show confirmation.
@@ -89,7 +93,11 @@ switch ($action) {
         }
         if (!delete_role($roleid)) {
             // The delete failed.
+<<<<<<< HEAD
             throw new \moodle_exception('cannotdeleterolewithid', 'error', $baseurl, $roleid);
+=======
+            print_error('cannotdeleterolewithid', 'error', $baseurl, $roleid);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         // Deleted a role sitewide...
         redirect($baseurl);
@@ -108,10 +116,17 @@ switch ($action) {
                 }
             }
             if (is_null($thisrole) || is_null($prevrole)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
             }
             if (!switch_roles($thisrole, $prevrole)) {
                 throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
+=======
+                print_error('cannotmoverolewithid', 'error', '', $roleid);
+            }
+            if (!switch_roles($thisrole, $prevrole)) {
+                print_error('cannotmoverolewithid', 'error', '', $roleid);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -131,10 +146,17 @@ switch ($action) {
                 }
             }
             if (is_null($nextrole)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
             }
             if (!switch_roles($thisrole, $nextrole)) {
                 throw new \moodle_exception('cannotmoverolewithid', 'error', '', $roleid);
+=======
+                print_error('cannotmoverolewithid', 'error', '', $roleid);
+            }
+            if (!switch_roles($thisrole, $nextrole)) {
+                print_error('cannotmoverolewithid', 'error', '', $roleid);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 

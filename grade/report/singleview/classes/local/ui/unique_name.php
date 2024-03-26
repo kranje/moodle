@@ -39,5 +39,9 @@ interface unique_name {
      * Get the name for this form element
      * @return string
      */
+<<<<<<< HEAD
     public function get_name(): string;
+=======
+    public function get_name();
+>>>>>>> forked/LAE_400_PACKAGE
 }

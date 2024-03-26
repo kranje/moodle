@@ -127,12 +127,19 @@ class custom_fields {
                     $selectfields .= ", {$customdatatablealias}.valueformat";
                 }
 
+<<<<<<< HEAD
                 $columnname = $field->get_formatted_name();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $columntype = $this->get_column_type($field, $datafield);
 
                 $newcolumn = (new column(
                     'customfield_' . $field->get('shortname'),
+<<<<<<< HEAD
                     new lang_string('customfieldcolumn', 'core_reportbuilder', $columnname),
+=======
+                    new lang_string('customfieldcolumn', 'core_reportbuilder', $field->get_formatted_name()),
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->entityname
                 ))
                     ->add_joins($this->get_joins())
@@ -207,7 +214,11 @@ class custom_fields {
                 $filter = (new filter(
                     $typeclass,
                     'customfield_' . $field->get('shortname'),
+<<<<<<< HEAD
                     new lang_string('customfieldcolumn', 'core_reportbuilder', $field->get('name')),
+=======
+                    new lang_string('customfieldcolumn', 'core_reportbuilder', $field->get_formatted_name()),
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->entityname,
                     "{$customdatatablealias}.{$datafield}"
                 ))

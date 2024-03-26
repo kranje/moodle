@@ -4,7 +4,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\Financial;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Depreciation
 {
@@ -118,7 +121,11 @@ class Depreciation
         }
 
         if ($period > $life) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Loop through each period calculating the depreciation
@@ -162,7 +169,11 @@ class Depreciation
         }
 
         if ($life === 0.0) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return ($cost - $salvage) / $life;
@@ -197,7 +208,11 @@ class Depreciation
         }
 
         if ($period > $life) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $syd = (($cost - $salvage) * ($life - $period + 1) * 2) / ($life * ($life + 1));
@@ -209,7 +224,11 @@ class Depreciation
     {
         $cost = FinancialValidations::validateFloat($cost);
         if ($cost < 0.0 && $negativeValueAllowed === false) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $cost;
@@ -219,7 +238,11 @@ class Depreciation
     {
         $salvage = FinancialValidations::validateFloat($salvage);
         if ($salvage < 0.0 && $negativeValueAllowed === false) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $salvage;
@@ -229,7 +252,11 @@ class Depreciation
     {
         $life = FinancialValidations::validateFloat($life);
         if ($life < 0.0 && $negativeValueAllowed === false) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $life;
@@ -239,7 +266,11 @@ class Depreciation
     {
         $period = FinancialValidations::validateFloat($period);
         if ($period <= 0.0 && $negativeValueAllowed === false) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $period;
@@ -249,7 +280,11 @@ class Depreciation
     {
         $month = FinancialValidations::validateInt($month);
         if ($month < 1) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $month;
@@ -259,7 +294,11 @@ class Depreciation
     {
         $factor = FinancialValidations::validateFloat($factor);
         if ($factor <= 0.0) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $factor;

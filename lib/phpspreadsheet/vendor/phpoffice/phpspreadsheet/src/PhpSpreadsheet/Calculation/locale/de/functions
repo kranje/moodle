@@ -243,7 +243,10 @@ ROWS = ZEILEN
 RTD = RTD
 TRANSPOSE = MTRANS
 VLOOKUP = SVERWEIS
+<<<<<<< HEAD
 *RC = ZS
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Mathematische und trigonometrische Funktionen (Math & Trig Functions)

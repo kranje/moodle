@@ -575,5 +575,8 @@ class SimplePie_Source
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Source', 'SimplePie\Source', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

@@ -25,13 +25,19 @@ use ltiservice_gradebookservices\local\service\gradebookservices;
  * @category   test
  * @copyright  2020 Claude Vervoort <claude.vervoort@cengage.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
  * @coversDefaultClass \mod_lti\service\gradebookservices\local\gradebookservices
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class gradebookservices_test extends \advanced_testcase {
 
     /**
+<<<<<<< HEAD
      * @covers ::instance_added
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test saving a graded LTI with resource and tag info (as a result of
      * content item selection) creates a gradebookservices record
      * that can be retrieved using the gradebook service API.
@@ -49,10 +55,15 @@ class gradebookservices_test extends \advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
         $resourceid = 'test-resource-id';
         $tag = 'tag';
+<<<<<<< HEAD
         $subreviewurl = 'https://subreview.example.com';
         $subreviewparams = 'a=2';
 
         $ltiinstance = $this->create_graded_lti($typeid, $course, $resourceid, $tag, $subreviewurl, $subreviewparams);
+=======
+
+        $ltiinstance = $this->create_graded_lti($typeid, $course, $resourceid, $tag);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->assertNotNull($ltiinstance);
 
@@ -61,6 +72,7 @@ class gradebookservices_test extends \advanced_testcase {
         $this->assertNotNull($gbs);
         $this->assertEquals($resourceid, $gbs->resourceid);
         $this->assertEquals($tag, $gbs->tag);
+<<<<<<< HEAD
         $this->assertEquals($subreviewurl, $gbs->subreviewurl);
         $this->assertEquals($subreviewparams, $gbs->subreviewparams);
         $this->assert_lineitems($course, $typeid, $ltiinstance->name,
@@ -102,6 +114,13 @@ class gradebookservices_test extends \advanced_testcase {
     /**
      * @covers ::add_standalone_lineitem
      *
+=======
+
+        $this->assert_lineitems($course, $typeid, $ltiinstance->name, $ltiinstance, $resourceid, $tag);
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Test saving a standalone LTI lineitem with resource and tag info
      * that can be retrieved using the gradebook service API.
      */
@@ -120,8 +139,11 @@ class gradebookservices_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * @covers ::find_ltiservice_gradebookservice_for_lti
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test line item URL is populated for coupled line item only
      * if there is not another line item bound to the lti instance,
      * since in that case there would be no rule to define which of
@@ -139,7 +161,11 @@ class gradebookservices_test extends \advanced_testcase {
         $typeid = $this->create_type();
         $course = $this->getDataGenerator()->create_course();
 
+<<<<<<< HEAD
         $ltiinstance = $this->create_graded_lti($typeid, $course, 'resource-id', 'tag', 'https://subreview.url', 'sub=review');
+=======
+        $ltiinstance = $this->create_graded_lti($typeid, $course, 'resource-id', 'tag');
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->assertNotNull($ltiinstance);
 
@@ -156,6 +182,7 @@ class gradebookservices_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * @covers ::override_endpoint
      *
      * Test Submission Review URL and custom parameter is applied when the
@@ -220,6 +247,8 @@ class gradebookservices_test extends \advanced_testcase {
     /**
      * @covers ::get_launch_parameters
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test line item URL is populated for not coupled line item only
      * if there is a single line item attached to that lti instance.
      */
@@ -256,8 +285,11 @@ class gradebookservices_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * @covers ::is_user_gradable_in_course
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test if a user can be graded in a course.
      */
     public function test_is_user_gradable_in_course() {
@@ -283,22 +315,33 @@ class gradebookservices_test extends \advanced_testcase {
      * @param object|null $ltiinstance lti instance related to that line item
      * @param string|null $resourceid resourceid the line item should have
      * @param string|null $tag tag the line item should have
+<<<<<<< HEAD
      * @param string|null $subreviewurl submission review url
      * @param string|null $subreviewparams submission review custom params
      */
     private function assert_lineitems(object $course, int $typeid,
             string $label, ?object $ltiinstance, ?string $resourceid, ?string $tag,
             ?string $subreviewurl = null, ?string $subreviewparams = null) : void {
+=======
+     */
+    private function assert_lineitems(object $course, int $typeid,
+            string $label, ?object $ltiinstance, ?string $resourceid, ?string $tag) : void {
+>>>>>>> forked/LAE_400_PACKAGE
         $gbservice = new gradebookservices();
         $gradeitems = $gbservice->get_lineitems($course->id, null, null, null, null, null, $typeid);
 
         // The 1st item in the array is the items count.
         $this->assertEquals(1, $gradeitems[0]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
         $lineitem = gradebookservices::item_for_json($gradeitems[1][0], '', $typeid);
         $this->assertEquals(10, $lineitem->scoreMaximum);
         $this->assertEquals($resourceid, $lineitem->resourceId);
         $this->assertEquals($tag, $lineitem->tag);
         $this->assertEquals($label, $lineitem->label);
+<<<<<<< HEAD
         $this->assertEquals(!empty($subreviewurl), isset($lineitem->submissionReview));
         if ($subreviewurl) {
             if ($subreviewurl == 'DEFAULT') {
@@ -313,6 +356,8 @@ class gradebookservices_test extends \advanced_testcase {
                 $this->assertFalse(isset($this->submissionReview->custom));
             }
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $gradeitems = $gbservice->get_lineitems($course->id, $resourceid, null, null, null, null, $typeid);
         $this->assertEquals(1, $gradeitems[0]);
@@ -341,6 +386,7 @@ class gradebookservices_test extends \advanced_testcase {
      * @param object $course course where to add the lti instance.
      * @param string|null $resourceid resource id
      * @param string|null $tag tag
+<<<<<<< HEAD
      * @param string|null $subreviewurl submission review url
      * @param string|null $subreviewparams submission review custom params
      *
@@ -348,15 +394,25 @@ class gradebookservices_test extends \advanced_testcase {
      */
     private function create_graded_lti(int $typeid, object $course, ?string $resourceid, ?string $tag,
             ?string $subreviewurl = null, ?string $subreviewparams = null) : object {
+=======
+     *
+     * @return object lti instance created
+     */
+    private function create_graded_lti(int $typeid, object $course, ?string $resourceid, ?string $tag) : object {
+>>>>>>> forked/LAE_400_PACKAGE
 
         $lti = ['course' => $course->id,
             'typeid' => $typeid,
             'instructorchoiceacceptgrades' => LTI_SETTING_ALWAYS,
             'grade' => 10,
             'lineitemresourceid' => $resourceid,
+<<<<<<< HEAD
             'lineitemtag' => $tag,
             'lineitemsubreviewurl' => $subreviewurl,
             'lineitemsubreviewparams' => $subreviewparams];
+=======
+            'lineitemtag' => $tag];
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $this->getDataGenerator()->create_module('lti', $lti, array());
     }

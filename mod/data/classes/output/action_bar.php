@@ -16,10 +16,14 @@
 
 namespace mod_data\output;
 
+<<<<<<< HEAD
 use mod_data\manager;
 use mod_data\preset;
 use moodle_url;
 use url_select;
+=======
+use moodle_url;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Class responsible for generating the action bar elements in the database module pages.
@@ -33,9 +37,12 @@ class action_bar {
     /** @var int $id The database module id. */
     private $id;
 
+<<<<<<< HEAD
     /** @var int $cmid The database course module id. */
     private $cmid;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var moodle_url $currenturl The URL of the current page. */
     private $currenturl;
 
@@ -47,8 +54,11 @@ class action_bar {
      */
     public function __construct(int $id, moodle_url $pageurl) {
         $this->id = $id;
+<<<<<<< HEAD
         [$course, $cm] = get_course_and_cm_from_instance($this->id, 'data');
         $this->cmid = $cm->id;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->currenturl = $pageurl;
     }
 
@@ -56,6 +66,7 @@ class action_bar {
      * Generate the output for the action bar in the field page.
      *
      * @param bool $hasfieldselect Whether the field selector element should be rendered.
+<<<<<<< HEAD
      * @param null $unused1 This parameter has been deprecated since 4.1 and should not be used anymore.
      * @param null $unused2 This parameter has been deprecated since 4.1 and should not be used anymore.
      * @return string The HTML code for the action bar.
@@ -78,11 +89,83 @@ class action_bar {
 
         $renderer = $PAGE->get_renderer('mod_data');
         $fieldsactionbar = new fields_action_bar($this->id, null, null, null, null, $fieldselect);
+=======
+     * @param bool $hassaveaspreset Whether the save as preset button element should be rendered.
+     * @param bool $hasexportpreset Whether the export as preset button element should be rendered.
+     * @return string The HTML code for the action bar.
+     */
+    public function get_fields_action_bar(bool $hasfieldselect = false, bool $hassaveaspreset = false,
+            bool $hasexportpreset = false): string {
+        global $PAGE, $DB;
+
+        $createfieldlink = new moodle_url('/mod/data/field.php', ['d' => $this->id]);
+        $importlink = new moodle_url('/mod/data/field.php', ['d' => $this->id, 'mode' => 'import']);
+        $presetslink = new moodle_url('/mod/data/field.php', ['d' => $this->id, 'mode' => 'usepreset']);
+
+        $menu = [
+            $createfieldlink->out(false) => get_string('managefields', 'mod_data'),
+            $importlink->out(false) => get_string('importpreset', 'mod_data'),
+            $presetslink->out(false) => get_string('usestandard', 'mod_data'),
+        ];
+
+        $selected = $createfieldlink->out(false);
+        $mode = $this->currenturl->get_param('mode');
+
+        if ($mode == 'import') {
+            $selected = $importlink->out(false);
+        } else if ($mode === 'usepreset') {
+            $selected = $presetslink->out(false);
+        }
+
+        $urlselect = new \url_select($menu, $selected, null, 'fieldactionselect');
+        $urlselect->set_label(get_string('fieldsnavigation', 'mod_data'), ['class' => 'sr-only']);
+
+        $fieldselect = null;
+        if ($hasfieldselect) {
+            // Get the list of possible fields (plugins).
+            $plugins = \core_component::get_plugin_list('datafield');
+            $menufield = [];
+
+            foreach ($plugins as $plugin => $fulldir) {
+                $menufield[$plugin] = get_string('pluginname', "datafield_{$plugin}");
+            }
+            asort($menufield);
+
+            $fieldselecturl = new moodle_url('/mod/data/field.php', ['d' => $this->id, 'mode' => 'new']);
+            $fieldselect = new \single_select($fieldselecturl, 'newtype', $menufield, null, get_string('newfield', 'data'),
+                'fieldform');
+            $fieldselect->set_label(get_string('newfield', 'mod_data'), ['class' => 'sr-only']);
+        }
+
+        $saveaspresetbutton = null;
+        $exportpresetbutton = null;
+        $hasfields = $DB->record_exists('data_fields', ['dataid' => $this->id]);
+
+        if ($hasfields) {
+            if ($hassaveaspreset) {
+                $saveaspresetlink = new moodle_url('/mod/data/preset.php',
+                    ['d' => $this->id, 'action' => 'export']);
+                $saveaspresetbutton = new \single_button($saveaspresetlink,
+                    get_string('saveaspreset', 'mod_data'), 'post', false);
+            }
+
+            if ($hasexportpreset) {
+                $exportpresetlink = new moodle_url('/mod/data/preset.php',
+                    ['d' => $this->id, 'action' => 'export']);
+                $exportpresetbutton = new \single_button($exportpresetlink,
+                    get_string('exportpreset', 'mod_data'), 'get', false);
+            }
+        }
+        $renderer = $PAGE->get_renderer('mod_data');
+        $fieldsactionbar = new fields_action_bar($this->id, $urlselect, $fieldselect, $saveaspresetbutton,
+            $exportpresetbutton);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $renderer->render_fields_action_bar($fieldsactionbar);
     }
 
     /**
+<<<<<<< HEAD
      * Generate the output for the action bar in the field mappings page.
      *
      * @return string The HTML code for the action bar.
@@ -136,6 +219,14 @@ class action_bar {
      * @return string The HTML code for the action selector.
      */
     public function get_view_action_bar(bool $hasentries, string $mode): string {
+=======
+     * Generate the output for the action selector in the view page.
+     *
+     * @param bool $hasentries Whether entries exist.
+     * @return string The HTML code for the action selector.
+     */
+    public function get_view_action_bar(bool $hasentries): string {
+>>>>>>> forked/LAE_400_PACKAGE
         global $PAGE;
 
         $viewlistlink = new moodle_url('/mod/data/view.php', ['d' => $this->id]);
@@ -152,10 +243,17 @@ class action_bar {
             $activeurl = $viewsinglelink;
         }
 
+<<<<<<< HEAD
         $urlselect = new url_select($menu, $activeurl->out(false), null, 'viewactionselect');
         $urlselect->set_label(get_string('viewnavigation', 'mod_data'), ['class' => 'sr-only']);
         $renderer = $PAGE->get_renderer('mod_data');
         $viewactionbar = new view_action_bar($this->id, $urlselect, $hasentries, $mode);
+=======
+        $urlselect = new \url_select($menu, $activeurl->out(false), null, 'viewactionselect');
+        $urlselect->set_label(get_string('viewnavigation', 'mod_data'), ['class' => 'sr-only']);
+        $renderer = $PAGE->get_renderer('mod_data');
+        $viewactionbar = new view_action_bar($this->id, $urlselect, $hasentries);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $renderer->render_view_action_bar($viewactionbar);
     }
@@ -166,7 +264,11 @@ class action_bar {
      * @return string The HTML code for the action selector.
      */
     public function get_templates_action_bar(): string {
+<<<<<<< HEAD
         global $PAGE;
+=======
+        global $PAGE, $DB;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $listtemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id,
             'mode' => 'listtemplate']);
@@ -180,6 +282,7 @@ class action_bar {
         $jstemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'jstemplate']);
 
         $menu = [
+<<<<<<< HEAD
             $addtemplatelink->out(false) => get_string('addtemplate', 'mod_data'),
             $singletemplatelink->out(false) => get_string('singletemplate', 'mod_data'),
             $listtemplatelink->out(false) => get_string('listtemplate', 'mod_data'),
@@ -211,6 +314,40 @@ class action_bar {
         ));
 
         $templatesactionbar = new templates_action_bar($this->id, $selectmenu, null, null, $presetsactions);
+=======
+            $listtemplatelink->out(false) => get_string('listtemplate', 'mod_data'),
+            $singletemplatelink->out(false) => get_string('singletemplate', 'mod_data'),
+            $advancedsearchtemplatelink->out(false) => get_string('asearchtemplate', 'mod_data'),
+            $addtemplatelink->out(false) => get_string('addtemplate', 'mod_data'),
+            $rsstemplatelink->out(false) => get_string('rsstemplate', 'mod_data'),
+            $csstemplatelink->out(false) => get_string('csstemplate', 'mod_data'),
+            $jstemplatelink->out(false) => get_string('jstemplate', 'mod_data'),
+        ];
+
+        $urlselect = new \url_select($menu, $this->currenturl->out(false), null, 'templatesactionselect');
+        $urlselect->set_label(get_string('templatesnavigation', 'mod_data'), ['class' => 'sr-only']);
+
+        $hasfields = $DB->record_exists('data_fields', ['dataid' => $this->id]);
+
+        $saveaspresetbutton = null;
+        $exportpresetbutton = null;
+
+        if ($hasfields) {
+            $saveaspresetlink = new moodle_url('/mod/data/preset.php',
+                ['d' => $this->id, 'action' => 'export']);
+            $saveaspresetbutton = new \single_button($saveaspresetlink,
+                get_string('saveaspreset', 'mod_data'), 'post', false);
+
+            $exportpresetlink = new moodle_url('/mod/data/preset.php',
+                ['d' => $this->id, 'action' => 'export', 'sesskey' => sesskey()]);
+            $exportpresetbutton = new \single_button($exportpresetlink,
+                get_string('exportpreset', 'mod_data'), 'get', false);
+        }
+
+        $renderer = $PAGE->get_renderer('mod_data');
+        $templatesactionbar = new templates_action_bar($this->id, $urlselect, $saveaspresetbutton,
+            $exportpresetbutton);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $renderer->render_templates_action_bar($templatesactionbar);
     }
@@ -224,6 +361,7 @@ class action_bar {
         global $PAGE;
 
         $renderer = $PAGE->get_renderer('mod_data');
+<<<<<<< HEAD
         $presetsactionbar = new presets_action_bar($this->cmid, $this->get_presets_actions_select(true));
 
         return $renderer->render_presets_action_bar($presetsactionbar);
@@ -325,4 +463,10 @@ class action_bar {
 
         return $actionsselect;
     }
+=======
+        $presetsactionbar = new presets_action_bar($this->id);
+
+        return $renderer->render_presets_action_bar($presetsactionbar);
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -24,6 +24,11 @@
 
 namespace block_clampmail;
 
+<<<<<<< HEAD
+=======
+defined('MOODLE_INTERNAL') || die();
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Functions for groups handling.
  *
@@ -44,7 +49,11 @@ class groups {
     public static function get_groups($groupmode, $courseid, $allgroups) {
         global $DB;
 
+<<<<<<< HEAD
         $context = \context_course::instance($courseid);
+=======
+        $context   = \context_course::instance($courseid);
+>>>>>>> forked/LAE_400_PACKAGE
 
         switch ($groupmode) {
             case NOGROUPS:

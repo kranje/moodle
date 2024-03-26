@@ -41,7 +41,11 @@ class analyser {
      */
     const MAX_TRY_COUNTED = 5;
 
+<<<<<<< HEAD
     /** @var int Time after which responses are automatically reanalysed. */
+=======
+    /** @var int No longer used. Previously the time after which statistics are automatically recomputed. */
+>>>>>>> forked/LAE_400_PACKAGE
     const TIME_TO_CACHE = 900; // 15 minutes.
 
     /** @var object full question data from db. */
@@ -53,6 +57,14 @@ class analyser {
     public $analysis;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var int used during calculations, so all results are stored with the same timestamp.
+     */
+    protected $calculationtime;
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * @var array Two index array first index is unique string for each sub question part, the second string index is the 'class'
      * that sub-question part can be classified into.
      *
@@ -109,7 +121,11 @@ class analyser {
     }
 
     /**
+<<<<<<< HEAD
      * Analyse all the response data for for all the specified attempts at this question.
+=======
+     * Analyse all the response data for all the specified attempts at this question.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param \qubaid_condition $qubaids which attempts to consider.
      * @param string $whichtries         which tries to analyse. Will be one of
@@ -117,6 +133,10 @@ class analyser {
      * @return analysis_for_question
      */
     public function calculate($qubaids, $whichtries = \question_attempt::LAST_TRY) {
+<<<<<<< HEAD
+=======
+        $this->calculationtime = time();
+>>>>>>> forked/LAE_400_PACKAGE
         // Load data.
         $dm = new \question_engine_data_mapper();
         $questionattempts = $dm->load_attempts_at_question($this->questiondata->id, $qubaids);
@@ -131,7 +151,11 @@ class analyser {
             }
 
         }
+<<<<<<< HEAD
         $this->analysis->cache($qubaids, $whichtries, $this->questiondata->id);
+=======
+        $this->analysis->cache($qubaids, $whichtries, $this->questiondata->id, $this->calculationtime);
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->analysis;
     }
 
@@ -145,23 +169,39 @@ class analyser {
     public function load_cached($qubaids, $whichtries) {
         global $DB;
 
+<<<<<<< HEAD
         $timemodified = time() - self::TIME_TO_CACHE;
         // Variable name 'analyses' is the plural of 'analysis'.
         $responseanalyses = $DB->get_records_select('question_response_analysis',
                                             'hashcode = ? AND whichtries = ? AND questionid = ? AND timemodified > ?',
                                             array($qubaids->get_hash_code(), $whichtries, $this->questiondata->id, $timemodified));
+=======
+        $timemodified = self::get_last_analysed_time($qubaids, $whichtries);
+        // Variable name 'analyses' is the plural of 'analysis'.
+        $responseanalyses = $DB->get_records('question_response_analysis',
+                ['hashcode' => $qubaids->get_hash_code(), 'whichtries' => $whichtries,
+                        'questionid' => $this->questiondata->id, 'timemodified' => $timemodified]);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!$responseanalyses) {
             return false;
         }
 
+<<<<<<< HEAD
         $analysisids = array();
+=======
+        $analysisids = [];
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($responseanalyses as $responseanalysis) {
             $analysisforsubpart = $this->analysis->get_analysis_for_subpart($responseanalysis->variant, $responseanalysis->subqid);
             $class = $analysisforsubpart->get_response_class($responseanalysis->aid);
             $class->add_response($responseanalysis->response, $responseanalysis->credit);
             $analysisids[] = $responseanalysis->id;
         }
+<<<<<<< HEAD
         list($sql, $params) = $DB->get_in_or_equal($analysisids);
+=======
+        [$sql, $params] = $DB->get_in_or_equal($analysisids);
+>>>>>>> forked/LAE_400_PACKAGE
         $counts = $DB->get_records_select('question_response_count', "analysisid {$sql}", $params);
         foreach ($counts as $count) {
             $responseanalysis = $responseanalyses[$count->analysisid];
@@ -183,11 +223,17 @@ class analyser {
      */
     public function get_last_analysed_time($qubaids, $whichtries) {
         global $DB;
+<<<<<<< HEAD
 
         $timemodified = time() - self::TIME_TO_CACHE;
         return $DB->get_field_select('question_response_analysis', 'timemodified',
                                      'hashcode = ? AND whichtries = ? AND questionid = ? AND timemodified > ?',
                                      array($qubaids->get_hash_code(), $whichtries, $this->questiondata->id, $timemodified),
                                      IGNORE_MULTIPLE);
+=======
+        return $DB->get_field('question_response_analysis', 'MAX(timemodified)',
+                ['hashcode' => $qubaids->get_hash_code(), 'whichtries' => $whichtries,
+                        'questionid' => $this->questiondata->id]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

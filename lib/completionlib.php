@@ -365,7 +365,11 @@ class completion_info {
         if (empty($completions)) {
             return false;
         } elseif (count($completions) > 1) {
+<<<<<<< HEAD
             throw new \moodle_exception('multipleselfcompletioncriteria', 'completion');
+=======
+            print_error('multipleselfcompletioncriteria', 'completion');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $completions[0];
@@ -1061,7 +1065,11 @@ class completion_info {
             if (!isset($this->course->cacherev)) {
                 $this->course = get_course($this->course_id);
             }
+<<<<<<< HEAD
             if ($cacheddata = ($completioncache->get($key) ?: [])) {
+=======
+            if ($cacheddata = $completioncache->get($key)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 if ($cacheddata['cacherev'] != $this->course->cacherev) {
                     // Course structure has been changed since the last caching, forget the cache.
                     $cacheddata = array();
@@ -1097,6 +1105,7 @@ class completion_info {
         // If we're not caching the completion data, then just fetch the completion data for the user in this course module.
         if ($usecache && $wholecourse) {
             // Get whole course data for cache.
+<<<<<<< HEAD
             $alldatabycmc = $DB->get_records_sql("SELECT cm.id AS cmid, cmc.*,
                                                          CASE WHEN cmv.id IS NULL THEN 0 ELSE 1 END AS viewed
                                                     FROM {course_modules} cm
@@ -1107,6 +1116,15 @@ class completion_info {
                                               INNER JOIN {modules} m ON m.id = cm.module
                                                    WHERE m.visible = 1 AND cm.course = ?",
                 [$userid, $userid, $this->course->id]);
+=======
+            $alldatabycmc = $DB->get_records_sql("SELECT cm.id AS cmid, cmc.*
+                                                    FROM {course_modules} cm
+                                               LEFT JOIN {course_modules_completion} cmc ON cmc.coursemoduleid = cm.id
+                                                         AND cmc.userid = ?
+                                              INNER JOIN {modules} m ON m.id = cm.module
+                                                   WHERE m.visible = 1 AND cm.course = ?", [$userid, $this->course->id]);
+
+>>>>>>> forked/LAE_400_PACKAGE
             $cminfos = get_fast_modinfo($cm->course, $userid)->get_cms();
 
             // Reindex by course module id.
@@ -1137,7 +1155,18 @@ class completion_info {
             $data = $cacheddata[$cminfo->id];
         } else {
             // Get single record
+<<<<<<< HEAD
             $data = $this->get_completion_data($cminfo->id, $userid, $defaultdata);
+=======
+            $data = $DB->get_record('course_modules_completion', array('coursemoduleid' => $cminfo->id, 'userid' => $userid));
+            if ($data) {
+                $data = (array)$data;
+            } else {
+                // Row not present counts as 'not complete'.
+                $data = $defaultdata;
+            }
+
+>>>>>>> forked/LAE_400_PACKAGE
             // Put in cache.
             $cacheddata[$cminfo->id] = $data;
         }
@@ -1197,8 +1226,15 @@ class completion_info {
         // If view is required, try and fetch from the db. In some cases, cache can be invalid.
         if ($cm->completionview == COMPLETION_VIEW_REQUIRED) {
             $data['viewed'] = COMPLETION_INCOMPLETE;
+<<<<<<< HEAD
             $record = $DB->record_exists('course_modules_viewed', ['coursemoduleid' => $cm->id, 'userid' => $userid]);
             $data['viewed'] = $record ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE;
+=======
+            $record = $DB->get_record('course_modules_completion', array('coursemoduleid' => $cm->id, 'userid' => $userid));
+            if ($record) {
+                $data['viewed'] = ($record->viewed == COMPLETION_VIEWED ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE);
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $data;
@@ -1272,6 +1308,7 @@ class completion_info {
             // Has real (nonzero) id meaning that a database row exists, update
             $DB->update_record('course_modules_completion', $data);
         }
+<<<<<<< HEAD
         $dataview = new stdClass();
         $dataview->coursemoduleid = $data->coursemoduleid;
         $dataview->userid = $data->userid;
@@ -1285,6 +1322,8 @@ class completion_info {
             $dataview->timecreated = time();
             $dataview->id = $DB->insert_record('course_modules_viewed', $dataview);
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $transaction->allow_commit();
 
         $cmcontext = context_module::instance($data->coursemoduleid);
@@ -1628,6 +1667,7 @@ class completion_info {
         throw new moodle_exception('err_system','completion',
             $CFG->wwwroot.'/course/view.php?id='.$this->course->id,null,$error);
     }
+<<<<<<< HEAD
 
     /**
      * Get completion data include viewed field.
@@ -1671,6 +1711,8 @@ class completion_info {
 
         return (array)$data;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**

@@ -52,7 +52,11 @@ list($options, $unrecognized) = cli_get_params(
         'updatesteps' => false,
         'optimize-runs' => '',
         'add-core-features-to-theme' => false,
+<<<<<<< HEAD
         'axe'         => false,
+=======
+        'axe'         => true,
+>>>>>>> forked/LAE_400_PACKAGE
     ),
     array(
         'h' => 'help',
@@ -79,7 +83,11 @@ Options:
 --disable        Disables test environment
 --diag           Get behat test environment status code
 --updatesteps    Update feature step file.
+<<<<<<< HEAD
 --axe            Include axe accessibility tests
+=======
+--no-axe         Disable axe accessibility tests.
+>>>>>>> forked/LAE_400_PACKAGE
 
 -o, --optimize-runs Split features with specified tags in all parallel runs.
 -a, --add-core-features-to-theme Add all core features to specified theme's
@@ -186,7 +194,11 @@ if ($options['install']) {
         behat_config_manager::set_behat_run_config_value('behatsiteenabled', 1);
     }
 
+<<<<<<< HEAD
     // Define whether to run Behat with axe tests.
+=======
+    // Configure axe according to option.
+>>>>>>> forked/LAE_400_PACKAGE
     behat_config_manager::set_behat_run_config_value('axe', $options['axe']);
 
     // Enable test mode.

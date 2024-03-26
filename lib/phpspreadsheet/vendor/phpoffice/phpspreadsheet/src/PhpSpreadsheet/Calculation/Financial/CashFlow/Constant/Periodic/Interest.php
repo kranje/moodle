@@ -6,7 +6,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\CashFlow\CashFlowValidations;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\Constants as FinancialConstants;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Interest
 {
@@ -60,7 +63,11 @@ class Interest
 
         // Validate parameters
         if ($period <= 0 || $period > $numberOfPeriods) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Calculate
@@ -107,7 +114,11 @@ class Interest
 
         // Validate parameters
         if ($period <= 0 || $period > $numberOfPeriods) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Return value
@@ -194,13 +205,21 @@ class Interest
             $rate = $rate1;
         }
 
+<<<<<<< HEAD
         return $close ? $rate : ExcelError::NAN();
+=======
+        return $close ? $rate : Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private static function rateNextGuess($rate, $numberOfPeriods, $payment, $presentValue, $futureValue, $type)
     {
         if ($rate == 0.0) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $tt1 = ($rate + 1) ** $numberOfPeriods;
         $tt2 = ($rate + 1) ** ($numberOfPeriods - 1);
@@ -209,7 +228,11 @@ class Interest
             * ($rate * $type + 1) / ($rate * $rate) + $numberOfPeriods
             * $payment * $tt2 * ($rate * $type + 1) / $rate + $payment * ($tt1 - 1) * $type / $rate;
         if ($denominator == 0) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $numerator / $denominator;

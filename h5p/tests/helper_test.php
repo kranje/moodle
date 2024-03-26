@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * Testing the H5P helper.
  *
@@ -23,22 +24,45 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 declare(strict_types = 1);
 
 namespace core_h5p;
 
+<<<<<<< HEAD
 use advanced_testcase;
+=======
+use core_h5p\local\library\autoloader;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Test class covering the H5P helper.
  *
  * @package    core_h5p
+<<<<<<< HEAD
  * @copyright  2019 Sara Arjona <sara@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+=======
+ * @category   test
+ * @copyright  2019 Sara Arjona <sara@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers     \core_h5p\helper
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class helper_test extends \advanced_testcase {
 
     /**
+<<<<<<< HEAD
+=======
+     * Register the H5P autoloader
+     */
+    protected function setUp(): void {
+        autoloader::register();
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Test the behaviour of get_display_options().
      *
      * @dataProvider display_options_provider
@@ -137,7 +161,11 @@ class helper_test extends \advanced_testcase {
         $this->setUser($user);
 
         // This is a valid .H5P file.
+<<<<<<< HEAD
         $path = __DIR__ . '/fixtures/greeting-card-887.h5p';
+=======
+        $path = __DIR__ . '/fixtures/greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
         $file = helper::create_fake_stored_file_from_path($path, (int)$user->id);
         $factory->get_framework()->set_file($file);
 
@@ -173,7 +201,11 @@ class helper_test extends \advanced_testcase {
         $this->setUser($user);
 
         // This is a valid .H5P file.
+<<<<<<< HEAD
         $path = __DIR__ . '/fixtures/greeting-card-887.h5p';
+=======
+        $path = __DIR__ . '/fixtures/greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
         $file = helper::create_fake_stored_file_from_path($path, (int)$user->id);
         $factory->get_framework()->set_file($file);
 
@@ -247,7 +279,11 @@ class helper_test extends \advanced_testcase {
         $admin = get_admin();
 
         // Prepare a valid .H5P file.
+<<<<<<< HEAD
         $path = __DIR__ . '/fixtures/greeting-card-887.h5p';
+=======
+        $path = __DIR__ . '/fixtures/greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Files created by users can't be deployed.
         $file = helper::create_fake_stored_file_from_path($path, (int)$user->id);
@@ -275,7 +311,11 @@ class helper_test extends \advanced_testcase {
         $admin = get_admin();
 
         // Prepare a valid .H5P file.
+<<<<<<< HEAD
         $path = __DIR__ . '/fixtures/greeting-card-887.h5p';
+=======
+        $path = __DIR__ . '/fixtures/greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Libraries can't be updated when the file has been created by users.
         $file = helper::create_fake_stored_file_from_path($path, (int)$user->id);
@@ -305,9 +345,13 @@ class helper_test extends \advanced_testcase {
         $this->assertTrue(empty($messages->info));
 
         // Add an some messages manually and check they are still there.
+<<<<<<< HEAD
         $messages->error = [];
         $messages->error['error1'] = 'Testing ERROR message';
         $messages->info = [];
+=======
+        $messages->error['error1'] = 'Testing ERROR message';
+>>>>>>> forked/LAE_400_PACKAGE
         $messages->info['info1'] = 'Testing INFO message';
         $messages->info['info2'] = 'Testing INFO message';
         helper::get_messages($messages, $factory);

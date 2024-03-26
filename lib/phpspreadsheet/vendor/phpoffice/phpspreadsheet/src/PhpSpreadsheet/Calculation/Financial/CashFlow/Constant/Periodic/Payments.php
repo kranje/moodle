@@ -6,7 +6,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\CashFlow\CashFlowValidations;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\Constants as FinancialConstants;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Payments
 {
@@ -98,7 +101,11 @@ class Payments
 
         // Validate parameters
         if ($period <= 0 || $period > $numberOfPeriods) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Calculate

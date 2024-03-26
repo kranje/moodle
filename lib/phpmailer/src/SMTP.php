@@ -35,7 +35,11 @@ class SMTP
      *
      * @var string
      */
+<<<<<<< HEAD
     const VERSION = '6.6.5';
+=======
+    const VERSION = '6.5.3';
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * SMTP line break constant.
@@ -187,7 +191,10 @@ class SMTP
         'SendGrid' => '/[\d]{3} Ok: queued as (.*)/',
         'CampaignMonitor' => '/[\d]{3} 2.0.0 OK:([a-zA-Z\d]{48})/',
         'Haraka' => '/[\d]{3} Message Queued \((.*)\)/',
+<<<<<<< HEAD
         'Mailjet' => '/[\d]{3} OK queued as (.*)/',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     ];
 
     /**
@@ -483,7 +490,11 @@ class SMTP
      * @param string $username The user name
      * @param string $password The password
      * @param string $authtype The auth type (CRAM-MD5, PLAIN, LOGIN, XOAUTH2)
+<<<<<<< HEAD
      * @param OAuthTokenProvider $OAuth An optional OAuthTokenProvider instance for XOAUTH2 authentication
+=======
+     * @param OAuth  $OAuth    An optional OAuth instance for XOAUTH2 authentication
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return bool True if successfully authenticated
      */
@@ -682,6 +693,10 @@ class SMTP
      */
     public function close()
     {
+<<<<<<< HEAD
+=======
+        $this->setError('');
+>>>>>>> forked/LAE_400_PACKAGE
         $this->server_caps = null;
         $this->helo_rply = null;
         if (is_resource($this->smtp_conn)) {
@@ -1036,10 +1051,14 @@ class SMTP
             return false;
         }
 
+<<<<<<< HEAD
         //Don't clear the error store when using keepalive
         if ($command !== 'RSET') {
             $this->setError('');
         }
+=======
+        $this->setError('');
+>>>>>>> forked/LAE_400_PACKAGE
 
         return true;
     }

@@ -42,7 +42,11 @@ use enrol_lti\local\ltiadvantage\repository\user_repository;
 use enrol_lti\local\ltiadvantage\service\application_registration_service;
 
 require_once(__DIR__."/../../config.php");
+<<<<<<< HEAD
 global $OUTPUT, $PAGE, $CFG;
+=======
+global $OUTPUT, $PAGE, $CFG, $SITE;
+>>>>>>> forked/LAE_400_PACKAGE
 require_once($CFG->libdir . '/filelib.php');
 
 $PAGE->set_context(context_system::instance());
@@ -113,9 +117,15 @@ $regrequest = (object) [
         $CFG->wwwroot . '/enrol/lti/launch_deeplink.php',
     ],
      // TODO: Consider whether to support client_name#ja syntax for multi language support - see MDL-73109.
+<<<<<<< HEAD
     'client_name' => get_string('moodle', 'enrol_lti'),
     'jwks_uri' => $CFG->wwwroot . '/enrol/lti/jwks.php',
     'logo_uri' => $OUTPUT->image_url('moodlelogo')->out(false),
+=======
+    'client_name' => format_string($SITE->fullname, true, ['context' => context_system::instance()]),
+    'jwks_uri' => $CFG->wwwroot . '/enrol/lti/jwks.php',
+    'logo_uri' => $OUTPUT->get_compact_logo_url() ? $OUTPUT->get_compact_logo_url()->out(false) : '',
+>>>>>>> forked/LAE_400_PACKAGE
     'token_endpoint_auth_method' => 'private_key_jwt',
     'scope' => implode(" ", $scopes),
     'https://purl.imsglobal.org/spec/lti-tool-configuration' => [

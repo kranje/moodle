@@ -1,11 +1,20 @@
 This files describes API changes for code that uses the user API.
 
+<<<<<<< HEAD
 === 4.1.2 ===
+=======
+=== 4.0.8 ===
+
+* External function core_user_external::add_user_private_files() now returns moodle_exception when the user quota is exceeded
+
+=== 4.0.7 ===
+>>>>>>> forked/LAE_400_PACKAGE
 
 * New method `core_user::is_current_user`, useful for components implementing permission callbacks for their preferences
 * New `profile_get_user_field` method for returning profile field instance of given type
 * The `profile_field_base::is_visible` method now accepts an optional `$context` argument
 
+<<<<<<< HEAD
 === 4.1 ===
 
 * Added a new method is_transform_supported() in the profile_field_base class.
@@ -42,6 +51,14 @@ This files describes API changes for code that uses the user API.
 
 === 4.0 ===
 
+=======
+=== 4.0.6 ===
+* Added a new method is_transform_supported() in the profile_field_base class.
+  The purpose is to allow the field to be transformed during the export process.
+  It has been implemented in the Date/Time data type.
+
+=== 4.0 ===
+>>>>>>> forked/LAE_400_PACKAGE
 * External function core_user_external::update_users() will now fail on a per user basis. Previously if one user
   update failed all users in the operation would fail.
 * External function core_user_external::update_users() now returns an error code and message to why a user update

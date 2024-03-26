@@ -35,7 +35,11 @@ class Horde_Imap_Client_DateTime extends DateTime
 
         /* Bug #14381 Catch malformed offset - which doesn't cause
            DateTime to throw exception. */
+<<<<<<< HEAD
         if ($time !== null && substr(rtrim($time), -5) === ' 0000') {
+=======
+        if (substr(rtrim($time), -5) === ' 0000') {
+>>>>>>> forked/LAE_400_PACKAGE
             $time = substr(trim($time), 0, strlen(trim($time)) - 5) . ' +0000';
             try {
                 if ($bug_67118) {
@@ -48,15 +52,25 @@ class Horde_Imap_Client_DateTime extends DateTime
 
         try {
             if ($bug_67118) {
+<<<<<<< HEAD
                 new DateTime($time === null ? 'now' : $time, $tz);
             }
             parent::__construct($time === null ? 'now' : $time, $tz);
+=======
+                new DateTime($time, $tz);
+            }
+            parent::__construct($time, $tz);
+>>>>>>> forked/LAE_400_PACKAGE
             return;
         } catch (Exception $e) {}
 
         /* Check for malformed day-of-week parts, usually incorrectly
          *  localized. E.g. Fr, 15 Apr 2016 15:15:09 +0000 */
+<<<<<<< HEAD
         if ($time !== null && !preg_match("/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),/", $time)) {
+=======
+        if (!preg_match("/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),/", $time)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $time = preg_replace("/^(\S*,)/", '', $time, 1, $i);
             if ($i) {
                 try {
@@ -70,7 +84,11 @@ class Horde_Imap_Client_DateTime extends DateTime
         }
 
         /* Bug #5717 - Check for UT vs. UTC. */
+<<<<<<< HEAD
         if ($time !== null && substr(rtrim($time), -3) === ' UT') {
+=======
+        if (substr(rtrim($time), -3) === ' UT') {
+>>>>>>> forked/LAE_400_PACKAGE
             try {
                 if ($bug_67118) {
                     new DateTime($time . 'C', $tz);

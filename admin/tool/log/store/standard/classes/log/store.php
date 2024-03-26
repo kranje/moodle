@@ -139,6 +139,7 @@ class store implements \tool_log\log\writer, \core\log\sql_internal_table_reader
         return $event;
     }
 
+<<<<<<< HEAD
     /**
      * Get number of events present for the given select clause.
      *
@@ -147,11 +148,14 @@ class store implements \tool_log\log\writer, \core\log\sql_internal_table_reader
      *
      * @return int Number of events available for the given conditions
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function get_events_select_count($selectwhere, array $params) {
         global $DB;
         return $DB->count_records_select('logstore_standard_log', $selectwhere, $params);
     }
 
+<<<<<<< HEAD
     /**
      * Get whether events are present for the given select clause.
      *
@@ -165,6 +169,8 @@ class store implements \tool_log\log\writer, \core\log\sql_internal_table_reader
         return $DB->record_exists_select('logstore_standard_log', $selectwhere, $params);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function get_internal_log_table_name() {
         return 'logstore_standard_log';
     }

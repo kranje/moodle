@@ -8,7 +8,10 @@ use PhpOffice\PhpSpreadsheet\Collection\Memory;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\SimpleCache\CacheInterface;
+<<<<<<< HEAD
 use ReflectionClass;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Settings
 {
@@ -162,12 +165,17 @@ class Settings
     public static function getCache(): CacheInterface
     {
         if (!self::$cache) {
+<<<<<<< HEAD
             self::$cache = self::useSimpleCacheVersion3() ? new Memory\SimpleCache3() : new Memory\SimpleCache1();
+=======
+            self::$cache = new Memory();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return self::$cache;
     }
 
+<<<<<<< HEAD
     public static function useSimpleCacheVersion3(): bool
     {
         return
@@ -175,6 +183,8 @@ class Settings
             (new ReflectionClass(CacheInterface::class))->getMethod('get')->getReturnType() !== null;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Set the HTTP client implementation to be used for network request.
      */

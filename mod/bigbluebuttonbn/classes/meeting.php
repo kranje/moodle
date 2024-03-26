@@ -147,12 +147,20 @@ class meeting {
     }
 
     /**
+<<<<<<< HEAD
      * Number of participants
+=======
+     * Total number of moderators and viewers.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return int
      */
     public function get_participant_count() {
+<<<<<<< HEAD
         return $this->get_meeting_info()->participantcount;
+=======
+        return $this->get_meeting_info()->totalusercount;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -192,7 +200,11 @@ class meeting {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function get_join_url(): string {
+=======
+    public function get_join_url() {
+>>>>>>> forked/LAE_400_PACKAGE
         return bigbluebutton_proxy::get_join_url(
             $this->instance->get_meeting_id(),
             $this->instance->get_user_fullname(),
@@ -206,6 +218,7 @@ class meeting {
     }
 
     /**
+<<<<<<< HEAD
      * Get meeting join URL for guest
      *
      * @param string $fullname
@@ -226,6 +239,8 @@ class meeting {
 
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Return meeting information for this meeting.
      *
      * @param bool $updatecache Whether to update the cache when fetching the information
@@ -253,7 +268,11 @@ class meeting {
         $activitystatus = bigbluebutton_proxy::view_get_activity_status($instance);
         // This might raise an exception if info cannot be retrieved.
         // But this might be totally fine as the meeting is maybe not yet created on BBB side.
+<<<<<<< HEAD
         $participantcount = 0;
+=======
+        $totalusercount = 0;
+>>>>>>> forked/LAE_400_PACKAGE
         // This is the default value for any meeting that has not been created.
         $meetinginfo->statusrunning = false;
         $meetinginfo->createtime = null;
@@ -262,11 +281,16 @@ class meeting {
         if (!empty($info)) {
             $meetinginfo->statusrunning = $info['running'] === 'true';
             $meetinginfo->createtime = $info['createTime'] ?? null;
+<<<<<<< HEAD
             $participantcount = isset($info['participantCount']) ? $info['participantCount'] : 0;
+=======
+            $totalusercount = isset($info['participantCount']) ? $info['participantCount'] : 0;
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $meetinginfo->statusclosed = $activitystatus === 'ended';
         $meetinginfo->statusopen = !$meetinginfo->statusrunning && $activitystatus === 'open';
+<<<<<<< HEAD
         $meetinginfo->participantcount = $participantcount;
 
         $canjoin = !$instance->user_must_wait_to_join() || $meetinginfo->statusrunning;
@@ -275,6 +299,13 @@ class meeting {
             !$instance->has_user_limit_been_reached($participantcount)
             || !$instance->does_current_user_count_towards_user_limit()
             );
+=======
+        $meetinginfo->totalusercount = $totalusercount;
+
+        $canjoin = !$instance->user_must_wait_to_join() || $meetinginfo->statusrunning;
+        // Limit has not been reached.
+        $canjoin = $canjoin && (!$instance->has_user_limit_been_reached($totalusercount));
+>>>>>>> forked/LAE_400_PACKAGE
         // User should only join during scheduled session start and end time, if defined.
         $canjoin = $canjoin && ($instance->is_currently_open());
         // Double check that the user has the capabilities to join.
@@ -286,7 +317,11 @@ class meeting {
             $meetinginfo->startedat = floor(intval($info['startTime']) / 1000); // Milliseconds.
             $meetinginfo->moderatorcount = $info['moderatorCount'];
             $meetinginfo->moderatorplural = $info['moderatorCount'] > 1;
+<<<<<<< HEAD
             $meetinginfo->participantcount = $participantcount - $meetinginfo->moderatorcount;
+=======
+            $meetinginfo->participantcount = $totalusercount - $meetinginfo->moderatorcount;
+>>>>>>> forked/LAE_400_PACKAGE
             $meetinginfo->participantplural = $meetinginfo->participantcount > 1;
         }
         $meetinginfo->statusmessage = $this->get_status_message($meetinginfo, $instance);
@@ -302,6 +337,7 @@ class meeting {
                 $meetinginfo->attendees[] = (array) $attendee;
             }
         }
+<<<<<<< HEAD
         $meetinginfo->guestaccessenabled = $instance->is_guest_allowed();
         if ($meetinginfo->guestaccessenabled && $instance->is_moderator()) {
             $meetinginfo->guestjoinurl = $instance->get_guest_access_url()->out();
@@ -309,6 +345,8 @@ class meeting {
         }
 
         $meetinginfo->features = $instance->get_enabled_features();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $meetinginfo;
     }
 
@@ -322,6 +360,12 @@ class meeting {
      * @return string
      */
     protected function get_status_message(object $meetinginfo, instance $instance): string {
+<<<<<<< HEAD
+=======
+        if ($instance->has_user_limit_been_reached($meetinginfo->totalusercount)) {
+            return get_string('view_message_conference_user_limit_reached', 'bigbluebuttonbn');
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         if ($meetinginfo->statusrunning) {
             return get_string('view_message_conference_in_progress', 'bigbluebuttonbn');
         }
@@ -379,6 +423,10 @@ class meeting {
         'disableprivatechat' => 'lockSettingsDisablePrivateChat',
         'disablepublicchat' => 'lockSettingsDisablePublicChat',
         'disablenote' => 'lockSettingsDisableNote',
+<<<<<<< HEAD
+=======
+        'lockonjoin' => 'lockSettingsLockOnJoin',
+>>>>>>> forked/LAE_400_PACKAGE
         'hideuserlist' => 'lockSettingsHideUserList'
     ];
     /**
@@ -415,19 +463,25 @@ class meeting {
         if ($this->instance->get_mute_on_start()) {
             $data['muteOnStart'] = 'true';
         }
+<<<<<<< HEAD
         // Here a bit of a change compared to the API default behaviour: we should not allow guest to join
         // a meeting managed by Moodle by default.
         if ($this->instance->is_guest_allowed()) {
             $data['guestPolicy'] = $this->instance->is_moderator_approval_required() ? 'ASK_MODERATOR' : 'ALWAYS_ACCEPT';
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Locks settings.
         foreach (self::LOCK_SETTINGS_MEETING_DATA as $instancevarname => $lockname) {
             $instancevar = $this->instance->get_instance_var($instancevarname);
             if (!is_null($instancevar)) {
                 $data[$lockname] = $instancevar ? 'true' : 'false';
+<<<<<<< HEAD
                 if ($instancevar) {
                     $data['lockSettingsLockOnJoin'] = 'true'; // This will be locked whenever one settings is locked.
                 }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         return $data;
@@ -543,6 +597,7 @@ class meeting {
     }
 
     /**
+<<<<<<< HEAD
      * Prepare join meeting action
      *
      * @param int $origin
@@ -555,6 +610,18 @@ class meeting {
                     $this->instance->has_user_limit_been_reached($this->get_participant_count())
                     && $this->instance->does_current_user_count_towards_user_limit()
             ) {
+=======
+     * Join a meeting.
+     *
+     * @param int $origin The spec
+     * @return string The URL to redirect to
+     * @throws meeting_join_exception
+     */
+    public function join(int $origin): string {
+        $this->do_get_meeting_info(true);
+        if ($this->is_running()) {
+            if ($this->instance->has_user_limit_been_reached($this->get_participant_count())) {
+>>>>>>> forked/LAE_400_PACKAGE
                 throw new meeting_join_exception('userlimitreached');
             }
         } else if ($this->instance->user_must_wait_to_join()) {
@@ -567,6 +634,7 @@ class meeting {
 
         // Before executing the redirect, increment the number of participants.
         roles::participant_joined($this->instance->get_meeting_id(), $this->instance->is_moderator());
+<<<<<<< HEAD
     }
     /**
      * Join a meeting.
@@ -590,6 +658,8 @@ class meeting {
      */
     public function guest_join(int $origin, string $userfullname): string {
         $this->prepare_meeting_join_action($origin);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->get_join_url();
     }
 }

@@ -198,6 +198,7 @@ class JS extends Minify
         // PHP only supports $this inside anonymous functions since 5.4
         $minifier = $this;
         $callback = function ($match) use ($minifier) {
+<<<<<<< HEAD
             if (
                 substr($match[2], 0, 1) === '!' ||
                 strpos($match[2], '@license') !== false ||
@@ -217,6 +218,17 @@ class JS extends Minify
 
         // multi-line comments
         $this->registerPattern('/(\n?)\/\*(.*?)\*\/(\n?)/s', $callback);
+=======
+            $count = count($minifier->extracted);
+            $placeholder = '/*'.$count.'*/';
+            $minifier->extracted[$placeholder] = $match[0];
+
+            return $placeholder;
+        };
+        // multi-line comments
+        $this->registerPattern('/\n?\/\*(!|.*?@license|.*?@preserve).*?\*\/\n?/s', $callback);
+        $this->registerPattern('/\/\*.*?\*\//s', '');
+>>>>>>> forked/LAE_400_PACKAGE
 
         // single-line comments
         $this->registerPattern('/\/\/.*$/m', '');
@@ -264,7 +276,11 @@ class JS extends Minify
         // of the RegExp methods (a `\` followed by a variable or value is
         // likely part of a division, not a regex)
         $keywords = array('do', 'in', 'new', 'else', 'throw', 'yield', 'delete', 'return',  'typeof');
+<<<<<<< HEAD
         $before = '(^|[=:,;\+\-\*\?\/\}\(\{\[&\|!]|'.implode('|', $keywords).')\s*';
+=======
+        $before = '(^|[=:,;\+\-\*\/\}\(\{\[&\|!]|'.implode('|', $keywords).')\s*';
+>>>>>>> forked/LAE_400_PACKAGE
         $propertiesAndMethods = array(
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#Properties_2
             'constructor',
@@ -284,7 +300,11 @@ class JS extends Minify
         );
         $delimiters = array_fill(0, count($propertiesAndMethods), '/');
         $propertiesAndMethods = array_map('preg_quote', $propertiesAndMethods, $delimiters);
+<<<<<<< HEAD
         $after = '(?=\s*([\.,;:\)\}&\|+]|\/\/|$|\.('.implode('|', $propertiesAndMethods).')))';
+=======
+        $after = '(?=\s*([\.,;\)\}&\|+]|\/\/|$|\.('.implode('|', $propertiesAndMethods).')))';
+>>>>>>> forked/LAE_400_PACKAGE
         $this->registerPattern('/'.$before.'\K'.$pattern.$after.'/', $callback);
 
         // regular expressions following a `)` are rather annoying to detect...
@@ -415,6 +435,7 @@ class JS extends Minify
          * to be the for-loop's body... Same goes for while loops.
          * I'm going to double that semicolon (if any) so after the next line,
          * which strips semicolons here & there, we're still left with this one.
+<<<<<<< HEAD
          * Note the special recursive construct in the three inner parts of the for:
          * (\{([^\{\}]*(?-2))*[^\{\}]*\})? - it is intended to match inline
          * functions bodies, e.g.: i<arr.map(function(e){return e}).length.
@@ -435,6 +456,11 @@ class JS extends Minify
          */
         $content = preg_replace('/(\bif\s*\([^{;]*\));\}/s', '\\1;;}', $content);
 
+=======
+         */
+        $content = preg_replace('/(for\([^;\{]*;[^;\{]*;[^;\{]*\));(\}|$)/s', '\\1;;\\2', $content);
+        $content = preg_replace('/(for\([^;\{]+\s+in\s+[^;\{]+\));(\}|$)/s', '\\1;;\\2', $content);
+>>>>>>> forked/LAE_400_PACKAGE
         /*
          * Below will also keep `;` after a `do{}while();` along with `while();`
          * While these could be stripped after do-while, detecting this

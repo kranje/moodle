@@ -92,7 +92,10 @@ class externallib_test extends externallib_advanced_testcase {
             'tool_mobile_setuplink' => get_config('tool_mobile', 'setuplink'),
             'tool_mobile_qrcodetype' => get_config('tool_mobile', 'qrcodetype'),
             'supportpage' => $CFG->supportpage,
+<<<<<<< HEAD
             'supportavailability' => $CFG->supportavailability,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'warnings' => array()
         );
         $this->assertEquals($expected, $result);
@@ -112,7 +115,10 @@ class externallib_test extends externallib_advanced_testcase {
         set_config('disabledfeatures', 'myoverview', 'tool_mobile');
         set_config('minimumversion', '3.8.0', 'tool_mobile');
         set_config('supportemail', 'test@test.com');
+<<<<<<< HEAD
         set_config('supportavailability', CONTACT_SUPPORT_ANYONE);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Enable couple of issuers.
         $issuer = \core\oauth2\api::create_standard_issuer('google');
@@ -134,7 +140,10 @@ class externallib_test extends externallib_advanced_testcase {
         $expected['agedigitalconsentverification'] = true;
         $expected['supportname'] = $CFG->supportname;
         $expected['supportemail'] = $CFG->supportemail;
+<<<<<<< HEAD
         $expected['supportavailability'] = $CFG->supportavailability;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $expected['autolang'] = '1';
         $expected['lang'] = ''; // Expect empty because it was set to an invalid lang.
         $expected['tool_mobile_disabledfeatures'] = 'myoverview';
@@ -229,7 +238,10 @@ class externallib_test extends externallib_advanced_testcase {
                 'value' => get_config('core_admin', 'coursecolor' . $number)
             ];
         }
+<<<<<<< HEAD
         $expected[] = ['name' => 'supportavailability', 'value' => $CFG->supportavailability];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $expected[] = ['name' => 'supportname', 'value' => $CFG->supportname];
         $expected[] = ['name' => 'supportemail', 'value' => $CFG->supportemail];
         $expected[] = ['name' => 'supportpage', 'value' => $CFG->supportpage];
@@ -238,7 +250,10 @@ class externallib_test extends externallib_advanced_testcase {
         $expected[] = ['name' => 'coursegraceperiodbefore', 'value' => $CFG->coursegraceperiodbefore];
 
         $expected[] = ['name' => 'enabledashboard', 'value' => $CFG->enabledashboard];
+<<<<<<< HEAD
         $expected[] = ['name' => 'customusermenuitems', 'value' => $CFG->customusermenuitems];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->assertCount(0, $result['warnings']);
         $this->assertEquals($expected, $result['settings']);
@@ -633,7 +648,10 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user);
 
         $mobilesettings = get_config('tool_mobile');
+<<<<<<< HEAD
         $mobilesettings->qrsameipcheck = 1;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $qrloginkey = api::get_qrlogin_key($mobilesettings);
 
         // Generate new tokens, the ones we expect to receive.
@@ -657,6 +675,7 @@ class externallib_test extends externallib_advanced_testcase {
         $result = external::get_tokens_for_qr_login(random_string('64'), $user->id);
     }
 
+<<<<<<< HEAD
     /*
      * Test get_tokens_for_qr_login ignore ip check.
      */
@@ -727,6 +746,8 @@ class externallib_test extends externallib_advanced_testcase {
         $result = external::get_tokens_for_qr_login($qrloginkey, $USER->id);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Test get_tokens_for_qr_login missing QR code enabled.
      */

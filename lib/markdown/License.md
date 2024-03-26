@@ -1,5 +1,9 @@
 PHP Markdown Lib  
+<<<<<<< HEAD
 Copyright (c) 2004-2022 Michel Fortin
+=======
+Copyright (c) 2004-2018 Michel Fortin
+>>>>>>> forked/LAE_400_PACKAGE
 <https://michelf.ca/>  
 All rights reserved.
 

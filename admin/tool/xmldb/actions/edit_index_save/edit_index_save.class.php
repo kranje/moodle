@@ -73,7 +73,11 @@ class edit_index_save extends XMLDBAction {
         // Do the job, setting result as needed
 
         if (!data_submitted()) { // Basic prevention
+<<<<<<< HEAD
             throw new \moodle_exception('wrongcall', 'error');
+=======
+            print_error('wrongcall', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Get parameters

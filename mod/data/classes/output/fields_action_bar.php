@@ -31,13 +31,29 @@ class fields_action_bar implements templatable, renderable {
     /** @var int $id The database module id. */
     private $id;
 
+<<<<<<< HEAD
     /** @var \action_menu|null $fieldselect The field selector object or null. */
     private $fieldselect;
 
+=======
+    /** @var \url_select $urlselect The URL selector object. */
+    private $urlselect;
+
+    /** @var \single_select|null $fieldselect The field selector object or null. */
+    private $fieldselect;
+
+    /** @var \single_button|null $saveaspresetbutton The save as preset single button object or null. */
+    private $saveaspresetbutton;
+
+    /** @var \single_button|null $exportpresetbutton The export preset single button object or null. */
+    private $exportpresetbutton;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * The class constructor.
      *
      * @param int $id The database module id
+<<<<<<< HEAD
      * @param null $unused1 This parameter has been deprecated since 4.1 and should not be used anymore.
      * @param null $unused2 This parameter has been deprecated since 4.1 and should not be used anymore.
      * @param null $unused3 This parameter has been deprecated since 4.1 and should not be used anymore.
@@ -54,6 +70,20 @@ class fields_action_bar implements templatable, renderable {
 
         $this->id = $id;
         $this->fieldselect = $fieldselect;
+=======
+     * @param \url_select $urlselect The URL selector object
+     * @param \single_select|null $fieldselect The field selector object or null
+     * @param \single_button|null $saveaspresetbutton The save as preset single button object or null
+     * @param \single_button|null $exportpresetbutton The export preset single button object or null
+     */
+    public function __construct(int $id, \url_select $urlselect, ?\single_select $fieldselect = null,
+            ?\single_button $saveaspresetbutton = null, ?\single_button $exportpresetbutton = null) {
+        $this->id = $id;
+        $this->urlselect = $urlselect;
+        $this->fieldselect = $fieldselect;
+        $this->saveaspresetbutton = $saveaspresetbutton;
+        $this->exportpresetbutton = $exportpresetbutton;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -66,13 +96,26 @@ class fields_action_bar implements templatable, renderable {
 
         $data = [
             'd' => $this->id,
+<<<<<<< HEAD
             'tertiarytitle' => get_string('managefields', 'mod_data'),
+=======
+            'urlselect' => $this->urlselect->export_for_template($output),
+>>>>>>> forked/LAE_400_PACKAGE
         ];
 
         if ($this->fieldselect) {
             $data['fieldselect'] = $this->fieldselect->export_for_template($output);
         }
 
+<<<<<<< HEAD
+=======
+        $data['saveaspreset'] = $this->saveaspresetbutton;
+
+        if ($this->exportpresetbutton) {
+            $data['exportpreset'] = $this->exportpresetbutton->export_for_template($output);
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         return $data;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Sabberworm\CSS\Value;
 
+<<<<<<< HEAD
 class RuleValueList extends ValueList
 {
     /**
@@ -13,3 +14,10 @@ class RuleValueList extends ValueList
         parent::__construct([], $sSeparator, $iLineNo);
     }
 }
+=======
+class RuleValueList extends ValueList {
+	public function __construct($sSeparator = ',', $iLineNo = 0) {
+		parent::__construct(array(), $sSeparator, $iLineNo);
+	}
+}
+>>>>>>> forked/LAE_400_PACKAGE

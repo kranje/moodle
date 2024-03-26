@@ -28,6 +28,7 @@ $currentorg = optional_param('currentorg', '', PARAM_RAW);  // selected organiza
 
 if (!empty($id)) {
     if (! $cm = get_coursemodule_from_id('scorm', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record("course", array("id" => $cm->course))) {
@@ -48,6 +49,28 @@ if (!empty($id)) {
     }
 } else {
     throw new \moodle_exception('missingparameter');
+=======
+        print_error('invalidcoursemodule');
+    }
+    if (! $course = $DB->get_record("course", array("id" => $cm->course))) {
+        print_error('coursemisconf');
+    }
+    if (! $scorm = $DB->get_record("scorm", array("id" => $cm->instance))) {
+        print_error('invalidcoursemodule');
+    }
+} else if (!empty($a)) {
+    if (! $scorm = $DB->get_record("scorm", array("id" => $a))) {
+        print_error('invalidcoursemodule');
+    }
+    if (! $course = $DB->get_record("course", array("id" => $scorm->course))) {
+        print_error('coursemisconf');
+    }
+    if (! $cm = get_coursemodule_from_instance("scorm", $scorm->id, $course->id)) {
+        print_error('invalidcoursemodule');
+    }
+} else {
+    print_error('missingparameter');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // PARAM_RAW is used for $currentorg, validate it against records stored in the table.

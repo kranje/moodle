@@ -3,6 +3,7 @@
   <library>
     <location>S3.php</location>
     <name>S3</name>
+<<<<<<< HEAD
     <description>A standalone Amazon S3 (REST) client for PHP 5.2.x using CURL that does not require PEAR.</description>
     <version>0.5.1</version>
     <license>BSD</license>
@@ -11,5 +12,10 @@
       <copyright>2013, Donovan Schönknecht</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>BSD</license>
+    <version>0.5.1</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
 </libraries>

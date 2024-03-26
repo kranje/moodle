@@ -26,6 +26,10 @@ import Templates from 'core/templates';
 import Notification from 'core/notification';
 import {toggleManualCompletion} from 'core_course/repository';
 import * as CourseEvents from 'core_course/events';
+<<<<<<< HEAD
+=======
+import Pending from 'core/pending';
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Selectors in the manual completion template.
@@ -77,6 +81,10 @@ export const init = () => {
  * @returns {Promise<void>}
  */
 const toggleManualCompletionState = async(toggleButton) => {
+<<<<<<< HEAD
+=======
+    const pendingPromise = new Pending('core_course:toggleManualCompletionState');
+>>>>>>> forked/LAE_400_PACKAGE
     // Make a copy of the original content of the button.
     const originalInnerHtml = toggleButton.innerHTML;
 
@@ -91,8 +99,16 @@ const toggleManualCompletionState = async(toggleButton) => {
     const completed = toggleType === TOGGLE_TYPES.TOGGLE_MARK_DONE;
 
     // Replace the button contents with the loading icon.
+<<<<<<< HEAD
     const loadingHtml = await Templates.render('core/loading', {});
     await Templates.replaceNodeContents(toggleButton, loadingHtml, '');
+=======
+    Templates.renderForPromise('core/loading', {})
+    .then((loadingHtml) => {
+        Templates.replaceNodeContents(toggleButton, loadingHtml, '');
+        return;
+    }).catch(() => {});
+>>>>>>> forked/LAE_400_PACKAGE
 
     try {
         // Call the webservice to update the manual completion status.
@@ -134,4 +150,8 @@ const toggleManualCompletionState = async(toggleButton) => {
         // Show the exception.
         Notification.exception(exception);
     }
+<<<<<<< HEAD
+=======
+    pendingPromise.resolve();
+>>>>>>> forked/LAE_400_PACKAGE
 };

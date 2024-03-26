@@ -499,6 +499,7 @@ extends Horde_Imap_Client_Cache_Backend
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return $this->__serialize();
     }
 
@@ -509,6 +510,10 @@ extends Horde_Imap_Client_Cache_Backend
     {
         $this->save();
         return parent::__serialize();
+=======
+        $this->save();
+        return parent::serialize();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 }

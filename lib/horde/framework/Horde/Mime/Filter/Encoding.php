@@ -34,7 +34,10 @@ class Horde_Mime_Filter_Encoding extends php_user_filter
     /**
      * @see stream_filter_register()
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function onCreate()
     {
         $this->params->body = false;
@@ -45,7 +48,10 @@ class Horde_Mime_Filter_Encoding extends php_user_filter
     /**
      * @see stream_filter_register()
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function filter($in, $out, &$consumed, $closing)
     {
         while ($bucket = stream_bucket_make_writeable($in)) {

@@ -24,8 +24,11 @@
 
 namespace mod_data\search;
 
+<<<<<<< HEAD
 use mod_data\manager;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/data/lib.php');
@@ -239,12 +242,39 @@ class entry extends \core_search\base_mod {
         $cm = $this->get_cm('data', $entry->dataid, $doc->get('courseid'));
         $context = \context_module::instance($cm->id);
 
+<<<<<<< HEAD
         // Get the files and attach them.
         $fs = get_file_storage();
         $files = $fs->get_area_files($context->id, 'mod_data', 'content', $entryid, 'filename', false);
         foreach ($files as $file) {
             $doc->add_stored_file($file);
         }
+=======
+        // Get all content fields which have files in them.
+        $contentssql = "
+                SELECT con.*
+                  FROM {data_content} con
+                  JOIN {files} fil
+                    ON fil.component = :component
+                   AND fil.filearea = :filearea
+                   AND fil.itemid = con.id
+                 WHERE con.recordid = :recordid
+        ";
+        $contents    = $DB->get_recordset_sql($contentssql, [
+            'recordid'  => $entryid,
+            'component' => 'mod_data',
+            'filearea'  => 'content',
+        ]);
+        foreach ($contents as $content) {
+            // Get the files and attach them.
+            $fs = get_file_storage();
+            $files = $fs->get_area_files($context->id, 'mod_data', 'content', $content->id, 'filename', false);
+            foreach ($files as $file) {
+                $doc->add_stored_file($file);
+            }
+        }
+        $contents->close();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -282,6 +312,7 @@ class entry extends \core_search\base_mod {
                  WHERE dc.fieldid = df.id
                        AND dc.recordid = :recordid";
 
+<<<<<<< HEAD
         $contents = $DB->get_records_sql($sql, ['recordid' => $entry->id]);
         $filteredcontents = [];
 
@@ -289,6 +320,13 @@ class entry extends \core_search\base_mod {
         $manager = manager::create_from_instance($data);
         $template = $manager->get_template('addtemplate');
         $template = $template->get_template_content();
+=======
+        $contents = $DB->get_records_sql($sql, array('recordid' => $entry->id));
+        $filteredcontents = array();
+
+        $template = $DB->get_record_sql('SELECT addtemplate FROM {data} WHERE id = ?', array($entry->dataid));
+        $template = $template->addtemplate;
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Filtering out the data_content records having invalid fieldtypes.
         foreach ($contents as $content) {
@@ -304,7 +342,11 @@ class entry extends \core_search\base_mod {
                 continue;
             }
             $content->priority = $classname::get_priority();
+<<<<<<< HEAD
             $content->addtemplateposition = strpos($template ?? '', '[['.$content->fldname.']]');
+=======
+            $content->addtemplateposition = strpos($template, '[['.$content->fldname.']]');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $orderqueue = new \SPLPriorityQueue();

@@ -247,6 +247,10 @@ $string['movingquestionsnofiles'] = 'Are you sure you want to move question(s) {
 $string['needtochoosecat'] = 'You need to choose a category to move this question to or press \'cancel\'.';
 $string['nocate'] = 'No such category {$a}!';
 $string['nopermissionadd'] = 'You don\'t have permission to add questions here.';
+<<<<<<< HEAD
+=======
+$string['nopermissionmove'] = 'You don\'t have permission to move questions from here. You must save the question in this category or save it as a new question.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['nopermissionedit'] = 'You don\'t have permission to edit questions from here.';
 $string['noprobs'] = 'No problems found in your question database.';
 $string['noquestions'] = 'No questions were found that could be exported. Make sure that you have selected a category to export that contains questions.';
@@ -446,6 +450,10 @@ $string['questionnamecopy'] = '{$a} (copy)';
 $string['questionpreviewdefaults'] = 'Question preview defaults';
 $string['questionpreviewdefaults_desc'] = 'These defaults are used when a user first previews a question in the question bank. Once a user has previewed a question, their personal preferences are stored as user preferences.';
 $string['questions'] = 'Questions';
+<<<<<<< HEAD
+=======
+$string['question_version'] = 'Question version';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['questionx'] = 'Question {$a}';
 $string['questiontext'] = 'Question text';
 $string['requiresgrading'] = 'Requires grading';
@@ -460,10 +468,17 @@ $string['settingsformultipletries'] = 'Multiple tries';
 $string['showhidden'] = 'Also show old questions';
 $string['showmarkandmax'] = 'Show mark and max';
 $string['showmaxmarkonly'] = 'Show max mark only';
+<<<<<<< HEAD
 $string['showquestiontext'] = 'Show question text in the question list';
 $string['showquestiontext_full'] = 'Full display';
 $string['showquestiontext_off'] = 'No';
 $string['showquestiontext_plain'] = 'Text only';
+=======
+$string['showquestiontext'] = 'Show question text in the question list?';
+$string['showquestiontext_full'] = 'Yes, with images, media, etc.';
+$string['showquestiontext_off'] = 'No';
+$string['showquestiontext_plain'] = 'Yes, text only';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['shown'] = 'Shown';
 $string['shownumpartscorrect'] = 'Show the number of correct responses';
 $string['shownumpartscorrectwhenfinished'] = 'Show the number of correct responses once the question has finished';
@@ -504,6 +519,7 @@ $string['yougotnright'] = 'You have correctly selected {$a->num}.';
 $string['qbanknotfound'] = 'The \'{$a}\' question bank plugin doesn\'t exist or is not recognised.';
 $string['noquestionbanks'] = 'No question bank plugin found.';
 $string['questionloaderror'] = 'Could not load the question options.';
+<<<<<<< HEAD
 $string['version_selection'] = 'Version {$a->version}';
 $string['question_version'] = 'Question version';
 
@@ -512,3 +528,8 @@ $string['notflagged'] = 'Not flagged';
 
 // Deprecated since Moodle 4.1.
 $string['nopermissionmove'] = 'You don\'t have permission to move questions from here. You must save the question in this category or save it as a new question.';
+=======
+
+// Deprecated since Moodle 4.0.
+$string['notflagged'] = 'Not flagged';
+>>>>>>> forked/LAE_400_PACKAGE

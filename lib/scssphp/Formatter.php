@@ -286,6 +286,7 @@ abstract class Formatter
 
         ob_start();
 
+<<<<<<< HEAD
         try {
             $this->block($block);
         } catch (\Exception $e) {
@@ -298,6 +299,11 @@ abstract class Formatter
 
         $out = ob_get_clean();
         assert($out !== false);
+=======
+        $this->block($block);
+
+        $out = ob_get_clean();
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $out;
     }
@@ -340,8 +346,11 @@ abstract class Formatter
                 // If the written line starts is empty, adding a mapping would add it for
                 // a non-existent column as we are at the end of the line
                 if ($line !== '') {
+<<<<<<< HEAD
                     assert($this->currentBlock->sourceLine !== null);
                     assert($this->currentBlock->sourceName !== null);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->sourceMapGenerator->addMapping(
                         $this->currentLine,
                         $this->currentColumn,
@@ -357,8 +366,11 @@ abstract class Formatter
             }
 
             if ($lastLine !== '') {
+<<<<<<< HEAD
                 assert($this->currentBlock->sourceLine !== null);
                 assert($this->currentBlock->sourceName !== null);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $this->sourceMapGenerator->addMapping(
                     $this->currentLine,
                     $this->currentColumn,

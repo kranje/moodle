@@ -104,6 +104,7 @@ Feature: Manager is able to delete tags
     And I should see "Cat"
     And I should not see "Dog"
     And I log out
+<<<<<<< HEAD
 
   @javascript
   Scenario: Delete all tags
@@ -119,3 +120,5 @@ Feature: Manager is able to delete tags
     And I should not see "Dog"
     And I should not see "Turtle"
     And I should not see "Neverusedtag"
+=======
+>>>>>>> forked/LAE_400_PACKAGE

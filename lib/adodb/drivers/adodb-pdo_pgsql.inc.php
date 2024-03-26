@@ -21,11 +21,19 @@
 
 class ADODB_pdo_pgsql extends ADODB_pdo {
 	var $metaDatabasesSQL = "select datname from pg_database where datname not in ('template0','template1') order by 1";
+<<<<<<< HEAD
 	var $metaTablesSQL = "select tablename,'T' from pg_tables where tablename not like 'pg\_%'
 		and tablename not in ('sql_features', 'sql_implementation_info', 'sql_languages',
 			'sql_packages', 'sql_sizing', 'sql_sizing_profiles')
 		union
 		select viewname,'V' from pg_views where viewname not like 'pg\_%'";
+=======
+    var $metaTablesSQL = "select tablename,'T' from pg_tables where tablename not like 'pg\_%'
+	and tablename not in ('sql_features', 'sql_implementation_info', 'sql_languages',
+	 'sql_packages', 'sql_sizing', 'sql_sizing_profiles')
+	union
+        select viewname,'V' from pg_views where viewname not like 'pg\_%'";
+>>>>>>> forked/LAE_400_PACKAGE
 	//"select tablename from pg_tables where tablename not like 'pg_%' order by 1";
 	var $isoDates = true; // accepts dates in ISO format
 	var $sysDate = "CURRENT_DATE";
@@ -34,6 +42,7 @@ class ADODB_pdo_pgsql extends ADODB_pdo {
 	var $metaColumnsSQL = "SELECT a.attname,t.typname,a.attlen,a.atttypmod,a.attnotnull,a.atthasdef,a.attnum
 		FROM pg_class c, pg_attribute a,pg_type t
 		WHERE relkind in ('r','v') AND (c.relname='%s' or c.relname = lower('%s')) and a.attname not like '....%%'
+<<<<<<< HEAD
 		AND a.attnum > 0 AND a.atttypid = t.oid AND a.attrelid = c.oid ORDER BY a.attnum";
 
 	// used when schema defined
@@ -43,6 +52,17 @@ class ADODB_pdo_pgsql extends ADODB_pdo {
 		and c.relnamespace=n.oid and n.nspname='%s'
 		and a.attname not like '....%%' AND a.attnum > 0
 		AND a.atttypid = t.oid AND a.attrelid = c.oid ORDER BY a.attnum";
+=======
+AND a.attnum > 0 AND a.atttypid = t.oid AND a.attrelid = c.oid ORDER BY a.attnum";
+
+	// used when schema defined
+	var $metaColumnsSQL1 = "SELECT a.attname, t.typname, a.attlen, a.atttypmod, a.attnotnull, a.atthasdef, a.attnum
+FROM pg_class c, pg_attribute a, pg_type t, pg_namespace n
+WHERE relkind in ('r','v') AND (c.relname='%s' or c.relname = lower('%s'))
+ and c.relnamespace=n.oid and n.nspname='%s'
+	and a.attname not like '....%%' AND a.attnum > 0
+	AND a.atttypid = t.oid AND a.attrelid = c.oid ORDER BY a.attnum";
+>>>>>>> forked/LAE_400_PACKAGE
 
 	// get primary key etc -- from Freek Dijkstra
 	var $metaKeySQL = "SELECT ic.relname AS index_name, a.attname AS column_name,i.indisunique AS unique_key, i.indisprimary AS primary_key
@@ -97,18 +117,26 @@ class ADODB_pdo_pgsql extends ADODB_pdo {
 	{
 		$info = $this->ServerInfo();
 		if ($info['version'] >= 7.3) {
+<<<<<<< HEAD
 			$this->metaTablesSQL = "
 select tablename,'T' from pg_tables
 where tablename not like 'pg\_%' and schemaname  not in ( 'pg_catalog','information_schema')
 union
 select viewname,'V' from pg_views
 where viewname not like 'pg\_%'  and schemaname  not in ( 'pg_catalog','information_schema')";
+=======
+	    	$this->metaTablesSQL = "select tablename,'T' from pg_tables where tablename not like 'pg\_%'
+			  and schemaname  not in ( 'pg_catalog','information_schema')
+	union
+        select viewname,'V' from pg_views where viewname not like 'pg\_%'  and schemaname  not in ( 'pg_catalog','information_schema') ";
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 		if ($mask) {
 			$save = $this->metaTablesSQL;
 			$mask = $this->qstr(strtolower($mask));
 			if ($info['version']>=7.3)
 				$this->metaTablesSQL = "
+<<<<<<< HEAD
 select tablename,'T' from pg_tables
 where tablename like $mask and schemaname not in ( 'pg_catalog','information_schema')
 union
@@ -118,6 +146,15 @@ where viewname like $mask and schemaname  not in ( 'pg_catalog','information_sch
 				$this->metaTablesSQL = "
 select tablename,'T' from pg_tables where tablename like $mask
 union
+=======
+select tablename,'T' from pg_tables where tablename like $mask and schemaname not in ( 'pg_catalog','information_schema')
+ union
+select viewname,'V' from pg_views where viewname like $mask and schemaname  not in ( 'pg_catalog','information_schema')  ";
+			else
+				$this->metaTablesSQL = "
+select tablename,'T' from pg_tables where tablename like $mask
+ union
+>>>>>>> forked/LAE_400_PACKAGE
 select viewname,'V' from pg_views where viewname like $mask";
 		}
 		$ret = ADOConnection::MetaTables($ttype,$showSchema);
@@ -301,6 +338,7 @@ select viewname,'V' from pg_views where viewname like $mask";
 		if (!stristr($transaction_mode,'isolation')) $transaction_mode = 'ISOLATION LEVEL '.$transaction_mode;
 		$this->_connectionID->query("SET TRANSACTION ".$transaction_mode);
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Returns a driver-specific format for a bind parameter
@@ -320,4 +358,6 @@ select viewname,'V' from pg_views where viewname like $mask";
 
 		return sprintf(':%s', $name);
 	}
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

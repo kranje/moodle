@@ -34,7 +34,11 @@ $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST)
 
 require_login($course, false, $cm);
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('guestsarenotallowed');
+=======
+    print_error('guestsarenotallowed');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $workshop = $DB->get_record('workshop', array('id' => $cm->instance), '*', MUST_EXIST);
@@ -46,7 +50,11 @@ $PAGE->set_url($workshop->excompare_url($sid, $aid));
 $example    = $workshop->get_example_by_id($sid);
 $assessment = $workshop->get_assessment_by_id($aid);
 if ($assessment->submissionid != $example->id) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidarguments');
+=======
+   print_error('invalidarguments');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $mformassessment = $strategy->get_assessment_form($PAGE->url, 'assessment', $assessment, false);
 if ($refasid = $DB->get_field('workshop_assessments', 'id', array('submissionid' => $example->id, 'weight' => 1))) {
@@ -62,7 +70,11 @@ if ($canmanage) {
 } elseif ($isreviewer and $workshop->assessing_examples_allowed()) {
     // ok you can go
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('nopermissions', 'error', $workshop->view_url(), 'compare example assessment');
+=======
+    print_error('nopermissions', 'error', $workshop->view_url(), 'compare example assessment');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->set_title($workshop->name);

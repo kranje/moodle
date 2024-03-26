@@ -55,6 +55,7 @@ class Dimension
      */
     protected $unit;
 
+<<<<<<< HEAD
     /**
      * Phpstan bug has been fixed; this function allows us to
      * pass Phpstan whether fixed or not.
@@ -71,6 +72,12 @@ class Dimension
         [$size, $unit] = self::stanBugFixed(sscanf($dimension, '%[1234567890.]%s'));
         $unit = strtolower(trim($unit ?? ''));
         $size = (float) $size;
+=======
+    public function __construct(string $dimension)
+    {
+        [$size, $unit] = sscanf($dimension, '%[1234567890.]%s');
+        $unit = strtolower(trim($unit));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // If a UoM is specified, then convert the size to pixels for internal storage
         if (isset(self::ABSOLUTE_UNITS[$unit])) {

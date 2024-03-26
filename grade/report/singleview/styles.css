@@ -1,7 +1,10 @@
 .path-grade-report-singleview div.reporttable {
+<<<<<<< HEAD
     margin: 20px 0 30px 0;
     padding: 10px 10px;
     background-color: #f8f9fa;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     text-align: center;
 }
 
@@ -27,7 +30,11 @@
 }
 
 .path-grade-report-singleview div.reporttable form div {
+<<<<<<< HEAD
     text-align: left;
+=======
+    text-align: center;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .path-grade-report-singleview .singleview_buttons {
@@ -35,6 +42,7 @@
 }
 
 .path-grade-report-singleview div.reporttable h2 {
+<<<<<<< HEAD
     text-align: left;
 }
 
@@ -66,12 +74,22 @@
     background-color: white;
     border-top: none;
     border-bottom: 1px solid #dee2e6;
+=======
+    text-align: center;
+}
+
+.path-grade-report-singleview input[name^="finalgrade"] {
+    width: 50px;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .path-grade-report-singleview .reporttable tbody th,
 .path-grade-report-singleview .reporttable tbody td.range {
     white-space: nowrap;
+<<<<<<< HEAD
     font-weight: normal;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .path-grade-report-singleview .reporttable tbody th > * {
@@ -98,11 +116,16 @@
     width: 100%;
 }
 
+<<<<<<< HEAD
 .path-grade-report-singleview .reporttable .generaltable th,
 .path-grade-report-singleview .reporttable .generaltable td {
     text-align: left;
     vertical-align: middle;
     border: none;
+=======
+.path-grade-report-singleview .reporttable th {
+    text-align: left;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .path-grade-report-singleview div.reporttable form div.singleview_bulk {
@@ -125,6 +148,7 @@
     margin-right: 10px;
 }
 
+<<<<<<< HEAD
 #bulkinsertmodal {
     width: 181px;
     height: 39px;
@@ -132,6 +156,8 @@
     border-radius: 4px;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .path-grade-report-singleview .singleview_bulk > fieldset {
     display: block;
 }
@@ -140,6 +166,7 @@
     margin-bottom: 0.5em;
     text-align: left;
 }
+<<<<<<< HEAD
 
 .searchresultitemscontainer {
     max-height: 150px;
@@ -160,3 +187,5 @@
 .path-grade-report-singleview .reporttable div.courseitem .gradeitemheader {
     font-weight: bold;
 }
+=======
+>>>>>>> forked/LAE_400_PACKAGE

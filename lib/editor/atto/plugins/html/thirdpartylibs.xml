@@ -3,14 +3,21 @@
   <library>
     <location>yui/src/codemirror</location>
     <name>codemirror</name>
+<<<<<<< HEAD
     <description>CodeMirror is a versatile text editor implemented in JavaScript for the browser.</description>
     <version>5.65.9</version>
     <license>MIT</license>
     <repository>https://github.com/codemirror/codemirror5</repository>
+=======
+    <license>MIT</license>
+    <version>5.65.0</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>yui/src/beautify</location>
     <name>jsbeautify</name>
+<<<<<<< HEAD
     <description>Beautify HTML code in Atto.</description>
     <version>1.14.6</version>
     <license>MIT</license>
@@ -18,5 +25,10 @@
     <copyrights>
       <copyright>2007-2018 Einar Lielmanis, Liam Newman, and contributors.</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>1.14.0</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
 </libraries>

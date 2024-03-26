@@ -49,12 +49,20 @@ H5PEditor.language.core = {
   selectFiletoUpload: 'Select file to upload',
   or: 'or',
   enterAudioUrl: 'Enter audio source URL',
+<<<<<<< HEAD
   enterVideoUrl: 'Enter video URL',
+=======
+  enterVideoUrl: 'Enter video source URL or YouTube link',
+>>>>>>> forked/LAE_400_PACKAGE
   enterAudioTitle: 'Paste link or other audio source URL',
   enterVideoTitle: 'Paste YouTube link or other video source URL',
   uploadAudioTitle: 'Upload audio file',
   uploadVideoTitle: 'Upload video file',
+<<<<<<< HEAD
   addVideoDescription: 'H5P supports all external video sources formatted as mp4, webm or ogv, like Vimeo Pro, and has support for YouTube and Panopto links.',
+=======
+  addVideoDescription: 'H5P supports all external video sources formatted as mp4, webm or ogv, like Vimeo Pro, and has support for YouTube links.',
+>>>>>>> forked/LAE_400_PACKAGE
   insert: 'Insert',
   cancel: 'Cancel',
   height: 'height',
@@ -215,6 +223,7 @@ H5PEditor.language.core = {
   unknownLibrary: 'Unfortunately, the selected content type \'%lib\' isn\'t installed on this system.',
   proceedButtonLabel: 'Proceed to save',
   enterFullscreenButtonLabel: 'Enter fullscreen',
+<<<<<<< HEAD
   exitFullscreenButtonLabel: 'Exit fullscreen',
   noContentHeader: 'No Fitting Content?',
   noContentSuggestion: 'Create one yourself!',
@@ -252,4 +261,7 @@ H5PEditor.language.core = {
   a11yTitleShowLabel: 'Show label for AT',
   a11yTitleHideLabel: 'Hide label for AT',
   reuseSuccess: ':title was successfully imported from the H5P Hub.',
+=======
+  exitFullscreenButtonLabel: 'Exit fullscreen'
+>>>>>>> forked/LAE_400_PACKAGE
 };

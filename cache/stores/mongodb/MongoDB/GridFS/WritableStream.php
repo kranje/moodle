@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2016-present MongoDB, Inc.
+=======
+ * Copyright 2016-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,13 +25,20 @@
 
 namespace MongoDB\GridFS;
 
+<<<<<<< HEAD
 use HashContext;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use MongoDB\BSON\Binary;
 use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
 use MongoDB\Exception\InvalidArgumentException;
+<<<<<<< HEAD
 
+=======
+use stdClass;
+>>>>>>> forked/LAE_400_PACKAGE
 use function array_intersect_key;
 use function hash_final;
 use function hash_init;
@@ -66,7 +81,11 @@ class WritableStream
     /** @var array */
     private $file;
 
+<<<<<<< HEAD
     /** @var HashContext|null */
+=======
+    /** @var resource */
+>>>>>>> forked/LAE_400_PACKAGE
     private $hashCtx;
 
     /** @var boolean */
@@ -103,7 +122,11 @@ class WritableStream
      * @param array             $options           Upload options
      * @throws InvalidArgumentException
      */
+<<<<<<< HEAD
     public function __construct(CollectionWrapper $collectionWrapper, string $filename, array $options = [])
+=======
+    public function __construct(CollectionWrapper $collectionWrapper, $filename, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options += [
             '_id' => new ObjectId(),
@@ -146,16 +169,27 @@ class WritableStream
         $this->file = [
             '_id' => $options['_id'],
             'chunkSize' => $this->chunkSize,
+<<<<<<< HEAD
             'filename' => $filename,
+=======
+            'filename' => (string) $filename,
+>>>>>>> forked/LAE_400_PACKAGE
         ] + array_intersect_key($options, ['aliases' => 1, 'contentType' => 1, 'metadata' => 1]);
     }
 
     /**
      * Return internal properties for debugging purposes.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
      */
     public function __debugInfo(): array
+=======
+     * @see http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
+     * @return array
+     */
+    public function __debugInfo()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return [
             'bucketName' => $this->collectionWrapper->getBucketName(),
@@ -167,7 +201,11 @@ class WritableStream
     /**
      * Closes an active stream and flushes all buffered data to GridFS.
      */
+<<<<<<< HEAD
     public function close(): void
+=======
+    public function close()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($this->isClosed) {
             // TODO: Should this be an error condition? e.g. BadMethodCallException
@@ -184,8 +222,15 @@ class WritableStream
 
     /**
      * Return the stream's file document.
+<<<<<<< HEAD
      */
     public function getFile(): object
+=======
+     *
+     * @return stdClass
+     */
+    public function getFile()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return (object) $this->file;
     }
@@ -194,8 +239,15 @@ class WritableStream
      * Return the stream's size in bytes.
      *
      * Note: this value will increase as more data is written to the stream.
+<<<<<<< HEAD
      */
     public function getSize(): int
+=======
+     *
+     * @return integer
+     */
+    public function getSize()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->length + strlen($this->buffer);
     }
@@ -208,8 +260,14 @@ class WritableStream
      * always the end of the stream.
      *
      * @see WritableStream::getSize()
+<<<<<<< HEAD
      */
     public function tell(): int
+=======
+     * @return integer
+     */
+    public function tell()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->getSize();
     }
@@ -221,12 +279,22 @@ class WritableStream
      * which point a chunk document will be inserted and the buffer reset.
      *
      * @param string $data Binary data to write
+<<<<<<< HEAD
      */
     public function writeBytes(string $data): int
     {
         if ($this->isClosed) {
             // TODO: Should this be an error condition? e.g. BadMethodCallException
             return 0;
+=======
+     * @return integer
+     */
+    public function writeBytes($data)
+    {
+        if ($this->isClosed) {
+            // TODO: Should this be an error condition? e.g. BadMethodCallException
+            return;
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $bytesRead = 0;
@@ -244,7 +312,11 @@ class WritableStream
         return $bytesRead;
     }
 
+<<<<<<< HEAD
     private function abort(): void
+=======
+    private function abort()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         try {
             $this->collectionWrapper->deleteChunksByFilesId($this->file['_id']);
@@ -255,15 +327,22 @@ class WritableStream
         $this->isClosed = true;
     }
 
+<<<<<<< HEAD
     /**
      * @return mixed
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     private function fileCollectionInsert()
     {
         $this->file['length'] = $this->length;
         $this->file['uploadDate'] = new UTCDateTime();
 
+<<<<<<< HEAD
         if (! $this->disableMD5 && $this->hashCtx) {
+=======
+        if (! $this->disableMD5) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->file['md5'] = hash_final($this->hashCtx);
         }
 
@@ -278,7 +357,11 @@ class WritableStream
         return $this->file['_id'];
     }
 
+<<<<<<< HEAD
     private function insertChunkFromBuffer(): void
+=======
+    private function insertChunkFromBuffer()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (strlen($this->buffer) == 0) {
             return;
@@ -293,7 +376,11 @@ class WritableStream
             'data' => new Binary($data, Binary::TYPE_GENERIC),
         ];
 
+<<<<<<< HEAD
         if (! $this->disableMD5 && $this->hashCtx) {
+=======
+        if (! $this->disableMD5) {
+>>>>>>> forked/LAE_400_PACKAGE
             hash_update($this->hashCtx, $data);
         }
 

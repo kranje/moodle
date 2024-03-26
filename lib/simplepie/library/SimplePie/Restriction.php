@@ -146,5 +146,8 @@ class SimplePie_Restriction
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Restriction', 'SimplePie\Restriction', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

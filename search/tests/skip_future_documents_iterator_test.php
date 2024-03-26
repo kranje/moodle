@@ -202,7 +202,10 @@ class test_counting_iterator implements \Iterator {
      *
      * @return mixed Can return any type.
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         $this->count++;
         return false;
@@ -220,7 +223,11 @@ class test_counting_iterator implements \Iterator {
     /**
      * Goes on to the next element.
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->pos++;
     }
 
@@ -229,7 +236,10 @@ class test_counting_iterator implements \Iterator {
      *
      * @throws \coding_exception Always
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         throw new \coding_exception('Unsupported');
     }
@@ -239,14 +249,22 @@ class test_counting_iterator implements \Iterator {
      *
      * @return bool True if still valid
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->pos < 3;
     }
 
     /**
      * Rewinds the iterator.
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->pos = 0;
     }
 }

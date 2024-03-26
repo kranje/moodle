@@ -43,7 +43,10 @@ Feature: An admin or teacher sets the post threshold for blocking and warning
     And I am on the "Test forum name" "forum activity" page
     And I click on "Test post subject two" "link"
     And I should not see "Reply"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # Verify that student2 is not affected by the posts made by student1
     And I am on the "Test forum name" "forum activity" page logged in as student2
     And I should see "Add discussion topic"

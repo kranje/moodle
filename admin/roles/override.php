@@ -90,10 +90,18 @@ $title = get_string('overridepermissionsforrole', 'core_role', $a);
 $currenttab = 'permissions';
 
 $PAGE->set_title($title);
+<<<<<<< HEAD
 $PAGE->navbar->add($straction);
 switch ($context->contextlevel) {
     case CONTEXT_SYSTEM:
         throw new \moodle_exception('cannotoverridebaserole', 'error');
+=======
+$PAGE->activityheader->disable();
+$PAGE->navbar->add($straction);
+switch ($context->contextlevel) {
+    case CONTEXT_SYSTEM:
+        print_error('cannotoverridebaserole', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
         break;
     case CONTEXT_USER:
         $fullname = fullname($user, has_capability('moodle/site:viewfullnames', $context));
@@ -124,7 +132,11 @@ if (empty($overridableroles[$roleid])) {
     $a = new stdClass;
     $a->roleid = $roleid;
     $a->context = $contextname;
+<<<<<<< HEAD
     throw new \moodle_exception('cannotoverriderolehere', '', $context->get_url(), $a);
+=======
+    print_error('cannotoverriderolehere', '', $context->get_url(), $a);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // If we are actually overriding a role, create the table object, and save changes if appropriate.

@@ -52,9 +52,13 @@ Feature: In an assignment, teachers grade multiple students on one page
       | student2 | C1 | student |
     And the following config values are set as admin:
       | enableoutcomes | 1 |
+<<<<<<< HEAD
     When I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "More > Outcomes" in the course gradebook
+=======
+    When I am on the "Course 1" "grades > outcomes" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Manage outcomes"
     And I press "Add a new outcome"
     And I follow "Add a new scale"
@@ -62,8 +66,12 @@ Feature: In an assignment, teachers grade multiple students on one page
       | Name | 1337dom scale |
       | Scale | Noob, Nub, 1337, HaXor |
     And I press "Save changes"
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I navigate to "More > Outcomes" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > outcomes" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Manage outcomes"
     And I press "Add a new outcome"
     And I set the following fields to these values:
@@ -78,19 +86,28 @@ Feature: In an assignment, teachers grade multiple students on one page
       | assignsubmission_onlinetext_enabled | 1 |
       | assignsubmission_file_enabled | 0 |
       | M8d skillZ! | 1 |
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     And I press "Add submission"
     And I set the following fields to these values:
       | Online text | I'm the student1 submission |
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student2
     When I press "Add submission"
     And I set the following fields to these values:
       | Online text | I'm the student2 submission |
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as teacher1
     And I follow "View all submissions"
     And I click on "Grade" "link" in the "Student 1" "table_row"
@@ -105,21 +122,30 @@ Feature: In an assignment, teachers grade multiple students on one page
     And I press "Save all quick grading changes"
     And I should see "The grade changes were saved"
     And I press "Continue"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     And I should see "I'm the teacher first feedback"
     And I should see "60.0"
     And I follow "Grades" in the user menu
     And I click on "Course 1" "link" in the "region-main" "region"
     And I should see "1337"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student2
     And I should not see "I'm the teacher first feedback"
     And I should not see "60.0"
     And I follow "Grades" in the user menu
     And I click on "Course 1" "link" in the "region-main" "region"
     And I should not see "1337"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as teacher1
     And I follow "View all submissions"
     And I click on "Hide User picture" "link"
@@ -138,14 +164,20 @@ Feature: In an assignment, teachers grade multiple students on one page
     And I press "Save all quick grading changes"
     And I should see "The grade changes were saved"
     And I press "Continue"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     And I should see "I'm the teacher first feedback"
     And I should see "60.0"
     And I follow "Grades" in the user menu
     And I click on "Course 1" "link" in the "region-main" "region"
     And I should see "1337"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student2
     And I should not see "I'm the teacher first feedback"
     And I should not see "60.0"

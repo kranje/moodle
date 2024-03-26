@@ -7,12 +7,20 @@ use Matrix\Div0Exception as MatrixDiv0Exception;
 use Matrix\Exception as MatrixException;
 use Matrix\Matrix;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 
 class MatrixFunctions
 {
     /**
+<<<<<<< HEAD
      * Convert parameter to Matrix.
+=======
+     * Convert parameter to matrix.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param mixed $matrixValues A matrix of values
      */
@@ -31,7 +39,11 @@ class MatrixFunctions
             $column = 0;
             foreach ($matrixRow as $matrixCell) {
                 if ((is_string($matrixCell)) || ($matrixCell === null)) {
+<<<<<<< HEAD
                     throw new Exception(ExcelError::VALUE());
+=======
+                    throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 $matrixData[$row][$column] = $matrixCell;
                 ++$column;
@@ -43,6 +55,7 @@ class MatrixFunctions
     }
 
     /**
+<<<<<<< HEAD
      * SEQUENCE.
      *
      * Generates a list of sequential numbers in an array.
@@ -84,6 +97,8 @@ class MatrixFunctions
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * MDETERM.
      *
      * Returns the matrix determinant of an array.
@@ -102,7 +117,11 @@ class MatrixFunctions
 
             return $matrix->determinant();
         } catch (MatrixException $ex) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -127,9 +146,15 @@ class MatrixFunctions
 
             return $matrix->inverse()->toArray();
         } catch (MatrixDiv0Exception $e) {
+<<<<<<< HEAD
             return ExcelError::NAN();
         } catch (MatrixException $e) {
             return ExcelError::VALUE();
+=======
+            return Functions::NAN();
+        } catch (MatrixException $e) {
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -151,7 +176,11 @@ class MatrixFunctions
 
             return $matrixA->multiply($matrixB)->toArray();
         } catch (MatrixException $ex) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -168,7 +197,11 @@ class MatrixFunctions
     {
         try {
             $dimension = (int) Helpers::validateNumericNullBool($dimension);
+<<<<<<< HEAD
             Helpers::validatePositive($dimension, ExcelError::VALUE());
+=======
+            Helpers::validatePositive($dimension, Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
             $matrix = Builder::createIdentityMatrix($dimension, 0)->toArray();
 
             return $matrix;

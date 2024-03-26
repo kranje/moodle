@@ -14,8 +14,11 @@ namespace ScssPhp\ScssPhp\Logger;
 
 /**
  * A logger that silently ignores all messages.
+<<<<<<< HEAD
  *
  * @final
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class QuietLogger implements LoggerInterface
 {

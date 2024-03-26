@@ -71,7 +71,11 @@ class search_token {
   // Need to think about this some more.
 
   function sanitize($userstring){
+<<<<<<< HEAD
     return htmlspecialchars($userstring, ENT_COMPAT);
+=======
+    return htmlspecialchars($userstring);
+>>>>>>> forked/LAE_400_PACKAGE
   }
   function getValue(){
     return $this->value;

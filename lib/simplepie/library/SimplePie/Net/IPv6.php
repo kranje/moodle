@@ -267,5 +267,8 @@ class SimplePie_Net_IPv6
 		return self::check_ipv6($ip);
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Net_IPv6', 'SimplePie\Net\IPv6', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

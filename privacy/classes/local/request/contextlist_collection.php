@@ -117,7 +117,10 @@ class contextlist_collection implements \Iterator, \Countable {
      *
      * @return  \context
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         $key = $this->get_key_from_position();
         return $this->contextlists[$key];
@@ -128,7 +131,10 @@ class contextlist_collection implements \Iterator, \Countable {
      *
      * @return  mixed
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->get_key_from_position();
     }
@@ -136,7 +142,11 @@ class contextlist_collection implements \Iterator, \Countable {
     /**
      * Move to the next context in the list.
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         ++$this->iteratorposition;
     }
 
@@ -145,7 +155,11 @@ class contextlist_collection implements \Iterator, \Countable {
      *
      * @return  bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return ($this->iteratorposition < count($this->contextlists));
     }
 
@@ -155,7 +169,11 @@ class contextlist_collection implements \Iterator, \Countable {
      * The list of contexts is uniqued during the rewind.
      * The rewind is called at the start of most iterations.
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->iteratorposition = 0;
     }
 
@@ -176,7 +194,11 @@ class contextlist_collection implements \Iterator, \Countable {
     /**
      * Return the number of contexts.
      */
+<<<<<<< HEAD
     public function count(): int {
+=======
+    public function count() {
+>>>>>>> forked/LAE_400_PACKAGE
         return count($this->contextlists);
     }
 }

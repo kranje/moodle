@@ -13,7 +13,10 @@ Our changes:
 * added round, ceil and floor functions.
 * EvalMath::EvalMath() changed to EvalMath::__construct() and there is a new EvalMath::EvalMath
   function to maintain backwards compatibility
+<<<<<<< HEAD
 * Ensure a string is passed to preg_match in EvalMath::nfx.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 To see all changes diff against version 1.1, available from:
 http://www.phpclasses.org/browse/package/2695.html
@@ -28,4 +31,8 @@ Changes by Stefan Erlachner, Thomas Niedermaier (MDL-64414):
 * add function or:
 e.g. if (or(condition_1, condition_2, ... condition_n))
 * add function and:
+<<<<<<< HEAD
 e.g. if (and(condition_1, condition_2, ... condition_n))
+=======
+e.g. if (and(condition_1, condition_2, ... condition_n))
+>>>>>>> forked/LAE_400_PACKAGE

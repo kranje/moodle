@@ -18,6 +18,12 @@ declare(strict_types=1);
 
 namespace core_reportbuilder\local\systemreports;
 
+<<<<<<< HEAD
+=======
+use context_system;
+use core_reportbuilder\local\helpers\audience;
+use core_reportbuilder\local\helpers\database;
+>>>>>>> forked/LAE_400_PACKAGE
 use html_writer;
 use lang_string;
 use moodle_url;
@@ -30,7 +36,10 @@ use core_reportbuilder\local\entities\user;
 use core_reportbuilder\local\filters\date;
 use core_reportbuilder\local\filters\text;
 use core_reportbuilder\local\filters\select;
+<<<<<<< HEAD
 use core_reportbuilder\local\helpers\audience;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\helpers\format;
 use core_reportbuilder\local\report\action;
 use core_reportbuilder\local\report\column;
@@ -67,9 +76,17 @@ class reports_list extends system_report {
         // Select fields required for actions, permission checks, and row class callbacks.
         $this->add_base_fields('rb.id, rb.name, rb.source, rb.type, rb.usercreated, rb.contextid');
 
+<<<<<<< HEAD
         // Limit the returned list to those reports the current user can access.
         [$where, $params] = audience::user_reports_list_access_sql('rb');
         $this->add_base_condition_sql($where, $params);
+=======
+        // If user can't view all reports, limit the returned list to those reports they can see.
+        [$where, $params] = $this->filter_by_allowed_reports_sql();
+        if (!empty($where)) {
+            $this->add_base_condition_sql($where, $params);
+        }
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Join user entity for "User modified" column.
         $entityuser = new user();
@@ -122,6 +139,7 @@ class reports_list extends system_report {
             $this->get_report_entity_name()
         ))
             ->set_type(column::TYPE_TEXT)
+<<<<<<< HEAD
             // We need enough fields to re-create the persistent and pass to the editable component.
             ->add_fields(implode(', ', [
                 "{$tablealias}.id",
@@ -135,6 +153,16 @@ class reports_list extends system_report {
                 global $PAGE;
 
                 $editable = new report_name_editable(0, new report(0, $report));
+=======
+            ->add_fields("{$tablealias}.name, {$tablealias}.id")
+            ->set_is_sortable(true)
+            ->add_callback(function(string $value, stdClass $row) {
+                global $PAGE;
+
+                $reportid = (int) $row->id;
+
+                $editable = new report_name_editable($reportid);
+>>>>>>> forked/LAE_400_PACKAGE
                 return $editable->render($PAGE->get_renderer('core'));
             })
         );
@@ -306,4 +334,56 @@ class reports_list extends system_report {
     private function report_source_valid(string $source): bool {
         return manager::report_source_exists($source, datasource::class) && manager::report_source_available($source);
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Filters the list of reports to return only the ones the user has access to
+     *
+     * - A user with 'editall' capability will have access to all reports.
+     * - A user with 'edit' capability will have access to:
+     *      - Those reports this user has created.
+     *      - Those reports this user is in audience of.
+     * - A user with 'view' capability will have access to:
+     *      - Those reports this user is in audience of.
+     *
+     * @return array
+     */
+    private function filter_by_allowed_reports_sql(): array {
+        global $DB, $USER;
+
+        // If user can't view all reports, limit the returned list to those reports they can see.
+        if (!has_capability('moodle/reportbuilder:editall', context_system::instance())) {
+            $reports = audience::user_reports_list();
+
+            if (has_capability('moodle/reportbuilder:edit', context_system::instance())) {
+                // User can always see own reports and also those reports user is in audience of.
+                $paramuserid = database::generate_param_name();
+
+                if (empty($reports)) {
+                    return ["rb.usercreated = :{$paramuserid}", [$paramuserid => $USER->id]];
+                }
+
+                $prefix = database::generate_param_name() . '_';
+                [$where, $params] = $DB->get_in_or_equal($reports, SQL_PARAMS_NAMED, $prefix);
+
+                $params = array_merge($params, [$paramuserid => $USER->id]);
+
+                return ["(rb.usercreated = :{$paramuserid} OR rb.id {$where})", $params];
+
+            }
+
+            // User has view capability. User can only see those reports user is in audience of.
+            if (empty($reports)) {
+                return ['1=2', []];
+            }
+
+            $prefix = database::generate_param_name() . '_';
+            [$where, $params] = $DB->get_in_or_equal($reports, SQL_PARAMS_NAMED, $prefix);
+            return ["rb.id {$where}", $params];
+        }
+
+        return ['', []];
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 6.5.0 (2022-08-12)
 	- encodeUrlQuery takes into account the port (#493)
 	- Fixing undefined offset error in writeHTML() when last DOM element ha…
@@ -117,11 +118,15 @@
 	- Fix unsupported operand types error when codepoints arrays are merged
 
 6.2.25 (2018-09-23)
+=======
+6.2.25
+>>>>>>> forked/LAE_400_PACKAGE
 	- Fix support for image URLs.
 
 6.2.24
 	- Support remote urls when checking if file exists.
 
+<<<<<<< HEAD
 6.2.23 (2018-09-22)
 	- Simplify file_exists function.
 
@@ -135,6 +140,15 @@
 	- Fix for security vulnerability: Using the phar:// wrapper it was possible to trigger the unserialization of user provided data.
 
 6.2.19 (2018-09-14)
+=======
+6.2.23
+	- Simplify file_exists function.
+
+6.2.22
+	- Fix for security vulnerability: Using the phar:// wrapper it was possible to trigger the unserialization of user provided data.
+
+6.2.19
+>>>>>>> forked/LAE_400_PACKAGE
 	- Merge various fixes for PHP 7.3 compatibility and security.
 
 6.2.13 (2016-06-10)

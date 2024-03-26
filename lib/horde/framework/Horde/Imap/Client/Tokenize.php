@@ -220,7 +220,10 @@ class Horde_Imap_Client_Tokenize implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->_current;
@@ -228,7 +231,10 @@ class Horde_Imap_Client_Tokenize implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return $this->_key;
@@ -238,7 +244,10 @@ class Horde_Imap_Client_Tokenize implements Iterator
      * @return mixed  Either a string, boolean (true for open paren, false for
      *                close paren/EOS), Horde_Stream object, or null.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         $level = isset($this->_nextModify['level'])
@@ -398,7 +407,10 @@ class Horde_Imap_Client_Tokenize implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         $this->_stream->rewind();
@@ -409,7 +421,10 @@ class Horde_Imap_Client_Tokenize implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return ($this->_level !== false);

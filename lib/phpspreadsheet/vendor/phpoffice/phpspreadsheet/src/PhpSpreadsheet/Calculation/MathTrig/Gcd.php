@@ -4,7 +4,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Gcd
 {
@@ -58,7 +61,11 @@ class Gcd
         }
 
         if (count($arrayArgs) <= 0) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $gcd = (int) array_pop($arrayArgs);
         do {

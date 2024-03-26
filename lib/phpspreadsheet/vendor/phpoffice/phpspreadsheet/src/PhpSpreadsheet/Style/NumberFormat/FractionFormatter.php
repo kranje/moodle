@@ -26,12 +26,18 @@ class FractionFormatter extends BaseFormatter
         $decimalLength = strlen($decimalPart);
         $decimalDivisor = 10 ** $decimalLength;
 
+<<<<<<< HEAD
         /** @var float */
         $GCD = MathTrig\Gcd::evaluate($decimalPart, $decimalDivisor);
         /** @var float */
         $decimalPartx = $decimalPart;
 
         $adjustedDecimalPart = $decimalPartx / $GCD;
+=======
+        $GCD = MathTrig\Gcd::evaluate($decimalPart, $decimalDivisor);
+
+        $adjustedDecimalPart = $decimalPart / $GCD;
+>>>>>>> forked/LAE_400_PACKAGE
         $adjustedDecimalDivisor = $decimalDivisor / $GCD;
 
         if ((strpos($format, '0') !== false)) {

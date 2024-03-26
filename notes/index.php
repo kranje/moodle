@@ -30,7 +30,11 @@ $filtertype   = optional_param('filtertype', '', PARAM_ALPHA);
 $filterselect = optional_param('filterselect', 0, PARAM_INT);
 
 if (empty($CFG->enablenotes)) {
+<<<<<<< HEAD
     throw new \moodle_exception('notesdisabled', 'notes');
+=======
+    print_error('notesdisabled', 'notes');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $url = new moodle_url('/notes/index.php');

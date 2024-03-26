@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <XMLDB PATH="admin/tool/monitor/db" VERSION="20220530" COMMENT="XMLDB file for Moodle tool/monitor"
+=======
+<XMLDB PATH="admin/tool/monitor/db" VERSION="20141103" COMMENT="XMLDB file for Moodle tool/monitor"
+>>>>>>> forked/LAE_400_PACKAGE
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
@@ -76,9 +80,12 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+<<<<<<< HEAD
         <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
         <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
         <KEY NAME="contextinstanceid" TYPE="foreign" FIELDS="contextinstanceid" REFTABLE="context" REFFIELDS="instanceid"/>
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       </KEYS>
     </TABLE>
   </TABLES>

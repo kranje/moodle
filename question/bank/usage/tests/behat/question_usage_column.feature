@@ -35,6 +35,10 @@ Feature: Use the qbank plugin manager page for question usage
     And I should see "Test questions"
     And I should see "0" on the usage column
     When I click "0" on the usage column
+<<<<<<< HEAD
     Then I should see "Version 1"
+=======
+    Then I should see "Question usage"
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Close" "button" in the ".modal-dialog" "css_element"
     And I should see "0" on the usage column

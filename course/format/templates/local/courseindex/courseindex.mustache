@@ -99,13 +99,21 @@
     }
 
 }}
+<<<<<<< HEAD
 <div id="{{uniqid}}-course-index" class="courseindex {{#editmode}} editing {{/editmode}}" role="tree">
+=======
+<div id="course-index" class="courseindex {{#editmode}} editing {{/editmode}}" role="tree">
+>>>>>>> forked/LAE_400_PACKAGE
     {{#sections}}
     {{> core_courseformat/local/courseindex/section }}
     {{/sections}}
 </div>
 {{#js}}
 require(['core_courseformat/local/courseindex/courseindex'], function(component) {
+<<<<<<< HEAD
     component.init('{{uniqid}}-course-index');
+=======
+    component.init('course-index');
+>>>>>>> forked/LAE_400_PACKAGE
 });
 {{/js}}

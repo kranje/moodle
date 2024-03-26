@@ -66,7 +66,11 @@ if ($courseid != SITEID && !empty($courseid)) {
 require_login($course, false);
 
 if (!calendar_user_can_add_event($course)) {
+<<<<<<< HEAD
     throw new \moodle_exception('errorcannotimport', 'calendar');
+=======
+    print_error('errorcannotimport', 'calendar');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $PAGE->navbar->add(get_string('managesubscriptions', 'calendar'), $PAGE->url);
 

@@ -30,6 +30,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['language'] = 'ቋንቋ';
+<<<<<<< HEAD
 $string['next'] = 'ቀፃሊ';
+=======
+$string['next'] = 'ዝቕጽል';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['previous'] = 'ዝሐለፈ';
 $string['reload'] = 'እንደገና ንምፅዓን';

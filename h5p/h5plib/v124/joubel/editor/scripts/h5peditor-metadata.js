@@ -136,6 +136,7 @@ H5PEditor.MetadataForm = (function (EventDispatcher, $, metadataSemantics) {
     };
 
     /**
+<<<<<<< HEAD
      * Toggle visibility of accessibility title field
      */
     const toggleA11yTitle = function () {
@@ -184,6 +185,8 @@ H5PEditor.MetadataForm = (function (EventDispatcher, $, metadataSemantics) {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @private
      */
     const setupSourceField = function () {
@@ -279,7 +282,10 @@ H5PEditor.MetadataForm = (function (EventDispatcher, $, metadataSemantics) {
       semantics.push(getExtraTitleFieldSemantics());
     }
     semantics.push(findField('title'));
+<<<<<<< HEAD
     semantics.push(findField('a11yTitle'));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     semantics.push(findField('license'));
     semantics.push(findField('licenseVersion'));
     semantics.push(findField('yearFrom'));
@@ -300,7 +306,10 @@ H5PEditor.MetadataForm = (function (EventDispatcher, $, metadataSemantics) {
     setupTitleField();
     setupLicenseField();
     setupSourceField();
+<<<<<<< HEAD
     setupA11yTitleField();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     // Append the metadata author list widget (Not the same type of widgets as the rest of editor fields)
     const metadataAuthorWidget = H5PEditor.metadataAuthorWidget(findField('authors').field.fields, params, $fieldsWrapper, self);

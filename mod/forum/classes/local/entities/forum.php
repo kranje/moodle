@@ -99,8 +99,13 @@ class forum {
     private $completionreplies;
     /** @var int $completionposts Completion posts */
     private $completionposts;
+<<<<<<< HEAD
     /** @var bool $displaywordcounts Should display word counts in posts */
     private $displaywordcounts;
+=======
+    /** @var bool $displaywordcount Should display word counts in posts */
+    private $displaywordcount;
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var bool $lockdiscussionafter Timestamp after which discussions should be locked */
     private $lockdiscussionafter;
     /** @var int $duedate Timestamp that represents the due date for forum posts */

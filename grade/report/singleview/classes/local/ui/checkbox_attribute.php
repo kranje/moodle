@@ -39,9 +39,12 @@ class checkbox_attribute extends element {
     /** @var bool $ischecked Is it checked? */
     private $ischecked;
 
+<<<<<<< HEAD
     /** @var bool If this is a read-only input. */
     private bool $isreadonly;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Constructor
      *
@@ -49,12 +52,19 @@ class checkbox_attribute extends element {
      * @param string $label The label for the form element
      * @param bool $ischecked Is this thing on?
      * @param int $locked Is this element locked either 0 or a time.
+<<<<<<< HEAD
      * @param bool $isreadonly If this is a read-only input.
      */
     public function __construct(string $name, string $label, bool $ischecked = false, int $locked=0, bool $isreadonly = false) {
         $this->ischecked = $ischecked;
         $this->locked = $locked;
         $this->isreadonly = $isreadonly;
+=======
+     */
+    public function __construct($name, $label, $ischecked = false, $locked=0) {
+        $this->ischecked = $ischecked;
+        $this->locked = $locked;
+>>>>>>> forked/LAE_400_PACKAGE
         parent::__construct($name, 1, $label);
     }
 
@@ -62,7 +72,11 @@ class checkbox_attribute extends element {
      * Nasty function allowing checkbox logic to escape the class.
      * @return bool
      */
+<<<<<<< HEAD
     public function is_checkbox(): bool {
+=======
+    public function is_checkbox() {
+>>>>>>> forked/LAE_400_PACKAGE
         return true;
     }
 
@@ -71,25 +85,42 @@ class checkbox_attribute extends element {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function html(): string {
         global $OUTPUT;
 
         $attributes = [
+=======
+    public function html() {
+
+        $attributes = array(
+>>>>>>> forked/LAE_400_PACKAGE
             'type' => 'checkbox',
             'name' => $this->name,
             'value' => 1,
             'id' => $this->name
+<<<<<<< HEAD
         ];
+=======
+        );
+>>>>>>> forked/LAE_400_PACKAGE
 
         // UCSB fixed user should not be able to override locked grade.
         if ( $this->locked) {
             $attributes['disabled'] = 'DISABLED';
         }
 
+<<<<<<< HEAD
         $hidden = [
             'type' => 'hidden',
             'name' => 'old' . $this->name
         ];
+=======
+        $hidden = array(
+            'type' => 'hidden',
+            'name' => 'old' . $this->name
+        );
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($this->ischecked) {
             $attributes['checked'] = 'CHECKED';
@@ -101,6 +132,7 @@ class checkbox_attribute extends element {
             $type = "exclude";
         }
 
+<<<<<<< HEAD
         if (!$this->isreadonly) {
             return (
                 html_writer::tag('label',
@@ -115,5 +147,14 @@ class checkbox_attribute extends element {
         } else {
             return '';
         }
+=======
+        return (
+            html_writer::tag('label',
+                             get_string($type . 'for', 'gradereport_singleview', $this->label),
+                             array('for' => $this->name, 'class' => 'accesshide')) .
+            html_writer::empty_tag('input', $attributes) .
+            html_writer::empty_tag('input', $hidden)
+        );
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

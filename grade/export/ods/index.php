@@ -24,7 +24,11 @@ $id = required_param('id', PARAM_INT); // course id
 $PAGE->set_url('/grade/export/ods/index.php', array('id'=>$id));
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);
@@ -33,7 +37,11 @@ $context = context_course::instance($id);
 require_capability('moodle/grade:export', $context);
 require_capability('gradeexport/ods:view', $context);
 
+<<<<<<< HEAD
 $actionbar = new \core_grades\output\export_action_bar($context, null, 'ods');
+=======
+$actionbar = new \core_grades\output\export_action_bar($context, $PAGE->url, 'ods');
+>>>>>>> forked/LAE_400_PACKAGE
 print_grade_page_head($COURSE->id, 'export', 'ods',
     get_string('exportto', 'grades') . ' ' . get_string('pluginname', 'gradeexport_ods'),
     false, false, true, null, null, null, $actionbar);

@@ -117,9 +117,12 @@ class auth_plugin_base {
      */
     protected $errorlogtag = '';
 
+<<<<<<< HEAD
     /** @var array Stores extra information available to the logged in event. */
     protected $extrauserinfo = [];
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * This is the primary method that is used by the authenticate_user_login()
      * function in moodlelib.php.
@@ -136,7 +139,11 @@ class auth_plugin_base {
      * @return bool Authentication success or failure.
      */
     function user_login($username, $password) {
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'user_login()' );
+=======
+        print_error('mustbeoveride', 'debug', '', 'user_login()' );
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -305,7 +312,11 @@ class auth_plugin_base {
      */
     function user_signup($user, $notify=true) {
         //override when can signup
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'user_signup()' );
+=======
+        print_error('mustbeoveride', 'debug', '', 'user_signup()' );
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -338,7 +349,11 @@ class auth_plugin_base {
      */
     function user_confirm($username, $confirmsecret) {
         //override when can confirm
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'user_confirm()' );
+=======
+        print_error('mustbeoveride', 'debug', '', 'user_confirm()' );
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -654,7 +669,11 @@ class auth_plugin_base {
         $user = $DB->get_record('user', array('username' => $username, 'mnethostid' => $CFG->mnet_localhost_id));
         if (empty($user)) { // Trouble.
             error_log($this->errorlogtag . get_string('auth_usernotexist', 'auth', $username));
+<<<<<<< HEAD
             throw new \moodle_exception('auth_usernotexist', 'auth', '', $username);
+=======
+            print_error('auth_usernotexist', 'auth', '', $username);
+>>>>>>> forked/LAE_400_PACKAGE
             die;
         }
 
@@ -810,6 +829,7 @@ class auth_plugin_base {
             'message' => $message
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Set extra user information.
@@ -829,6 +849,8 @@ class auth_plugin_base {
     public function get_extrauserinfo(): array {
         return $this->extrauserinfo;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**

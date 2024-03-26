@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Size
 {
@@ -31,15 +34,24 @@ class Size
             $mArgs = self::filter($aArgs);
             $count = Counts::COUNT($mArgs);
             --$entry;
+<<<<<<< HEAD
             if ($count === 0 || $entry < 0 || $entry >= $count) {
                 return ExcelError::NAN();
+=======
+            if (($entry < 0) || ($entry >= $count) || ($count == 0)) {
+                return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             rsort($mArgs);
 
             return $mArgs[$entry];
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -67,15 +79,24 @@ class Size
             $mArgs = self::filter($aArgs);
             $count = Counts::COUNT($mArgs);
             --$entry;
+<<<<<<< HEAD
             if ($count === 0 || $entry < 0 || $entry >= $count) {
                 return ExcelError::NAN();
+=======
+            if (($entry < 0) || ($entry >= $count) || ($count == 0)) {
+                return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             sort($mArgs);
 
             return $mArgs[$entry];
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

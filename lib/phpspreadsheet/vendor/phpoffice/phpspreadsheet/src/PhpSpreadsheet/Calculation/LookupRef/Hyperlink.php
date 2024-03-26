@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 
 class Hyperlink
@@ -26,7 +29,11 @@ class Hyperlink
         $displayName = ($displayName === null) ? '' : Functions::flattenSingleValue($displayName);
 
         if ((!is_object($cell)) || (trim($linkURL) == '')) {
+<<<<<<< HEAD
             return ExcelError::REF();
+=======
+            return Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ((is_object($displayName)) || trim($displayName) == '') {

@@ -81,8 +81,12 @@ class question_category_list extends moodle_list {
      * @param \context $context
      */
     public function __construct($type='ul', $attributes='', $editable = false, $pageurl=null,
+<<<<<<< HEAD
                                 $page = 0, $pageparamname = 'page',
                                 $itemsperpage = DEFAULT_QUESTIONS_PER_PAGE, $context = null) {
+=======
+                                $page = 0, $pageparamname = 'page', $itemsperpage = 20, $context = null) {
+>>>>>>> forked/LAE_400_PACKAGE
         parent::__construct('ul', '', $editable, $pageurl, $page, 'cpage', $itemsperpage);
         $this->context = $context;
     }

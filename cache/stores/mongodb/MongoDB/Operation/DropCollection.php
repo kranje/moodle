@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,15 +27,24 @@ namespace MongoDB\Operation;
 
 use MongoDB\Driver\Command;
 use MongoDB\Driver\Exception\CommandException;
+<<<<<<< HEAD
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use MongoDB\Driver\Server;
 use MongoDB\Driver\Session;
 use MongoDB\Driver\WriteConcern;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnsupportedException;
+<<<<<<< HEAD
 
 use function current;
 use function is_array;
+=======
+use function current;
+use function is_array;
+use function MongoDB\server_supports_feature;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Operation for the drop command.
@@ -35,7 +52,11 @@ use function is_array;
  * @api
  * @see \MongoDB\Collection::drop()
  * @see \MongoDB\Database::dropCollection()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/drop/
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/drop/
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class DropCollection implements Executable
 {
@@ -43,6 +64,15 @@ class DropCollection implements Executable
     private static $errorCodeNamespaceNotFound = 26;
 
     /** @var string */
+<<<<<<< HEAD
+=======
+    private static $errorMessageNamespaceNotFound = 'ns not found';
+
+    /** @var integer */
+    private static $wireVersionForWriteConcern = 5;
+
+    /** @var string */
+>>>>>>> forked/LAE_400_PACKAGE
     private $databaseName;
 
     /** @var string */
@@ -56,23 +86,40 @@ class DropCollection implements Executable
      *
      * Supported options:
      *
+<<<<<<< HEAD
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    This is not supported for servers versions < 4.4.
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+=======
+     *  * session (MongoDB\Driver\Session): Client session.
+     *
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * typeMap (array): Type map for BSON deserialization. This will be used
      *    for the returned command result document.
      *
      *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern.
      *
+<<<<<<< HEAD
+=======
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $databaseName   Database name
      * @param string $collectionName Collection name
      * @param array  $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, string $collectionName, array $options = [])
+=======
+    public function __construct($databaseName, $collectionName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (isset($options['session']) && ! $options['session'] instanceof Session) {
             throw InvalidArgumentException::invalidType('"session" option', $options['session'], Session::class);
@@ -90,8 +137,13 @@ class DropCollection implements Executable
             unset($options['writeConcern']);
         }
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = (string) $collectionName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->options = $options;
     }
 
@@ -99,17 +151,31 @@ class DropCollection implements Executable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return array|object Command result document
      * @throws UnsupportedException if write concern is used and unsupported
+=======
+     * @param Server $server
+     * @return array|object Command result document
+     * @throws UnsupportedException if writeConcern is used and unsupported
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server)
     {
+<<<<<<< HEAD
+=======
+        if (isset($this->options['writeConcern']) && ! server_supports_feature($server, self::$wireVersionForWriteConcern)) {
+            throw UnsupportedException::writeConcernNotSupported();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $inTransaction = isset($this->options['session']) && $this->options['session']->isInTransaction();
         if ($inTransaction && isset($this->options['writeConcern'])) {
             throw UnsupportedException::writeConcernNotSupportedInTransaction();
         }
 
+<<<<<<< HEAD
         try {
             $cursor = $server->executeWriteCommand($this->databaseName, $this->createCommand(), $this->createOptions());
         } catch (CommandException $e) {
@@ -117,6 +183,18 @@ class DropCollection implements Executable
              * Check for an error code and return the command reply instead of
              * throwing. */
             if ($e->getCode() === self::$errorCodeNamespaceNotFound) {
+=======
+        $command = new Command(['drop' => $this->collectionName]);
+
+        try {
+            $cursor = $server->executeWriteCommand($this->databaseName, $command, $this->createOptions());
+        } catch (CommandException $e) {
+            /* The server may return an error if the collection does not exist.
+             * Check for an error code (or message for pre-3.2 servers) and
+             * return the command reply instead of throwing. */
+            if ($e->getCode() === self::$errorCodeNamespaceNotFound ||
+                $e->getMessage() === self::$errorMessageNamespaceNotFound) {
+>>>>>>> forked/LAE_400_PACKAGE
                 return $e->getResultDocument();
             }
 
@@ -131,6 +209,7 @@ class DropCollection implements Executable
     }
 
     /**
+<<<<<<< HEAD
      * Create the drop command.
      */
     private function createCommand(): Command
@@ -150,6 +229,14 @@ class DropCollection implements Executable
      * @see https://php.net/manual/en/mongodb-driver-server.executewritecommand.php
      */
     private function createOptions(): array
+=======
+     * Create options for executing the command.
+     *
+     * @see http://php.net/manual/en/mongodb-driver-server.executewritecommand.php
+     * @return array
+     */
+    private function createOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 

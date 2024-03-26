@@ -50,8 +50,13 @@ abstract class question_base extends base {
      * @return \moodle_url
      */
     public function get_url() {
+<<<<<<< HEAD
         if ($this->courseid) {
             $cat = $this->other['categoryid'] . ',' . $this->contextid;
+=======
+        $cat = $this->other['categoryid'] . ',' . $this->contextid;
+        if ($this->courseid) {
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->contextlevel == CONTEXT_MODULE) {
                 return new \moodle_url('/question/edit.php',
                         ['cmid' => $this->contextinstanceid, 'cat' => $cat, 'lastchanged' => $this->objectid]);
@@ -60,8 +65,13 @@ abstract class question_base extends base {
                     ['courseid' => $this->courseid, 'cat' => $cat, 'lastchanged' => $this->objectid]);
         }
         // Lets try viewing from the frontpage for contexts above course.
+<<<<<<< HEAD
         return new \moodle_url('/question/bank/managecategories/category.php',
                 ['courseid' => SITEID, 'edit' => $this->other['categoryid'], 'lastchanged' => $this->objectid]);
+=======
+        return new \moodle_url('/question/edit.php',
+                ['courseid' => SITEID, 'edit' => $cat, 'lastchanged' => $this->objectid]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

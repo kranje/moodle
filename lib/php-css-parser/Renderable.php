@@ -2,6 +2,7 @@
 
 namespace Sabberworm\CSS;
 
+<<<<<<< HEAD
 interface Renderable
 {
     /**
@@ -19,3 +20,10 @@ interface Renderable
      */
     public function getLineNo();
 }
+=======
+interface Renderable {
+	public function __toString();
+	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat);
+	public function getLineNo();
+}
+>>>>>>> forked/LAE_400_PACKAGE

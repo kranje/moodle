@@ -87,14 +87,22 @@ class creole_parser extends wiki_markup_parser {
      */
 
     protected function before_parsing() {
+<<<<<<< HEAD
         $this->string = htmlspecialchars($this->string, ENT_COMPAT);
+=======
+        $this->string = htmlspecialchars($this->string);
+>>>>>>> forked/LAE_400_PACKAGE
         parent::before_parsing();
     }
 
     public function get_section($header, $text, $clean = false) {
         // The requested header is likely to have been passed to htmlspecialchars in
         // self::before_parsing(), therefore we should decode it when looking for it.
+<<<<<<< HEAD
         return parent::get_section(htmlspecialchars_decode($header, ENT_COMPAT), $text, $clean);
+=======
+        return parent::get_section(htmlspecialchars_decode($header), $text, $clean);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     protected function header_block_rule($match) {

@@ -69,6 +69,7 @@ class percent extends base {
      * @param mixed $value
      * @param array $values
      * @param array $callbacks
+<<<<<<< HEAD
      * @param int $columntype
      * @return string
      */
@@ -77,5 +78,14 @@ class percent extends base {
             return '';
         }
         return format::percent((float) reset($values));
+=======
+     * @return mixed
+     */
+    public static function format_value($value, array $values, array $callbacks) {
+        if (reset($values) === null) {
+            return '';
+        }
+        return format::percent(reset($values));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

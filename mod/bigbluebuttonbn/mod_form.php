@@ -24,7 +24,10 @@
  * @author    Fred Dixon  (ffdixon [at] blindsidenetworks [dt] com)
  */
 
+<<<<<<< HEAD
 use mod_bigbluebuttonbn\instance;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use mod_bigbluebuttonbn\local\helpers\roles;
 use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
 
@@ -81,8 +84,11 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
         $this->bigbluebuttonbn_mform_add_block_preuploads($mform, $cfg);
         // Add block 'Participant List'.
         $this->bigbluebuttonbn_mform_add_block_user_role_mapping($mform, $participantlist);
+<<<<<<< HEAD
         // Add block 'Guest Access'.
         $this->bigbluebuttonbn_mform_add_block_guest_access($mform, $cfg, $this->current);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Add block 'Schedule'.
         $this->bigbluebuttonbn_mform_add_block_schedule($mform, $this->current);
         // Add standard elements, common to all modules.
@@ -456,6 +462,18 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
         $this->bigbluebuttonbn_mform_add_element($mform, $field['type'], $field['name'], $field['data_type'],
                 $field['description_key'], $cfg['disablenote_default']);
 
+<<<<<<< HEAD
+=======
+        $field = ['type' => 'hidden', 'name' => 'lockonjoin', 'data_type' => PARAM_INT, 'description_key' => null];
+        if ($cfg['lockonjoin_editable']) {
+            $field['type'] = 'checkbox';
+            $field['description_key'] = 'mod_form_field_lockonjoin';
+            $locksettings = true;
+        }
+        $this->bigbluebuttonbn_mform_add_element($mform, $field['type'], $field['name'], $field['data_type'],
+                $field['description_key'], $cfg['lockonjoin_default']);
+
+>>>>>>> forked/LAE_400_PACKAGE
         $field = ['type' => 'hidden', 'name' => 'hideuserlist', 'data_type' => PARAM_INT, 'description_key' => null];
         if ($cfg['hideuserlist_editable']) {
             $field['type'] = 'checkbox';
@@ -601,6 +619,7 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
     }
 
     /**
+<<<<<<< HEAD
      * Function to add guest acces settings to the instance
      *
      * @param MoodleQuickForm $mform
@@ -637,6 +656,8 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Function for showing the block for integration with the calendar.
      *
      * @param MoodleQuickForm $mform

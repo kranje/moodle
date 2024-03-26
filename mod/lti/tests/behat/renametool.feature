@@ -5,6 +5,7 @@ Feature: Rename external tools via inline editing
   I need to be able to rename the LTI tool and have it's name change in the gradebook
 
   Background:
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email                |
       | teacher1 | Terry1    | Teacher1 | teacher1@example.com |
@@ -22,6 +23,20 @@ Feature: Rename external tools via inline editing
     And I add a "External tool" to section "1" and I fill the form with:
       | Activity name | Test tool activity 1 |
     And I set the field "Edit title" in the "li#section-1" "css_element" to "Test tool activity renamed"
+=======
+    Given the following "courses" exist:
+      | fullname | shortname | category |
+      | Course 1 | C1 | 0 |
+    And the following "activities" exist:
+      | activity | course | name                 |
+      | lti      | C1     | Test tool activity 1 |
+
+  @javascript
+  Scenario: Add a tool and inline edit
+    When I log in as "admin"
+    And I am on "Course 1" course homepage with editing mode on
+    And I set the field "Edit title" in the "Test tool activity 1" "activity" to "Test tool activity renamed"
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Setup > Gradebook setup" in the course gradebook
     Then I should not see "Test tool activity 1"
     And I should see "Test tool activity renamed"

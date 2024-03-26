@@ -6,6 +6,7 @@ use Packback\Lti1p3\Interfaces\IServiceRequest;
 
 class ServiceRequest implements IServiceRequest
 {
+<<<<<<< HEAD
     // Request methods
     public const METHOD_GET = 'GET';
     public const METHOD_POST = 'POST';
@@ -34,15 +35,27 @@ class ServiceRequest implements IServiceRequest
     private $type;
     private $body;
     private $payload;
+=======
+    private $method;
+    private $url;
+    private $body;
+>>>>>>> forked/LAE_400_PACKAGE
     private $accessToken;
     private $contentType = 'application/json';
     private $accept = 'application/json';
 
+<<<<<<< HEAD
     public function __construct(string $method, string $url, $type = self::UNSUPPORTED)
     {
         $this->method = $method;
         $this->url = $url;
         $this->type = $type;
+=======
+    public function __construct(string $method, string $url)
+    {
+        $this->method = $method;
+        $this->url = $url;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function getMethod(): string
@@ -57,10 +70,13 @@ class ServiceRequest implements IServiceRequest
 
     public function getPayload(): array
     {
+<<<<<<< HEAD
         if (isset($this->payload)) {
             return $this->payload;
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $payload = [
             'headers' => $this->getHeaders(),
         ];
@@ -94,6 +110,7 @@ class ServiceRequest implements IServiceRequest
         return $this;
     }
 
+<<<<<<< HEAD
     public function setPayload(array $payload): IServiceRequest
     {
         $this->payload = $payload;
@@ -101,6 +118,8 @@ class ServiceRequest implements IServiceRequest
         return $this;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function setAccept(string $accept): IServiceRequest
     {
         $this->accept = $accept;
@@ -115,6 +134,7 @@ class ServiceRequest implements IServiceRequest
         return $this;
     }
 
+<<<<<<< HEAD
     public function getErrorPrefix(): string
     {
         $defaultMessage = 'Logging request data:';
@@ -136,6 +156,8 @@ class ServiceRequest implements IServiceRequest
         return $errorMessages[$this->type] ?? $defaultMessage;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     private function getHeaders(): array
     {
         $headers = [
@@ -146,8 +168,12 @@ class ServiceRequest implements IServiceRequest
             $headers['Authorization'] = $this->accessToken;
         }
 
+<<<<<<< HEAD
         // Include Content-Type for POST and PUT requests
         if (in_array($this->getMethod(), [ServiceRequest::METHOD_POST, ServiceRequest::METHOD_PUT])) {
+=======
+        if ($this->getMethod() === LtiServiceConnector::METHOD_POST) {
+>>>>>>> forked/LAE_400_PACKAGE
             $headers['Content-Type'] = $this->contentType;
         }
 

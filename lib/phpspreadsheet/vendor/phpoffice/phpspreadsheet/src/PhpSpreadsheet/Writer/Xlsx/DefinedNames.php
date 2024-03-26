@@ -118,7 +118,11 @@ class DefinedNames
             $range[1] = Coordinate::absoluteCoordinate($range[1]);
             $range = implode(':', $range);
 
+<<<<<<< HEAD
             $this->objWriter->writeRawData('\'' . str_replace("'", "''", $worksheet->getTitle()) . '\'!' . $range);
+=======
+            $this->objWriter->writeRawData('\'' . str_replace("'", "''", $worksheet->getTitle() ?? '') . '\'!' . $range);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $this->objWriter->endElement();
         }

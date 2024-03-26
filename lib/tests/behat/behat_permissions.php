@@ -47,6 +47,7 @@ class behat_permissions extends behat_base {
      * @param TableNode $table
      */
     public function i_set_the_following_system_permissions_of_role($rolename, $table) {
+<<<<<<< HEAD
 
         $parentnodes = get_string('users', 'admin') . ' > ' .
             get_string('permissions', 'role');
@@ -63,6 +64,49 @@ class behat_permissions extends behat_base {
         $this->execute("behat_permissions::i_fill_the_capabilities_form_with_the_following_permissions", $table);
 
         $this->execute('behat_forms::press_button', get_string('savechanges'));
+=======
+        // Applied in the System context.
+        $context = \context_system::instance();
+
+        // Translate the specified rolename into a role.
+        $rolenames = role_get_names($context);
+        $matched = array_filter($rolenames, function($role) use ($rolename) {
+            return ($role->localname === $rolename) || ($role->shortname === $rolename) || ($role->description === $rolename);
+        });
+
+        if (count($matched) === 0) {
+            throw new ExpectationException("Unable to find a role with name '{$rolename}'", $this->getSession());
+        } else if (count($matched) > 1) {
+            throw new ExpectationException("Multiple roles matched '{$rolename}'", $this->getSession());
+        }
+
+        $role = reset($matched);
+
+        $permissionmap = [
+            get_string('inherit', 'role') => 'inherit',
+            get_string('allow', 'role') => 'allow',
+            get_string('prevent', 'role') => 'prevent',
+            get_string('prohibit', 'role') => 'prohibit',
+        ];
+
+        $columns = ['role'];
+        $newtabledata = [$role->shortname];
+        foreach ($table as $data) {
+            $columns[] = $data['capability'];
+            $newtabledata[] = $permissionmap[$data['permission']];
+        }
+
+        $this->execute(
+            'behat_data_generators::the_following_entities_exist',
+            [
+                'role capabilities',
+                new TableNode([
+                    0 => $columns,
+                    1 => $newtabledata,
+                ])
+            ]
+        );
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

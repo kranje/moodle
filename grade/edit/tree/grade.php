@@ -45,7 +45,11 @@ if ($userid !== 0) {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->set_pagelayout('incourse');
@@ -62,27 +66,47 @@ $returnurl = $gpr->get_return_url($CFG->wwwroot.'/grade/report/index.php?id='.$c
 // security checks!
 if (!empty($id)) {
     if (!$grade = $DB->get_record('grade_grades', array('id' => $id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidgroupid');
     }
 
     if (!empty($itemid) and $itemid != $grade->itemid) {
         throw new \moodle_exception('invaliditemid');
+=======
+        print_error('invalidgroupid');
+    }
+
+    if (!empty($itemid) and $itemid != $grade->itemid) {
+        print_error('invaliditemid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $itemid = $grade->itemid;
 
     if (!empty($userid) and $userid != $grade->userid) {
+<<<<<<< HEAD
         throw new \moodle_exception('invaliduser');
+=======
+        print_error('invaliduser');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $userid = $grade->userid;
 
     unset($grade);
 
 } else if (empty($userid) or empty($itemid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('missinguseranditemid');
 }
 
 if (!$grade_item = grade_item::fetch(array('id'=>$itemid, 'courseid'=>$courseid))) {
     throw new \moodle_exception('cannotfindgradeitem');
+=======
+    print_error('missinguseranditemid');
+}
+
+if (!$grade_item = grade_item::fetch(array('id'=>$itemid, 'courseid'=>$courseid))) {
+    print_error('cannotfindgradeitem');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // now verify grading user has access to all groups or is member of the same group when separate groups used in course
@@ -95,10 +119,17 @@ if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('
             }
         }
         if (!$ok) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotgradeuser');
         }
     } else {
         throw new \moodle_exception('cannotgradeuser');
+=======
+            print_error('cannotgradeuser');
+        }
+    } else {
+        print_error('cannotgradeuser');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

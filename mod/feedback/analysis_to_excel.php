@@ -49,7 +49,11 @@ ob_end_clean();
 // Get the questions (item-names).
 $feedbackstructure = new mod_feedback_structure($feedback, $cm, $course->id);
 if (!$items = $feedbackstructure->get_items(true)) {
+<<<<<<< HEAD
     throw new \moodle_exception('no_items_available_yet', 'feedback', $cm->url);
+=======
+    print_error('no_items_available_yet', 'feedback', $cm->url);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $mygroupid = groups_get_activity_group($cm);

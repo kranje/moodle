@@ -142,9 +142,12 @@ implements IteratorAggregate
         }
 
         /* Ensure no null characters exist in header data. */
+<<<<<<< HEAD
 		if ($data === null) {
 			return '';
 		}
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return str_replace("\0", '', $data);
     }
 
@@ -176,7 +179,10 @@ implements IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
 	#[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_values);

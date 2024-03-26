@@ -229,7 +229,11 @@ class Datamatrix {
 	/**
 	 * This is the class constructor.
 	 * Creates a datamatrix object
+<<<<<<< HEAD
 	 * @param string $code Code to represent using Datamatrix.
+=======
+	 * @param $code (string) Code to represent using Datamatrix.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @public
 	 */
 	public function __construct($code) {
@@ -355,11 +359,19 @@ class Datamatrix {
 
 	/**
 	 * Product of two numbers in a Power-of-Two Galois Field
+<<<<<<< HEAD
 	 * @param int $a first number to multiply.
 	 * @param int $b second number to multiply.
 	 * @param array $log Log table.
 	 * @param array $alog Anti-Log table.
 	 * @param int $gf Number of Factors of the Reed-Solomon polynomial.
+=======
+	 * @param $a (int) first number to multiply.
+	 * @param $b (int) second number to multiply.
+	 * @param $log (array) Log table.
+	 * @param $alog (array) Anti-Log table.
+	 * @param $gf (array) Number of Factors of the Reed-Solomon polynomial.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return int product
 	 * @protected
 	 */
@@ -372,12 +384,21 @@ class Datamatrix {
 
 	/**
 	 * Add error correction codewords to data codewords array (ANNEX E).
+<<<<<<< HEAD
 	 * @param array $wd Array of datacodewords.
 	 * @param int $nb Number of blocks.
 	 * @param int $nd Number of data codewords per block.
 	 * @param int $nc Number of correction codewords per block.
 	 * @param int $gf numner of fields on log/antilog table (power of 2).
 	 * @param int $pp The value of its prime modulus polynomial (301 for ECC200).
+=======
+	 * @param $wd (array) Array of datacodewords.
+	 * @param $nb (int) Number of blocks.
+	 * @param $nd (int) Number of data codewords per block.
+	 * @param $nc (int) Number of correction codewords per block.
+	 * @param $gf (int) numner of fields on log/antilog table (power of 2).
+	 * @param $pp (int) The value of its prime modulus polynomial (301 for ECC200).
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array data codewords + error codewords
 	 * @protected
 	 */
@@ -438,9 +459,15 @@ class Datamatrix {
 
 	/**
 	 * Return the 253-state codeword
+<<<<<<< HEAD
 	 * @param int $cwpad Pad codeword.
 	 * @param int $cwpos Number of data codewords from the beginning of encoded data.
 	 * @return int pad codeword
+=======
+	 * @param $cwpad (int) Pad codeword.
+	 * @param $cwpos (int) Number of data codewords from the beginning of encoded data.
+	 * @return pad codeword
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @protected
 	 */
 	protected function get253StateCodeword($cwpad, $cwpos) {
@@ -453,9 +480,15 @@ class Datamatrix {
 
 	/**
 	 * Return the 255-state codeword
+<<<<<<< HEAD
 	 * @param int $cwpad Pad codeword.
 	 * @param int $cwpos Number of data codewords from the beginning of encoded data.
 	 * @return int pad codeword
+=======
+	 * @param $cwpad (int) Pad codeword.
+	 * @param $cwpos (int) Number of data codewords from the beginning of encoded data.
+	 * @return pad codeword
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @protected
 	 */
 	protected function get255StateCodeword($cwpad, $cwpos) {
@@ -468,8 +501,13 @@ class Datamatrix {
 
 	/**
 	 * Returns true if the char belongs to the selected mode
+<<<<<<< HEAD
 	 * @param int $chr Character (byte) to check.
 	 * @param int $mode Current encoding mode.
+=======
+	 * @param $chr (int) Character (byte) to check.
+	 * @param $mode (int) Current encoding mode.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return boolean true if the char is of the selected mode.
 	 * @protected
 	 */
@@ -514,9 +552,15 @@ class Datamatrix {
 
 	/**
 	 * The look-ahead test scans the data to be encoded to find the best mode (Annex P - steps from J to S).
+<<<<<<< HEAD
 	 * @param string $data data to encode
 	 * @param int $pos current position
 	 * @param int $mode current encoding mode
+=======
+	 * @param $data (string) data to encode
+	 * @param $pos (int) current position
+	 * @param $mode (int) current encoding mode
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return int encoding mode
 	 * @protected
 	 */
@@ -646,8 +690,13 @@ class Datamatrix {
 
 	/**
 	 * Get the switching codeword to a new encoding mode (latch codeword)
+<<<<<<< HEAD
 	 * @param int $mode New encoding mode.
 	 * @return int Switch codeword.
+=======
+	 * @param $mode (int) New encoding mode.
+	 * @return (int) Switch codeword.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @protected
 	 */
 	protected function getSwitchEncodingCodeword($mode) {
@@ -685,8 +734,13 @@ class Datamatrix {
 
 	/**
 	 * Choose the minimum matrix size and return the max number of data codewords.
+<<<<<<< HEAD
 	 * @param int $numcw Number of current codewords.
 	 * @return int number of data codewords in matrix
+=======
+	 * @param $numcw (int) Number of current codewords.
+	 * @return number of data codewords in matrix
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @protected
 	 */
 	protected function getMaxDataCodewords($numcw) {
@@ -700,7 +754,11 @@ class Datamatrix {
 
 	/**
 	 * Get high level encoding using the minimum symbol data characters for ECC 200
+<<<<<<< HEAD
 	 * @param string $data data to encode
+=======
+	 * @param $data (string) data to encode
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array of codewords
 	 * @protected
 	 */
@@ -970,6 +1028,7 @@ class Datamatrix {
 	/**
 	 * Places "chr+bit" with appropriate wrapping within array[].
 	 * (Annex F - ECC 200 symbol character placement)
+<<<<<<< HEAD
 	 * @param array $marr Array of symbols.
 	 * @param int $nrow Number of rows.
 	 * @param int $ncol Number of columns.
@@ -977,6 +1036,15 @@ class Datamatrix {
 	 * @param int $col Column number.
 	 * @param int $chr Char byte.
 	 * @param int $bit Bit.
+=======
+	 * @param $marr (array) Array of symbols.
+	 * @param $nrow (int) Number of rows.
+	 * @param $ncol (int) Number of columns.
+	 * @param $row (int) Row number.
+	 * @param $col (int) Column number.
+	 * @param $chr (int) Char byte.
+	 * @param $bit (int) Bit.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array
 	 * @protected
 	 */
@@ -996,12 +1064,21 @@ class Datamatrix {
 	/**
 	 * Places the 8 bits of a utah-shaped symbol character.
 	 * (Annex F - ECC 200 symbol character placement)
+<<<<<<< HEAD
 	 * @param array $marr Array of symbols.
 	 * @param int $nrow Number of rows.
 	 * @param int $ncol Number of columns.
 	 * @param int $row Row number.
 	 * @param int $col Column number.
 	 * @param int $chr Char byte.
+=======
+	 * @param $marr (array) Array of symbols.
+	 * @param $nrow (int) Number of rows.
+	 * @param $ncol (int) Number of columns.
+	 * @param $row (int) Row number.
+	 * @param $col (int) Column number.
+	 * @param $chr (int) Char byte.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array
 	 * @protected
 	 */
@@ -1020,10 +1097,17 @@ class Datamatrix {
 	/**
 	 * Places the 8 bits of the first special corner case.
 	 * (Annex F - ECC 200 symbol character placement)
+<<<<<<< HEAD
 	 * @param array $marr Array of symbols.
 	 * @param int $nrow Number of rows.
 	 * @param int $ncol Number of columns.
 	 * @param int $chr Char byte.
+=======
+	 * @param $marr (array) Array of symbols.
+	 * @param $nrow (int) Number of rows.
+	 * @param $ncol (int) Number of columns.
+	 * @param $chr (int) Char byte.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array
 	 * @protected
 	 */
@@ -1042,10 +1126,17 @@ class Datamatrix {
 	/**
 	 * Places the 8 bits of the second special corner case.
 	 * (Annex F - ECC 200 symbol character placement)
+<<<<<<< HEAD
 	 * @param array $marr Array of symbols.
 	 * @param int $nrow Number of rows.
 	 * @param int $ncol Number of columns.
 	 * @param int $chr Char byte.
+=======
+	 * @param $marr (array) Array of symbols.
+	 * @param $nrow (int) Number of rows.
+	 * @param $ncol (int) Number of columns.
+	 * @param $chr (int) Char byte.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array
 	 * @protected
 	 */
@@ -1064,10 +1155,17 @@ class Datamatrix {
 	/**
 	 * Places the 8 bits of the third special corner case.
 	 * (Annex F - ECC 200 symbol character placement)
+<<<<<<< HEAD
 	 * @param array $marr Array of symbols.
 	 * @param int $nrow Number of rows.
 	 * @param int $ncol Number of columns.
 	 * @param int $chr Char byte.
+=======
+	 * @param $marr (array) Array of symbols.
+	 * @param $nrow (int) Number of rows.
+	 * @param $ncol (int) Number of columns.
+	 * @param $chr (int) Char byte.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array
 	 * @protected
 	 */
@@ -1086,10 +1184,17 @@ class Datamatrix {
 	/**
 	 * Places the 8 bits of the fourth special corner case.
 	 * (Annex F - ECC 200 symbol character placement)
+<<<<<<< HEAD
 	 * @param array $marr Array of symbols.
 	 * @param int $nrow Number of rows.
 	 * @param int $ncol Number of columns.
 	 * @param int $chr Char byte.
+=======
+	 * @param $marr (array) Array of symbols.
+	 * @param $nrow (int) Number of rows.
+	 * @param $ncol (int) Number of columns.
+	 * @param $chr (int) Char byte.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array
 	 * @protected
 	 */
@@ -1108,8 +1213,13 @@ class Datamatrix {
 	/**
 	 * Build a placement map.
 	 * (Annex F - ECC 200 symbol character placement)
+<<<<<<< HEAD
 	 * @param int $nrow Number of rows.
 	 * @param int $ncol Number of columns.
+=======
+	 * @param $nrow (int) Number of rows.
+	 * @param $ncol (int) Number of columns.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array
 	 * @protected
 	 */

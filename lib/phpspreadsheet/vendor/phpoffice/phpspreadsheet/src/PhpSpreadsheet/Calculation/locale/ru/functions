@@ -177,7 +177,10 @@ SYD = АСЧ
 TBILLEQ = РАВНОКЧЕК
 TBILLPRICE = ЦЕНАКЧЕК
 TBILLYIELD = ДОХОДКЧЕК
+<<<<<<< HEAD
 USDOLLAR = ДОЛЛСША
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 VDB = ПУО
 XIRR = ЧИСТВНДОХ
 XNPV = ЧИСТНЗ
@@ -232,7 +235,10 @@ AREAS = ОБЛАСТИ
 CHOOSE = ВЫБОР
 COLUMN = СТОЛБЕЦ
 COLUMNS = ЧИСЛСТОЛБ
+<<<<<<< HEAD
 FILTER = ФИЛЬТР
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 FORMULATEXT = Ф.ТЕКСТ
 GETPIVOTDATA = ПОЛУЧИТЬ.ДАННЫЕ.СВОДНОЙ.ТАБЛИЦЫ
 HLOOKUP = ГПР
@@ -245,6 +251,7 @@ OFFSET = СМЕЩ
 ROW = СТРОКА
 ROWS = ЧСТРОК
 RTD = ДРВ
+<<<<<<< HEAD
 SORT = СОРТ
 SORTBY = СОРТПО
 TRANSPOSE = ТРАНСП
@@ -252,6 +259,10 @@ UNIQUE = УНИК
 VLOOKUP = ВПР
 XLOOKUP = ПРОСМОТРX
 XMATCH = ПОИСКПОЗX
+=======
+TRANSPOSE = ТРАНСП
+VLOOKUP = ВПР
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Математические и тригонометрические функции (Math & Trig Functions)
@@ -309,7 +320,10 @@ PRODUCT = ПРОИЗВЕД
 QUOTIENT = ЧАСТНОЕ
 RADIANS = РАДИАНЫ
 RAND = СЛЧИС
+<<<<<<< HEAD
 RANDARRAY = СЛУЧМАССИВ
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 RANDBETWEEN = СЛУЧМЕЖДУ
 ROMAN = РИМСКОЕ
 ROUND = ОКРУГЛ
@@ -320,7 +334,10 @@ ROUNDUP = ОКРУГЛВВЕРХ
 SEC = SEC
 SECH = SECH
 SERIESSUM = РЯД.СУММ
+<<<<<<< HEAD
 SEQUENCE = ПОСЛЕДОВ
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 SIGN = ЗНАК
 SIN = SIN
 SINH = SINH
@@ -456,12 +473,16 @@ Z.TEST = Z.ТЕСТ
 ##
 ## Текстовые функции (Text Functions)
 ##
+<<<<<<< HEAD
 ARRAYTOTEXT = МАССИВВТЕКСТ
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 BAHTTEXT = БАТТЕКСТ
 CHAR = СИМВОЛ
 CLEAN = ПЕЧСИМВ
 CODE = КОДСИМВ
 CONCAT = СЦЕП
+<<<<<<< HEAD
 DBCS = БДЦС
 DOLLAR = РУБЛЬ
 EXACT = СОВПАД
@@ -476,16 +497,33 @@ LENB = ДЛИНБ
 LOWER = СТРОЧН
 MID = ПСТР
 MIDB = ПСТРБ
+=======
+DOLLAR = РУБЛЬ
+EXACT = СОВПАД
+FIND = НАЙТИ
+FIXED = ФИКСИРОВАННЫЙ
+ISTHAIDIGIT = TAYRAKAMIYSA
+LEFT = ЛЕВСИМВ
+LEN = ДЛСТР
+LOWER = СТРОЧН
+MID = ПСТР
+>>>>>>> forked/LAE_400_PACKAGE
 NUMBERSTRING = СТРОКАЧИСЕЛ
 NUMBERVALUE = ЧЗНАЧ
 PROPER = ПРОПНАЧ
 REPLACE = ЗАМЕНИТЬ
+<<<<<<< HEAD
 REPLACEB = ЗАМЕНИТЬБ
 REPT = ПОВТОР
 RIGHT = ПРАВСИМВ
 RIGHTB = ПРАВБ
 SEARCH = ПОИСК
 SEARCHB = ПОИСКБ
+=======
+REPT = ПОВТОР
+RIGHT = ПРАВСИМВ
+SEARCH = ПОИСК
+>>>>>>> forked/LAE_400_PACKAGE
 SUBSTITUTE = ПОДСТАВИТЬ
 T = Т
 TEXT = ТЕКСТ
@@ -499,7 +537,10 @@ UNICHAR = ЮНИСИМВ
 UNICODE = UNICODE
 UPPER = ПРОПИСН
 VALUE = ЗНАЧЕН
+<<<<<<< HEAD
 VALUETOTEXT = ЗНАЧЕНИЕВТЕКСТ
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Веб-функции (Web Functions)

@@ -20,10 +20,17 @@ Feature: Inline editing H5P content in mod_forum
       | student1 | C1 | student        |
     And the following "contentbank content" exist:
       | contextlevel | reference | contenttype     | user     | contentname        | filepath                                  |
+<<<<<<< HEAD
       | Course       | C1        | contenttype_h5p | admin    | Greeting card      | /h5p/tests/fixtures/greeting-card-887.h5p |
     And the following "activities" exist:
       | activity | name       | intro      | introformat | course | content  | contentformat | idnumber |
       | forum    | ForumName1 | PageDesc1  | 1           | C1     | H5Ptest  | 1             | 1        |
+=======
+      | Course       | C1        | contenttype_h5p | admin    | Greeting card      | /h5p/tests/fixtures/greeting-card.h5p     |
+    And the following "activities" exist:
+      | activity | name       | introformat | course | content  | contentformat | idnumber |
+      | forum    | ForumName1 | 1           | C1     | H5Ptest  | 1             | 1        |
+>>>>>>> forked/LAE_400_PACKAGE
     And the "displayh5p" filter is "on"
     # Override this capability to let teachers and students to Turn editing on.
     And the following "permission overrides" exist:
@@ -33,10 +40,15 @@ Feature: Inline editing H5P content in mod_forum
 
   @javascript @repository_contentbank
   Scenario: Edit H5P content from a forum intro using copy to content bank file
+<<<<<<< HEAD
     Given I am on the "C1" "Course" page logged in as "admin"
     # Add H5P content to the forum description.
     And I am on the "ForumName1" "forum activity" page
     And I navigate to "Settings" in current page administration
+=======
+    Given I am on the "ForumName1" "forum activity editing" page logged in as admin
+    # Add H5P content to the forum description.
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Insert H5P" "button" in the "#fitem_id_introeditor" "css_element"
     And I click on "Browse repositories..." "button" in the "Insert H5P" "dialogue"
     And I select "Content bank" repository in file picker
@@ -63,24 +75,42 @@ Feature: Inline editing H5P content in mod_forum
     And I log out
     # Check teacher2 (non-editing teacher) can't see the Edit button, because she can't edit the forum activity.
     And I log in as "teacher2"
+<<<<<<< HEAD
     And I turn editing mode on
     And I am on "Course 1" course homepage
+=======
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "ForumName1" "forum activity" page
     And I should not see "Edit H5P content"
     And I log out
     # Check student1 can't see the Edit button.
     And I log in as "student1"
+<<<<<<< HEAD
     And I turn editing mode on
     And I am on "Course 1" course homepage
+=======
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "ForumName1" "forum activity" page
     And I should not see "Edit H5P content"
 
   @javascript @repository_contentbank
   Scenario: Edit H5P content from a forum post
+<<<<<<< HEAD
     Given I am on the "C1" "Course" page logged in as "admin"
     # Add H5P content to a forum post as admin.
     And I am on the "ForumName1" "forum activity" page
     And I click on "Add discussion topic" "link"
+=======
+    Given the following "mod_forum > discussions" exist:
+      | user     | forum  | name                | message             |
+      | admin    | 1      | Forum post by admin | Forum post by admin |
+    Given I am on the "ForumName1" "forum activity" page logged in as admin
+    And I follow "Forum post by admin"
+    And I click on "Edit" "link"
+    # Add H5P content to a forum post as admin.
+>>>>>>> forked/LAE_400_PACKAGE
     And I set the following fields to these values:
       | Subject | Forum post by admin |
     And I click on "Insert H5P" "button" in the "#fitem_id_message" "css_element"
@@ -89,8 +119,12 @@ Feature: Inline editing H5P content in mod_forum
     And I click on "Greeting card" "file" in repository content area
     And I click on "Select this file" "button"
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
+<<<<<<< HEAD
     And I press "Post to forum"
     And I follow "Forum post by admin"
+=======
+    And I press "Save changes"
+>>>>>>> forked/LAE_400_PACKAGE
     And I switch to "h5p-iframe" class iframe
     And I switch to "h5p-iframe" class iframe
     And I should see "Hello world!"
@@ -111,16 +145,24 @@ Feature: Inline editing H5P content in mod_forum
     And I log out
     # Check teacher2 (non-editing teacher) can see the Edit button because she can edit the post too.
     And I log in as "teacher2"
+<<<<<<< HEAD
     And I turn editing mode on
     And I am on "Course 1" course homepage
+=======
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "ForumName1" "forum activity" page
     And I follow "Forum post by admin"
     And I should see "Edit H5P content"
     And I log out
     # Check student1 can't see the Edit button.
     And I log in as "student1"
+<<<<<<< HEAD
     And I turn editing mode on
     And I am on "Course 1" course homepage
+=======
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "ForumName1" "forum activity" page
     And I follow "Forum post by admin"
     And I should not see "Edit H5P content"

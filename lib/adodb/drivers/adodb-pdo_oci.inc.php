@@ -75,6 +75,7 @@ class ADODB_pdo_oci extends ADODB_pdo_base {
 		$retarr = array();
 		while (!$rs->EOF) { //print_r($rs->fields);
 			$fld = new ADOFieldObject();
+<<<<<<< HEAD
 			$fld->name = $rs->fields[0];
 			$fld->type = $rs->fields[1];
 			$fld->max_length = $rs->fields[2];
@@ -84,6 +85,17 @@ class ADODB_pdo_oci extends ADODB_pdo_base {
 				$fld->max_length = $rs->fields[4];
 			}
 			$fld->not_null = (strncmp($rs->fields[5], 'NOT',3) === 0);
+=======
+	   		$fld->name = $rs->fields[0];
+	   		$fld->type = $rs->fields[1];
+	   		$fld->max_length = $rs->fields[2];
+			$fld->scale = $rs->fields[3];
+			if ($rs->fields[1] == 'NUMBER' && $rs->fields[3] == 0) {
+				$fld->type ='INT';
+	     		$fld->max_length = $rs->fields[4];
+	    	}
+		   	$fld->not_null = (strncmp($rs->fields[5], 'NOT',3) === 0);
+>>>>>>> forked/LAE_400_PACKAGE
 			$fld->binary = (strpos($fld->type,'BLOB') !== false);
 			$fld->default_value = $rs->fields[6];
 
@@ -98,6 +110,7 @@ class ADODB_pdo_oci extends ADODB_pdo_base {
 			return $retarr;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * @param bool $auto_commit
 	 * @return void
@@ -119,4 +132,14 @@ class ADODB_pdo_oci extends ADODB_pdo_base {
 	{
 		return sprintf(':%s', $name);
 	}
+=======
+    /**
+     * @param bool $auto_commit
+     * @return void
+     */
+    function SetAutoCommit($auto_commit)
+    {
+        $this->_connectionID->setAttribute(PDO::ATTR_AUTOCOMMIT, $auto_commit);
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -196,7 +196,10 @@ class Horde_Imap_Client_Ids_Map implements Countable, IteratorAggregate, Seriali
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->_ids);
@@ -206,7 +209,10 @@ class Horde_Imap_Client_Ids_Map implements Countable, IteratorAggregate, Seriali
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_ids);
@@ -214,6 +220,7 @@ class Horde_Imap_Client_Ids_Map implements Countable, IteratorAggregate, Seriali
 
     /* Serializable methods. */
 
+<<<<<<< HEAD
     public function serialize()
     {
         return serialize($this->__serialize());
@@ -231,20 +238,39 @@ class Horde_Imap_Client_Ids_Map implements Countable, IteratorAggregate, Seriali
     /**
      */
     public function __serialize()
+=======
+    /**
+     */
+    public function serialize()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         /* Sort before storing; provides more compressible representation. */
         $this->sort();
 
+<<<<<<< HEAD
         return [
             strval(new Horde_Imap_Client_Ids(array_keys($this->_ids))),
             strval(new Horde_Imap_Client_Ids(array_values($this->_ids)))
         ];
+=======
+        return json_encode(array(
+            strval(new Horde_Imap_Client_Ids(array_keys($this->_ids))),
+            strval(new Horde_Imap_Client_Ids(array_values($this->_ids)))
+        ));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
+<<<<<<< HEAD
     public function __unserialize($data)
     {
+=======
+    public function unserialize($data)
+    {
+        $data = json_decode($data, true);
+
+>>>>>>> forked/LAE_400_PACKAGE
         $keys = new Horde_Imap_Client_Ids($data[0]);
         $vals = new Horde_Imap_Client_Ids($data[1]);
         $this->_ids = array_combine($keys->ids, $vals->ids);

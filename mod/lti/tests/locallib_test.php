@@ -67,6 +67,7 @@ require_once($CFG->dirroot . '/mod/lti/tests/mod_lti_testcase.php');
  */
 class locallib_test extends mod_lti_testcase {
 
+<<<<<<< HEAD
     /**
      * @covers ::lti_split_parameters()
      *
@@ -80,6 +81,8 @@ class locallib_test extends mod_lti_testcase {
         $this->assertEquals(lti_split_parameters("a=1\r\nb=2"), array('a' => '1', 'b' => '2'));
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function test_split_custom_parameters() {
         $this->resetAfterTest();
 
@@ -631,7 +634,10 @@ class locallib_test extends mod_lti_testcase {
             'basic-lti-launch-request' => 'LtiResourceLinkRequest',
             'ContentItemSelectionRequest' => 'LtiDeepLinkingRequest',
             'LtiDeepLinkingResponse' => 'ContentItemSelection',
+<<<<<<< HEAD
             'LtiSubmissionReviewRequest' => 'LtiSubmissionReviewRequest'
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
 
         $this->assertEquals($mapping, lti_get_jwt_message_type_mapping());
@@ -1019,12 +1025,15 @@ class locallib_test extends mod_lti_testcase {
                 'claim' => 'lis_result_sourcedid',
                 'isarray' => false
             ],
+<<<<<<< HEAD
             'for_user_id' => [
                 'suffix' => '',
                 'group' => 'for_user',
                 'claim' => 'user_id',
                 'isarray' => false
             ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
         $actual = lti_get_jwt_claim_mapping();
         $this->assertEquals($mapping, $actual);
@@ -1359,6 +1368,7 @@ MwIDAQAB
         $this->assertEquals($contentitems[0]['lineItem']['tag'], $config->lineitemtag);
         $this->assertEquals($contentitems[0]['lineItem']['resourceId'], $config->lineitemresourceid);
         $this->assertEquals($contentitems[0]['lineItem']['scoreMaximum'], $config->grade_modgrade_point);
+<<<<<<< HEAD
         $this->assertEquals('', $config->lineitemsubreviewurl);
         $this->assertEquals('', $config->lineitemsubreviewparams);
     }
@@ -1452,6 +1462,8 @@ MwIDAQAB
         $this->assertEquals($contentitems[0]['lineItem']['scoreMaximum'], $config->grade_modgrade_point);
         $this->assertEquals('DEFAULT', $config->lineitemsubreviewurl);
         $this->assertEquals('', $config->lineitemsubreviewparams);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -1488,11 +1500,15 @@ MwIDAQAB
             'lineItem' => [
                 'resourceId' => 'r12345',
                 'tag' => 'final',
+<<<<<<< HEAD
                 'scoreMaximum' => 10.0,
                 'submissionReview' => [
                     'url' => 'https://testsub.url',
                     'custom' => ['a' => 'b']
                 ]
+=======
+                'scoreMaximum' => 10.0
+>>>>>>> forked/LAE_400_PACKAGE
             ],
             'frame' => []
         ];
@@ -1514,8 +1530,11 @@ MwIDAQAB
         $this->assertEquals($contentitems[1]['lineItem']['tag'], $config->multiple[1]->lineitemtag);
         $this->assertEquals($contentitems[1]['lineItem']['resourceId'], $config->multiple[1]->lineitemresourceid);
         $this->assertEquals($contentitems[1]['lineItem']['scoreMaximum'], $config->multiple[1]->grade_modgrade_point);
+<<<<<<< HEAD
         $this->assertEquals($contentitems[1]['lineItem']['submissionReview']['url'], $config->multiple[1]->lineitemsubreviewurl);
         $this->assertEquals("a=b", $config->multiple[1]->lineitemsubreviewparams);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -1768,17 +1787,27 @@ MwIDAQAB
         $config->typeid = 'some-type-id';
         $config->lti_toolurl = 'some-lti-tool-url';
 
+<<<<<<< HEAD
         $request = lti_build_login_request($course->id, $instance->cmid, $instance, $config, 'basic-lti-launch-request');
         $this->assertEquals($CFG->wwwroot, $request['iss']);
         $this->assertEquals('http://some-lti-tool-url', $request['target_link_uri']);
         $this->assertEquals(123456789, $request['login_hint']);
         $this->assertTrue(strpos($request['lti_message_hint'], "\"cmid\":{$instance->cmid}") > 0);
         $this->assertTrue(strpos($request['lti_message_hint'],  "\"launchid\":\"ltilaunch{$instance->id}_") > 0);
+=======
+        $request = lti_build_login_request($course->id, $instance->id, $instance, $config, 'basic-lti-launch-request');
+
+        $this->assertEquals($CFG->wwwroot, $request['iss']);
+        $this->assertEquals('http://some-lti-tool-url', $request['target_link_uri']);
+        $this->assertEquals(123456789, $request['login_hint']);
+        $this->assertEquals($instance->id, $request['lti_message_hint']);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals('some-client-id', $request['client_id']);
         $this->assertEquals('some-type-id', $request['lti_deployment_id']);
     }
 
     /**
+<<<<<<< HEAD
      * @covers ::lti_get_launch_data()
      *
      * Test for_user is passed as parameter when specified.
@@ -1798,6 +1827,8 @@ MwIDAQAB
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test default orgid is host if not specified in config (tool installed in earlier version of Moodle).
      */
     public function test_lti_get_launch_data_default_organizationid_unset_usehost() {

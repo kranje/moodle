@@ -392,7 +392,11 @@ function imscp_export_contents($cm, $baseurl) {
     $structure['fileurl']      = null;
     $structure['timecreated']  = $imscp->timemodified;
     $structure['timemodified'] = $imscp->timemodified;
+<<<<<<< HEAD
     $structure['content']      = json_encode(unserialize($imscp->structure));
+=======
+    $structure['content']      = json_encode(unserialize_array($imscp->structure));
+>>>>>>> forked/LAE_400_PACKAGE
     $structure['sortorder']    = 0;
     $structure['userid']       = null;
     $structure['author']       = null;

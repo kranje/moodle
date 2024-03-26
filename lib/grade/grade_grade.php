@@ -768,7 +768,11 @@ class grade_grade extends grade_object {
         global $CFG;
 
         if (count($grade_grades) !== count($grade_items)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidarraysize', 'debug', '', 'grade_grade::get_hiding_affected()!');
+=======
+            print_error('invalidarraysize', 'debug', '', 'grade_grade::get_hiding_affected()!');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $dependson = array();

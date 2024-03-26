@@ -14,6 +14,7 @@ Feature: Display the IMS content package description in the IMSCP and optionally
     And the following "course enrolments" exist:
       | user | course | role |
       | teacher1 | C1 | editingteacher |
+<<<<<<< HEAD
 
   @javascript @_file_upload
   Scenario: Description is displayed in the IMS content package
@@ -39,11 +40,24 @@ Feature: Display the IMS content package description in the IMSCP and optionally
     And I upload "mod/imscp/tests/packages/singlescobasic.zip" file to "Package file" filemanager
     And I click on "Save and display" "button"
     When I am on the "Test IMS content package" "imscp activity editing" page
+=======
+    And the following "activities" exist:
+      | activity | course | name                     | intro                                | packagefilepath                             |
+      | imscp    | C1     | Test IMS content package | Test IMS content package description | mod/imscp/tests/packages/singelscobasic.zip |
+
+  Scenario: Description is displayed in the IMS content package
+    When I am on the "Test IMS content package" "imscp activity" page logged in as teacher1
+    Then I should see "Test IMS content package description"
+
+  Scenario: Show IMS description in the course homepage
+    When I am on the "Test IMS content package" "imscp activity editing" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And the following fields match these values:
       | Display description on course page | |
     And I set the following fields to these values:
       | Display description on course page | 1 |
     And I press "Save and return to course"
+<<<<<<< HEAD
     When I am on "Course 1" course homepage
     Then I should see "Test IMS content package description"
 
@@ -62,4 +76,13 @@ Feature: Display the IMS content package description in the IMSCP and optionally
       | Display description on course page | |
     And I press "Save and return to course"
     When I am on "Course 1" course homepage
+=======
+    Then I should see "Test IMS content package description"
+
+  Scenario: Hide IMS description in the course homepage
+    When I am on the "Test IMS content package" "imscp activity editing" page logged in as teacher1
+    And the following fields match these values:
+      | Display description on course page | |
+    And I press "Save and return to course"
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should not see "Test IMS content package description"

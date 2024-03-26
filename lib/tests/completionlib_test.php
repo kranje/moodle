@@ -756,6 +756,7 @@ class completionlib_test extends advanced_testcase {
                 'coursemoduleid' => $cm->id,
                 'userid' => $user->id,
                 'completionstate' => $completion,
+<<<<<<< HEAD
                 'overrideby' => null,
                 'timemodified' => 0,
             ];
@@ -766,6 +767,13 @@ class completionlib_test extends advanced_testcase {
             ];
             $DB->insert_record('course_modules_completion', $cmcompletionrecord);
             $DB->insert_record('course_modules_viewed', $cmcompletionviewrecord);
+=======
+                'viewed' => 0,
+                'overrideby' => null,
+                'timemodified' => 0,
+            ];
+            $DB->insert_record('course_modules_completion', $cmcompletionrecord);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Whether we expect for the returned completion data to be stored in the cache.
@@ -826,6 +834,7 @@ class completionlib_test extends advanced_testcase {
             'coursemoduleid' => $cm->id,
             'userid' => $this->user->id,
             'completionstate' => COMPLETION_NOT_VIEWED,
+<<<<<<< HEAD
             'overrideby' => null,
             'timemodified' => 0,
         ];
@@ -836,6 +845,13 @@ class completionlib_test extends advanced_testcase {
         ];
         $DB->insert_record('course_modules_completion', $cmcompletionrecord);
         $DB->insert_record('course_modules_viewed', $cmcompletionviewrecord);
+=======
+            'viewed' => 0,
+            'overrideby' => null,
+            'timemodified' => 0,
+        ];
+        $DB->insert_record('course_modules_completion', $cmcompletionrecord);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Mock other completion data.
         $completioninfo = new completion_info($this->course);
@@ -855,6 +871,10 @@ class completionlib_test extends advanced_testcase {
 
             $this->assertEquals($testcm->id, $result->coursemoduleid);
             $this->assertEquals($this->user->id, $result->userid);
+<<<<<<< HEAD
+=======
+            $this->assertEquals(0, $result->viewed);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $results[$testcm->id] = $result;
         }
@@ -871,6 +891,7 @@ class completionlib_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Tests for get_completion_data().
      *
      * @covers ::get_completion_data
@@ -924,6 +945,8 @@ class completionlib_test extends advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Tests for completion_info::get_other_cm_completion_data().
      *
      * @covers ::get_other_cm_completion_data
@@ -2008,16 +2031,23 @@ class core_completionlib_fake_recordset implements Iterator {
         $this->index = 0;
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         return $this->values[$this->index];
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->values[$this->index];
     }
 
+<<<<<<< HEAD
     public function next(): void {
         $this->index++;
     }
@@ -2027,6 +2057,17 @@ class core_completionlib_fake_recordset implements Iterator {
     }
 
     public function valid(): bool {
+=======
+    public function next() {
+        $this->index++;
+    }
+
+    public function rewind() {
+        $this->index = 0;
+    }
+
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return count($this->values) > $this->index;
     }
 

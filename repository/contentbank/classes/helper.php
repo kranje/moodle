@@ -96,7 +96,10 @@ class helper {
             'filename'  => $file->get_filename()
         ];
 
+<<<<<<< HEAD
         $contenttype = $content->get_content_type_instance();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $encodedpath = base64_encode(json_encode($params));
 
         $node = [
@@ -109,8 +112,13 @@ class helper {
             'isref' => $file->is_external_file(),
             'size' => $file->get_filesize(),
             'source' => $encodedpath,
+<<<<<<< HEAD
             'icon' => $contenttype->get_icon($content),
             'thumbnail' => $contenttype->get_icon($content)
+=======
+            'icon' => $OUTPUT->image_url(file_file_icon($file, 24))->out(false),
+            'thumbnail' => $OUTPUT->image_url(file_file_icon($file, 90))->out(false)
+>>>>>>> forked/LAE_400_PACKAGE
         ];
 
         if ($file->get_status() == 666) {
@@ -132,4 +140,8 @@ class helper {
             'name' => $context->get_context_name(false)
         ];
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> forked/LAE_400_PACKAGE

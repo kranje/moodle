@@ -67,6 +67,7 @@ class sum extends base {
     /**
      * Return formatted value for column when applying aggregation
      *
+<<<<<<< HEAD
      * For boolean columns we return the sum of the true values, numeric columns execute original callbacks if present
      *
      * @param mixed $value
@@ -86,5 +87,17 @@ class sum extends base {
         }
 
         return parent::format_value($value, $values, $callbacks, $columntype);
+=======
+     * @param mixed $value
+     * @param array $values
+     * @param array $callbacks
+     * @return mixed
+     */
+    public static function format_value($value, array $values, array $callbacks) {
+        if (reset($values) === null) {
+            return '';
+        }
+        return (int) reset($values);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

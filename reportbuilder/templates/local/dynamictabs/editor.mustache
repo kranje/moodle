@@ -104,6 +104,7 @@
             <div class="{{#editmode}}p-2 border{{/editmode}}">
                 <div data-region="core_reportbuilder/report-header" class="dropdown d-flex justify-content-end">
                     {{! Preview/Edit button }}
+<<<<<<< HEAD
                     <button data-action="toggle-edit-preview" class="btn btn-outline-secondary"
                         {{#editmode}}
                             data-edit-mode="1" title="{{#str}} switchpreview, core_reportbuilder {{/str}}"
@@ -112,6 +113,10 @@
                             data-edit-mode="0" title="{{#str}} switchedit, core_reportbuilder {{/str}}"
                         {{/editmode}}
                     >
+=======
+                    <button data-action="toggle-edit-preview" data-edit-mode="{{editmode}}" class="btn btn-outline-secondary"
+                            title="{{#editmode}}{{#str}} switchpreview, core_reportbuilder {{/str}}{{/editmode}}{{^editmode}}{{#str}} switchedit, core_reportbuilder {{/str}}{{/editmode}}">
+>>>>>>> forked/LAE_400_PACKAGE
                         {{#editmode}}
                             {{#pix}} i/preview, core {{/pix}}
                             {{#str}} preview, core {{/str}}

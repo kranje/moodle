@@ -934,7 +934,11 @@ class core_calendar_external extends external_api {
             }
 
             if (!calendar_edit_event_allowed($legacyevent, true)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('nopermissiontoupdatecalendar');
+=======
+                print_error('nopermissiontoupdatecalendar');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $legacyevent->update($properties);
@@ -1192,7 +1196,11 @@ class core_calendar_external extends external_api {
         $legacyevent = $mapper->from_event_to_legacy_event($event);
 
         if (!calendar_edit_event_allowed($legacyevent, true)) {
+<<<<<<< HEAD
             throw new \moodle_exception('nopermissiontoupdatecalendar');
+=======
+            print_error('nopermissiontoupdatecalendar');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         self::validate_context($legacyevent->context);

@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,14 +33,20 @@ use MongoDB\Driver\WriteConcern;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnsupportedException;
 use MongoDB\UpdateResult;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_array;
 use function is_bool;
 use function is_object;
 use function is_string;
 use function MongoDB\is_first_key_operator;
 use function MongoDB\is_pipeline;
+<<<<<<< HEAD
 use function MongoDB\is_write_concern_acknowledged;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function MongoDB\server_supports_feature;
 
 /**
@@ -42,12 +56,29 @@ use function MongoDB\server_supports_feature;
  * operation classes.
  *
  * @internal
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/update/
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/update/
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class Update implements Executable, Explainable
 {
     /** @var integer */
+<<<<<<< HEAD
     private static $wireVersionForHint = 8;
+=======
+    private static $wireVersionForArrayFilters = 6;
+
+    /** @var integer */
+    private static $wireVersionForCollation = 5;
+
+    /** @var integer */
+    private static $wireVersionForDocumentLevelValidation = 4;
+
+    /** @var integer */
+    private static $wireVersionForHintServerSideError = 5;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var string */
     private $databaseName;
@@ -72,6 +103,7 @@ class Update implements Executable, Explainable
      *  * arrayFilters (document array): A set of filters specifying to which
      *    array elements an update should apply.
      *
+<<<<<<< HEAD
      *  * bypassDocumentValidation (boolean): If true, allows the write to
      *    circumvent document level validation.
      *
@@ -80,6 +112,21 @@ class Update implements Executable, Explainable
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    This is not supported for servers versions < 4.4.
+=======
+     *    This is not supported for server versions < 3.6 and will result in an
+     *    exception at execution time if used.
+     *
+     *  * bypassDocumentValidation (boolean): If true, allows the write to
+     *    circumvent document level validation.
+     *
+     *    For servers < 3.2, this option is ignored as document level validation
+     *    is not available.
+     *
+     *  * collation (document): Collation specification.
+     *
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * hint (string|document): The index to use. Specify either the index
      *    name as a string or the index key pattern as a document. If specified,
@@ -94,6 +141,7 @@ class Update implements Executable, Explainable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
      *  * upsert (boolean): When true, a new document is created if no document
      *    matches the query. The default is false.
      *
@@ -102,6 +150,13 @@ class Update implements Executable, Explainable
      *    Parameters can then be accessed as variables in an aggregate
      *    expression context (e.g. "$$var").
      *
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+     *  * upsert (boolean): When true, a new document is created if no document
+     *    matches the query. The default is false.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern.
      *
      * @param string       $databaseName   Database name
@@ -112,7 +167,11 @@ class Update implements Executable, Explainable
      * @param array        $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, string $collectionName, $filter, $update, array $options = [])
+=======
+    public function __construct($databaseName, $collectionName, $filter, $update, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_array($filter) && ! is_object($filter)) {
             throw InvalidArgumentException::invalidType('$filter', $filter, 'array or object');
@@ -163,6 +222,7 @@ class Update implements Executable, Explainable
             throw InvalidArgumentException::invalidType('"writeConcern" option', $options['writeConcern'], WriteConcern::class);
         }
 
+<<<<<<< HEAD
         if (isset($options['let']) && ! is_array($options['let']) && ! is_object($options['let'])) {
             throw InvalidArgumentException::invalidType('"let" option', $options['let'], 'array or object');
         }
@@ -171,12 +231,19 @@ class Update implements Executable, Explainable
             unset($options['bypassDocumentValidation']);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['writeConcern']) && $options['writeConcern']->isDefault()) {
             unset($options['writeConcern']);
         }
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = (string) $collectionName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->filter = $filter;
         $this->update = $update;
         $this->options = $options;
@@ -186,18 +253,39 @@ class Update implements Executable, Explainable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return UpdateResult
      * @throws UnsupportedException if hint or write concern is used and unsupported
+=======
+     * @param Server $server
+     * @return UpdateResult
+     * @throws UnsupportedException if array filters or collation is used and unsupported
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server)
     {
+<<<<<<< HEAD
         /* CRUD spec requires a client-side error when using "hint" with an
          * unacknowledged write concern on an unsupported server. */
         if (
             isset($this->options['writeConcern']) && ! is_write_concern_acknowledged($this->options['writeConcern']) &&
             isset($this->options['hint']) && ! server_supports_feature($server, self::$wireVersionForHint)
         ) {
+=======
+        if (isset($this->options['arrayFilters']) && ! server_supports_feature($server, self::$wireVersionForArrayFilters)) {
+            throw UnsupportedException::arrayFiltersNotSupported();
+        }
+
+        if (isset($this->options['collation']) && ! server_supports_feature($server, self::$wireVersionForCollation)) {
+            throw UnsupportedException::collationNotSupported();
+        }
+
+        /* Server versions >= 3.4.0 raise errors for unknown update
+         * options. For previous versions, the CRUD spec requires a client-side
+         * error. */
+        if (isset($this->options['hint']) && ! server_supports_feature($server, self::$wireVersionForHintServerSideError)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw UnsupportedException::hintNotSupported();
         }
 
@@ -206,7 +294,19 @@ class Update implements Executable, Explainable
             throw UnsupportedException::writeConcernNotSupportedInTransaction();
         }
 
+<<<<<<< HEAD
         $bulk = new Bulk($this->createBulkWriteOptions());
+=======
+        $bulkOptions = [];
+
+        if (! empty($this->options['bypassDocumentValidation']) &&
+            server_supports_feature($server, self::$wireVersionForDocumentLevelValidation)
+        ) {
+            $bulkOptions['bypassDocumentValidation'] = $this->options['bypassDocumentValidation'];
+        }
+
+        $bulk = new Bulk($bulkOptions);
+>>>>>>> forked/LAE_400_PACKAGE
         $bulk->update($this->filter, $this->update, $this->createUpdateOptions());
 
         $writeResult = $server->executeBulkWrite($this->databaseName . '.' . $this->collectionName, $bulk, $this->createExecuteOptions());
@@ -214,28 +314,44 @@ class Update implements Executable, Explainable
         return new UpdateResult($writeResult);
     }
 
+<<<<<<< HEAD
     /**
      * Returns the command document for this operation.
      *
      * @see Explainable::getCommandDocument()
      * @return array
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getCommandDocument(Server $server)
     {
         $cmd = ['update' => $this->collectionName, 'updates' => [['q' => $this->filter, 'u' => $this->update] + $this->createUpdateOptions()]];
 
+<<<<<<< HEAD
         if (isset($this->options['bypassDocumentValidation'])) {
             $cmd['bypassDocumentValidation'] = $this->options['bypassDocumentValidation'];
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($this->options['writeConcern'])) {
             $cmd['writeConcern'] = $this->options['writeConcern'];
         }
 
+<<<<<<< HEAD
+=======
+        if (! empty($this->options['bypassDocumentValidation']) &&
+            server_supports_feature($server, self::$wireVersionForDocumentLevelValidation)
+        ) {
+            $cmd['bypassDocumentValidation'] = $this->options['bypassDocumentValidation'];
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         return $cmd;
     }
 
     /**
+<<<<<<< HEAD
      * Create options for constructing the bulk write.
      *
      * @see https://php.net/manual/en/mongodb-driver-bulkwrite.construct.php
@@ -263,6 +379,14 @@ class Update implements Executable, Explainable
      * @see https://php.net/manual/en/mongodb-driver-server.executebulkwrite.php
      */
     private function createExecuteOptions(): array
+=======
+     * Create options for executing the bulk write.
+     *
+     * @see http://php.net/manual/en/mongodb-driver-server.executebulkwrite.php
+     * @return array
+     */
+    private function createExecuteOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 
@@ -282,8 +406,15 @@ class Update implements Executable, Explainable
      *
      * Note that these options are different from the bulk write options, which
      * are created in createExecuteOptions().
+<<<<<<< HEAD
      */
     private function createUpdateOptions(): array
+=======
+     *
+     * @return array
+     */
+    private function createUpdateOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $updateOptions = [
             'multi' => $this->options['multi'],

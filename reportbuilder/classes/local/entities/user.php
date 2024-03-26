@@ -18,10 +18,14 @@ declare(strict_types=1);
 
 namespace core_reportbuilder\local\entities;
 
+<<<<<<< HEAD
 use context_helper;
 use context_system;
 use context_user;
 use core_component;
+=======
+use context_system;
+>>>>>>> forked/LAE_400_PACKAGE
 use html_writer;
 use lang_string;
 use moodle_url;
@@ -54,12 +58,16 @@ class user extends base {
      * @return array
      */
     protected function get_default_table_aliases(): array {
+<<<<<<< HEAD
         return [
             'user' => 'u',
             'context' => 'uctx',
             'tag_instance' => 'uti',
             'tag' => 'ut',
         ];
+=======
+        return ['user' => 'u'];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -109,6 +117,7 @@ class user extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Returns column that corresponds to the given identity field, profile field identifiers will be converted to those
      * used by the {@see user_profile_fields} helper
      *
@@ -159,6 +168,8 @@ class user extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns list of all available columns
      *
      * These are all the columns available to use in any report that uses this entity.
@@ -169,7 +180,10 @@ class user extends base {
         global $DB;
 
         $usertablealias = $this->get_table_alias('user');
+<<<<<<< HEAD
         $contexttablealias = $this->get_table_alias('context');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $fullnameselect = self::get_name_fields_select($usertablealias);
         $fullnamesort = explode(', ', $fullnameselect);
@@ -301,6 +315,7 @@ class user extends base {
                     $countries = get_string_manager()->get_list_of_countries(true);
                     return $countries[$country] ?? '';
                 });
+<<<<<<< HEAD
             } else if ($userfield === 'description') {
                 // Select enough fields in order to format the column.
                 $column
@@ -309,6 +324,8 @@ class user extends base {
                           AND {$contexttablealias}.instanceid = {$usertablealias}.id")
                     ->add_fields("{$usertablealias}.descriptionformat, {$usertablealias}.id")
                     ->add_fields(context_helper::get_preload_record_columns_sql($contexttablealias));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $columns[] = $column;
@@ -326,7 +343,10 @@ class user extends base {
     protected function is_sortable(string $fieldname): bool {
         // Some columns can't be sorted, like longtext or images.
         $nonsortable = [
+<<<<<<< HEAD
             'description',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'picture',
         ];
 
@@ -342,8 +362,11 @@ class user extends base {
      * @return string
      */
     public function format($value, stdClass $row, string $fieldname): string {
+<<<<<<< HEAD
         global $CFG;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if ($this->get_user_field_type($fieldname) === column::TYPE_BOOLEAN) {
             return format::boolean_as_text($value);
         }
@@ -352,6 +375,7 @@ class user extends base {
             return format::userdate($value, $row);
         }
 
+<<<<<<< HEAD
         if ($fieldname === 'description') {
             if (empty($row->id)) {
                 return '';
@@ -366,6 +390,8 @@ class user extends base {
             return format_text($description, $row->descriptionformat, ['context' => $context->id]);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return s($value);
     }
 
@@ -411,7 +437,10 @@ class user extends base {
             'email' => new lang_string('email'),
             'city' => new lang_string('city'),
             'country' => new lang_string('country'),
+<<<<<<< HEAD
             'description' => new lang_string('description'),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'firstnamephonetic' => new lang_string('firstnamephonetic'),
             'lastnamephonetic' => new lang_string('lastnamephonetic'),
             'middlename' => new lang_string('middlename'),
@@ -427,7 +456,10 @@ class user extends base {
             'confirmed' => new lang_string('confirmed', 'admin'),
             'username' => new lang_string('username'),
             'moodlenetprofile' => new lang_string('moodlenetprofile', 'user'),
+<<<<<<< HEAD
             'timecreated' => new lang_string('timecreated', 'core_reportbuilder'),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -439,15 +471,21 @@ class user extends base {
      */
     protected function get_user_field_type(string $userfield): int {
         switch ($userfield) {
+<<<<<<< HEAD
             case 'description':
                 $fieldtype = column::TYPE_LONGTEXT;
                 break;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             case 'confirmed':
             case 'suspended':
                 $fieldtype = column::TYPE_BOOLEAN;
                 break;
             case 'lastaccess':
+<<<<<<< HEAD
             case 'timecreated':
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $fieldtype = column::TYPE_TIMESTAMP;
                 break;
             default:
@@ -464,8 +502,11 @@ class user extends base {
      * @return filter[]
      */
     protected function get_all_filters(): array {
+<<<<<<< HEAD
         global $DB;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $filters = [];
         $tablealias = $this->get_table_alias('user');
 
@@ -485,11 +526,14 @@ class user extends base {
         // User fields filters.
         $fields = $this->get_user_fields();
         foreach ($fields as $field => $name) {
+<<<<<<< HEAD
             $filterfieldsql = "{$tablealias}.{$field}";
             if ($this->get_user_field_type($field) === column::TYPE_LONGTEXT) {
                 $filterfieldsql = $DB->sql_cast_to_char($filterfieldsql);
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $optionscallback = [static::class, 'get_options_for_' . $field];
             if (is_callable($optionscallback)) {
                 $classname = select::class;
@@ -506,7 +550,11 @@ class user extends base {
                 $field,
                 $name,
                 $this->get_entity_name(),
+<<<<<<< HEAD
                 $filterfieldsql
+=======
+                $tablealias . '.' . $field
+>>>>>>> forked/LAE_400_PACKAGE
             ))
                 ->add_joins($this->get_joins());
 
@@ -528,6 +576,7 @@ class user extends base {
         ))
             ->add_joins($this->get_joins());
 
+<<<<<<< HEAD
         // Authentication method filter.
         $filters[] = (new filter(
             select::class,
@@ -554,6 +603,8 @@ class user extends base {
                 return $authoptions;
             });
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $filters;
     }
 

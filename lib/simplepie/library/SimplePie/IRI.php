@@ -1234,5 +1234,8 @@ class SimplePie_IRI
 		return $iauthority;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_IRI', 'SimplePie\IRI', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

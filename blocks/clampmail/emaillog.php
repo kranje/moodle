@@ -23,6 +23,7 @@
  */
 
 require_once('../../config.php');
+<<<<<<< HEAD
 
 $courseid = required_param('courseid', PARAM_INT);
 $type = optional_param('type', 'log', PARAM_ALPHA);
@@ -32,6 +33,18 @@ $page = optional_param('page', 0, PARAM_INT);
 $perpage = optional_param('perpage', 10, PARAM_INT);
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
+=======
+require_once('lib.php');
+
+$courseid    = required_param('courseid', PARAM_INT);
+$type        = optional_param('type', 'log', PARAM_ALPHA);
+$typeid      = optional_param('typeid', 0, PARAM_INT);
+$action      = optional_param('action', null, PARAM_ALPHA);
+$page        = optional_param('page', 0, PARAM_INT);
+$perpage     = optional_param('perpage', 10, PARAM_INT);
+$userid      = optional_param('userid', $USER->id, PARAM_INT);
+$course      = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
+>>>>>>> forked/LAE_400_PACKAGE
 
 require_login($course);
 
@@ -83,8 +96,12 @@ $count = $DB->count_records($dbtable, $params);
 
 switch ($action) {
     case "confirm":
+<<<<<<< HEAD
         require_sesskey();
         if (block_clampmail\email::cleanup($dbtable, $coursecontext->id, $typeid)) {
+=======
+        if (clampmail::cleanup($dbtable, $coursecontext->id, $typeid)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $url = new moodle_url('/blocks/clampmail/emaillog.php', array(
                 'courseid' => $courseid,
                 'type' => $type
@@ -94,11 +111,18 @@ switch ($action) {
             print_error('delete_failed', 'block_clampmail', '', $typeid);
         }
     case "delete":
+<<<<<<< HEAD
         require_sesskey();
         $html = block_clampmail\email::delete_dialog($courseid, $type, $typeid);
         break;
     default:
         $html = block_clampmail\email::list_entries($courseid, $type, $page, $perpage, $userid, $count, $candelete);
+=======
+        $html = clampmail::delete_dialog($courseid, $type, $typeid);
+        break;
+    default:
+        $html = clampmail::list_entries($courseid, $type, $page, $perpage, $userid, $count, $candelete);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($canimpersonate and $USER->id != $userid) {

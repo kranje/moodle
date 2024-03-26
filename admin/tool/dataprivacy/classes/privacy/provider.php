@@ -79,6 +79,7 @@ class provider implements
             'privacy:metadata:request'
         );
 
+<<<<<<< HEAD
         // Regarding this block, we are unable to export or purge this data, as
         // it would damage the privacy data across the whole site.
         $collection->add_database_table(
@@ -89,6 +90,8 @@ class provider implements
             'privacy:metadata:purpose'
         );
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $collection->add_user_preference(tool_helper::PREF_REQUEST_FILTERS,
             'privacy:metadata:preference:tool_dataprivacy_request-filters');
         $collection->add_user_preference(tool_helper::PREF_REQUEST_PERPAGE,

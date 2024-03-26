@@ -1029,7 +1029,11 @@ class qformat_default {
 
         // did we actually process anything
         if ($count==0) {
+<<<<<<< HEAD
             throw new \moodle_exception('noquestions', 'question', $continuepath);
+=======
+            print_error('noquestions', 'question', $continuepath);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // final pre-process on exported data
@@ -1066,7 +1070,11 @@ class qformat_default {
         global $DB;
 
         if (!$category = $DB->get_record('question_categories', array('id' => $id))) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfindcategory', 'error', '', $id);
+=======
+            print_error('cannotfindcategory', 'error', '', $id);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $contextstring = $this->translator->context_to_string($category->contextid);
 

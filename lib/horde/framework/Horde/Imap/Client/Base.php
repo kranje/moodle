@@ -232,7 +232,11 @@ implements Serializable, SplObserver
      *            DEFAULT: 30 seconds
      * - username: (string) [REQUIRED] The username.
      * - authusername (string) The username used for SASL authentication.
+<<<<<<< HEAD
      * 	 If specified this is the user name whose password is used
+=======
+     * 	 If specified this is the user name whose password is used 
+>>>>>>> forked/LAE_400_PACKAGE
      * 	 (e.g. administrator).
      * 	 Only valid for RFC 2595/4616 - PLAIN SASL mechanism.
      * 	 DEFAULT: the same value provided in the username parameter.
@@ -346,7 +350,10 @@ implements Serializable, SplObserver
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function update(SplSubject $subject)
     {
         if (($subject instanceof Horde_Imap_Client_Data_Capability) ||
@@ -364,7 +371,15 @@ implements Serializable, SplObserver
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        return serialize(array(
+            'i' => $this->_init,
+            'p' => $this->_params,
+            'v' => self::VERSION
+        ));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -372,6 +387,7 @@ implements Serializable, SplObserver
     public function unserialize($data)
     {
         $data = @unserialize($data);
+<<<<<<< HEAD
         if (!is_array($data)) {
             throw new Exception('Cache version change');
         }
@@ -393,6 +409,11 @@ implements Serializable, SplObserver
     public function __unserialize(array $data)
     {
         if (empty($data['v']) || $data['v'] != self::VERSION) {
+=======
+        if (!is_array($data) ||
+            !isset($data['v']) ||
+            ($data['v'] != self::VERSION)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new Exception('Cache version change');
         }
 
@@ -4008,8 +4029,14 @@ implements Serializable, SplObserver
         $vanished = $this->vanished($this->_selected, $modseq, array(
             'ids' => $uids_ob
         ));
+<<<<<<< HEAD
         if (!empty($vanished->ids)) {
             $this->_deleteMsgs($this->_selected, $this->getIdsOb($vanished->ids));
+=======
+        $disappear = array_diff($uids_ob->ids, $vanished->ids);
+        if (!empty($disappear)) {
+            $this->_deleteMsgs($this->_selected, $this->getIdsOb($disappear));
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $mbox_ob->sync = true;

@@ -2,13 +2,19 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 
 class Combinations
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * COMBIN.
      *
@@ -18,6 +24,7 @@ class Combinations
      * Excel Function:
      *        COMBIN(numObjs,numInSet)
      *
+<<<<<<< HEAD
      * @param mixed $numObjs Number of different objects, or can be an array of numbers
      * @param mixed $numInSet Number of objects in each combination, or can be an array of numbers
      *
@@ -31,6 +38,15 @@ class Combinations
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $numObjs, $numInSet);
         }
 
+=======
+     * @param mixed $numObjs Number of different objects
+     * @param mixed $numInSet Number of objects in each combination
+     *
+     * @return float|int|string Number of combinations, or a string containing an error
+     */
+    public static function withoutRepetition($numObjs, $numInSet)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $numObjs = Helpers::validateNumericNullSubstitution($numObjs, null);
             $numInSet = Helpers::validateNumericNullSubstitution($numInSet, null);
@@ -44,12 +60,17 @@ class Combinations
     }
 
     /**
+<<<<<<< HEAD
      * COMBINA.
+=======
+     * COMBIN.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * Returns the number of combinations for a given number of items. Use COMBIN to
      *        determine the total possible number of groups for a given number of items.
      *
      * Excel Function:
+<<<<<<< HEAD
      *        COMBINA(numObjs,numInSet)
      *
      * @param mixed $numObjs Number of different objects, or can be an array of numbers
@@ -65,6 +86,17 @@ class Combinations
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $numObjs, $numInSet);
         }
 
+=======
+     *        COMBIN(numObjs,numInSet)
+     *
+     * @param mixed $numObjs Number of different objects
+     * @param mixed $numInSet Number of objects in each combination
+     *
+     * @return float|int|string Number of combinations, or a string containing an error
+     */
+    public static function withRepetition($numObjs, $numInSet)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $numObjs = Helpers::validateNumericNullSubstitution($numObjs, null);
             $numInSet = Helpers::validateNumericNullSubstitution($numInSet, null);
@@ -84,8 +116,12 @@ class Combinations
             return $e->getMessage();
         }
 
+<<<<<<< HEAD
         return round(
             Factorial::fact($numObjs + $numInSet - 1) / Factorial::fact($numObjs - 1)
         ) / Factorial::fact($numInSet);
+=======
+        return round(Factorial::fact($numObjs + $numInSet - 1) / Factorial::fact($numObjs - 1)) / Factorial::fact($numInSet);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

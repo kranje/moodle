@@ -37,3 +37,16 @@ function tool_task_status_checks() : array {
     ];
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * Function used to handle mtrace by outputting the text to normal browser window.
+ *
+ * @param string $message Message to output
+ * @param string $eol End of line character
+ */
+function tool_task_mtrace_wrapper(string $message, string $eol): void {
+    $message = s($message);
+    echo $message . $eol;
+}
+>>>>>>> forked/LAE_400_PACKAGE

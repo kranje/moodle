@@ -19,8 +19,11 @@ declare(strict_types=1);
 namespace core_reportbuilder\local\helpers;
 
 use cache;
+<<<<<<< HEAD
 use context;
 use context_system;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_collator;
 use core_component;
 use core_plugin_manager;
@@ -54,11 +57,19 @@ class audience {
     }
 
     /**
+<<<<<<< HEAD
      * Returns list of report IDs that the specified user can access, based on audience configuration. This can be expensive if the
      * site has lots of reports, with lots of audiences, so we cache the result for the duration of the users session
      *
      * @param int|null $userid User ID to check, or the current user if omitted
      * @return int[]
+=======
+     * Returns list of reports that the specified user can access. Note this is potentially very expensive to calculate if a
+     * site has lots of reports, with lots of audiences, so we cache the result for the duration of the users session
+     *
+     * @param int|null $userid User ID to check, or the current user if omitted
+     * @return array
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function get_allowed_reports(?int $userid = null): array {
         global $USER, $DB;
@@ -115,7 +126,11 @@ class audience {
     }
 
     /**
+<<<<<<< HEAD
      * Generate SQL select clause and params for selecting reports specified user can access, based on audience configuration
+=======
+     * Generate SQL select clause and params for selecting reports specified user can access
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param string $reporttablealias
      * @param int|null $userid User ID to check, or the current user if omitted
@@ -139,7 +154,11 @@ class audience {
     }
 
     /**
+<<<<<<< HEAD
      * Return list of report ID's specified user can access, based on audience configuration
+=======
+     * Return list of report ID's specified user can access
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param int|null $userid User ID to check, or the current user if omitted
      * @return int[]
@@ -156,6 +175,7 @@ class audience {
     }
 
     /**
+<<<<<<< HEAD
      * Returns SQL to limit the list of reports to those that the given user has access to
      *
      * - A user with 'editall' capability will have access to all reports
@@ -203,6 +223,8 @@ class audience {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Return appropriate list of where clauses and params for given audiences
      *
      * @param audience_model[] $audiences
@@ -261,6 +283,7 @@ class audience {
      * Get all the audiences types the current user can add to, organised by categories.
      *
      * @return array
+<<<<<<< HEAD
      *
      * @deprecated since Moodle 4.1 - please do not use this function any more, {@see custom_report_audience_cards_exporter}
      */
@@ -268,6 +291,10 @@ class audience {
         debugging('The function ' . __FUNCTION__ . '() is deprecated, please do not use it any more. ' .
             'See \'custom_report_audience_cards_exporter\' class for replacement', DEBUG_DEVELOPER);
 
+=======
+     */
+    public static function get_all_audiences_menu_types(): array {
+>>>>>>> forked/LAE_400_PACKAGE
         $menucardsarray = [];
         $notavailablestr = get_string('notavailable', 'moodle');
 

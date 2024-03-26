@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -13,10 +14,18 @@ class Replace
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Replace
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * REPLACE.
      *
      * @param mixed $oldText The text string value to modify
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $start Integer offset for start character of the replacement
      *                         Or can be an array of values
@@ -52,12 +61,34 @@ class Replace
         }
 
         return $returnValue;
+=======
+     * @param mixed $start Integer offset for start character of the replacement
+     * @param mixed $chars Integer number of characters to replace from the start offset
+     * @param mixed $newText String to replace in the defined position
+     */
+    public static function replace($oldText, $start, $chars, $newText): string
+    {
+        try {
+            $start = Helpers::extractInt($start, 1, 0, true);
+            $chars = Helpers::extractInt($chars, 0, 0, true);
+            $oldText = Helpers::extractString($oldText);
+            $newText = Helpers::extractString($newText);
+            $left = mb_substr($oldText, 0, $start - 1, 'UTF-8');
+
+            $right = mb_substr($oldText, $start + $chars - 1, null, 'UTF-8');
+        } catch (CalcExp $e) {
+            return $e->getMessage();
+        }
+
+        return $left . $newText . $right;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * SUBSTITUTE.
      *
      * @param mixed $text The text string value to modify
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $fromText The string value that we want to replace in $text
      *                         Or can be an array of values
@@ -107,6 +138,33 @@ class Replace
      */
     private static function executeSubstitution(string $text, string $fromText, string $toText, int $instance)
     {
+=======
+     * @param mixed $fromText The string value that we want to replace in $text
+     * @param mixed $toText The string value that we want to replace with in $text
+     * @param mixed $instance Integer instance Number for the occurrence of frmText to change
+     */
+    public static function substitute($text = '', $fromText = '', $toText = '', $instance = null): string
+    {
+        try {
+            $text = Helpers::extractString($text);
+            $fromText = Helpers::extractString($fromText);
+            $toText = Helpers::extractString($toText);
+            $instance = Functions::flattenSingleValue($instance);
+            if ($instance === null) {
+                return str_replace($fromText, $toText, $text);
+            }
+            if (is_bool($instance)) {
+                if ($instance === false || Functions::getCompatibilityMode() !== Functions::COMPATIBILITY_OPENOFFICE) {
+                    return Functions::Value();
+                }
+                $instance = 1;
+            }
+            $instance = Helpers::extractInt($instance, 1, 0, true);
+        } catch (CalcExp $e) {
+            return $e->getMessage();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $pos = -1;
         while ($instance > 0) {
             $pos = mb_strpos($text, $fromText, $pos + 1, 'UTF-8');
@@ -117,7 +175,11 @@ class Replace
         }
 
         if ($pos !== false) {
+<<<<<<< HEAD
             return Functions::scalar(self::REPLACE($text, ++$pos, StringHelper::countCharacters($fromText), $toText));
+=======
+            return self::REPLACE($text, ++$pos, mb_strlen($fromText, 'UTF-8'), $toText);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $text;

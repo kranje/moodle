@@ -56,6 +56,7 @@ Feature: A user with access to multiple groups should be able to post a copy of 
       | G1       | C2G1 |
       | G1       | C2G2 |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro             | course | idnumber     | groupmode | grouping |
       | forum      | No group forum         | Test forum name   | C1     | forum        | 0         |          |
       | forum      | Separate group forum   | Test forum name   | C1     | forum        | 1         |          |
@@ -113,6 +114,37 @@ Feature: A user with access to multiple groups should be able to post a copy of 
     And I am on "Course 1" course homepage
     And I follow "No group forum"
     And I click on "Add discussion topic" "link"
+=======
+      | activity   | name                   | course | idnumber     | groupmode | grouping |
+      | forum      | No group forum         | C1     | forum        | 0         |          |
+      | forum      | Separate group forum   | C1     | forum        | 1         |          |
+      | forum      | Visible group forum    | C1     | forum        | 2         |          |
+      | forum      | Groupings forum        | C2     | forum        | 1         | G1       |
+    And the following forum discussions exist in course "Course 1":
+      | user     | forum                | name         | message | posttomygroups |
+      | teacher1 | Separate group forum | Discussion 1 | test    | 1              |
+      | teacher1 | Visible group forum  | Discussion 1 | test    | 1              |
+
+  Scenario: Teacher is able to post a copy of a message to all groups in a separate group forum
+    When I am on the "Separate group forum" "forum activity" page logged in as student1
+    Then I should see "Discussion 1"
+    And I am on the "Separate group forum" "forum activity" page logged in as student2
+    And I should see "Discussion 1"
+    And I am on the "Separate group forum" "forum activity" page logged in as student3
+    And I should see "Discussion 1"
+
+  Scenario: Teacher is able to post a copy of a message to all groups in a visible group forum
+    When I am on the "Visible group forum" "forum activity" page logged in as student1
+    Then I should see "Discussion 1"
+    And I am on the "Visible group forum" "forum activity" page logged in as student2
+    And I should see "Discussion 1"
+    And I am on the "Visible group forum" "forum activity" page logged in as student3
+    And I should see "Discussion 1"
+
+  Scenario: Teacher is unable to post a copy of a message to all groups in a no group forum
+    Given I am on the "No group forum" "forum activity" page logged in as teacher1
+    When I click on "Add discussion topic" "link"
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should not see "Post a copy to all groups"
 
   Scenario: Posts to all groups that have groupings should only display within the grouping and not to other groups
@@ -122,6 +154,7 @@ Feature: A user with access to multiple groups should be able to post a copy of 
       | Subject | Discussion 1 |
       | Message | test |
       | Post a copy to all groups | 1 |
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 2" course homepage
@@ -131,4 +164,9 @@ Feature: A user with access to multiple groups should be able to post a copy of 
     And I log in as "student2"
     And I am on "Course 2" course homepage
     And I follow "Groupings forum"
+=======
+    When I am on the "Groupings forum" "forum activity" page logged in as student1
+    Then I should see "Discussion 1"
+    And I am on the "Groupings forum" "forum activity" page logged in as student2
+>>>>>>> forked/LAE_400_PACKAGE
     And I should not see "Discussion 1"

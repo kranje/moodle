@@ -11,12 +11,23 @@ Feature: Show hidden blocks in a docked block region when editing
     And the following "course enrolments" exist:
       | user | course | role |
       | admin | C1 | editingteacher |
+<<<<<<< HEAD
     And I log in as "admin"
     And I am on "Course 1" course homepage with editing mode on
     And I add the "Search forums" block
     And I add the "Latest announcements" block
     And I add the "Upcoming events" block
     And I add the "Recent activity" block
+=======
+    And the following "blocks" exist:
+      | blockname         | contextlevel | reference | pagetypepattern | defaultregion |
+      | search_forums     | Course       | C1        | course-view-*   | side-pre      |
+      | news_items        | Course       | C1        | course-view-*   | side-pre      |
+      | calendar_upcoming | Course       | C1        | course-view-*   | side-pre      |
+      | recent_activity   | Course       | C1        | course-view-*   | side-pre      |
+    And I log in as "admin"
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     # Hide all the blocks in the non-default region
     And I configure the "Search forums" block
     And I set the following fields to these values:

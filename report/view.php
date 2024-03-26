@@ -32,7 +32,11 @@ $PAGE->set_url(new moodle_url('/report/view.php', array('courseid' => $courseid)
 
 // Basic access checks.
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 require_login($course);
 

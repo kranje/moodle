@@ -1,5 +1,6 @@
 Description of MatthiasMullie\Minify import into Moodle
 
+<<<<<<< HEAD
 1) Go to from https://github.com/matthiasmullie/minify/releases
 
 Download lastest minify Source code (zip) and unzip
@@ -11,6 +12,18 @@ mv minify-X.Y.ZZ/data /path/to/moodle/lib/minify/matthiasmullie-minify/
 Download lastest path-converter Source code (zip) and unzip
 mv path-converter-A.B.C/src/ /path/to/moodle/lib/minify/matthiasmullie-pathconverter/
 
+=======
+1) Download https://github.com/matthiasmullie/minify/archive/X.Y.ZZ.zip and unzip
+
+mv minify-X.Y.ZZ/src /path/to/moodle/lib/minify/matthiasmullie-minify/
+mv minify-X.Y.ZZ/data /path/to/moodle/lib/minify/matthiasmullie-minify/
+
+2) Download https://github.com/matthiasmullie/path-converter/archive/A.B.C.zip and unzip
+
+mv path-converter-A.B.C/src/ /path/to/moodle/lib/minify/matthiasmullie-pathconverter/
+
+
+>>>>>>> forked/LAE_400_PACKAGE
 3) Apply the following patches:
 
 MDL-68191: https://github.com/matthiasmullie/minify/issues/317 is a bug that stops

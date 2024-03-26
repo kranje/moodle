@@ -29,7 +29,11 @@
     require_once("../../config.php");
 
     if (!filter_is_enabled('tex')) {
+<<<<<<< HEAD
         throw new \moodle_exception('filternotenabled');
+=======
+        print_error('filternotenabled');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     require_once($CFG->libdir.'/filelib.php');
@@ -248,7 +252,11 @@
         chdir($latex->temp_dir);
 
         // put the expression as a file into the temp area
+<<<<<<< HEAD
         $expression = html_entity_decode($expression, ENT_COMPAT);
+=======
+        $expression = html_entity_decode($expression);
+>>>>>>> forked/LAE_400_PACKAGE
         $output .= "<p>Processing TeX expression:</p><pre>$expression</pre>\n";
         $doc = $latex->construct_latex_document($expression);
         $fh = fopen($tex, 'w');

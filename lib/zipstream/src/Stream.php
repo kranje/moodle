@@ -67,7 +67,11 @@ class Stream implements StreamInterface
     {
         try {
             $this->seek(0);
+<<<<<<< HEAD
         } catch (RuntimeException $e) {}
+=======
+        } catch (\RuntimeException $e) {}
+>>>>>>> forked/LAE_400_PACKAGE
         return (string) stream_get_contents($this->stream);
     }
 
@@ -81,7 +85,11 @@ class Stream implements StreamInterface
      *     PHP $whence values for `fseek()`.  SEEK_SET: Set position equal to
      *     offset bytes SEEK_CUR: Set position to current location plus offset
      *     SEEK_END: Set position to end-of-stream plus offset.
+<<<<<<< HEAD
      * @throws RuntimeException on failure.
+=======
+     * @throws \RuntimeException on failure.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function seek($offset, $whence = SEEK_SET): void
     {
@@ -136,7 +144,11 @@ class Stream implements StreamInterface
      * Returns the current position of the file read/write pointer
      *
      * @return int Position of the file pointer
+<<<<<<< HEAD
      * @throws RuntimeException on error.
+=======
+     * @throws \RuntimeException on error.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function tell(): int
     {
@@ -165,7 +177,11 @@ class Stream implements StreamInterface
      *
      * @see seek()
      * @link http://www.php.net/manual/en/function.fseek.php
+<<<<<<< HEAD
      * @throws RuntimeException on failure.
+=======
+     * @throws \RuntimeException on failure.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function rewind(): void
     {
@@ -177,7 +193,11 @@ class Stream implements StreamInterface
      *
      * @param string $string The string that is to be written.
      * @return int Returns the number of bytes written to the stream.
+<<<<<<< HEAD
      * @throws RuntimeException on failure.
+=======
+     * @throws \RuntimeException on failure.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function write($string): int
     {
@@ -197,11 +217,15 @@ class Stream implements StreamInterface
      */
     public function isWritable(): bool
     {
+<<<<<<< HEAD
         $mode = $this->getMetadata('mode');
         if (!is_string($mode)) {
             throw new RuntimeException('Could not get stream mode from metadata!');
         }
         return preg_match('/[waxc+]/', $mode) === 1;
+=======
+        return preg_match('/[waxc+]/', $this->getMetadata('mode')) === 1;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -233,11 +257,15 @@ class Stream implements StreamInterface
      */
     public function isReadable(): bool
     {
+<<<<<<< HEAD
         $mode = $this->getMetadata('mode');
         if (!is_string($mode)) {
             throw new RuntimeException('Could not get stream mode from metadata!');
         }
         return preg_match('/[r+]/', $mode) === 1;
+=======
+        return preg_match('/[r+]/', $this->getMetadata('mode')) === 1;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

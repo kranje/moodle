@@ -364,5 +364,8 @@ class SimplePie_gzdecode
 		return false;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_gzdecode', 'SimplePie\Gzdecode', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

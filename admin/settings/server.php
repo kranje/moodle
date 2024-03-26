@@ -61,6 +61,7 @@ if ($hassiteconfig) {
     $temp->add($setting);
     $temp->add(new admin_setting_configtext('supportpage', new lang_string('supportpage', 'admin'),
         new lang_string('configsupportpage', 'admin'), '', PARAM_URL));
+<<<<<<< HEAD
     $temp->add(new admin_setting_configselect('supportavailability', new lang_string('supportavailability', 'admin'),
         new lang_string('configsupportavailability', 'admin'), CONTACT_SUPPORT_AUTHENTICATED,
         [
@@ -71,6 +72,8 @@ if ($hassiteconfig) {
     ));
 
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $ADMIN->add('server', $temp);
 
     // Session handling.
@@ -182,11 +185,14 @@ if ($hassiteconfig) {
         new lang_string('configproxypassword', 'admin'), ''));
     $temp->add(new admin_setting_configtext('proxybypass', new lang_string('proxybypass', 'admin'),
         new lang_string('configproxybypass', 'admin'), 'localhost, 127.0.0.1'));
+<<<<<<< HEAD
     $temp->add(new admin_setting_configcheckbox('proxylogunsafe', new lang_string('proxylogunsafe', 'admin'),
         new lang_string('configproxylogunsafe_help', 'admin'), 0));
     $temp->add(new admin_setting_configcheckbox('proxyfixunsafe', new lang_string('proxyfixunsafe', 'admin'),
         new lang_string('configproxyfixunsafe_help', 'admin'), 0));
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $ADMIN->add('server', $temp);
 
     $temp = new admin_settingpage('maintenancemode', new lang_string('sitemaintenancemode', 'admin'));
@@ -452,6 +458,7 @@ if ($hassiteconfig) {
         'CRAM-MD5' => 'CRAM-MD5',
     ];
 
+<<<<<<< HEAD
     // Get all the issuers.
     $issuers = \core\oauth2\api::get_all_issuers();
     $enabledissuers = [];
@@ -481,6 +488,11 @@ if ($hassiteconfig) {
             new lang_string('configsmtpoauthservice', 'admin'), '', $oauth2services));
     }
 
+=======
+    $temp->add(new admin_setting_configselect('smtpauthtype', new lang_string('smtpauthtype', 'admin'),
+        new lang_string('configsmtpauthtype', 'admin'), 'LOGIN', $authtypeoptions));
+
+>>>>>>> forked/LAE_400_PACKAGE
     $temp->add(new admin_setting_configtext('smtpuser', new lang_string('smtpuser', 'admin'),
         new lang_string('configsmtpuser', 'admin'), '', PARAM_NOTAGS));
 

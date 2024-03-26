@@ -6,7 +6,11 @@ use DOMElement;
 use PhpOffice\PhpSpreadsheet\DefinedName;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
+<<<<<<< HEAD
 class DefinedNames extends BaseLoader
+=======
+class DefinedNames extends BaseReader
+>>>>>>> forked/LAE_400_PACKAGE
 {
     public function read(DOMElement $workbookData): void
     {
@@ -25,8 +29,13 @@ class DefinedNames extends BaseLoader
             $baseAddress = $definedNameElement->getAttributeNS($this->tableNs, 'base-cell-address');
             $range = $definedNameElement->getAttributeNS($this->tableNs, 'cell-range-address');
 
+<<<<<<< HEAD
             $baseAddress = FormulaTranslator::convertToExcelAddressValue($baseAddress);
             $range = FormulaTranslator::convertToExcelAddressValue($range);
+=======
+            $baseAddress = $this->convertToExcelAddressValue($baseAddress);
+            $range = $this->convertToExcelAddressValue($range);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $this->addDefinedName($baseAddress, $definedName, $range);
         }
@@ -43,9 +52,15 @@ class DefinedNames extends BaseLoader
             $baseAddress = $definedNameElement->getAttributeNS($this->tableNs, 'base-cell-address');
             $expression = $definedNameElement->getAttributeNS($this->tableNs, 'expression');
 
+<<<<<<< HEAD
             $baseAddress = FormulaTranslator::convertToExcelAddressValue($baseAddress);
             $expression = substr($expression, strpos($expression, ':=') + 1);
             $expression = FormulaTranslator::convertToExcelFormulaValue($expression);
+=======
+            $baseAddress = $this->convertToExcelAddressValue($baseAddress);
+            $expression = substr($expression, strpos($expression, ':=') + 1);
+            $expression = $this->convertToExcelFormulaValue($expression);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $this->addDefinedName($baseAddress, $definedName, $expression);
         }

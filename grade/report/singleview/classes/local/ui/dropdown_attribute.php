@@ -24,6 +24,11 @@
 
 namespace gradereport_singleview\local\ui;
 
+<<<<<<< HEAD
+=======
+use html_writer;
+
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -35,6 +40,7 @@ defined('MOODLE_INTERNAL') || die;
  */
 class dropdown_attribute extends element {
 
+<<<<<<< HEAD
     /**
      * Who is selected?
      * @var string $selected
@@ -56,6 +62,17 @@ class dropdown_attribute extends element {
     /** @var bool If this is a read-only input. */
     private bool $isreadonly;
 
+=======
+    /** @var string $selected Who is selected ? */
+    private $selected;
+
+    /** @var array $options List of options ? */
+    private $options;
+
+    /** @var bool $isdisabled Is this input disabled. */
+    private $isdisabled;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Constructor
      *
@@ -64,6 +81,7 @@ class dropdown_attribute extends element {
      * @param string $label The form label for this input.
      * @param string $selected The name of the selected item in this input.
      * @param bool $isdisabled Are we disabled?
+<<<<<<< HEAD
      * @param bool $isreadonly If this is a read-only input.
      */
     public function __construct(
@@ -78,6 +96,13 @@ class dropdown_attribute extends element {
         $this->options = $options;
         $this->isdisabled = $isdisabled;
         $this->isreadonly = $isreadonly;
+=======
+     */
+    public function __construct($name, $options, $label, $selected = '', $isdisabled = false) {
+        $this->selected = $selected;
+        $this->options = $options;
+        $this->isdisabled = $isdisabled;
+>>>>>>> forked/LAE_400_PACKAGE
         parent::__construct($name, $selected, $label);
     }
 
@@ -86,7 +111,11 @@ class dropdown_attribute extends element {
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function is_dropdown(): bool {
+=======
+    public function is_dropdown() {
+>>>>>>> forked/LAE_400_PACKAGE
         return true;
     }
 
@@ -95,12 +124,17 @@ class dropdown_attribute extends element {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function html(): string {
+=======
+    public function html() {
+>>>>>>> forked/LAE_400_PACKAGE
         global $OUTPUT;
 
         $options = $this->options;
         $selected = $this->selected;
 
+<<<<<<< HEAD
         $context = [
             'name' => $this->name,
             'value' => $this->selected,
@@ -108,6 +142,13 @@ class dropdown_attribute extends element {
             'tabindex' => 1,
             'disabled' => !empty($this->isdisabled),
             'readonly' => $this->isreadonly,
+=======
+        $context = array(
+            'name' => $this->name,
+            'value' => $this->selected,
+            'tabindex' => 1,
+            'disabled' => !empty($this->isdisabled),
+>>>>>>> forked/LAE_400_PACKAGE
             'options' => array_map(function($option) use ($options, $selected) {
                 return [
                     'name' => $options[$option],
@@ -116,7 +157,11 @@ class dropdown_attribute extends element {
                 ];
             }, array_keys($options)),
             'label' => get_string('gradefor', 'gradereport_singleview', $this->label),
+<<<<<<< HEAD
         ];
+=======
+        );
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $OUTPUT->render_from_template('gradereport_singleview/dropdown_attribute', $context);
     }

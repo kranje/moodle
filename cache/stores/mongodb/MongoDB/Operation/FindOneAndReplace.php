@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,8 +29,11 @@ use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
 use MongoDB\Driver\Server;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnsupportedException;
+<<<<<<< HEAD
 
 use function array_key_exists;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_array;
 use function is_integer;
 use function is_object;
@@ -33,12 +44,21 @@ use function MongoDB\is_first_key_operator;
  *
  * @api
  * @see \MongoDB\Collection::findOneAndReplace()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/findAndModify/
  */
 class FindOneAndReplace implements Executable, Explainable
 {
     public const RETURN_DOCUMENT_BEFORE = 1;
     public const RETURN_DOCUMENT_AFTER = 2;
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
+ */
+class FindOneAndReplace implements Executable, Explainable
+{
+    const RETURN_DOCUMENT_BEFORE = 1;
+    const RETURN_DOCUMENT_AFTER = 2;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var FindAndModify */
     private $findAndModify;
@@ -51,11 +71,21 @@ class FindOneAndReplace implements Executable, Explainable
      *  * bypassDocumentValidation (boolean): If true, allows the write to
      *    circumvent document level validation.
      *
+<<<<<<< HEAD
      *  * collation (document): Collation specification.
      *
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    This is not supported for servers versions < 4.4.
+=======
+     *    For servers < 3.2, this option is ignored as document level validation
+     *    is not available.
+     *
+     *  * collation (document): Collation specification.
+     *
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * hint (string|document): The index to use. Specify either the index
      *    name as a string or the index key pattern as a document. If specified,
@@ -78,6 +108,11 @@ class FindOneAndReplace implements Executable, Explainable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * sort (document): Determines which document the operation modifies if
      *    the query selects multiple documents.
      *
@@ -86,6 +121,7 @@ class FindOneAndReplace implements Executable, Explainable
      *  * upsert (boolean): When true, a new document is created if no document
      *    matches the query. The default is false.
      *
+<<<<<<< HEAD
      *  * let (document): Map of parameter names and values. Values must be
      *    constant or closed expressions that do not reference document fields.
      *    Parameters can then be accessed as variables in an aggregate
@@ -93,6 +129,13 @@ class FindOneAndReplace implements Executable, Explainable
      *
      *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern.
      *
+=======
+     *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern.
+     *
+     *    This is not supported for server versions < 3.2 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string       $databaseName   Database name
      * @param string       $collectionName Collection name
      * @param array|object $filter         Query by which to filter documents
@@ -100,7 +143,11 @@ class FindOneAndReplace implements Executable, Explainable
      * @param array        $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, string $collectionName, $filter, $replacement, array $options = [])
+=======
+    public function __construct($databaseName, $collectionName, $filter, $replacement, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_array($filter) && ! is_object($filter)) {
             throw InvalidArgumentException::invalidType('$filter', $filter, 'array or object');
@@ -114,10 +161,19 @@ class FindOneAndReplace implements Executable, Explainable
             throw new InvalidArgumentException('First key in $replacement argument is an update operator');
         }
 
+<<<<<<< HEAD
+=======
+        $options += [
+            'returnDocument' => self::RETURN_DOCUMENT_BEFORE,
+            'upsert' => false,
+        ];
+
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['projection']) && ! is_array($options['projection']) && ! is_object($options['projection'])) {
             throw InvalidArgumentException::invalidType('"projection" option', $options['projection'], 'array or object');
         }
 
+<<<<<<< HEAD
         if (array_key_exists('returnDocument', $options) && ! is_integer($options['returnDocument'])) {
             throw InvalidArgumentException::invalidType('"returnDocument" option', $options['returnDocument'], 'integer');
         }
@@ -127,6 +183,14 @@ class FindOneAndReplace implements Executable, Explainable
             $options['returnDocument'] !== self::RETURN_DOCUMENT_AFTER &&
             $options['returnDocument'] !== self::RETURN_DOCUMENT_BEFORE
         ) {
+=======
+        if (! is_integer($options['returnDocument'])) {
+            throw InvalidArgumentException::invalidType('"returnDocument" option', $options['returnDocument'], 'integer');
+        }
+
+        if ($options['returnDocument'] !== self::RETURN_DOCUMENT_AFTER &&
+            $options['returnDocument'] !== self::RETURN_DOCUMENT_BEFORE) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new InvalidArgumentException('Invalid value for "returnDocument" option: ' . $options['returnDocument']);
         }
 
@@ -134,9 +198,13 @@ class FindOneAndReplace implements Executable, Explainable
             $options['fields'] = $options['projection'];
         }
 
+<<<<<<< HEAD
         if (isset($options['returnDocument'])) {
             $options['new'] = $options['returnDocument'] === self::RETURN_DOCUMENT_AFTER;
         }
+=======
+        $options['new'] = $options['returnDocument'] === self::RETURN_DOCUMENT_AFTER;
+>>>>>>> forked/LAE_400_PACKAGE
 
         unset($options['projection'], $options['returnDocument']);
 
@@ -151,6 +219,10 @@ class FindOneAndReplace implements Executable, Explainable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
+=======
+     * @param Server $server
+>>>>>>> forked/LAE_400_PACKAGE
      * @return array|object|null
      * @throws UnsupportedException if collation or write concern is used and unsupported
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
@@ -160,12 +232,15 @@ class FindOneAndReplace implements Executable, Explainable
         return $this->findAndModify->execute($server);
     }
 
+<<<<<<< HEAD
     /**
      * Returns the command document for this operation.
      *
      * @see Explainable::getCommandDocument()
      * @return array
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getCommandDocument(Server $server)
     {
         return $this->findAndModify->getCommandDocument($server);

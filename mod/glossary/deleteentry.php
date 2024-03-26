@@ -28,6 +28,7 @@ $entrydeleted  = get_string("entrydeleted","glossary");
 
 
 if (! $cm = get_coursemodule_from_id('glossary', $id)) {
+<<<<<<< HEAD
     throw new \moodle_exception("invalidcoursemodule");
 }
 
@@ -37,18 +38,37 @@ if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
 
 if (! $entry = $DB->get_record("glossary_entries", array("id"=>$entry))) {
     throw new \moodle_exception('invalidentry');
+=======
+    print_error("invalidcoursemodule");
+}
+
+if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+    print_error('coursemisconf');
+}
+
+if (! $entry = $DB->get_record("glossary_entries", array("id"=>$entry))) {
+    print_error('invalidentry');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Permission checks are based on the course module instance so make sure it is correct.
 if ($cm->instance != $entry->glossaryid) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidentry');
+=======
+    print_error('invalidentry');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course, false, $cm);
 $context = context_module::instance($cm->id);
 
 if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidid', 'glossary');
+=======
+    print_error('invalidid', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Throws an exception if the user cannot delete the entry.

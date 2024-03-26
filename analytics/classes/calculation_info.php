@@ -99,7 +99,11 @@ class calculation_info {
             $samplekey = self::get_sample_key($uniquesampleid);
 
             // Update the cached data adding the new indicator data.
+<<<<<<< HEAD
             $cacheddata = $cache->get($samplekey) ?: [];
+=======
+            $cacheddata = $cache->get($samplekey);
+>>>>>>> forked/LAE_400_PACKAGE
             $cacheddata[$calculableclass] = $infokeys;
             $cache->set($samplekey, $cacheddata);
         }

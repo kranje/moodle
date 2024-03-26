@@ -65,6 +65,7 @@ abstract class plugin {
         } while ($unique == $password);
         return $password;
     }
+<<<<<<< HEAD
 
     /**
      * Generate random credentials for guest access
@@ -76,4 +77,6 @@ abstract class plugin {
         $guestlinkuid = sha1(self::random_password(1024));
         return [$guestlinkuid, $password];
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -62,7 +62,11 @@ $params = array('contextid' => $contextid,
                 'scaleid' => $scaleid);
 if (!has_capability('moodle/rating:view', $context) ||
         !component_callback($component, 'rating_can_see_item_ratings', array($params), true)) {
+<<<<<<< HEAD
     throw new \moodle_exception('noviewrate', 'rating');
+=======
+    print_error('noviewrate', 'rating');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $canviewallratings = has_capability('moodle/rating:viewall', $context);

@@ -67,7 +67,11 @@ class core_course_deletecategory_form extends moodleform {
             $options[1] = get_string('deleteallcannotundo');
         }
         if (empty($options)) {
+<<<<<<< HEAD
             throw new \moodle_exception('youcannotdeletecategory', 'error', 'index.php', $categoryname);
+=======
+            print_error('youcannotdeletecategory', 'error', 'index.php', $categoryname);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Now build the form.

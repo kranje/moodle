@@ -35,7 +35,11 @@ class behat_mod_data_generator extends behat_generator_base {
                 'singular' => 'entry',
                 'datagenerator' => 'entry',
                 'required' => ['database'],
+<<<<<<< HEAD
                 'switchids' => ['database' => 'databaseid', 'user' => 'userid'],
+=======
+                'switchids' => ['database' => 'databaseid'],
+>>>>>>> forked/LAE_400_PACKAGE
             ],
             'fields' => [
                 'singular' => 'field',
@@ -49,12 +53,15 @@ class behat_mod_data_generator extends behat_generator_base {
                 'required' => ['database', 'name'],
                 'switchids' => ['database' => 'databaseid'],
             ],
+<<<<<<< HEAD
             'presets' => [
                 'singular' => 'preset',
                 'datagenerator' => 'preset',
                 'required' => ['database', 'name'],
                 'switchids' => ['database' => 'databaseid', 'user' => 'userid'],
             ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -81,11 +88,14 @@ class behat_mod_data_generator extends behat_generator_base {
         $database = $DB->get_record('data', ['id' => $data['databaseid']], '*', MUST_EXIST);
 
         unset($data['databaseid']);
+<<<<<<< HEAD
         $userid = 0;
         if (array_key_exists('userid', $data)) {
             $userid = $data['userid'];
             unset($data['userid']);
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $data = array_reduce(array_keys($data), function ($fields, $fieldname) use ($data, $database) {
             global $DB;
@@ -97,7 +107,11 @@ class behat_mod_data_generator extends behat_generator_base {
             return $fields;
         }, []);
 
+<<<<<<< HEAD
         $this->get_data_generator()->create_entry($database, $data, 0, [], null, $userid);
+=======
+        $this->get_data_generator()->create_entry($database, $data);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -136,6 +150,7 @@ class behat_mod_data_generator extends behat_generator_base {
     }
 
     /**
+<<<<<<< HEAD
      * Saves a preset.
      *
      * @param array $data Preset data.
@@ -149,6 +164,8 @@ class behat_mod_data_generator extends behat_generator_base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get the module data generator.
      *
      * @return mod_data_generator Database data generator.

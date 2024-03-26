@@ -134,6 +134,7 @@ class manage_qbank_plugins_page extends \admin_setting {
             $table->data[] = $row;
             $count++;
         }
+<<<<<<< HEAD
 
         // Sort table data.
         usort($table->data, function($a, $b) {
@@ -146,6 +147,8 @@ class manage_qbank_plugins_page extends \admin_setting {
             return $aid < $bid ? -1 : 1;
         });
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $return .= \html_writer::table($table);
         return highlight($query, $return);
     }

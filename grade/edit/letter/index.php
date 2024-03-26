@@ -38,7 +38,11 @@ $contextid = null;//now we have a context object throw away the $contextid from 
 //if viewing
 if (!$edit) {
     if (!has_capability('moodle/grade:manage', $context) and !has_capability('moodle/grade:manageletters', $context)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nopermissiontoviewletergrade');
+=======
+        print_error('nopermissiontoviewletergrade');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 } else {//else we're editing
     require_capability('moodle/grade:manageletters', $context);
@@ -71,13 +75,21 @@ if ($context->contextlevel == CONTEXT_SYSTEM or $context->contextlevel == CONTEX
 
     $gpr = new grade_plugin_return(array('type'=>'edit', 'plugin'=>'letter', 'courseid'=>$course->id));
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourselevel');
+=======
+    print_error('invalidcourselevel');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $strgrades = get_string('grades');
 $pagename  = get_string('letters', 'grades');
 
 $letters = grade_get_letters($context);
+<<<<<<< HEAD
+=======
+$num = count($letters) + 3;
+>>>>>>> forked/LAE_400_PACKAGE
 
 $override = $DB->record_exists('grade_letters', array('contextid' => $context->id));
 
@@ -128,18 +140,32 @@ if (!$edit) {
     $data = new stdClass();
     $data->id = $context->id;
 
+<<<<<<< HEAD
     $i = 0;
     foreach ($letters as $boundary=>$letter) {
         $data->gradeletter[$i] = $letter;
         $data->gradeboundary[$i] = $boundary;
+=======
+    $i = 1;
+    foreach ($letters as $boundary=>$letter) {
+        $gradelettername = 'gradeletter'.$i;
+        $gradeboundaryname = 'gradeboundary'.$i;
+
+        $data->$gradelettername   = $letter;
+        $data->$gradeboundaryname = $boundary;
+>>>>>>> forked/LAE_400_PACKAGE
         $i++;
     }
     $data->override = $override;
 
+<<<<<<< HEAD
     // Count number of letters, used to build the repeated elements of the form.
     $lettercount = count($letters);
 
     $mform = new edit_letter_form($returnurl.$editparam, ['lettercount' => $lettercount, 'admin' => $admin]);
+=======
+    $mform = new edit_letter_form($returnurl.$editparam, array('num'=>$num, 'admin'=>$admin));
+>>>>>>> forked/LAE_400_PACKAGE
     $mform->set_data($data);
 
     if ($mform->is_cancelled()) {
@@ -168,6 +194,7 @@ if (!$edit) {
         }
 
         $letters = array();
+<<<<<<< HEAD
         for ($i = 0; $i < $data->gradeentrycount; $i++) {
             $letter = $data->gradeletter[$i];
             if ($letter === '') {
@@ -181,6 +208,26 @@ if (!$edit) {
 
             // The keys need to be strings so floats are not truncated.
             $letters[number_format($boundary, 5)] = $letter;
+=======
+        for ($i=1; $i < $num+1; $i++) {
+            $gradelettername = 'gradeletter'.$i;
+            $gradeboundaryname = 'gradeboundary'.$i;
+
+            if (property_exists($data, $gradeboundaryname) and $data->$gradeboundaryname != -1) {
+                $letter = trim($data->$gradelettername);
+                if ($letter == '') {
+                    continue;
+                }
+
+                $boundary = floatval($data->$gradeboundaryname);
+                if ($boundary < 0 || $boundary > 100) {
+                    continue;    // Skip if out of range.
+                }
+
+                // The keys need to be strings so floats are not truncated.
+                $letters[number_format($boundary, 5)] = $letter;
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $pool = array();

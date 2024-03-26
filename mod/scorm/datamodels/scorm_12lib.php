@@ -49,10 +49,17 @@ function get_scorm_default (&$userdata, $scorm, $scoid, $attempt, $mode) {
             $userdata->$key = $value;
         }
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotfindsco', 'scorm');
     }
     if (!$sco = scorm_get_sco($scoid)) {
         throw new \moodle_exception('cannotfindsco', 'scorm');
+=======
+        print_error('cannotfindsco', 'scorm');
+    }
+    if (!$sco = scorm_get_sco($scoid)) {
+        print_error('cannotfindsco', 'scorm');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (isset($userdata->status)) {

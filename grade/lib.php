@@ -852,12 +852,19 @@ class grade_plugin_info {
  * @param actionbar|null $actionbar The actions bar which will be displayed on the page if $shownavigation is set
  *                                  to true. If $actionbar is not explicitly defined, the general action bar
  *                                  (\core_grades\output\general_action_bar) will be used by default.
+<<<<<<< HEAD
  * @param boolean $showtitle If set to false just show course full name as a title.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * @return string HTML code or nothing if $return == false
  */
 function print_grade_page_head(int $courseid, string $active_type, ?string $active_plugin = null, $heading = false,
        bool $return = false, $buttons = false, bool $shownavigation = true, ?string $headerhelpidentifier = null,
+<<<<<<< HEAD
        ?string $headerhelpcomponent = null, ?stdClass $user = null, ?action_bar $actionbar = null, $showtitle = true) {
+=======
+       ?string $headerhelpcomponent = null, ?stdClass $user = null, ?action_bar $actionbar = null) {
+>>>>>>> forked/LAE_400_PACKAGE
     global $CFG, $OUTPUT, $PAGE;
 
     // Put a warning on all gradebook pages if the course has modules currently scheduled for background deletion.
@@ -878,9 +885,13 @@ function print_grade_page_head(int $courseid, string $active_type, ?string $acti
     $stractive_plugin = ($active_plugin) ? $plugin_info['strings']['active_plugin_str'] : $heading;
     $stractive_type = $plugin_info['strings'][$active_type];
 
+<<<<<<< HEAD
     if (!$showtitle) {
         $title = $PAGE->course->fullname;
     } else if (empty($plugin_info[$active_type]->id) || !empty($plugin_info[$active_type]->parent)) {
+=======
+    if (empty($plugin_info[$active_type]->id) || !empty($plugin_info[$active_type]->parent)) {
+>>>>>>> forked/LAE_400_PACKAGE
         $title = $PAGE->course->fullname.': ' . $stractive_type . ': ' . $stractive_plugin;
     } else {
         $title = $PAGE->course->fullname.': ' . $stractive_plugin;
@@ -919,10 +930,13 @@ function print_grade_page_head(int $courseid, string $active_type, ?string $acti
         $heading = $stractive_plugin;
     }
 
+<<<<<<< HEAD
     if (!$showtitle) {
         $heading = '';
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if ($shownavigation) {
         $renderer = $PAGE->get_renderer('core_grades');
         // If the navigation action bar is not explicitly defined, use the general (default) action bar.
@@ -943,8 +957,19 @@ function print_grade_page_head(int $courseid, string $active_type, ?string $acti
         $output = $OUTPUT->heading_with_help($heading, $headerhelpidentifier, $headerhelpcomponent);
     } else {
         if (isset($user)) {
+<<<<<<< HEAD
             $renderer = $PAGE->get_renderer('core_grades');
             $output = $OUTPUT->heading($renderer->user_heading($user, $courseid));
+=======
+            $output = $OUTPUT->context_header(
+                array(
+                    'heading' => html_writer::link(new moodle_url('/user/view.php', array('id' => $user->id,
+                        'course' => $courseid)), fullname($user)),
+                    'user' => $user,
+                    'usercontext' => context_user::instance($user->id)
+                ), 2
+            );
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             $output = $OUTPUT->heading($heading);
         }
@@ -1488,6 +1513,7 @@ class grade_structure {
     }
 
     /**
+<<<<<<< HEAD
      * Returns the string that describes the type of the element.
      *
      * @param array $element An array representing an element in the grade_tree
@@ -1530,6 +1556,8 @@ class grade_structure {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns name of element optionally with icon and link
      *
      * @param array &$element An array representing an element in the grade_tree
@@ -1710,6 +1738,7 @@ class grade_structure {
     }
 
     /**
+<<<<<<< HEAD
      * Returns an action menu for the grade.
      *
      * @param grade_grade $grade A grade_grade object
@@ -1740,6 +1769,8 @@ class grade_structure {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns the grade eid - the grade may not exist yet.
      *
      * @param grade_grade $grade_grade A grade_grade object
@@ -3029,7 +3060,11 @@ abstract class grade_helper {
 
             // Add link to preferences tab if such a page exists
             if (file_exists($plugindir.'/preferences.php')) {
+<<<<<<< HEAD
                 $url = new moodle_url('/grade/report/'.$plugin.'/preferences.php', array('id' => $courseid));
+=======
+                $url = new moodle_url('/grade/report/'.$plugin.'/preferences.php', array('id'=>$courseid));
+>>>>>>> forked/LAE_400_PACKAGE
                 $gradepreferences[$plugin] = new grade_plugin_info($plugin, $url,
                     get_string('preferences', 'grades') . ': ' . $pluginstr);
             }

@@ -8,6 +8,7 @@ Feature: The timeline block allows users to search for upcoming activities
       | username | firstname | lastname | email               | idnumber |
       | student1 | Student  | 1        | student1@example.com | S1       |
     And the following "courses" exist:
+<<<<<<< HEAD
       | fullname                  | shortname | category | startdate                   | enddate                    |
       | Course 1                  | C1        | 0        | ##1 month ago##             | ##15 days ago##            |
       | Course 2                  | C2        | 0        | ##yesterday##               | ##tomorrow##               |
@@ -29,6 +30,27 @@ Feature: The timeline block allows users to search for upcoming activities
       | feedback | C1     | feedback2 | Test feedback 2           | Test feedback description | ##first day of +5 months## | ##last day of +5 months##  |              |
       | feedback | C3     | feedback3 | Test feedback 3           | Test feedback description | ##first day of +5 months## | ##last day of +10 months## |              |
       | assign   | C6     | assign1   | Assign with advanced name | Test assign description   | ##yesterday##              |                            | ##tomorrow## |
+=======
+      | fullname | shortname | category | startdate                   | enddate                    |
+      | Course 1 | C1        | 0        | ##1 month ago##             | ##15 days ago##            |
+      | Course 2 | C2        | 0        | ##yesterday##               | ##tomorrow##               |
+      | Course 3 | C3        | 0        | ##first day of next month## | ##last day of next month## |
+      | Course 4 | C4        | 0        | ##1 month ago##             | ##tomorrow##               |
+      | Course 5 | C5        | 0        | ##first day of last month## | ##last day of next month## |
+    And the following "activities" exist:
+      | activity | course | idnumber  | name            | intro                     | timeopen                   | timeclose                  |
+      | choice   | C2     | choice1   | Test choice 1   | Test choice description   | ##yesterday##              | ##tomorrow##               |
+      | choice   | C1     | choice2   | Test choice 2   | Test choice description   | ##first day of +5 months## | ##last day of +5 months##  |
+      | choice   | C3     | choice3   | Test choice 3   | Test choice description   | ##first day of +5 months## | ##last day of +10 months## |
+      | choice   | C2     | choice4   | Test choice 4   | Test choice description   | ##first day of +5 months## | ##last day of +15 months## |
+      | choice   | C1     | choice5   | Test choice 5   | Test choice description   | ##first day of +5 months## | ##last day of +20 months## |
+      | choice   | C3     | choice6   | Test choice 6   | Test choice description   | ##first day of +5 months## | ##last day of +25 months## |
+      | choice   | C4     | choice7   | Test choice 7   | Test choice description   | ##first day of +5 months## | ##last day of +5 months##  |
+      | choice   | C5     | choice8   | Test choice 8   | Test choice description   | ##first day of +5 months## | ##last day of +10 months## |
+      | feedback | C2     | feedback1 | Test feedback 1 | Test feedback description | ##yesterday##              | ##tomorrow##               |
+      | feedback | C1     | feedback2 | Test feedback 2 | Test feedback description | ##first day of +5 months## | ##last day of +5 months##  |
+      | feedback | C3     | feedback3 | Test feedback 3 | Test feedback description | ##first day of +5 months## | ##last day of +10 months## |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "course enrolments" exist:
       | user     | course | role    |
       | student1 | C1     | student |
@@ -36,7 +58,10 @@ Feature: The timeline block allows users to search for upcoming activities
       | student1 | C3     | student |
       | student1 | C4     | student |
       | student1 | C5     | student |
+<<<<<<< HEAD
       | student1 | C6     | student |
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: The search should return no events if I enter the wrong value
     Given I log in as "student1"
@@ -59,6 +84,7 @@ Feature: The timeline block allows users to search for upcoming activities
     And I should not see "Test feedback 1" in the "Timeline" "block"
     And I should not see "Test feedback 3" in the "Timeline" "block"
 
+<<<<<<< HEAD
   Scenario: Search for Course name - Advanced
     Given I log in as "student1"
     And I click on "Filter timeline by date" "button" in the "Timeline" "block"
@@ -66,6 +92,8 @@ Feature: The timeline block allows users to search for upcoming activities
     When I set the field "Search" in the "Timeline" "block" to "Course advanced"
     Then I should see "Assign with advanced name" in the "Timeline" "block"
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Search for Activity name
     Given I log in as "student1"
     And I click on "Filter timeline by date" "button" in the "Timeline" "block"
@@ -82,6 +110,7 @@ Feature: The timeline block allows users to search for upcoming activities
     And I should not see "Test feedback 2" in the "Timeline" "block"
     And I should not see "Test feedback 3" in the "Timeline" "block"
 
+<<<<<<< HEAD
   Scenario: Search for Activity name - Advanced
     Given I log in as "student1"
     And I click on "Filter timeline by date" "button" in the "Timeline" "block"
@@ -89,6 +118,8 @@ Feature: The timeline block allows users to search for upcoming activities
     When I set the field "Search" in the "Timeline" "block" to "Assign advanced"
     Then I should see "Assign with advanced name" in the "Timeline" "block"
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Search for Activity type
     Given I log in as "student1"
     And I click on "Filter timeline by date" "button" in the "Timeline" "block"

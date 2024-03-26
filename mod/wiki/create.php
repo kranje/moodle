@@ -36,7 +36,11 @@ $uid = optional_param('uid', 0, PARAM_INT);
 // so sesskey must be checked
 if ($action == 'create') {
     if (!confirm_sesskey()) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidsesskey');
+=======
+        print_error('invalidsesskey');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -44,20 +48,32 @@ if (!empty($swid)) {
     $subwiki = wiki_get_subwiki($swid);
 
     if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else {
     $subwiki = wiki_get_subwiki_by_group($wid, $group, $uid);
 
     if (!$wiki = wiki_get_wiki($wid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 }
 
 if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $groups = new stdClass();

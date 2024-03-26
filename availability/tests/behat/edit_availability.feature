@@ -27,6 +27,13 @@ Feature: edit_availability
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
+<<<<<<< HEAD
+=======
+    And the following "activity" exists:
+      | activity | forum   |
+      | course   | C1      |
+      | name     | MyForum |
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Confirm the 'enable availability' option is working
     Given the following config values are set as admin:
@@ -55,12 +62,17 @@ Feature: edit_availability
       | activity    | page                        |
       | course      | C1                          |
       | idnumber    | 0002                        |
+<<<<<<< HEAD
       | section     | 1                           |
       | name        | Page2                       |
       | intro       | pageintro                   |
     And I am on "Course 1" course homepage
     And I follow "Page2"
     And I navigate to "Settings" in current page administration
+=======
+      | name        | Page2                       |
+    And I am on the "Page2" "page activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     Then "Restrict access" "fieldset" should exist
 
     Given I am on "Course 1" course homepage
@@ -70,9 +82,18 @@ Feature: edit_availability
   @javascript
   Scenario: Edit availability using settings in activity form
     # Set up.
+<<<<<<< HEAD
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
     And I add a "Page" to section "1"
+=======
+    Given the following "activity" exists:
+      | activity | page |
+      | course   | C1   |
+      | section  | 1    |
+      | name     | P1   |
+    And I am on the "P1" "page activity editing" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     Then I should see "None" in the "Restrict access" "fieldset"
 
@@ -178,9 +199,13 @@ Feature: edit_availability
     # Button does not exist when conditional access restrictions are turned off.
     Given the following config values are set as admin:
       | enableavailability | 0 |
+<<<<<<< HEAD
     And I log in as "admin"
     And I am on "Course 1" course homepage with editing mode on
     And I add a "Forum" to section "1"
+=======
+    And I am on the "MyForum" "forum activity editing" page logged in as admin
+>>>>>>> forked/LAE_400_PACKAGE
     When I expand all fieldsets
     Then "Add group/grouping access restriction" "button" should not exist
 
@@ -190,12 +215,16 @@ Feature: edit_availability
     Given the following "groupings" exist:
       | name | course | idnumber |
       | GX1  | C1     | GXI1     |
+<<<<<<< HEAD
     And I log in as "admin"
     And I am on "Course 1" course homepage with editing mode on
     And I add a "Forum" to section "1"
     And I set the following fields to these values:
       | Forum name  | MyForum |
       | Description | x       |
+=======
+    And I am on the "MyForum" "forum activity editing" page logged in as admin
+>>>>>>> forked/LAE_400_PACKAGE
     When I expand all fieldsets
     Then the "Add group/grouping access restriction" "button" should be disabled
 

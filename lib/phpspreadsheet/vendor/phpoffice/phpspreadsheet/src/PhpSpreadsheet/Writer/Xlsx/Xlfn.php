@@ -144,9 +144,12 @@ class Xlfn
         . '|call'
         . '|let'
         . '|register[.]id'
+<<<<<<< HEAD
         . '|textafter'
         . '|textbefore'
         . '|textsplit'
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         . '|valuetotext'
         . ')(?=\\s*[(])/i';
 
@@ -155,7 +158,11 @@ class Xlfn
      */
     public static function addXlfn(string $funcstring): string
     {
+<<<<<<< HEAD
         return (string) preg_replace(self::XLFNREGEXP, '_xlfn.$1', $funcstring);
+=======
+        return preg_replace(self::XLFNREGEXP, '_xlfn.$1', $funcstring);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

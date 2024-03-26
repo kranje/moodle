@@ -58,8 +58,11 @@ if (!class_exists('SimplePie'))
  */
 class SimplePie_Autoloader
 {
+<<<<<<< HEAD
 	protected $path;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	/**
 	 * Constructor
 	 */

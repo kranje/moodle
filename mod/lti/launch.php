@@ -50,12 +50,19 @@ require_once("../../config.php");
 require_once($CFG->dirroot.'/mod/lti/lib.php');
 require_once($CFG->dirroot.'/mod/lti/locallib.php');
 
+<<<<<<< HEAD
 $cmid = required_param('id', PARAM_INT); // Course Module ID.
 $triggerview = optional_param('triggerview', 1, PARAM_BOOL);
 $action = optional_param('action', '', PARAM_TEXT);
 $foruserid = optional_param('user', 0, PARAM_INT);
 
 $cm = get_coursemodule_from_id('lti', $cmid, 0, false, MUST_EXIST);
+=======
+$id = required_param('id', PARAM_INT); // Course Module ID.
+$triggerview = optional_param('triggerview', 1, PARAM_BOOL);
+
+$cm = get_coursemodule_from_id('lti', $id, 0, false, MUST_EXIST);
+>>>>>>> forked/LAE_400_PACKAGE
 $lti = $DB->get_record('lti', array('id' => $cm->instance), '*', MUST_EXIST);
 
 $typeid = $lti->typeid;
@@ -66,11 +73,15 @@ if ($typeid) {
     $config = lti_get_type_type_config($typeid);
     if ($config->lti_ltiversion === LTI_VERSION_1P3) {
         if (!isset($SESSION->lti_initiatelogin_status)) {
+<<<<<<< HEAD
             $msgtype = 'basic-lti-launch-request';
             if ($action === 'gradeReport') {
                 $msgtype = 'LtiSubmissionReviewRequest';
             }
             echo lti_initiate_login($cm->course, $cmid, $lti, $config, $msgtype, '', '', $foruserid);
+=======
+            echo lti_initiate_login($cm->course, $id, $lti, $config);
+>>>>>>> forked/LAE_400_PACKAGE
             exit;
         } else {
             unset($SESSION->lti_initiatelogin_status);
@@ -91,4 +102,9 @@ if ($triggerview) {
 }
 
 $lti->cmid = $cm->id;
+<<<<<<< HEAD
 lti_launch_tool($lti, $foruserid);
+=======
+lti_launch_tool($lti);
+
+>>>>>>> forked/LAE_400_PACKAGE

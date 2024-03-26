@@ -32,6 +32,7 @@ require_once(__DIR__ . '/../fixtures/task_fixtures.php');
 class adhoc_task_test extends \advanced_testcase {
 
     /**
+<<<<<<< HEAD
      * Test getting name of task that implements it's own get_name method
      *
      * @covers \core\task\adhoc_task::get_name
@@ -52,6 +53,8 @@ class adhoc_task_test extends \advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test basic adhoc task execution.
      */
     public function test_get_next_adhoc_task_now() {
@@ -134,7 +137,11 @@ class adhoc_task_test extends \advanced_testcase {
     public function test_queue_adhoc_task_for_component(): void {
         $this->resetAfterTest();
 
+<<<<<<< HEAD
         $task = new \mod_forum\task\send_user_digests();
+=======
+        $task = new \mod_forum\task\refresh_forum_post_counts();
+>>>>>>> forked/LAE_400_PACKAGE
         $task->set_component('mod_test');
 
         manager::queue_adhoc_task($task);
@@ -148,7 +155,11 @@ class adhoc_task_test extends \advanced_testcase {
     public function test_queue_task_for_component_without_set_component(): void {
         $this->resetAfterTest();
 
+<<<<<<< HEAD
         $task = new \mod_forum\task\send_user_digests();
+=======
+        $task = new \mod_forum\task\refresh_forum_post_counts();
+>>>>>>> forked/LAE_400_PACKAGE
 
         manager::queue_adhoc_task($task);
         $this->assertDebuggingNotCalled();

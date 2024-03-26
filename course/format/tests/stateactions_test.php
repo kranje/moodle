@@ -31,6 +31,7 @@ use stdClass;
 class stateactions_test extends \advanced_testcase {
 
     /**
+<<<<<<< HEAD
      * Setup to ensure that fixtures are loaded.
      */
     public static function setupBeforeClass(): void {
@@ -39,6 +40,8 @@ class stateactions_test extends \advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Helper method to create an activity into a section and add it to the $sections and $activities arrays.
      *
      * @param int $courseid Course identifier where the activity will be added.
@@ -188,7 +191,10 @@ class stateactions_test extends \advanced_testcase {
      * @param array $params the ids, targetsection and targetcm to use as params
      * @param array $expectedresults List of the course module names expected after calling the method.
      * @param bool $expectedexception If this call will raise an exception.
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function test_get_state(
         string $format,
@@ -604,6 +610,7 @@ class stateactions_test extends \advanced_testcase {
      * @return array the state update summary
      */
     protected function basic_state_text(
+<<<<<<< HEAD
         string $method = 'section_hide',
         string $role = 'editingteacher',
         array $idrefs = [],
@@ -615,6 +622,19 @@ class stateactions_test extends \advanced_testcase {
         $sectionvalue = 0,
         ?string $cmfield = null,
         $cmvalue = 0
+=======
+        string  $method = 'section_hide',
+        string  $role = 'editingteacher',
+        array   $idrefs = [],
+        bool    $expectedexception = false,
+        int     $expectedtotal = 0,
+        ?string $coursefield = null,
+                $coursevalue = 0,
+        ?string $sectionfield = null,
+                $sectionvalue = 0,
+        ?string $cmfield = null,
+                $cmvalue = 0
+>>>>>>> forked/LAE_400_PACKAGE
     ): array {
         $this->resetAfterTest();
 
@@ -680,6 +700,7 @@ class stateactions_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test for section_hide
      *
      * @covers ::section_hide
@@ -846,6 +867,8 @@ class stateactions_test extends \advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Data provider for basic role tests.
      *
      * @return array the testing scenarios
@@ -870,4 +893,61 @@ class stateactions_test extends \advanced_testcase {
             ],
         ];
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Test for cm_moveright
+     *
+     * @covers ::cm_moveright
+     * @dataProvider basic_role_provider
+     * @param string $role the user role
+     * @param bool $expectedexception if it will expect an exception.
+     */
+    public function test_cm_moveright(
+        string $role = 'editingteacher',
+        bool $expectedexception = false
+    ): void {
+        $this->basic_state_text(
+            'cm_moveright',
+            $role,
+            ['cm0', 'cm1', 'cm2', 'cm3'],
+            $expectedexception,
+            4,
+            null,
+            null,
+            null,
+            null,
+            'indent',
+            1
+        );
+    }
+
+    /**
+     * Test for cm_moveleft
+     *
+     * @covers ::cm_moveleft
+     * @dataProvider basic_role_provider
+     * @param string $role the user role
+     * @param bool $expectedexception if it will expect an exception.
+     */
+    public function test_cm_moveleft(
+        string $role = 'editingteacher',
+        bool $expectedexception = false
+    ): void {
+        $this->basic_state_text(
+            'cm_moveleft',
+            $role,
+            ['cm0', 'cm1', 'cm2', 'cm3'],
+            $expectedexception,
+            4,
+            null,
+            null,
+            null,
+            null,
+            'indent',
+            0
+        );
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

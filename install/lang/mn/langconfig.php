@@ -29,5 +29,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
+=======
+$string['parentlanguage'] = '';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['thisdirection'] = 'ltr';
 $string['thislanguage'] = 'Монгол';

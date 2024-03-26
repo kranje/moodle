@@ -1,4 +1,7 @@
 totop,theme_boost
+<<<<<<< HEAD
 privacy:drawernavclosed,theme_boost
 privacy:drawernavopen,theme_boost
 currentinparentheses,theme_boost
+=======
+>>>>>>> forked/LAE_400_PACKAGE

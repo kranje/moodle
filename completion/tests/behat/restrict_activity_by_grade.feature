@@ -17,6 +17,7 @@ Feature: Restrict activity availability through grade conditions
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
+<<<<<<< HEAD
     And the following "activity" exists:
       | course                              | C1               |
       | activity                            | assign           |
@@ -29,11 +30,20 @@ Feature: Restrict activity availability through grade conditions
     And I am on "Course 1" course homepage with editing mode on
     # Adding the page like this because id_availableform_enabled needs to be clicked to trigger the action.
     And I add a "Page" to section "2"
+=======
+    And the following "activities" exist:
+      | course | activity | idnumber         | name             | assignsubmission_onlinetext_enabled | assignsubmission_file_enabled | submissiondrafts |
+      | C1     | assign   | Grade assignment | Grade assignment | 1                                   | 0                             | 0                |
+      | C1     | page     | Grade page       | Test page name   |                                     |                               |                  |
+    # Adding the page like this because id_availableform_enabled needs to be clicked to trigger the action.
+    And I am on the "Test page name" "page activity editing" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Grade" "button" in the "Add restriction..." "dialogue"
     And I click on "min" "checkbox"
     And I set the following fields to these values:
+<<<<<<< HEAD
       | Name         | Test page name                                                   |
       | Description  | Restricted page, till grades in Grade assignment is at least 20% |
       | Page content | Test page contents                                               |
@@ -41,6 +51,11 @@ Feature: Restrict activity availability through grade conditions
       | minval       | 20                                                               |
     And I press "Save and return to course"
     And I log out
+=======
+      | id     | Grade assignment |
+      | minval | 20               |
+    And I press "Save and return to course"
+>>>>>>> forked/LAE_400_PACKAGE
 
     When I am on the "Course 1" course page logged in as student1
     Then I should see "Not available unless: You achieve higher than a certain score in Grade assignment"
@@ -52,7 +67,10 @@ Feature: Restrict activity availability through grade conditions
       | Online text | I'm the student submission |
     And I press "Save changes"
     And I should see "Submitted for grading"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     And I am on the "Grade assignment" "assign activity" page logged in as teacher1
     And I follow "View all submissions"
@@ -60,8 +78,11 @@ Feature: Restrict activity availability through grade conditions
     And I set the following fields to these values:
       | Grade | 21 |
     And I press "Save changes"
+<<<<<<< HEAD
     And I follow "Edit settings"
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     And I am on the "Course 1" course page logged in as student1
     And "Test page name" activity should be visible

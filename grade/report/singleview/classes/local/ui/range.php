@@ -24,8 +24,11 @@
 
 namespace gradereport_singleview\local\ui;
 
+<<<<<<< HEAD
 use grade_item;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -41,7 +44,11 @@ class range extends attribute_format {
      * Constructor
      * @param grade_item $item The grade item
      */
+<<<<<<< HEAD
     public function __construct(grade_item $item) {
+=======
+    public function __construct($item) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->item = $item;
     }
 
@@ -50,7 +57,11 @@ class range extends attribute_format {
      *
      * @return element
      */
+<<<<<<< HEAD
     public function determine_format(): element {
+=======
+    public function determine_format() {
+>>>>>>> forked/LAE_400_PACKAGE
         $decimals = $this->item->get_decimals();
 
         $min = format_float($this->item->grademin, $decimals);

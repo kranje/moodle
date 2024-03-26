@@ -191,9 +191,19 @@ class Slk extends BaseReader
 
     /**
      * Loads PhpSpreadsheet from file.
+<<<<<<< HEAD
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
+=======
+     *
+     * @return Spreadsheet
+     */
+    public function load(string $filename, int $flags = 0)
+    {
+        $this->processFlags($flags);
+
+>>>>>>> forked/LAE_400_PACKAGE
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
 
@@ -450,7 +460,11 @@ class Slk extends BaseReader
 
                     break;
                 case 'M':
+<<<<<<< HEAD
                     $formatArray['font']['size'] = ((float) substr($rowDatum, 1)) / 20;
+=======
+                    $formatArray['font']['size'] = substr($rowDatum, 1) / 20;
+>>>>>>> forked/LAE_400_PACKAGE
 
                     break;
                 case 'L':

@@ -10,6 +10,7 @@
 
 /* Advanced Page CSS */
 
+<<<<<<< HEAD
 @media only screen and (min-width: 768px) {
     .tool_brickfield_grid_item {
         width: 33.333333333333336%;
@@ -53,6 +54,24 @@
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: 1em;
+=======
+#tool_brickifeld_advanced_page {
+    margin: 20px 20px 20px 10px;
+}
+
+.tool_brickfield_banner_heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tool_brickfield_banner_heading > img {
+    height: 50px;
+}
+
+.tool_brickfield_banner > p {
+    text-align: center;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .tool_brickfield_grid_heading {
@@ -60,12 +79,17 @@
     font-size: 20px;
     font-weight: 400;
     color: #040d29;
+<<<<<<< HEAD
+=======
+    padding-bottom: 4px;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .tool_brickfield_grid_content {
     color: #040d29;
     font-size: 16px;
     line-height: 1.4em;
+<<<<<<< HEAD
     margin: 0;
     padding: 0;
 }
@@ -92,10 +116,43 @@
 }
 
 .tool_brickfield_advanced_button {
+=======
+}
+
+.tool_brickfield_grid_heading > img {
+    height: 30px;
+    padding-right: 16px;
+}
+
+.tool_brickfield_grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 20px 30px;
+}
+
+.tool_brickfield_grid > div {
+    margin: 10px;
+    padding: 20px;
+    flex-basis: 30%;
+    border: 1px solid grey;
+    max-width: 500px;
+    min-width: 250px;
+    flex-grow: 4;
+    border-radius: 15px 15px 15px 50px;
+}
+
+.tool_brickfield_grid_heading {
+    display: flex;
+}
+
+.tool_brickfield_footer > a {
+>>>>>>> forked/LAE_400_PACKAGE
     font-size: 18px;
     letter-spacing: 1px;
     color: #fff;
     background-color: #4054b2;
+<<<<<<< HEAD
     border-style: solid;
     border-color: #fff;
     border-radius: 5px 5px 5px 5px;
@@ -115,4 +172,24 @@
     height: 10em;
     padding: 2.5em;
     margin-bottom: 2em;
+=======
+    border-radius: 5px;
+    padding: 15px 50px;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+.tool_brickfield_footer {
+    text-align: center;
+}
+
+.tool_brickfield_footer > a:hover {
+    color: #fff;
+    background-color: #253687;
+    text-decoration: none;
+}
+
+.tool_brickfield_footer > p {
+    margin-bottom: 25px;
+>>>>>>> forked/LAE_400_PACKAGE
 }

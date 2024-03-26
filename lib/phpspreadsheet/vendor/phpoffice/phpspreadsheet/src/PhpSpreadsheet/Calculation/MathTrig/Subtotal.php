@@ -4,7 +4,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 class Subtotal
@@ -18,11 +21,15 @@ class Subtotal
         return array_filter(
             $args,
             function ($index) use ($cellReference) {
+<<<<<<< HEAD
                 $explodeArray = explode('.', $index);
                 $row = $explodeArray[1] ?? '';
                 if (!is_numeric($row)) {
                     return true;
                 }
+=======
+                [, $row, ] = explode('.', $index);
+>>>>>>> forked/LAE_400_PACKAGE
 
                 return $cellReference->getWorksheet()->getRowDimension($row)->getVisible();
             },
@@ -39,17 +46,25 @@ class Subtotal
         return array_filter(
             $args,
             function ($index) use ($cellReference) {
+<<<<<<< HEAD
                 $explodeArray = explode('.', $index);
                 $row = $explodeArray[1] ?? '';
                 $column = $explodeArray[2] ?? '';
+=======
+                [, $row, $column] = explode('.', $index);
+>>>>>>> forked/LAE_400_PACKAGE
                 $retVal = true;
                 if ($cellReference->getWorksheet()->cellExists($column . $row)) {
                     //take this cell out if it contains the SUBTOTAL or AGGREGATE functions in a formula
                     $isFormula = $cellReference->getWorksheet()->getCell($column . $row)->isFormula();
+<<<<<<< HEAD
                     $cellFormula = !preg_match(
                         '/^=.*\b(SUBTOTAL|AGGREGATE)\s*\(/i',
                         $cellReference->getWorksheet()->getCell($column . $row)->getValue() ?? ''
                     );
+=======
+                    $cellFormula = !preg_match('/^=.*\b(SUBTOTAL|AGGREGATE)\s*\(/i', $cellReference->getWorksheet()->getCell($column . $row)->getValue());
+>>>>>>> forked/LAE_400_PACKAGE
 
                     $retVal = !$isFormula || $cellFormula;
                 }
@@ -60,6 +75,7 @@ class Subtotal
         );
     }
 
+<<<<<<< HEAD
     private const CALL_FUNCTIONS = [
         1 => [Statistical\Averages::class, 'average'], // 1 and 101
         [Statistical\Counts::class, 'COUNT'], // 2 and 102
@@ -72,6 +88,21 @@ class Subtotal
         [Sum::class, 'sumIgnoringStrings'], // 9 and 109
         [Statistical\Variances::class, 'VAR'], // 10 and 110
         [Statistical\Variances::class, 'VARP'], // 111 and 111
+=======
+    /** @var callable[] */
+    private const CALL_FUNCTIONS = [
+        1 => [Statistical\Averages::class, 'average'],
+        [Statistical\Counts::class, 'COUNT'], // 2
+        [Statistical\Counts::class, 'COUNTA'], // 3
+        [Statistical\Maximum::class, 'max'], // 4
+        [Statistical\Minimum::class, 'min'], // 5
+        [Operations::class, 'product'], // 6
+        [Statistical\StandardDeviations::class, 'STDEV'], // 7
+        [Statistical\StandardDeviations::class, 'STDEVP'], // 8
+        [Sum::class, 'sumIgnoringStrings'], // 9
+        [Statistical\Variances::class, 'VAR'], // 10
+        [Statistical\Variances::class, 'VARP'], // 11
+>>>>>>> forked/LAE_400_PACKAGE
     ];
 
     /**
@@ -93,6 +124,7 @@ class Subtotal
     public static function evaluate($functionType, ...$args)
     {
         $cellReference = array_pop($args);
+<<<<<<< HEAD
         $bArgs = Functions::flattenArrayIndexed($args);
         $aArgs = [];
         // int keys must come before string keys for PHP 8.0+
@@ -109,6 +141,9 @@ class Subtotal
                 $aArgs[$key] = $value;
             }
         }
+=======
+        $aArgs = Functions::flattenArrayIndexed($args);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $subtotal = (int) Helpers::validateNumericNullBool($functionType);
@@ -130,6 +165,10 @@ class Subtotal
             return call_user_func_array($call, $aArgs);
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

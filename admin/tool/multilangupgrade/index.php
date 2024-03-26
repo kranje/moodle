@@ -52,7 +52,11 @@ if (!$go or !data_submitted() or !confirm_sesskey()) {   /// Print a form
 
 
 if (!$tables = $DB->get_tables() ) {    // No tables yet at all.
+<<<<<<< HEAD
     throw new \moodle_exception('notables', 'debug');
+=======
+    print_error('notables', 'debug');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 echo $OUTPUT->box_start();

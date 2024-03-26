@@ -502,7 +502,11 @@ class auth_plugin_db extends auth_plugin_base {
                                  WHERE {$this->config->fielduser} = '".$this->ext_addslashes($extusername)."' ");
 
         if (!$rs) {
+<<<<<<< HEAD
             throw new \moodle_exception('auth_dbcantconnect', 'auth_db');
+=======
+            print_error('auth_dbcantconnect','auth_db');
+>>>>>>> forked/LAE_400_PACKAGE
         } else if (!$rs->EOF) {
             // User exists externally.
             $result = true;
@@ -525,7 +529,11 @@ class auth_plugin_db extends auth_plugin_base {
                                   FROM {$this->config->table} ");
 
         if (!$rs) {
+<<<<<<< HEAD
             throw new \moodle_exception('auth_dbcantconnect', 'auth_db');
+=======
+            print_error('auth_dbcantconnect','auth_db');
+>>>>>>> forked/LAE_400_PACKAGE
         } else if (!$rs->EOF) {
             while ($rec = $rs->FetchRow()) {
                 $rec = array_change_key_case((array)$rec, CASE_LOWER);
@@ -607,7 +615,11 @@ class auth_plugin_db extends auth_plugin_base {
                        SET ".implode(',', $update)."
                      WHERE {$this->config->fielduser} = ?";
             if (!$authdb->Execute($sql, array($this->ext_addslashes($extusername)))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('auth_dbupdateerror', 'auth_db');
+=======
+                print_error('auth_dbupdateerror', 'auth_db');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         $authdb->Close();

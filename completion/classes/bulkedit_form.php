@@ -73,7 +73,11 @@ class core_completion_bulkedit_form extends core_completion_edit_base_form {
         if (file_exists($modmoodleform)) {
             require_once($modmoodleform);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('noformdesc');
+=======
+            print_error('noformdesc');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         list($cmrec, $context, $module, $data, $cw) = get_moduleinfo_data($cm, $course);

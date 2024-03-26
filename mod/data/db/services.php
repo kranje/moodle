@@ -115,6 +115,7 @@ $functions = array(
         'capabilities'  => 'mod/data:writeentry',
         'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
     ),
+<<<<<<< HEAD
     'mod_data_delete_saved_preset' => array(
         'classname'     => 'mod_data\external\delete_saved_preset',
         'description'   => 'Delete site user preset.',
@@ -129,4 +130,6 @@ $functions = array(
         'ajax'          => true,
         'capabilities'  => 'mod/data:managetemplates',
     ),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 );

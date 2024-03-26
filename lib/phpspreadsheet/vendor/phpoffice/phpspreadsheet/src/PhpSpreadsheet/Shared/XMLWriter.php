@@ -54,9 +54,13 @@ class XMLWriter extends \XMLWriter
     public function __destruct()
     {
         // Unlink temporary files
+<<<<<<< HEAD
         // There is nothing reasonable to do if unlink fails.
         if ($this->tempFileName != '') {
             /** @scrutinizer ignore-unhandled */
+=======
+        if ($this->tempFileName != '') {
+>>>>>>> forked/LAE_400_PACKAGE
             @unlink($this->tempFileName);
         }
     }

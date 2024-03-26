@@ -527,7 +527,11 @@ abstract class pdo_moodle_database extends moodle_database {
                 break;
             default:
                 $this->lastError = __FILE__ . ' LINE: ' . __LINE__ . '.';
+<<<<<<< HEAD
                 throw new \moodle_exception(unknowparamtype, 'error', '', $this->lastError);
+=======
+                print_error(unknowparamtype, 'error', '', $this->lastError);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         $sql = "UPDATE {{$table}} SET $newfield $select";
@@ -535,11 +539,19 @@ abstract class pdo_moodle_database extends moodle_database {
     }
 
     public function sql_concat() {
+<<<<<<< HEAD
         throw new \moodle_exception('TODO');
     }
 
     public function sql_concat_join($separator="' '", $elements=array()) {
         throw new \moodle_exception('TODO');
+=======
+        print_error('TODO');
+    }
+
+    public function sql_concat_join($separator="' '", $elements=array()) {
+        print_error('TODO');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

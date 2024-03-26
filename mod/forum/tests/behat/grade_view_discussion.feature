@@ -22,7 +22,10 @@ Feature: View discussion while grading in a forum
     And the following "activity" exists:
       | activity    | forum                      |
       | name        | Gradable forum             |
+<<<<<<< HEAD
       | intro       | Standard forum description |
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       | course      | C1                         |
       | idnumber    | forum1                     |
       | grade_forum | 100                        |

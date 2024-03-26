@@ -178,7 +178,11 @@ $string['course:configuredownloadcontent'] = 'Configure download course content'
 $string['course:downloadcoursecontent'] = 'Download course content';
 $string['course:enrolconfig'] = 'Configure enrol instances in courses';
 $string['course:enrolreview'] = 'Review course enrolments';
+<<<<<<< HEAD
 $string['course:setforcedlanguage'] = 'Force course or activity language';
+=======
+$string['course:setforcedlanguage'] = 'Force course language';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['course:ignoreavailabilityrestrictions'] = 'Ignore availability restrictions';
 $string['course:ignorefilesizelimits'] = 'Use files larger than any file size restrictions';
 $string['course:isincompletionreports'] = 'Be shown on completion reports';

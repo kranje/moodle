@@ -187,51 +187,93 @@ class provider_test extends provider_testcase {
             $writer = writer::with_context($context);
             $this->assertTrue($writer->has_any_data());
             if ($context->contextlevel == CONTEXT_MODULE) {
+<<<<<<< HEAD
                 if ($data = (array)$writer->get_data($subcontextstudent)) {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
+=======
+                if ($data = $writer->get_data($subcontextstudent)) {
+                    $this->assertEquals($user->id, reset($data)->userid);
+                }
+                if ($data = $writer->get_data($subcontextrc)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->assertEquals('moodle/backup:backupactivity', reset($data)->capability);
                     $this->assertEquals($strpermissions[CAP_ALLOW], reset($data)->permission);
                 }
             }
             if ($context->contextlevel == CONTEXT_COURSE) {
+<<<<<<< HEAD
                 if ($data = (array)$writer->get_data($subcontextstudent)) {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
+=======
+                if ($data = $writer->get_data($subcontextstudent)) {
+                    $this->assertEquals($user->id, reset($data)->userid);
+                }
+                if ($data = $writer->get_data($subcontextrc)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->assertEquals('moodle/backup:backupcourse', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_COURSECAT) {
+<<<<<<< HEAD
                 if ($data = (array)$writer->get_data($subcontextmanager)) {
                     $this->assertEquals($user->id, reset($data)->modifierid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
+=======
+                if ($data = $writer->get_data($subcontextmanager)) {
+                    $this->assertEquals($user->id, reset($data)->modifierid);
+                }
+                if ($data = $writer->get_data($subcontextrc)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->assertEquals('moodle/category:manage', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_SYSTEM) {
+<<<<<<< HEAD
                 if ($data = (array)$writer->get_data($subcontextmanager)) {
                     $this->assertEquals($user->id, reset($data)->modifierid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
+=======
+                if ($data = $writer->get_data($subcontextmanager)) {
+                    $this->assertEquals($user->id, reset($data)->modifierid);
+                }
+                if ($data = $writer->get_data($subcontextrc)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->assertEquals('moodle/backup:backupcourse', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_BLOCK) {
+<<<<<<< HEAD
                 if ($data = (array)$writer->get_data($subcontextstudent)) {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
+=======
+                if ($data = $writer->get_data($subcontextstudent)) {
+                    $this->assertEquals($user->id, reset($data)->userid);
+                }
+                if ($data = $writer->get_data($subcontextrc)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->assertEquals('moodle/block:edit', reset($data)->capability);
                 }
             }
             if ($context->contextlevel == CONTEXT_USER) {
+<<<<<<< HEAD
                 if ($data = (array)$writer->get_data($subcontextmanager)) {
                     $this->assertEquals($user->id, reset($data)->userid);
                 }
                 if ($data = (array)$writer->get_data($subcontextrc)) {
+=======
+                if ($data = $writer->get_data($subcontextmanager)) {
+                    $this->assertEquals($user->id, reset($data)->userid);
+                }
+                if ($data = $writer->get_data($subcontextrc)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->assertEquals('moodle/competency:evidencedelete', reset($data)->capability);
                 }
             }
@@ -415,7 +457,11 @@ class provider_test extends provider_testcase {
         provider::export_user_role_to_cohort($user->id);
         $writer = writer::with_context($contextuserassignover);
         $this->assertTrue($writer->has_any_data());
+<<<<<<< HEAD
         $exported = (array)$writer->get_related_data($subcontextteacher, 'cohortroles');
+=======
+        $exported = $writer->get_related_data($subcontextteacher, 'cohortroles');
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals($user->id, reset($exported)->userid);
 
         // Test User is member of a cohort which User2 is assigned to role to this cohort.
@@ -432,7 +478,11 @@ class provider_test extends provider_testcase {
         provider::export_user_role_to_cohort($user->id);
         $writer = writer::with_context($contextuser);
         $this->assertTrue($writer->has_any_data());
+<<<<<<< HEAD
         $exported = (array)$writer->get_related_data($subcontextteacher, 'cohortroles');
+=======
+        $exported = $writer->get_related_data($subcontextteacher, 'cohortroles');
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals($user2->id, reset($exported)->userid);
     }
 

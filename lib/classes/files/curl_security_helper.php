@@ -223,7 +223,11 @@ class curl_security_helper extends curl_security_helper_base {
     protected function address_explicitly_blocked($addr) {
         $blockedhosts = $this->get_blocked_hosts_by_category();
         $iphostsblocked = array_merge($blockedhosts['ipv4'], $blockedhosts['ipv6']);
+<<<<<<< HEAD
         return address_in_subnet($addr, implode(',', $iphostsblocked));
+=======
+        return address_in_subnet($addr, implode(',', $iphostsblocked), true);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

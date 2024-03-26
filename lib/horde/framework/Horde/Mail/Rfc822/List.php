@@ -331,7 +331,10 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return !is_null($this[$offset]);
@@ -339,7 +342,10 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($offset)
     {
         try {
@@ -352,7 +358,10 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         if ($ob = $this[$offset]) {
@@ -370,7 +379,10 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
         if ($ob = $this[$offset]) {
@@ -391,7 +403,10 @@ class Horde_Mail_Rfc822_List
      *
      * @return integer  The number of addresses.
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->addresses);
@@ -399,7 +414,10 @@ class Horde_Mail_Rfc822_List
 
     /* Iterator methods. */
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         if (!$this->valid()) {
@@ -413,13 +431,19 @@ class Horde_Mail_Rfc822_List
             : $ob->addresses[$this->_ptr['subidx']];
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return $this->_ptr['key'];
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         if (is_null($this->_ptr['subidx'])) {
@@ -445,7 +469,10 @@ class Horde_Mail_Rfc822_List
         }
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         $this->_ptr = array(
@@ -462,13 +489,19 @@ class Horde_Mail_Rfc822_List
         }
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return (!empty($this->_ptr) && isset($this->_data[$this->_ptr['idx']]));
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function seek($position)
     {
         if (!$this->valid() ||
@@ -526,6 +559,7 @@ class Horde_Mail_Rfc822_List
         $this->_data = unserialize($data);
     }
 
+<<<<<<< HEAD
 	public function __serialize() {
 		return array(
 			'data' => $this->_data
@@ -536,4 +570,6 @@ class Horde_Mail_Rfc822_List
 		$this->_data = $data['data'];
 	}
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

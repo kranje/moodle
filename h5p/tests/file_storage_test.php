@@ -605,7 +605,11 @@ class file_storage_test extends \advanced_testcase {
                 true,
             ],
             'Icon not included' => [
+<<<<<<< HEAD
                 'greeting-card-887.h5p',
+=======
+                'greeting-card.h5p',
+>>>>>>> forked/LAE_400_PACKAGE
                 false,
             ],
         ];

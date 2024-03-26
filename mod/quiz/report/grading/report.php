@@ -727,6 +727,7 @@ class quiz_grading_report extends quiz_default_report {
         $a = new stdClass();
         $a->attempt = $attempt->attempt;
         $a->fullname = fullname($attempt);
+<<<<<<< HEAD
         $customfields = [];
         foreach ($this->extrauserfields as $field) {
             if ($attempt->{s($field)}) {
@@ -734,6 +735,17 @@ class quiz_grading_report extends quiz_default_report {
             }
         }
         $a->customfields = trim(implode(', ', (array)$customfields), ' ,');
+=======
+
+        $customfields = [];
+        foreach ($this->extrauserfields as $field) {
+            if (strval($attempt->{$field}) !== '') {
+                $customfields[] = s($attempt->{$field});
+            }
+        }
+
+        $a->customfields = implode(', ', $customfields);
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($shownames && $showcustomfields) {
             return get_string('gradingattemptwithcustomfields', 'quiz_grading', $a);

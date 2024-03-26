@@ -374,7 +374,11 @@ class xmldb_key extends xmldb_object {
             $o.= ' REFFIELDS="' . implode(', ', $this->reffields) . '"';
         }
         if ($this->comment) {
+<<<<<<< HEAD
             $o.= ' COMMENT="' . htmlspecialchars($this->comment, ENT_COMPAT) . '"';
+=======
+            $o.= ' COMMENT="' . htmlspecialchars($this->comment) . '"';
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $o.= '/>' . "\n";
 

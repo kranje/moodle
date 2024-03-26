@@ -58,10 +58,14 @@ define(
         // Eventually, core_courseformat/local/content/actions will handle all actions for
         // component compatible formats and the default actions.js won't be necessary anymore.
         // Meanwhile, we filter the migrated actions.
+<<<<<<< HEAD
         const componentActions = [
             'moveSection', 'moveCm', 'addSection', 'deleteSection', 'sectionHide', 'sectionShow',
             'cmHide', 'cmShow', 'cmStealth',
         ];
+=======
+        const componentActions = ['moveSection', 'moveCm', 'addSection', 'deleteSection', 'cmMoveRight', 'cmMoveLeft'];
+>>>>>>> forked/LAE_400_PACKAGE
 
         // The course reactive instance.
         const courseeditor = editor.getCurrentCourseEditor();
@@ -82,6 +86,10 @@ define(
             TOGGLE: '.toggle-display,.dropdown-toggle',
             SECTIONLI: 'li.section',
             SECTIONACTIONMENU: '.section_action_menu',
+<<<<<<< HEAD
+=======
+            SECTIONITEM: '[data-for="section_title"]',
+>>>>>>> forked/LAE_400_PACKAGE
             ADDSECTIONS: '.changenumsections [data-add-sections]',
             SECTIONBADGES: '[data-region="sectionbadges"]',
         };
@@ -981,7 +989,11 @@ define(
 
                 // The section and activity names are edited using inplace editable.
                 // The "update" jQuery event must be captured in order to update the course state.
+<<<<<<< HEAD
                 $('body').on('updated', `${SELECTOR.SECTIONLI} [data-inplaceeditable]`, function(e) {
+=======
+                $('body').on('updated', `${SELECTOR.SECTIONLI} ${SELECTOR.SECTIONITEM} [data-inplaceeditable]`, function(e) {
+>>>>>>> forked/LAE_400_PACKAGE
                     if (e.ajaxreturn && e.ajaxreturn.itemid) {
                         const state = courseeditor.state;
                         const section = state.section.get(e.ajaxreturn.itemid);

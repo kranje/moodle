@@ -85,7 +85,11 @@ class helper {
         } else {
             $name = $record->eventname;
             $description = "Unknown event ({$name})";
+<<<<<<< HEAD
             $other = self::decode_other($record->other);
+=======
+            $other = \tool_log\helper\reader::decode_other($record->other);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $realuserid = $record->realuserid;

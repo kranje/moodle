@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_grades @javascript
+=======
+@core @core_grades
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: We can enter in grades and view reports from the gradebook
   In order to check the expected results are displayed
   As a teacher
@@ -18,6 +22,7 @@ Feature: We can enter in grades and view reports from the gradebook
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro                   | course | section | idnumber |
       | assign     | Test assignment name 1 | Submit your online text | C1     | 1       | assign1  |
       | assign     | Test assignment name 2 | Submit your online text | C1     | 1       | assign2  |
@@ -43,6 +48,15 @@ Feature: We can enter in grades and view reports from the gradebook
     And I log in as "student1"
     And I am on "Course 1" course homepage
     And I follow "Test assignment name 1"
+=======
+      | activity   | name                   | course | idnumber | assignsubmission_onlinetext_enabled |
+      | assign     | Test assignment name 1 | C1     | assign1  | 1                                   |
+      | assign     | Test assignment name 2 | C1     | assign2  | 1                                   |
+    And I log in as "admin"
+    And I set the following administration settings values:
+      | grade_aggregations_visible | Mean of grades,Weighted mean of grades,Simple weighted mean of grades,Mean of grades (with extra credits),Median of grades,Lowest grade,Highest grade,Mode of grades,Natural |
+    And I am on the "Test assignment name 1" "assign activity" page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     When I press "Add submission"
     And I set the following fields to these values:
       | Online text | This is a submission for assignment 1 |
@@ -50,8 +64,12 @@ Feature: We can enter in grades and view reports from the gradebook
     And I press "Submit assignment"
     And I press "Continue"
     Then I should see "Submitted for grading"
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I follow "Test assignment name 2"
+=======
+    And I am on the "Test assignment name 2" "assign activity" page
+>>>>>>> forked/LAE_400_PACKAGE
     When I press "Add submission"
     And I set the following fields to these values:
       | Online text | This is a submission for assignment 2 |
@@ -59,10 +77,14 @@ Feature: We can enter in grades and view reports from the gradebook
     And I press "Submit assignment"
     And I press "Continue"
     Then I should see "Submitted for grading"
+<<<<<<< HEAD
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > Grader report > View" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     And I give the grade "80.00" to the user "Student 1" for the grade item "Test assignment name 1"
     And I give the grade "90.00" to the user "Student 1" for the grade item "Test assignment name 2"
@@ -70,8 +92,13 @@ Feature: We can enter in grades and view reports from the gradebook
 
   Scenario: Grade a grade item and ensure the results display correctly in the gradebook
     When I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And the "Gradebook navigation menu" select menu should contain "Grader report"
     And I click on "All users (1)" in the "user" search widget
+=======
+    And the "jump" select box should contain "Grader report"
+    And the "Select all or one user" select box should contain "All users (1)"
+>>>>>>> forked/LAE_400_PACKAGE
     And I log out
     And I log in as "student1"
     And I follow "Grades" in the user menu

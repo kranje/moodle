@@ -27,7 +27,11 @@ if ($noteid) {
     // Existing note.
     $url->param('id', $noteid);
     if (!$note = note_load($noteid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidid', 'notes');
+=======
+        print_error('invalidid', 'notes');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else {
@@ -51,20 +55,32 @@ if ($noteid) {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id' => $note->courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);
 
 if (empty($CFG->enablenotes)) {
+<<<<<<< HEAD
     throw new \moodle_exception('notesdisabled', 'notes');
+=======
+    print_error('notesdisabled', 'notes');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context = context_course::instance($course->id);
 require_capability('moodle/notes:manage', $context);
 
 if (!$user = $DB->get_record('user', array('id' => $note->userid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invaliduserid');
+=======
+    print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $noteform = new note_edit_form();

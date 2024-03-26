@@ -69,11 +69,19 @@ if ($importform->is_cancelled()) {
     $readcount = $csvimport->load_csv_content($text, $encoding, $delimiter);
 
     if ($readcount === false) {
+<<<<<<< HEAD
         throw new \moodle_exception('csvfileerror', 'error', $PAGE->url, $csvimport->get_error());
     } else if ($readcount == 0) {
         throw new \moodle_exception('csvemptyfile', 'error', $PAGE->url, $csvimport->get_error());
     } else if ($readcount == 1) {
         throw new \moodle_exception('csvnodata', 'error', $PAGE->url);
+=======
+        print_error('csvfileerror', 'error', $PAGE->url, $csvimport->get_error());
+    } else if ($readcount == 0) {
+        print_error('csvemptyfile', 'error', $PAGE->url, $csvimport->get_error());
+    } else if ($readcount == 1) {
+        print_error('csvnodata', 'error', $PAGE->url);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $csvimport->init();
@@ -100,7 +108,11 @@ if ($importform->is_cancelled()) {
     foreach ($header as $i => $h) {
         $h = trim($h); $header[$i] = $h; // remove whitespace
         if (!(isset($required[$h]) or isset($optionalDefaults[$h]) or isset($optional[$h]))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidfieldname', 'error', $PAGE->url, $h);
+=======
+                print_error('invalidfieldname', 'error', $PAGE->url, $h);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         if (isset($required[$h])) {
             $required[$h] = 2;
@@ -109,7 +121,11 @@ if ($importform->is_cancelled()) {
     // check for required fields
     foreach ($required as $key => $value) {
         if ($value < 2) {
+<<<<<<< HEAD
             throw new \moodle_exception('fieldrequired', 'error', $PAGE->url, $key);
+=======
+            print_error('fieldrequired', 'error', $PAGE->url, $key);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
     $linenum = 2; // since header is line 1
@@ -130,7 +146,11 @@ if ($importform->is_cancelled()) {
             foreach ($record as $name => $value) {
                 // check for required values
                 if (isset($required[$name]) and !$value) {
+<<<<<<< HEAD
                     throw new \moodle_exception('missingfield', 'error', $PAGE->url, $name);
+=======
+                    print_error('missingfield', 'error', $PAGE->url, $name);
+>>>>>>> forked/LAE_400_PACKAGE
                 } else if ($name == "groupname") {
                     $newgroup->name = $value;
                 } else {

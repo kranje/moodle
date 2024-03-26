@@ -147,9 +147,15 @@ class externallib_test extends externallib_advanced_testcase {
         $returndescription = mod_url_external::get_urls_by_courses_returns();
 
         // Create what we expect to be returned when querying the two courses.
+<<<<<<< HEAD
         $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'lang',
                 'externalurl', 'display', 'displayoptions', 'parameters', 'timemodified', 'section', 'visible', 'groupmode',
                 'groupingid');
+=======
+        $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'externalurl',
+                                'display', 'displayoptions', 'parameters', 'timemodified', 'section', 'visible', 'groupmode',
+                                'groupingid');
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Add expected coursemodule and data.
         $url1->coursemodule = $url1->cmid;
@@ -159,7 +165,10 @@ class externallib_test extends externallib_advanced_testcase {
         $url1->groupmode = 0;
         $url1->groupingid = 0;
         $url1->introfiles = [];
+<<<<<<< HEAD
         $url1->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $url2->coursemodule = $url2->cmid;
         $url2->introformat = 1;
@@ -168,7 +177,10 @@ class externallib_test extends externallib_advanced_testcase {
         $url2->groupmode = 0;
         $url2->groupingid = 0;
         $url2->introfiles = [];
+<<<<<<< HEAD
         $url2->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($expectedfields as $field) {
             $expected1[$field] = $url1->{$field};

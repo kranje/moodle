@@ -148,7 +148,11 @@ class auth_plugin_ldap extends auth_plugin_base {
      */
     function user_login($username, $password) {
         if (! function_exists('ldap_bind')) {
+<<<<<<< HEAD
             throw new \moodle_exception('auth_ldapnotinstalled', 'auth_ldap');
+=======
+            print_error('auth_ldapnotinstalled', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 
@@ -450,12 +454,20 @@ class auth_plugin_ldap extends auth_plugin_base {
                 // strings (UCS-2 Little Endian format) and surrounded with
                 // double quotes. See http://support.microsoft.com/?kbid=269190
                 if (!function_exists('mb_convert_encoding')) {
+<<<<<<< HEAD
                     throw new \moodle_exception('auth_ldap_no_mbstring', 'auth_ldap');
+=======
+                    print_error('auth_ldap_no_mbstring', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 // Check for invalid sAMAccountName characters.
                 if (preg_match('#[/\\[\]:;|=,+*?<>@"]#', $extusername)) {
+<<<<<<< HEAD
                     throw new \moodle_exception ('auth_ldap_ad_invalidchars', 'auth_ldap');
+=======
+                    print_error ('auth_ldap_ad_invalidchars', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 // First create the user account, and mark it as disabled.
@@ -465,7 +477,11 @@ class auth_plugin_ldap extends auth_plugin_base {
                                                  AUTH_AD_ACCOUNTDISABLE;
                 $userdn = 'cn='.ldap_addslashes($extusername).','.$this->config->create_context;
                 if (!ldap_add($ldapconnection, $userdn, $newuser)) {
+<<<<<<< HEAD
                     throw new \moodle_exception('auth_ldap_ad_create_req', 'auth_ldap');
+=======
+                    print_error('auth_ldap_ad_create_req', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 // Now set the password
@@ -475,12 +491,20 @@ class auth_plugin_ldap extends auth_plugin_base {
                 if(!ldap_modify($ldapconnection, $userdn, $newuser)) {
                     // Something went wrong: delete the user account and error out
                     ldap_delete ($ldapconnection, $userdn);
+<<<<<<< HEAD
                     throw new \moodle_exception('auth_ldap_ad_create_req', 'auth_ldap');
+=======
+                    print_error('auth_ldap_ad_create_req', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 $uadd = true;
                 break;
             default:
+<<<<<<< HEAD
                throw new \moodle_exception('auth_ldap_unsupportedusertype', 'auth_ldap', '', $this->config->user_type_name);
+=======
+               print_error('auth_ldap_unsupportedusertype', 'auth_ldap', '', $this->config->user_type_name);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $this->ldap_close();
         return $uadd;
@@ -528,14 +552,22 @@ class auth_plugin_ldap extends auth_plugin_base {
         require_once($CFG->dirroot.'/user/lib.php');
 
         if ($this->user_exists($user->username)) {
+<<<<<<< HEAD
             throw new \moodle_exception('auth_ldap_user_exists', 'auth_ldap');
+=======
+            print_error('auth_ldap_user_exists', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $plainslashedpassword = $user->password;
         unset($user->password);
 
         if (! $this->user_create($user, $plainslashedpassword)) {
+<<<<<<< HEAD
             throw new \moodle_exception('auth_ldap_create_error', 'auth_ldap');
+=======
+            print_error('auth_ldap_create_error', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $user->id = user_create_user($user, false, false);
@@ -558,7 +590,11 @@ class auth_plugin_ldap extends auth_plugin_base {
         \core\event\user_created::create_from_userid($user->id)->trigger();
 
         if (! send_confirmation_email($user)) {
+<<<<<<< HEAD
             throw new \moodle_exception('noemail', 'auth_ldap');
+=======
+            print_error('noemail', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($notify) {
@@ -1013,7 +1049,11 @@ class auth_plugin_ldap extends auth_plugin_base {
                                                  & (~AUTH_AD_ACCOUNTDISABLE);
                 break;
             default:
+<<<<<<< HEAD
                 throw new \moodle_exception('user_activatenotsupportusertype', 'auth_ldap', '', $this->config->user_type_name);
+=======
+                print_error('user_activatenotsupportusertype', 'auth_ldap', '', $this->config->user_type_name);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $result = ldap_modify($ldapconnection, $userdn, $newinfo);
         $this->ldap_close();
@@ -1448,7 +1488,11 @@ class auth_plugin_ldap extends auth_plugin_base {
                 $result = $this->ldap_get_ad_pwdexpire($time, $ldapconnection, $user_dn);
                 break;
             default:
+<<<<<<< HEAD
                 throw new \moodle_exception('auth_ldap_usertypeundefined', 'auth_ldap');
+=======
+                print_error('auth_ldap_usertypeundefined', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         return $result;
     }
@@ -1469,7 +1513,11 @@ class auth_plugin_ldap extends auth_plugin_base {
                 $result = $time ; // Already in correct format
                 break;
             default:
+<<<<<<< HEAD
                 throw new \moodle_exception('auth_ldap_usertypeundefined2', 'auth_ldap');
+=======
+                print_error('auth_ldap_usertypeundefined2', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         return $result;
 
@@ -1994,7 +2042,11 @@ class auth_plugin_ldap extends auth_plugin_base {
             return $ldapconnection;
         }
 
+<<<<<<< HEAD
         throw new \moodle_exception('auth_ldap_noconnect_all', 'auth_ldap', '', $debuginfo);
+=======
+        print_error('auth_ldap_noconnect_all', 'auth_ldap', '', $debuginfo);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

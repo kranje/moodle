@@ -48,7 +48,11 @@ $actions = array_map(function($actionparams) {
     foreach ($keys as $key => $type) {
         // Replicate required_param().
         if (!isset($actionparams[$key])) {
+<<<<<<< HEAD
             throw new \moodle_exception('missingparam', '', '', $key);
+=======
+            print_error('missingparam', '', '', $key);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $params[$key] = clean_param($actionparams[$key], $type);
     }
@@ -68,12 +72,20 @@ $PAGE->set_context($context);
 
 require_login();
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('accessdenied', 'admin');
+=======
+    print_error('accessdenied', 'admin');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 require_sesskey();
 
 if (!in_array('atto', explode(',', get_config('core', 'texteditors')))) {
+<<<<<<< HEAD
     throw new \moodle_exception('accessdenied', 'admin');
+=======
+    print_error('accessdenied', 'admin');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $responses = array();
@@ -94,7 +106,11 @@ foreach ($actions as $actionparams) {
 
         $record = $DB->get_record('editor_atto_autosave', $params);
         if ($record && $record->pageinstance != $pageinstance) {
+<<<<<<< HEAD
             throw new \moodle_exception('concurrent access from the same user is not supported');
+=======
+            print_error('concurrent access from the same user is not supported');
+>>>>>>> forked/LAE_400_PACKAGE
             die();
         }
 

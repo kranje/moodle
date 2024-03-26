@@ -19,6 +19,9 @@ interface IServiceRequest
     public function setAccept(string $accept): self;
 
     public function setContentType(string $contentType): self;
+<<<<<<< HEAD
 
     public function getErrorPrefix(): string;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -15,6 +15,7 @@ Feature: Students can edit or delete their forum posts within a set time limit
       | user | course | role |
       | student1 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro                   | course  | idnumber  |
       | forum      | Test forum name        | Test forum description  | C1      | forum     |
     And I log in as "student1"
@@ -25,6 +26,17 @@ Feature: Students can edit or delete their forum posts within a set time limit
 
   Scenario: Edit forum post
     Given I follow "Forum post subject"
+=======
+      | activity   | name                   | course  | idnumber  |
+      | forum      | Test forum name        | C1      | forum     |
+
+  Scenario: Edit forum post
+    Given the following "mod_forum > discussions" exist:
+      | user     | forum | name               | message          |
+      | student1 | forum | Forum post subject | This is the body |
+    And I am on the "Test forum name" "forum activity" page logged in as "student1"
+    And I follow "Forum post subject"
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Edit"
     When I set the following fields to these values:
       | Subject | Edited post subject |
@@ -35,11 +47,20 @@ Feature: Students can edit or delete their forum posts within a set time limit
     And I should see "Edited post body"
 
   Scenario: Delete forum post
+<<<<<<< HEAD
     Given I follow "Forum post subject"
+=======
+    Given the following "mod_forum > discussions" exist:
+      | user     | forum | name               | message          |
+      | student1 | forum | Forum post subject | This is the body |
+    And I am on the "Test forum name" "forum activity" page logged in as "student1"
+    And I follow "Forum post subject"
+>>>>>>> forked/LAE_400_PACKAGE
     When I follow "Delete"
     And I press "Continue"
     Then I should not see "Forum post subject"
 
+<<<<<<< HEAD
   @javascript @block_recent_activity
   Scenario: Time limit expires
     Given I log out
@@ -51,6 +72,19 @@ Feature: Students can edit or delete their forum posts within a set time limit
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+  @block_recent_activity
+  Scenario: Time limit expires
+    Given the following "blocks" exist:
+      | blockname       | contextlevel | reference | pagetypepattern | defaultregion |
+      | recent_activity | Course       | C1        | course-view-*   | side-pre      |
+    And the following config values are set as admin:
+      | maxeditingtime | 1 |
+    And the following "mod_forum > discussions" exist:
+      | user     | forum | name               | message          | timemodified       |
+      | student1 | forum | Forum post subject | This is the body | ##now +1 second##  |
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "New forum posts:" in the "Recent activity" "block"
     And I should see "Forum post subject" in the "Recent activity" "block"
     When I wait "2" seconds

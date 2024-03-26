@@ -47,6 +47,7 @@ class behat_mod_forum_generator extends behat_generator_base {
     }
 
     /**
+<<<<<<< HEAD
      * Get the forum id using an activity idnumber.
      *
      * @param string $idnumber
@@ -60,6 +61,15 @@ class behat_mod_forum_generator extends behat_generator_base {
         }
 
         return $id;
+=======
+     * Get the forum id using an activity idnumber or name.
+     *
+     * @param string $idnumberorname The forum activity idnumber or name.
+     * @return int The forum id
+     */
+    protected function get_forum_id(string $idnumberorname): int {
+        return $this->get_cm_by_activity_name('forum', $idnumberorname)->instance;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

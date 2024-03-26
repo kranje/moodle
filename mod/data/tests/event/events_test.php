@@ -25,10 +25,13 @@
 
 namespace mod_data\event;
 
+<<<<<<< HEAD
 use mod_data\local\importer\preset_existing_importer;
 use mod_data\manager;
 use mod_data\preset;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 class events_test extends \advanced_testcase {
 
     /**
@@ -364,6 +367,7 @@ class events_test extends \advanced_testcase {
         $url = new \moodle_url('/mod/data/templates.php', array('d' => $data->id));
         $this->assertEquals($url, $event->get_url());
     }
+<<<<<<< HEAD
 
     /**
      * Data provider for build providers for test_needs_mapping and test_set_affected_fields.
@@ -487,4 +491,6 @@ class events_test extends \advanced_testcase {
             }
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

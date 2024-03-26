@@ -219,12 +219,22 @@ class calculated {
      * Cache calculated stats stored in this object in 'question_statistics' table.
      *
      * @param \qubaid_condition $qubaids
+<<<<<<< HEAD
      */
     public function cache($qubaids) {
         global $DB;
         $toinsert = new \stdClass();
         $toinsert->hashcode = $qubaids->get_hash_code();
         $toinsert->timemodified = time();
+=======
+     * @param int|null $timemodified the modified time to store. Defaults to the current time.
+     */
+    public function cache($qubaids, $timemodified = null) {
+        global $DB;
+        $toinsert = new \stdClass();
+        $toinsert->hashcode = $qubaids->get_hash_code();
+        $toinsert->timemodified = $timemodified ?? time();
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($this->fieldsindb as $field) {
             $toinsert->{$field} = $this->{$field};
         }
@@ -232,7 +242,11 @@ class calculated {
 
         if ($this->get_variants()) {
             foreach ($this->variantstats as $variantstat) {
+<<<<<<< HEAD
                 $variantstat->cache($qubaids);
+=======
+                $variantstat->cache($qubaids, $timemodified);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
     }

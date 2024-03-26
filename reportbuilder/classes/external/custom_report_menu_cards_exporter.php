@@ -18,16 +18,39 @@ declare(strict_types=1);
 
 namespace core_reportbuilder\external;
 
+<<<<<<< HEAD
 use core\external\exporter;
 
 /**
  * Custom report menu cards exporter abstract class
+=======
+use renderer_base;
+use core\external\exporter;
+
+/**
+ * Custom report menu cards exporter class
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * @package     core_reportbuilder
  * @copyright   2021 David Matamoros <davidmc@moodle.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 abstract class custom_report_menu_cards_exporter extends exporter {
+=======
+class custom_report_menu_cards_exporter extends exporter {
+
+    /**
+     * Return a list of objects that are related to the exporter
+     *
+     * @return array
+     */
+    protected static function define_related(): array {
+        return [
+            'menucards' => 'array[]',
+        ];
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Return the list of additional properties for read structure and export
@@ -40,9 +63,17 @@ abstract class custom_report_menu_cards_exporter extends exporter {
                 'type' => [
                     'name' => [
                         'type' => PARAM_TEXT,
+<<<<<<< HEAD
                     ],
                     'key' => [
                         'type' => PARAM_TEXT,
+=======
+                        'optional' => true,
+                    ],
+                    'key' => [
+                        'type' => PARAM_TEXT,
+                        'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
                     ],
                     'items' => [
                         'type' => [
@@ -73,4 +104,19 @@ abstract class custom_report_menu_cards_exporter extends exporter {
             ],
         ];
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Get the additional values to inject while exporting
+     *
+     * @param renderer_base $output
+     * @return array
+     */
+    protected function get_other_values(renderer_base $output): array {
+        return [
+            'menucards' => $this->related['menucards']
+        ];
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

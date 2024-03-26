@@ -52,10 +52,13 @@ define('SQL_QUERY_STRUCTURE', 4);
 /** SQL_QUERY_AUX - Auxiliary query done by driver, setting connection config, getting table info, etc. */
 define('SQL_QUERY_AUX', 5);
 
+<<<<<<< HEAD
 /** SQL_QUERY_AUX_READONLY - Auxiliary query that can be done using the readonly connection:
  * database parameters, table/index/column lists, if not within transaction/ddl. */
 define('SQL_QUERY_AUX_READONLY', 6);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Abstract class representing moodle database interface.
  * @link http://docs.moodle.org/dev/DML_functions
@@ -418,11 +421,17 @@ abstract class moodle_database {
 
     /**
      * This should be called before each db query.
+<<<<<<< HEAD
      *
      * @param string $sql The query string.
      * @param array|null $params An array of parameters.
      * @param int $type The type of query ( SQL_QUERY_SELECT | SQL_QUERY_AUX_READONLY | SQL_QUERY_AUX |
      *                  SQL_QUERY_INSERT | SQL_QUERY_UPDATE | SQL_QUERY_STRUCTURE ).
+=======
+     * @param string $sql The query string.
+     * @param array|null $params An array of parameters.
+     * @param int $type The type of query. ( SQL_QUERY_SELECT | SQL_QUERY_AUX | SQL_QUERY_INSERT | SQL_QUERY_UPDATE | SQL_QUERY_STRUCTURE )
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $extrainfo This is here for any driver specific extra information.
      * @return void
      */
@@ -439,7 +448,10 @@ abstract class moodle_database {
         switch ($type) {
             case SQL_QUERY_SELECT:
             case SQL_QUERY_AUX:
+<<<<<<< HEAD
             case SQL_QUERY_AUX_READONLY:
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $this->reads++;
                 break;
             case SQL_QUERY_INSERT:
@@ -490,7 +502,10 @@ abstract class moodle_database {
         switch ($type) {
             case SQL_QUERY_SELECT:
             case SQL_QUERY_AUX:
+<<<<<<< HEAD
             case SQL_QUERY_AUX_READONLY:
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 throw new dml_read_exception($error, $sql, $params);
             case SQL_QUERY_INSERT:
             case SQL_QUERY_UPDATE:
@@ -2171,6 +2186,7 @@ abstract class moodle_database {
     }
 
     /**
+<<<<<<< HEAD
      * Return SQL for casting to char of given field/expression. Default implementation performs implicit cast using
      * concatenation with an empty string
      *
@@ -2182,6 +2198,8 @@ abstract class moodle_database {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns the SQL to be used in order to CAST one CHAR column to INTEGER.
      *
      * Be aware that the CHAR column you're trying to cast contains really
@@ -2355,6 +2373,7 @@ abstract class moodle_database {
     }
 
     /**
+<<<<<<< HEAD
      * Returns the SQL text to be used to order by columns, standardising the return
      * pattern of null values across database types to sort nulls first when ascending
      * and last when descending.
@@ -2368,6 +2387,8 @@ abstract class moodle_database {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns the SQL text to be used to calculate the length in characters of one expression.
      * @param string $fieldname The fieldname/expression to calculate its length in characters.
      * @return string the piece of SQL code to be used in the statement.

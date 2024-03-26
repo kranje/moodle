@@ -43,7 +43,10 @@ $string['pm'] = 'pm';
 $string['pmcaps'] = 'PM';
 $string['strftimedate'] = '%d %B %Y';
 $string['strftimedatemonthabbr'] = '%d %b %Y';
+<<<<<<< HEAD
 $string['strftimedatemonthtimeshort'] = '%d %b %Y, %I:%M';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['strftimedatefullshort'] = '%d/%m/%y';
 $string['strftimedateshort'] = '%d %B';
 $string['strftimedateshortmonthabbr'] = '%d %b';

@@ -7,7 +7,11 @@
 require(__DIR__.'/../../config.php');
 
 if (empty($CFG->enableportfolios)) {
+<<<<<<< HEAD
     throw new \moodle_exception('disabled', 'portfolio');
+=======
+    print_error('disabled', 'portfolio');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_once($CFG->libdir.'/portfoliolib.php');

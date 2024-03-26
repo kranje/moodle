@@ -10,7 +10,11 @@ define('NO_MOODLE_COOKIES', true); // Because it interferes with caching
     require_once('../../config.php');
 
     if (!filter_is_enabled('tex')) {
+<<<<<<< HEAD
         throw new \moodle_exception('filternotenabled');
+=======
+        print_error('filternotenabled');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     require_once($CFG->libdir.'/filelib.php');
@@ -28,7 +32,11 @@ define('NO_MOODLE_COOKIES', true); // Because it interferes with caching
         $image    = $args[0];
         $pathname = $CFG->dataroot.'/filter/tex/'.$image;
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidarguments', 'error');
+=======
+        print_error('invalidarguments', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!file_exists($pathname)) {
@@ -50,8 +58,11 @@ define('NO_MOODLE_COOKIES', true); // Because it interferes with caching
             $lateximage = $latex->render($texexp, $image, 12, $density, $background);
             if ($lateximage) {
                 copy($lateximage, $pathname);
+<<<<<<< HEAD
                 $latex->clean_up($md5);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 // failing that, use mimetex
                 $texexp = $texcache->rawtext;

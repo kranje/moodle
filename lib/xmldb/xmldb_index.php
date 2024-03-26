@@ -248,7 +248,11 @@ class xmldb_index extends xmldb_object {
             $o.= ' HINTS="' . implode(', ', $this->hints) . '"';
         }
         if ($this->comment) {
+<<<<<<< HEAD
             $o.= ' COMMENT="' . htmlspecialchars($this->comment, ENT_COMPAT) . '"';
+=======
+            $o.= ' COMMENT="' . htmlspecialchars($this->comment) . '"';
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $o.= '/>' . "\n";
 

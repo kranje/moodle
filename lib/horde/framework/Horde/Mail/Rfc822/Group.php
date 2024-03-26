@@ -137,7 +137,10 @@ class Horde_Mail_Rfc822_Group
      *
      * @return integer  The number of addresses.
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->addresses);

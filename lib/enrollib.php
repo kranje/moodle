@@ -214,6 +214,7 @@ function enrol_is_enabled($enrol) {
 /**
  * Check all the login enrolment information for the given user object
  * by querying the enrolment plugins
+<<<<<<< HEAD
  * This function may be very slow, use only once after log-in or login-as.
  *
  * @param stdClass $user User object.
@@ -222,6 +223,15 @@ function enrol_is_enabled($enrol) {
  * @return void
  */
 function enrol_check_plugins($user, bool $ignoreintervalcheck = true) {
+=======
+ *
+ * This function may be very slow, use only once after log-in or login-as.
+ *
+ * @param stdClass $user
+ * @return void
+ */
+function enrol_check_plugins($user) {
+>>>>>>> forked/LAE_400_PACKAGE
     global $CFG;
 
     if (empty($user->id) or isguestuser($user)) {
@@ -238,6 +248,7 @@ function enrol_check_plugins($user, bool $ignoreintervalcheck = true) {
         return;
     }
 
+<<<<<<< HEAD
     $syncinterval = isset($CFG->enrolments_sync_interval) ? (int)$CFG->enrolments_sync_interval : HOURSECS;
     $needintervalchecking = !$ignoreintervalcheck && !empty($syncinterval);
 
@@ -248,6 +259,8 @@ function enrol_check_plugins($user, bool $ignoreintervalcheck = true) {
         }
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $inprogress[$user->id] = true;  // Set the flag
 
     $enabled = enrol_get_plugins(true);
@@ -256,10 +269,13 @@ function enrol_check_plugins($user, bool $ignoreintervalcheck = true) {
         $enrol->sync_user_enrolments($user);
     }
 
+<<<<<<< HEAD
     if ($needintervalchecking) {
         set_user_preference('last_time_enrolments_synced', time(), $user);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     unset($inprogress[$user->id]);  // Unset the flag
 }
 
@@ -1769,9 +1785,17 @@ function enrol_get_course_by_user_enrolment_id($ueid) {
  * @param bool $onlyactive consider only active enrolments in enabled plugins and time restrictions
  * @param array $usersfilter Limit the results obtained to this list of user ids. $uefilter compatibility not guaranteed.
  * @param array $uefilter Limit the results obtained to this list of user enrolment ids. $usersfilter compatibility not guaranteed.
+<<<<<<< HEAD
  * @return stdClass[]
  */
 function enrol_get_course_users($courseid = false, $onlyactive = false, $usersfilter = array(), $uefilter = array()) {
+=======
+ * @param array $usergroups Limit the results of users to the ones that belong to one of the submitted group ids.
+ * @return stdClass[]
+ */
+function enrol_get_course_users($courseid = false, $onlyactive = false, $usersfilter = [], $uefilter = [],
+                                $usergroups = []) {
+>>>>>>> forked/LAE_400_PACKAGE
     global $DB;
 
     if (!$courseid && !$usersfilter && !$uefilter) {
@@ -1814,6 +1838,19 @@ function enrol_get_course_users($courseid = false, $onlyactive = false, $usersfi
         $params = $params + $ueparams;
     }
 
+<<<<<<< HEAD
+=======
+    // Only select enrolled users that belong to a specific group(s).
+    if (!empty($usergroups)) {
+        $usergroups = array_map(function ($item) { // Sanitize groupid to int to be save for sql.
+            return (int)$item;
+        }, $usergroups);
+        list($ugsql, $ugparams) = $DB->get_in_or_equal($usergroups, SQL_PARAMS_NAMED);
+        $conditions[] = 'ue.userid IN (SELECT userid FROM {groups_members} WHERE groupid ' . $ugsql . ')';
+        $params = $params + $ugparams;
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     return $DB->get_records_sql($sql . ' ' . implode(' AND ', $conditions), $params);
 }
 

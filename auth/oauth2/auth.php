@@ -35,6 +35,7 @@ require_once($CFG->libdir.'/authlib.php');
  */
 class auth_plugin_oauth2 extends \auth_oauth2\auth {
 
+<<<<<<< HEAD
     /**
      * Test the various configured Oauth2 providers.
      */
@@ -59,6 +60,8 @@ class auth_plugin_oauth2 extends \auth_oauth2\auth {
             echo $OUTPUT->render_from_template('auth_oauth2/idps', ['idps' => $templateidps]);
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 

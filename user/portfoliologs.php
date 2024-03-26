@@ -25,7 +25,11 @@
 require_once(__DIR__ . '/../config.php');
 
 if (empty($CFG->enableportfolios)) {
+<<<<<<< HEAD
     throw new \moodle_exception('disabled', 'portfolio');
+=======
+    print_error('disabled', 'portfolio');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_once($CFG->libdir . '/portfoliolib.php');
@@ -36,7 +40,11 @@ $page     = optional_param('page', 0, PARAM_INT);
 $perpage  = optional_param('perpage', 10, PARAM_INT);
 
 if (! $course = $DB->get_record("course", array("id" => $courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course, false);

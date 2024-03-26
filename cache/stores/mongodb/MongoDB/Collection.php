@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,13 +61,19 @@ use MongoDB\Operation\InsertMany;
 use MongoDB\Operation\InsertOne;
 use MongoDB\Operation\ListIndexes;
 use MongoDB\Operation\MapReduce;
+<<<<<<< HEAD
 use MongoDB\Operation\RenameCollection;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use MongoDB\Operation\ReplaceOne;
 use MongoDB\Operation\UpdateMany;
 use MongoDB\Operation\UpdateOne;
 use MongoDB\Operation\Watch;
 use Traversable;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function array_diff_key;
 use function array_intersect_key;
 use function current;
@@ -76,6 +90,18 @@ class Collection
     ];
 
     /** @var integer */
+<<<<<<< HEAD
+=======
+    private static $wireVersionForFindAndModifyWriteConcern = 4;
+
+    /** @var integer */
+    private static $wireVersionForReadConcern = 4;
+
+    /** @var integer */
+    private static $wireVersionForWritableCommandWriteConcern = 5;
+
+    /** @var integer */
+>>>>>>> forked/LAE_400_PACKAGE
     private static $wireVersionForReadConcernWithWriteStage = 8;
 
     /** @var string */
@@ -126,7 +152,11 @@ class Collection
      * @param array   $options        Collection options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(Manager $manager, string $databaseName, string $collectionName, array $options = [])
+=======
+    public function __construct(Manager $manager, $databaseName, $collectionName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (strlen($databaseName) < 1) {
             throw new InvalidArgumentException('$databaseName is invalid: ' . $databaseName);
@@ -153,8 +183,13 @@ class Collection
         }
 
         $this->manager = $manager;
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = (string) $collectionName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->readConcern = $options['readConcern'] ?? $this->manager->getReadConcern();
         $this->readPreference = $options['readPreference'] ?? $this->manager->getReadPreference();
         $this->typeMap = $options['typeMap'] ?? self::$defaultTypeMap;
@@ -164,7 +199,11 @@ class Collection
     /**
      * Return internal properties for debugging purposes.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
+=======
+     * @see http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
+>>>>>>> forked/LAE_400_PACKAGE
      * @return array
      */
     public function __debugInfo()
@@ -183,7 +222,11 @@ class Collection
     /**
      * Return the collection namespace (e.g. "db.collection").
      *
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/core/databases-and-collections/
+=======
+     * @see https://docs.mongodb.org/manual/faq/developers/#faq-dev-namespace
+>>>>>>> forked/LAE_400_PACKAGE
      * @return string
      */
     public function __toString()
@@ -216,17 +259,30 @@ class Collection
             $options['readPreference'] = $this->readPreference;
         }
 
+<<<<<<< HEAD
         $server = $hasWriteStage
             ? select_server_for_aggregate_write_stage($this->manager, $options)
             : select_server($this->manager, $options);
+=======
+        if ($hasWriteStage) {
+            $options['readPreference'] = new ReadPreference(ReadPreference::RP_PRIMARY);
+        }
+
+        $server = select_server($this->manager, $options);
+>>>>>>> forked/LAE_400_PACKAGE
 
         /* MongoDB 4.2 and later supports a read concern when an $out stage is
          * being used, but earlier versions do not.
          *
          * A read concern is also not compatible with transactions.
          */
+<<<<<<< HEAD
         if (
             ! isset($options['readConcern']) &&
+=======
+        if (! isset($options['readConcern']) &&
+            server_supports_feature($server, self::$wireVersionForReadConcern) &&
+>>>>>>> forked/LAE_400_PACKAGE
             ! is_in_transaction($options) &&
             ( ! $hasWriteStage || server_supports_feature($server, self::$wireVersionForReadConcernWithWriteStage))
         ) {
@@ -237,7 +293,14 @@ class Collection
             $options['typeMap'] = $this->typeMap;
         }
 
+<<<<<<< HEAD
         if ($hasWriteStage && ! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if ($hasWriteStage &&
+            ! isset($options['writeConcern']) &&
+            server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) &&
+            ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -291,7 +354,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 
@@ -320,7 +387,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 
@@ -368,8 +439,13 @@ class Collection
      * If the "name" option is unspecified, a name will be generated from the
      * "key" document.
      *
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/createIndexes/
      * @see https://mongodb.com/docs/manual/reference/method/db.collection.createIndex/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/createIndexes/
+     * @see http://docs.mongodb.org/manual/reference/method/db.collection.createIndex/
+>>>>>>> forked/LAE_400_PACKAGE
      * @see CreateIndexes::__construct() for supported command options
      * @param array[] $indexes List of index specifications
      * @param array   $options Command options
@@ -382,7 +458,11 @@ class Collection
     {
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -395,7 +475,11 @@ class Collection
      * Deletes all documents matching the filter.
      *
      * @see DeleteMany::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/delete/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/delete/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to delete documents
      * @param array        $options Command options
      * @return DeleteResult
@@ -419,7 +503,11 @@ class Collection
      * Deletes at most one document matching the filter.
      *
      * @see DeleteOne::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/delete/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/delete/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to delete documents
      * @param array        $options Command options
      * @return DeleteResult
@@ -446,13 +534,21 @@ class Collection
      * @param string       $fieldName Field for which to return distinct values
      * @param array|object $filter    Query by which to filter documents
      * @param array        $options   Command options
+<<<<<<< HEAD
      * @return array
+=======
+     * @return mixed[]
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws UnexpectedValueException if the command response was malformed
      * @throws UnsupportedException if options are not supported by the selected server
      * @throws InvalidArgumentException for parameter/option parsing errors
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function distinct(string $fieldName, $filter = [], array $options = [])
+=======
+    public function distinct($fieldName, $filter = [], array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! isset($options['readPreference']) && ! is_in_transaction($options)) {
             $options['readPreference'] = $this->readPreference;
@@ -464,7 +560,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 
@@ -491,6 +591,7 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
             $options['writeConcern'] = $this->writeConcern;
         }
@@ -510,6 +611,12 @@ class Collection
             (new DropCollection($this->databaseName, $encryptedFields['ecocCollection'] ?? 'enxcol_.' . $this->collectionName . '.ecoc'))->execute($server);
         }
 
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+            $options['writeConcern'] = $this->writeConcern;
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $operation = new DropCollection($this->databaseName, $this->collectionName, $options);
 
         return $operation->execute($server);
@@ -540,7 +647,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -567,7 +678,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -595,7 +710,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 
@@ -608,7 +727,11 @@ class Collection
      * Explains explainable commands.
      *
      * @see Explain::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/explain/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/explain/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param Explainable $explainable Command on which to run explain
      * @param array       $options     Additional options
      * @return array|object
@@ -637,7 +760,11 @@ class Collection
      * Finds documents matching the query.
      *
      * @see Find::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/crud/#read-operations
+=======
+     * @see http://docs.mongodb.org/manual/core/read-operations-introduction/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to filter documents
      * @param array        $options Additional options
      * @return Cursor
@@ -653,7 +780,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 
@@ -670,7 +801,11 @@ class Collection
      * Finds a single document matching the query.
      *
      * @see FindOne::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/crud/#read-operations
+=======
+     * @see http://docs.mongodb.org/manual/core/read-operations-introduction/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to filter documents
      * @param array        $options Additional options
      * @return array|object|null
@@ -686,7 +821,11 @@ class Collection
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 
@@ -705,7 +844,11 @@ class Collection
      * The document to return may be null if no document matched the filter.
      *
      * @see FindOneAndDelete::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/findAndModify/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to filter documents
      * @param array        $options Command options
      * @return array|object|null
@@ -718,7 +861,11 @@ class Collection
     {
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForFindAndModifyWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -741,7 +888,11 @@ class Collection
      * to return the updated document.
      *
      * @see FindOneAndReplace::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/findAndModify/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter      Query by which to filter documents
      * @param array|object $replacement Replacement document
      * @param array        $options     Command options
@@ -755,7 +906,11 @@ class Collection
     {
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForFindAndModifyWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -778,7 +933,11 @@ class Collection
      * to return the updated document.
      *
      * @see FindOneAndReplace::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/findAndModify/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/findAndModify/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to filter documents
      * @param array|object $update  Update to apply to the matched document
      * @param array        $options Command options
@@ -792,7 +951,11 @@ class Collection
     {
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForFindAndModifyWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -838,7 +1001,11 @@ class Collection
     /**
      * Return the collection namespace.
      *
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/glossary/#term-namespace
+=======
+     * @see https://docs.mongodb.org/manual/reference/glossary/#term-namespace
+>>>>>>> forked/LAE_400_PACKAGE
      * @return string
      */
     public function getNamespace()
@@ -849,7 +1016,11 @@ class Collection
     /**
      * Return the read concern for this collection.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-readconcern.isdefault.php
+=======
+     * @see http://php.net/manual/en/mongodb-driver-readconcern.isdefault.php
+>>>>>>> forked/LAE_400_PACKAGE
      * @return ReadConcern
      */
     public function getReadConcern()
@@ -880,7 +1051,11 @@ class Collection
     /**
      * Return the write concern for this collection.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-writeconcern.isdefault.php
+=======
+     * @see http://php.net/manual/en/mongodb-driver-writeconcern.isdefault.php
+>>>>>>> forked/LAE_400_PACKAGE
      * @return WriteConcern
      */
     public function getWriteConcern()
@@ -892,7 +1067,11 @@ class Collection
      * Inserts multiple documents.
      *
      * @see InsertMany::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/insert/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/insert/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array[]|object[] $documents The documents to insert
      * @param array            $options   Command options
      * @return InsertManyResult
@@ -915,7 +1094,11 @@ class Collection
      * Inserts one document.
      *
      * @see InsertOne::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/insert/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/insert/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $document The document to insert
      * @param array        $options  Command options
      * @return InsertOneResult
@@ -938,6 +1121,10 @@ class Collection
      * Returns information for all indexes for the collection.
      *
      * @see ListIndexes::__construct() for supported options
+<<<<<<< HEAD
+=======
+     * @param array $options
+>>>>>>> forked/LAE_400_PACKAGE
      * @return IndexInfoIterator
      * @throws InvalidArgumentException for parameter/option parsing errors
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
@@ -954,7 +1141,11 @@ class Collection
      * Executes a map-reduce aggregation on the collection.
      *
      * @see MapReduce::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/mapReduce/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/mapReduce/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param JavascriptInterface $map     Map function
      * @param JavascriptInterface $reduce  Reduce function
      * @param string|array|object $out     Output specification
@@ -985,7 +1176,11 @@ class Collection
          *
          * A read concern is also not compatible with transactions.
          */
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! ($hasOutputCollection && $this->readConcern->getLevel() === ReadConcern::MAJORITY) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && ! ($hasOutputCollection && $this->readConcern->getLevel() === ReadConcern::MAJORITY) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 
@@ -993,7 +1188,11 @@ class Collection
             $options['typeMap'] = $this->typeMap;
         }
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -1003,6 +1202,7 @@ class Collection
     }
 
     /**
+<<<<<<< HEAD
      * Renames the collection.
      *
      * @see RenameCollection::__construct() for supported options
@@ -1040,6 +1240,12 @@ class Collection
      *
      * @see ReplaceOne::__construct() for supported options
      * @see https://mongodb.com/docs/manual/reference/command/update/
+=======
+     * Replaces at most one document matching the filter.
+     *
+     * @see ReplaceOne::__construct() for supported options
+     * @see http://docs.mongodb.org/manual/reference/command/update/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter      Query by which to filter documents
      * @param array|object $replacement Replacement document
      * @param array        $options     Command options
@@ -1064,7 +1270,11 @@ class Collection
      * Updates all documents matching the filter.
      *
      * @see UpdateMany::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/update/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/update/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to filter documents
      * @param array|object $update  Update to apply to the matched documents
      * @param array        $options Command options
@@ -1089,7 +1299,11 @@ class Collection
      * Updates at most one document matching the filter.
      *
      * @see UpdateOne::__construct() for supported options
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/update/
+=======
+     * @see http://docs.mongodb.org/manual/reference/command/update/
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array|object $filter  Query by which to filter documents
      * @param array|object $update  Update to apply to the matched document
      * @param array        $options Command options
@@ -1134,7 +1348,11 @@ class Collection
          * related to change streams being unsupported instead of an
          * UnsupportedException regarding use of the "readConcern" option from
          * the Aggregate operation class. */
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 

@@ -35,6 +35,7 @@ class ADODB2_sybase extends ADODB_DataDict {
 			$len = $fieldobj->max_length;
 		}
 
+<<<<<<< HEAD
 		$t = strtoupper($t);
 		
 		if (array_key_exists($t,$this->connection->customActualTypes))
@@ -44,6 +45,10 @@ class ADODB2_sybase extends ADODB_DataDict {
 
 		switch ($t) {
 
+=======
+		$len = -1; // mysql max_length is not accurate
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 
 		case 'INT':
 		case 'INTEGER': return  'I';
@@ -60,6 +65,7 @@ class ADODB2_sybase extends ADODB_DataDict {
 
 	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		$meta = strtoupper($meta);
 		
 		/*
@@ -69,6 +75,8 @@ class ADODB2_sybase extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		switch(strtoupper($meta)) {
 		case 'C': return 'VARCHAR';
 		case 'XL':

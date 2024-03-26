@@ -42,7 +42,11 @@ $plugins = core_plugin_manager::instance()->get_plugins_of_type('contenttype');
 $sortorder = array_flip(array_keys($plugins));
 
 if (!isset($plugins[$name])) {
+<<<<<<< HEAD
     throw new \moodle_exception('contenttypenotfound', 'error', $return, $name);
+=======
+    print_error('contenttypenotfound', 'error', $return, $name);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 switch ($action) {

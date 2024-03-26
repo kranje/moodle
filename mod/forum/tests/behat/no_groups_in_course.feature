@@ -14,6 +14,7 @@ Feature: Posting to forums in a course with no groups behaves correctly
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro                         | course | idnumber     | groupmode |
       | forum      | Standard forum         | Standard forum description    | C1     | nogroups     | 0         |
       | forum      | Visible forum          | Visible forum description     | C1     | visgroups    | 2         |
@@ -23,6 +24,15 @@ Feature: Posting to forums in a course with no groups behaves correctly
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I follow "Standard forum"
+=======
+      | activity   | name                   | course | idnumber     | groupmode |
+      | forum      | Standard forum         | C1     | nogroups     | 0         |
+      | forum      | Visible forum          | C1     | visgroups    | 2         |
+      | forum      | Separate forum         | C1     | sepgroups    | 1         |
+
+  Scenario: Teachers can post in standard forum
+    Given I am on the "Standard forum" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     When I click on "Add discussion topic" "link"
     Then I should not see "Post a copy to all groups"
     And I set the following fields to these values:
@@ -33,9 +43,13 @@ Feature: Posting to forums in a course with no groups behaves correctly
     And I should see "Teacher -> All participants"
 
   Scenario: Teachers can post in forum with separate groups
+<<<<<<< HEAD
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I follow "Separate forum"
+=======
+    Given I am on the "Separate forum" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     When I click on "Add discussion topic" "link"
     Then I should not see "Post a copy to all groups"
     And I set the following fields to these values:
@@ -46,9 +60,13 @@ Feature: Posting to forums in a course with no groups behaves correctly
     And I should see "Teacher -> All participants"
 
   Scenario: Teachers can post in forum with visible groups
+<<<<<<< HEAD
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I follow "Visible forum"
+=======
+    Given I am on the "Visible forum" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     When I click on "Add discussion topic" "link"
     Then I should not see "Post a copy to all groups"
     And I set the following fields to these values:
@@ -59,9 +77,13 @@ Feature: Posting to forums in a course with no groups behaves correctly
     And I should see "Teacher -> All participants"
 
   Scenario: Students can post in standard forum
+<<<<<<< HEAD
     Given I log in as "student1"
     And I am on "Course 1" course homepage
     And I follow "Standard forum"
+=======
+    Given I am on the "Standard forum" "forum activity" page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     When I click on "Add discussion topic" "link"
     Then I should not see "Post a copy to all groups"
     And I set the following fields to these values:
@@ -72,15 +94,23 @@ Feature: Posting to forums in a course with no groups behaves correctly
     And I should see "Student -> All participants"
 
   Scenario: Students cannot post in forum with separate groups
+<<<<<<< HEAD
     Given I log in as "student1"
     And I am on "Course 1" course homepage
     When I follow "Separate forum"
+=======
+    When I am on the "Separate forum" "forum activity" page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "You are not able to create a discussion because you are not a member of any group."
     And I should not see "Add discussion topic"
 
   Scenario: Students cannot post in forum with visible groups
+<<<<<<< HEAD
     Given I log in as "student1"
     And I am on "Course 1" course homepage
     When I follow "Visible forum"
+=======
+    When I am on the "Visible forum" "forum activity" page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "You are not able to create a discussion because you are not a member of any group."
     And I should not see "Add discussion topic"

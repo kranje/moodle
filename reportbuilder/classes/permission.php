@@ -18,7 +18,10 @@ declare(strict_types=1);
 
 namespace core_reportbuilder;
 
+<<<<<<< HEAD
 use context;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use context_system;
 use core_reportbuilder\local\helpers\audience;
 use core_reportbuilder\local\models\report;
@@ -37,11 +40,18 @@ class permission {
      * Require given user can view reports list
      *
      * @param int|null $userid User ID to check, or the current user if omitted
+<<<<<<< HEAD
      * @param context|null $context
      * @throws report_access_exception
      */
     public static function require_can_view_reports_list(?int $userid = null, ?context $context = null): void {
         if (!static::can_view_reports_list($userid, $context)) {
+=======
+     * @throws report_access_exception
+     */
+    public static function require_can_view_reports_list(?int $userid = null): void {
+        if (!static::can_view_reports_list($userid)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new report_access_exception();
         }
     }
@@ -50,6 +60,7 @@ class permission {
      * Whether given user can view reports list
      *
      * @param int|null $userid User ID to check, or the current user if omitted
+<<<<<<< HEAD
      * @param context|null $context
      * @return bool
      */
@@ -60,11 +71,22 @@ class permission {
             $context = context_system::instance();
         }
 
+=======
+     * @return bool
+     */
+    public static function can_view_reports_list(?int $userid = null): bool {
+        global $CFG;
+
+>>>>>>> forked/LAE_400_PACKAGE
         return !empty($CFG->enablecustomreports) && has_any_capability([
             'moodle/reportbuilder:editall',
             'moodle/reportbuilder:edit',
             'moodle/reportbuilder:view',
+<<<<<<< HEAD
         ], $context, $userid);
+=======
+        ], context_system::instance(), $userid);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -88,7 +110,11 @@ class permission {
      * @return bool
      */
     public static function can_view_report(report $report, ?int $userid = null): bool {
+<<<<<<< HEAD
         if (!static::can_view_reports_list($userid, $report->get_context())) {
+=======
+        if (!static::can_view_reports_list($userid)) {
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 
@@ -139,9 +165,15 @@ class permission {
             return has_any_capability([
                 'moodle/reportbuilder:edit',
                 'moodle/reportbuilder:editall',
+<<<<<<< HEAD
             ], $report->get_context(), $userid);
         } else {
             return has_capability('moodle/reportbuilder:editall', $report->get_context(), $userid);
+=======
+            ], context_system::instance(), $userid);
+        } else {
+            return has_capability('moodle/reportbuilder:editall', context_system::instance(), $userid);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -149,6 +181,7 @@ class permission {
      * Whether given user can create a new report
      *
      * @param int|null $userid User ID to check, or the current user if omitted
+<<<<<<< HEAD
      * @param context|null $context
      * @return bool
      */
@@ -163,17 +196,35 @@ class permission {
             'moodle/reportbuilder:edit',
             'moodle/reportbuilder:editall',
         ], $context, $userid) && !manager::report_limit_reached();
+=======
+     * @return bool
+     */
+    public static function can_create_report(?int $userid = null): bool {
+        global $CFG;
+
+        return !empty($CFG->enablecustomreports) && has_any_capability([
+            'moodle/reportbuilder:edit',
+            'moodle/reportbuilder:editall',
+        ], context_system::instance(), $userid);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Require given user can create a new report
      *
      * @param int|null $userid User ID to check, or the current user if omitted
+<<<<<<< HEAD
      * @param context|null $context
      * @throws report_access_exception
      */
     public static function require_can_create_report(?int $userid = null, ?context $context = null): void {
         if (!static::can_create_report($userid, $context)) {
+=======
+     * @throws report_access_exception
+     */
+    public static function require_can_create_report(?int $userid = null): void {
+        if (!static::can_create_report($userid)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new report_access_exception('errorreportcreate');
         }
     }

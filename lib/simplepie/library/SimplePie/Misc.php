@@ -2260,6 +2260,7 @@ function embed_wmedia(width, height, link) {
 	{
 		// No-op
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Sanitize a URL by removing HTTP credentials.
@@ -2273,3 +2274,6 @@ function embed_wmedia(width, height, link) {
 }
 
 class_alias('SimplePie_Misc', 'SimplePie\Misc', false);
+=======
+}
+>>>>>>> forked/LAE_400_PACKAGE

@@ -4,7 +4,11 @@
  *
  * @package   php-markdown
  * @author    Michel Fortin <michel.fortin@michelf.com>
+<<<<<<< HEAD
  * @copyright 2004-2022 Michel Fortin <https://michelf.com/projects/php-markdown/>
+=======
+ * @copyright 2004-2019 Michel Fortin <https://michelf.com/projects/php-markdown/>
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright (Original Markdown) 2004-2006 John Gruber <https://daringfireball.net/projects/markdown/>
  */
 
@@ -17,6 +21,7 @@ class MarkdownExtra extends \Michelf\Markdown {
 	/**
 	 * Configuration variables
 	 */
+<<<<<<< HEAD
 	/**
 	 * Prefix for footnote ids.
 	 */
@@ -32,6 +37,27 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 */
 	public string $fn_link_class     = "footnote-ref";
 	public string $fn_backlink_class = "footnote-backref";
+=======
+
+	/**
+	 * Prefix for footnote ids.
+	 * @var string
+	 */
+	public $fn_id_prefix = "";
+
+	/**
+	 * Optional title attribute for footnote links.
+	 * @var string
+	 */
+	public $fn_link_title = "";
+
+	/**
+	 * Optional class attribute for footnote links and backlinks.
+	 * @var string
+	 */
+	public $fn_link_class     = "footnote-ref";
+	public $fn_backlink_class = "footnote-backref";
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Content to be displayed within footnote backlinks. The default is '↩';
@@ -39,22 +65,36 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * from displaying the arrow character as an emoji.
 	 * Optionally use '^^' and '%%' to refer to the footnote number and
 	 * reference number respectively. {@see parseFootnotePlaceholders()}
+<<<<<<< HEAD
 	 */
 	public string $fn_backlink_html = '&#8617;&#xFE0E;';
+=======
+	 * @var string
+	 */
+	public $fn_backlink_html = '&#8617;&#xFE0E;';
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Optional title and aria-label attributes for footnote backlinks for
 	 * added accessibility (to ensure backlink uniqueness).
 	 * Use '^^' and '%%' to refer to the footnote number and reference number
 	 * respectively. {@see parseFootnotePlaceholders()}
+<<<<<<< HEAD
 	 */
 	public string $fn_backlink_title = "";
 	public string $fn_backlink_label = "";
+=======
+	 * @var string
+	 */
+	public $fn_backlink_title = "";
+	public $fn_backlink_label = "";
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Class name for table cell alignment (%% replaced left/center/right)
 	 * For instance: 'go-%%' becomes 'go-left' or 'go-right' or 'go-center'
 	 * If empty, the align attribute is used instead of a class name.
+<<<<<<< HEAD
 	 */
 	public string $table_align_class_tmpl = '';
 
@@ -62,10 +102,22 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * Optional class prefix for fenced code block.
 	 */
 	public string $code_class_prefix = "";
+=======
+	 * @var string
+	 */
+	public $table_align_class_tmpl = '';
+
+	/**
+	 * Optional class prefix for fenced code block.
+	 * @var string
+	 */
+	public $code_class_prefix = "";
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Class attribute for code blocks goes on the `code` tag;
 	 * setting this to true will put attributes on the `pre` tag instead.
+<<<<<<< HEAD
 	 */
 	public bool $code_attr_on_pre = false;
 
@@ -78,12 +130,35 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * Only convert atx-style headers if there's a space between the header and #
 	 */
 	public bool $hashtag_protection = false;
+=======
+	 * @var boolean
+	 */
+	public $code_attr_on_pre = false;
+
+	/**
+	 * Predefined abbreviations.
+	 * @var array
+	 */
+	public $predef_abbr = array();
+
+	/**
+	 * Only convert atx-style headers if there's a space between the header and #
+	 * @var boolean
+	 */
+	public $hashtag_protection = false;
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Determines whether footnotes should be appended to the end of the document.
 	 * If true, footnote html can be retrieved from $this->footnotes_assembled.
+<<<<<<< HEAD
 	 */
 	public bool $omit_footnotes = false;
+=======
+	 * @var boolean
+	 */
+	public $omit_footnotes = false;
+>>>>>>> forked/LAE_400_PACKAGE
 
 
 	/**
@@ -95,8 +170,14 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * `section` that will enclose the list of footnotes so they are
 	 * reachable to accessibility tools the same way they would be with the
 	 * default HTML output.
+<<<<<<< HEAD
 	 */
 	public ?string $footnotes_assembled = null;
+=======
+	 * @var null|string
+	 */
+	public $footnotes_assembled = null;
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Parser implementation
@@ -136,6 +217,7 @@ class MarkdownExtra extends \Michelf\Markdown {
 
 	/**
 	 * Extra variables used during extra transformations.
+<<<<<<< HEAD
 	 */
 	protected array $footnotes = array();
 	protected array $footnotes_ordered = array();
@@ -153,6 +235,29 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * Ref attribute for links
 	 */
 	protected array $ref_attr = array();
+=======
+	 * @var array
+	 */
+	protected $footnotes = array();
+	protected $footnotes_ordered = array();
+	protected $footnotes_ref_count = array();
+	protected $footnotes_numbers = array();
+	protected $abbr_desciptions = array();
+	/** @var string */
+	protected $abbr_word_re = '';
+
+	/**
+	 * Give the current footnote number.
+	 * @var integer
+	 */
+	protected $footnote_counter = 1;
+
+    /**
+     * Ref attribute for links
+     * @var array
+     */
+	protected $ref_attr = array();
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Setting up Extra-specific variables.
@@ -198,6 +303,7 @@ class MarkdownExtra extends \Michelf\Markdown {
 	/**
 	 * Extra attribute parser
 	 */
+<<<<<<< HEAD
 	/**
 	 * Expression to use to catch attributes (includes the braces)
 	 */
@@ -207,6 +313,20 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * Expression to use when parsing in a context when no capture is desired
 	 */
 	protected string $id_class_attr_nocatch_re = '\{(?>[ ]*[#.a-z][-_:a-zA-Z0-9=]+){1,}[ ]*\}';
+=======
+
+	/**
+	 * Expression to use to catch attributes (includes the braces)
+	 * @var string
+	 */
+	protected $id_class_attr_catch_re = '\{((?>[ ]*[#.a-z][-_:a-zA-Z0-9=]+){1,})[ ]*\}';
+
+	/**
+	 * Expression to use when parsing in a context when no capture is desired
+	 * @var string
+	 */
+	protected $id_class_attr_nocatch_re = '\{(?>[ ]*[#.a-z][-_:a-zA-Z0-9=]+){1,}[ ]*\}';
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Parse attributes caught by the $this->id_class_attr_catch_re expression
@@ -320,6 +440,7 @@ class MarkdownExtra extends \Michelf\Markdown {
 	/**
 	 * HTML block parser
 	 */
+<<<<<<< HEAD
 	/**
 	 * Tags that are always treated as block tags
 	 */
@@ -334,10 +455,31 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * Tags where markdown="1" default to span mode:
 	 */
 	protected string $contain_span_tags_re = 'p|h[1-6]|li|dd|dt|td|th|legend|address';
+=======
+
+	/**
+	 * Tags that are always treated as block tags
+	 * @var string
+	 */
+	protected $block_tags_re = 'p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|address|form|fieldset|iframe|hr|legend|article|section|nav|aside|hgroup|header|footer|figcaption|figure';
+
+	/**
+	 * Tags treated as block tags only if the opening tag is alone on its line
+	 * @var string
+	 */
+	protected $context_block_tags_re = 'script|noscript|style|ins|del|iframe|object|source|track|param|math|svg|canvas|audio|video';
+
+	/**
+	 * Tags where markdown="1" default to span mode:
+	 * @var string
+	 */
+	protected $contain_span_tags_re = 'p|h[1-6]|li|dd|dt|td|th|legend|address';
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Tags which must not have their contents modified, no matter where
 	 * they appear
+<<<<<<< HEAD
 	 */
 	protected string $clean_tags_re = 'script|style|math|svg';
 
@@ -345,6 +487,17 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * Tags that do not need to be closed.
 	 */
 	protected string $auto_close_tags_re = 'hr|img|param|source|track';
+=======
+	 * @var string
+	 */
+	protected $clean_tags_re = 'script|style|math|svg';
+
+	/**
+	 * Tags that do not need to be closed.
+	 * @var string
+	 */
+	protected $auto_close_tags_re = 'hr|img|param|source|track';
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Hashify HTML Blocks and "clean tags".
@@ -601,7 +754,10 @@ class MarkdownExtra extends \Michelf\Markdown {
 			else {
 				$parsed .= $tag;
 			}
+<<<<<<< HEAD
 			// @phpstan-ignore-next-line
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		} while ($depth >= 0);
 
 		return array($parsed, $text);
@@ -683,7 +839,11 @@ class MarkdownExtra extends \Michelf\Markdown {
 			// by the pattern.
 			$parts = preg_split($tag_re, $text, 2, PREG_SPLIT_DELIM_CAPTURE);
 
+<<<<<<< HEAD
 			if ($parts === false || count($parts) < 3) {
+=======
+			if (count($parts) < 3) {
+>>>>>>> forked/LAE_400_PACKAGE
 				// End of $text reached with unbalenced tag(s).
 				// In that case, we return original text unchanged and pass the
 				// first character as filtered to prevent an infinite loop in the
@@ -907,7 +1067,10 @@ class MarkdownExtra extends \Michelf\Markdown {
 	protected function _doAnchors_inline_callback($matches) {
 		$link_text		=  $this->runSpanGamut($matches[2]);
 		$url			=  $matches[3] === '' ? $matches[4] : $matches[3];
+<<<<<<< HEAD
 		$title_quote		=& $matches[6];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		$title			=& $matches[7];
 		$attr  = $this->doExtraAttributes("a", $dummy =& $matches[8]);
 
@@ -920,7 +1083,11 @@ class MarkdownExtra extends \Michelf\Markdown {
 		$url = $this->encodeURLAttribute($url);
 
 		$result = "<a href=\"$url\"";
+<<<<<<< HEAD
 		if (isset($title) && $title_quote) {
+=======
+		if (isset($title)) {
+>>>>>>> forked/LAE_400_PACKAGE
 			$title = $this->encodeAttribute($title);
 			$result .=  " title=\"$title\"";
 		}
@@ -1032,14 +1199,21 @@ class MarkdownExtra extends \Michelf\Markdown {
 	protected function _doImages_inline_callback($matches) {
 		$alt_text		= $matches[2];
 		$url			= $matches[3] === '' ? $matches[4] : $matches[3];
+<<<<<<< HEAD
 		$title_quote		=& $matches[6];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		$title			=& $matches[7];
 		$attr  = $this->doExtraAttributes("img", $dummy =& $matches[8]);
 
 		$alt_text = $this->encodeAttribute($alt_text);
 		$url = $this->encodeURLAttribute($url);
 		$result = "<img src=\"$url\" alt=\"$alt_text\"";
+<<<<<<< HEAD
 		if (isset($title) && $title_quote) {
+=======
+		if (isset($title)) {
+>>>>>>> forked/LAE_400_PACKAGE
 			$title = $this->encodeAttribute($title);
 			$result .=  " title=\"$title\""; // $title already quoted
 		}
@@ -1223,7 +1397,10 @@ class MarkdownExtra extends \Michelf\Markdown {
 		$head		= $matches[1];
 		$underline	= $matches[2];
 		$content	= $matches[3];
+<<<<<<< HEAD
 		$attr       = [];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 		// Remove any tailing pipes for each line.
 		$head		= preg_replace('/[|] *$/m', '', $head);
@@ -1525,17 +1702,29 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 * work in the middle of a word.
 	 * @var array
 	 */
+<<<<<<< HEAD
 	protected array $em_relist = array(
+=======
+	protected $em_relist = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		''  => '(?:(?<!\*)\*(?!\*)|(?<![a-zA-Z0-9_])_(?!_))(?![\.,:;]?\s)',
 		'*' => '(?<![\s*])\*(?!\*)',
 		'_' => '(?<![\s_])_(?![a-zA-Z0-9_])',
 	);
+<<<<<<< HEAD
 	protected array $strong_relist = array(
+=======
+	protected $strong_relist = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		''   => '(?:(?<!\*)\*\*(?!\*)|(?<![a-zA-Z0-9_])__(?!_))(?![\.,:;]?\s)',
 		'**' => '(?<![\s*])\*\*(?!\*)',
 		'__' => '(?<![\s_])__(?![a-zA-Z0-9_])',
 	);
+<<<<<<< HEAD
 	protected array $em_strong_relist = array(
+=======
+	protected $em_strong_relist = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		''    => '(?:(?<!\*)\*\*\*(?!\*)|(?<![a-zA-Z0-9_])___(?!_))(?![\.,:;]?\s)',
 		'***' => '(?<![\s*])\*\*\*(?!\*)',
 		'___' => '(?<![\s_])___(?![a-zA-Z0-9_])',

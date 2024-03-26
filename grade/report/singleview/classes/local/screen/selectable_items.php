@@ -38,23 +38,39 @@ interface selectable_items {
      * Get the description of this list
      * @return string
      */
+<<<<<<< HEAD
     public function description(): string;
+=======
+    public function description();
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Get the label for the select box that chooses items for this page.
      * @return string
      */
+<<<<<<< HEAD
     public function select_label(): string;
+=======
+    public function select_label();
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Get the list of options to show.
      * @return array
      */
+<<<<<<< HEAD
     public function options(): array;
+=======
+    public function options();
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Get type of things in the list (gradeitem or user)
      * @return string
      */
+<<<<<<< HEAD
     public function item_type(): string;
+=======
+    public function item_type();
+>>>>>>> forked/LAE_400_PACKAGE
 }

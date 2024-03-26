@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @block @block_activity_results @javascript
+=======
+@block @block_activity_results
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: The activity results block displays student low scores
   In order to be display student scores
   As a user
@@ -29,6 +33,7 @@ Feature: The activity results block displays student low scores
       | course                        | C1              |
       | idnumber                      | 0001            |
       | name                          | Test assignment |
+<<<<<<< HEAD
       | intro                         | Offline text    |
       | section                       | 1               |
       | assignsubmission_file_enabled | 0               |
@@ -42,6 +47,18 @@ Feature: The activity results block displays student low scores
     And I give the grade "50.00" to the user "Student 5" for the grade item "Test assignment"
     And I press "Save changes"
     And I am on "Course 1" course homepage
+=======
+      | assignsubmission_file_enabled | 0               |
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Test assignment | student1 | 90.00 |
+      | Test assignment | student2 | 80.00 |
+      | Test assignment | student3 | 70.00 |
+      | Test assignment | student4 | 60.00 |
+      | Test assignment | student5 | 50.00 |
+    And I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Configure the block on the course page to show 1 low score
     Given I add the "Activity results" block

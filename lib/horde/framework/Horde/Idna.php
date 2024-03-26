@@ -36,6 +36,7 @@ class Horde_Idna
     {
         switch ($backend = static::_getBackend()) {
         case 'INTL':
+<<<<<<< HEAD
             if ($data === null) {
                 return false;
             }
@@ -45,6 +46,11 @@ class Horde_Idna
             if ($data === null) {
                 return false;
             }
+=======
+            return idn_to_ascii($data);
+
+        case 'INTL_UTS46':
+>>>>>>> forked/LAE_400_PACKAGE
             $result = idn_to_ascii($data, 0, INTL_IDNA_VARIANT_UTS46, $info);
             self::_checkForError($info);
             return $result;

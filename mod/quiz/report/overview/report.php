@@ -139,7 +139,13 @@ class quiz_overview_report extends quiz_attempts_report {
                             $quiz, $groupstudentsjoins);
                     if ($currentgroup) {
                         $a= new stdClass();
+<<<<<<< HEAD
                         $a->groupname = groups_get_group_name($currentgroup);
+=======
+                        $a->groupname = format_string(groups_get_group_name($currentgroup), true, [
+                            'context' => $this->context,
+                        ]);
+>>>>>>> forked/LAE_400_PACKAGE
                         $a->coursestudents = get_string('participants');
                         $a->countregradeneeded = $regradesneeded;
                         $regradealldrydolabel =
@@ -235,7 +241,14 @@ class quiz_overview_report extends quiz_attempts_report {
                 if ($DB->record_exists_sql($sql, $groupstudentsjoins->params)) {
                     $data = quiz_report_grade_bands($bandwidth, $bands, $quiz->id, $groupstudentsjoins);
                     $chart = self::get_chart($labels, $data);
+<<<<<<< HEAD
                     $graphname = get_string('overviewreportgraphgroup', 'quiz_overview', groups_get_group_name($currentgroup));
+=======
+                    $groupname = format_string(groups_get_group_name($currentgroup), true, [
+                        'context' => $this->context,
+                    ]);
+                    $graphname = get_string('overviewreportgraphgroup', 'quiz_overview', $groupname);
+>>>>>>> forked/LAE_400_PACKAGE
                     // Numerical range data should display in LTR even for RTL languages.
                     echo $output->chart($chart, $graphname, ['dir' => 'ltr']);
                 }

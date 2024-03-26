@@ -101,6 +101,7 @@ class lib_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Check delete instance
      *
      * @covers ::bigbluebuttonbn_delete_instance
@@ -174,6 +175,8 @@ class lib_test extends \advanced_testcase {
         }
     }
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Check user outline page
      *
      * @covers ::bigbluebuttonbn_user_outline

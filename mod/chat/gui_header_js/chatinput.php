@@ -23,6 +23,7 @@ $chatsid = required_param('chat_sid', PARAM_ALPHANUM);
 $chatid   = required_param('chat_id', PARAM_INT);
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('notlogged', 'chat');
 }
 if (!$chat = $DB->get_record('chat', array('id' => $chatid))) {
@@ -35,6 +36,20 @@ if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
 
 if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('notlogged', 'chat');
+}
+if (!$chat = $DB->get_record('chat', array('id' => $chatid))) {
+    print_error('invalidid', 'chat');
+}
+
+if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
+    print_error('invalidcourseid');
+}
+
+if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->set_url('/mod/chat/gui_header_js/chatinput.php', array('chat_sid' => $chatsid, 'chat_id' => $chatid));

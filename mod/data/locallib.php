@@ -968,10 +968,13 @@ function data_get_tag_title_field($dataid) {
     $validfieldtypes = array('text', 'textarea', 'menu', 'radiobutton', 'checkbox', 'multimenu', 'url');
     $fields = $DB->get_records('data_fields', ['dataid' => $dataid]);
     $template = $DB->get_field('data', 'addtemplate', ['id' => $dataid]);
+<<<<<<< HEAD
     if (empty($template)) {
         $data = $DB->get_record('data', ['id' => $dataid]);
         $template = data_generate_default_template($data, 'addtemplate', 0, false, false);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     $filteredfields = [];
 
@@ -1022,7 +1025,10 @@ function data_get_tag_title_field($dataid) {
  */
 function data_get_tag_title_for_entry($field, $entry) {
     global $CFG, $DB;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if (!isset($field->type)) {
         return null;
     }

@@ -5,6 +5,7 @@ Feature: Configure tool types
   I need to be able to add, remove and configure tool types
 
   Background:
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email                |
       | teacher1 | Terry1    | Teacher1 | teacher1@example.com |
@@ -17,6 +18,9 @@ Feature: Configure tool types
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
     And I log in as "admin"
+=======
+    Given I log in as "admin"
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Plugins > Activity modules > External tool > Manage tools" in site administration
 
   @javascript

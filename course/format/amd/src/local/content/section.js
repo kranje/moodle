@@ -24,7 +24,10 @@
 
 import Header from 'core_courseformat/local/content/section/header';
 import DndSection from 'core_courseformat/local/courseeditor/dndsection';
+<<<<<<< HEAD
 import Templates from 'core/templates';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 export default class extends DndSection {
 
@@ -39,18 +42,24 @@ export default class extends DndSection {
             SECTION_ITEM: `[data-for='section_title']`,
             CM: `[data-for="cmitem"]`,
             SECTIONINFO: `[data-for="sectioninfo"]`,
+<<<<<<< HEAD
             SECTIONBADGES: `[data-region="sectionbadges"]`,
             SHOWSECTION: `[data-action="sectionShow"]`,
             HIDESECTION: `[data-action="sectionHide"]`,
             ACTIONTEXT: `.menu-action-text`,
             ICON: `.icon`,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         };
         // Most classes will be loaded later by DndCmItem.
         this.classes = {
             LOCKED: 'editinprogress',
             HASDESCRIPTION: 'description',
+<<<<<<< HEAD
             HIDE: 'd-none',
             HIDDEN: 'hidden',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         };
 
         // We need our id to watch specific events.
@@ -120,7 +129,11 @@ export default class extends DndSection {
     }
 
     /**
+<<<<<<< HEAD
      * Update a content section using the state information.
+=======
+     * Update a course index section using the state information.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param {object} param
      * @param {Object} param.element details the update details.
@@ -129,13 +142,17 @@ export default class extends DndSection {
         // Update classes.
         this.element.classList.toggle(this.classes.DRAGGING, element.dragging ?? false);
         this.element.classList.toggle(this.classes.LOCKED, element.locked ?? false);
+<<<<<<< HEAD
         this.element.classList.toggle(this.classes.HIDDEN, !element.visible ?? false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         this.locked = element.locked;
         // The description box classes depends on the section state.
         const sectioninfo = this.getElement(this.selectors.SECTIONINFO);
         if (sectioninfo) {
             sectioninfo.classList.toggle(this.classes.HASDESCRIPTION, element.hasrestrictions);
         }
+<<<<<<< HEAD
         // Update section badges and menus.
         this._updateBadges(element);
         this._updateActionsMenu(element);
@@ -192,5 +209,7 @@ export default class extends DndSection {
                 Templates.replaceNode(icon, pixHtml, '');
             }
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

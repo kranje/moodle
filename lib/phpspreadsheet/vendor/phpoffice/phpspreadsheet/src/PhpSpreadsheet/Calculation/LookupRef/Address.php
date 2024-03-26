@@ -2,15 +2,22 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Cell\AddressHelper;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 
 class Address
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public const ADDRESS_ABSOLUTE = 1;
     public const ADDRESS_COLUMN_RELATIVE = 2;
     public const ADDRESS_ROW_RELATIVE = 3;
@@ -28,14 +35,19 @@ class Address
      *        =ADDRESS(row, column, [relativity], [referenceStyle], [sheetText])
      *
      * @param mixed $row Row number (integer) to use in the cell reference
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $column Column number (integer) to use in the cell reference
      *                      Or can be an array of values
+=======
+     * @param mixed $column Column number (integer) to use in the cell reference
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $relativity Integer flag indicating the type of reference to return
      *                             1 or omitted    Absolute
      *                             2               Absolute row; relative column
      *                             3               Relative row; absolute column
      *                             4               Relative
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $referenceStyle A logical (boolean) value that specifies the A1 or R1C1 reference style.
      *                                TRUE or omitted    ADDRESS returns an A1-style reference
@@ -69,13 +81,35 @@ class Address
 
         if (($row < 1) || ($column < 1)) {
             return ExcelError::VALUE();
+=======
+     * @param mixed $referenceStyle A logical (boolean) value that specifies the A1 or R1C1 reference style.
+     *                                TRUE or omitted    ADDRESS returns an A1-style reference
+     *                                FALSE              ADDRESS returns an R1C1-style reference
+     * @param mixed $sheetName Optional Name of worksheet to use
+     *
+     * @return string
+     */
+    public static function cell($row, $column, $relativity = 1, $referenceStyle = true, $sheetName = '')
+    {
+        $row = Functions::flattenSingleValue($row);
+        $column = Functions::flattenSingleValue($column);
+        $relativity = ($relativity === null) ? 1 : Functions::flattenSingleValue($relativity);
+        $referenceStyle = ($referenceStyle === null) ? true : Functions::flattenSingleValue($referenceStyle);
+        $sheetName = Functions::flattenSingleValue($sheetName);
+
+        if (($row < 1) || ($column < 1)) {
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $sheetName = self::sheetName($sheetName);
 
+<<<<<<< HEAD
         if (is_int($referenceStyle)) {
             $referenceStyle = (bool) $referenceStyle;
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if ((!is_bool($referenceStyle)) || $referenceStyle === self::REFERENCE_STYLE_A1) {
             return self::formatAsA1($row, $column, $relativity, $sheetName);
         }
@@ -117,8 +151,13 @@ class Address
         if (($relativity == self::ADDRESS_ROW_RELATIVE) || ($relativity == self::ADDRESS_RELATIVE)) {
             $row = "[{$row}]";
         }
+<<<<<<< HEAD
         [$rowChar, $colChar] = AddressHelper::getRowAndColumnChars();
 
         return "{$sheetName}$rowChar{$row}$colChar{$column}";
+=======
+
+        return "{$sheetName}R{$row}C{$column}";
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

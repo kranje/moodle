@@ -31,17 +31,29 @@
 // Make sure this is a legitimate posting
 
     if (!$formdata = data_submitted() or !confirm_sesskey()) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotcallscript');
+=======
+        print_error('cannotcallscript');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $id = required_param('id', PARAM_INT);    // Course Module ID
 
     if (! $cm = get_coursemodule_from_id('survey', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     }
 
     if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
         throw new \moodle_exception('coursemisconf');
+=======
+        print_error('invalidcoursemodule');
+    }
+
+    if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+        print_error('coursemisconf');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $PAGE->set_url('/mod/survey/save.php', array('id'=>$id));
@@ -51,7 +63,11 @@
     require_capability('mod/survey:participate', $context);
 
     if (! $survey = $DB->get_record("survey", array("id"=>$cm->instance))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidsurveyid', 'survey');
+=======
+        print_error('invalidsurveyid', 'survey');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $strsurveysaved = get_string('surveysaved', 'survey');

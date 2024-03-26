@@ -46,23 +46,39 @@ H5PEditor.language.core = {
   cancelLabel: 'İptal',
   resetToOriginalLabel: 'Özgün biçimine sıfırla',
   loadingImageEditor: 'Resim düzenleyici yükleniyor, bekleyin ...',
+<<<<<<< HEAD
   selectFiletoUpload: 'Yüklenecek dosyayı seçin',
   or: 'veya',
   enterAudioUrl: 'Ses kaynağının URLsini girin',
   enterVideoUrl: 'Enter video URL',
+=======
+  selectFiletoUpload: 'Yüklenecej dosyayı seçin',
+  or: 'veya',
+  enterAudioUrl: 'Ses kaynağının URLsini girin',
+  enterVideoUrl: 'Video kaynağının URLsini ya da YouTube linkini girin',
+>>>>>>> forked/LAE_400_PACKAGE
   enterAudioTitle: 'Linki ya da diğer ses kaynağının URLsini yapıştırın',
   enterVideoTitle: 'Youtube linkini ya da diğer video kaynağının URLsini yapıştırın',
   uploadAudioTitle: 'Ses dosyası yükle',
   uploadVideoTitle: 'Video dosyası yükle',
+<<<<<<< HEAD
   addVideoDescription: 'H5P supports all external video sources formatted as mp4, webm or ogv, like Vimeo Pro, and has support for YouTube and Panopto links.',
+=======
+  addVideoDescription: 'H5P mp4, webm veya ogv formatına sahip tüm dışsal video kaynaklarını destekler, Vimeo Pro yu tutar ve YouTube linklerini destekler.',
+>>>>>>> forked/LAE_400_PACKAGE
   insert: 'Ekle',
   cancel: 'Vazgeç',
   height: 'yükseklik',
   width: 'genişlik',
   textField: 'metin alanı',
   numberField: 'sayı alanı',
+<<<<<<< HEAD
   orderItemUp: 'Öğeleri yukarıya doğru sırala',
   orderItemDown: 'Öğeleri aşağıya doğru sırala',
+=======
+  orderItemUp: 'Order item up',
+  orderItemDown: 'Order item down',
+>>>>>>> forked/LAE_400_PACKAGE
   removeItem: 'Öğeyi kaldır',
   hubPanelLabel: 'İçerik türünü seç',
   importantInstructions: 'Önemli açıklamalar',
@@ -84,12 +100,20 @@ H5PEditor.language.core = {
   h5pFileWrongExtensionTitle: 'Seçilen dosya yüklenemedi',
   h5pFileWrongExtensionContent: 'Sadece .h5p uzantılı dosyalar kabul edilmektedir.',
   h5pFileValidationFailedTitle: 'H5P dosyası doğrulanamamıştır.',
+<<<<<<< HEAD
   h5pFileValidationFailedContent: 'Yüklenen H5P\'nin geçerli H5P içeriklerini içerdiğinden emin olun. H5P dosyaları sadece H5P Kütüphaneleri (H5P Libraries) sayfası aracılığıyla yüklenen kütüphaneleri içerebilir.',
+=======
+  h5pFileValidationFailedContent: 'Yüklenen H5Pnin geçerli H5P içerdiğinden emin olun. H5P dosyaları sadece H5P Kütüphaneleri (H5P Libraries) sayfası aracılığıyla yüklenen kütüphaneleri içerebilir.',
+>>>>>>> forked/LAE_400_PACKAGE
   h5pFileUploadServerErrorTitle: 'H5P dosyası yüklenemedi',
   h5pFileUploadServerErrorContent: 'Beklenmeyen bir hata oluştu. Daha detaylı bilgi için sunucunuzun hata log kayıtlarını inceleyin.',
   contentTypeSectionAll: 'Tüm İçerik Türleri',
   searchResults: 'Arama Sonuçları',
+<<<<<<< HEAD
   contentTypeSearchFieldPlaceholder: 'İçerik Türü Ara',
+=======
+  contentTypeSearchFieldPlaceholder: 'İçerik Türü AraSearch for Content Types',
+>>>>>>> forked/LAE_400_PACKAGE
   contentTypeInstallButtonLabel: 'Yükle',
   contentTypeInstallingButtonLabel: 'Yükleniyor',
   contentTypeUseButtonLabel: 'Kullan',
@@ -137,12 +161,21 @@ H5PEditor.language.core = {
   licenseCanUseCommercially: 'Ticari olarak kullanılabilir',
   licenseCanModify: 'Düzenlenebilir',
   licenseCanDistribute: 'Dağıtılabilir',
+<<<<<<< HEAD
   licenseCanSublicense: 'Alt lisans olabilir',
   licenseCanHoldLiable: 'Sorumlu tutabilir',
   licenseCannotHoldLiable: 'Sorumlu olamaz',
   licenseMustIncludeCopyright: 'Telif hakkı içermelidir',
   licenseMustIncludeLicense: 'Lisans içermelidir',
   licenseFetchDetailsFailed: 'Lisans ayrıntıları alınamadı',
+=======
+  licenseCanSublicense: 'Can sublicense',
+  licenseCanHoldLiable: 'Can hold liable',
+  licenseCannotHoldLiable: 'Cannot hold liable',
+  licenseMustIncludeCopyright: 'Must include copyright',
+  licenseMustIncludeLicense: 'Must include license',
+  licenseFetchDetailsFailed: 'Failed fetching license details',
+>>>>>>> forked/LAE_400_PACKAGE
   imageLightboxTitle: 'Resimler',
   imageLightBoxProgress: ':total\'dan :num of',
   nextImage: 'Sonraki resim',
@@ -166,7 +199,11 @@ H5PEditor.language.core = {
   metadataSharingAndLicensingInfo: 'Üstveri (Metadata) (paylaşma ve lisanslama bilgisi)',
   fillInTheFieldsBelow: 'Aşağıdaki alanları doldurunuz',
   saveMetadata: 'Üstveriyi (metadata) kaydet',
+<<<<<<< HEAD
   addAuthor: 'Yazarı kaydet',
+=======
+  addAuthor: 'Save author',
+>>>>>>> forked/LAE_400_PACKAGE
   confirmRemoveAuthor: 'Bu yazarı kaldırmak istediğinizden emin misiniz?',
   addNewChange: 'Yeni değişiklik ekle',
   confirmDeleteChangeLog: 'Bu değişim log kaydını silmek istediğinizden emin misiniz?',
@@ -176,6 +213,7 @@ H5PEditor.language.core = {
   loggedChanges: 'Loglanmış değişiklikler',
   noChangesHaveBeenLogged: 'Hiçbir değişiklik loglanmadı',
   errorHeader: 'Bir hata oluştu',
+<<<<<<< HEAD
   errorCalculatingMaxScore: 'Bu içerik için maksimum puan hesaplanamadı. Maksimum puan 0 olarak kabul edilir. Doğru değilse yöneticinize başvurun.',
   maxScoreSemanticsMissing: 'İçerikte beklenen anlam bulunamadı.',
   copyButton: 'Kopyala',
@@ -217,4 +255,44 @@ H5PEditor.language.core = {
   a11yTitleShowLabel: 'Show label for AT',
   a11yTitleHideLabel: 'Hide label for AT',
   reuseSuccess: ':title was successfully imported from the H5P Hub.'
+=======
+  errorCalculatingMaxScore: 'Could not calculate the max score for this content. The max score is assumed to be 0. Contact your administrator if this isn’t correct.',
+  maxScoreSemanticsMissing: 'Could not find the expected semantics in the content.',
+  copyButton: 'Kopyala',
+  copiedButton: 'Kopyalandı',
+  pasteButton: 'Yapıştır',
+  pasteAndReplaceButton: 'Paste & Replace',
+  pasteContent: 'Replace Content',
+  confirmPasteContent: 'By doing this you will replace the current content with the content from your clipboard. The current content will be lost. Are you sure you wish to continue?',
+  confirmPasteButtonText: 'Replace content',
+  copyToClipboard: 'H5P içeriğini panoya kopyalayın',
+  copiedToClipboard: 'İçerik panoya kopyalandı',
+  pasteFromClipboard: 'Panodan H5P içeriğini yapıştırın',
+  pasteAndReplaceFromClipboard: 'Replace existing content with H5P Content from the clipboard',
+  pasteNoContent: 'Panoda H5P içeriği yok',
+  pasteError: 'Panodan H5P içeriği yapıştırılamadı',
+  pasteContentNotSupported: 'The content in the H5P clipboard is not supported in this context',
+  pasteContentRestricted: 'The content in the clipboard has been restricted on this site',
+  pasteTooOld: 'The content in the H5P clipboard is of a lower version (:clip) than what is supported in this context (:local), if possible try to have the content you want to paste upgraded, copy it again and try pasting it here.',
+  pasteTooNew: 'The content in the H5P clipboard is of a higher version (:clip) than what is supported in this context (:local), if possible try to have this content upgraded first, and then try pasting the content here again.',
+  ok: 'TAMAM',
+  avTablistLabel: 'Insert using',
+  tabTitleBasicFileUpload: 'File Upload',
+  tabTitleInputLinkURL: 'Link/URL',
+  errorTooHighVersion: 'Parameters contain %used while only %supported or earlier are supported.',
+  errorNotSupported: 'Parameters contain %used which is not supported.',
+  errorParamsBroken: 'Parameters are broken.',
+  libraryMissing: 'Missing required library %lib.',
+  scriptMissing: 'Could not load upgrades script for %lib.',
+  language: 'Language',
+  noLanguagesSupported: 'No languages supported',
+  changeLanguage: 'Change language to :language?',
+  thisWillPotentially: "This will potentially reset all the text and translations. You can't undo this. The content itself will not be changed. Do you want to proceed?",
+  notAllTextsChanged: 'Not all texts were changed, there is only partial coverage for :language.',
+  contributeTranslations: 'If you want to complete the translation for :language you can learn about <a href=":url" target="_new">contributing translations to H5P</a>',
+  unknownLibrary: 'Unfortunately, the selected content type \'%lib\' isn\'t installed on this system.',
+  proceedButtonLabel: 'Proceed to save',
+  enterFullscreenButtonLabel: 'Enter fullscreen',
+  exitFullscreenButtonLabel: 'Exit fullscreen'
+>>>>>>> forked/LAE_400_PACKAGE
 };

@@ -666,7 +666,11 @@ class behat_config_util {
                 [
                     'capabilities' => [
                         'extra_capabilities' => [
+<<<<<<< HEAD
                             'chromeOptions' => [
+=======
+                            'goog:chromeOptions' => [
+>>>>>>> forked/LAE_400_PACKAGE
                                 'args' => [
                                     'unlimited-storage',
                                     'disable-web-security',
@@ -678,6 +682,19 @@ class behat_config_util {
                 $values
             );
 
+<<<<<<< HEAD
+=======
+            // Selenium no longer supports non-w3c browser control.
+            // Rename chromeOptions to goog:chromeOptions, which is the W3C variant of this.
+            if (array_key_exists('chromeOptions', $values['capabilities']['extra_capabilities'])) {
+                $values['capabilities']['extra_capabilities']['goog:chromeOptions'] = array_merge_recursive(
+                    $values['capabilities']['extra_capabilities']['goog:chromeOptions'],
+                    $values['capabilities']['extra_capabilities']['chromeOptions'],
+                );
+                unset($values['capabilities']['extra_capabilities']['chromeOptions']);
+            }
+
+>>>>>>> forked/LAE_400_PACKAGE
             // If the mobile app is enabled, check its version and add appropriate tags.
             if ($mobiletags = $this->get_mobile_version_tags()) {
                 if (!empty($values['tags'])) {
@@ -687,13 +704,22 @@ class behat_config_util {
                 }
             }
 
+<<<<<<< HEAD
             $values['capabilities']['extra_capabilities']['chromeOptions']['args'] = array_map(function($arg): string {
+=======
+            $values['capabilities']['extra_capabilities']['goog:chromeOptions']['args'] = array_map(function($arg): string {
+>>>>>>> forked/LAE_400_PACKAGE
                 if (substr($arg, 0, 2) === '--') {
                     return substr($arg, 2);
                 }
                 return $arg;
+<<<<<<< HEAD
             }, $values['capabilities']['extra_capabilities']['chromeOptions']['args']);
             sort($values['capabilities']['extra_capabilities']['chromeOptions']['args']);
+=======
+            }, $values['capabilities']['extra_capabilities']['goog:chromeOptions']['args']);
+            sort($values['capabilities']['extra_capabilities']['goog:chromeOptions']['args']);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Fill tags information.
@@ -746,6 +772,7 @@ class behat_config_util {
     protected function get_mobile_version_tags($verbose = true) : string {
         global $CFG;
 
+<<<<<<< HEAD
         if (empty($CFG->behat_ionic_wwwroot)) {
             return '';
         }
@@ -766,6 +793,47 @@ class behat_config_util {
 
         $installedversion = $env->build->version;
 
+=======
+        if (!empty($CFG->behat_ionic_dirroot)) {
+            // Get app version from package.json.
+            $jsonpath = $CFG->behat_ionic_dirroot . '/package.json';
+            $json = @file_get_contents($jsonpath);
+            if (!$json) {
+                throw new coding_exception('Unable to load app version from ' . $jsonpath);
+            }
+            $package = json_decode($json);
+            if ($package === null || empty($package->version)) {
+                throw new coding_exception('Invalid app package data in ' . $jsonpath);
+            }
+            $installedversion = $package->version;
+        } else if (!empty($CFG->behat_ionic_wwwroot)) {
+            // Get app version from env.json inside wwwroot.
+            $jsonurl = $CFG->behat_ionic_wwwroot . '/assets/env.json';
+            $json = @file_get_contents($jsonurl);
+            if (!$json) {
+                // Fall back to ionic 3 config file.
+                $jsonurl = $CFG->behat_ionic_wwwroot . '/config.json';
+                $json = @file_get_contents($jsonurl);
+                if (!$json) {
+                    throw new coding_exception('Unable to load app version from ' . $jsonurl);
+                }
+                $config = json_decode($json);
+                if ($config === null || empty($config->versionname)) {
+                    throw new coding_exception('Invalid app config data in ' . $jsonurl);
+                }
+                $installedversion = str_replace('-dev', '', $config->versionname);
+            } else {
+                $env = json_decode($json);
+                if (empty($env->build->version ?? null)) {
+                    throw new coding_exception('Invalid app config data in ' . $jsonurl);
+                }
+                $installedversion = $env->build->version;
+            }
+        } else {
+            return '';
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         // Read all feature files to check which mobile tags are used. (Note: This could be cached
         // but ideally, it is the sort of thing that really ought to be refreshed by doing a new
         // Behat init. Also, at time of coding it only takes 0.3 seconds and only if app enabled.)
@@ -893,7 +961,11 @@ class behat_config_util {
                 && (!defined('PHPUNIT_TEST') || !PHPUNIT_TEST)) {
             echo "Bucket weightings:\n";
             foreach ($weights as $k => $weight) {
+<<<<<<< HEAD
                 echo $k + 1 . ": " . str_repeat('*', (int)(70 * $nbuckets * $weight / $totalweight)) . PHP_EOL;
+=======
+                echo $k + 1 . ": " . str_repeat('*', 70 * $nbuckets * $weight / $totalweight) . PHP_EOL;
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -1436,7 +1508,12 @@ class behat_config_util {
 
         // Mobile app tests are not theme-specific, so run only for the default theme (and if
         // configured).
+<<<<<<< HEAD
         if (empty($CFG->behat_ionic_wwwroot) || $theme !== $this->get_default_theme()) {
+=======
+        if ((empty($CFG->behat_ionic_dirroot) && empty($CFG->behat_ionic_wwwroot)) ||
+                $theme !== $this->get_default_theme()) {
+>>>>>>> forked/LAE_400_PACKAGE
             $themeblacklisttags[] = '@app';
         }
 

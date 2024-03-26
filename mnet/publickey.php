@@ -12,7 +12,11 @@ require_once(__DIR__ . '/../config.php');
 require_once $CFG->dirroot.'/mnet/lib.php';
 
 if ($CFG->mnet_dispatcher_mode === 'off') {
+<<<<<<< HEAD
     throw new \moodle_exception('mnetdisabled', 'mnet');
+=======
+    print_error('mnetdisabled', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 header("Content-type: text/plain; charset=utf-8");

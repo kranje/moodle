@@ -4,7 +4,11 @@
 
 namespace Composer\Autoload;
 
+<<<<<<< HEAD
 class ComposerStaticInite0d802f9161d0d84fba97a5520240273
+=======
+class ComposerStaticInit47a82a2b792e78d18b5f54d474d822dc
+>>>>>>> forked/LAE_400_PACKAGE
 {
     public static $prefixLengthsPsr4 = array (
         'P' => 
@@ -59,9 +63,15 @@ class ComposerStaticInite0d802f9161d0d84fba97a5520240273
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+<<<<<<< HEAD
             $loader->prefixLengthsPsr4 = ComposerStaticInite0d802f9161d0d84fba97a5520240273::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInite0d802f9161d0d84fba97a5520240273::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInite0d802f9161d0d84fba97a5520240273::$classMap;
+=======
+            $loader->prefixLengthsPsr4 = ComposerStaticInit47a82a2b792e78d18b5f54d474d822dc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit47a82a2b792e78d18b5f54d474d822dc::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit47a82a2b792e78d18b5f54d474d822dc::$classMap;
+>>>>>>> forked/LAE_400_PACKAGE
 
         }, null, ClassLoader::class);
     }

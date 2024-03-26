@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,13 @@ class Arabic
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Arabic
+{
+>>>>>>> forked/LAE_400_PACKAGE
     private const ROMAN_LOOKUP = [
         'M' => 1000,
         'D' => 500,
@@ -73,6 +81,7 @@ class Arabic
      * Excel Function:
      *        ARABIC(text)
      *
+<<<<<<< HEAD
      * @param mixed $roman Should be a string, or can be an array of strings
      *
      * @return array|int|string the arabic numberal contrived from the roman numeral
@@ -87,6 +96,16 @@ class Arabic
 
         // An empty string should return 0
         $roman = substr(trim(strtoupper((string) $roman)), 0, 255);
+=======
+     * @param string $roman
+     *
+     * @return int|string the arabic numberal contrived from the roman numeral
+     */
+    public static function evaluate($roman)
+    {
+        // An empty string should return 0
+        $roman = substr(trim(strtoupper((string) Functions::flattenSingleValue($roman))), 0, 255);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($roman === '') {
             return 0;
         }
@@ -100,7 +119,11 @@ class Arabic
         try {
             $arabic = self::calculateArabic(self::strSplit($roman));
         } catch (Exception $e) {
+<<<<<<< HEAD
             return ExcelError::VALUE(); // Invalid character detected
+=======
+            return Functions::VALUE(); // Invalid character detected
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($negativeNumber) {

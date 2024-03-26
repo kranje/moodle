@@ -33,7 +33,11 @@ $workshop = $DB->get_record('workshop', array('id' => $cm->instance), '*', MUST_
 
 require_login($course, false, $cm);
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('guestsarenotallowed');
+=======
+    print_error('guestsarenotallowed');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $workshop = new workshop($workshop, $cm, $course);
 

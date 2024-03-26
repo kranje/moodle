@@ -6,7 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,8 +25,11 @@ use ArrayObject;
 use JsonSerializable;
 use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Unserializable;
+<<<<<<< HEAD
 use ReturnTypeWillChange;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function array_values;
 use function MongoDB\recursive_copy;
 
@@ -49,8 +56,14 @@ class BSONArray extends ArrayObject implements JsonSerializable, Serializable, U
     /**
      * Factory method for var_export().
      *
+<<<<<<< HEAD
      * @see https://php.net/oop5.magic#object.set-state
      * @see https://php.net/var-export
+=======
+     * @see http://php.net/oop5.magic#object.set-state
+     * @see http://php.net/var-export
+     * @param array $properties
+>>>>>>> forked/LAE_400_PACKAGE
      * @return self
      */
     public static function __set_state(array $properties)
@@ -67,10 +80,16 @@ class BSONArray extends ArrayObject implements JsonSerializable, Serializable, U
      * The array data will be numerically reindexed to ensure that it is stored
      * as a BSON array.
      *
+<<<<<<< HEAD
      * @see https://php.net/mongodb-bson-serializable.bsonserialize
      * @return array
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/mongodb-bson-serializable.bsonserialize
+     * @return array
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function bsonSerialize()
     {
         return array_values($this->getArrayCopy());
@@ -79,10 +98,16 @@ class BSONArray extends ArrayObject implements JsonSerializable, Serializable, U
     /**
      * Unserialize the document to BSON.
      *
+<<<<<<< HEAD
      * @see https://php.net/mongodb-bson-unserializable.bsonunserialize
      * @param array $data Array data
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/mongodb-bson-unserializable.bsonunserialize
+     * @param array $data Array data
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function bsonUnserialize(array $data)
     {
         self::__construct($data);
@@ -94,10 +119,16 @@ class BSONArray extends ArrayObject implements JsonSerializable, Serializable, U
      * The array data will be numerically reindexed to ensure that it is stored
      * as a JSON array.
      *
+<<<<<<< HEAD
      * @see https://php.net/jsonserializable.jsonserialize
      * @return array
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/jsonserializable.jsonserialize
+     * @return array
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function jsonSerialize()
     {
         return array_values($this->getArrayCopy());

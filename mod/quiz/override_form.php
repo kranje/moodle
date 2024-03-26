@@ -104,7 +104,11 @@ class quiz_override_form extends moodleform {
                 if (empty($groups)) {
                     // Generate an error.
                     $link = new moodle_url('/mod/quiz/overrides.php', array('cmid'=>$cm->id));
+<<<<<<< HEAD
                     throw new \moodle_exception('groupsnone', 'quiz', $link);
+=======
+                    print_error('groupsnone', 'quiz', $link);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 $groupchoices = array();
@@ -181,7 +185,11 @@ class quiz_override_form extends moodleform {
                 if (empty($users)) {
                     // Generate an error.
                     $link = new moodle_url('/mod/quiz/overrides.php', array('cmid'=>$cm->id));
+<<<<<<< HEAD
                     throw new \moodle_exception('usersnone', 'quiz', $link);
+=======
+                    print_error('usersnone', 'quiz', $link);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 $userchoices = [];

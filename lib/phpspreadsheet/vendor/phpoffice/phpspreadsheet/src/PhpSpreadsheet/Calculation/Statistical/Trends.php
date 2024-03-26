@@ -2,16 +2,24 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
 
 class Trends
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     private static function filterTrendValues(array &$array1, array &$array2): void
     {
         foreach ($array1 as $key => $value) {
@@ -47,9 +55,15 @@ class Trends
         $xValueCount = count($xValues);
 
         if (($yValueCount === 0) || ($yValueCount !== $xValueCount)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NA());
         } elseif ($yValueCount === 1) {
             throw new Exception(ExcelError::DIV0());
+=======
+            throw new Exception(Functions::NA());
+        } elseif ($yValueCount === 1) {
+            throw new Exception(Functions::DIV0());
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -66,7 +80,11 @@ class Trends
     public static function CORREL($yValues, $xValues = null)
     {
         if (($xValues === null) || (!is_array($yValues)) || (!is_array($xValues))) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         try {
@@ -112,6 +130,7 @@ class Trends
      * The predicted value is a y-value for a given x-value.
      *
      * @param mixed $xValue Float value of X for which we want to find Y
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $yValues array of mixed Data Series Y
      * @param mixed $xValues of mixed Data Series X
@@ -125,6 +144,16 @@ class Trends
         if (is_array($xValue)) {
             return self::evaluateArrayArgumentsSubset([self::class, __FUNCTION__], 1, $xValue, $yValues, $xValues);
         }
+=======
+     * @param mixed $yValues array of mixed Data Series Y
+     * @param mixed $xValues of mixed Data Series X
+     *
+     * @return bool|float|string
+     */
+    public static function FORECAST($xValue, $yValues, $xValues)
+    {
+        $xValue = Functions::flattenSingleValue($xValue);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $xValue = StatisticalValidations::validateFloat($xValue);
@@ -233,7 +262,11 @@ class Trends
                 ],
                 [
                     $bestFitLinear->getSlopeSE(),
+<<<<<<< HEAD
                     ($const === false) ? ExcelError::NA() : $bestFitLinear->getIntersectSE(),
+=======
+                    ($const === false) ? Functions::NA() : $bestFitLinear->getIntersectSE(),
+>>>>>>> forked/LAE_400_PACKAGE
                 ],
                 [
                     $bestFitLinear->getGoodnessOfFit(),
@@ -286,7 +319,11 @@ class Trends
 
         foreach ($yValues as $value) {
             if ($value < 0.0) {
+<<<<<<< HEAD
                 return ExcelError::NAN();
+=======
+                return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -300,7 +337,11 @@ class Trends
                 ],
                 [
                     $bestFitExponential->getSlopeSE(),
+<<<<<<< HEAD
                     ($const === false) ? ExcelError::NA() : $bestFitExponential->getIntersectSE(),
+=======
+                    ($const === false) ? Functions::NA() : $bestFitExponential->getIntersectSE(),
+>>>>>>> forked/LAE_400_PACKAGE
                 ],
                 [
                     $bestFitExponential->getGoodnessOfFit(),

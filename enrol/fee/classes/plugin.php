@@ -164,6 +164,7 @@ class enrol_fee_plugin extends enrol_plugin {
      * @return string html text, usually a form in a text box
      */
     public function enrol_page_hook(stdClass $instance) {
+<<<<<<< HEAD
         return $this->show_payment_info($instance);
     }
 
@@ -190,6 +191,9 @@ class enrol_fee_plugin extends enrol_plugin {
      */
     private function show_payment_info(stdClass $instance) {
         global $USER, $OUTPUT, $DB;
+=======
+        global $CFG, $USER, $OUTPUT, $PAGE, $DB;
+>>>>>>> forked/LAE_400_PACKAGE
 
         ob_start();
 
@@ -208,6 +212,22 @@ class enrol_fee_plugin extends enrol_plugin {
         $course = $DB->get_record('course', array('id' => $instance->courseid));
         $context = context_course::instance($course->id);
 
+<<<<<<< HEAD
+=======
+        $shortname = format_string($course->shortname, true, array('context' => $context));
+        $strloginto = get_string("loginto", "", $shortname);
+        $strcourses = get_string("courses");
+
+        // Pass $view=true to filter hidden caps if the user cannot see them.
+        if ($users = get_users_by_capability($context, 'moodle/course:update', 'u.*', 'u.id ASC',
+                                             '', '', '', '', false, true)) {
+            $users = sort_by_roleassignment_authority($users, $context);
+            $teacher = array_shift($users);
+        } else {
+            $teacher = false;
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         if ( (float) $instance->cost <= 0 ) {
             $cost = (float) $this->get_config('cost');
         } else {
@@ -219,7 +239,11 @@ class enrol_fee_plugin extends enrol_plugin {
         } else {
 
             $data = [
+<<<<<<< HEAD
                 'isguestuser' => isguestuser() || !isloggedin(),
+=======
+                'isguestuser' => isguestuser(),
+>>>>>>> forked/LAE_400_PACKAGE
                 'cost' => \core_payment\helper::get_cost_as_string($cost, $instance->currency),
                 'instanceid' => $instance->id,
                 'description' => get_string('purchasedescription', 'enrol_fee',

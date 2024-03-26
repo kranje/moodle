@@ -76,7 +76,11 @@ if ($context->contextlevel == CONTEXT_COURSE) {
     $pagename = get_string("repositorycourse",'repository');
 
     if ( !$course = $DB->get_record('course', array('id'=>$context->instanceid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     require_login($course, false);
     // If the user is allowed to edit this course, he's allowed to edit list of repository instances
@@ -88,11 +92,19 @@ if ($context->contextlevel == CONTEXT_COURSE) {
     $pagename = get_string('manageinstances', 'repository');
     //is the user looking at its own repository instances
     if ($USER->id != $context->instanceid){
+<<<<<<< HEAD
         throw new \moodle_exception('notyourinstances', 'repository');
     }
     $user = $USER;
 } else {
     throw new \moodle_exception('invalidcontext');
+=======
+        print_error('notyourinstances', 'repository');
+    }
+    $user = $USER;
+} else {
+    print_error('invalidcontext');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /// Security: we cannot perform any action if the type is not visible or if the context has been disabled
@@ -108,13 +120,21 @@ if (!empty($new) && empty($edit)){
 
 if (isset($type)) {
     if (!$type->get_visible()) {
+<<<<<<< HEAD
         throw new \moodle_exception('typenotvisible', 'repository', $baseurl);
+=======
+        print_error('typenotvisible', 'repository', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     // Prevents the user from creating/editing an instance if the repository is not visible in
     // this context OR if the user does not have the capability to view this repository in this context.
     $canviewrepository = has_capability('repository/'.$type->get_typename().':view', $context);
     if (!$type->get_contextvisibility($context) || !$canviewrepository) {
+<<<<<<< HEAD
         throw new \moodle_exception('usercontextrepositorydisabled', 'repository', $baseurl);
+=======
+        print_error('usercontextrepositorydisabled', 'repository', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -123,7 +143,11 @@ if (!empty($instance)) {
     // The context passed MUST match the context of the repository. And as both have to be
     // similar, this also ensures that the context is either a user one, or a course one.
     if ($instance->instance->contextid != $context->id) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcontext');
+=======
+        print_error('invalidcontext');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if ($instance->readonly) {
         // Cannot edit, or delete a readonly instance.
@@ -169,7 +193,11 @@ if (!empty($edit) || !empty($new)) {
 
     } else if ($fromform = $mform->get_data()){
         if (!confirm_sesskey()) {
+<<<<<<< HEAD
             throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+=======
+            print_error('confirmsesskeybad', '', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($edit) {
             $settings = array();
@@ -186,7 +214,11 @@ if (!empty($edit) || !empty($new)) {
             $savedstr = get_string('configsaved', 'repository');
             redirect($baseurl);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('instancenotsaved', 'repository', $baseurl);
+=======
+            print_error('instancenotsaved', 'repository', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
     } else {     // Display the form
@@ -200,13 +232,21 @@ if (!empty($edit) || !empty($new)) {
 } else if (!empty($delete)) {
     if ($sure) {
         if (!confirm_sesskey()) {
+<<<<<<< HEAD
             throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+=======
+            print_error('confirmsesskeybad', '', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($instance->delete()) {
             $deletedstr = get_string('instancedeleted', 'repository');
             redirect($baseurl, $deletedstr, 3);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('instancenotdeleted', 'repository', $baseurl);
+=======
+            print_error('instancenotdeleted', 'repository', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
     }

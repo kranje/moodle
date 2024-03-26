@@ -86,10 +86,16 @@ class countdistinct extends base {
      * @param mixed $value
      * @param array $values
      * @param array $callbacks
+<<<<<<< HEAD
      * @param int $columntype
      * @return int
      */
     public static function format_value($value, array $values, array $callbacks, int $columntype): int {
+=======
+     * @return mixed
+     */
+    public static function format_value($value, array $values, array $callbacks) {
+>>>>>>> forked/LAE_400_PACKAGE
         return (int) reset($values);
     }
 }

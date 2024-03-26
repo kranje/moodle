@@ -130,13 +130,18 @@ class Horde_Imap_Client_Data_Namespace implements Serializable
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        return json_encode($this->_data);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
     public function unserialize($data)
     {
+<<<<<<< HEAD
         $data = @unserialize($data);
         if (!is_array($data)) {
             throw new Exception('Cache version change.');
@@ -155,6 +160,9 @@ class Horde_Imap_Client_Data_Namespace implements Serializable
     public function __unserialize(array $data)
     {
         $this->_data = $data;
+=======
+        $this->_data = json_decode($data, true);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 }

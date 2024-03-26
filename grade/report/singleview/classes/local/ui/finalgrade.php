@@ -34,20 +34,32 @@ use stdClass;
  * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class finalgrade extends grade_attribute_format implements unique_value, be_disabled, be_readonly {
 
     /**
      * Name of this input
      * @var string $name
      */
+=======
+class finalgrade extends grade_attribute_format implements unique_value, be_disabled {
+
+    /** @var string $name Name of this input */
+>>>>>>> forked/LAE_400_PACKAGE
     public $name = 'finalgrade';
 
     /**
      * Get the value for this input.
      *
+<<<<<<< HEAD
      * @return null|string The value based on the grade_grade.
      */
     public function get_value(): ?string {
+=======
+     * @return string The value based on the grade_grade.
+     */
+    public function get_value() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->label = $this->grade->grade_item->itemname;
 
         $val = $this->grade->finalgrade;
@@ -63,7 +75,11 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
      *
      * @return string The label for this form input.
      */
+<<<<<<< HEAD
     public function get_label(): string {
+=======
+    public function get_label() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!isset($this->grade->label)) {
             $this->grade->label = '';
         }
@@ -75,7 +91,11 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
      *
      * @return bool Set disabled on this input or not.
      */
+<<<<<<< HEAD
     public function is_disabled(): bool {
+=======
+    public function is_disabled() {
+>>>>>>> forked/LAE_400_PACKAGE
         $locked = 0;
         $gradeitemlocked = 0;
         $overridden = 0;
@@ -98,6 +118,7 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
     }
 
     /**
+<<<<<<< HEAD
      * Return true if this is read-only.
      *
      * @return bool
@@ -108,15 +129,25 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Create the element for this column.
      *
      * @return element
      */
+<<<<<<< HEAD
     public function determine_format(): element {
         if ($this->grade->grade_item->load_scale()) {
             $scale = $this->grade->grade_item->load_scale();
 
             $options = [-1 => get_string('nograde')];
+=======
+    public function determine_format() {
+        if ($this->grade->grade_item->load_scale()) {
+            $scale = $this->grade->grade_item->load_scale();
+
+            $options = array(-1 => get_string('nograde'));
+>>>>>>> forked/LAE_400_PACKAGE
 
             foreach ($scale->scale_items as $i => $name) {
                 $options[$i + 1] = $name;
@@ -127,16 +158,24 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
                 $options,
                 $this->get_label(),
                 $this->get_value(),
+<<<<<<< HEAD
                 $this->is_disabled(),
                 $this->is_readonly()
+=======
+                $this->is_disabled()
+>>>>>>> forked/LAE_400_PACKAGE
             );
         } else {
             return new text_attribute(
                 $this->get_name(),
                 $this->get_value(),
                 $this->get_label(),
+<<<<<<< HEAD
                 $this->is_disabled(),
                 $this->is_readonly()
+=======
+                $this->is_disabled()
+>>>>>>> forked/LAE_400_PACKAGE
             );
         }
     }
@@ -148,6 +187,11 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
      * @return string Any error string
      */
     public function set($value) {
+<<<<<<< HEAD
+=======
+        global $DB;
+
+>>>>>>> forked/LAE_400_PACKAGE
         $userid = $this->grade->userid;
         $gradeitem = $this->grade->grade_item;
 

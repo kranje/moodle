@@ -22,8 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die();
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 // General Strings.
 $string['all_grades'] = 'All grades';
 $string['assessmentname'] = 'Grade item';
@@ -31,12 +34,16 @@ $string['blanks'] = 'Empty grades';
 $string['bulkappliesto'] = 'For';
 $string['bulkinsertvalue'] = 'Insert new grade';
 $string['bulklegend'] = 'Bulk insert grades';
+<<<<<<< HEAD
 $string['bulkchoice'] = 'Bulk insert lets you replace multiple grades at once. Choose the grades you want to replace:';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['bulkperform'] = 'Perform bulk insert';
 $string['bulkfor'] = 'Grades for {$a}';
 $string['entrypage'] = 'Grade user or grade item';
 $string['exclude'] = 'Exclude';
 $string['excludeall'] = 'Exclude all grades';
+<<<<<<< HEAD
 $string['excludeallgrades'] = 'Exclude all';
 $string['excludefor'] = 'Exclude for {$a}';
 $string['excludenone'] = 'Do not exclude any grades';
@@ -48,12 +55,23 @@ $string['gradeitem'] = 'Grade item: {$a}';
 $string['gradeuser'] = 'Grade user: {$a}';
 $string['gotonextreport'] = 'Go to next user report';
 $string['gotopreviousreport'] = 'Go to previous user report';
+=======
+$string['excludefor'] = 'Exclude for {$a}';
+$string['excludenone'] = 'Do not exclude any grades';
+$string['eventgradereportviewed'] = 'Grade single view report viewed.';
+$string['feedbackfor'] = 'Feedback for {$a}';
+$string['filtergrades'] = 'Show grades for {$a}.';
+$string['gradefor'] = 'Grade for {$a}';
+$string['gradeitem'] = 'Grade item: {$a}';
+$string['gradeuser'] = 'Grade user: {$a}';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['noscreens'] = 'Could not find a suitable single view screen.';
 $string['gradeitemcannotbeoverridden'] = 'This grade item cannot be overridden.';
 $string['itemsperpage'] = 'Items per page';
 $string['notvalid'] = 'Not a valid Single view screen: {$a}';
 $string['override'] = 'Override';
 $string['overrideall'] = 'Override all grades';
+<<<<<<< HEAD
 $string['overrideallgrades'] = 'Override all';
 $string['overridefor'] = 'Override for {$a}';
 $string['overridenone'] = 'Do not override any grades';
@@ -86,3 +104,19 @@ $string['unsaveddatawarning'] = 'Unsaved data warning';
 
 // Deprecated since Moodle 4.1.
 $string['filtergrades'] = 'Show grades for {$a}.';
+=======
+$string['overridefor'] = 'Override for {$a}';
+$string['overridenone'] = 'Do not override any grades';
+$string['overridenoneconfirm'] = 'You are about to disable grade overrides. This will remove all previously overridden grades. Are you sure you want to continue?';
+$string['pluginname'] = 'Single view';
+$string['privacy:metadata'] = 'The Grade single view report only shows data stored in other locations.';
+$string['savegrades'] = 'Saving grades';
+$string['save'] = 'Save';
+$string['savegradessuccess'] = 'Grades were set for {$a} items';
+$string['selectgrade'] = 'Select a grade item above';
+$string['selectuser'] = 'Select a user above to view all their grades';
+$string['singleview:view'] = 'View single view';
+$string['summarygrade'] = 'A table of users, with columns for range, grade, feedback, and whether to override or exclude a particular grade.';
+$string['summaryuser'] = 'A table of grade items, with columns for grade category, range, grade, feedback, and whether to override or exclude a particular grade.';
+$string['userselect'] = 'Select activity';
+>>>>>>> forked/LAE_400_PACKAGE

@@ -1,5 +1,6 @@
 # Changelog
 
+<<<<<<< HEAD
 ## 4.0.1 (August 21, 2023)
 
 - Fix for sesskey validation
@@ -18,6 +19,8 @@
 - Migrate CI builds to Github Actions
 - Fixed bug which prevented viewing history when an unenrolled user was one of the recipients
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 ## 3.11.0 (August 25, 2021)
 
 - Added student-use feature to configuration

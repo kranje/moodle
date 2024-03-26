@@ -31,25 +31,41 @@ class gradereport_singleview_screen_testable extends \gradereport_singleview\loc
      *
      * @return array returns array of users.
      */
+<<<<<<< HEAD
     public function test_load_users(): array {
+=======
+    public function test_load_users() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->load_users();
     }
 
     /**
      * Return the HTML for the page.
      */
+<<<<<<< HEAD
     public function init($selfitemisempty = false) {
     }
+=======
+    public function init($selfitemisempty = false) {}
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Get the type of items on this screen, not valid so return false.
      */
+<<<<<<< HEAD
     public function item_type(): string {
     }
+=======
+    public function item_type() {}
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Return the HTML for the page.
      */
+<<<<<<< HEAD
     public function html(): string {
     }
+=======
+    public function html() {}
+>>>>>>> forked/LAE_400_PACKAGE
 }

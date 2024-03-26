@@ -58,7 +58,10 @@ $string['enrollednewusers'] = 'Successfully enrolled {$a} new users';
 $string['enrolledusers'] = 'Enrolled users';
 $string['enrolledusersmatching'] = 'Matching enrolled users';
 $string['enrolme'] = 'Enrol me in this course';
+<<<<<<< HEAD
 $string['enrolment'] = 'Enrolment';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['enrolmentinstances'] = 'Enrolment methods';
 $string['enrolmentnew'] = 'New enrolment in {$a}';
 $string['enrolmentnewuser'] = '{$a->user} has enrolled in course "{$a->course}"';
@@ -84,7 +87,11 @@ $string['errorthresholdlow'] = 'Notification threshold must be at least 1 day.';
 $string['errorwithbulkoperation'] = 'There was an error while processing your bulk enrolment change.';
 $string['eventuserenrolmentcreated'] = 'User enrolled in course';
 $string['eventuserenrolmentdeleted'] = 'User unenrolled from course';
+<<<<<<< HEAD
 $string['eventuserenrolmentupdated'] = 'User unenrolment updated';
+=======
+$string['eventuserenrolmentupdated'] = 'User enrolment updated';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['expirynotify'] = 'Notify before enrolment expires';
 $string['expirynotify_help'] = 'This setting determines whether enrolment expiry notification messages are sent.';
 $string['expirynotifyall'] = 'Enroller and enrolled user';
@@ -103,7 +110,10 @@ $string['invalidrole'] = 'Invalid role';
 $string['invalidrequest'] = 'Invalid request';
 $string['manageenrols'] = 'Manage enrol plugins';
 $string['manageinstance'] = 'Manage';
+<<<<<<< HEAD
 $string['method'] = 'Method';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['migratetomanual'] = 'Migrate to manual enrolments';
 $string['nochange'] = 'No change';
 $string['noexistingparticipants'] = 'No existing participants';
@@ -133,10 +143,13 @@ $string['startdatetoday'] = 'Today';
 $string['synced'] = 'Synced';
 $string['testsettings'] = 'Test settings';
 $string['testsettingsheading'] = 'Test enrol settings - {$a}';
+<<<<<<< HEAD
 $string['timeended'] = 'Time ended';
 $string['timeenrolled'] = 'Time enrolled';
 $string['timereaggregated'] = 'Time reaggregated';
 $string['timestarted'] = 'Time started';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['totalenrolledusers'] = '{$a} enrolled users';
 $string['totalunenrolledusers'] = '{$a} unenrolled users';
 $string['totalotherusers'] = '{$a} other users';

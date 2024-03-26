@@ -3,15 +3,23 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
 use DateTime;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class Week
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * WEEKNUM.
      *
@@ -27,8 +35,12 @@ class Week
      *
      * @param mixed $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      * @param array|int $method Week begins on Sunday or Monday
+=======
+     * @param int $method Week begins on Sunday or Monday
+>>>>>>> forked/LAE_400_PACKAGE
      *                                        1 or omitted    Week begins on Sunday.
      *                                        2                Week begins on Monday.
      *                                        11               Week begins on Monday.
@@ -39,6 +51,7 @@ class Week
      *                                        16               Week begins on Saturday.
      *                                        17               Week begins on Sunday.
      *                                        21               ISO (Jan. 4 is week 1, begins on Monday).
+<<<<<<< HEAD
      *                         Or can be an array of methods
      *
      * @return array|int|string Week Number
@@ -51,6 +64,13 @@ class Week
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $dateValue, $method);
         }
 
+=======
+     *
+     * @return int|string Week Number
+     */
+    public static function number($dateValue, $method = Constants::STARTWEEK_SUNDAY)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $origDateValueNull = empty($dateValue);
 
         try {
@@ -99,6 +119,7 @@ class Week
      *
      * @param mixed $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      *
      * @return array|int|string Week Number
@@ -111,6 +132,13 @@ class Week
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $dateValue);
         }
 
+=======
+     *
+     * @return int|string Week Number
+     */
+    public static function isoWeekNumber($dateValue)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         if (self::apparentBug($dateValue)) {
             return 52;
         }
@@ -137,13 +165,19 @@ class Week
      * Excel Function:
      *        WEEKDAY(dateValue[,style])
      *
+<<<<<<< HEAD
      * @param null|array|float|int|string $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
      *                         Or can be an array of date values
+=======
+     * @param null|float|int|string $dateValue Excel date serial value (float), PHP date timestamp (integer),
+     *                                    PHP DateTime object, or a standard date string
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $style A number that determines the type of return value
      *                                        1 or omitted    Numbers 1 (Sunday) through 7 (Saturday).
      *                                        2                Numbers 1 (Monday) through 7 (Sunday).
      *                                        3                Numbers 0 (Monday) through 6 (Sunday).
+<<<<<<< HEAD
      *                         Or can be an array of styles
      *
      * @return array|int|string Day of the week value
@@ -156,6 +190,13 @@ class Week
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $dateValue, $style);
         }
 
+=======
+     *
+     * @return int|string Day of the week value
+     */
+    public static function day($dateValue, $style = 1)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $dateValue = Helpers::getDateValue($dateValue);
             $style = self::validateStyle($style);
@@ -191,12 +232,23 @@ class Week
      */
     private static function validateStyle($style): int
     {
+<<<<<<< HEAD
         if (!is_numeric($style)) {
             throw new Exception(ExcelError::VALUE());
         }
         $style = (int) $style;
         if (($style < 1) || ($style > 3)) {
             throw new Exception(ExcelError::NAN());
+=======
+        $style = Functions::flattenSingleValue($style);
+
+        if (!is_numeric($style)) {
+            throw new Exception(Functions::VALUE());
+        }
+        $style = (int) $style;
+        if (($style < 1) || ($style > 3)) {
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $style;
@@ -233,7 +285,11 @@ class Week
     private static function validateDateValue($dateValue): float
     {
         if (is_bool($dateValue)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::VALUE());
+=======
+            throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return Helpers::getDateValue($dateValue);
@@ -249,14 +305,24 @@ class Week
         if ($method === null) {
             $method = Constants::STARTWEEK_SUNDAY;
         }
+<<<<<<< HEAD
 
         if (!is_numeric($method)) {
             throw new Exception(ExcelError::VALUE());
+=======
+        $method = Functions::flattenSingleValue($method);
+        if (!is_numeric($method)) {
+            throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $method = (int) $method;
         if (!array_key_exists($method, Constants::METHODARR)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $method = Constants::METHODARR[$method];
 

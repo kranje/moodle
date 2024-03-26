@@ -36,6 +36,7 @@ class pdflib_test extends \advanced_testcase {
         $producer = TCPDF_STATIC::getTCPDFProducer();
         $this->assertEquals('TCPDF (http://www.tcpdf.org)', $producer);
     }
+<<<<<<< HEAD
 
     public function test_qrcode() {
         global $CFG;
@@ -66,4 +67,6 @@ class pdflib_test extends \advanced_testcase {
         $this->assertGreaterThan(100000, strlen($res));
         $this->assertLessThan(120000, strlen($res));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -23,11 +23,14 @@ use core\output\inplace_editable;
 use core_reportbuilder\permission;
 use core_reportbuilder\local\models\schedule;
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die;
 
 global $CFG;
 require_once("{$CFG->libdir}/external/externallib.php");
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Schedule name editable component
  *
@@ -51,9 +54,13 @@ class schedule_name_editable extends inplace_editable {
         $report = $schedule->get_report();
         $editable = permission::can_edit_report($report);
 
+<<<<<<< HEAD
         $displayvalue = $schedule->get_formatted_name($report->get_context());
 
         parent::__construct('core_reportbuilder', 'schedulename', $schedule->get('id'), $editable, $displayvalue,
+=======
+        parent::__construct('core_reportbuilder', 'schedulename', $schedule->get('id'), $editable, $schedule->get_formatted_name(),
+>>>>>>> forked/LAE_400_PACKAGE
             $schedule->get('name'), get_string('editschedulename', 'core_reportbuilder'));
     }
 

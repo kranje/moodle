@@ -16,6 +16,7 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
       | user | course | role |
       | student1 | C1 | student |
       | student2 | C1 | student |
+<<<<<<< HEAD
     And I log in as "admin"
 
   Scenario: Tracking forum posts off
@@ -34,12 +35,31 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
     And I log out
     When I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+
+  Scenario: Tracking forum posts off
+    Given the following "activity" exists:
+      | activity      | forum                           |
+      | course        | C1                              |
+      | idnumber      | forum1                          |
+      | type          | general                         |
+      | name          | Test forum name                 |
+      | trackingtype  | 0                               |
+    And the following "mod_forum > discussion" exists:
+      | forum   | forum1            |
+      | course  | C1                |
+      | user    | admin             |
+      | name    | Test post subject |
+      | message | Test post message |
+    When I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should not see "1 unread post"
     And I follow "Test forum name"
     And I should not see "Track unread posts"
 
   Scenario: Tracking forum posts optional with user tracking on
     Given the following "activity" exists:
+<<<<<<< HEAD
       | activity     | forum                         |
       | course       | C1                            |
       | idnumber     | 00001                         |
@@ -55,6 +75,21 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
     And I log out
     When I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+      | activity     | forum                  |
+      | course       | C1                     |
+      | idnumber     | forum1                 |
+      | name         | Test forum name        |
+      | type         | general                |
+      | trackingtype | 1                      |
+    And the following "mod_forum > discussion" exists:
+      | forum   | forum1            |
+      | course  | C1                |
+      | user    | admin             |
+      | name    | Test post subject |
+      | message | Test post message |
+    When I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "1 unread post"
     And I follow "Test forum name"
     And I follow "Don't track unread posts"
@@ -74,6 +109,7 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
       | course       | C1                          |
       | idnumber     | 00001                       |
       | name         | Test forum name             |
+<<<<<<< HEAD
       | intro        | Test forum description      |
       | section      | 1                           |
       | type         | generalforum                |
@@ -85,6 +121,17 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
     And I log out
     When I log in as "student2"
     And I am on "Course 1" course homepage
+=======
+      | type         | general                     |
+      | trackingtype | 1                           |
+    And the following "mod_forum > discussion" exists:
+      | forum   | 00001             |
+      | course  | C1                |
+      | user    | admin             |
+      | name    | Test post subject |
+      | message | Test post message |
+    When I am on the "Course 1" course page logged in as student2
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should not see "1 unread post"
     And I follow "Test forum name"
     And I should not see "Track unread posts"
@@ -97,6 +144,7 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
       | course       | C1                          |
       | idnumber     | 00001                       |
       | name         | Test forum name             |
+<<<<<<< HEAD
       | intro        | Test forum description      |
       | section      | 1                           |
       | type         | generalforum                |
@@ -108,6 +156,17 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
     And I log out
     When I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+      | type         | general                     |
+      | trackingtype | 2                           |
+    And the following "mod_forum > discussion" exists:
+      | forum   | 00001            |
+      | course  | C1                |
+      | user    | admin             |
+      | name    | Test post subject |
+      | message | Test post message |
+    When I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "1 unread post"
     And I am on the "Test forum name" "forum activity" page
     And I should not see "Don't track unread posts"
@@ -123,6 +182,7 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
       | course       | C1                          |
       | idnumber     | 00001                       |
       | name         | Test forum name             |
+<<<<<<< HEAD
       | intro        | Test forum description      |
       | section      | 1                           |
       | type         | generalforum                |
@@ -134,6 +194,17 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
     And I log out
     When I log in as "student2"
     And I am on "Course 1" course homepage
+=======
+      | type         | general                     |
+      | trackingtype | 2                           |
+    And the following "mod_forum > discussion" exists:
+      | forum   | 00001             |
+      | course  | C1                |
+      | user    | admin             |
+      | name    | Test post subject |
+      | message | Test post message |
+    When I am on the "Course 1" course page logged in as student2
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "1 unread post"
     And I am on the "Test forum name" "forum activity" page
     And I should not see "Don't track unread posts"
@@ -149,6 +220,7 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
       | course       | C1                        |
       | idnumber     | 00001                     |
       | name         | Test forum name           |
+<<<<<<< HEAD
       | description  | Test forum description    |
       | section      | 1                         |
       | type         | generalforum              |
@@ -162,6 +234,19 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
     And I log out
     When I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+      | type         | general                   |
+      | trackingtype | 2                         |
+    And the following "mod_forum > discussion" exists:
+      | forum   | 00001             |
+      | course  | C1                |
+      | user    | admin             |
+      | name    | Test post subject |
+      | message | Test post message |
+    And the following config values are set as admin:
+      | forum_allowforcedreadtracking | 0 |
+    When I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "1 unread post"
     And I follow "Test forum name"
     And I follow "Don't track unread posts"
@@ -183,6 +268,7 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
       | course       | C1                     |
       | idnumber     | 00001                  |
       | name         | Test forum name        |
+<<<<<<< HEAD
       | description  | Test forum description |
       | section      | 1                      |
       | type         | generalforum           |
@@ -196,6 +282,19 @@ Feature: A teacher can set one of 3 possible options for tracking read forum pos
     And I log out
     When I log in as "student2"
     And I am on "Course 1" course homepage
+=======
+      | type         | general                |
+      | trackingtype | 2                      |
+    And the following "mod_forum > discussion" exists:
+      | forum   | 00001             |
+      | course  | C1                |
+      | user    | admin             |
+      | name    | Test post subject |
+      | message | Test post message |
+    And the following config values are set as admin:
+      | forum_allowforcedreadtracking | 0 |
+    When I am on the "Course 1" course page logged in as student2
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should not see "1 unread post"
     And I follow "Test forum name"
     And I should not see "Track unread posts"

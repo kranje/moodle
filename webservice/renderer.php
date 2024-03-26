@@ -497,8 +497,11 @@ EOF;
     /**
      * Create indented XML-RPC  param description
      *
+<<<<<<< HEAD
      * @todo MDL-76078 - Incorrect inter-communication, core cannot have plugin dependencies like this.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param external_description $paramdescription the description structure of the web service function parameters
      * @param string $indentation Indentation in the generated HTML code; should contain only spaces.
      * @return string the html to diplay
@@ -577,8 +580,11 @@ EOF;
     /**
      * Return indented REST param description
      *
+<<<<<<< HEAD
      * @todo MDL-76078 - Incorrect inter-communication, core cannot have plugin dependencies like this.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param external_description $paramdescription the description structure of the web service function parameters
      * @param string $paramstring parameter
      * @return string the html to diplay
@@ -624,8 +630,11 @@ EOF;
     /**
      * Displays all the documentation
      *
+<<<<<<< HEAD
      * @todo MDL-76078 - Incorrect inter-communication, core cannot have plugin dependencies like this.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array $functions external_description of all the web service functions
      * @param boolean $printableformat true if we want to display the documentation in a printable format
      * @param array $activatedprotocol the currently enabled protocol
@@ -664,21 +673,32 @@ EOF;
         //(opened if printableformat = true)
         foreach ($functions as $functionname => $description) {
 
+<<<<<<< HEAD
             $tags = '';
             if (!empty($description->deprecated)) {
                 $tags .= ' ' . html_writer::span(get_string('deprecated', 'core_webservice'), 'badge badge-warning');
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if (empty($printableformat)) {
                 $documentationhtml .= print_collapsible_region_start('',
                                 'aera_' . $functionname,
                                 html_writer::start_tag('strong', array())
+<<<<<<< HEAD
                                 . $functionname . html_writer::end_tag('strong') . $tags,
+=======
+                                . $functionname . html_writer::end_tag('strong'),
+>>>>>>> forked/LAE_400_PACKAGE
                                 false,
                                 !$printableformat,
                                 true);
             } else {
+<<<<<<< HEAD
                 $documentationhtml .= html_writer::tag('strong', $functionname) . $tags;
+=======
+                $documentationhtml .= html_writer::tag('strong', $functionname);
+>>>>>>> forked/LAE_400_PACKAGE
                 $documentationhtml .= $br;
             }
 
@@ -733,7 +753,11 @@ EOF;
                     $documentationhtml .= $this->colored_box_with_pre_tag(
                                     get_string('phpparam', 'webservice'),
                                     htmlentities('[' . $paramname . '] =>'
+<<<<<<< HEAD
                                             . $this->xmlrpc_param_description_html($paramdesc), ENT_COMPAT),
+=======
+                                            . $this->xmlrpc_param_description_html($paramdesc)),
+>>>>>>> forked/LAE_400_PACKAGE
                                     'DFEEE7');
                 }
                 // POST format for the REST protocol for the argument
@@ -741,7 +765,11 @@ EOF;
                     $documentationhtml .= $this->colored_box_with_pre_tag(
                                     get_string('restparam', 'webservice'),
                                     htmlentities($this->rest_param_description_html(
+<<<<<<< HEAD
                                                     $paramdesc, $paramname), ENT_COMPAT),
+=======
+                                                    $paramdesc, $paramname)),
+>>>>>>> forked/LAE_400_PACKAGE
                                     'FEEBE5');
                 }
                 $documentationhtml .= html_writer::end_tag('span');
@@ -771,7 +799,11 @@ EOF;
                     $documentationhtml .= $this->colored_box_with_pre_tag(
                                     get_string('phpresponse', 'webservice'),
                                     htmlentities($this->xmlrpc_param_description_html(
+<<<<<<< HEAD
                                                     $description->returns_desc), ENT_COMPAT),
+=======
+                                                    $description->returns_desc)),
+>>>>>>> forked/LAE_400_PACKAGE
                                     'DFEEE7');
                 }
                 // XML response for the REST protocol
@@ -783,7 +815,11 @@ EOF;
                     $restresponse .="</RESPONSE>" . $brakeline;
                     $documentationhtml .= $this->colored_box_with_pre_tag(
                                     get_string('restcode', 'webservice'),
+<<<<<<< HEAD
                                     htmlentities($restresponse, ENT_COMPAT),
+=======
+                                    htmlentities($restresponse),
+>>>>>>> forked/LAE_400_PACKAGE
                                     'FEEBE5');
                 }
             }
@@ -807,7 +843,11 @@ EOF;
 EOF;
                 $documentationhtml .= $this->colored_box_with_pre_tag(
                                 get_string('restexception', 'webservice'),
+<<<<<<< HEAD
                                 htmlentities($restexceptiontext, ENT_COMPAT),
+=======
+                                htmlentities($restexceptiontext),
+>>>>>>> forked/LAE_400_PACKAGE
                                 'FEEBE5');
 
                 $documentationhtml .= html_writer::end_tag('span');

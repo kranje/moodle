@@ -456,6 +456,7 @@ abstract class base {
     /**
      * Returns true if this course format uses activity indentation.
      *
+<<<<<<< HEAD
      * Indentation is not supported by core formats anymore and may be deprecated in the future.
      * This method will keep a default return "true" for legacy reasons but new formats should override
      * it with a return false to prevent future deprecations.
@@ -464,6 +465,8 @@ abstract class base {
      * and i_indent_left_activity should be removed as well. Right now no core behat uses them but indentation
      * is not officially deprecated so they are still available for the contrib formats.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @return bool if the course format uses indentation.
      */
     public function uses_indentation(): bool {
@@ -620,7 +623,11 @@ abstract class base {
         $course = $this->get_course();
         try {
             $sectionpreferences = (array) json_decode(
+<<<<<<< HEAD
                 get_user_preferences("coursesectionspreferences_{$course->id}", '', $USER->id)
+=======
+                get_user_preferences('coursesectionspreferences_' . $course->id, null, $USER->id)
+>>>>>>> forked/LAE_400_PACKAGE
             );
             if (empty($sectionpreferences)) {
                 $sectionpreferences = [];
@@ -1080,7 +1087,11 @@ abstract class base {
         $changed = $needrebuild = false;
         foreach ($defaultoptions as $key => $value) {
             if (isset($records[$key])) {
+<<<<<<< HEAD
                 if (array_key_exists($key, $data) && $records[$key]->value != $data[$key]) {
+=======
+                if (array_key_exists($key, $data) && $records[$key]->value !== $data[$key]) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $DB->set_field('course_format_options', 'value',
                             $data[$key], array('id' => $records[$key]->id));
                     $changed = true;
@@ -1353,7 +1364,11 @@ abstract class base {
      * return true if the course editor must be displayed.
      *
      * @param array|null $capabilities array of capabilities a user needs to have to see edit controls in general.
+<<<<<<< HEAD
      *  If null or not specified, the user needs to have 'moodle/course:manageactivities'.
+=======
+     *  If null or not specified, the user needs to have 'moodle/course:manageactivities'
+>>>>>>> forked/LAE_400_PACKAGE
      * @return bool true if edit controls must be displayed
      */
     public function show_editor(?array $capabilities = ['moodle/course:manageactivities']): bool {

@@ -116,6 +116,13 @@ class webservice extends base {
     }
 
     public function is_uninstall_allowed() {
+<<<<<<< HEAD
+=======
+        // The xmlrpc plugin contains webservice_xmlrpc_client (used by core).
+        if ($this->name == 'xmlrpc') {
+            return false;
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         return true;
     }
 }

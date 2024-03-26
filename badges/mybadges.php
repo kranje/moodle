@@ -40,7 +40,11 @@ $show        = optional_param('show', 0, PARAM_INT);
 require_login();
 
 if (empty($CFG->enablebadges)) {
+<<<<<<< HEAD
     throw new \moodle_exception('badgesdisabled', 'badges');
+=======
+    print_error('badgesdisabled', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $url = new moodle_url('/badges/mybadges.php');

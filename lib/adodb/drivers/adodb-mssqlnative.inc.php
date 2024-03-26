@@ -151,8 +151,11 @@ class ADODB_mssqlnative extends ADOConnection {
 
 		$arrServerInfo = sqlsrv_server_info($this->_connectionID);
 		$ADODB_FETCH_MODE = $savem;
+<<<<<<< HEAD
 		
 		$arr = array();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		$arr['description'] = $arrServerInfo['SQLServerName'].' connected to '.$arrServerInfo['CurrentDatabase'];
 		$arr['version'] = $arrServerInfo['SQLServerVersion'];//ADOConnection::_findvers($arr['description']);
 		return $arr;
@@ -721,7 +724,11 @@ class ADODB_mssqlnative extends ADOConnection {
 		return $indexes;
 	}
 
+<<<<<<< HEAD
 	public function metaForeignKeys($table, $owner = '', $upper = false, $associative = false)
+=======
+	function MetaForeignKeys($table, $owner=false, $upper=false)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 		global $ADODB_FETCH_MODE;
 
@@ -1011,6 +1018,7 @@ class ADODB_mssqlnative extends ADOConnection {
 		return $metaProcedures;
 	}
 
+<<<<<<< HEAD
 	/**
 	* An SQL Statement that adds a specific number of
 	* days or part to local datetime
@@ -1042,6 +1050,8 @@ class ADODB_mssqlnative extends ADOConnection {
 
 	}
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /*--------------------------------------------------------------------------------------

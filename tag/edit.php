@@ -33,7 +33,11 @@ $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
 require_login();
 
 if (empty($CFG->usetags)) {
+<<<<<<< HEAD
     throw new \moodle_exception('tagsaredisabled', 'tag');
+=======
+    print_error('tagsaredisabled', 'tag');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 //Editing a tag requires moodle/tag:edit capability

@@ -104,16 +104,27 @@ if (file_exists($actionpath) && is_readable($actionpath)) {
             }
         } else {
             // TODO: need more detailed error info
+<<<<<<< HEAD
             throw new \moodle_exception('xmldberror');
+=======
+            print_error('xmldberror');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     } else {
         $a = new stdClass();
         $a->action = $action;
         $a->actionclass = $actionclass;
+<<<<<<< HEAD
         throw new \moodle_exception('cannotinstantiateclass', 'tool_xmldb', '', $a);
     }
 } else {
     throw new \moodle_exception('invalidaction');
+=======
+        print_error('cannotinstantiateclass', 'tool_xmldb', '', $a);
+    }
+} else {
+    print_error('invalidaction');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($xmldb_action->getDoesGenerate() != ACTION_GENERATE_XML) {

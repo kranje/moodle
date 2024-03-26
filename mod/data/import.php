@@ -77,7 +77,10 @@ if ($form->is_cancelled()) {
 
 /// Print the page header
 $PAGE->navbar->add(get_string('add', 'data'));
+<<<<<<< HEAD
 $PAGE->add_body_class('mediumwidth');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $PAGE->set_title($data->name);
 $PAGE->set_heading($course->fullname);
 $PAGE->set_secondary_active_tab('modulepage');

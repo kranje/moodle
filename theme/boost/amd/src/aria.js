@@ -200,6 +200,7 @@ const dropdownFix = () => {
 };
 
 /**
+<<<<<<< HEAD
  * A lot of Bootstrap's out of the box features don't work if dropdown items are not focusable.
  */
 const comboboxFix = () => {
@@ -338,6 +339,8 @@ const comboboxFix = () => {
 };
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * After page load, focus on any element with special autofocus attribute.
  */
 const autoFocus = () => {
@@ -441,7 +444,10 @@ const collapseFix = () => {
 
 export const init = () => {
     dropdownFix();
+<<<<<<< HEAD
     comboboxFix();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     autoFocus();
     tabElementFix();
     collapseFix();

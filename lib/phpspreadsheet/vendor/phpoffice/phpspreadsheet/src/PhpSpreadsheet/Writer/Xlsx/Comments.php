@@ -165,7 +165,11 @@ class Comments extends WriterPart
         // Metadata
         [$column, $row] = Coordinate::indexesFromString($cellReference);
         $id = 1024 + $column + $row;
+<<<<<<< HEAD
         $id = substr("$id", 0, 4);
+=======
+        $id = substr($id, 0, 4);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // v:shape
         $objWriter->startElement('v:shape');
@@ -223,10 +227,17 @@ class Comments extends WriterPart
         $objWriter->writeElement('x:AutoFill', 'False');
 
         // x:Row
+<<<<<<< HEAD
         $objWriter->writeElement('x:Row', (string) ($row - 1));
 
         // x:Column
         $objWriter->writeElement('x:Column', (string) ($column - 1));
+=======
+        $objWriter->writeElement('x:Row', ($row - 1));
+
+        // x:Column
+        $objWriter->writeElement('x:Column', ($column - 1));
+>>>>>>> forked/LAE_400_PACKAGE
 
         $objWriter->endElement();
 

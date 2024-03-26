@@ -54,7 +54,11 @@ if (empty($iid)) {
         unset($content);
 
         if (!is_null($csvloaderror)) {
+<<<<<<< HEAD
             throw new \moodle_exception('csvloaderror', '', $returnurl, $csvloaderror);
+=======
+            print_error('csvloaderror', '', $returnurl, $csvloaderror);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         // Continue to form2.
 

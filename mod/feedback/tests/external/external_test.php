@@ -120,6 +120,10 @@ class external_test extends externallib_advanced_testcase {
      * Test test_mod_feedback_get_feedbacks_by_courses
      */
     public function test_mod_feedback_get_feedbacks_by_courses() {
+<<<<<<< HEAD
+=======
+        global $DB;
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Create additional course.
         $course2 = self::getDataGenerator()->create_course();
@@ -148,7 +152,11 @@ class external_test extends externallib_advanced_testcase {
 
         // Create what we expect to be returned when querying the two courses.
         // First for the student user.
+<<<<<<< HEAD
         $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'lang', 'anonymous',
+=======
+        $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'anonymous',
+>>>>>>> forked/LAE_400_PACKAGE
             'multiple_submit', 'autonumbering', 'page_after_submitformat', 'publish_stats', 'completionsubmit');
 
         $properties = feedback_summary_exporter::read_properties_definition();
@@ -158,12 +166,18 @@ class external_test extends externallib_advanced_testcase {
         $feedback1->coursemodule = $feedback1->cmid;
         $feedback1->introformat = 1;
         $feedback1->introfiles = [];
+<<<<<<< HEAD
         $feedback1->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $feedback2->coursemodule = $feedback2->cmid;
         $feedback2->introformat = 1;
         $feedback2->introfiles = [];
+<<<<<<< HEAD
         $feedback2->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($expectedfields as $field) {
             if (!empty($properties[$field]) && $properties[$field]['type'] == PARAM_BOOL) {

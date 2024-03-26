@@ -174,7 +174,11 @@ class ADOdbLoadBalancer
      * @param  string $type Type of database connection, either: 'write' capable or 'readonly'
      * @return bool|int|string
      */
+<<<<<<< HEAD
     public function getConnectionByWeight($type)
+=======
+    private function getConnectionByWeight($type)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($type == 'readonly') {
             $total_weight = $this->total_connection_weights['all'];
@@ -233,7 +237,11 @@ class ADOdbLoadBalancer
      * @return bool|ADOConnection
      * @throws Exception
      */
+<<<<<<< HEAD
     public function getConnectionById($connection_id)
+=======
+    private function _getConnection($connection_id)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (isset($this->connections[$connection_id])) {
             $connection_obj = $this->connections[$connection_id];
@@ -261,6 +269,7 @@ class ADOdbLoadBalancer
                     throw $e; // No connections left, reThrow exception so application can catch it.
                 }
 
+<<<<<<< HEAD
                 // Check to see if a connection test callback was defined, and if so execute it.
                 // This is useful for testing replication lag and such to ensure the connection is suitable to be used.
                 $test_connection_callback = $connection_obj->getConnectionTestCallback();
@@ -270,6 +279,8 @@ class ADOdbLoadBalancer
                     return false;
                 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 if (is_array($this->user_defined_session_init_sql)) {
                     foreach ($this->user_defined_session_init_sql as $session_init_sql) {
                         $adodb_obj->Execute($session_init_sql);
@@ -307,12 +318,18 @@ class ADOdbLoadBalancer
 
             if ($connection_id !== false) {
                 try {
+<<<<<<< HEAD
                     $adodb_obj = $this->getConnectionById($connection_id);
                     if (is_object($adodb_obj)) {
                         break; //Found valid connection, continue with it.
                     } else {
                         throw new Exception('ADODB Connection Object does not exist. Perhaps LoadBalancer Database Connection Test Failed?');
                     }
+=======
+                    $adodb_obj = $this->_getConnection($connection_id);
+                    // $connection_obj = $this->connections[$connection_id];
+                    break;
+>>>>>>> forked/LAE_400_PACKAGE
                 } catch (Exception $e) {
                     // Connection error, see if there are other connections to try still.
                     $this->removeConnection($connection_id);
@@ -327,10 +344,13 @@ class ADOdbLoadBalancer
             }
         }
 
+<<<<<<< HEAD
         if (!isset($connection_id)) {
             throw new Exception('No connection available to use at this time! Type: ' . $type);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->last_connection_id[$type] = $connection_id;
 
         if ($pin_connection === true) {
@@ -448,7 +468,11 @@ class ADOdbLoadBalancer
                         && $connection_obj->getADOdbObject()->_connectionID !== false
                     )
                 ) {
+<<<<<<< HEAD
                     $adodb_obj = $this->getConnectionById($key);
+=======
+                    $adodb_obj = $this->_getConnection($key);
+>>>>>>> forked/LAE_400_PACKAGE
                     if (is_object($adodb_obj)) {
                         $result_arr[] = $adodb_obj->Execute($sql, $inputarr);
                     }
@@ -611,7 +635,10 @@ class ADOdbLoadBalancer
             case 'binddate':
             case 'bindtimestamp':
             case 'setfetchmode':
+<<<<<<< HEAD
             case 'setcustommetatype':
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                   $type = false; // No connection necessary.
                 break;
 
@@ -704,11 +731,14 @@ class ADOdbLoadBalancerConnection
     protected $adodb_obj = false;
 
     /**
+<<<<<<< HEAD
      * @var callable    Closure
      */
     protected $connection_test_callback = NULL;
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @var string    Type of connection, either 'write' capable or 'readonly'
      */
     public $type = 'write';
@@ -784,6 +814,7 @@ class ADOdbLoadBalancerConnection
     }
 
     /**
+<<<<<<< HEAD
      * Anonymous function that is called and must return TRUE for the connection to be usable.*
      *   The first argument is the type of connection to test.
      *   Useful to check things like replication lag.
@@ -802,6 +833,8 @@ class ADOdbLoadBalancerConnection
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns the ADODB object for this connection.
      *
      * @return bool

@@ -4,11 +4,16 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "71522fc9834426e64d51273f01714eaa",
+=======
+    "content-hash": "7897c25160d1ab3b2ad956387eabccf6",
+>>>>>>> forked/LAE_400_PACKAGE
     "packages": [],
     "packages-dev": [
         {
             "name": "behat/behat",
+<<<<<<< HEAD
             "version": "v3.12.0",
             "source": {
                 "type": "git",
@@ -19,6 +24,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Behat/Behat/zipball/2f059c9172764ba1f1759b3679aca499b665330a",
                 "reference": "2f059c9172764ba1f1759b3679aca499b665330a",
+=======
+            "version": "v3.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Behat/Behat.git",
+                "reference": "a19c72c78eb0cdf7b7c4dabfeec9eb3a282728fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/a19c72c78eb0cdf7b7c4dabfeec9eb3a282728fc",
+                "reference": "a19c72c78eb0cdf7b7c4dabfeec9eb3a282728fc",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -36,7 +53,10 @@
             },
             "require-dev": {
                 "herrera-io/box": "~1.6.1",
+<<<<<<< HEAD
                 "phpspec/prophecy": "^1.15",
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 "phpunit/phpunit": "^8.5 || ^9.0",
                 "symfony/process": "^4.4 || ^5.0 || ^6.0",
                 "vimeo/psalm": "^4.8"
@@ -90,9 +110,15 @@
             ],
             "support": {
                 "issues": "https://github.com/Behat/Behat/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/Behat/Behat/tree/v3.12.0"
             },
             "time": "2022-11-29T15:30:11+00:00"
+=======
+                "source": "https://github.com/Behat/Behat/tree/v3.11.0"
+            },
+            "time": "2022-07-07T09:49:27+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "behat/gherkin",
@@ -223,6 +249,7 @@
         },
         {
             "name": "behat/mink-browserkit-driver",
+<<<<<<< HEAD
             "version": "v2.1.0",
             "source": {
                 "type": "git",
@@ -248,12 +275,41 @@
                 "symfony/http-client": "^4.4 || ^5.0 || ^6.0",
                 "symfony/http-kernel": "^4.4 || ^5.0 || ^6.0",
                 "symfony/mime": "^4.4 || ^5.0 || ^6.0",
+=======
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/minkphp/MinkBrowserKitDriver.git",
+                "reference": "057926c9da452bac5bfcffb92eb4f3e1ce74dae9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/057926c9da452bac5bfcffb92eb4f3e1ce74dae9",
+                "reference": "057926c9da452bac5bfcffb92eb4f3e1ce74dae9",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink": "^1.7.1@dev",
+                "php": ">=5.4",
+                "symfony/browser-kit": "~2.3|~3.0|~4.0",
+                "symfony/dom-crawler": "~2.3|~3.0|~4.0"
+            },
+            "require-dev": {
+                "mink/driver-testsuite": "dev-master",
+                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.18 || ^8.5 || ^9.5",
+                "symfony/debug": "^2.7|^3.0|^4.0",
+                "symfony/http-kernel": "~2.3|~3.0|~4.0",
+>>>>>>> forked/LAE_400_PACKAGE
                 "yoast/phpunit-polyfills": "^1.0"
             },
             "type": "mink-driver",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "2.x-dev"
+=======
+                    "dev-master": "1.x-dev"
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             },
             "autoload": {
@@ -282,6 +338,7 @@
             ],
             "support": {
                 "issues": "https://github.com/minkphp/MinkBrowserKitDriver/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/minkphp/MinkBrowserKitDriver/tree/v2.1.0"
             },
             "time": "2022-03-28T14:33:51+00:00"
@@ -308,11 +365,42 @@
             "require-dev": {
                 "mink/driver-testsuite": "dev-master",
                 "symfony/error-handler": "^4.4 || ^5.0"
+=======
+                "source": "https://github.com/minkphp/MinkBrowserKitDriver/tree/v1.4.1"
+            },
+            "time": "2021-12-10T14:17:06+00:00"
+        },
+        {
+            "name": "behat/mink-goutte-driver",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/minkphp/MinkGoutteDriver.git",
+                "reference": "8139f520f417c81bf9d2f9a171fff400f6adc9ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/MinkGoutteDriver/zipball/8139f520f417c81bf9d2f9a171fff400f6adc9ea",
+                "reference": "8139f520f417c81bf9d2f9a171fff400f6adc9ea",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink-browserkit-driver": "~1.2@dev",
+                "fabpot/goutte": "~1.0.4|~2.0|~3.1",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mink/driver-testsuite": "dev-master"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "type": "mink-driver",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "2.x-dev"
+=======
+                    "dev-master": "1.x-dev"
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             },
             "autoload": {
@@ -341,9 +429,15 @@
             ],
             "support": {
                 "issues": "https://github.com/minkphp/MinkGoutteDriver/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/minkphp/MinkGoutteDriver/tree/v2.0.0"
             },
             "time": "2021-12-29T10:56:50+00:00"
+=======
+                "source": "https://github.com/minkphp/MinkGoutteDriver/tree/v1.3.0"
+            },
+            "time": "2021-10-12T11:35:46+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "behat/transliterator",
@@ -396,6 +490,7 @@
         },
         {
             "name": "doctrine/instantiator",
+<<<<<<< HEAD
             "version": "1.5.0",
             "source": {
                 "type": "git",
@@ -406,20 +501,40 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/instantiator/zipball/0a0fa9780f5d4e507415a065172d26a98d02047b",
                 "reference": "0a0fa9780f5d4e507415a065172d26a98d02047b",
+=======
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/instantiator.git",
+                "reference": "10dcfce151b967d20fde1b34ae6640712c3891bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/10dcfce151b967d20fde1b34ae6640712c3891bc",
+                "reference": "10dcfce151b967d20fde1b34ae6640712c3891bc",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
+<<<<<<< HEAD
                 "doctrine/coding-standard": "^9 || ^11",
+=======
+                "doctrine/coding-standard": "^9",
+>>>>>>> forked/LAE_400_PACKAGE
                 "ext-pdo": "*",
                 "ext-phar": "*",
                 "phpbench/phpbench": "^0.16 || ^1",
                 "phpstan/phpstan": "^1.4",
                 "phpstan/phpstan-phpunit": "^1",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+<<<<<<< HEAD
                 "vimeo/psalm": "^4.30 || ^5.4"
+=======
+                "vimeo/psalm": "^4.22"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "type": "library",
             "autoload": {
@@ -446,7 +561,11 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/doctrine/instantiator/tree/1.5.0"
+=======
+                "source": "https://github.com/doctrine/instantiator/tree/1.4.1"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -462,6 +581,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-30T00:15:36+00:00"
         },
         {
@@ -490,6 +610,40 @@
                 "symfony/phpunit-bridge": "^5.0|^6.0"
             },
             "type": "application",
+=======
+            "time": "2022-03-03T08:28:38+00:00"
+        },
+        {
+            "name": "fabpot/goutte",
+            "version": "v3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfPHP/Goutte.git",
+                "reference": "80a23b64f44d54dd571d114c473d9d7e9ed84ca5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfPHP/Goutte/zipball/80a23b64f44d54dd571d114c473d9d7e9ed84ca5",
+                "reference": "80a23b64f44d54dd571d114c473d9d7e9ed84ca5",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=7.1.3",
+                "symfony/browser-kit": "^4.4|^5.0",
+                "symfony/css-selector": "^4.4|^5.0",
+                "symfony/dom-crawler": "^4.4|^5.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^5.0"
+            },
+            "type": "application",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+>>>>>>> forked/LAE_400_PACKAGE
             "autoload": {
                 "psr-4": {
                     "Goutte\\": "Goutte"
@@ -515,6 +669,7 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/Goutte/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/FriendsOfPHP/Goutte/tree/v4.0.2"
             },
             "time": "2021-12-17T17:15:01+00:00"
@@ -531,21 +686,51 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/FriendsOfBehat/MinkExtension/zipball/ffc5ee88aa8e5b430f0c417adb3f0c943ffeafed",
                 "reference": "ffc5ee88aa8e5b430f0c417adb3f0c943ffeafed",
+=======
+                "source": "https://github.com/FriendsOfPHP/Goutte/tree/v3.3.1"
+            },
+            "time": "2020-11-01T09:30:18+00:00"
+        },
+        {
+            "name": "friends-of-behat/mink-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moodlehq/MinkExtension.git",
+                "reference": "586ffcc1dc08ed23fcbc89cb16cb6f72d40499f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moodlehq/MinkExtension/zipball/586ffcc1dc08ed23fcbc89cb16cb6f72d40499f3",
+                "reference": "586ffcc1dc08ed23fcbc89cb16cb6f72d40499f3",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.0.5",
                 "behat/mink": "^1.5",
+<<<<<<< HEAD
                 "php": ">=7.4",
                 "symfony/config": "^4.4 || ^5.0 || ^6.0"
+=======
+                "php": ">=7.2",
+                "symfony/config": "^3.4 || ^4.4 || ^5.0"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "replace": {
                 "behat/mink-extension": "self.version"
             },
             "require-dev": {
+<<<<<<< HEAD
                 "behat/mink-goutte-driver": "^1.1 || ^2.0",
                 "phpspec/phpspec": "^6.0 || ^7.0 || 7.1.x-dev"
             },
+=======
+                "behat/mink-goutte-driver": "^1.1",
+                "phpspec/phpspec": "^6.0 || ^7.0"
+            },
+            "default-branch": true,
+>>>>>>> forked/LAE_400_PACKAGE
             "type": "behat-extension",
             "extra": {
                 "branch-alias": {
@@ -557,7 +742,10 @@
                     "Behat\\MinkExtension": "src/"
                 }
             },
+<<<<<<< HEAD
             "notification-url": "https://packagist.org/downloads/",
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             "license": [
                 "MIT"
             ],
@@ -580,9 +768,324 @@
                 "web"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/FriendsOfBehat/MinkExtension/tree/v2.7.2"
             },
             "time": "2022-10-17T07:23:22+00:00"
+=======
+                "source": "https://github.com/moodlehq/MinkExtension/tree/master"
+            },
+            "time": "2021-05-18T13:04:16+00:00"
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "6.5.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "a52f0440530b54fa079ce76e8c5d196a42cad981"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a52f0440530b54fa079ce76e8c5d196a42cad981",
+                "reference": "a52f0440530b54fa079ce76e8c5d196a42cad981",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.9",
+                "php": ">=5.5",
+                "symfony/polyfill-intl-idn": "^1.17"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
+                "psr/log": "^1.1"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.5-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Jeremy Lindblom",
+                    "email": "jeremeamia@gmail.com",
+                    "homepage": "https://github.com/jeremeamia"
+                },
+                {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle/issues",
+                "source": "https://github.com/guzzle/guzzle/tree/6.5.8"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/guzzle",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-06-20T22:16:07+00:00"
+        },
+        {
+            "name": "guzzlehttp/promises",
+            "version": "1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "b94b2807d85443f9719887892882d0329d1e2598"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598",
+                "reference": "b94b2807d85443f9719887892882d0329d1e2598",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^4.4 || ^5.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "Guzzle promises library",
+            "keywords": [
+                "promise"
+            ],
+            "support": {
+                "issues": "https://github.com/guzzle/promises/issues",
+                "source": "https://github.com/guzzle/promises/tree/1.5.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/promises",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-08-28T14:55:35+00:00"
+        },
+        {
+            "name": "guzzlehttp/psr7",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/psr7.git",
+                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
+                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5 || ^3.0.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "ext-zlib": "*",
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
+            },
+            "suggest": {
+                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "PSR-7 message implementation that also provides common utility methods",
+            "keywords": [
+                "http",
+                "message",
+                "psr-7",
+                "request",
+                "response",
+                "stream",
+                "uri",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/guzzle/psr7/issues",
+                "source": "https://github.com/guzzle/psr7/tree/1.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-06-20T21:43:03+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "mikey179/vfsstream",
@@ -1311,6 +1814,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
             "version": "9.5.27",
             "source": {
                 "type": "git",
@@ -1321,6 +1825,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a2bc7ffdca99f92d959b3f2270529334030bba38",
                 "reference": "a2bc7ffdca99f92d959b3f2270529334030bba38",
+=======
+            "version": "9.5.26",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "851867efcbb6a1b992ec515c71cdcf20d895e9d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/851867efcbb6a1b992ec515c71cdcf20d895e9d2",
+                "reference": "851867efcbb6a1b992ec515c71cdcf20d895e9d2",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -1393,7 +1909,11 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.27"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.26"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -1409,6 +1929,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-09T07:31:23+00:00"
         },
         {
@@ -1427,6 +1948,26 @@
             },
             "require": {
                 "php": ">=7.4.0"
+=======
+            "time": "2022-10-28T06:00:21+00:00"
+        },
+        {
+            "name": "psr/container",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "type": "library",
             "autoload": {
@@ -1455,9 +1996,15 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
             "time": "2021-11-05T16:50:12+00:00"
+=======
+                "source": "https://github.com/php-fig/container/tree/1.1.1"
+            },
+            "time": "2021-03-05T17:36:06+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "psr/event-dispatcher",
@@ -1510,6 +2057,7 @@
             "time": "2019-01-08T18:20:26+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "psr/log",
             "version": "1.1.4",
             "source": {
@@ -1521,6 +2069,19 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
                 "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+=======
+            "name": "psr/http-message",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -1529,12 +2090,20 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.1.x-dev"
+=======
+                    "dev-master": "1.0.x-dev"
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             },
             "autoload": {
                 "psr-4": {
+<<<<<<< HEAD
                     "Psr\\Log\\": "Psr/Log/"
+=======
+                    "Psr\\Http\\Message\\": "src/"
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1544,6 +2113,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
+<<<<<<< HEAD
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
@@ -1558,6 +2128,69 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "time": "2021-05-03T11:20:27+00:00"
+=======
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
+            "time": "2016-08-06T14:39:51+00:00"
+        },
+        {
+            "name": "ralouphie/getallheaders",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "120b605dfeb996808c31b6477290a714d356e822"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
+                "reference": "120b605dfeb996808c31b6477290a714d356e822",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5 || ^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "support": {
+                "issues": "https://github.com/ralouphie/getallheaders/issues",
+                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+            },
+            "time": "2019-03-08T08:55:37+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "sebastian/cli-parser",
@@ -2525,6 +3158,7 @@
         },
         {
             "name": "symfony/browser-kit",
+<<<<<<< HEAD
             "version": "v5.4.11",
             "source": {
                 "type": "git",
@@ -2547,6 +3181,30 @@
                 "symfony/http-client": "^4.4|^5.0|^6.0",
                 "symfony/mime": "^4.4|^5.0|^6.0",
                 "symfony/process": "^4.4|^5.0|^6.0"
+=======
+            "version": "v4.4.44",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/browser-kit.git",
+                "reference": "2a1ff40723ef6b29c8229a860a9c8f815ad7dbbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/2a1ff40723ef6b29c8229a860a9c8f815ad7dbbb",
+                "reference": "2a1ff40723ef6b29c8229a860a9c8f815ad7dbbb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3",
+                "symfony/dom-crawler": "^3.4|^4.0|^5.0",
+                "symfony/polyfill-php80": "^1.16"
+            },
+            "require-dev": {
+                "symfony/css-selector": "^3.4|^4.0|^5.0",
+                "symfony/http-client": "^4.3|^5.0",
+                "symfony/mime": "^4.3|^5.0",
+                "symfony/process": "^3.4|^4.0|^5.0"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "suggest": {
                 "symfony/process": ""
@@ -2577,7 +3235,11 @@
             "description": "Simulates the behavior of a web browser, allowing you to make requests, click on links and submit forms programmatically",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/browser-kit/tree/v5.4.11"
+=======
+                "source": "https://github.com/symfony/browser-kit/tree/v4.4.44"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -2593,7 +3255,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-07-27T15:50:05+00:00"
+=======
+            "time": "2022-07-25T12:56:14+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "symfony/config",
@@ -2676,6 +3342,7 @@
         },
         {
             "name": "symfony/console",
+<<<<<<< HEAD
             "version": "v5.4.17",
             "source": {
                 "type": "git",
@@ -2686,6 +3353,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/58422fdcb0e715ed05b385f70d3e8b5ed4bbd45f",
                 "reference": "58422fdcb0e715ed05b385f70d3e8b5ed4bbd45f",
+=======
+            "version": "v5.4.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "ea59bb0edfaf9f28d18d8791410ee0355f317669"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/ea59bb0edfaf9f28d18d8791410ee0355f317669",
+                "reference": "ea59bb0edfaf9f28d18d8791410ee0355f317669",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -2755,7 +3434,11 @@
                 "terminal"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/console/tree/v5.4.17"
+=======
+                "source": "https://github.com/symfony/console/tree/v5.4.15"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -2771,6 +3454,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-28T14:15:31+00:00"
         },
         {
@@ -2785,6 +3469,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/css-selector/zipball/052ef49b660f9ad2a3adb311c555c9bc11ba61f4",
                 "reference": "052ef49b660f9ad2a3adb311c555c9bc11ba61f4",
+=======
+            "time": "2022-10-26T21:41:52+00:00"
+        },
+        {
+            "name": "symfony/css-selector",
+            "version": "v5.4.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "c1681789f059ab756001052164726ae88512ae3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/c1681789f059ab756001052164726ae88512ae3d",
+                "reference": "c1681789f059ab756001052164726ae88512ae3d",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -2821,7 +3521,11 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/css-selector/tree/v5.4.17"
+=======
+                "source": "https://github.com/symfony/css-selector/tree/v5.4.11"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -2837,6 +3541,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-23T11:40:44+00:00"
         },
         {
@@ -2851,6 +3556,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/58f2988128d2d278280781db037677a32cf720db",
                 "reference": "58f2988128d2d278280781db037677a32cf720db",
+=======
+            "time": "2022-06-27T16:58:25+00:00"
+        },
+        {
+            "name": "symfony/dependency-injection",
+            "version": "v5.4.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dependency-injection.git",
+                "reference": "24cf522668845391c0542bc1de496366072a6d0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/24cf522668845391c0542bc1de496366072a6d0e",
+                "reference": "24cf522668845391c0542bc1de496366072a6d0e",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -2910,7 +3631,11 @@
             "description": "Allows you to standardize and centralize the way objects are constructed in your application",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/dependency-injection/tree/v5.4.17"
+=======
+                "source": "https://github.com/symfony/dependency-injection/tree/v5.4.13"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -2926,7 +3651,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-28T13:55:51+00:00"
+=======
+            "time": "2022-08-30T19:10:13+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2997,6 +3726,7 @@
         },
         {
             "name": "symfony/dom-crawler",
+<<<<<<< HEAD
             "version": "v5.4.17",
             "source": {
                 "type": "git",
@@ -3012,6 +3742,22 @@
             "require": {
                 "php": ">=7.2.5",
                 "symfony/deprecation-contracts": "^2.1|^3",
+=======
+            "version": "v4.4.45",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "4b8daf6c56801e6d664224261cb100b73edc78a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/4b8daf6c56801e6d664224261cb100b73edc78a5",
+                "reference": "4b8daf6c56801e6d664224261cb100b73edc78a5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3",
+>>>>>>> forked/LAE_400_PACKAGE
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/polyfill-php80": "^1.16"
@@ -3021,7 +3767,11 @@
             },
             "require-dev": {
                 "masterminds/html5": "^2.6",
+<<<<<<< HEAD
                 "symfony/css-selector": "^4.4|^5.0|^6.0"
+=======
+                "symfony/css-selector": "^3.4|^4.0|^5.0"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -3052,7 +3802,11 @@
             "description": "Eases DOM navigation for HTML and XML documents",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/dom-crawler/tree/v5.4.17"
+=======
+                "source": "https://github.com/symfony/dom-crawler/tree/v4.4.45"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -3068,6 +3822,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-22T10:31:03+00:00"
         },
         {
@@ -3082,6 +3837,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/8e18a9d559eb8ebc2220588f1faa726a2fcd31c9",
                 "reference": "8e18a9d559eb8ebc2220588f1faa726a2fcd31c9",
+=======
+            "time": "2022-08-03T12:57:57+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v5.4.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc",
+                "reference": "8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -3137,7 +3908,11 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/event-dispatcher/tree/v5.4.17"
+=======
+                "source": "https://github.com/symfony/event-dispatcher/tree/v5.4.9"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -3153,7 +3928,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-12T15:54:21+00:00"
+=======
+            "time": "2022-05-05T16:45:39+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -3299,6 +4078,7 @@
             "time": "2022-09-21T19:53:16+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/http-client",
             "version": "v5.4.17",
             "source": {
@@ -3548,6 +4328,8 @@
             "time": "2022-12-13T09:59:55+00:00"
         },
         {
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             "name": "symfony/polyfill-ctype",
             "version": "v1.27.0",
             "source": {
@@ -4428,6 +5210,7 @@
         },
         {
             "name": "symfony/string",
+<<<<<<< HEAD
             "version": "v5.4.17",
             "source": {
                 "type": "git",
@@ -4438,6 +5221,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/string/zipball/55733a8664b8853b003e70251c58bc8cb2d82a6b",
                 "reference": "55733a8664b8853b003e70251c58bc8cb2d82a6b",
+=======
+            "version": "v5.4.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/string.git",
+                "reference": "571334ce9f687e3e6af72db4d3b2a9431e4fd9ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/string/zipball/571334ce9f687e3e6af72db4d3b2a9431e4fd9ed",
+                "reference": "571334ce9f687e3e6af72db4d3b2a9431e4fd9ed",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -4494,7 +5289,11 @@
                 "utf8"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/string/tree/v5.4.17"
+=======
+                "source": "https://github.com/symfony/string/tree/v5.4.15"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -4510,7 +5309,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-12T15:54:21+00:00"
+=======
+            "time": "2022-10-05T15:16:54+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "symfony/translation",
@@ -4689,6 +5492,7 @@
         },
         {
             "name": "symfony/yaml",
+<<<<<<< HEAD
             "version": "v5.4.17",
             "source": {
                 "type": "git",
@@ -4699,6 +5503,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/edcdc11498108f8967fe95118a7ec8624b94760e",
                 "reference": "edcdc11498108f8967fe95118a7ec8624b94760e",
+=======
+            "version": "v5.4.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "e83fe9a72011f07c662da46a05603d66deeeb487"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/e83fe9a72011f07c662da46a05603d66deeeb487",
+                "reference": "e83fe9a72011f07c662da46a05603d66deeeb487",
+>>>>>>> forked/LAE_400_PACKAGE
                 "shasum": ""
             },
             "require": {
@@ -4744,7 +5560,11 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/yaml/tree/v5.4.17"
+=======
+                "source": "https://github.com/symfony/yaml/tree/v5.4.14"
+>>>>>>> forked/LAE_400_PACKAGE
             },
             "funding": [
                 {
@@ -4760,7 +5580,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-13T09:57:04+00:00"
+=======
+            "time": "2022-10-03T15:15:50+00:00"
+>>>>>>> forked/LAE_400_PACKAGE
         },
         {
             "name": "theseer/tokenizer",
@@ -4815,11 +5639,21 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
+<<<<<<< HEAD
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4.0",
+=======
+    "stability-flags": {
+        "friends-of-behat/mink-extension": 20
+    },
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.3.0",
+>>>>>>> forked/LAE_400_PACKAGE
         "ext-iconv": "*",
         "ext-mbstring": "*",
         "ext-curl": "*",

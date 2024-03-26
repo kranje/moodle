@@ -38,10 +38,17 @@ $override = null;
 if ($overrideid) {
 
     if (! $override = $DB->get_record('quiz_overrides', array('id' => $overrideid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidoverrideid', 'quiz');
     }
     if (! $quiz = $DB->get_record('quiz', array('id' => $override->quiz))) {
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidoverrideid', 'quiz');
+    }
+    if (! $quiz = $DB->get_record('quiz', array('id' => $override->quiz))) {
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     list($course, $cm) = get_course_and_cm_from_instance($quiz, 'quiz');
 
@@ -50,7 +57,11 @@ if ($overrideid) {
     $quiz = $DB->get_record('quiz', array('id' => $cm->instance), '*', MUST_EXIST);
 
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $course = $DB->get_record('course', array('id'=>$cm->course), '*', MUST_EXIST);
 
@@ -82,11 +93,19 @@ if ($overrideid) {
 
     if ($override->groupid) {
         if (!groups_group_visible($override->groupid, $course, $cm)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidoverrideid', 'quiz');
         }
     } else {
         if (!groups_user_groups_visible($course, $override->userid, $cm)) {
             throw new \moodle_exception('invalidoverrideid', 'quiz');
+=======
+            print_error('invalidoverrideid', 'quiz');
+        }
+    } else {
+        if (!groups_user_groups_visible($course, $override->userid, $cm)) {
+            print_error('invalidoverrideid', 'quiz');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 } else {

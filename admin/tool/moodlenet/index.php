@@ -44,7 +44,11 @@ if ($importinfo->get_config()->course) {
     require_capability('moodle/course:manageactivities', context_course::instance($importinfo->get_config()->course));
 }
 if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
+<<<<<<< HEAD
     throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+=======
+    print_error('moodlenetnotenabled', 'tool_moodlenet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Handle the form submits.
@@ -73,7 +77,11 @@ if ($cancel) {
             $context = import_backup_helper::get_context_for_user($USER->id);
 
             if (is_null($context)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('nopermissions', 'error', '', get_string('restore:uploadfile', 'core_role'));
+=======
+                print_error('nopermissions', 'error', '', get_string('restore:uploadfile', 'core_role'));
+>>>>>>> forked/LAE_400_PACKAGE
             }
         } else {
             $context = context_course::instance($importinfo->get_config()->course);

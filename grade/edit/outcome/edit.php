@@ -49,12 +49,20 @@ if ($id) {
 
     /// editing existing outcome
     if (!$outcome_rec = $DB->get_record('grade_outcomes', array('id' => $id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidoutcome');
+=======
+        print_error('invalidoutcome');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if ($outcome_rec->courseid) {
         $outcome_rec->standard = 0;
         if (!$course = $DB->get_record('course', array('id' => $outcome_rec->courseid))) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcourseid');
+=======
+            print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         require_login($course);
         $context = context_course::instance($course->id);
@@ -63,7 +71,11 @@ if ($id) {
     } else {
         if ($courseid) {
             if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidcourseid');
+=======
+                print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         $outcome_rec->standard = 1;

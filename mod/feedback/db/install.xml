@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <XMLDB PATH="mod/feedback/db" VERSION="20220530" COMMENT="XMLDB file for Moodle mod/feedback"
+=======
+<XMLDB PATH="mod/feedback/db" VERSION="20160511" COMMENT="XMLDB file for Moodle mod/feedback"
+>>>>>>> forked/LAE_400_PACKAGE
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -80,7 +84,10 @@
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for feedback_completed"/>
         <KEY NAME="feedback" TYPE="foreign" FIELDS="feedback" REFTABLE="feedback" REFFIELDS="id"/>
+<<<<<<< HEAD
         <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       </KEYS>
       <INDEXES>
         <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>

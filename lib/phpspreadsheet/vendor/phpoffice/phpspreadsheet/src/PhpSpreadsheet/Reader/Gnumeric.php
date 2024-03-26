@@ -227,9 +227,19 @@ class Gnumeric extends BaseReader
 
     /**
      * Loads Spreadsheet from file.
+<<<<<<< HEAD
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
+=======
+     *
+     * @return Spreadsheet
+     */
+    public function load(string $filename, int $flags = 0)
+    {
+        $this->processFlags($flags);
+
+>>>>>>> forked/LAE_400_PACKAGE
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
         $spreadsheet->removeSheetByIndex(0);
@@ -272,11 +282,14 @@ class Gnumeric extends BaseReader
             //        name in line with the formula, not the reverse
             $this->spreadsheet->getActiveSheet()->setTitle($worksheetName, false, false);
 
+<<<<<<< HEAD
             $visibility = $sheetOrNull->attributes()['Visibility'] ?? 'GNM_SHEET_VISIBILITY_VISIBLE';
             if ((string) $visibility !== 'GNM_SHEET_VISIBILITY_VISIBLE') {
                 $this->spreadsheet->getActiveSheet()->setSheetState(Worksheet::SHEETSTATE_HIDDEN);
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if (!$this->readDataOnly) {
                 (new PageSetup($this->spreadsheet))
                     ->printInformation($sheet)
@@ -289,8 +302,17 @@ class Gnumeric extends BaseReader
                 $row = (int) $cellAttributes->Row + 1;
                 $column = (int) $cellAttributes->Col;
 
+<<<<<<< HEAD
                 $maxRow = max($maxRow, $row);
                 $maxCol = max($maxCol, $column);
+=======
+                if ($row > $maxRow) {
+                    $maxRow = $row;
+                }
+                if ($column > $maxCol) {
+                    $maxCol = $column;
+                }
+>>>>>>> forked/LAE_400_PACKAGE
 
                 $column = Coordinate::stringFromColumnIndex($column + 1);
 
@@ -301,7 +323,42 @@ class Gnumeric extends BaseReader
                     }
                 }
 
+<<<<<<< HEAD
                 $this->loadCell($cell, $worksheetName, $cellAttributes, $column, $row);
+=======
+                $ValueType = $cellAttributes->ValueType;
+                $ExprID = (string) $cellAttributes->ExprID;
+                $type = DataType::TYPE_FORMULA;
+                if ($ExprID > '') {
+                    if (((string) $cell) > '') {
+                        $this->expressions[$ExprID] = [
+                            'column' => $cellAttributes->Col,
+                            'row' => $cellAttributes->Row,
+                            'formula' => (string) $cell,
+                        ];
+                    } else {
+                        $expression = $this->expressions[$ExprID];
+
+                        $cell = $this->referenceHelper->updateFormulaReferences(
+                            $expression['formula'],
+                            'A1',
+                            $cellAttributes->Col - $expression['column'],
+                            $cellAttributes->Row - $expression['row'],
+                            $worksheetName
+                        );
+                    }
+                    $type = DataType::TYPE_FORMULA;
+                } else {
+                    $vtype = (string) $ValueType;
+                    if (array_key_exists($vtype, self::$mappings['dataType'])) {
+                        $type = self::$mappings['dataType'][$vtype];
+                    }
+                    if ($vtype === '20') {        //    Boolean
+                        $cell = $cell == 'TRUE';
+                    }
+                }
+                $this->spreadsheet->getActiveSheet()->getCell($column . $row)->setValueExplicit((string) $cell, $type);
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             if ($sheet->Styles !== null) {
@@ -314,18 +371,25 @@ class Gnumeric extends BaseReader
             $this->processMergedCells($sheet);
             $this->processAutofilter($sheet);
 
+<<<<<<< HEAD
             $this->setSelectedCells($sheet);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             ++$worksheetID;
         }
 
         $this->processDefinedNames($gnmXML);
 
+<<<<<<< HEAD
         $this->setSelectedSheet($gnmXML);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Return
         return $this->spreadsheet;
     }
 
+<<<<<<< HEAD
     private function setSelectedSheet(SimpleXMLElement $gnmXML): void
     {
         if (isset($gnmXML->UIData)) {
@@ -357,13 +421,19 @@ class Gnumeric extends BaseReader
         }
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     private function processMergedCells(?SimpleXMLElement $sheet): void
     {
         //    Handle Merged Cells in this worksheet
         if ($sheet !== null && isset($sheet->MergedRegions)) {
             foreach ($sheet->MergedRegions->Merge as $mergeCells) {
                 if (strpos((string) $mergeCells, ':') !== false) {
+<<<<<<< HEAD
                     $this->spreadsheet->getActiveSheet()->mergeCells($mergeCells, Worksheet::MERGE_CELL_CONTENT_HIDE);
+=======
+                    $this->spreadsheet->getActiveSheet()->mergeCells($mergeCells);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         }
@@ -385,8 +455,12 @@ class Gnumeric extends BaseReader
 
     private function setColumnWidth(int $whichColumn, float $defaultWidth): void
     {
+<<<<<<< HEAD
         $columnDimension = $this->spreadsheet->getActiveSheet()
             ->getColumnDimension(Coordinate::stringFromColumnIndex($whichColumn + 1));
+=======
+        $columnDimension = $this->spreadsheet->getActiveSheet()->getColumnDimension(Coordinate::stringFromColumnIndex($whichColumn + 1));
+>>>>>>> forked/LAE_400_PACKAGE
         if ($columnDimension !== null) {
             $columnDimension->setWidth($defaultWidth);
         }
@@ -394,8 +468,12 @@ class Gnumeric extends BaseReader
 
     private function setColumnInvisible(int $whichColumn): void
     {
+<<<<<<< HEAD
         $columnDimension = $this->spreadsheet->getActiveSheet()
             ->getColumnDimension(Coordinate::stringFromColumnIndex($whichColumn + 1));
+=======
+        $columnDimension = $this->spreadsheet->getActiveSheet()->getColumnDimension(Coordinate::stringFromColumnIndex($whichColumn + 1));
+>>>>>>> forked/LAE_400_PACKAGE
         if ($columnDimension !== null) {
             $columnDimension->setVisible(false);
         }
@@ -536,6 +614,7 @@ class Gnumeric extends BaseReader
 
         return $value;
     }
+<<<<<<< HEAD
 
     private function loadCell(
         SimpleXMLElement $cell,
@@ -583,4 +662,6 @@ class Gnumeric extends BaseReader
                 ->setFormatCode((string) $cellAttributes->ValueFormat);
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

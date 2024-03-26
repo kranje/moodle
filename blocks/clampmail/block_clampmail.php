@@ -22,6 +22,13 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
+=======
+defined('MOODLE_INTERNAL') || die;
+
+require_once($CFG->dirroot . '/blocks/clampmail/lib.php');
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Block definition.
  *

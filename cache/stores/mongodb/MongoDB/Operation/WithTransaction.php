@@ -6,7 +6,10 @@ use Exception;
 use MongoDB\Driver\Exception\RuntimeException;
 use MongoDB\Driver\Session;
 use Throwable;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function call_user_func;
 use function time;
 
@@ -52,10 +55,18 @@ class WithTransaction
      * @see Client::startSession
      *
      * @param Session $session A session object as retrieved by Client::startSession
+<<<<<<< HEAD
      * @throws RuntimeException for driver errors while committing the transaction
      * @throws Exception for any other errors, including those thrown in the callback
      */
     public function execute(Session $session): void
+=======
+     * @return void
+     * @throws RuntimeException for driver errors while committing the transaction
+     * @throws Exception for any other errors, including those thrown in the callback
+     */
+    public function execute(Session $session)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $startTime = time();
 
@@ -69,8 +80,12 @@ class WithTransaction
                     $session->abortTransaction();
                 }
 
+<<<<<<< HEAD
                 if (
                     $e instanceof RuntimeException &&
+=======
+                if ($e instanceof RuntimeException &&
+>>>>>>> forked/LAE_400_PACKAGE
                     $e->hasErrorLabel('TransientTransactionError') &&
                     ! $this->isTransactionTimeLimitExceeded($startTime)
                 ) {
@@ -89,8 +104,12 @@ class WithTransaction
                 try {
                     $session->commitTransaction();
                 } catch (RuntimeException $e) {
+<<<<<<< HEAD
                     if (
                         $e->getCode() !== 50 /* MaxTimeMSExpired */ &&
+=======
+                    if ($e->getCode() !== 50 /* MaxTimeMSExpired */ &&
+>>>>>>> forked/LAE_400_PACKAGE
                         $e->hasErrorLabel('UnknownTransactionCommitResult') &&
                         ! $this->isTransactionTimeLimitExceeded($startTime)
                     ) {
@@ -98,8 +117,12 @@ class WithTransaction
                         continue;
                     }
 
+<<<<<<< HEAD
                     if (
                         $e->hasErrorLabel('TransientTransactionError') &&
+=======
+                    if ($e->hasErrorLabel('TransientTransactionError') &&
+>>>>>>> forked/LAE_400_PACKAGE
                         ! $this->isTransactionTimeLimitExceeded($startTime)
                     ) {
                         // Restart the transaction, invoking the callback again
@@ -122,8 +145,14 @@ class WithTransaction
      * Returns whether the time limit for retrying transactions in the convenient transaction API has passed
      *
      * @param int $startTime The time the transaction was started
+<<<<<<< HEAD
      */
     private function isTransactionTimeLimitExceeded(int $startTime): bool
+=======
+     * @return bool
+     */
+    private function isTransactionTimeLimitExceeded($startTime)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return time() - $startTime >= 120;
     }

@@ -5,7 +5,10 @@ namespace PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Borders;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
@@ -41,7 +44,11 @@ class Style extends WriterPart
 
         // numFmts
         $objWriter->startElement('numFmts');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', (string) $this->getParentWriter()->getNumFmtHashTable()->count());
+=======
+        $objWriter->writeAttribute('count', $this->getParentWriter()->getNumFmtHashTable()->count());
+>>>>>>> forked/LAE_400_PACKAGE
 
         // numFmt
         for ($i = 0; $i < $this->getParentWriter()->getNumFmtHashTable()->count(); ++$i) {
@@ -52,6 +59,7 @@ class Style extends WriterPart
 
         // fonts
         $objWriter->startElement('fonts');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', (string) $this->getParentWriter()->getFontHashTable()->count());
 
         // font
@@ -60,12 +68,20 @@ class Style extends WriterPart
             if ($thisfont !== null) {
                 $this->writeFont($objWriter, $thisfont);
             }
+=======
+        $objWriter->writeAttribute('count', $this->getParentWriter()->getFontHashTable()->count());
+
+        // font
+        for ($i = 0; $i < $this->getParentWriter()->getFontHashTable()->count(); ++$i) {
+            $this->writeFont($objWriter, $this->getParentWriter()->getFontHashTable()->getByIndex($i));
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $objWriter->endElement();
 
         // fills
         $objWriter->startElement('fills');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', (string) $this->getParentWriter()->getFillHashTable()->count());
 
         // fill
@@ -74,12 +90,20 @@ class Style extends WriterPart
             if ($thisfill !== null) {
                 $this->writeFill($objWriter, $thisfill);
             }
+=======
+        $objWriter->writeAttribute('count', $this->getParentWriter()->getFillHashTable()->count());
+
+        // fill
+        for ($i = 0; $i < $this->getParentWriter()->getFillHashTable()->count(); ++$i) {
+            $this->writeFill($objWriter, $this->getParentWriter()->getFillHashTable()->getByIndex($i));
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $objWriter->endElement();
 
         // borders
         $objWriter->startElement('borders');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', (string) $this->getParentWriter()->getBordersHashTable()->count());
 
         // border
@@ -88,12 +112,20 @@ class Style extends WriterPart
             if ($thisborder !== null) {
                 $this->writeBorder($objWriter, $thisborder);
             }
+=======
+        $objWriter->writeAttribute('count', $this->getParentWriter()->getBordersHashTable()->count());
+
+        // border
+        for ($i = 0; $i < $this->getParentWriter()->getBordersHashTable()->count(); ++$i) {
+            $this->writeBorder($objWriter, $this->getParentWriter()->getBordersHashTable()->getByIndex($i));
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $objWriter->endElement();
 
         // cellStyleXfs
         $objWriter->startElement('cellStyleXfs');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', '1');
 
         // xf
@@ -102,13 +134,27 @@ class Style extends WriterPart
         $objWriter->writeAttribute('fontId', '0');
         $objWriter->writeAttribute('fillId', '0');
         $objWriter->writeAttribute('borderId', '0');
+=======
+        $objWriter->writeAttribute('count', 1);
+
+        // xf
+        $objWriter->startElement('xf');
+        $objWriter->writeAttribute('numFmtId', 0);
+        $objWriter->writeAttribute('fontId', 0);
+        $objWriter->writeAttribute('fillId', 0);
+        $objWriter->writeAttribute('borderId', 0);
+>>>>>>> forked/LAE_400_PACKAGE
         $objWriter->endElement();
 
         $objWriter->endElement();
 
         // cellXfs
         $objWriter->startElement('cellXfs');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', (string) count($spreadsheet->getCellXfCollection()));
+=======
+        $objWriter->writeAttribute('count', count($spreadsheet->getCellXfCollection()));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // xf
         foreach ($spreadsheet->getCellXfCollection() as $cellXf) {
@@ -119,19 +165,29 @@ class Style extends WriterPart
 
         // cellStyles
         $objWriter->startElement('cellStyles');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', '1');
+=======
+        $objWriter->writeAttribute('count', 1);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // cellStyle
         $objWriter->startElement('cellStyle');
         $objWriter->writeAttribute('name', 'Normal');
+<<<<<<< HEAD
         $objWriter->writeAttribute('xfId', '0');
         $objWriter->writeAttribute('builtinId', '0');
+=======
+        $objWriter->writeAttribute('xfId', 0);
+        $objWriter->writeAttribute('builtinId', 0);
+>>>>>>> forked/LAE_400_PACKAGE
         $objWriter->endElement();
 
         $objWriter->endElement();
 
         // dxfs
         $objWriter->startElement('dxfs');
+<<<<<<< HEAD
         $objWriter->writeAttribute('count', (string) $this->getParentWriter()->getStylesConditionalHashTable()->count());
 
         // dxf
@@ -140,6 +196,13 @@ class Style extends WriterPart
             if ($thisstyle !== null) {
                 $this->writeCellStyleDxf($objWriter, $thisstyle->getStyle());
             }
+=======
+        $objWriter->writeAttribute('count', $this->getParentWriter()->getStylesConditionalHashTable()->count());
+
+        // dxf
+        for ($i = 0; $i < $this->getParentWriter()->getStylesConditionalHashTable()->count(); ++$i) {
+            $this->writeCellStyleDxf($objWriter, $this->getParentWriter()->getStylesConditionalHashTable()->getByIndex($i)->getStyle());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $objWriter->endElement();
@@ -184,19 +247,30 @@ class Style extends WriterPart
 
         // gradientFill
         $objWriter->startElement('gradientFill');
+<<<<<<< HEAD
         $objWriter->writeAttribute('type', (string) $fill->getFillType());
         $objWriter->writeAttribute('degree', (string) $fill->getRotation());
+=======
+        $objWriter->writeAttribute('type', $fill->getFillType());
+        $objWriter->writeAttribute('degree', $fill->getRotation());
+>>>>>>> forked/LAE_400_PACKAGE
 
         // stop
         $objWriter->startElement('stop');
         $objWriter->writeAttribute('position', '0');
 
         // color
+<<<<<<< HEAD
         if ($fill->getStartColor()->getARGB() !== null) {
             $objWriter->startElement('color');
             $objWriter->writeAttribute('rgb', $fill->getStartColor()->getARGB());
             $objWriter->endElement();
         }
+=======
+        $objWriter->startElement('color');
+        $objWriter->writeAttribute('rgb', $fill->getStartColor()->getARGB());
+        $objWriter->endElement();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $objWriter->endElement();
 
@@ -205,11 +279,17 @@ class Style extends WriterPart
         $objWriter->writeAttribute('position', '1');
 
         // color
+<<<<<<< HEAD
         if ($fill->getEndColor()->getARGB() !== null) {
             $objWriter->startElement('color');
             $objWriter->writeAttribute('rgb', $fill->getEndColor()->getARGB());
             $objWriter->endElement();
         }
+=======
+        $objWriter->startElement('color');
+        $objWriter->writeAttribute('rgb', $fill->getEndColor()->getARGB());
+        $objWriter->endElement();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $objWriter->endElement();
 
@@ -237,7 +317,11 @@ class Style extends WriterPart
 
         // patternFill
         $objWriter->startElement('patternFill');
+<<<<<<< HEAD
         $objWriter->writeAttribute('patternType', (string) $fill->getFillType());
+=======
+        $objWriter->writeAttribute('patternType', $fill->getFillType());
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (self::writePatternColors($fill)) {
             // fgColor
@@ -377,6 +461,7 @@ class Style extends WriterPart
     {
         // xf
         $objWriter->startElement('xf');
+<<<<<<< HEAD
         $objWriter->writeAttribute('xfId', '0');
         $objWriter->writeAttribute('fontId', (string) (int) $this->getParentWriter()->getFontHashTable()->getIndexForHashCode($style->getFont()->getHashCode()));
         if ($style->getQuotePrefix()) {
@@ -391,6 +476,22 @@ class Style extends WriterPart
 
         $objWriter->writeAttribute('fillId', (string) (int) $this->getParentWriter()->getFillHashTable()->getIndexForHashCode($style->getFill()->getHashCode()));
         $objWriter->writeAttribute('borderId', (string) (int) $this->getParentWriter()->getBordersHashTable()->getIndexForHashCode($style->getBorders()->getHashCode()));
+=======
+        $objWriter->writeAttribute('xfId', 0);
+        $objWriter->writeAttribute('fontId', (int) $this->getParentWriter()->getFontHashTable()->getIndexForHashCode($style->getFont()->getHashCode()));
+        if ($style->getQuotePrefix()) {
+            $objWriter->writeAttribute('quotePrefix', 1);
+        }
+
+        if ($style->getNumberFormat()->getBuiltInFormatCode() === false) {
+            $objWriter->writeAttribute('numFmtId', (int) ($this->getParentWriter()->getNumFmtHashTable()->getIndexForHashCode($style->getNumberFormat()->getHashCode()) + 164));
+        } else {
+            $objWriter->writeAttribute('numFmtId', (int) $style->getNumberFormat()->getBuiltInFormatCode());
+        }
+
+        $objWriter->writeAttribute('fillId', (int) $this->getParentWriter()->getFillHashTable()->getIndexForHashCode($style->getFill()->getHashCode()));
+        $objWriter->writeAttribute('borderId', (int) $this->getParentWriter()->getBordersHashTable()->getIndexForHashCode($style->getBorders()->getHashCode()));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Apply styles?
         $objWriter->writeAttribute('applyFont', ($spreadsheet->getDefaultStyle()->getFont()->getHashCode() != $style->getFont()->getHashCode()) ? '1' : '0');
@@ -404,6 +505,7 @@ class Style extends WriterPart
 
         // alignment
         $objWriter->startElement('alignment');
+<<<<<<< HEAD
         $vertical = Alignment::VERTICAL_ALIGNMENT_FOR_XLSX[$style->getAlignment()->getVertical()] ?? '';
         $horizontal = Alignment::HORIZONTAL_ALIGNMENT_FOR_XLSX[$style->getAlignment()->getHorizontal()] ?? '';
         if ($horizontal !== '') {
@@ -412,23 +514,41 @@ class Style extends WriterPart
         if ($vertical !== '') {
             $objWriter->writeAttribute('vertical', $vertical);
         }
+=======
+        $objWriter->writeAttribute('horizontal', $style->getAlignment()->getHorizontal());
+        $objWriter->writeAttribute('vertical', $style->getAlignment()->getVertical());
+>>>>>>> forked/LAE_400_PACKAGE
 
         $textRotation = 0;
         if ($style->getAlignment()->getTextRotation() >= 0) {
             $textRotation = $style->getAlignment()->getTextRotation();
+<<<<<<< HEAD
         } else {
             $textRotation = 90 - $style->getAlignment()->getTextRotation();
         }
         $objWriter->writeAttribute('textRotation', (string) $textRotation);
+=======
+        } elseif ($style->getAlignment()->getTextRotation() < 0) {
+            $textRotation = 90 - $style->getAlignment()->getTextRotation();
+        }
+        $objWriter->writeAttribute('textRotation', $textRotation);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $objWriter->writeAttribute('wrapText', ($style->getAlignment()->getWrapText() ? 'true' : 'false'));
         $objWriter->writeAttribute('shrinkToFit', ($style->getAlignment()->getShrinkToFit() ? 'true' : 'false'));
 
         if ($style->getAlignment()->getIndent() > 0) {
+<<<<<<< HEAD
             $objWriter->writeAttribute('indent', (string) $style->getAlignment()->getIndent());
         }
         if ($style->getAlignment()->getReadOrder() > 0) {
             $objWriter->writeAttribute('readingOrder', (string) $style->getAlignment()->getReadOrder());
+=======
+            $objWriter->writeAttribute('indent', $style->getAlignment()->getIndent());
+        }
+        if ($style->getAlignment()->getReadOrder() > 0) {
+            $objWriter->writeAttribute('readingOrder', $style->getAlignment()->getReadOrder());
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $objWriter->endElement();
 
@@ -466,6 +586,7 @@ class Style extends WriterPart
 
         // alignment
         $objWriter->startElement('alignment');
+<<<<<<< HEAD
         $horizontal = Alignment::HORIZONTAL_ALIGNMENT_FOR_XLSX[$style->getAlignment()->getHorizontal()] ?? '';
         if ($horizontal) {
             $objWriter->writeAttribute('horizontal', $horizontal);
@@ -473,16 +594,30 @@ class Style extends WriterPart
         $vertical = Alignment::VERTICAL_ALIGNMENT_FOR_XLSX[$style->getAlignment()->getVertical()] ?? '';
         if ($vertical) {
             $objWriter->writeAttribute('vertical', $vertical);
+=======
+        if ($style->getAlignment()->getHorizontal() !== null) {
+            $objWriter->writeAttribute('horizontal', $style->getAlignment()->getHorizontal());
+        }
+        if ($style->getAlignment()->getVertical() !== null) {
+            $objWriter->writeAttribute('vertical', $style->getAlignment()->getVertical());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($style->getAlignment()->getTextRotation() !== null) {
             $textRotation = 0;
             if ($style->getAlignment()->getTextRotation() >= 0) {
                 $textRotation = $style->getAlignment()->getTextRotation();
+<<<<<<< HEAD
             } else {
                 $textRotation = 90 - $style->getAlignment()->getTextRotation();
             }
             $objWriter->writeAttribute('textRotation', (string) $textRotation);
+=======
+            } elseif ($style->getAlignment()->getTextRotation() < 0) {
+                $textRotation = 90 - $style->getAlignment()->getTextRotation();
+            }
+            $objWriter->writeAttribute('textRotation', $textRotation);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $objWriter->endElement();
 
@@ -490,7 +625,11 @@ class Style extends WriterPart
         $this->writeBorder($objWriter, $style->getBorders());
 
         // protection
+<<<<<<< HEAD
         if ((!empty($style->getProtection()->getLocked())) || (!empty($style->getProtection()->getHidden()))) {
+=======
+        if (($style->getProtection()->getLocked() !== null) || ($style->getProtection()->getHidden() !== null)) {
+>>>>>>> forked/LAE_400_PACKAGE
             if (
                 $style->getProtection()->getLocked() !== Protection::PROTECTION_INHERIT ||
                 $style->getProtection()->getHidden() !== Protection::PROTECTION_INHERIT
@@ -528,6 +667,7 @@ class Style extends WriterPart
             $objWriter->writeAttribute('style', $border->getBorderStyle());
 
             // color
+<<<<<<< HEAD
             if ($border->getColor()->getARGB() !== null) {
                 $objWriter->startElement('color');
                 $objWriter->writeAttribute('rgb', $border->getColor()->getARGB());
@@ -535,6 +675,13 @@ class Style extends WriterPart
 
                 $objWriter->endElement();
             }
+=======
+            $objWriter->startElement('color');
+            $objWriter->writeAttribute('rgb', $border->getColor()->getARGB());
+            $objWriter->endElement();
+
+            $objWriter->endElement();
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -543,15 +690,26 @@ class Style extends WriterPart
      *
      * @param int $id Number Format identifier
      */
+<<<<<<< HEAD
     private function writeNumFmt(XMLWriter $objWriter, ?NumberFormat $numberFormat, $id = 0): void
     {
         // Translate formatcode
         $formatCode = ($numberFormat === null) ? null : $numberFormat->getFormatCode();
+=======
+    private function writeNumFmt(XMLWriter $objWriter, NumberFormat $numberFormat, $id = 0): void
+    {
+        // Translate formatcode
+        $formatCode = $numberFormat->getFormatCode();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // numFmt
         if ($formatCode !== null) {
             $objWriter->startElement('numFmt');
+<<<<<<< HEAD
             $objWriter->writeAttribute('numFmtId', (string) ($id + 164));
+=======
+            $objWriter->writeAttribute('numFmtId', ($id + 164));
+>>>>>>> forked/LAE_400_PACKAGE
             $objWriter->writeAttribute('formatCode', $formatCode);
             $objWriter->endElement();
         }

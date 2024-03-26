@@ -27,6 +27,12 @@ use moodle_url;
  */
 class import_action_bar extends action_bar {
 
+<<<<<<< HEAD
+=======
+    /** @var moodle_url $importactiveurl The URL that should be set as active in the imports URL selector element. */
+    protected $importactiveurl;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var string $activeplugin The plugin of the current import grades page (xml, csv, ...). */
     protected $activeplugin;
 
@@ -34,6 +40,7 @@ class import_action_bar extends action_bar {
      * The class constructor.
      *
      * @param \context $context The context object.
+<<<<<<< HEAD
      * @param null $unused This parameter has been deprecated since 4.1 and should not be used anymore.
      * @param string $activeplugin The plugin of the current import grades page (xml, csv, ...).
      */
@@ -42,6 +49,14 @@ class import_action_bar extends action_bar {
             debugging('Deprecated argument passed to ' . __FUNCTION__, DEBUG_DEVELOPER);
         }
         parent::__construct($context);
+=======
+     * @param moodle_url $importactiveurl The URL that should be set as active in the imports URL selector element.
+     * @param string $activeplugin The plugin of the current import grades page (xml, csv, ...).
+     */
+    public function __construct(\context $context, moodle_url $importactiveurl, string $activeplugin) {
+        parent::__construct($context);
+        $this->importactiveurl = $importactiveurl;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->activeplugin = $activeplugin;
     }
 
@@ -84,6 +99,7 @@ class import_action_bar extends action_bar {
         }
 
         $importsmenu = [];
+<<<<<<< HEAD
         $importactiveurl = null;
         // Generate the data for the imports navigation selector menu.
         foreach ($imports as $import) {
@@ -96,6 +112,16 @@ class import_action_bar extends action_bar {
         // This navigation selector menu will contain the links to all available grade export plugin pages.
         $importsurlselect = new \core\output\select_menu('importas', $importsmenu, $importactiveurl);
         $importsurlselect->set_label(get_string('importas', 'grades'));
+=======
+        // Generate the data for the imports navigation selector menu.
+        foreach ($imports as $import) {
+            $importsmenu[$import->link->out()] = $import->string;
+        }
+
+        // This navigation selector menu will contain the links to all available grade export plugin pages.
+        $importsurlselect = new \url_select($importsmenu, $this->importactiveurl->out(false), null,
+            'gradesimportactionselect');
+>>>>>>> forked/LAE_400_PACKAGE
         $data['importselector'] = $importsurlselect->export_for_template($output);
 
         return $data;

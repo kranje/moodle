@@ -49,9 +49,12 @@ class client extends \oauth2_client {
     /** @var bool $autorefresh whether this client will use a refresh token to automatically renew access tokens.*/
     protected $autorefresh = false;
 
+<<<<<<< HEAD
     /** @var array $rawuserinfo Keep rawuserinfo from . */
     protected $rawuserinfo = [];
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Constructor.
      *
@@ -486,6 +489,7 @@ class client extends \oauth2_client {
     }
 
     /**
+<<<<<<< HEAD
      * Fetch the user info from the user info endpoint.
      *
      * @return stdClass|false Moodle user fields for the logged in user (or false if request failed)
@@ -495,6 +499,15 @@ class client extends \oauth2_client {
         if (!empty($this->rawuserinfo)) {
             return $this->rawuserinfo;
         }
+=======
+     * Fetch the user info from the user info endpoint and map all
+     * the fields back into moodle fields.
+     *
+     * @return array|false Moodle user fields for the logged in user (or false if request failed)
+     * @throws moodle_exception if the response is empty after decoding it.
+     */
+    public function get_userinfo() {
+>>>>>>> forked/LAE_400_PACKAGE
         $url = $this->get_issuer()->get_endpoint_url('userinfo');
         if (empty($url)) {
             return false;
@@ -515,6 +528,7 @@ class client extends \oauth2_client {
             // Throw an exception displaying the original response, because, at this point, $userinfo shouldn't be empty.
             throw new moodle_exception($response);
         }
+<<<<<<< HEAD
         $this->rawuserinfo = $userinfo;
         return $userinfo;
     }
@@ -531,6 +545,8 @@ class client extends \oauth2_client {
         if ($userinfo === false) {
             return false;
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $this->map_userinfo_to_fields($userinfo);
     }

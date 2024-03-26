@@ -229,6 +229,15 @@ class behat_command {
             return BEHAT_EXITCODE_CONFIG;
         }
 
+<<<<<<< HEAD
+=======
+        // If app config is supplied, check the value is correct.
+        if (!empty($CFG->behat_ionic_dirroot) && !file_exists($CFG->behat_ionic_dirroot . '/ionic.config.json')) {
+            self::output_msg(get_string('errorapproot', 'tool_behat'));
+            return BEHAT_EXITCODE_CONFIG;
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         return 0;
     }
 

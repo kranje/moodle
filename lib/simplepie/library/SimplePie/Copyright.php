@@ -122,5 +122,8 @@ class SimplePie_Copyright
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Copyright', 'SimplePie\Copyright', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

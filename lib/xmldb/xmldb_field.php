@@ -116,6 +116,7 @@ class xmldb_field extends xmldb_object {
      */
     public function set_attributes($type, $precision=null, $unsigned=null, $notnull=null, $sequence=null, $default=null, $previous=null) {
         $this->type = $type;
+<<<<<<< HEAD
 
         // LOBs (BINARY OR TEXT) don't support any precision (neither length or decimals).
         if ($type == XMLDB_TYPE_BINARY || $this->type == XMLDB_TYPE_TEXT) {
@@ -133,10 +134,30 @@ class xmldb_field extends xmldb_object {
             }
         }
 
+=======
+    /// Try to split the precision into length and decimals and apply
+    /// each one as needed
+        $precisionarr = explode(',', $precision);
+        if (isset($precisionarr[0])) {
+            $this->length = trim($precisionarr[0]);
+        }
+        if (isset($precisionarr[1])) {
+            $this->decimals = trim($precisionarr[1]);
+        }
+        $this->precision = $type;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->notnull = !empty($notnull) ? true : false;
         $this->sequence = !empty($sequence) ? true : false;
         $this->setDefault($default);
 
+<<<<<<< HEAD
+=======
+        if ($this->type == XMLDB_TYPE_BINARY || $this->type == XMLDB_TYPE_TEXT) {
+            $this->length = null;
+            $this->decimals = null;
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $this->previous = $previous;
     }
 
@@ -525,7 +546,11 @@ class xmldb_field extends xmldb_object {
             $o.= ' DECIMALS="' . $this->decimals . '"';
         }
         if ($this->comment) {
+<<<<<<< HEAD
             $o.= ' COMMENT="' . htmlspecialchars($this->comment, ENT_COMPAT) . '"';
+=======
+            $o.= ' COMMENT="' . htmlspecialchars($this->comment) . '"';
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $o.= '/>' . "\n";
 

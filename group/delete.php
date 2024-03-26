@@ -36,7 +36,11 @@ $PAGE->set_pagelayout('standard');
 
 // Make sure course is OK and user has access to manage groups
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 require_login($course);
 $context = context_course::instance($course->id);
@@ -48,6 +52,7 @@ $groupidarray = explode(',',$groupids);
 $groupnames = array();
 foreach($groupidarray as $groupid) {
     if (!$group = $DB->get_record('groups', array('id' => $groupid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidgroupid');
     }
     if (!empty($group->idnumber) && !$changeidnumber) {
@@ -55,6 +60,15 @@ foreach($groupidarray as $groupid) {
     }
     if ($courseid != $group->courseid) {
         throw new \moodle_exception('groupunknown', '', '', $group->courseid);
+=======
+        print_error('invalidgroupid');
+    }
+    if (!empty($group->idnumber) && !$changeidnumber) {
+        print_error('grouphasidnumber', '', '', $group->name);
+    }
+    if ($courseid != $group->courseid) {
+        print_error('groupunknown', '', '', $group->courseid);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $groupnames[] = format_string($group->name);
 }
@@ -62,12 +76,20 @@ foreach($groupidarray as $groupid) {
 $returnurl='index.php?id='.$course->id;
 
 if(count($groupidarray)==0) {
+<<<<<<< HEAD
     throw new \moodle_exception('errorselectsome', 'group', $returnurl);
+=======
+    print_error('errorselectsome','group',$returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($confirm && data_submitted()) {
     if (!confirm_sesskey() ) {
+<<<<<<< HEAD
         throw new \moodle_exception('confirmsesskeybad', 'error', $returnurl);
+=======
+        print_error('confirmsesskeybad','error',$returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     foreach($groupidarray as $groupid) {

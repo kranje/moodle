@@ -14,6 +14,7 @@
     display: inline-block;
 }
 
+<<<<<<< HEAD
 .path-grade-report-user .user-grade,
 .grade-report-user .user-grade {
     width: 100%;
@@ -37,11 +38,33 @@
 
 .path-grade-report-user .user-grade .b1l,
 .grade-report-user .user-grade .b1l {
+=======
+.path-grade-report-user .user-grade {
+    width: 100%;
+    border: 1px solid;
+}
+
+.path-grade-report-user .user-grade thead th {
+    vertical-align: bottom;
+}
+
+.path-grade-report-user .user-grade th {
+    text-align: left;
+}
+
+.path-grade-report-user .user-grade td {
+    min-width: 4.5em;
+    vertical-align: top;
+}
+
+.path-grade-report-user .user-grade .b1l {
+>>>>>>> forked/LAE_400_PACKAGE
     padding: 0;
     width: 24px;
     min-width: 24px;
 }
 
+<<<<<<< HEAD
 .path-grade-report-user .user-grade tbody .column-itemname,
 .grade-report-user .user-grade tbody .column-itemname {
     padding-left: 24px;
@@ -185,3 +208,25 @@
         display: none;
     }
 }
+=======
+.path-grade-report-user .user-grade tbody .column-itemname {
+    padding-left: 0;
+    padding-right: 8px;
+}
+
+.path-grade-report-user .user-grade .column-itemname.item,
+.path-grade-report-user .user-grade .gradeitemdescription {
+    font-weight: normal;
+    padding-left: 24px;
+}
+
+.path-grade-report-user .user-grade .column-itemname.baggt,
+.path-grade-report-user .user-grade .column-itemname.baggb {
+    padding-left: 24px;
+}
+
+.path-grade-report-user .user-grade .baggt,
+.path-grade-report-user .user-grade .baggb {
+    font-weight: bold;
+}
+>>>>>>> forked/LAE_400_PACKAGE

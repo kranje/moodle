@@ -165,7 +165,11 @@ abstract class grade_report {
         global $CFG, $COURSE, $DB;
 
         if (empty($CFG->gradebookroles)) {
+<<<<<<< HEAD
             throw new \moodle_exception('norolesdefined', 'grades');
+=======
+            print_error('norolesdefined', 'grades');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $this->courseid  = $courseid;
@@ -577,6 +581,7 @@ abstract class grade_report {
         $result = $this->blank_hidden_total_and_adjust_bounds($courseid, $course_item, $finalgrade);
         return $result['grade'];
     }
+<<<<<<< HEAD
 
     /**
      * Calculate average grade for a given grade item.
@@ -755,5 +760,7 @@ abstract class grade_report {
 
         return $modnames;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 

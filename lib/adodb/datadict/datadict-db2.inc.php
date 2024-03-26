@@ -34,6 +34,7 @@ class ADODB2_db2 extends ADODB_DataDict {
 	
  	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		$meta = strtoupper($meta);
 		
 		/*
@@ -43,6 +44,8 @@ class ADODB2_db2 extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		switch($meta) {
 		case 'C': return 'VARCHAR';
 		case 'XL': return 'CLOB';

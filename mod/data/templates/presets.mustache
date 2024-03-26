@@ -17,6 +17,7 @@
     Form containing all database presets displayed within a table.
 
     Context variables required for this template:
+<<<<<<< HEAD
     * formactionurl - The form action url.
     * id - The database course module id (cmid).
     * presets - List of presets containing id, name, fullname, shortname and actions.
@@ -101,10 +102,31 @@
     {{/ core/sticky_footer }}
 </form>
 
+=======
+    * formactionul - The form action url.
+    * d - The database id.
+    * presetstable - The HTML output of the table with presets
+
+    Example context (json):
+    {
+        "formactionul": "http://www.example.com",
+        "d": 1,
+        "presetstable": "<table></table>"
+    }
+}}
+<form method="post" action="{{formactionul}}" class="mt-4">
+    <input type="hidden" name="d" value="{{d}}">
+    <input type="hidden" name="mode" value="usepreset">
+    <input type="hidden" name="action" value="select">
+    {{{presetstable}}}
+    <input type="submit" name="selectpreset" value="{{#str}}usepreset, mod_data{{/str}}" class="btn btn-primary mt-2">
+</form>
+>>>>>>> forked/LAE_400_PACKAGE
 {{#js}}
     require(['mod_data/selectpreset'], function(selectPreset) {
         selectPreset.init();
     });
+<<<<<<< HEAD
 
     require(['mod_data/editpreset'], function(editPreset) {
         editPreset.init();
@@ -112,4 +134,6 @@
     require(['mod_data/importmappingdialogue'], function(importPreset) {
         importPreset.init();
     });
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 {{/js}}

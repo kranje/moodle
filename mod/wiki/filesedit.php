@@ -34,17 +34,29 @@ $pageid    = optional_param('pageid', 0, PARAM_INT);
 $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
 
 if (!$subwiki = wiki_get_subwiki($subwikiid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+=======
+    print_error('incorrectsubwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Checking wiki instance of that subwiki
 if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+    print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Checking course module instance
 if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Checking course instance
@@ -55,7 +67,11 @@ $context = context_module::instance($cm->id);
 require_login($course, true, $cm);
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotviewpage', 'wiki');
+=======
+    print_error('cannotviewpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 require_capability('mod/wiki:managefiles', $context);
 

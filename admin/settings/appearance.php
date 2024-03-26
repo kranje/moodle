@@ -82,6 +82,7 @@ reports,core_reportbuilder|/reportbuilder/index.php',
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
+<<<<<<< HEAD
     // Favicon file setting.
     $title = get_string('favicon', 'admin');
     $description = get_string('favicon_desc', 'admin');
@@ -90,6 +91,8 @@ reports,core_reportbuilder|/reportbuilder/index.php',
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $ADMIN->add('appearance', $temp);
 
     // Course colours section.

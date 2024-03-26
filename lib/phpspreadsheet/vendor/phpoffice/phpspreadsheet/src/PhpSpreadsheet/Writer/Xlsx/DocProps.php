@@ -56,7 +56,11 @@ class DocProps extends WriterPart
 
         // Variant
         $objWriter->startElement('vt:variant');
+<<<<<<< HEAD
         $objWriter->writeElement('vt:i4', (string) $spreadsheet->getSheetCount());
+=======
+        $objWriter->writeElement('vt:i4', $spreadsheet->getSheetCount());
+>>>>>>> forked/LAE_400_PACKAGE
         $objWriter->endElement();
 
         $objWriter->endElement();
@@ -68,7 +72,11 @@ class DocProps extends WriterPart
 
         // Vector
         $objWriter->startElement('vt:vector');
+<<<<<<< HEAD
         $objWriter->writeAttribute('size', (string) $spreadsheet->getSheetCount());
+=======
+        $objWriter->writeAttribute('size', $spreadsheet->getSheetCount());
+>>>>>>> forked/LAE_400_PACKAGE
         $objWriter->writeAttribute('baseType', 'lpstr');
 
         $sheetCount = $spreadsheet->getSheetCount();
@@ -207,7 +215,11 @@ class DocProps extends WriterPart
 
             $objWriter->startElement('property');
             $objWriter->writeAttribute('fmtid', '{D5CDD505-2E9C-101B-9397-08002B2CF9AE}');
+<<<<<<< HEAD
             $objWriter->writeAttribute('pid', (string) ($key + 2));
+=======
+            $objWriter->writeAttribute('pid', $key + 2);
+>>>>>>> forked/LAE_400_PACKAGE
             $objWriter->writeAttribute('name', $customProperty);
 
             switch ($propertyType) {

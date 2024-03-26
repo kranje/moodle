@@ -44,7 +44,11 @@ require_login();
 
 if (has_capability('moodle/user:loginas', $systemcontext)) {
     if (is_siteadmin($userid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nologinas');
+=======
+        print_error('nologinas');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $context = $systemcontext;
     $PAGE->set_context($context);
@@ -52,10 +56,17 @@ if (has_capability('moodle/user:loginas', $systemcontext)) {
     require_login($course);
     require_capability('moodle/user:loginas', $coursecontext);
     if (is_siteadmin($userid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nologinas');
     }
     if (!is_enrolled($coursecontext, $userid)) {
         throw new \moodle_exception('usernotincourse');
+=======
+        print_error('nologinas');
+    }
+    if (!is_enrolled($coursecontext, $userid)) {
+        print_error('usernotincourse');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $context = $coursecontext;
 
@@ -72,7 +83,11 @@ if (has_capability('moodle/user:loginas', $systemcontext)) {
             }
         }
         if (!$samegroup) {
+<<<<<<< HEAD
             throw new \moodle_exception('nologinas');
+=======
+            print_error('nologinas');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 }

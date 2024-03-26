@@ -152,7 +152,11 @@ class SimplePie_Cache_Redis implements SimplePie_Cache_Base {
         if ($data !== false) {
             $return = $this->cache->set($this->name, $data);
             if ($this->options['expire']) {
+<<<<<<< HEAD
                 return $this->cache->expire($this->name, $this->options['expire']);
+=======
+                return $this->cache->expire($this->name, $this->ttl);
+>>>>>>> forked/LAE_400_PACKAGE
             }
             return $return;
         }
@@ -170,5 +174,8 @@ class SimplePie_Cache_Redis implements SimplePie_Cache_Base {
     }
 
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Cache_Redis', 'SimplePie\Cache\Redis', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

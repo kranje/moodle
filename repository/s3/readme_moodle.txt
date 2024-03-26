@@ -2,7 +2,11 @@
 
 Amazon S3 PHP Class
 
+<<<<<<< HEAD
 Cloned from https://github.com/tpyo/amazon-s3-php-class.git
+=======
+Cloned from git://github.com/tpyo/amazon-s3-php-class.git
+>>>>>>> forked/LAE_400_PACKAGE
 
 https://github.com/tpyo/amazon-s3-php-class
 http://undesigned.org.za/2007/10/22/amazon-s3-php-class

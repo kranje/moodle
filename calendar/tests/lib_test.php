@@ -14,8 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 namespace core_calendar;
 
+=======
+/**
+ * Contains the class containing unit tests for the calendar lib.
+ *
+ * @package    core_calendar
+ * @copyright  2017 Mark Nelson <markn@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+namespace core_calendar;
+
+defined('MOODLE_INTERNAL') || die();
+
+require_once(__DIR__ . '/helpers.php');
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Class contaning unit tests for the calendar lib.
  *
@@ -26,6 +42,7 @@ namespace core_calendar;
 class lib_test extends \advanced_testcase {
 
     /**
+<<<<<<< HEAD
      * Load required test libraries
      */
     public static function setUpBeforeClass(): void {
@@ -35,6 +52,8 @@ class lib_test extends \advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Tests set up
      */
     protected function setUp(): void {
@@ -1044,6 +1063,7 @@ class lib_test extends \advanced_testcase {
         $result = calendar_can_manage_user_event($adminevent);
         $this->assertEquals(false, $result);
     }
+<<<<<<< HEAD
 
     /**
      * Data provider for {@see test_calendar_format_event_location}
@@ -1075,4 +1095,6 @@ class lib_test extends \advanced_testcase {
         $event = create_event(['location' => $location]);
         $this->assertMatchesRegularExpression("|^({$expectedpattern})$|", calendar_format_event_location($event));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

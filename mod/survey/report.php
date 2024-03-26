@@ -106,9 +106,22 @@ $renderer = $PAGE->get_renderer('mod_survey');
 echo $renderer->response_actionbar($actionbar);
 
 // Check to see if groups are being used in this survey.
+<<<<<<< HEAD
 if ($groupmode = groups_get_activity_groupmode($cm)) {   // Groups are being used.
     $menuaction = $action == "student" ? "students" : $action;
     $currentgroup = groups_get_activity_group($cm, true);
+=======
+$groupmode = groups_get_activity_groupmode($cm);
+if ($groupmode != NOGROUPS) {
+    $menuaction = $action == "student" ? "students" : $action;
+
+    // Get the current activity group, confirm user can access.
+    $currentgroup = groups_get_activity_group($cm, true);
+    if ($currentgroup === 0 && $groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $context)) {
+        throw new moodle_exception('notingroup');
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     $groupsactivitymenu = groups_print_activity_menu($cm, new moodle_url('/mod/survey/report.php',
             ['id' => $cm->id, 'action' => $menuaction, 'qid' => $qid]), true);
 } else {
@@ -300,7 +313,11 @@ switch ($action) {
 
     case "question":
         if (!$question = $DB->get_record("survey_questions", array("id" => $qid))) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfindquestion', 'survey');
+=======
+            print_error('cannotfindquestion', 'survey');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $question->text = get_string($question->text, "survey");
 
@@ -365,8 +382,14 @@ switch ($action) {
         break;
 
     case "student":
+<<<<<<< HEAD
         if (!$user = $DB->get_record("user", array("id" => $student))) {
             throw new moodle_exception('invaliduserid');
+=======
+        $user = core_user::get_user($student, '*', MUST_EXIST);
+        if ($currentgroup && !array_key_exists($user->id, $users)) {
+            throw new moodle_exception('usernotavailable', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         echo $OUTPUT->heading(get_string("analysisof", "survey", fullname($user)), 3);

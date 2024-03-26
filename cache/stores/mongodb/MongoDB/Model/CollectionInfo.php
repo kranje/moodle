@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +27,11 @@ namespace MongoDB\Model;
 
 use ArrayAccess;
 use MongoDB\Exception\BadMethodCallException;
+<<<<<<< HEAD
 use ReturnTypeWillChange;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function array_key_exists;
 
 /**
@@ -50,7 +61,11 @@ class CollectionInfo implements ArrayAccess
     /**
      * Return the collection info as an array.
      *
+<<<<<<< HEAD
      * @see https://php.net/oop5.magic#language.oop5.magic.debuginfo
+=======
+     * @see http://php.net/oop5.magic#language.oop5.magic.debuginfo
+>>>>>>> forked/LAE_400_PACKAGE
      * @return array
      */
     public function __debugInfo()
@@ -61,8 +76,11 @@ class CollectionInfo implements ArrayAccess
     /**
      * Return the maximum number of documents to keep in the capped collection.
      *
+<<<<<<< HEAD
      * @deprecated 1.0 Deprecated in favor of using getOptions
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @return integer|null
      */
     public function getCappedMax()
@@ -74,8 +92,11 @@ class CollectionInfo implements ArrayAccess
     /**
      * Return the maximum size (in bytes) of the capped collection.
      *
+<<<<<<< HEAD
      * @deprecated 1.0 Deprecated in favor of using getOptions
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @return integer|null
      */
     public function getCappedSize()
@@ -85,6 +106,7 @@ class CollectionInfo implements ArrayAccess
     }
 
     /**
+<<<<<<< HEAD
      * Return information about the _id index for the collection.
      */
     public function getIdIndex(): array
@@ -106,6 +128,10 @@ class CollectionInfo implements ArrayAccess
      * Return the collection name.
      *
      * @see https://mongodb.com/docs/manual/reference/command/listCollections/#output
+=======
+     * Return the collection name.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @return string
      */
     public function getName()
@@ -116,11 +142,15 @@ class CollectionInfo implements ArrayAccess
     /**
      * Return the collection options.
      *
+<<<<<<< HEAD
      * @see https://mongodb.com/docs/manual/reference/command/listCollections/#output
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @return array
      */
     public function getOptions()
     {
+<<<<<<< HEAD
         return (array) ($this->info['options'] ?? []);
     }
 
@@ -132,13 +162,19 @@ class CollectionInfo implements ArrayAccess
     public function getType(): string
     {
         return (string) $this->info['type'];
+=======
+        return isset($this->info['options']) ? (array) $this->info['options'] : [];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Return whether the collection is a capped collection.
      *
+<<<<<<< HEAD
      * @deprecated 1.0 Deprecated in favor of using getOptions
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @return boolean
      */
     public function isCapped()
@@ -149,11 +185,18 @@ class CollectionInfo implements ArrayAccess
     /**
      * Check whether a field exists in the collection information.
      *
+<<<<<<< HEAD
      * @see https://php.net/arrayaccess.offsetexists
      * @param mixed $key
      * @return boolean
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/arrayaccess.offsetexists
+     * @param mixed $key
+     * @return boolean
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($key)
     {
         return array_key_exists($key, $this->info);
@@ -162,11 +205,18 @@ class CollectionInfo implements ArrayAccess
     /**
      * Return the field's value from the collection information.
      *
+<<<<<<< HEAD
      * @see https://php.net/arrayaccess.offsetget
      * @param mixed $key
      * @return mixed
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/arrayaccess.offsetget
+     * @param mixed $key
+     * @return mixed
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($key)
     {
         return $this->info[$key];
@@ -175,6 +225,7 @@ class CollectionInfo implements ArrayAccess
     /**
      * Not supported.
      *
+<<<<<<< HEAD
      * @see https://php.net/arrayaccess.offsetset
      * @param mixed $key
      * @param mixed $value
@@ -182,6 +233,13 @@ class CollectionInfo implements ArrayAccess
      * @return void
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/arrayaccess.offsetset
+     * @param mixed $key
+     * @param mixed $value
+     * @throws BadMethodCallException
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($key, $value)
     {
         throw BadMethodCallException::classIsImmutable(self::class);
@@ -190,12 +248,19 @@ class CollectionInfo implements ArrayAccess
     /**
      * Not supported.
      *
+<<<<<<< HEAD
      * @see https://php.net/arrayaccess.offsetunset
      * @param mixed $key
      * @throws BadMethodCallException
      * @return void
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/arrayaccess.offsetunset
+     * @param mixed $key
+     * @throws BadMethodCallException
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($key)
     {
         throw BadMethodCallException::classIsImmutable(self::class);

@@ -61,7 +61,11 @@ class FormulaParser
     /**
      * Create a new FormulaParser.
      *
+<<<<<<< HEAD
      * @param ?string $formula Formula to parse
+=======
+     * @param string $formula Formula to parse
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function __construct($formula = '')
     {

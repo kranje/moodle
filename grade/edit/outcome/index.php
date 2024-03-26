@@ -82,7 +82,11 @@ switch ($action) {
         if (empty($outcome->courseid)) {
             require_capability('moodle/grade:manage', context_system::instance());
         } else if ($outcome->courseid != $courseid) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcourseid');
+=======
+            print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (!$outcome->can_delete()) {

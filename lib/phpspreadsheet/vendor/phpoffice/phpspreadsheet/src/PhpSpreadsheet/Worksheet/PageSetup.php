@@ -259,11 +259,18 @@ class PageSetup
     /**
      * First page number.
      *
+<<<<<<< HEAD
      * @var ?int
      */
     private $firstPageNumber;
 
     /** @var string */
+=======
+     * @var int
+     */
+    private $firstPageNumber;
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $pageOrder = self::PAGEORDER_DOWN_THEN_OVER;
 
     /**
@@ -376,7 +383,11 @@ class PageSetup
     {
         // Microsoft Office Excel 2007 only allows setting a scale between 10 and 400 via the user interface,
         // but it is apparently still able to handle any scale >= 0, where 0 results in 100
+<<<<<<< HEAD
         if ($scale === null || $scale >= 0) {
+=======
+        if (($scale >= 0) || $scale === null) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->scale = $scale;
             if ($update) {
                 $this->fitToPage = false;
@@ -641,7 +652,10 @@ class PageSetup
         if ($index == 0) {
             return $this->printArea;
         }
+<<<<<<< HEAD
         /** @phpstan-ignore-next-line */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $printAreas = explode(',', $this->printArea);
         if (isset($printAreas[$index - 1])) {
             return $printAreas[$index - 1];
@@ -665,7 +679,10 @@ class PageSetup
         if ($index == 0) {
             return $this->printArea !== null;
         }
+<<<<<<< HEAD
         /** @phpstan-ignore-next-line */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $printAreas = explode(',', $this->printArea);
 
         return isset($printAreas[$index - 1]);
@@ -686,7 +703,10 @@ class PageSetup
         if ($index == 0) {
             $this->printArea = null;
         } else {
+<<<<<<< HEAD
             /** @phpstan-ignore-next-line */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $printAreas = explode(',', $this->printArea);
             if (isset($printAreas[$index - 1])) {
                 unset($printAreas[$index - 1]);
@@ -735,7 +755,10 @@ class PageSetup
             if ($index == 0) {
                 $this->printArea = $value;
             } else {
+<<<<<<< HEAD
                 /** @phpstan-ignore-next-line */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $printAreas = explode(',', $this->printArea);
                 if ($index < 0) {
                     $index = count($printAreas) - abs($index) + 1;
@@ -750,7 +773,10 @@ class PageSetup
             if ($index == 0) {
                 $this->printArea = $this->printArea ? ($this->printArea . ',' . $value) : $value;
             } else {
+<<<<<<< HEAD
                 /** @phpstan-ignore-next-line */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $printAreas = explode(',', $this->printArea);
                 if ($index < 0) {
                     $index = abs($index) - 1;
@@ -846,7 +872,11 @@ class PageSetup
     /**
      * Get first page number.
      *
+<<<<<<< HEAD
      * @return ?int
+=======
+     * @return int
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function getFirstPageNumber()
     {
@@ -856,7 +886,11 @@ class PageSetup
     /**
      * Set first page number.
      *
+<<<<<<< HEAD
      * @param ?int $value
+=======
+     * @param int $value
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return $this
      */

@@ -32,6 +32,7 @@ class data_field_checkbox extends data_field_base {
      */
     protected static $priority = self::LOW_PRIORITY;
 
+<<<<<<< HEAD
     public function supports_preview(): bool {
         return true;
     }
@@ -52,6 +53,8 @@ class data_field_checkbox extends data_field_base {
         ];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     function display_add_field($recordid = 0, $formdata = null) {
         global $CFG, $DB, $OUTPUT;
 
@@ -208,6 +211,7 @@ class data_field_checkbox extends data_field_base {
     }
 
     function display_browse_field($recordid, $template) {
+<<<<<<< HEAD
         $content = $this->get_data_content($recordid);
         if (!$content || empty($content->content)) {
             return '';
@@ -226,6 +230,30 @@ class data_field_checkbox extends data_field_base {
             $str .= $line . "<br />\n";
         }
         return $str;
+=======
+        global $DB;
+
+        if ($content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
+            if (strval($content->content) === '') {
+                return false;
+            }
+
+            $options = explode("\n",$this->field->param1);
+            $options = array_map('trim', $options);
+
+            $contentArr = explode('##', $content->content);
+            $str = '';
+            foreach ($contentArr as $line) {
+                if (!in_array($line, $options)) {
+                    // hmm, looks like somebody edited the field definition
+                    continue;
+                }
+                $str .= $line . "<br />\n";
+            }
+            return $str;
+        }
+        return false;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     function format_data_field_checkbox_content($content) {

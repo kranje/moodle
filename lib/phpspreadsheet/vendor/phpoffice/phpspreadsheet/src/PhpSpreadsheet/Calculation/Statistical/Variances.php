@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Variances extends VarianceBase
 {
@@ -21,7 +24,11 @@ class Variances extends VarianceBase
      */
     public static function VAR(...$args)
     {
+<<<<<<< HEAD
         $returnValue = ExcelError::DIV0();
+=======
+        $returnValue = Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $summerA = $summerB = 0.0;
 
@@ -63,7 +70,11 @@ class Variances extends VarianceBase
      */
     public static function VARA(...$args)
     {
+<<<<<<< HEAD
         $returnValue = ExcelError::DIV0();
+=======
+        $returnValue = Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $summerA = $summerB = 0.0;
 
@@ -72,7 +83,11 @@ class Variances extends VarianceBase
         $aCount = 0;
         foreach ($aArgs as $k => $arg) {
             if ((is_string($arg)) && (Functions::isValue($k))) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             } elseif ((is_string($arg)) && (!Functions::isMatrixValue($k))) {
             } else {
                 // Is it a numeric value?
@@ -110,7 +125,11 @@ class Variances extends VarianceBase
     public static function VARP(...$args)
     {
         // Return value
+<<<<<<< HEAD
         $returnValue = ExcelError::DIV0();
+=======
+        $returnValue = Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $summerA = $summerB = 0.0;
 
@@ -152,7 +171,11 @@ class Variances extends VarianceBase
      */
     public static function VARPA(...$args)
     {
+<<<<<<< HEAD
         $returnValue = ExcelError::DIV0();
+=======
+        $returnValue = Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $summerA = $summerB = 0.0;
 
@@ -161,7 +184,11 @@ class Variances extends VarianceBase
         $aCount = 0;
         foreach ($aArgs as $k => $arg) {
             if ((is_string($arg)) && (Functions::isValue($k))) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             } elseif ((is_string($arg)) && (!Functions::isMatrixValue($k))) {
             } else {
                 // Is it a numeric value?

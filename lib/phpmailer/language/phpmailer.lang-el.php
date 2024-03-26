@@ -5,6 +5,7 @@
  * @package PHPMailer
  */
 
+<<<<<<< HEAD
 $PHPMAILER_LANG['authenticate']         = 'Σφάλμα SMTP: Αδυναμία πιστοποίησης.';
 $PHPMAILER_LANG['buggy_php']            = 'Η έκδοση PHP που χρησιμοποιείτε παρουσιάζει σφάλμα που μπορεί να έχει ως αποτέλεσμα κατεστραμένα μηνύματα. Για να το διορθώσετε, αλλάξτε τον τρόπο αποστολής σε SMTP, απενεργοποιήστε την επιλογή mail.add_x_header στο αρχείο php.ini, αλλάξτε λειτουργικό σε MacOS ή Linux ή αναβαθμίστε την PHP σε έκδοση 7.0.17+ ή 7.1.3+.';
 $PHPMAILER_LANG['connect_host']         = 'Σφάλμα SMTP: Αδυναμία σύνδεσης με τον φιλοξενητή SMTP.';
@@ -31,3 +32,24 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'Αποτυχία σύνδεσης SMT
 $PHPMAILER_LANG['smtp_detail']          = 'Λεπτομέρεια: ';
 $PHPMAILER_LANG['smtp_error']           = 'Σφάλμα με τον διακομιστή SMTP: ';
 $PHPMAILER_LANG['variable_set']         = 'Αδυναμία ορισμού ή επαναφοράς μεταβλητής: ';
+=======
+$PHPMAILER_LANG['authenticate']         = 'SMTP Σφάλμα: Αδυναμία πιστοποίησης (authentication).';
+$PHPMAILER_LANG['connect_host']         = 'SMTP Σφάλμα: Αδυναμία σύνδεσης στον SMTP-Host.';
+$PHPMAILER_LANG['data_not_accepted']    = 'SMTP Σφάλμα: Τα δεδομένα δεν έγιναν αποδεκτά.';
+$PHPMAILER_LANG['empty_message']        = 'Το E-Mail δεν έχει περιεχόμενο .';
+$PHPMAILER_LANG['encoding']             = 'Αγνωστο Encoding-Format: ';
+$PHPMAILER_LANG['execute']              = 'Αδυναμία εκτέλεσης ακόλουθης εντολής: ';
+$PHPMAILER_LANG['file_access']          = 'Αδυναμία προσπέλασης του αρχείου: ';
+$PHPMAILER_LANG['file_open']            = 'Σφάλμα Αρχείου: Δεν είναι δυνατό το άνοιγμα του ακόλουθου αρχείου: ';
+$PHPMAILER_LANG['from_failed']          = 'Η παρακάτω διεύθυνση αποστολέα δεν είναι σωστή: ';
+$PHPMAILER_LANG['instantiate']          = 'Αδυναμία εκκίνησης Mail function.';
+$PHPMAILER_LANG['invalid_address']      = 'Το μήνυμα δεν εστάλη, η διεύθυνση δεν είναι έγκυρη: ';
+$PHPMAILER_LANG['mailer_not_supported'] = ' mailer δεν υποστηρίζεται.';
+$PHPMAILER_LANG['provide_address']      = 'Παρακαλούμε δώστε τουλάχιστον μια e-mail διεύθυνση παραλήπτη.';
+$PHPMAILER_LANG['recipients_failed']    = 'SMTP Σφάλμα: Οι παρακάτω διευθύνσεις παραλήπτη δεν είναι έγκυρες: ';
+$PHPMAILER_LANG['signing']              = 'Σφάλμα υπογραφής: ';
+$PHPMAILER_LANG['smtp_connect_failed']  = 'Αποτυχία σύνδεσης στον SMTP Server.';
+$PHPMAILER_LANG['smtp_error']           = 'Σφάλμα από τον SMTP Server: ';
+$PHPMAILER_LANG['variable_set']         = 'Αδυναμία ορισμού ή αρχικοποίησης μεταβλητής: ';
+//$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
+>>>>>>> forked/LAE_400_PACKAGE

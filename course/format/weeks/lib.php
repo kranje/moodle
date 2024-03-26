@@ -50,7 +50,11 @@ class format_weeks extends core_courseformat\base {
     }
 
     public function uses_indentation(): bool {
+<<<<<<< HEAD
         return false;
+=======
+        return (get_config('format_weeks', 'indentation')) ? true : false;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -406,6 +410,7 @@ class format_weeks extends core_courseformat\base {
         } else {
             $sectionnum = $section;
         }
+<<<<<<< HEAD
         $oneweekseconds = 604800;
         // Hack alert. We add 2 hours to avoid possible DST problems. (e.g. we go into daylight
         // savings and the date changes.
@@ -414,6 +419,27 @@ class format_weeks extends core_courseformat\base {
         $dates = new stdClass();
         $dates->start = $startdate + ($oneweekseconds * ($sectionnum - 1));
         $dates->end = $dates->start + $oneweekseconds;
+=======
+
+        // Create a DateTime object for the start date.
+        $startdateobj = new DateTime("@$startdate");
+
+        // Calculate the interval for one week.
+        $oneweekinterval = new DateInterval('P7D');
+
+        // Calculate the interval for the specified number of sections.
+        for ($i = 1; $i < $sectionnum; $i++) {
+            $startdateobj->add($oneweekinterval);
+        }
+
+        // Calculate the end date.
+        $enddateobj = clone $startdateobj;
+        $enddateobj->add($oneweekinterval);
+
+        $dates = new stdClass();
+        $dates->start = $startdateobj->getTimestamp();
+        $dates->end = $enddateobj->getTimestamp();
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $dates;
     }
@@ -615,7 +641,13 @@ class format_weeks extends core_courseformat\base {
      */
     public function get_config_for_external() {
         // Return everything (nothing to hide).
+<<<<<<< HEAD
         return $this->get_format_options();
+=======
+        $formatoptions = $this->get_format_options();
+        $formatoptions['indentation'] = get_config('format_weeks', 'indentation');
+        return $formatoptions;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

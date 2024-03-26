@@ -47,9 +47,12 @@ class MemoryDrawing extends BaseDrawing
      */
     private $uniqueName;
 
+<<<<<<< HEAD
     /** @var null|resource */
     private $alwaysNull;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Create a new MemoryDrawing.
      */
@@ -59,7 +62,10 @@ class MemoryDrawing extends BaseDrawing
         $this->renderingFunction = self::RENDERING_DEFAULT;
         $this->mimeType = self::MIMETYPE_DEFAULT;
         $this->uniqueName = md5(mt_rand(0, 9999) . time() . mt_rand(0, 9999));
+<<<<<<< HEAD
         $this->alwaysNull = null;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Initialize parent
         parent::__construct();
@@ -68,9 +74,14 @@ class MemoryDrawing extends BaseDrawing
     public function __destruct()
     {
         if ($this->imageResource) {
+<<<<<<< HEAD
             $rslt = @imagedestroy($this->imageResource);
             // "Fix" for Scrutinizer
             $this->imageResource = $rslt ? null : $this->alwaysNull;
+=======
+            imagedestroy($this->imageResource);
+            $this->imageResource = null;
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -86,8 +97,13 @@ class MemoryDrawing extends BaseDrawing
             return;
         }
 
+<<<<<<< HEAD
         $width = (int) imagesx($this->imageResource);
         $height = (int) imagesy($this->imageResource);
+=======
+        $width = imagesx($this->imageResource);
+        $height = imagesy($this->imageResource);
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (imageistruecolor($this->imageResource)) {
             $clone = imagecreatetruecolor($width, $height);
@@ -150,8 +166,13 @@ class MemoryDrawing extends BaseDrawing
 
         if ($this->imageResource !== null) {
             // Get width/height
+<<<<<<< HEAD
             $this->width = (int) imagesx($this->imageResource);
             $this->height = (int) imagesy($this->imageResource);
+=======
+            $this->width = imagesx($this->imageResource);
+            $this->height = imagesy($this->imageResource);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $this;

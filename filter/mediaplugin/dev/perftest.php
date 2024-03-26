@@ -31,7 +31,11 @@ require_once($CFG->dirroot . '/filter/mediaplugin/filter.php');
 // Only available to site admins.
 require_login();
 if (!is_siteadmin()) {
+<<<<<<< HEAD
     throw new \moodle_exception('nopermissions', 'error', '', 'perftest');
+=======
+    print_error('nopermissions', 'error', '', 'perftest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Set up page.

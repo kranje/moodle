@@ -245,7 +245,10 @@ ROWS = RIVIT
 RTD = RTD
 TRANSPOSE = TRANSPONOI
 VLOOKUP = PHAKU
+<<<<<<< HEAD
 *RC = RS
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Matemaattiset ja trigonometriset funktiot (Math & Trig Functions)

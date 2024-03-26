@@ -22,8 +22,12 @@ namespace ScssPhp\ScssPhp\Exception;
 class ParserException extends \Exception implements SassException
 {
     /**
+<<<<<<< HEAD
      * @var array|null
      * @phpstan-var array{string, int, int}|null
+=======
+     * @var array
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $sourcePosition;
 
@@ -31,9 +35,12 @@ class ParserException extends \Exception implements SassException
      * Get source position
      *
      * @api
+<<<<<<< HEAD
      *
      * @return array|null
      * @phpstan-return array{string, int, int}|null
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function getSourcePosition()
     {
@@ -46,10 +53,13 @@ class ParserException extends \Exception implements SassException
      * @api
      *
      * @param array $sourcePosition
+<<<<<<< HEAD
      *
      * @return void
      *
      * @phpstan-param array{string, int, int} $sourcePosition
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function setSourcePosition($sourcePosition)
     {

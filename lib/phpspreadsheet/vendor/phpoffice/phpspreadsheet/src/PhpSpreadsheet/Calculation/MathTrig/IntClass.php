@@ -2,13 +2,19 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 
 class IntClass
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * INT.
      *
@@ -17,6 +23,7 @@ class IntClass
      * Excel Function:
      *        INT(number)
      *
+<<<<<<< HEAD
      * @param array|float $number Number to cast to an integer, or can be an array of numbers
      *
      * @return array|string Integer value, or a string containing an error
@@ -29,6 +36,14 @@ class IntClass
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number to cast to an integer
+     *
+     * @return int|string Integer value, or a string containing an error
+     */
+    public static function evaluate($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {

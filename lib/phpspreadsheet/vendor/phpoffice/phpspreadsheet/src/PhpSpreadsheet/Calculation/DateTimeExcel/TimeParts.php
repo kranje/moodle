@@ -2,14 +2,22 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class TimeParts
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * HOUROFDAY.
      *
@@ -21,6 +29,7 @@ class TimeParts
      *
      * @param mixed $timeValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard time string
+<<<<<<< HEAD
      *                         Or can be an array of date/time values
      *
      * @return array|int|string Hour
@@ -34,6 +43,15 @@ class TimeParts
         }
 
         try {
+=======
+     *
+     * @return int|string Hour
+     */
+    public static function hour($timeValue)
+    {
+        try {
+            $timeValue = Functions::flattenSingleValue($timeValue);
+>>>>>>> forked/LAE_400_PACKAGE
             Helpers::nullFalseTrueToNumber($timeValue);
             if (!is_numeric($timeValue)) {
                 $timeValue = Helpers::getTimeValue($timeValue);
@@ -61,6 +79,7 @@ class TimeParts
      *
      * @param mixed $timeValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard time string
+<<<<<<< HEAD
      *                         Or can be an array of date/time values
      *
      * @return array|int|string Minute
@@ -74,6 +93,15 @@ class TimeParts
         }
 
         try {
+=======
+     *
+     * @return int|string Minute
+     */
+    public static function minute($timeValue)
+    {
+        try {
+            $timeValue = Functions::flattenSingleValue($timeValue);
+>>>>>>> forked/LAE_400_PACKAGE
             Helpers::nullFalseTrueToNumber($timeValue);
             if (!is_numeric($timeValue)) {
                 $timeValue = Helpers::getTimeValue($timeValue);
@@ -101,6 +129,7 @@ class TimeParts
      *
      * @param mixed $timeValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard time string
+<<<<<<< HEAD
      *                         Or can be an array of date/time values
      *
      * @return array|int|string Second
@@ -114,6 +143,15 @@ class TimeParts
         }
 
         try {
+=======
+     *
+     * @return int|string Second
+     */
+    public static function second($timeValue)
+    {
+        try {
+            $timeValue = Functions::flattenSingleValue($timeValue);
+>>>>>>> forked/LAE_400_PACKAGE
             Helpers::nullFalseTrueToNumber($timeValue);
             if (!is_numeric($timeValue)) {
                 $timeValue = Helpers::getTimeValue($timeValue);

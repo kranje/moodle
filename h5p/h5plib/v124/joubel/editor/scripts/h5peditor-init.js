@@ -17,18 +17,24 @@
 
     // Required for assets
     H5PEditor.baseUrl = '';
+<<<<<<< HEAD
     H5PEditor.enableContentHub = H5PIntegration.editor.enableContentHub;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     if (H5PIntegration.editor.nodeVersionId !== undefined) {
       H5PEditor.contentId = H5PIntegration.editor.nodeVersionId;
     }
 
+<<<<<<< HEAD
     if (H5PIntegration.editor.hub !== undefined) {
       H5PIntegration.Hub = {
         contentSearchUrl: H5PIntegration.editor.hub.contentSearchUrl
       };
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     var h5peditor;
     $create.hide();
     var library = $library.val();

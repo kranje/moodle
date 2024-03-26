@@ -28,6 +28,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
+=======
+use core_question\local\bank\question_version_status;
+use core_question\question_reference_manager;
+>>>>>>> forked/LAE_400_PACKAGE
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -122,6 +127,13 @@ function questions_in_use($questionids): bool {
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    if (question_reference_manager::questions_with_references($questionids)) {
+        return true;
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     // Check if any plugins are using these questions.
     $callbacksbytype = get_plugins_with_function('questions_in_use');
     foreach ($callbacksbytype as $callbacks) {
@@ -360,8 +372,15 @@ function question_delete_question($questionid): void {
         $questionstocheck[] = $question->parent;
     }
 
+<<<<<<< HEAD
     // Do not delete a question if it is used by an activity module
     if (questions_in_use($questionstocheck)) {
+=======
+    // Do not delete a question if it is used by an activity module. Just mark the version hidden.
+    if (questions_in_use($questionstocheck)) {
+        $DB->set_field('question_versions', 'status',
+                question_version_status::QUESTION_STATUS_HIDDEN, ['questionid' => $questionid]);
+>>>>>>> forked/LAE_400_PACKAGE
         return;
     }
 
@@ -1486,9 +1505,16 @@ function question_has_capability_on($questionorid, $cap, $notused = -1): bool {
 /**
  * Require capability on question.
  *
+<<<<<<< HEAD
  * @param object $question
  * @param string $cap
  * @return bool
+=======
+ * @param int|stdClass|question_definition $question object or id.
+ *      If an object is passed, it should include ->contextid and ->createdby.
+ * @param string $cap 'add', 'edit', 'view', 'use', 'move' or 'tag'.
+ * @return bool true if the user has the capability. Throws exception if not.
+>>>>>>> forked/LAE_400_PACKAGE
  */
 function question_require_capability_on($question, $cap): bool {
     if (!question_has_capability_on($question, $cap)) {
@@ -1982,7 +2008,11 @@ function core_question_find_next_unused_idnumber(?string $oldidnumber, int $cate
     global $DB;
 
     // The the old idnumber is not of the right form, bail now.
+<<<<<<< HEAD
     if ($oldidnumber === null || !preg_match('~\d+$~', $oldidnumber, $matches)) {
+=======
+    if (!preg_match('~\d+$~', $oldidnumber, $matches)) {
+>>>>>>> forked/LAE_400_PACKAGE
         return null;
     }
 

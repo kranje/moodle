@@ -318,6 +318,14 @@
   padding: 0;
   min-width: 0;
 }
+<<<<<<< HEAD
+=======
+@-moz-document url-prefix() {
+  .listgroup > .group.field {
+    display: table-column;
+  }
+}
+>>>>>>> forked/LAE_400_PACKAGE
 .content {
   display: block;
   margin: 0;

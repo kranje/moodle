@@ -66,11 +66,14 @@ class lesson_summary_exporter extends exporter {
                 'type' => PARAM_INT,
                 'default' => FORMAT_MOODLE
             ),
+<<<<<<< HEAD
             'lang' => array(
                 'type' => PARAM_LANG,
                 'description' => 'Forced activity language',
                 'null' => NULL_ALLOWED,
             ),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'practice' => array(
                 'type' => PARAM_BOOL,
                 'description' => 'Practice lesson?',

@@ -196,7 +196,11 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
      *
      * @return ArrayIterator
      */
+<<<<<<< HEAD
     public function getIterator(): Traversable {
+=======
+    public function getIterator() {
+>>>>>>> forked/LAE_400_PACKAGE
         $ret = array();
         foreach (self::$coursecatfields as $property => $unused) {
             if ($this->$property !== false) {
@@ -900,7 +904,11 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         // Trigger a purge for all caches listening for changes to category enrolment.
         cache_helper::purge_by_event('changesincategoryenrolment');
 
+<<<<<<< HEAD
         if (!$CFG->coursecontact || !in_array($roleid, explode(',', $CFG->coursecontact))) {
+=======
+        if (empty($CFG->coursecontact) || !in_array($roleid, explode(',', $CFG->coursecontact))) {
+>>>>>>> forked/LAE_400_PACKAGE
             // The role is not one of course contact roles.
             return;
         }

@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,13 @@ class BesselJ
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class BesselJ
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * BESSELJ.
      *
@@ -23,11 +31,15 @@ class BesselJ
      *
      * @param mixed $x A float value at which to evaluate the function.
      *                                If x is nonnumeric, BESSELJ returns the #VALUE! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $ord The integer order of the Bessel function.
      *                       If ord is not an integer, it is truncated.
      *                                If $ord is nonnumeric, BESSELJ returns the #VALUE! error value.
      *                                If $ord < 0, BESSELJ returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|float|string Result, or a string containing an error
@@ -39,6 +51,15 @@ class BesselJ
         if (is_array($x) || is_array($ord)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $x, $ord);
         }
+=======
+     *
+     * @return float|string Result, or a string containing an error
+     */
+    public static function BESSELJ($x, $ord)
+    {
+        $x = Functions::flattenSingleValue($x);
+        $ord = Functions::flattenSingleValue($ord);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $x = EngineeringValidations::validateFloat($x);
@@ -48,12 +69,20 @@ class BesselJ
         }
 
         if ($ord < 0) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $fResult = self::calculate($x, $ord);
 
+<<<<<<< HEAD
         return (is_nan($fResult)) ? ExcelError::NAN() : $fResult;
+=======
+        return (is_nan($fResult)) ? Functions::NAN() : $fResult;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private static function calculate(float $x, int $ord): float

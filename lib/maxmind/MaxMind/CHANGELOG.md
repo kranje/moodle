@@ -1,6 +1,7 @@
 CHANGELOG
 =========
 
+<<<<<<< HEAD
 1.11.0
 -------------------
 
@@ -9,6 +10,8 @@ CHANGELOG
 * Resolve minor issue found by the Clang static analyzer in the C
   extension.
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 1.10.1 (2021-04-14)
 -------------------
 

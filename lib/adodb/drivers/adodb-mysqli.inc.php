@@ -75,17 +75,23 @@ class ADODB_mysqli extends ADOConnection {
 	var $ssl_capath = null;
 	var $ssl_cipher = null;
 
+<<<<<<< HEAD
 	/** @var mysqli Identifier for the native database connection */
 	var $_connectionID = false;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	/**
 	 * Tells the insert_id method how to obtain the last value, depending on whether
 	 * we are using a stored procedure or not
 	 */
 	private $usePreparedStatement = false;
 	private $useLastInsertStatement = false;
+<<<<<<< HEAD
 	private $usingBoundVariables = false;
 	private $statementAffectedRows = -1;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * @var bool True if the last executed statement is a SELECT {@see _query()}
@@ -128,12 +134,22 @@ class ADODB_mysqli extends ADOConnection {
 	/**
 	 * Adds a parameter to the connection string.
 	 *
+<<<<<<< HEAD
 	 * Parameter must be one of the constants listed in mysqli_options().
 	 * @see https://www.php.net/manual/en/mysqli.options.php
 	 *
 	 * @param int    $parameter The parameter to set
 	 * @param string $value     The value of the parameter
 	 *
+=======
+	 * Parameter must be one of the the constants listed in mysqli_options().
+	 * @see https://www.php.net/manual/en/mysqli.options.php
+	 *
+	 * @param int $parameter The parameter to set
+	 * @param string $value The value of the parameter
+	 *
+	 * @example, for mssqlnative driver ('CharacterSet','UTF-8')
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return bool
 	 */
 	public function setConnectionParameter($parameter, $value) {
@@ -141,7 +157,12 @@ class ADODB_mysqli extends ADOConnection {
 			$this->outp_throw("Invalid connection parameter '$parameter'", __METHOD__);
 			return false;
 		}
+<<<<<<< HEAD
 		return parent::setConnectionParameter($parameter, $value);
+=======
+		$this->connectionParameters[$parameter] = $value;
+		return true;
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**
@@ -187,6 +208,7 @@ class ADODB_mysqli extends ADOConnection {
 		}
 
 		// Now merge in the standard connection parameters setting
+<<<<<<< HEAD
 		foreach ($this->connectionParameters as $options) {
 			foreach ($options as $parameter => $value) {
 				// Make sure parameter is numeric before calling mysqli_options()
@@ -196,6 +218,15 @@ class ADODB_mysqli extends ADOConnection {
 				) {
 					$this->outp_throw("Invalid connection parameter '$parameter'", __METHOD__);
 				}
+=======
+		foreach ($this->connectionParameters as $parameter => $value) {
+			// Make sure parameter is numeric before calling mysqli_options()
+			// that to avoid Warning (or TypeError exception on PHP 8).
+			if (!is_numeric($parameter)
+				|| !mysqli_options($this->_connectionID, $parameter, $value)
+			) {
+				$this->outp_throw("Invalid connection parameter '$parameter'", __METHOD__);
+>>>>>>> forked/LAE_400_PACKAGE
 			}
 		}
 
@@ -207,12 +238,18 @@ class ADODB_mysqli extends ADOConnection {
 		// SSL Connections for MySQLI
 		if ($this->ssl_key || $this->ssl_cert || $this->ssl_ca || $this->ssl_capath || $this->ssl_cipher) {
 			mysqli_ssl_set($this->_connectionID, $this->ssl_key, $this->ssl_cert, $this->ssl_ca, $this->ssl_capath, $this->ssl_cipher);
+<<<<<<< HEAD
 			$this->socket = MYSQLI_CLIENT_SSL;
 			$this->clientFlags = MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
 		}
 
 		#if (!empty($this->port)) $argHostname .= ":".$this->port;
 		/** @noinspection PhpCastIsUnnecessaryInspection */
+=======
+		}
+
+		#if (!empty($this->port)) $argHostname .= ":".$this->port;
+>>>>>>> forked/LAE_400_PACKAGE
 		$ok = @mysqli_real_connect($this->_connectionID,
 					$argHostname,
 					$argUsername,
@@ -260,15 +297,26 @@ class ADODB_mysqli extends ADOConnection {
 	 * @param string|null $argHostname The host to connect to.
 	 * @param string|null $argUsername The username to connect as.
 	 * @param string|null $argPassword The password to connect with.
+<<<<<<< HEAD
 	 * @param string|null $argDatabaseName The name of the database to start in when connected.
+=======
+	 * @param string|null $argDatabasename The name of the database to start in when connected.
+>>>>>>> forked/LAE_400_PACKAGE
 	 *
 	 * @return bool|null True if connected successfully, false if connection failed, or null if the mysqli extension
 	 * isn't currently loaded.
 	 */
+<<<<<<< HEAD
 	function _nconnect($argHostname, $argUsername, $argPassword, $argDatabaseName)
 	{
 		$this->forceNewConnect = true;
 		return $this->_connect($argHostname, $argUsername, $argPassword, $argDatabaseName);
+=======
+	function _nconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
+	{
+		$this->forceNewConnect = true;
+		return $this->_connect($argHostname, $argUsername, $argPassword, $argDatabasename);
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**
@@ -384,17 +432,29 @@ class ADODB_mysqli extends ADOConnection {
 	 *
 	 * @link https://adodb.org/dokuwiki/doku.php?id=v5:reference:connection:rowlock
 	 *
+<<<<<<< HEAD
 	 * @param string $table The table(s) to lock rows for.
+=======
+	 * @param string $tables The table(s) to lock rows for.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @param string $where (Optional) The WHERE clause to use to determine which rows to lock.
 	 * @param string $col (Optional) The columns to select.
 	 *
 	 * @return bool True if the locking SQL statement executed successfully, otherwise false.
 	 */
+<<<<<<< HEAD
 	function RowLock($table, $where = '', $col = '1 as adodbignore')
 	{
 		if ($this->transCnt==0) $this->beginTrans();
 		if ($where) $where = ' where '.$where;
 		$rs = $this->execute("select $col from $table $where for update");
+=======
+	function RowLock($tables, $where = '', $col = '1 as adodbignore')
+	{
+		if ($this->transCnt==0) $this->beginTrans();
+		if ($where) $where = ' where '.$where;
+		$rs = $this->execute("select $col from $tables $where for update");
+>>>>>>> forked/LAE_400_PACKAGE
 		return !empty($rs);
 	}
 
@@ -465,6 +525,7 @@ class ADODB_mysqli extends ADOConnection {
 			// the rowcount, but ADOdb does not do that.
 			return false;
 		}
+<<<<<<< HEAD
 		else if ($this->statementAffectedRows >= 0)
 		{
 			$result = $this->statementAffectedRows;
@@ -476,6 +537,12 @@ class ADODB_mysqli extends ADOConnection {
 			if ($result == -1) {
 				if ($this->debug) ADOConnection::outp("mysqli_affected_rows() failed : "  . $this->errorMsg());
 			}
+=======
+
+		$result =  @mysqli_affected_rows($this->_connectionID);
+		if ($result == -1) {
+			if ($this->debug) ADOConnection::outp("mysqli_affected_rows() failed : "  . $this->errorMsg());
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 		return $result;
 	}
@@ -581,6 +648,10 @@ class ADODB_mysqli extends ADOConnection {
 		// save old fetch mode
 		global $ADODB_FETCH_MODE;
 
+<<<<<<< HEAD
+=======
+		$false = false;
+>>>>>>> forked/LAE_400_PACKAGE
 		$save = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		if ($this->fetchMode !== FALSE) {
@@ -588,7 +659,11 @@ class ADODB_mysqli extends ADOConnection {
 		}
 
 		// get index details
+<<<<<<< HEAD
 		$rs = $this->Execute(sprintf('SHOW INDEXES FROM `%s`',$table));
+=======
+		$rs = $this->execute(sprintf('SHOW INDEXES FROM %s',$table));
+>>>>>>> forked/LAE_400_PACKAGE
 
 		// restore fetchmode
 		if (isset($savem)) {
@@ -597,7 +672,11 @@ class ADODB_mysqli extends ADOConnection {
 		$ADODB_FETCH_MODE = $save;
 
 		if (!is_object($rs)) {
+<<<<<<< HEAD
 			return false;
+=======
+			return $false;
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 
 		$indexes = array ();
@@ -635,7 +714,11 @@ class ADODB_mysqli extends ADOConnection {
 	 * @param string $fmt The date format to use.
 	 * @param string|bool $col (Optional) The table column to date format, or if false, use NOW().
 	 *
+<<<<<<< HEAD
 	 * @return string The SQL DATE_FORMAT() string, or false if the provided date format was empty.
+=======
+	 * @return bool|string The SQL DATE_FORMAT() string, or false if the provided date format was empty.
+>>>>>>> forked/LAE_400_PACKAGE
 	 */
 	function SQLDate($fmt, $col = false)
 	{
@@ -754,13 +837,21 @@ class ADODB_mysqli extends ADOConnection {
 	/**
 	 * Returns information about stored procedures and stored functions.
 	 *
+<<<<<<< HEAD
 	 * @param string|bool $procedureNamePattern (Optional) Only look for procedures/functions with a name matching this pattern.
+=======
+	 * @param string|bool $NamePattern (Optional) Only look for procedures/functions with a name matching this pattern.
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @param null $catalog (Optional) Unused.
 	 * @param null $schemaPattern (Optional) Unused.
 	 *
 	 * @return array
 	 */
+<<<<<<< HEAD
 	function MetaProcedures($procedureNamePattern = false, $catalog  = null, $schemaPattern  = null)
+=======
+	function MetaProcedures($NamePattern = false, $catalog  = null, $schemaPattern  = null)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 		// save old fetch mode
 		global $ADODB_FETCH_MODE;
@@ -777,8 +868,13 @@ class ADODB_mysqli extends ADOConnection {
 		// get index details
 
 		$likepattern = '';
+<<<<<<< HEAD
 		if ($procedureNamePattern) {
 			$likepattern = " LIKE '".$procedureNamePattern."'";
+=======
+		if ($NamePattern) {
+			$likepattern = " LIKE '".$NamePattern."'";
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 		$rs = $this->execute('SHOW PROCEDURE STATUS'.$likepattern);
 		if (is_object($rs)) {
@@ -854,8 +950,14 @@ class ADODB_mysqli extends ADOConnection {
 	 *
 	 * @return array|bool An array of foreign keys, or false no foreign keys could be found.
 	 */
+<<<<<<< HEAD
 	public function metaForeignKeys($table, $owner = '', $upper = false, $associative = false)
 	{
+=======
+	function MetaForeignKeys($table, $owner = false, $upper = false, $associative = false)
+	{
+
+>>>>>>> forked/LAE_400_PACKAGE
 		global $ADODB_FETCH_MODE;
 
 		if ($ADODB_FETCH_MODE == ADODB_FETCH_ASSOC
@@ -869,7 +971,11 @@ class ADODB_mysqli extends ADOConnection {
 			$table = "$owner.$table";
 		}
 
+<<<<<<< HEAD
 		$a_create_table = $this->getRow(sprintf('SHOW CREATE TABLE `%s`', $table));
+=======
+		$a_create_table = $this->getRow(sprintf('SHOW CREATE TABLE %s', $table));
+>>>>>>> forked/LAE_400_PACKAGE
 
 		$this->setFetchMode($savem);
 
@@ -948,6 +1054,10 @@ class ADODB_mysqli extends ADOConnection {
 		while (!$rs->EOF) {
 			$fld = new ADOFieldObject();
 			$fld->name = $rs->fields[0];
+<<<<<<< HEAD
+=======
+			$type = $rs->fields[1];
+>>>>>>> forked/LAE_400_PACKAGE
 
 			/*
 			* Type from information_schema returns
@@ -1039,7 +1149,11 @@ class ADODB_mysqli extends ADOConnection {
 	 * @param int $nrows (Optional) The limit for the number of records you want returned. By default, all results.
 	 * @param int $offset (Optional) The offset to use when selecting the results. By default, no offset.
 	 * @param array|bool $inputarr (Optional) Any parameter values required by the SQL statement, or false if none.
+<<<<<<< HEAD
 	 * @param int $secs2cache (Optional) If greater than 0, perform a cached execute. By default, normal execution.
+=======
+	 * @param int $secs (Optional) If greater than 0, perform a cached execute. By default, normal execution.
+>>>>>>> forked/LAE_400_PACKAGE
 	 *
 	 * @return ADORecordSet|false The query results, or false if the query failed to execute.
 	 */
@@ -1047,15 +1161,24 @@ class ADODB_mysqli extends ADOConnection {
 						 $nrows = -1,
 						 $offset = -1,
 						 $inputarr = false,
+<<<<<<< HEAD
 						 $secs2cache = 0)
+=======
+						 $secs = 0)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 		$nrows = (int) $nrows;
 		$offset = (int) $offset;
 		$offsetStr = ($offset >= 0) ? "$offset," : '';
 		if ($nrows < 0) $nrows = '18446744073709551615';
 
+<<<<<<< HEAD
 		if ($secs2cache)
 			$rs = $this->cacheExecute($secs2cache, $sql . " LIMIT $offsetStr$nrows" , $inputarr );
+=======
+		if ($secs)
+			$rs = $this->cacheExecute($secs, $sql . " LIMIT $offsetStr$nrows" , $inputarr );
+>>>>>>> forked/LAE_400_PACKAGE
 		else
 			$rs = $this->execute($sql . " LIMIT $offsetStr$nrows" , $inputarr );
 
@@ -1064,7 +1187,10 @@ class ADODB_mysqli extends ADOConnection {
 
 	/**
 	 * Prepares an SQL statement and returns a handle to use.
+<<<<<<< HEAD
 	 * This is not used by bound parameters anymore
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	 *
 	 * @link https://adodb.org/dokuwiki/doku.php?id=v5:reference:connection:prepare
 	 * @todo update this function to handle prepared statements correctly
@@ -1093,6 +1219,7 @@ class ADODB_mysqli extends ADOConnection {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Execute SQL
 	 *
 	 * @param string     $sql      SQL statement to execute, or possibly an array
@@ -1193,6 +1320,15 @@ class ADODB_mysqli extends ADOConnection {
 	*
 	* @return bool|mysqli_result
 	*/
+=======
+	 * Return the query id.
+	 *
+	 * @param string|array $sql
+	 * @param array $inputarr
+	 *
+	 * @return bool|mysqli_result
+	 */
+>>>>>>> forked/LAE_400_PACKAGE
 	function _query($sql, $inputarr)
 	{
 		global $ADODB_COUNTRECS;
@@ -1210,7 +1346,11 @@ class ADODB_mysqli extends ADOConnection {
 
 			$stmt = $sql[1];
 			$a = '';
+<<<<<<< HEAD
 			foreach($inputarr as $v) {
+=======
+			foreach($inputarr as $k => $v) {
+>>>>>>> forked/LAE_400_PACKAGE
 				if (is_string($v)) $a .= 's';
 				else if (is_integer($v)) $a .= 'i';
 				else $a .= 'd';
@@ -1224,6 +1364,7 @@ class ADODB_mysqli extends ADOConnection {
 
 			$fnarr = array_merge( array($stmt,$a) , $inputarr);
 			call_user_func_array('mysqli_stmt_bind_param',$fnarr);
+<<<<<<< HEAD
 			return mysqli_stmt_execute($stmt);
 		}
 		else if (is_string($sql) && is_array($inputarr))
@@ -1323,6 +1464,10 @@ class ADODB_mysqli extends ADOConnection {
 
 			// Turn the statement into a result set and return it
 			return $stmt->get_result();
+=======
+			$ret = mysqli_stmt_execute($stmt);
+			return $ret;
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 		else
 		{
@@ -1347,7 +1492,11 @@ class ADODB_mysqli extends ADOConnection {
 			$rs = mysqli_multi_query($this->_connectionID, $sql.';');
 			if ($rs) {
 				$rs = ($ADODB_COUNTRECS) ? @mysqli_store_result( $this->_connectionID ) : @mysqli_use_result( $this->_connectionID );
+<<<<<<< HEAD
 				return $rs ?: true; // mysqli_more_results( $this->_connectionID )
+=======
+				return $rs ? $rs : true; // mysqli_more_results( $this->_connectionID )
+>>>>>>> forked/LAE_400_PACKAGE
 			}
 		} else {
 			$rs = mysqli_query($this->_connectionID, $sql, $ADODB_COUNTRECS ? MYSQLI_STORE_RESULT : MYSQLI_USE_RESULT);
@@ -1465,12 +1614,15 @@ class ADORecordSet_mysqli extends ADORecordSet{
 	var $databaseType = "mysqli";
 	var $canSeek = true;
 
+<<<<<<< HEAD
 	/** @var ADODB_mysqli The parent connection */
 	var $connection = false;
 
 	/** @var mysqli_result result link identifier */
 	var $_queryID;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	function __construct($queryID, $mode = false)
 	{
 		if ($mode === false) {
@@ -1577,7 +1729,12 @@ class ADORecordSet_mysqli extends ADORecordSet{
 		if ($this->fetchMode == MYSQLI_ASSOC && $upper == ADODB_ASSOC_CASE_LOWER) {
 			return $this->fields;
 		}
+<<<<<<< HEAD
 		return ADORecordSet::getRowAssoc($upper);
+=======
+		$row = ADORecordSet::getRowAssoc($upper);
+		return $row;
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**
@@ -1732,7 +1889,10 @@ class ADORecordSet_mysqli extends ADORecordSet{
 12 = MYSQLI_TYPE_DATETIME
 13 = MYSQLI_TYPE_YEAR
 14 = MYSQLI_TYPE_NEWDATE
+<<<<<<< HEAD
 245 = MYSQLI_TYPE_JSON
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 247 = MYSQLI_TYPE_ENUM
 248 = MYSQLI_TYPE_SET
 249 = MYSQLI_TYPE_TINY_BLOB
@@ -1753,7 +1913,11 @@ class ADORecordSet_mysqli extends ADORecordSet{
 	 *
 	 * @return string The MetaType
 	 */
+<<<<<<< HEAD
 	function metaType($t, $len = -1, $fieldobj = false)
+=======
+	function MetaType($t, $len = -1, $fieldobj = false)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 		if (is_object($t)) {
 			$fieldobj = $t;
@@ -1761,6 +1925,7 @@ class ADORecordSet_mysqli extends ADORecordSet{
 			$len = $fieldobj->max_length;
 		}
 
+<<<<<<< HEAD
 		$t = strtoupper($t);
 		/*
 		* Add support for custom actual types. We do this
@@ -1771,6 +1936,10 @@ class ADORecordSet_mysqli extends ADORecordSet{
 
 		$len = -1; // mysql max_length is not accurate
 		switch ($t) {
+=======
+		$len = -1; // mysql max_length is not accurate
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 			case 'STRING':
 			case 'CHAR':
 			case 'VARCHAR':
@@ -1848,8 +2017,11 @@ class ADORecordSet_mysqli extends ADORecordSet{
 			case 'DEC':
 			case 'FIXED':
 			default:
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 				//if (!is_numeric($t)) echo "<p>--- Error in type matching $t -----</p>";
 				return 'N';
 		}
@@ -1880,6 +2052,7 @@ class ADORecordSet_array_mysqli extends ADORecordSet_array
 			$len = $fieldobj->max_length;
 		}
 
+<<<<<<< HEAD
 		$t = strtoupper($t);
 
 		if (array_key_exists($t,$this->connection->customActualTypes))
@@ -1888,6 +2061,10 @@ class ADORecordSet_array_mysqli extends ADORecordSet_array
 		$len = -1; // mysql max_length is not accurate
 
 		switch ($t) {
+=======
+		$len = -1; // mysql max_length is not accurate
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 			case 'STRING':
 			case 'CHAR':
 			case 'VARCHAR':

@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2016-present MongoDB, Inc.
+=======
+ * Copyright 2016-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,12 +33,19 @@ use MongoDB\Driver\ReadPreference;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\UpdateResult;
 use MultipleIterator;
+<<<<<<< HEAD
 
 use function abs;
 use function assert;
 use function count;
 use function is_numeric;
 use function is_object;
+=======
+use stdClass;
+use function abs;
+use function count;
+use function is_numeric;
+>>>>>>> forked/LAE_400_PACKAGE
 use function sprintf;
 
 /**
@@ -65,10 +80,17 @@ class CollectionWrapper
      * @param array   $collectionOptions Collection options
      * @throws InvalidArgumentException
      */
+<<<<<<< HEAD
     public function __construct(Manager $manager, string $databaseName, string $bucketName, array $collectionOptions = [])
     {
         $this->databaseName = $databaseName;
         $this->bucketName = $bucketName;
+=======
+    public function __construct(Manager $manager, $databaseName, $bucketName, array $collectionOptions = [])
+    {
+        $this->databaseName = (string) $databaseName;
+        $this->bucketName = (string) $bucketName;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->filesCollection = new Collection($manager, $databaseName, sprintf('%s.files', $bucketName), $collectionOptions);
         $this->chunksCollection = new Collection($manager, $databaseName, sprintf('%s.chunks', $bucketName), $collectionOptions);
@@ -79,7 +101,11 @@ class CollectionWrapper
      *
      * @param mixed $id
      */
+<<<<<<< HEAD
     public function deleteChunksByFilesId($id): void
+=======
+    public function deleteChunksByFilesId($id)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->chunksCollection->deleteMany(['files_id' => $id]);
     }
@@ -89,7 +115,11 @@ class CollectionWrapper
      *
      * @param mixed $id
      */
+<<<<<<< HEAD
     public function deleteFileAndChunksById($id): void
+=======
+    public function deleteFileAndChunksById($id)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->filesCollection->deleteOne(['_id' => $id]);
         $this->chunksCollection->deleteMany(['files_id' => $id]);
@@ -98,7 +128,11 @@ class CollectionWrapper
     /**
      * Drops the GridFS files and chunks collections.
      */
+<<<<<<< HEAD
     public function dropCollections(): void
+=======
+    public function dropCollections()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->filesCollection->drop(['typeMap' => []]);
         $this->chunksCollection->drop(['typeMap' => []]);
@@ -109,8 +143,14 @@ class CollectionWrapper
      *
      * @param mixed   $id        File ID
      * @param integer $fromChunk Starting chunk (inclusive)
+<<<<<<< HEAD
      */
     public function findChunksByFileId($id, int $fromChunk = 0): Cursor
+=======
+     * @return Cursor
+     */
+    public function findChunksByFileId($id, $fromChunk = 0)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->chunksCollection->find(
             [
@@ -138,11 +178,22 @@ class CollectionWrapper
      *
      * @see Bucket::downloadToStreamByName()
      * @see Bucket::openDownloadStreamByName()
+<<<<<<< HEAD
      */
     public function findFileByFilenameAndRevision(string $filename, int $revision): ?object
     {
         $filename = $filename;
         $revision = $revision;
+=======
+     * @param string  $filename
+     * @param integer $revision
+     * @return stdClass|null
+     */
+    public function findFileByFilenameAndRevision($filename, $revision)
+    {
+        $filename = (string) $filename;
+        $revision = (integer) $revision;
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($revision < 0) {
             $skip = abs($revision) - 1;
@@ -152,7 +203,11 @@ class CollectionWrapper
             $sortOrder = 1;
         }
 
+<<<<<<< HEAD
         $file = $this->filesCollection->findOne(
+=======
+        return $this->filesCollection->findOne(
+>>>>>>> forked/LAE_400_PACKAGE
             ['filename' => $filename],
             [
                 'skip' => $skip,
@@ -160,15 +215,19 @@ class CollectionWrapper
                 'typeMap' => ['root' => 'stdClass'],
             ]
         );
+<<<<<<< HEAD
         assert(is_object($file) || $file === null);
 
         return $file;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Finds a GridFS file document for a given ID.
      *
      * @param mixed $id
+<<<<<<< HEAD
      */
     public function findFileById($id): ?object
     {
@@ -179,6 +238,16 @@ class CollectionWrapper
         assert(is_object($file) || $file === null);
 
         return $file;
+=======
+     * @return stdClass|null
+     */
+    public function findFileById($id)
+    {
+        return $this->filesCollection->findOne(
+            ['_id' => $id],
+            ['typeMap' => ['root' => 'stdClass']]
+        );
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -206,22 +275,58 @@ class CollectionWrapper
         return $this->filesCollection->findOne($filter, $options);
     }
 
+<<<<<<< HEAD
     public function getBucketName(): string
+=======
+    /**
+     * Return the bucket name.
+     *
+     * @return string
+     */
+    public function getBucketName()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->bucketName;
     }
 
+<<<<<<< HEAD
     public function getChunksCollection(): Collection
+=======
+    /**
+     * Return the chunks collection.
+     *
+     * @return Collection
+     */
+    public function getChunksCollection()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->chunksCollection;
     }
 
+<<<<<<< HEAD
     public function getDatabaseName(): string
+=======
+    /**
+     * Return the database name.
+     *
+     * @return string
+     */
+    public function getDatabaseName()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->databaseName;
     }
 
+<<<<<<< HEAD
     public function getFilesCollection(): Collection
+=======
+    /**
+     * Return the files collection.
+     *
+     * @return Collection
+     */
+    public function getFilesCollection()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->filesCollection;
     }
@@ -231,7 +336,11 @@ class CollectionWrapper
      *
      * @param array|object $chunk Chunk document
      */
+<<<<<<< HEAD
     public function insertChunk($chunk): void
+=======
+    public function insertChunk($chunk)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! $this->checkedIndexes) {
             $this->ensureIndexes();
@@ -247,7 +356,11 @@ class CollectionWrapper
      *
      * @param array|object $file File document
      */
+<<<<<<< HEAD
     public function insertFile($file): void
+=======
+    public function insertFile($file)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! $this->checkedIndexes) {
             $this->ensureIndexes();
@@ -259,6 +372,7 @@ class CollectionWrapper
     /**
      * Updates the filename field in the file document for a given ID.
      *
+<<<<<<< HEAD
      * @param mixed $id
      */
     public function updateFilenameForId($id, string $filename): UpdateResult
@@ -266,13 +380,28 @@ class CollectionWrapper
         return $this->filesCollection->updateOne(
             ['_id' => $id],
             ['$set' => ['filename' => $filename]]
+=======
+     * @param mixed  $id
+     * @param string $filename
+     * @return UpdateResult
+     */
+    public function updateFilenameForId($id, $filename)
+    {
+        return $this->filesCollection->updateOne(
+            ['_id' => $id],
+            ['$set' => ['filename' => (string) $filename]]
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 
     /**
      * Create an index on the chunks collection if it does not already exist.
      */
+<<<<<<< HEAD
     private function ensureChunksIndex(): void
+=======
+    private function ensureChunksIndex()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $expectedIndex = ['files_id' => 1, 'n' => 1];
 
@@ -288,7 +417,11 @@ class CollectionWrapper
     /**
      * Create an index on the files collection if it does not already exist.
      */
+<<<<<<< HEAD
     private function ensureFilesIndex(): void
+=======
+    private function ensureFilesIndex()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $expectedIndex = ['filename' => 1, 'uploadDate' => 1];
 
@@ -307,7 +440,11 @@ class CollectionWrapper
      * This method is called once before the first write operation on a GridFS
      * bucket. Indexes are only be created if the files collection is empty.
      */
+<<<<<<< HEAD
     private function ensureIndexes(): void
+=======
+    private function ensureIndexes()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($this->checkedIndexes) {
             return;
@@ -323,7 +460,11 @@ class CollectionWrapper
         $this->ensureChunksIndex();
     }
 
+<<<<<<< HEAD
     private function indexKeysMatch(array $expectedKeys, array $actualKeys): bool
+=======
+    private function indexKeysMatch(array $expectedKeys, array $actualKeys) : bool
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (count($expectedKeys) !== count($actualKeys)) {
             return false;
@@ -334,8 +475,13 @@ class CollectionWrapper
         $iterator->attachIterator(new ArrayIterator($actualKeys));
 
         foreach ($iterator as $key => $value) {
+<<<<<<< HEAD
             [$expectedKey, $actualKey]     = $key;
             [$expectedValue, $actualValue] = $value;
+=======
+            list($expectedKey, $actualKey)     = $key;
+            list($expectedValue, $actualValue) = $value;
+>>>>>>> forked/LAE_400_PACKAGE
 
             if ($expectedKey !== $actualKey) {
                 return false;
@@ -355,8 +501,15 @@ class CollectionWrapper
 
     /**
      * Returns whether the files collection is empty.
+<<<<<<< HEAD
      */
     private function isFilesCollectionEmpty(): bool
+=======
+     *
+     * @return boolean
+     */
+    private function isFilesCollectionEmpty()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return null === $this->filesCollection->findOne([], [
             'readPreference' => new ReadPreference(ReadPreference::RP_PRIMARY),

@@ -26,6 +26,7 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
       | Grade out of 100  | 50                       |
       | Feedback comments | I'm the teacher feedback |
     And I press "Save changes"
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I log out
     And I am on the "Test assignment name" "assign activity" page logged in as student1
@@ -35,11 +36,18 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Setup > Gradebook setup" in the course gradebook
+=======
+    And I am on the "Test assignment name" "assign activity" page logged in as student1
+    And I should see "50.00"
+    And I should see "I'm the teacher feedback" in the "Feedback comments" "table_row"
+    And I am on the "Course 1" "grades > gradebook setup" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario: Hiding the activity using the drop-down hide link and then unhiding the activity using the edit settings form page
     Given I click on "Edit" "link" in the "Test assignment name" "table_row"
     And I click on "Hide" "link" in the "Test assignment name" "table_row"
+<<<<<<< HEAD
     And I log out
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     And I should not see "50.00"
@@ -48,6 +56,12 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Setup > Gradebook setup" in the course gradebook
+=======
+    And I am on the "Test assignment name" "assign activity" page logged in as student1
+    And I should not see "50.00"
+    And I should not see "I'm the teacher feedback"
+    And I am on the "Course 1" "grades > gradebook setup" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Edit" "link" in the "Test assignment name" "table_row"
     And I click on "Edit settings" "link" in the "Test assignment name" "table_row"
     And the field "Hidden" matches value "1"
@@ -68,6 +82,7 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     And I should not see "50.00"
     And I should not see "I'm the teacher feedback"
+<<<<<<< HEAD
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
@@ -75,6 +90,11 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
     And I click on "Edit" "link" in the "Test assignment name" "table_row"
     And I click on "Show" "link" in the "Test assignment name" "table_row"
     And I log out
+=======
+    And I am on the "Course 1" "grades > gradebook setup" page logged in as "teacher1"
+    And I click on "Edit" "link" in the "Test assignment name" "table_row"
+    And I click on "Show" "link" in the "Test assignment name" "table_row"
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     Then I should see "50.00"
     And I should see "I'm the teacher feedback" in the "Feedback comments" "table_row"
@@ -83,6 +103,7 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
   Scenario: Hiding the category using the drop-down hide link and then unhiding the category using the edit settings form page
     Given I click on "Edit" "link" in the "Course 1" "table_row"
     And I click on "Hide" "link" in the "Course 1" "table_row"
+<<<<<<< HEAD
     And I log out
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     And I should not see "50.00"
@@ -91,12 +112,21 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Setup > Gradebook setup" in the course gradebook
+=======
+    And I am on the "Test assignment name" "assign activity" page logged in as student1
+    And I should not see "50.00"
+    And I should not see "I'm the teacher feedback"
+    And I am on the "Course 1" "grades > gradebook setup" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Edit" "link" in the "Course 1" "table_row"
     And I click on "Edit settings" "link" in the "Course 1" "table_row"
     And the field "Hidden" matches value "1"
     And I set the field "Hidden" to "0"
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     Then I should see "50.00"
     And I should see "I'm the teacher feedback" in the "Feedback comments" "table_row"
@@ -107,6 +137,7 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
     And I click on "Edit settings" "link" in the "Course 1" "table_row"
     And I set the field "Hidden" to "1"
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     And I should not see "50.00"
@@ -118,6 +149,14 @@ Feature: Teacher can unhide grades on the edit page allowing students to view th
     And I click on "Edit" "link" in the "Course 1" "table_row"
     And I click on "Show" "link" in the "Course 1" "table_row"
     And I log out
+=======
+    And I am on the "Test assignment name" "assign activity" page logged in as student1
+    And I should not see "50.00"
+    And I should not see "I'm the teacher feedback"
+    And I am on the "Course 1" "grades > gradebook setup" page logged in as "teacher1"
+    And I click on "Edit" "link" in the "Course 1" "table_row"
+    And I click on "Show" "link" in the "Course 1" "table_row"
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as student1
     Then I should see "50.00"
     And I should see "I'm the teacher feedback" in the "Feedback comments" "table_row"

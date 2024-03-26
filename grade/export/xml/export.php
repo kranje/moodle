@@ -23,7 +23,11 @@ $id                = required_param('id', PARAM_INT); // course id
 $PAGE->set_url('/grade/export/xml/export.php', array('id'=>$id));
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);
@@ -45,7 +49,11 @@ if (!empty($CFG->gradepublishing) && !empty($key)) {
 
 if (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
     if (!groups_is_member($groupid, $USER->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotaccessgroup', 'grades');
+=======
+        print_error('cannotaccessgroup', 'grades');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 $mform = new grade_export_form(null, array('publishing' => true, 'simpleui' => true, 'multipledisplaytypes' => false,

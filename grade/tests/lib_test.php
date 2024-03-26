@@ -24,12 +24,15 @@
  */
 namespace core_grades;
 
+<<<<<<< HEAD
 use assign;
 use cm_info;
 use grade_item;
 use grade_plugin_return;
 use grade_report_summary;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -176,6 +179,7 @@ class lib_test extends \advanced_testcase {
             }
         }
     }
+<<<<<<< HEAD
 
     /**
      * Tests that ungraded_counts calculates count and sum of grades correctly when there are graded users.
@@ -711,4 +715,6 @@ class lib_test extends \advanced_testcase {
         $this->assertArrayHasKey('assign', $gradeitems2);
         $this->assertArrayHasKey('manual', $gradeitems2);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

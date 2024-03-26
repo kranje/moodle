@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * Event documentation
  *
@@ -25,6 +26,13 @@
 namespace tool_monitor;
 
 defined('MOODLE_INTERNAL') || die();
+=======
+
+namespace tool_monitor;
+
+use core_component;
+use ReflectionClass;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Class for returning event information.
@@ -35,6 +43,7 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class eventlist {
+<<<<<<< HEAD
     /**
      * Return all of the core event files.
      *
@@ -155,6 +164,8 @@ class eventlist {
         }
         return $finalfiles;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Get a list of events present in the system.
@@ -164,6 +175,7 @@ class eventlist {
      * @return array list of events present in the system.
      */
     public static function get_all_eventlist($withoutcomponent = false) {
+<<<<<<< HEAD
         if ($withoutcomponent) {
             $return = array_merge(self::get_core_eventlist(), self::get_non_core_eventlist($withoutcomponent));
             array_multisort($return, SORT_NATURAL);
@@ -171,6 +183,60 @@ class eventlist {
             $return = array_merge(array('core' => self::get_core_eventlist()),
                     self::get_non_core_eventlist($withoutcomponent = false));
         }
+=======
+        global $CFG;
+
+        // Disable developer debugging as deprecated events will fire warnings.
+        // Setup backup variables to restore the following settings back to what they were when we are finished.
+        $debuglevel          = $CFG->debug;
+        $debugdisplay        = $CFG->debugdisplay;
+        $debugdeveloper      = $CFG->debugdeveloper;
+        $CFG->debug          = 0;
+        $CFG->debugdisplay   = false;
+        $CFG->debugdeveloper = false;
+
+        // List of exceptional events that will cause problems if displayed.
+        $eventsignore = [
+            \core\event\unknown_logged::class,
+            \logstore_legacy\event\legacy_logged::class,
+        ];
+
+        $return = [];
+
+        $events = core_component::get_component_classes_in_namespace(null, 'event');
+        foreach (array_keys($events) as $event) {
+            // We need to filter all classes that extend event base, or the base class itself.
+            if (is_a($event, \core\event\base::class, true) && !in_array($event, $eventsignore)) {
+
+                $reflectionclass = new ReflectionClass($event);
+                if ($reflectionclass->isAbstract()) {
+                    continue;
+                }
+
+                // We can't choose this component's own events.
+                [$component] = explode('\\', $event);
+                if ($component === 'tool_monitor') {
+                    continue;
+                }
+
+                if ($withoutcomponent) {
+                    $return["\\{$event}"] = $event::get_name_with_info();
+                } else {
+                    $return[$component]["\\{$event}"] = $event::get_name_with_info();
+                }
+            }
+        }
+
+        // Now enable developer debugging as event information has been retrieved.
+        $CFG->debug          = $debuglevel;
+        $CFG->debugdisplay   = $debugdisplay;
+        $CFG->debugdeveloper = $debugdeveloper;
+
+        if ($withoutcomponent) {
+            array_multisort($return, SORT_NATURAL);
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         return $return;
     }
 

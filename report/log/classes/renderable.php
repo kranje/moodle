@@ -93,6 +93,12 @@ class report_log_renderable implements renderable {
     /** @var table_log table log which will be used for rendering logs */
     public $tablelog;
 
+<<<<<<< HEAD
+=======
+    /** @var array group ids */
+    public $grouplist;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Constructor.
      *
@@ -343,11 +349,20 @@ class report_log_renderable implements renderable {
     }
 
     /**
+<<<<<<< HEAD
      * Return list of groups.
+=======
+     * Return list of groups that are used in this course. This is done when groups are used in the course
+     * and the user is allowed to see all groups or groups are visible anyway. If groups are used but the
+     * mode is separate groups and the user is not allowed to see all groups, the list contains the groups
+     * only, where the user is member.
+     * If the course uses no groups, the list is empty.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return array list of groups.
      */
     public function get_group_list() {
+<<<<<<< HEAD
 
         // No groups for system.
         if (empty($this->course)) {
@@ -367,6 +382,33 @@ class report_log_renderable implements renderable {
             }
         }
         return $groups;
+=======
+        global $USER;
+
+        if ($this->grouplist !== null) {
+            return $this->grouplist;
+        }
+        // No groups for system.
+        if (empty($this->course)) {
+            $this->grouplist = [];
+            return $this->grouplist;
+        }
+
+        $context = context_course::instance($this->course->id);
+        $this->grouplist = [];
+        $groupmode = groups_get_course_groupmode($this->course);
+        $cgroups = [];
+        if (($groupmode == VISIBLEGROUPS) ||
+            ($groupmode == SEPARATEGROUPS && has_capability('moodle/site:accessallgroups', $context))) {
+            $cgroups = groups_get_all_groups($this->course->id);
+        } else if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $context)) {
+            $cgroups = groups_get_all_groups($this->course->id, $USER->id);
+        }
+        foreach ($cgroups as $cgroup) {
+            $this->grouplist[$cgroup->id] = $cgroup->name;
+        }
+        return $this->grouplist;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -385,9 +427,35 @@ class report_log_renderable implements renderable {
         $limitfrom = empty($this->showusers) ? 0 : '';
         $limitnum  = empty($this->showusers) ? COURSE_MAX_USERS_PER_DROPDOWN + 1 : '';
         $userfieldsapi = \core_user\fields::for_name();
+<<<<<<< HEAD
         $courseusers = get_enrolled_users($context, '', $this->groupid, 'u.id, ' .
                 $userfieldsapi->get_sql('u', false, '', '', false)->selects,
                 null, $limitfrom, $limitnum);
+=======
+
+        // Get the groups of that course.
+        $groups = $this->get_group_list();
+        // Check here if we are not in group mode, or in group mode but narrow the group selection
+        // to the group of the user.
+        if (empty($groups) || !empty($this->groupid) && isset($groups[(int)$this->groupid])) {
+            // No groups are used in that course, therefore get all users (maybe limited to one group).
+            $courseusers = get_enrolled_users($context, '', $this->groupid, 'u.id, ' .
+                $userfieldsapi->get_sql('u', false, '', '', false)->selects,
+                null, $limitfrom, $limitnum);
+        } else {
+            // The course uses groups, get the users from these groups.
+            $groupids = array_keys($groups);
+            try {
+                $enrolments = enrol_get_course_users($courseid, false, [], [], $groupids);
+                $courseusers = [];
+                foreach ($enrolments as $enrolment) {
+                    $courseusers[$enrolment->id] = $enrolment;
+                }
+            } catch (Exception $e) {
+                $courseusers = [];
+            }
+        }
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (count($courseusers) < COURSE_MAX_USERS_PER_DROPDOWN && !$this->showusers) {
             $this->showusers = 1;

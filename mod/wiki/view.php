@@ -65,7 +65,11 @@ $PAGE->add_body_class('limitedwidth');
 if ($id) {
     // Cheacking course module instance
     if (!$cm = get_coursemodule_from_id('wiki', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Checking course instance
@@ -75,7 +79,11 @@ if ($id) {
 
     // Checking wiki instance
     if (!$wiki = wiki_get_wiki($cm->instance)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $PAGE->set_cm($cm);
 
@@ -120,22 +128,38 @@ if ($id) {
 
     // Checking page instance
     if (!$page = wiki_get_page($pageid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectpageid', 'wiki');
+=======
+        print_error('incorrectpageid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Checking subwiki
     if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+=======
+        print_error('incorrectsubwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Checking wiki instance of that subwiki
     if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Checking course module instance
     if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $currentgroup = $subwiki->groupid;
@@ -163,12 +187,20 @@ if ($id) {
 
     // Setting wiki instance
     if (!$wiki = wiki_get_wiki($wid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Checking course module
     if (!$cm = get_coursemodule_from_instance("wiki", $wiki->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Checking course instance
@@ -207,7 +239,11 @@ if ($id) {
         $manageandedit = $manage && $edit;
 
         if ($groupmode == VISIBLEGROUPS and ($modeanduser || $modeandgroupmember) and !$manageandedit) {
+<<<<<<< HEAD
             throw new \moodle_exception('nocontent', 'wiki');
+=======
+            print_error('nocontent','wiki');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $params = array('wid' => $wiki->id, 'group' => $gid, 'uid' => $uid, 'title' => $title);
@@ -241,7 +277,11 @@ if ($id) {
     //
     //    // Checking wiki instance
     //    if (!$wiki = wiki_get_wiki($wid)) {
+<<<<<<< HEAD
     //        throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+    //        print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     //    }
     //
     //    // Checking subwiki instance
@@ -250,7 +290,11 @@ if ($id) {
     //        $currentgroup = 0;
     //    }
     //    if (!$subwiki = wiki_get_subwiki_by_group($wid, $currentgroup)) {
+<<<<<<< HEAD
     //        throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+=======
+    //        print_error('incorrectsubwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     //    }
     //
     //    // Checking page instance
@@ -263,7 +307,11 @@ if ($id) {
     //
     //    // Checking course module instance
     //    if (!$cm = get_coursemodule_from_instance("wiki", $wiki->id, $course->id)) {
+<<<<<<< HEAD
     //        throw new \moodle_exception('invalidcoursemodule');
+=======
+    //        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     //    }
     //
     //    $subwiki = null;
@@ -275,11 +323,19 @@ if ($id) {
     //     * Error. No more options
     //     */
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidparameters', 'wiki');
 }
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
     throw new \moodle_exception('cannotviewpage', 'wiki');
+=======
+    print_error('invalidparameters', 'wiki');
+}
+
+if (!wiki_user_can_view($subwiki, $wiki)) {
+    print_error('cannotviewpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if (($edit != - 1) and $PAGE->user_allowed_editing()) {

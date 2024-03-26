@@ -114,7 +114,10 @@ class Horde_Mime_Uudecode implements Countable, IteratorAggregate
 
     /* Countable method. */
 
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->_data);
@@ -122,7 +125,10 @@ class Horde_Mime_Uudecode implements Countable, IteratorAggregate
 
     /* IteratorAggregate method. */
 
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_data);

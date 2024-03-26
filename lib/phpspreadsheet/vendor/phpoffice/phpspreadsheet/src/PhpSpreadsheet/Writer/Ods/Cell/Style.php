@@ -2,22 +2,31 @@
 
 namespace PhpOffice\PhpSpreadsheet\Writer\Ods\Cell;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Helper\Dimension;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Font;
 use PhpOffice\PhpSpreadsheet\Style\Style as CellStyle;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Worksheet\ColumnDimension;
 use PhpOffice\PhpSpreadsheet\Worksheet\RowDimension;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Style
 {
     public const CELL_STYLE_PREFIX = 'ce';
+<<<<<<< HEAD
     public const COLUMN_STYLE_PREFIX = 'co';
     public const ROW_STYLE_PREFIX = 'ro';
     public const TABLE_STYLE_PREFIX = 'ta';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     private $writer;
 
@@ -166,6 +175,7 @@ class Style
         $this->writer->endElement(); // Close style:text-properties
     }
 
+<<<<<<< HEAD
     protected function writeColumnProperties(ColumnDimension $columnDimension): void
     {
         $this->writer->startElement('style:table-column-properties');
@@ -243,6 +253,8 @@ class Style
         $this->writer->endElement(); // Close style:style
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function write(CellStyle $style): void
     {
         $this->writer->startElement('style:style');

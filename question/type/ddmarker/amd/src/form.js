@@ -374,7 +374,10 @@ define(['jquery', 'core/dragdrop', 'qtype_ddmarker/shapes'], function($, dragDro
         init: function() {
             dragDropForm.fp = dragDropForm.filePickers();
             dragDropForm.noDropZones = dragDropForm.form.getFormValue('nodropzone', []);
+<<<<<<< HEAD
             dragDropForm.setupPreviewArea();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             dragDropForm.setOptionsForDragItemSelectors();
             dragDropForm.createShapes();
             dragDropForm.setupEventHandlers();
@@ -555,7 +558,17 @@ define(['jquery', 'core/dragdrop', 'qtype_ddmarker/shapes'], function($, dragDro
             // after filepicker's javascript has finished.
             $('form.mform[data-qtype="ddmarker"]').on('change', '#id_bgimage', dragDropForm.loadPreviewImage);
 
+<<<<<<< HEAD
             dragDropForm.loadPreviewImage();
+=======
+            if ($('#ddm-droparea').length) {
+                dragDropForm.loadPreviewImage();
+            } else {
+                // Setup preview area when the background image is uploaded the first time.
+                dragDropForm.setupPreviewArea();
+                dragDropForm.loadPreviewImage();
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         },
 
         /**

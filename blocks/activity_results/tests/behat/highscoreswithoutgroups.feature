@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @block @block_activity_results @javascript
+=======
+@block @block_activity_results
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: The activity results block displays student high scores
   In order to be display student scores
   As a user
@@ -27,6 +31,7 @@ Feature: The activity results block displays student high scores
     And the following "activities" exist:
       | activity   | name            | intro          | course | section | idnumber | assignsubmission_file_enabled |
       | assign     | Test assignment | Offline text   | C1     | 1       | assign1  | 0                             |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
     And I navigate to "View > Grader report" in the course gradebook
@@ -37,6 +42,17 @@ Feature: The activity results block displays student high scores
     And I give the grade "50.00" to the user "Student 5" for the grade item "Test assignment"
     And I press "Save changes"
     And I am on "Course 1" course homepage
+=======
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Test assignment | student1 | 90.00 |
+      | Test assignment | student2 | 80.00 |
+      | Test assignment | student3 | 70.00 |
+      | Test assignment | student4 | 60.00 |
+      | Test assignment | student5 | 50.00 |
+    And I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Configure the block on the course page to show 0 high scores
     Given I add the "Activity results" block

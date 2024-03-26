@@ -562,4 +562,15 @@ abstract class scheduled_task extends task_base {
     public static function get_html_id(string $classname): string {
         return str_replace('\\', '-', ltrim($classname, '\\'));
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Get a descriptive name for this task (shown to admins).
+     *
+     * @return string
+     */
+    abstract public function get_name();
+
+>>>>>>> forked/LAE_400_PACKAGE
 }

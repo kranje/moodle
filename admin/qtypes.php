@@ -94,7 +94,11 @@ $sortedqtypes = question_bank::sort_qtype_array($sortedqtypes, $config);
 // Disable.
 if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$disable])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $disable);
+=======
+        print_error('unknownquestiontype', 'question', $thispageurl, $disable);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $class = \core_plugin_manager::resolve_plugininfo_class('qtype');
@@ -105,11 +109,19 @@ if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey(
 // Enable.
 if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$enable])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $enable);
     }
 
     if (!$qtypes[$enable]->menu_name()) {
         throw new \moodle_exception('cannotenable', 'question', $thispageurl, $enable);
+=======
+        print_error('unknownquestiontype', 'question', $thispageurl, $enable);
+    }
+
+    if (!$qtypes[$enable]->menu_name()) {
+        print_error('cannotenable', 'question', $thispageurl, $enable);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $class = \core_plugin_manager::resolve_plugininfo_class('qtype');
@@ -120,7 +132,11 @@ if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey())
 // Move up in order.
 if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$up])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $up);
+=======
+        print_error('unknownquestiontype', 'question', $thispageurl, $up);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $neworder = question_reorder_qtypes($sortedqtypes, $up, -1);
@@ -131,7 +147,11 @@ if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
 // Move down in order.
 if (($down = optional_param('down', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($qtypes[$down])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownquestiontype', 'question', $thispageurl, $down);
+=======
+        print_error('unknownquestiontype', 'question', $thispageurl, $down);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $neworder = question_reorder_qtypes($sortedqtypes, $down, +1);

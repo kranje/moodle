@@ -3,6 +3,7 @@ information provided here is intended especially for developers.
 
 This information is intended for authors of webservices, not people writing webservice clients.
 
+<<<<<<< HEAD
 === 4.1 ===
 
 * The XMLRPC webservice (protocol) has been completely removed. It's now available in the plugins directory.
@@ -12,6 +13,12 @@ This information is intended for authors of webservices, not people writing webs
 * User access related exceptions have been changed to use the moodle_exception class instead of the
   generic webservice_access_exception, the main reason for this change is to allow clients to
   implement some code logic against an access error.
+=======
+=== 4.0 ===
+
+* User access related exceptions have been changed to use the moodle_exception class instead of the generic webservice_access_exception,
+  the main reason for this change is to allow clients to implement some code logic against an access error.
+>>>>>>> forked/LAE_400_PACKAGE
 
 === 3.11 ===
 

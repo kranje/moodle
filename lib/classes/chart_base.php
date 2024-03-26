@@ -77,7 +77,11 @@ class chart_base implements JsonSerializable, renderable {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function jsonSerialize(): array {
+=======
+    public function jsonSerialize() {
+>>>>>>> forked/LAE_400_PACKAGE
         global $CFG;
         return [
             'type' => $this->get_type(),

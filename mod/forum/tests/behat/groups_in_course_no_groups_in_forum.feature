@@ -26,6 +26,7 @@ Feature: Forums in 'No groups' mode allow posting to All participants for all us
       | teacher1 | G2 |
       | student1 | G1 |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro                         | course | idnumber     | groupmode |
       | forum      | Standard forum name    | Standard forum description    | C1     | nogroups     | 0         |
 
@@ -33,6 +34,13 @@ Feature: Forums in 'No groups' mode allow posting to All participants for all us
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I follow "Standard forum name"
+=======
+      | activity   | name                   | course | idnumber     | groupmode |
+      | forum      | Standard forum name    | C1     | nogroups     | 0         |
+
+  Scenario: Teacher can post
+    Given I am on the "Standard forum name" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should not see "Group A"
     And I should not see "Group B"
     When I click on "Add discussion topic" "link"
@@ -46,9 +54,13 @@ Feature: Forums in 'No groups' mode allow posting to All participants for all us
     And I should see "Teacher 1 -> Forum"
 
   Scenario: Student can post
+<<<<<<< HEAD
     Given I log in as "student1"
     And I am on "Course 1" course homepage
     And I follow "Standard forum name"
+=======
+    Given I am on the "Standard forum name" "forum activity" page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should not see "Group A"
     And I should not see "Group B"
     When I click on "Add discussion topic" "link"

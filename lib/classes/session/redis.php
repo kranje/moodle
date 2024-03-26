@@ -65,8 +65,11 @@ class redis extends handler {
     protected $prefix = '';
     /** @var int $acquiretimeout how long to wait for session lock in seconds */
     protected $acquiretimeout = 120;
+<<<<<<< HEAD
     /** @var int $acquirewarn how long before warning when waiting for a lock in seconds */
     protected $acquirewarn = null;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var int $lockretry how long to wait between session lock attempts in ms */
     protected $lockretry = 100;
     /** @var int $serializer The serializer to use */
@@ -121,10 +124,13 @@ class redis extends handler {
             $this->acquiretimeout = (int)$CFG->session_redis_acquire_lock_timeout;
         }
 
+<<<<<<< HEAD
         if (isset($CFG->session_redis_acquire_lock_warn)) {
             $this->acquirewarn = (int)$CFG->session_redis_acquire_lock_warn;
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($CFG->session_redis_acquire_lock_retry)) {
             $this->lockretry = (int)$CFG->session_redis_acquire_lock_retry;
         }
@@ -227,6 +233,10 @@ class redis extends handler {
                         throw new RedisException('Unable to select Redis database '.$this->database.'.');
                     }
                 }
+<<<<<<< HEAD
+=======
+                $this->connection->ping();
+>>>>>>> forked/LAE_400_PACKAGE
                 return true;
             } catch (RedisException $e) {
                 $logstring = "Failed to connect (try {$counter} out of {$maxnumberofretries}) to redis ";
@@ -466,8 +476,11 @@ class redis extends handler {
 
         $whoami = "[pid {$pid}] {$hostname}:$uri";
 
+<<<<<<< HEAD
         $haswarned = false; // Have we logged a lock warning?
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         while (!$haslock) {
 
             $haslock = $this->connection->setnx($lockkey, $whoami);
@@ -478,6 +491,7 @@ class redis extends handler {
                 return true;
             }
 
+<<<<<<< HEAD
             if (!empty($this->acquirewarn) && !$haswarned && $this->time() > $startlocktime + $this->acquirewarn) {
                 // This is a warning to better inform users.
                 $whohaslock = $this->connection->get($lockkey);
@@ -487,12 +501,15 @@ class redis extends handler {
                 $haswarned = true;
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->time() > $startlocktime + $this->acquiretimeout) {
                 // This is a fatal error, better inform users.
                 // It should not happen very often - all pages that need long time to execute
                 // should close session immediately after access control checks.
                 $whohaslock = $this->connection->get($lockkey);
                 // phpcs:ignore
+<<<<<<< HEAD
                 error_log("Error: Cannot obtain session lock for sid: $id within $this->acquiretimeout seconds. " .
                     "It is likely another page ($whohaslock) has a long session lock, or the session lock was never released.");
                 $acquiretimeout = format_time($this->acquiretimeout);
@@ -503,6 +520,11 @@ class redis extends handler {
                     'whohaslock' => $whohaslock,
                     'lockexpire' => $lockexpire];
                 throw new exception("sessioncannotobtainlock", 'error', '', $a);
+=======
+                error_log("Cannot obtain session lock for sid: $id within $this->acquiretimeout seconds. " .
+                    "It is likely another page ($whohaslock) has a long session lock, or the session lock was never released.");
+                throw new exception("Unable to obtain session lock");
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             if ($this->time() < $startlocktime + 5) {
@@ -511,7 +533,11 @@ class redis extends handler {
                 // time. If it is too small we will poll too much and if it is
                 // too large we will waste time waiting for no reason. 100ms is
                 // the default starting point.
+<<<<<<< HEAD
                 $delay = rand($this->lockretry, (int)($this->lockretry * 1.1));
+=======
+                $delay = rand($this->lockretry, $this->lockretry * 1.1);
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 // If we don't get a lock within 5 seconds then there must be a
                 // very long lived process holding the lock so throttle back to

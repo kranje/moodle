@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @block @block_activity_results @javascript
+=======
+@block @block_activity_results
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: The activity results block displays student low scores as scales
   In order to be display student scores as scales
   As a user
@@ -32,6 +36,7 @@ Feature: The activity results block displays student low scores as scales
       | idnumber                      | 0001                            |
       | section                       | 1                               |
       | assignsubmission_file_enabled | 0                               |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Scales" in the course gradebook
@@ -43,12 +48,23 @@ Feature: The activity results block displays student low scores as scales
     And I am on "Course 1" course homepage with editing mode on
     And I am on the "Test assignment" "assign activity" page
     And I navigate to "Settings" in current page administration
+=======
+    And the following "scales" exist:
+      | name     | scale                                                                |
+      | My Scale | Disappointing, Not good enough, Average, Good, Very good, Excellent! |
+    And I am on the "Test assignment" "assign activity editing" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I set the following fields to these values:
       | id_grade_modgrade_type | Scale |
       | id_grade_modgrade_scale | My Scale |
     And I press "Save and return to course"
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    And I turn editing mode on
+    And I am on the "Course 1" "grades > Grader report > View" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I give the grade "Excellent!" to the user "Student 1" for the grade item "Test assignment"
     And I give the grade "Very good" to the user "Student 2" for the grade item "Test assignment"
     And I give the grade "Good" to the user "Student 3" for the grade item "Test assignment"

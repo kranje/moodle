@@ -168,7 +168,11 @@ class HTML_Common {
 
         if (is_array($attributes)) {
             foreach ($attributes as $key => $value) {
+<<<<<<< HEAD
                 $strAttr .= ' ' . $key . '="' . htmlspecialchars($value ?? '') . '"';
+=======
+                $strAttr .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         return $strAttr;

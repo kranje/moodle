@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Description of SimplePie library import into Moodle
+=======
+Description of SimplePie v1.5.6 library import into Moodle
+>>>>>>> forked/LAE_400_PACKAGE
 
 Obtained from https://github.com/simplepie/simplepie/releases/
 
@@ -13,7 +17,10 @@ To upgrade this library:
     - README.markdown
 5. That should leave you with just the following. Do not move them. If there is any difference, check if they also need to be moved and update this doc:
     - idn (This is a third-party library that SimplePie can optionally use. We don't use this in Moodle)
+<<<<<<< HEAD
     - src
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     - CHANGELOG.md
     - composer.json
     - db.sql

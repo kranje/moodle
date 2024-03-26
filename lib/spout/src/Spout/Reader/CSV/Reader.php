@@ -3,9 +3,12 @@
 namespace Box\Spout\Reader\CSV;
 
 use Box\Spout\Common\Exception\IOException;
+<<<<<<< HEAD
 use Box\Spout\Common\Helper\GlobalFunctionsHelper;
 use Box\Spout\Common\Manager\OptionsManagerInterface;
 use Box\Spout\Reader\Common\Creator\InternalEntityFactoryInterface;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use Box\Spout\Reader\Common\Entity\Options;
 use Box\Spout\Reader\CSV\Creator\InternalEntityFactory;
 use Box\Spout\Reader\ReaderAbstract;
@@ -25,6 +28,7 @@ class Reader extends ReaderAbstract
     /** @var string Original value for the "auto_detect_line_endings" INI value */
     protected $originalAutoDetectLineEndings;
 
+<<<<<<< HEAD
     /** @var bool Whether the code is running with PHP >= 8.1 */
     private $isRunningAtLeastPhp81;
 
@@ -42,6 +46,8 @@ class Reader extends ReaderAbstract
         $this->isRunningAtLeastPhp81 = \version_compare(PHP_VERSION, '8.1.0') >= 0;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Sets the field delimiter for the CSV.
      * Needs to be called before opening the reader.
@@ -104,11 +110,16 @@ class Reader extends ReaderAbstract
      */
     protected function openReader($filePath)
     {
+<<<<<<< HEAD
         // "auto_detect_line_endings" is deprecated in PHP 8.1
         if (!$this->isRunningAtLeastPhp81) {
             $this->originalAutoDetectLineEndings = \ini_get('auto_detect_line_endings');
             \ini_set('auto_detect_line_endings', '1');
         }
+=======
+        $this->originalAutoDetectLineEndings = \ini_get('auto_detect_line_endings');
+        \ini_set('auto_detect_line_endings', '1');
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->filePointer = $this->globalFunctionsHelper->fopen($filePath, 'r');
         if (!$this->filePointer) {
@@ -146,9 +157,13 @@ class Reader extends ReaderAbstract
             $this->globalFunctionsHelper->fclose($this->filePointer);
         }
 
+<<<<<<< HEAD
         // "auto_detect_line_endings" is deprecated in PHP 8.1
         if (!$this->isRunningAtLeastPhp81) {
             \ini_set('auto_detect_line_endings', $this->originalAutoDetectLineEndings);
         }
+=======
+        \ini_set('auto_detect_line_endings', $this->originalAutoDetectLineEndings);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

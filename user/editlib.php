@@ -48,11 +48,19 @@ function useredit_setup_preference_page($userid, $courseid) {
 
     // Guest can not edit.
     if (isguestuser()) {
+<<<<<<< HEAD
         throw new \moodle_exception('guestnoeditprofile');
     }
 
     if (!$course = $DB->get_record('course', array('id' => $courseid))) {
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('guestnoeditprofile');
+    }
+
+    if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if ($course->id != SITEID) {
@@ -68,19 +76,31 @@ function useredit_setup_preference_page($userid, $courseid) {
 
     // The user profile we are editing.
     if (!$user = $DB->get_record('user', array('id' => $userid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invaliduserid');
+=======
+        print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Guest can not be edited.
     if (isguestuser($user)) {
+<<<<<<< HEAD
         throw new \moodle_exception('guestnoeditprofile');
+=======
+        print_error('guestnoeditprofile');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Remote users cannot be edited.
     if (is_mnet_remote_user($user)) {
         if (user_not_fully_set_up($user, false)) {
             $hostwwwroot = $DB->get_field('mnet_host', 'wwwroot', array('id' => $user->mnethostid));
+<<<<<<< HEAD
             throw new \moodle_exception('usernotfullysetup', 'mnet', '', $hostwwwroot);
+=======
+            print_error('usernotfullysetup', 'mnet', '', $hostwwwroot);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         redirect($CFG->wwwroot . "/user/view.php?course={$course->id}");
     }
@@ -92,7 +112,11 @@ function useredit_setup_preference_page($userid, $courseid) {
     if ($user->id == $USER->id) {
         // Editing own profile - require_login() MUST NOT be used here, it would result in infinite loop!
         if (!has_capability('moodle/user:editownprofile', $systemcontext)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotedityourprofile');
+=======
+            print_error('cannotedityourprofile');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
     } else {
@@ -101,7 +125,11 @@ function useredit_setup_preference_page($userid, $courseid) {
 
         // No editing of primary admin!
         if (is_siteadmin($user) and !is_siteadmin($USER)) {  // Only admins may edit other admins.
+<<<<<<< HEAD
             throw new \moodle_exception('useradmineditadmin');
+=======
+            print_error('useradmineditadmin');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 

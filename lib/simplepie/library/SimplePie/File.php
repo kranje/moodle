@@ -106,7 +106,11 @@ class SimplePie_File
 				curl_setopt($fp, CURLOPT_FAILONERROR, 1);
 				curl_setopt($fp, CURLOPT_TIMEOUT, $timeout);
 				curl_setopt($fp, CURLOPT_CONNECTTIMEOUT, $timeout);
+<<<<<<< HEAD
 				curl_setopt($fp, CURLOPT_REFERER, SimplePie_Misc::url_remove_credentials($url));
+=======
+				curl_setopt($fp, CURLOPT_REFERER, $url);
+>>>>>>> forked/LAE_400_PACKAGE
 				curl_setopt($fp, CURLOPT_USERAGENT, $useragent);
 				curl_setopt($fp, CURLOPT_HTTPHEADER, $headers2);
 				foreach ($curl_options as $curl_param => $curl_value) {
@@ -119,7 +123,10 @@ class SimplePie_File
 					curl_setopt($fp, CURLOPT_ENCODING, 'none');
 					$this->headers = curl_exec($fp);
 				}
+<<<<<<< HEAD
 				$this->status_code = curl_getinfo($fp, CURLINFO_HTTP_CODE);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 				if (curl_errno($fp))
 				{
 					$this->error = 'cURL error ' . curl_errno($fp) . ': ' . curl_error($fp);
@@ -299,5 +306,8 @@ class SimplePie_File
 		}
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_File', 'SimplePie\File', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

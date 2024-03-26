@@ -21,8 +21,13 @@ namespace core_reportbuilder\external;
 use pix_icon;
 use renderer_base;
 use core\external\exporter;
+<<<<<<< HEAD
 use core_reportbuilder\datasource;
 use core_reportbuilder\local\models\column;
+=======
+use core_reportbuilder\local\models\column;
+use core_reportbuilder\local\report\base;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Custom report columns sorting exporter class
@@ -40,7 +45,11 @@ class custom_report_columns_sorting_exporter extends exporter {
      */
     protected static function define_related(): array {
         return [
+<<<<<<< HEAD
             'report' => datasource::class,
+=======
+            'report' => base::class,
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -53,6 +62,10 @@ class custom_report_columns_sorting_exporter extends exporter {
         return [
             'hassortablecolumns' => [
                 'type' => PARAM_BOOL,
+<<<<<<< HEAD
+=======
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
             'sortablecolumns' => [
                 'type' => [
@@ -60,7 +73,11 @@ class custom_report_columns_sorting_exporter extends exporter {
                     'title' => ['type' => PARAM_TEXT],
                     'heading' => ['type' => PARAM_TEXT],
                     'sortdirection' => ['type' => PARAM_INT],
+<<<<<<< HEAD
                     'sortenabled' => ['type' => PARAM_BOOL],
+=======
+                    'sortenabled' => ['type' => PARAM_INT],
+>>>>>>> forked/LAE_400_PACKAGE
                     'sortorder' => ['type' => PARAM_INT],
                     'sorticon' => [
                         'type' => [
@@ -72,10 +89,18 @@ class custom_report_columns_sorting_exporter extends exporter {
                     'movetitle' => ['type' => PARAM_TEXT],
                     'sortenabledtitle' => ['type' => PARAM_TEXT],
                 ],
+<<<<<<< HEAD
+=======
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
                 'multiple' => true,
             ],
             'helpicon' => [
                 'type' => PARAM_RAW,
+<<<<<<< HEAD
+=======
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
         ];
     }
@@ -87,7 +112,11 @@ class custom_report_columns_sorting_exporter extends exporter {
      * @return array
      */
     protected function get_other_values(renderer_base $output): array {
+<<<<<<< HEAD
         /** @var datasource $report */
+=======
+        /** @var base $report */
+>>>>>>> forked/LAE_400_PACKAGE
         $report = $this->related['report'];
 
         $reportid = $report->get_report_persistent()->get('id');
@@ -117,7 +146,11 @@ class custom_report_columns_sorting_exporter extends exporter {
                 'title' => $columntitle,
                 'heading' => $columnheading !== '' ? $columnheading : $columntitle,
                 'sortdirection' => $persistent->get('sortdirection'),
+<<<<<<< HEAD
                 'sortenabled' => $persistent->get('sortenabled'),
+=======
+                'sortenabled' => (int)$persistent->get('sortenabled'),
+>>>>>>> forked/LAE_400_PACKAGE
                 'sortorder' => $persistent->get('sortorder'),
                 'sorticon' => $sorticon->export_for_pix(),
                 'movetitle' => get_string('movesorting', 'core_reportbuilder', $columntitle),

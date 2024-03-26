@@ -57,7 +57,11 @@ Feature: File types of the submission and feedback attachments can be limitted
   Scenario: Overall feedback attachments obey the list of allowed file types
     # Define workshop to accept only .php files as overall feedback attachments.
     Given I am on the "Course1" course page logged in as teacher1
+<<<<<<< HEAD
     And I edit assessment form in workshop "TestWorkshop" as:"
+=======
+    And I edit assessment form in workshop "TestWorkshop" as:
+>>>>>>> forked/LAE_400_PACKAGE
       | id_description__idx_0_editor | Aspect1 |
       | id_description__idx_1_editor | Aspect2 |
       | id_description__idx_2_editor |         |
@@ -69,12 +73,20 @@ Feature: File types of the submission and feedback attachments can be limitted
     And I change phase in workshop "TestWorkshop" to "Submission phase"
     # As a student, attempt to attach an invalid file.
     And I am on the TestWorkshop "workshop activity" page logged in as student1
+<<<<<<< HEAD
     And I add a submission in workshop "TestWorkshop" as:"
+=======
+    And I add a submission in workshop "TestWorkshop" as:
+>>>>>>> forked/LAE_400_PACKAGE
       | Title              | Submission1  |
       | Submission content | Some content |
     # As a teacher, allocate that submission to be assessed by another student.
     And I am on the TestWorkshop "workshop activity" page logged in as teacher1
+<<<<<<< HEAD
     And I allocate submissions in workshop "TestWorkshop" as:"
+=======
+    And I allocate submissions in workshop "TestWorkshop" as:
+>>>>>>> forked/LAE_400_PACKAGE
       | Participant   | Reviewer      |
       | Sam1 Student1 | Sam2 Student2 |
     And I change phase in workshop "TestWorkshop" to "Assessment phase"

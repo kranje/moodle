@@ -17,12 +17,18 @@
 namespace mod_data\form;
 
 use context;
+<<<<<<< HEAD
 use core\notification;
 use moodle_exception;
 use moodle_url;
 use core_form\dynamic_form;
 use mod_data\manager;
 use mod_data\preset;
+=======
+use moodle_exception;
+use moodle_url;
+use core_form\dynamic_form;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Save database as preset form.
@@ -40,6 +46,7 @@ class save_as_preset extends dynamic_form {
 
         $this->_form->addElement('hidden', 'd');
         $this->_form->setType('d', PARAM_INT);
+<<<<<<< HEAD
         $this->_form->addElement('hidden', 'action', 'save');
         $this->_form->setType('action', PARAM_ALPHANUM);
         $this->_form->addElement('hidden', 'oldpresetname', '');
@@ -54,6 +61,14 @@ class save_as_preset extends dynamic_form {
 
         $this->_form->addElement('textarea', 'description', get_string('description'), ['rows' => 5, 'cols' => 60]);
         $this->_form->setType('name', PARAM_TEXT);
+=======
+        $this->_form->addElement('hidden', 'action', 'save2');
+        $this->_form->setType('action', PARAM_ALPHANUM);
+        $this->_form->addElement('text', 'name', get_string('name'), ['size' => 60]);
+        $this->_form->setType('name', PARAM_FILE);
+        $this->_form->addRule('name', null, 'required');
+        $this->_form->addElement('checkbox', 'overwrite', '', get_string('overrwritedesc', 'data'));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -83,11 +98,17 @@ class save_as_preset extends dynamic_form {
 
         $errors = parent::validation($formdata, $files);
         $context = $this->get_context_for_dynamic_submission();
+<<<<<<< HEAD
         $cm = get_coursemodule_from_id('', $context->instanceid, 0, false, MUST_EXIST);
         $manager = manager::create_from_coursemodule($cm);
 
         if (!empty($formdata['overwrite'])) {
             $presets = $manager->get_available_presets();
+=======
+
+        if (!empty($formdata['overwrite'])) {
+            $presets = data_get_available_presets($context);
+>>>>>>> forked/LAE_400_PACKAGE
             $selectedpreset = new \stdClass();
             foreach ($presets as $preset) {
                 if ($preset->name == $formdata['name']) {
@@ -95,6 +116,7 @@ class save_as_preset extends dynamic_form {
                     break;
                 }
             }
+<<<<<<< HEAD
             if (!$selectedpreset instanceof preset || !$selectedpreset->can_manage()) {
                 $errors['name'] = get_string('cannotoverwritepreset', 'data');
             }
@@ -118,6 +140,19 @@ class save_as_preset extends dynamic_form {
             if (!empty($errors) && $usercandelete) {
                 $this->_form->getElement('overwrite')->removeAttribute('class');
             }
+=======
+            if (isset($selectedpreset->name) && !data_user_can_delete_preset($context, $selectedpreset)) {
+                $errors['name'] = get_string('cannotoverwritepreset', 'data');
+            }
+        } else {
+            // If the preset exists now then we need to throw an error.
+            $sitepresets = data_get_available_site_presets($context);
+            foreach ($sitepresets as $preset) {
+                if ($formdata['name'] == $preset->name) {
+                    $errors['name'] = get_string('errorpresetexists', 'data');
+                }
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $errors;
@@ -136,6 +171,7 @@ class save_as_preset extends dynamic_form {
             throw new moodle_exception('saveaspresetmissingcapability', 'data');
         }
 
+<<<<<<< HEAD
         $action = $this->optional_param('action', '', PARAM_ALPHANUM);
         if ($action == 'saveaspreset') {
             // For saving it as a new preset, some fields need to be created; otherwise, an exception will be raised.
@@ -145,6 +181,13 @@ class save_as_preset extends dynamic_form {
             if (!$hasfields) {
                 throw new moodle_exception('nofieldindatabase', 'data');
             }
+=======
+        $d = $this->optional_param('d', null, PARAM_INT);
+        $hasfields = $DB->record_exists('data_fields', ['dataid' => $d]);
+
+        if (!$hasfields) {
+            throw new moodle_exception('nofieldindatabase', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -157,25 +200,40 @@ class save_as_preset extends dynamic_form {
         global $DB, $CFG;
         require_once($CFG->dirroot . '/mod/data/lib.php');
 
+<<<<<<< HEAD
         $formdata = $this->get_data();
         $result = false;
         $errors = [];
         $data = $DB->get_record('data', array('id' => $formdata->d), '*', MUST_EXIST);
+=======
+        $result = false;
+        $errors = [];
+        $data = $DB->get_record('data', array('id' => $this->get_data()->d), '*', MUST_EXIST);
+>>>>>>> forked/LAE_400_PACKAGE
         $course = $DB->get_record('course', array('id' => $data->course), '*', MUST_EXIST);
         $cm = get_coursemodule_from_instance('data', $data->id, $course->id, null, MUST_EXIST);
         $context = \context_module::instance($cm->id, MUST_EXIST);
 
         try {
+<<<<<<< HEAD
             $manager = manager::create_from_instance($data);
             if (!empty($formdata->overwrite)) {
                 $presets = $manager->get_available_presets();
                 $selectedpreset = new \stdClass();
                 foreach ($presets as $preset) {
                     if ($preset->name == $formdata->name) {
+=======
+            if (!empty($this->get_data()->overwrite)) {
+                $presets = data_get_available_presets($context);
+                $selectedpreset = new \stdClass();
+                foreach ($presets as $preset) {
+                    if ($preset->name == $this->get_data()->name) {
+>>>>>>> forked/LAE_400_PACKAGE
                         $selectedpreset = $preset;
                         break;
                     }
                 }
+<<<<<<< HEAD
                 if ($selectedpreset instanceof preset && $selectedpreset->can_manage()) {
                     $selectedpreset->delete();
                 }
@@ -202,6 +260,16 @@ class save_as_preset extends dynamic_form {
             }
         } catch (\Exception $exception) {
             $errors[] = $exception->getMessage();
+=======
+                if (isset($selectedpreset->name) && data_user_can_delete_preset($context, $selectedpreset)) {
+                    data_delete_site_preset($this->get_data()->name);
+                }
+            }
+            data_presets_save($course, $cm, $data, $this->get_data()->name);
+            $result = true;
+        } catch (\Exception $e) {
+            $errors[] = $e->getMessage();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return [
@@ -218,10 +286,13 @@ class save_as_preset extends dynamic_form {
     public function set_data_for_dynamic_submission(): void {
         $data = (object)[
             'd' => $this->optional_param('d', 0, PARAM_INT),
+<<<<<<< HEAD
             'action' => $this->optional_param('action', '', PARAM_ALPHANUM),
             'oldpresetname' => $this->optional_param('presetname', '', PARAM_FILE),
             'name' => $this->optional_param('presetname', '', PARAM_FILE),
             'description' => $this->optional_param('presetdescription', '', PARAM_TEXT),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
         $this->set_data($data);
     }

@@ -99,8 +99,11 @@ function bigbluebuttonbn_add_instance($bigbluebuttonbn) {
     $bigbluebuttonbn->presentation = files::save_media_file($bigbluebuttonbn);
     // Encode meetingid.
     $bigbluebuttonbn->meetingid = meeting::get_unique_meetingid_seed();
+<<<<<<< HEAD
     [$bigbluebuttonbn->guestlinkuid, $bigbluebuttonbn->guestpassword] =
         \mod_bigbluebuttonbn\plugin::generate_guest_meeting_credentials();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     // Insert a record.
     $bigbluebuttonbn->id = $DB->insert_record('bigbluebuttonbn', $bigbluebuttonbn);
     // Log insert action.
@@ -127,10 +130,13 @@ function bigbluebuttonbn_update_instance($bigbluebuttonbn) {
     $bigbluebuttonbn->id = $bigbluebuttonbn->instance;
     $bigbluebuttonbn->presentation = files::save_media_file($bigbluebuttonbn);
 
+<<<<<<< HEAD
     if (empty($bigbluebuttonbn->guestjoinurl) || empty($bigbluebuttonbn->guestpassword)) {
         [$bigbluebuttonbn->guestlinkuid, $bigbluebuttonbn->guestpassword] =
             \mod_bigbluebuttonbn\plugin::generate_guest_meeting_credentials();
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     // Update a record.
     $DB->update_record('bigbluebuttonbn', $bigbluebuttonbn);
 
@@ -165,12 +171,24 @@ function bigbluebuttonbn_delete_instance($id) {
     try {
         $meeting = new meeting($instance);
         $meeting->end_meeting();
+<<<<<<< HEAD
+=======
+        $groups = groups_get_course_group($instance->get_course());
+        if ($groups) {
+            foreach ($groups as $group) {
+                $instance->set_group_id($group->id);
+                $meeting = new meeting($instance);
+                $meeting->end_meeting();
+            }
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     } catch (moodle_exception $e) {
         // Do not log any issue when testing.
         if (!(defined('PHPUNIT_TEST') && PHPUNIT_TEST) && !defined('BEHAT_SITE_RUNNING')) {
             debugging($e->getMessage(), DEBUG_DEVELOPER, $e->getTrace());
         }
     }
+<<<<<<< HEAD
     // Get all possible groups (course and course module).
     $groupids = [];
     if (groups_get_activity_groupmode($instance->get_cm())) {
@@ -191,6 +209,8 @@ function bigbluebuttonbn_delete_instance($id) {
             debugging($e->getMessage() . ' for group ' . $groupid, DEBUG_NORMAL, $e->getTrace());
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     $result = true;
 

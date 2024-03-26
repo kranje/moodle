@@ -431,7 +431,11 @@ class mod_workshop_renderer extends plugin_renderer_base {
         $userinfo   = $data->userinfo;
 
         if (empty($grades)) {
+<<<<<<< HEAD
             return $this->output->notification(get_string('nothingtodisplay'), 'success', false);
+=======
+            return '';
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $table = new html_table();
@@ -822,6 +826,7 @@ class mod_workshop_renderer extends plugin_renderer_base {
     }
 
     /**
+<<<<<<< HEAD
      * Render the initials bars for workshop.
      *
      * @param workshop $workshop the current workshop of initial bars.
@@ -838,6 +843,8 @@ class mod_workshop_renderer extends plugin_renderer_base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Renders the user's final grades
      *
      * @param workshop_final_grades $grades with the info about grades in the gradebook

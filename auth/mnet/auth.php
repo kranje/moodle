@@ -61,7 +61,11 @@ class auth_plugin_mnet extends auth_plugin_base {
      * @return bool Authentication success or failure.
      */
     function user_login($username, $password) {
+<<<<<<< HEAD
         return false; // Throw moodle_exception("mnetlocal").
+=======
+        return false; // print_error("mnetlocal");
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -152,7 +156,11 @@ class auth_plugin_mnet extends auth_plugin_base {
         require_once $CFG->dirroot . '/mnet/xmlrpc/client.php';
 
         if (\core\session\manager::is_loggedinas()) {
+<<<<<<< HEAD
             throw new \moodle_exception('notpermittedtojumpas', 'mnet');
+=======
+            print_error('notpermittedtojumpas', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // check remote login permissions
@@ -160,12 +168,20 @@ class auth_plugin_mnet extends auth_plugin_base {
                 or is_mnet_remote_user($USER)
                 or isguestuser()
                 or !isloggedin()) {
+<<<<<<< HEAD
             throw new \moodle_exception('notpermittedtojump', 'mnet');
+=======
+            print_error('notpermittedtojump', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // check for SSO publish permission first
         if ($this->has_service($mnethostid, 'sso_sp') == false) {
+<<<<<<< HEAD
             throw new \moodle_exception('hostnotconfiguredforsso', 'mnet');
+=======
+            print_error('hostnotconfiguredforsso', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // set RPC timeout to 30 seconds if not configured
@@ -230,7 +246,11 @@ class auth_plugin_mnet extends auth_plugin_base {
 
         // verify the remote host is configured locally before attempting RPC call
         if (! $remotehost = $DB->get_record('mnet_host', array('wwwroot' => $remotepeer->wwwroot, 'deleted' => 0))) {
+<<<<<<< HEAD
             throw new \moodle_exception('notpermittedtoland', 'mnet');
+=======
+            print_error('notpermittedtoland', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // set up the RPC request
@@ -249,23 +269,39 @@ class auth_plugin_mnet extends auth_plugin_base {
                 list($code, $message) = array_map('trim',explode(':', $errormessage, 2));
                 if($code == 702) {
                     $site = get_site();
+<<<<<<< HEAD
                     throw new \moodle_exception('mnet_session_prohibited', 'mnet', $remotepeer->wwwroot,
                         format_string($site->fullname));
+=======
+                    print_error('mnet_session_prohibited', 'mnet', $remotepeer->wwwroot, format_string($site->fullname));
+>>>>>>> forked/LAE_400_PACKAGE
                     exit;
                 }
                 $message .= "ERROR $code:<br/>$errormessage<br/>";
             }
+<<<<<<< HEAD
             throw new \moodle_exception("rpcerror", '', '', $message);
+=======
+            print_error("rpcerror", '', '', $message);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         unset($mnetrequest);
 
         if (empty($remoteuser) or empty($remoteuser->username)) {
+<<<<<<< HEAD
             throw new \moodle_exception('unknownerror', 'mnet');
+=======
+            print_error('unknownerror', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
             exit;
         }
 
         if (user_not_fully_set_up($remoteuser, false)) {
+<<<<<<< HEAD
             throw new \moodle_exception('notenoughidpinfo', 'mnet');
+=======
+            print_error('notenoughidpinfo', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
             exit;
         }
 
@@ -290,7 +326,11 @@ class auth_plugin_mnet extends auth_plugin_base {
         if (empty($localuser) || ! $localuser->id) {
             /*
             if (empty($this->config->auto_add_remote_users)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('nolocaluser', 'mnet');
+=======
+                print_error('nolocaluser', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
             } See MDL-21327   for why this is commented out
             */
             $remoteuser->mnethostid = $remotehost->id;
@@ -304,8 +344,12 @@ class auth_plugin_mnet extends auth_plugin_base {
 
         // check sso access control list for permission first
         if (!$this->can_login_remotely($localuser->username, $remotehost->id)) {
+<<<<<<< HEAD
             throw new \moodle_exception('sso_mnet_login_refused', 'mnet', '',
                 array('user' => $localuser->username, 'host' => $remotehost->name));
+=======
+            print_error('sso_mnet_login_refused', 'mnet', '', array('user'=>$localuser->username, 'host'=>$remotehost->name));
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $fs = get_file_storage();
@@ -418,7 +462,11 @@ class auth_plugin_mnet extends auth_plugin_base {
                 // we may be clearing out stale entries
                 $courses = array();
             }
+<<<<<<< HEAD
             $mnetrequest->add_param($courses, 'array');
+=======
+            $mnetrequest->add_param($courses);
+>>>>>>> forked/LAE_400_PACKAGE
 
             // Call 0800-RPC Now! -- we don't care too much if it fails
             // as it's just informational.

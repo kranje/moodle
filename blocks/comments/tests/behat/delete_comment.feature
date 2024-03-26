@@ -17,6 +17,7 @@ Feature: Delete comment block messages
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
     And I add the "Comments" block
@@ -27,6 +28,14 @@ Feature: Delete comment block messages
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
+=======
+    And the following "blocks" exist:
+      | blockname | contextlevel | reference | pagetypepattern | defaultregion |
+      | comments  | Course       | C1        | course-view-*   | side-pre      |
+    And I am on the "Course 1" course page logged in as student1
+    And I add "Comment from student1" comment to comments block
+    And I am on the "Course 1" course page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I add "Comment from teacher1" comment to comments block
     When I delete "Comment from student1" comment from comments block
     Then I should not see "Comment from student1"

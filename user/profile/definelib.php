@@ -284,11 +284,19 @@ function profile_delete_category($id) {
 
     // Retrieve the category.
     if (!$category = $DB->get_record('user_info_category', array('id' => $id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcategoryid');
     }
 
     if (!$categories = $DB->get_records('user_info_category', null, 'sortorder ASC')) {
         throw new \moodle_exception('nocate', 'debug');
+=======
+        print_error('invalidcategoryid');
+    }
+
+    if (!$categories = $DB->get_records('user_info_category', null, 'sortorder ASC')) {
+        print_error('nocate', 'debug');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     unset($categories[$category->id]);
@@ -343,7 +351,11 @@ function profile_delete_field($id) {
 
     // Remove any user data associated with this field.
     if (!$DB->delete_records('user_info_data', array('fieldid' => $id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotdeletecustomfield');
+=======
+        print_error('cannotdeletecustomfield');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Note: Any availability conditions that depend on this field will remain,

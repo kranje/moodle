@@ -132,7 +132,11 @@ class helper_test extends \advanced_testcase {
         ob_start();
         $pagevars = [
             'qpage' => 0,
+<<<<<<< HEAD
             'qperpage' => DEFAULT_QUESTIONS_PER_PAGE,
+=======
+            'qperpage' => 20,
+>>>>>>> forked/LAE_400_PACKAGE
             'cat' => $this->cat->id . ',' . $this->context->id,
             'recurse' => false,
             'showhidden' => false,
@@ -153,7 +157,11 @@ class helper_test extends \advanced_testcase {
         ob_start();
         $pagevars = [
             'qpage' => 0,
+<<<<<<< HEAD
             'qperpage' => DEFAULT_QUESTIONS_PER_PAGE,
+=======
+            'qperpage' => 20,
+>>>>>>> forked/LAE_400_PACKAGE
             'cat' => $this->cat->id . ',' . $this->context->id,
             'recurse' => false,
             'showhidden' => false,
@@ -169,7 +177,11 @@ class helper_test extends \advanced_testcase {
         ob_start();
         $pagevars = [
             'qpage' => 0,
+<<<<<<< HEAD
             'qperpage' => DEFAULT_QUESTIONS_PER_PAGE,
+=======
+            'qperpage' => 20,
+>>>>>>> forked/LAE_400_PACKAGE
             'cat' => $this->secondcategory->id . ',' . $this->context->id,
             'category' => $this->secondcategory->id . ',' . $this->context->id,
             'recurse' => false,

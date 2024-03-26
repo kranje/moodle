@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 VideoJS 7.20.3
+=======
+VideoJS 7.17.0
+>>>>>>> forked/LAE_400_PACKAGE
 --------------
 https://github.com/videojs/video.js
 

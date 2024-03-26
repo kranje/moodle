@@ -31,6 +31,7 @@ import {
 
 import {eventTypes, notifyCurrentSessionEnded} from './events';
 
+<<<<<<< HEAD
 /**
  * Init the room
  *
@@ -38,6 +39,11 @@ import {eventTypes, notifyCurrentSessionEnded} from './events';
  * @param {Number} pollInterval poll interval in miliseconds
  */
 export const init = (bigbluebuttonbnid, pollInterval) => {
+=======
+const timeoutjoin = 5000;
+
+export const init = (bigbluebuttonbnid) => {
+>>>>>>> forked/LAE_400_PACKAGE
     const completionElement = document.querySelector('a[href*=completion_validate]');
     if (completionElement) {
         completionElement.addEventListener("click", () => {
@@ -50,10 +56,17 @@ export const init = (bigbluebuttonbnid, pollInterval) => {
         if (joinButton) {
             window.open(joinButton.href, 'bigbluebutton_conference');
             e.preventDefault();
+<<<<<<< HEAD
             // Gives the user a bit of time to go into the meeting before polling the room.
             setTimeout(() => {
                 roomUpdater.updateRoom(true);
             }, pollInterval);
+=======
+            // Gives the user a bit of time to go into the meeting.
+            setTimeout(() => {
+                roomUpdater.updateRoom(true);
+                }, timeoutjoin);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     });
 
@@ -69,11 +82,26 @@ export const init = (bigbluebuttonbnid, pollInterval) => {
         fetchNotifications();
     });
     // Room update.
+<<<<<<< HEAD
     roomUpdater.start(pollInterval);
+=======
+    roomUpdater.start();
+};
+
+/**
+ * Handle autoclosing of the window.
+ */
+const autoclose = () => {
+    window.opener.setTimeout(() => {
+        roomUpdater.updateRoom(true);
+    }, timeoutjoin);
+    window.removeEventListener('onbeforeunload', autoclose);
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**
  * Auto close child windows when clicking the End meeting button.
+<<<<<<< HEAD
  * @param {Number} closeDelay time to wait in miliseconds before closing the window
  */
 export const setupWindowAutoClose = (closeDelay = 2000) => {
@@ -86,5 +114,12 @@ export const setupWindowAutoClose = (closeDelay = 2000) => {
         {
             once: true
         });
+=======
+ */
+export const setupWindowAutoClose = () => {
+    notifyCurrentSessionEnded(window.opener);
+    window.addEventListener('onbeforeunload', autoclose);
+
+>>>>>>> forked/LAE_400_PACKAGE
     window.close(); // This does not work as scripts can only close windows that are opened by themselves.
 };

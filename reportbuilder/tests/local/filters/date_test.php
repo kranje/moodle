@@ -243,9 +243,12 @@ class date_test extends advanced_testcase {
             'Next two weeks' => [date::DATE_NEXT, 2, date::DATE_UNIT_WEEK, '+10 day'],
             'Next two months' => [date::DATE_NEXT, 2, date::DATE_UNIT_MONTH, '+7 week'],
             'Next two years' => [date::DATE_NEXT, 2, date::DATE_UNIT_YEAR, '+15 month'],
+<<<<<<< HEAD
 
             'In the past' => [date::DATE_PAST, null, null, '-3 hour'],
             'In the future' => [date::DATE_FUTURE, null, null, '+3 hour'],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -254,12 +257,20 @@ class date_test extends advanced_testcase {
      *
      * @param int $operator
      * @param int|null $unitvalue
+<<<<<<< HEAD
      * @param int|null $unit
+=======
+     * @param int $unit
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string|null $timecreated Relative time suitable for passing to {@see strtotime} (or null for current time)
      *
      * @dataProvider get_sql_filter_relative_provider
      */
+<<<<<<< HEAD
     public function test_get_sql_filter_relative(int $operator, ?int $unitvalue, ?int $unit, ?string $timecreated = null): void {
+=======
+    public function test_get_sql_filter_relative(int $operator, ?int $unitvalue, int $unit, ?string $timecreated = null): void {
+>>>>>>> forked/LAE_400_PACKAGE
         global $DB;
 
         $this->resetAfterTest();

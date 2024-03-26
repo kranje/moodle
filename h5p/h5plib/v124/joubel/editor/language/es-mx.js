@@ -49,12 +49,20 @@ H5PEditor.language.core = {
   selectFiletoUpload: 'Seleccione el archivo a subir',
   or: 'o',
   enterAudioUrl: 'Introduzca la URL del origen del audio',
+<<<<<<< HEAD
   enterVideoUrl: 'Enter video URL',
+=======
+  enterVideoUrl: 'Introduzca la URL del origen del video o link en Youtube',
+>>>>>>> forked/LAE_400_PACKAGE
   enterAudioTitle: 'Pegue el link u otra fuente de audio',
   enterVideoTitle: 'Peque el link de Youtube o la URL de la fuente del video',
   uploadAudioTitle: 'Subir archivo de audio',
   uploadVideoTitle: 'Subir archivo de video',
+<<<<<<< HEAD
   addVideoDescription: 'H5P supports all external video sources formatted as mp4, webm or ogv, like Vimeo Pro, and has support for YouTube and Panopto links.',
+=======
+  addVideoDescription: 'H5P soporta todas las fuentes de vídeo externas con formato mp4, webm u ogv, como Vimeo Pro, y tiene soporte para enlaces de YouTube.',
+>>>>>>> forked/LAE_400_PACKAGE
   insert: 'Insertar',
   cancel: 'Cancelar',
   height: 'altura',
@@ -214,7 +222,10 @@ H5PEditor.language.core = {
   proceedButtonLabel: 'Proceder a guardar',
   enterFullscreenButtonLabel: 'Ir a pantalla completa',
   exitFullscreenButtonLabel: 'Salir de pantalla completa',
+<<<<<<< HEAD
   a11yTitleShowLabel: 'Show label for AT',
   a11yTitleHideLabel: 'Hide label for AT',
   reuseSuccess: ':title was successfully imported from the H5P Hub.',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 };

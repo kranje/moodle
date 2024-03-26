@@ -30,6 +30,7 @@ Feature: Export calendar events
     And I should see "Events related to groups"
     And I should see "My personal events"
 
+<<<<<<< HEAD
   @javascript
   Scenario: Export calendar in ics format
     And I follow "Full calendar"
@@ -49,6 +50,8 @@ Feature: Export calendar events
     And I should see "##today##DTSTART:%Y%m##"
     And I should see "##today##%dT050000Z##"
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Generating calendar URL for all events
     Given I follow "Full calendar"
     And I click on "Import or export calendars" "link"

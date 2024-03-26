@@ -49,7 +49,11 @@ list($options, $unrecognized) = cli_get_params(
         'torun'    => 0,
         'optimize-runs' => '',
         'add-core-features-to-theme' => false,
+<<<<<<< HEAD
         'axe'      => false,
+=======
+        'axe'      => null,
+>>>>>>> forked/LAE_400_PACKAGE
         'disable-composer' => false,
         'composer-upgrade' => true,
         'composer-self-update' => true,
@@ -69,7 +73,11 @@ Behat utilities to initialise behat tests
 
 Usage:
   php init.php      [--parallel=value [--maxruns=value] [--fromrun=value --torun=value]]
+<<<<<<< HEAD
                     [--axe] [-o | --optimize-runs] [-a | --add-core-features-to-theme]
+=======
+                    [--no-axe] [-o | --optimize-runs] [-a | --add-core-features-to-theme]
+>>>>>>> forked/LAE_400_PACKAGE
                     [--no-composer-self-update] [--no-composer-upgrade]
                     [--disable-composer]
                     [--help]
@@ -79,7 +87,11 @@ Options:
 -m, --maxruns       Max parallel processes to be executed at one time
 --fromrun           Execute run starting from (Used for parallel runs on different vms)
 --torun             Execute run till (Used for parallel runs on different vms)
+<<<<<<< HEAD
 --axe               Include axe accessibility tests
+=======
+--no-axe            Disable axe accessibility tests.
+>>>>>>> forked/LAE_400_PACKAGE
 
 -o, --optimize-runs
                     Split features with specified tags in all parallel runs.
@@ -110,6 +122,15 @@ if (!empty($options['help'])) {
     exit(0);
 }
 
+<<<<<<< HEAD
+=======
+if ($options['axe']) {
+    echo "Axe accessibility tests are enabled by default, to disable them, use the --no-axe option.\n";
+} else if ($options['axe'] === false) {
+    echo "Axe accessibility tests have been disabled.\n";
+}
+
+>>>>>>> forked/LAE_400_PACKAGE
 // Check which util file to call.
 $utilfile = 'util_single_run.php';
 $commandoptions = "";
@@ -118,9 +139,13 @@ if ($options['parallel'] && $options['parallel'] > 1) {
     $utilfile = 'util.php';
     // Sanitize all input options, so they can be passed to util.
     foreach ($options as $option => $value) {
+<<<<<<< HEAD
         if ($value) {
             $commandoptions .= " --$option=\"$value\"";
         }
+=======
+        $commandoptions .= behat_get_command_flags($option, $value);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 } else {
     // Only sanitize options for single run.
@@ -130,9 +155,13 @@ if ($options['parallel'] && $options['parallel'] > 1) {
     ];
 
     foreach ($cmdoptionsforsinglerun as $option) {
+<<<<<<< HEAD
         if (!empty($options[$option])) {
             $commandoptions .= " --$option='$options[$option]'";
         }
+=======
+        $commandoptions .= behat_get_command_flags($option, $options[$option]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

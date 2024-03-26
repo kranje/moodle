@@ -113,7 +113,10 @@ $string['eventkind'] = 'Type of event';
 $string['eventname'] = 'Event title';
 $string['eventnameandcategory'] = '{$a->category}: {$a->name}';
 $string['eventnameandcourse'] = '{$a->course}: {$a->name}';
+<<<<<<< HEAD
 $string['eventnamelocation'] = '{$a->name} location: {$a->location}';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['eventnone'] = 'No events';
 $string['eventrepeat'] = 'Repeats';
 $string['events'] = 'Events';

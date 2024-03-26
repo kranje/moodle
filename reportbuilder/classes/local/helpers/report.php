@@ -391,6 +391,7 @@ class report {
      *
      * @param report_model $persistent
      * @return array
+<<<<<<< HEAD
      *
      * @deprecated since Moodle 4.1 - please do not use this function any more, {@see custom_report_column_cards_exporter}
      */
@@ -398,6 +399,10 @@ class report {
         debugging('The function ' . __FUNCTION__ . '() is deprecated, please do not use it any more. ' .
             'See \'custom_report_column_cards_exporter\' class for replacement', DEBUG_DEVELOPER);
 
+=======
+     */
+    public static function get_available_columns(report_model $persistent) : array {
+>>>>>>> forked/LAE_400_PACKAGE
         $available = [];
 
         $report = manager::get_report_from_persistent($persistent);

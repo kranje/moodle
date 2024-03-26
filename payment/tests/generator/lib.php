@@ -15,7 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+<<<<<<< HEAD
  * Payment module test data generator class
+=======
+ * Quiz module test data generator class
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * @package    core_payment
  * @category   test

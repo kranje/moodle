@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,17 +41,25 @@ use MongoDB\Model\BSONDocument;
 use MongoDB\Model\CollectionInfoIterator;
 use MongoDB\Operation\Aggregate;
 use MongoDB\Operation\CreateCollection;
+<<<<<<< HEAD
 use MongoDB\Operation\CreateIndexes;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use MongoDB\Operation\DatabaseCommand;
 use MongoDB\Operation\DropCollection;
 use MongoDB\Operation\DropDatabase;
 use MongoDB\Operation\ListCollectionNames;
 use MongoDB\Operation\ListCollections;
 use MongoDB\Operation\ModifyCollection;
+<<<<<<< HEAD
 use MongoDB\Operation\RenameCollection;
 use MongoDB\Operation\Watch;
 use Traversable;
 
+=======
+use MongoDB\Operation\Watch;
+use Traversable;
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_array;
 use function strlen;
 
@@ -57,6 +73,15 @@ class Database
     ];
 
     /** @var integer */
+<<<<<<< HEAD
+=======
+    private static $wireVersionForReadConcern = 4;
+
+    /** @var integer */
+    private static $wireVersionForWritableCommandWriteConcern = 5;
+
+    /** @var integer */
+>>>>>>> forked/LAE_400_PACKAGE
     private static $wireVersionForReadConcernWithWriteStage = 8;
 
     /** @var string */
@@ -104,7 +129,11 @@ class Database
      * @param array   $options      Database options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(Manager $manager, string $databaseName, array $options = [])
+=======
+    public function __construct(Manager $manager, $databaseName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (strlen($databaseName) < 1) {
             throw new InvalidArgumentException('$databaseName is invalid: ' . $databaseName);
@@ -127,7 +156,11 @@ class Database
         }
 
         $this->manager = $manager;
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
+=======
+        $this->databaseName = (string) $databaseName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->readConcern = $options['readConcern'] ?? $this->manager->getReadConcern();
         $this->readPreference = $options['readPreference'] ?? $this->manager->getReadPreference();
         $this->typeMap = $options['typeMap'] ?? self::$defaultTypeMap;
@@ -137,7 +170,11 @@ class Database
     /**
      * Return internal properties for debugging purposes.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
+=======
+     * @see http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
+>>>>>>> forked/LAE_400_PACKAGE
      * @return array
      */
     public function __debugInfo()
@@ -159,12 +196,21 @@ class Database
      * be selected with complex syntax (e.g. $database->{"system.profile"}) or
      * {@link selectCollection()}.
      *
+<<<<<<< HEAD
      * @see https://php.net/oop5.overloading#object.get
      * @see https://php.net/types.string#language.types.string.parsing.complex
      * @param string $collectionName Name of the collection to select
      * @return Collection
      */
     public function __get(string $collectionName)
+=======
+     * @see http://php.net/oop5.overloading#object.get
+     * @see http://php.net/types.string#language.types.string.parsing.complex
+     * @param string $collectionName Name of the collection to select
+     * @return Collection
+     */
+    public function __get($collectionName)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->selectCollection($collectionName);
     }
@@ -201,17 +247,30 @@ class Database
             $options['readPreference'] = $this->readPreference;
         }
 
+<<<<<<< HEAD
         $server = $hasWriteStage
             ? select_server_for_aggregate_write_stage($this->manager, $options)
             : select_server($this->manager, $options);
+=======
+        if ($hasWriteStage) {
+            $options['readPreference'] = new ReadPreference(ReadPreference::RP_PRIMARY);
+        }
+
+        $server = select_server($this->manager, $options);
+>>>>>>> forked/LAE_400_PACKAGE
 
         /* MongoDB 4.2 and later supports a read concern when an $out stage is
          * being used, but earlier versions do not.
          *
          * A read concern is also not compatible with transactions.
          */
+<<<<<<< HEAD
         if (
             ! isset($options['readConcern']) &&
+=======
+        if (! isset($options['readConcern']) &&
+            server_supports_feature($server, self::$wireVersionForReadConcern) &&
+>>>>>>> forked/LAE_400_PACKAGE
             ! is_in_transaction($options) &&
             ( ! $hasWriteStage || server_supports_feature($server, self::$wireVersionForReadConcernWithWriteStage))
         ) {
@@ -222,7 +281,14 @@ class Database
             $options['typeMap'] = $this->typeMap;
         }
 
+<<<<<<< HEAD
         if ($hasWriteStage && ! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if ($hasWriteStage &&
+            ! isset($options['writeConcern']) &&
+            server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) &&
+            ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -257,12 +323,21 @@ class Database
      * Create a new collection explicitly.
      *
      * @see CreateCollection::__construct() for supported options
+<<<<<<< HEAD
+=======
+     * @param string $collectionName
+     * @param array  $options
+>>>>>>> forked/LAE_400_PACKAGE
      * @return array|object Command result document
      * @throws UnsupportedException if options are not supported by the selected server
      * @throws InvalidArgumentException for parameter/option parsing errors
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function createCollection(string $collectionName, array $options = [])
+=======
+    public function createCollection($collectionName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! isset($options['typeMap'])) {
             $options['typeMap'] = $this->typeMap;
@@ -270,6 +345,7 @@ class Database
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
             $options['writeConcern'] = $this->writeConcern;
         }
@@ -298,6 +374,15 @@ class Database
         }
 
         return $result;
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+            $options['writeConcern'] = $this->writeConcern;
+        }
+
+        $operation = new CreateCollection($this->databaseName, $collectionName, $options);
+
+        return $operation->execute($server);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -318,7 +403,11 @@ class Database
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -338,7 +427,11 @@ class Database
      * @throws InvalidArgumentException for parameter/option parsing errors
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function dropCollection(string $collectionName, array $options = [])
+=======
+    public function dropCollection($collectionName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! isset($options['typeMap'])) {
             $options['typeMap'] = $this->typeMap;
@@ -346,6 +439,7 @@ class Database
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
             $options['writeConcern'] = $this->writeConcern;
         }
@@ -365,6 +459,12 @@ class Database
             (new DropCollection($this->databaseName, $encryptedFields['ecocCollection'] ?? 'enxcol_.' . $collectionName . '.ecoc'))->execute($server);
         }
 
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+            $options['writeConcern'] = $this->writeConcern;
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $operation = new DropCollection($this->databaseName, $collectionName, $options);
 
         return $operation->execute($server);
@@ -393,7 +493,11 @@ class Database
     /**
      * Return the read concern for this database.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-readconcern.isdefault.php
+=======
+     * @see http://php.net/manual/en/mongodb-driver-readconcern.isdefault.php
+>>>>>>> forked/LAE_400_PACKAGE
      * @return ReadConcern
      */
     public function getReadConcern()
@@ -424,7 +528,11 @@ class Database
     /**
      * Return the write concern for this database.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-writeconcern.isdefault.php
+=======
+     * @see http://php.net/manual/en/mongodb-driver-writeconcern.isdefault.php
+>>>>>>> forked/LAE_400_PACKAGE
      * @return WriteConcern
      */
     public function getWriteConcern()
@@ -439,7 +547,11 @@ class Database
      * @throws InvalidArgumentException for parameter/option parsing errors
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function listCollectionNames(array $options = []): Iterator
+=======
+    public function listCollectionNames(array $options = []) : Iterator
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $operation = new ListCollectionNames($this->databaseName, $options);
         $server = select_server($this->manager, $options);
@@ -451,6 +563,10 @@ class Database
      * Returns information for all collections in this database.
      *
      * @see ListCollections::__construct() for supported options
+<<<<<<< HEAD
+=======
+     * @param array $options
+>>>>>>> forked/LAE_400_PACKAGE
      * @return CollectionInfoIterator
      * @throws InvalidArgumentException for parameter/option parsing errors
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
@@ -474,7 +590,11 @@ class Database
      * @throws InvalidArgumentException for parameter/option parsing errors
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function modifyCollection(string $collectionName, array $collectionOptions, array $options = [])
+=======
+    public function modifyCollection($collectionName, array $collectionOptions, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! isset($options['typeMap'])) {
             $options['typeMap'] = $this->typeMap;
@@ -482,7 +602,11 @@ class Database
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['writeConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['writeConcern']) && server_supports_feature($server, self::$wireVersionForWritableCommandWriteConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['writeConcern'] = $this->writeConcern;
         }
 
@@ -492,6 +616,7 @@ class Database
     }
 
     /**
+<<<<<<< HEAD
      * Rename a collection within this database.
      *
      * @see RenameCollection::__construct() for supported options
@@ -526,6 +651,8 @@ class Database
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Select a collection within this database.
      *
      * @see Collection::__construct() for supported options
@@ -534,7 +661,11 @@ class Database
      * @return Collection
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function selectCollection(string $collectionName, array $options = [])
+=======
+    public function selectCollection($collectionName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options += [
             'readConcern' => $this->readConcern,
@@ -583,7 +714,11 @@ class Database
 
         $server = select_server($this->manager, $options);
 
+<<<<<<< HEAD
         if (! isset($options['readConcern']) && ! is_in_transaction($options)) {
+=======
+        if (! isset($options['readConcern']) && server_supports_feature($server, self::$wireVersionForReadConcern) && ! is_in_transaction($options)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $options['readConcern'] = $this->readConcern;
         }
 

@@ -2,16 +2,24 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 
 class HLookup extends LookupBase
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * HLOOKUP
      * The HLOOKUP function searches for value in the top-most row of lookup_array and returns the value
@@ -27,6 +35,7 @@ class HLookup extends LookupBase
      */
     public static function lookup($lookupValue, $lookupArray, $indexNumber, $notExactMatch = true)
     {
+<<<<<<< HEAD
         if (is_array($lookupValue)) {
             return self::evaluateArrayArgumentsIgnore([self::class, __FUNCTION__], 1, $lookupValue, $lookupArray, $indexNumber, $notExactMatch);
         }
@@ -36,6 +45,14 @@ class HLookup extends LookupBase
         try {
             self::validateLookupArray($lookupArray);
             $lookupArray = self::convertLiteralArray($lookupArray);
+=======
+        $lookupValue = Functions::flattenSingleValue($lookupValue);
+        $indexNumber = Functions::flattenSingleValue($indexNumber);
+        $notExactMatch = ($notExactMatch === null) ? true : Functions::flattenSingleValue($notExactMatch);
+        $lookupArray = self::convertLiteralArray($lookupArray);
+
+        try {
+>>>>>>> forked/LAE_400_PACKAGE
             $indexNumber = self::validateIndexLookup($lookupArray, $indexNumber);
         } catch (Exception $e) {
             return $e->getMessage();
@@ -44,12 +61,20 @@ class HLookup extends LookupBase
         $f = array_keys($lookupArray);
         $firstRow = reset($f);
         if ((!is_array($lookupArray[$firstRow])) || ($indexNumber > count($lookupArray))) {
+<<<<<<< HEAD
             return ExcelError::REF();
+=======
+            return Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $firstkey = $f[0] - 1;
         $returnColumn = $firstkey + $indexNumber;
+<<<<<<< HEAD
         $firstColumn = array_shift($f) ?? 1;
+=======
+        $firstColumn = array_shift($f);
+>>>>>>> forked/LAE_400_PACKAGE
         $rowNumber = self::hLookupSearch($lookupValue, $lookupArray, $firstColumn, $notExactMatch);
 
         if ($rowNumber !== null) {
@@ -57,23 +82,40 @@ class HLookup extends LookupBase
             return $lookupArray[$returnColumn][Coordinate::stringFromColumnIndex($rowNumber)];
         }
 
+<<<<<<< HEAD
         return ExcelError::NA();
+=======
+        return Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * @param mixed $lookupValue The value that you want to match in lookup_array
+<<<<<<< HEAD
      * @param  int|string $column
      */
     private static function hLookupSearch($lookupValue, array $lookupArray, $column, bool $notExactMatch): ?int
     {
         $lookupLower = StringHelper::strToLower((string) $lookupValue);
+=======
+     * @param mixed $column The column to look up
+     * @param mixed $notExactMatch determines if you are looking for an exact match based on lookup_value
+     */
+    private static function hLookupSearch($lookupValue, array $lookupArray, $column, $notExactMatch): ?int
+    {
+        $lookupLower = StringHelper::strToLower($lookupValue);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $rowNumber = null;
         foreach ($lookupArray[$column] as $rowKey => $rowData) {
             // break if we have passed possible keys
             $bothNumeric = is_numeric($lookupValue) && is_numeric($rowData);
             $bothNotNumeric = !is_numeric($lookupValue) && !is_numeric($rowData);
+<<<<<<< HEAD
             $cellDataLower = StringHelper::strToLower((string) $rowData);
+=======
+            $cellDataLower = StringHelper::strToLower($rowData);
+>>>>>>> forked/LAE_400_PACKAGE
 
             if (
                 $notExactMatch &&

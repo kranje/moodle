@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,12 @@ class Random
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+
+class Random
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * RAND.
      *
@@ -17,13 +24,18 @@ class Random
      */
     public static function rand()
     {
+<<<<<<< HEAD
         return mt_rand(0, 10000000) / 10000000;
+=======
+        return (mt_rand(0, 10000000)) / 10000000;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * RANDBETWEEN.
      *
      * @param mixed $min Minimal value
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $max Maximal value
      *                      Or can be an array of values
@@ -38,6 +50,14 @@ class Random
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $min, $max);
         }
 
+=======
+     * @param mixed $max Maximal value
+     *
+     * @return float|int|string Random number
+     */
+    public static function randBetween($min, $max)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $min = (int) Helpers::validateNumericNullBool($min);
             $max = (int) Helpers::validateNumericNullBool($max);
@@ -48,6 +68,7 @@ class Random
 
         return mt_rand($min, $max);
     }
+<<<<<<< HEAD
 
     /**
      * RANDARRAY.
@@ -96,4 +117,6 @@ class Random
             max($columns, 1)
         );
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -1,6 +1,10 @@
 /**
  * @license
+<<<<<<< HEAD
  * Video.js 7.20.3 <http://videojs.com/>
+=======
+ * Video.js 7.17.0 <http://videojs.com/>
+>>>>>>> forked/LAE_400_PACKAGE
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/main/LICENSE>
@@ -10,13 +14,21 @@
  * <https://github.com/mozilla/vtt.js/blob/main/LICENSE>
  */
 
+<<<<<<< HEAD
  (function (global, factory) {
+=======
+(function (global, factory) {
+>>>>>>> forked/LAE_400_PACKAGE
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.videojs = factory());
 }(this, (function () { 'use strict';
 
+<<<<<<< HEAD
   var version$5 = "7.20.3";
+=======
+  var version$5 = "7.17.0";
+>>>>>>> forked/LAE_400_PACKAGE
 
   /**
    * An Object that contains lifecycle hooks as keys which point to an array
@@ -2148,8 +2160,12 @@
         // Safari 6.0.3 warns you if you try to copy deprecated layerX/Y
         // Chrome warns you if you try to copy deprecated keyboardEvent.keyLocation
         // and webkitMovementX/Y
+<<<<<<< HEAD
         // Lighthouse complains if Event.path is copied
         if (key !== 'layerX' && key !== 'layerY' && key !== 'keyLocation' && key !== 'webkitMovementX' && key !== 'webkitMovementY' && key !== 'path') {
+=======
+        if (key !== 'layerX' && key !== 'layerY' && key !== 'keyLocation' && key !== 'webkitMovementX' && key !== 'webkitMovementY') {
+>>>>>>> forked/LAE_400_PACKAGE
           // Chrome 32+ warns if you try to copy deprecated returnValue, but
           // we still want to if preventDefault isn't supported (IE8).
           if (!(key === 'returnValue' && old.preventDefault)) {
@@ -3745,6 +3761,7 @@
     return SetSham;
   }();
 
+<<<<<<< HEAD
   var Set$1 = window.Set ? window.Set : SetSham;
 
   var keycode = createCommonjsModule(function (module, exports) {
@@ -3941,6 +3958,9 @@
   keycode.aliases;
   keycode.names;
   keycode.title;
+=======
+  var Set = window.Set ? window.Set : SetSham;
+>>>>>>> forked/LAE_400_PACKAGE
 
   /**
    * Player Component - Base class for all UI objects
@@ -3972,22 +3992,32 @@
      *        The `Player` that this class should be attached to.
      *
      * @param {Object} [options]
+<<<<<<< HEAD
      *        The key/value store of component options.
+=======
+     *        The key/value store of player options.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param {Object[]} [options.children]
      *        An array of children objects to intialize this component with. Children objects have
      *        a name property that will be used if more than one component of the same type needs to be
      *        added.
      *
+<<<<<<< HEAD
      * @param  {string} [options.className]
      *         A class or space separated list of classes to add the component
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param {Component~ReadyCallback} [ready]
      *        Function that gets called when the `Component` is ready.
      */
     function Component(player, options, ready) {
+<<<<<<< HEAD
       var _this = this;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       // The component might be the player itself and we can't pass `this` to super
       if (!player && this.play) {
         this.player_ = player = this; // eslint-disable-line
@@ -4017,12 +4047,15 @@
         this.el_ = options.el;
       } else if (options.createEl !== false) {
         this.el_ = this.createEl();
+<<<<<<< HEAD
       }
 
       if (options.className && this.el_) {
         options.className.split(' ').forEach(function (c) {
           return _this.addClass(c);
         });
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       } // if evented is anything except false, we want to mixin in evented
 
 
@@ -4039,9 +4072,15 @@
       this.children_ = [];
       this.childIndex_ = {};
       this.childNameIndex_ = {};
+<<<<<<< HEAD
       this.setTimeoutIds_ = new Set$1();
       this.setIntervalIds_ = new Set$1();
       this.rafIds_ = new Set$1();
+=======
+      this.setTimeoutIds_ = new Set();
+      this.setIntervalIds_ = new Set();
+      this.rafIds_ = new Set();
+>>>>>>> forked/LAE_400_PACKAGE
       this.namedRafs_ = new Map$1();
       this.clearingTimersOnDispose_ = false; // Add any child components in options
 
@@ -4061,19 +4100,26 @@
      * Dispose of the `Component` and all child components.
      *
      * @fires Component#dispose
+<<<<<<< HEAD
      *
      * @param {Object} options
      * @param {Element} options.originalEl element with which to replace player element
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
 
 
     var _proto = Component.prototype;
 
+<<<<<<< HEAD
     _proto.dispose = function dispose(options) {
       if (options === void 0) {
         options = {};
       }
 
+=======
+    _proto.dispose = function dispose() {
+>>>>>>> forked/LAE_400_PACKAGE
       // Bail out if the component has already been disposed.
       if (this.isDisposed_) {
         return;
@@ -4117,11 +4163,15 @@
       if (this.el_) {
         // Remove element from DOM
         if (this.el_.parentNode) {
+<<<<<<< HEAD
           if (options.restoreEl) {
             this.el_.parentNode.replaceChild(options.restoreEl, this.el_);
           } else {
             this.el_.parentNode.removeChild(this.el_);
           }
+=======
+          this.el_.parentNode.removeChild(this.el_);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         this.el_ = null;
@@ -4547,7 +4597,11 @@
     ;
 
     _proto.initChildren = function initChildren() {
+<<<<<<< HEAD
       var _this2 = this;
+=======
+      var _this = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       var children = this.options_.children;
 
@@ -4580,15 +4634,26 @@
           // reach back into the player for options later.
 
 
+<<<<<<< HEAD
           opts.playerOptions = _this2.options_.playerOptions; // Create and add the child component.
+=======
+          opts.playerOptions = _this.options_.playerOptions; // Create and add the child component.
+>>>>>>> forked/LAE_400_PACKAGE
           // Add a direct reference to the child by name on the parent instance.
           // If two of the same component are used, different names should be supplied
           // for each
 
+<<<<<<< HEAD
           var newChild = _this2.addChild(name, opts);
 
           if (newChild) {
             _this2[name] = newChild;
+=======
+          var newChild = _this.addChild(name, opts);
+
+          if (newChild) {
+            _this[name] = newChild;
+>>>>>>> forked/LAE_400_PACKAGE
           }
         }; // Allow for an array of children details to passed in the options
 
@@ -4618,7 +4683,11 @@
 
           if (typeof child === 'string') {
             name = child;
+<<<<<<< HEAD
             opts = children[name] || _this2.options_[name] || {};
+=======
+            opts = children[name] || _this.options_[name] || {};
+>>>>>>> forked/LAE_400_PACKAGE
           } else {
             name = child.name;
             opts = child;
@@ -5156,11 +5225,16 @@
     _proto.handleKeyDown = function handleKeyDown(event) {
       if (this.player_) {
         // We only stop propagation here because we want unhandled events to fall
+<<<<<<< HEAD
         // back to the browser. Exclude Tab for focus trapping.
         if (!keycode.isEventKey(event, 'Tab')) {
           event.stopPropagation();
         }
 
+=======
+        // back to the browser.
+        event.stopPropagation();
+>>>>>>> forked/LAE_400_PACKAGE
         this.player_.handleKeyDown(event);
       }
     }
@@ -5358,7 +5432,11 @@
     ;
 
     _proto.setTimeout = function setTimeout(fn, timeout) {
+<<<<<<< HEAD
       var _this3 = this;
+=======
+      var _this2 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       // declare as variables so they are properly available in timeout function
       // eslint-disable-next-line
@@ -5366,8 +5444,13 @@
       fn = bind(this, fn);
       this.clearTimersOnDispose_();
       timeoutId = window.setTimeout(function () {
+<<<<<<< HEAD
         if (_this3.setTimeoutIds_.has(timeoutId)) {
           _this3.setTimeoutIds_["delete"](timeoutId);
+=======
+        if (_this2.setTimeoutIds_.has(timeoutId)) {
+          _this2.setTimeoutIds_["delete"](timeoutId);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         fn();
@@ -5482,7 +5565,11 @@
     ;
 
     _proto.requestAnimationFrame = function requestAnimationFrame(fn) {
+<<<<<<< HEAD
       var _this4 = this;
+=======
+      var _this3 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       // Fall back to using a timer.
       if (!this.supportsRaf_) {
@@ -5495,8 +5582,13 @@
       var id;
       fn = bind(this, fn);
       id = window.requestAnimationFrame(function () {
+<<<<<<< HEAD
         if (_this4.rafIds_.has(id)) {
           _this4.rafIds_["delete"](id);
+=======
+        if (_this3.rafIds_.has(id)) {
+          _this3.rafIds_["delete"](id);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         fn();
@@ -5519,7 +5611,11 @@
     ;
 
     _proto.requestNamedAnimationFrame = function requestNamedAnimationFrame(name, fn) {
+<<<<<<< HEAD
       var _this5 = this;
+=======
+      var _this4 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (this.namedRafs_.has(name)) {
         return;
@@ -5530,8 +5626,13 @@
       var id = this.requestAnimationFrame(function () {
         fn();
 
+<<<<<<< HEAD
         if (_this5.namedRafs_.has(name)) {
           _this5.namedRafs_["delete"](name);
+=======
+        if (_this4.namedRafs_.has(name)) {
+          _this4.namedRafs_["delete"](name);
+>>>>>>> forked/LAE_400_PACKAGE
         }
       });
       this.namedRafs_.set(name, id);
@@ -5597,7 +5698,11 @@
     ;
 
     _proto.clearTimersOnDispose_ = function clearTimersOnDispose_() {
+<<<<<<< HEAD
       var _this6 = this;
+=======
+      var _this5 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (this.clearingTimersOnDispose_) {
         return;
@@ -5612,11 +5717,19 @@
           // for a `Set` key will actually be the value again
           // so forEach((val, val) =>` but for maps we want to use
           // the key.
+<<<<<<< HEAD
           _this6[idName].forEach(function (val, key) {
             return _this6[cancelName](key);
           });
         });
         _this6.clearingTimersOnDispose_ = false;
+=======
+          _this5[idName].forEach(function (val, key) {
+            return _this5[cancelName](key);
+          });
+        });
+        _this5.clearingTimersOnDispose_ = false;
+>>>>>>> forked/LAE_400_PACKAGE
       });
     }
     /**
@@ -6189,6 +6302,204 @@
     trackToJson_: trackToJson_
   };
 
+<<<<<<< HEAD
+=======
+  var keycode = createCommonjsModule(function (module, exports) {
+    // Source: http://jsfiddle.net/vWx8V/
+    // http://stackoverflow.com/questions/5603195/full-list-of-javascript-keycodes
+
+    /**
+     * Conenience method returns corresponding value for given keyName or keyCode.
+     *
+     * @param {Mixed} keyCode {Number} or keyName {String}
+     * @return {Mixed}
+     * @api public
+     */
+    function keyCode(searchInput) {
+      // Keyboard Events
+      if (searchInput && 'object' === typeof searchInput) {
+        var hasKeyCode = searchInput.which || searchInput.keyCode || searchInput.charCode;
+        if (hasKeyCode) searchInput = hasKeyCode;
+      } // Numbers
+
+
+      if ('number' === typeof searchInput) return names[searchInput]; // Everything else (cast to string)
+
+      var search = String(searchInput); // check codes
+
+      var foundNamedKey = codes[search.toLowerCase()];
+      if (foundNamedKey) return foundNamedKey; // check aliases
+
+      var foundNamedKey = aliases[search.toLowerCase()];
+      if (foundNamedKey) return foundNamedKey; // weird character?
+
+      if (search.length === 1) return search.charCodeAt(0);
+      return undefined;
+    }
+    /**
+     * Compares a keyboard event with a given keyCode or keyName.
+     *
+     * @param {Event} event Keyboard event that should be tested
+     * @param {Mixed} keyCode {Number} or keyName {String}
+     * @return {Boolean}
+     * @api public
+     */
+
+
+    keyCode.isEventKey = function isEventKey(event, nameOrCode) {
+      if (event && 'object' === typeof event) {
+        var keyCode = event.which || event.keyCode || event.charCode;
+
+        if (keyCode === null || keyCode === undefined) {
+          return false;
+        }
+
+        if (typeof nameOrCode === 'string') {
+          // check codes
+          var foundNamedKey = codes[nameOrCode.toLowerCase()];
+
+          if (foundNamedKey) {
+            return foundNamedKey === keyCode;
+          } // check aliases
+
+
+          var foundNamedKey = aliases[nameOrCode.toLowerCase()];
+
+          if (foundNamedKey) {
+            return foundNamedKey === keyCode;
+          }
+        } else if (typeof nameOrCode === 'number') {
+          return nameOrCode === keyCode;
+        }
+
+        return false;
+      }
+    };
+
+    exports = module.exports = keyCode;
+    /**
+     * Get by name
+     *
+     *   exports.code['enter'] // => 13
+     */
+
+    var codes = exports.code = exports.codes = {
+      'backspace': 8,
+      'tab': 9,
+      'enter': 13,
+      'shift': 16,
+      'ctrl': 17,
+      'alt': 18,
+      'pause/break': 19,
+      'caps lock': 20,
+      'esc': 27,
+      'space': 32,
+      'page up': 33,
+      'page down': 34,
+      'end': 35,
+      'home': 36,
+      'left': 37,
+      'up': 38,
+      'right': 39,
+      'down': 40,
+      'insert': 45,
+      'delete': 46,
+      'command': 91,
+      'left command': 91,
+      'right command': 93,
+      'numpad *': 106,
+      'numpad +': 107,
+      'numpad -': 109,
+      'numpad .': 110,
+      'numpad /': 111,
+      'num lock': 144,
+      'scroll lock': 145,
+      'my computer': 182,
+      'my calculator': 183,
+      ';': 186,
+      '=': 187,
+      ',': 188,
+      '-': 189,
+      '.': 190,
+      '/': 191,
+      '`': 192,
+      '[': 219,
+      '\\': 220,
+      ']': 221,
+      "'": 222
+    }; // Helper aliases
+
+    var aliases = exports.aliases = {
+      'windows': 91,
+      '⇧': 16,
+      '⌥': 18,
+      '⌃': 17,
+      '⌘': 91,
+      'ctl': 17,
+      'control': 17,
+      'option': 18,
+      'pause': 19,
+      'break': 19,
+      'caps': 20,
+      'return': 13,
+      'escape': 27,
+      'spc': 32,
+      'spacebar': 32,
+      'pgup': 33,
+      'pgdn': 34,
+      'ins': 45,
+      'del': 46,
+      'cmd': 91
+    };
+    /*!
+     * Programatically add the following
+     */
+    // lower case chars
+
+    for (i = 97; i < 123; i++) {
+      codes[String.fromCharCode(i)] = i - 32;
+    } // numbers
+
+
+    for (var i = 48; i < 58; i++) {
+      codes[i - 48] = i;
+    } // function keys
+
+
+    for (i = 1; i < 13; i++) {
+      codes['f' + i] = i + 111;
+    } // numpad keys
+
+
+    for (i = 0; i < 10; i++) {
+      codes['numpad ' + i] = i + 96;
+    }
+    /**
+     * Get by code
+     *
+     *   exports.name[13] // => 'Enter'
+     */
+
+
+    var names = exports.names = exports.title = {}; // title for backward compat
+    // Create reverse mapping
+
+    for (i in codes) {
+      names[codes[i]] = i;
+    } // Add aliases
+
+
+    for (var alias in aliases) {
+      codes[alias] = aliases[alias];
+    }
+  });
+  keycode.code;
+  keycode.codes;
+  keycode.aliases;
+  keycode.names;
+  keycode.title;
+
+>>>>>>> forked/LAE_400_PACKAGE
   var MODAL_CLASS_NAME = 'vjs-modal-dialog';
   /**
    * The `ModalDialog` displays over the video and its controls, which blocks
@@ -8407,6 +8718,7 @@
       var cues = new TextTrackCueList(_this.cues_);
       var activeCues = new TextTrackCueList(_this.activeCues_);
       var changed = false;
+<<<<<<< HEAD
       _this.timeupdateHandler = bind(assertThisInitialized(_this), function (event) {
         if (event === void 0) {
           event = {};
@@ -8421,6 +8733,10 @@
             this.rvf_ = this.tech_.requestVideoFrameCallback(this.timeupdateHandler);
           }
 
+=======
+      var timeupdateHandler = bind(assertThisInitialized(_this), function () {
+        if (!this.tech_.isReady_ || this.tech_.isDisposed()) {
+>>>>>>> forked/LAE_400_PACKAGE
           return;
         } // Accessing this.activeCues for the side-effects of updating itself
         // due to its nature as a getter function. Do not remove or cues will
@@ -8434,6 +8750,7 @@
           this.trigger('cuechange');
           changed = false;
         }
+<<<<<<< HEAD
 
         if (event.type !== 'timeupdate') {
           this.rvf_ = this.tech_.requestVideoFrameCallback(this.timeupdateHandler);
@@ -8442,12 +8759,22 @@
 
       var disposeHandler = function disposeHandler() {
         _this.stopTracking();
+=======
+      });
+
+      var disposeHandler = function disposeHandler() {
+        _this.tech_.off('timeupdate', timeupdateHandler);
+>>>>>>> forked/LAE_400_PACKAGE
       };
 
       _this.tech_.one('dispose', disposeHandler);
 
       if (mode !== 'disabled') {
+<<<<<<< HEAD
         _this.startTracking();
+=======
+        _this.tech_.on('timeupdate', timeupdateHandler);
+>>>>>>> forked/LAE_400_PACKAGE
       }
 
       Object.defineProperties(assertThisInitialized(_this), {
@@ -8496,10 +8823,17 @@
               loadTrack(this.src, this);
             }
 
+<<<<<<< HEAD
             this.stopTracking();
 
             if (mode !== 'disabled') {
               this.startTracking();
+=======
+            this.tech_.off('timeupdate', timeupdateHandler);
+
+            if (mode !== 'disabled') {
+              this.tech_.on('timeupdate', timeupdateHandler);
+>>>>>>> forked/LAE_400_PACKAGE
             }
             /**
              * An event that fires when mode changes on this track. This allows
@@ -8602,6 +8936,7 @@
 
       return _this;
     }
+<<<<<<< HEAD
 
     var _proto = TextTrack.prototype;
 
@@ -8620,13 +8955,21 @@
 
       this.tech_.off('timeupdate', this.timeupdateHandler);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Add a cue to the internal list of cues.
      *
      * @param {TextTrack~Cue} cue
      *        The cue to add to our internal list
      */
+<<<<<<< HEAD
     ;
+=======
+
+
+    var _proto = TextTrack.prototype;
+>>>>>>> forked/LAE_400_PACKAGE
 
     _proto.addCue = function addCue(originalCue) {
       var cue = originalCue;
@@ -9220,8 +9563,13 @@
         continue;
       }
 
+<<<<<<< HEAD
       var k = kv[0].trim();
       var v = kv[1].trim();
+=======
+      var k = kv[0];
+      var v = kv[1];
+>>>>>>> forked/LAE_400_PACKAGE
       callback(k, v);
     }
   }
@@ -11035,11 +11383,18 @@
 
       _this.disposeSourceHandler_ = function (e) {
         return _this.disposeSourceHandler(e);
+<<<<<<< HEAD
       };
 
       _this.queuedHanders_ = new Set(); // keep track of whether the current source has played at all to
       // implement a very limited played()
 
+=======
+      }; // keep track of whether the current source has played at all to
+      // implement a very limited played()
+
+
+>>>>>>> forked/LAE_400_PACKAGE
       _this.hasStarted_ = false;
 
       _this.on('playing', function () {
@@ -11863,6 +12218,7 @@
 
     _proto.setDisablePictureInPicture = function setDisablePictureInPicture() {}
     /**
+<<<<<<< HEAD
      * A fallback implementation of requestVideoFrameCallback using requestAnimationFrame
      *
      * @param {function} cb
@@ -11905,6 +12261,8 @@
       }
     }
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * A method to set a poster from a `Tech`.
      *
      * @abstract
@@ -12232,6 +12590,7 @@
 
   Tech.prototype.featuresNativeTextTracks = false;
   /**
+<<<<<<< HEAD
    * Boolean indicating whether the `Tech` supports `requestVideoFrameCallback`.
    *
    * @type {boolean}
@@ -12240,6 +12599,8 @@
 
   Tech.prototype.featuresVideoFrameCallback = false;
   /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
    * A functional mixin for techs that want to use the Source Handler pattern.
    * Source handlers are scripts for handling specific formats.
    * The source handler pattern is used for adaptive formats (HLS, DASH) that
@@ -12797,7 +13158,11 @@
   /**
    * Mimetypes
    *
+<<<<<<< HEAD
    * @see https://www.iana.org/assignments/media-types/media-types.xhtml
+=======
+   * @see http://hul.harvard.edu/ois/////systems/wax/wax-public-help/mimetypes.htm
+>>>>>>> forked/LAE_400_PACKAGE
    * @typedef Mimetypes~Kind
    * @enum
    */
@@ -12817,7 +13182,10 @@
     oga: 'audio/ogg',
     wav: 'audio/wav',
     m3u8: 'application/x-mpegURL',
+<<<<<<< HEAD
     mpd: 'application/dash+xml',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     jpg: 'image/jpeg',
     jpeg: 'image/jpeg',
     gif: 'image/gif',
@@ -13041,6 +13409,7 @@
      *         The `Player` that this class should be attached to.
      *
      * @param  {Object} [options]
+<<<<<<< HEAD
      *         The key/value store of component options.
      *
      * @param  {function} [options.clickHandler]
@@ -13052,16 +13421,25 @@
      * @param  {string} [options.className]
      *         A class or space separated list of classes to add the component
      *
+=======
+     *         The key/value store of player options.
+     *
+     * @param  {function} [options.clickHandler]
+     *         The function to call when the button is clicked / activated
+>>>>>>> forked/LAE_400_PACKAGE
      */
     function ClickableComponent(player, options) {
       var _this;
 
       _this = _Component.call(this, player, options) || this;
 
+<<<<<<< HEAD
       if (_this.options_.controlText) {
         _this.controlText(_this.options_.controlText);
       }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       _this.handleMouseOver_ = function (e) {
         return _this.handleMouseOver(e);
       };
@@ -14962,12 +15340,18 @@
     _proto.createEl = function createEl$1() {
       var el = _TimeDisplay.prototype.createEl.call(this);
 
+<<<<<<< HEAD
       if (this.options_.displayNegative !== false) {
         el.insertBefore(createEl('span', {}, {
           'aria-hidden': true
         }, '-'), this.contentEl_);
       }
 
+=======
+      el.insertBefore(createEl('span', {}, {
+        'aria-hidden': true
+      }, '-'), this.contentEl_);
+>>>>>>> forked/LAE_400_PACKAGE
       return el;
     }
     /**
@@ -15444,7 +15828,11 @@
       this.on(doc, 'mouseup', this.handleMouseUp_);
       this.on(doc, 'touchmove', this.handleMouseMove_);
       this.on(doc, 'touchend', this.handleMouseUp_);
+<<<<<<< HEAD
       this.handleMouseMove(event, true);
+=======
+      this.handleMouseMove(event);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Handle the `mousemove`, `touchmove`, and `mousedown` events on this `Slider`.
@@ -15455,7 +15843,10 @@
      * @param {EventTarget~Event} event
      *        `mousedown`, `mousemove`, `touchstart`, or `touchmove` event that triggered
      *        this function
+<<<<<<< HEAD
      * @param {boolean} mouseDown this is a flag that should be set to true if `handleMouseMove` is called directly. It allows us to skip things that should not happen if coming from mouse down but should happen on regular mouse move handler. Defaults to false.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @listens mousemove
      * @listens touchmove
@@ -16358,6 +16749,10 @@
 
 
       event.stopPropagation();
+<<<<<<< HEAD
+=======
+      this.player_.scrubbing(true);
+>>>>>>> forked/LAE_400_PACKAGE
       this.videoWasPlaying = !this.player_.paused();
       this.player_.pause();
 
@@ -16368,25 +16763,35 @@
      *
      * @param {EventTarget~Event} event
      *        The `mousemove` event that caused this to run.
+<<<<<<< HEAD
      * @param {boolean} mouseDown this is a flag that should be set to true if `handleMouseMove` is called directly. It allows us to skip things that should not happen if coming from mouse down but should happen on regular mouse move handler. Defaults to false
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @listens mousemove
      */
     ;
 
+<<<<<<< HEAD
     _proto.handleMouseMove = function handleMouseMove(event, mouseDown) {
       if (mouseDown === void 0) {
         mouseDown = false;
       }
 
+=======
+    _proto.handleMouseMove = function handleMouseMove(event) {
+>>>>>>> forked/LAE_400_PACKAGE
       if (!isSingleLeftClick(event)) {
         return;
       }
 
+<<<<<<< HEAD
       if (!mouseDown && !this.player_.scrubbing()) {
         this.player_.scrubbing(true);
       }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       var newTime;
       var distance = this.calculateDistance(event);
       var liveTracker = this.player_.liveTracker;
@@ -16914,6 +17319,7 @@
 
       _this.on(player, ['disablepictureinpicturechanged', 'loadedmetadata'], function (e) {
         return _this.handlePictureInPictureEnabledChange(e);
+<<<<<<< HEAD
       });
 
       _this.on(player, ['loadedmetadata', 'audioonlymodechange', 'audiopostermodechange'], function () {
@@ -16929,6 +17335,8 @@
         } else {
           _this.show();
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       }); // TODO: Deactivate button on player emptied event.
 
 
@@ -18613,10 +19021,15 @@
 
       if (this.items && this.items.length <= this.hideThreshold_) {
         this.hide();
+<<<<<<< HEAD
         this.menu.contentEl_.removeAttribute('role');
       } else {
         this.show();
         this.menu.contentEl_.setAttribute('role', 'menu');
+=======
+      } else {
+        this.show();
+>>>>>>> forked/LAE_400_PACKAGE
       }
     }
     /**
@@ -19580,6 +19993,10 @@
       _this = _MenuItem.call(this, player, options) || this;
       _this.track = track;
       _this.cue = cue;
+<<<<<<< HEAD
+=======
+      track.addEventListener('cuechange', bind(assertThisInitialized(_this), _this.update));
+>>>>>>> forked/LAE_400_PACKAGE
       return _this;
     }
     /**
@@ -19601,6 +20018,26 @@
       _MenuItem.prototype.handleClick.call(this);
 
       this.player_.currentTime(this.cue.startTime);
+<<<<<<< HEAD
+=======
+      this.update(this.cue.startTime);
+    }
+    /**
+     * Update chapter menu item
+     *
+     * @param {EventTarget~Event} [event]
+     *        The `cuechange` event that caused this function to run.
+     *
+     * @listens TextTrack#cuechange
+     */
+    ;
+
+    _proto.update = function update(event) {
+      var cue = this.cue;
+      var currentTime = this.player_.currentTime(); // vjs.log(currentTime, cue.startTime);
+
+      this.selected(cue.startTime <= currentTime && currentTime < cue.endTime);
+>>>>>>> forked/LAE_400_PACKAGE
     };
 
     return ChaptersTrackMenuItem;
@@ -19632,6 +20069,7 @@
      *        The function to call when this function is ready.
      */
     function ChaptersButton(player, options, ready) {
+<<<<<<< HEAD
       var _this;
 
       _this = _TextTrackButton.call(this, player, options, ready) || this;
@@ -19643,6 +20081,9 @@
       };
 
       return _this;
+=======
+      return _TextTrackButton.call(this, player, options, ready) || this;
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Builds the default DOM `className`.
@@ -19674,6 +20115,7 @@
     ;
 
     _proto.update = function update(event) {
+<<<<<<< HEAD
       if (event && event.track && event.track.kind !== 'chapters') {
         return;
       }
@@ -19688,6 +20130,13 @@
         // Update the menu initially or if the number of cues has changed since set
         _TextTrackButton.prototype.update.call(this);
       }
+=======
+      if (!this.track_ || event && (event.type === 'addtrack' || event.type === 'removetrack')) {
+        this.setTrack(this.findChaptersTrack());
+      }
+
+      _TextTrackButton.prototype.update.call(this);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Set the currently selected track for the chapters button.
@@ -19715,7 +20164,10 @@
           remoteTextTrackEl.removeEventListener('load', this.updateHandler_);
         }
 
+<<<<<<< HEAD
         this.track_.removeEventListener('cuechange', this.selectCurrentItem_);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         this.track_ = null;
       }
 
@@ -19729,8 +20181,11 @@
         if (_remoteTextTrackEl) {
           _remoteTextTrackEl.addEventListener('load', this.updateHandler_);
         }
+<<<<<<< HEAD
 
         this.track_.addEventListener('cuechange', this.selectCurrentItem_);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       }
     }
     /**
@@ -20332,20 +20787,34 @@
 
     var _proto = AudioTrackMenuItem.prototype;
 
+<<<<<<< HEAD
     _proto.createEl = function createEl$1(type, props, attrs) {
+=======
+    _proto.createEl = function createEl(type, props, attrs) {
+>>>>>>> forked/LAE_400_PACKAGE
       var el = _MenuItem.prototype.createEl.call(this, type, props, attrs);
 
       var parentSpan = el.querySelector('.vjs-menu-item-text');
 
       if (this.options_.track.kind === 'main-desc') {
+<<<<<<< HEAD
         parentSpan.appendChild(createEl('span', {
+=======
+        parentSpan.appendChild(_MenuItem.prototype.createEl.call(this, 'span', {
+>>>>>>> forked/LAE_400_PACKAGE
           className: 'vjs-icon-placeholder'
         }, {
           'aria-hidden': true
         }));
+<<<<<<< HEAD
         parentSpan.appendChild(createEl('span', {
           className: 'vjs-control-text',
           textContent: ' ' + this.localize('Descriptions')
+=======
+        parentSpan.appendChild(_MenuItem.prototype.createEl.call(this, 'span', {
+          className: 'vjs-control-text',
+          textContent: this.localize('Descriptions')
+>>>>>>> forked/LAE_400_PACKAGE
         }));
       }
 
@@ -20369,6 +20838,7 @@
       // off for us.
 
 
+<<<<<<< HEAD
       this.track.enabled = true; // when native audio tracks are used, we want to make sure that other tracks are turned off
 
       if (this.player_.tech_.featuresNativeAudioTracks) {
@@ -20384,6 +20854,9 @@
           track.enabled = track === this.track;
         }
       }
+=======
+      this.track.enabled = true;
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Handle any {@link AudioTrack} change.
@@ -20708,11 +21181,26 @@
     _proto.handleClick = function handleClick(event) {
       // select next rate option
       var currentRate = this.player().playbackRate();
+<<<<<<< HEAD
       var rates = this.playbackRates();
       var currentIndex = rates.indexOf(currentRate); // this get the next rate and it will select first one if the last one currently selected
 
       var newIndex = (currentIndex + 1) % rates.length;
       this.player().playbackRate(rates[newIndex]);
+=======
+      var rates = this.playbackRates(); // this will select first one if the last one currently selected
+
+      var newRate = rates[0];
+
+      for (var i = 0; i < rates.length; i++) {
+        if (rates[i] > currentRate) {
+          newRate = rates[i];
+          break;
+        }
+      }
+
+      this.player().playbackRate(newRate);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * On playbackrateschange, update the menu to account for the new items.
@@ -21611,8 +22099,12 @@
     _proto.createEl = function createEl() {
       return _Component.prototype.createEl.call(this, 'iframe', {
         className: 'vjs-resize-manager',
+<<<<<<< HEAD
         tabIndex: -1,
         title: this.localize('No content')
+=======
+        tabIndex: -1
+>>>>>>> forked/LAE_400_PACKAGE
       }, {
         'aria-hidden': 'true'
       });
@@ -21749,7 +22241,11 @@
       // may not have the proper values for things like seekableEnd until then
 
 
+<<<<<<< HEAD
       _this.on(_this.player_, 'canplay', function () {
+=======
+      _this.one(_this.player_, 'canplay', function () {
+>>>>>>> forked/LAE_400_PACKAGE
         return _this.toggleTracking();
       }); // we don't need to track live playback if the document is hidden,
       // also, tracking when the document is hidden can
@@ -22475,8 +22971,12 @@
 
       _this = _Tech.call(this, options, ready) || this;
       var source = options.source;
+<<<<<<< HEAD
       var crossoriginTracks = false;
       _this.featuresVideoFrameCallback = _this.featuresVideoFrameCallback && _this.el_.tagName === 'VIDEO'; // Set the source if one is provided
+=======
+      var crossoriginTracks = false; // Set the source if one is provided
+>>>>>>> forked/LAE_400_PACKAGE
       // 1) Check if the source is new (if not, we want to keep the original so playback isn't interrupted)
       // 2) Check to see if the network state of the tag was failed at init, and if so, reset the source
       // anyway so the error gets fired.
@@ -23093,11 +23593,15 @@
       var endFn = function endFn() {
         this.trigger('fullscreenchange', {
           isFullscreen: false
+<<<<<<< HEAD
         }); // Safari will sometimes set contols on the videoelement when existing fullscreen.
 
         if (this.el_.controls && !this.options_.nativeControlsForTouch && this.controls()) {
           this.el_.controls = false;
         }
+=======
+        });
+>>>>>>> forked/LAE_400_PACKAGE
       };
 
       var beginFn = function beginFn() {
@@ -23198,6 +23702,7 @@
       return this.el_.requestPictureInPicture();
     }
     /**
+<<<<<<< HEAD
      * Native requestVideoFrameCallback if supported by browser/tech, or fallback
      * Don't use rVCF on Safari when DRM is playing, as it doesn't fire
      * Needs to be checked later than the constructor
@@ -23230,6 +23735,8 @@
       }
     }
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * A getter/setter for the `Html5` Tech's source object.
      * > Note: Please use {@link Html5#setSource}
      *
@@ -23539,6 +24046,7 @@
     try {
       var volume = Html5.TEST_VID.volume;
       Html5.TEST_VID.volume = volume / 2 + 0.1;
+<<<<<<< HEAD
       var canControl = volume !== Html5.TEST_VID.volume; // With the introduction of iOS 15, there are cases where the volume is read as
       // changed but reverts back to its original state at the start of the next tick.
       // To determine whether volume can be controlled on iOS,
@@ -23556,6 +24064,9 @@
       }
 
       return canControl;
+=======
+      return volume !== Html5.TEST_VID.volume;
+>>>>>>> forked/LAE_400_PACKAGE
     } catch (e) {
       return false;
     }
@@ -23749,14 +24260,21 @@
    * @default {@link Html5.supportsNativeAudioTracks}
    */
 
+<<<<<<< HEAD
   [['featuresMuteControl', 'canMuteVolume'], ['featuresPlaybackRate', 'canControlPlaybackRate'], ['featuresSourceset', 'canOverrideAttributes'], ['featuresNativeTextTracks', 'supportsNativeTextTracks'], ['featuresNativeVideoTracks', 'supportsNativeVideoTracks'], ['featuresNativeAudioTracks', 'supportsNativeAudioTracks']].forEach(function (_ref) {
+=======
+  [['featuresVolumeControl', 'canControlVolume'], ['featuresMuteControl', 'canMuteVolume'], ['featuresPlaybackRate', 'canControlPlaybackRate'], ['featuresSourceset', 'canOverrideAttributes'], ['featuresNativeTextTracks', 'supportsNativeTextTracks'], ['featuresNativeVideoTracks', 'supportsNativeVideoTracks'], ['featuresNativeAudioTracks', 'supportsNativeAudioTracks']].forEach(function (_ref) {
+>>>>>>> forked/LAE_400_PACKAGE
     var key = _ref[0],
         fn = _ref[1];
     defineLazyProperty(Html5.prototype, key, function () {
       return Html5[fn]();
     }, true);
   });
+<<<<<<< HEAD
   Html5.prototype.featuresVolumeControl = Html5.canControlVolume();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   /**
    * Boolean indicating whether the `HTML5` tech currently supports the media element
    * moving in the DOM. iOS breaks if you move the media element, so this is set this to
@@ -23794,6 +24312,7 @@
    * @default
    */
 
+<<<<<<< HEAD
   Html5.prototype.featuresTimeupdateEvents = true;
   /**
    * Whether the HTML5 el supports `requestVideoFrameCallback`
@@ -23802,6 +24321,9 @@
    */
 
   Html5.prototype.featuresVideoFrameCallback = !!(Html5.TEST_VID && Html5.TEST_VID.requestVideoFrameCallback); // HTML5 Feature detection and Device Fixes --------------------------------- //
+=======
+  Html5.prototype.featuresTimeupdateEvents = true; // HTML5 Feature detection and Device Fixes --------------------------------- //
+>>>>>>> forked/LAE_400_PACKAGE
 
   var canPlayType;
 
@@ -24906,6 +25428,7 @@
 
       _this.userActive_ = false; // Init debugEnabled_
 
+<<<<<<< HEAD
       _this.debugEnabled_ = false; // Init state audioOnlyMode_
 
       _this.audioOnlyMode_ = false; // Init state audioPosterMode_
@@ -24916,6 +25439,9 @@
         playerHeight: null,
         hiddenChildren: []
       }; // if the global option object was accidentally blown away by
+=======
+      _this.debugEnabled_ = false; // if the global option object was accidentally blown away by
+>>>>>>> forked/LAE_400_PACKAGE
       // someone, bail early with an informative error
 
       if (!_this.options_ || !_this.options_.techOrder || !_this.options_.techOrder.length) {
@@ -25096,6 +25622,7 @@
 
       _this.breakpoints(_this.options_.breakpoints);
 
+<<<<<<< HEAD
       _this.responsive(_this.options_.responsive); // Calling both the audio mode methods after the player is fully
       // setup to be able to listen to the events triggered by them
 
@@ -25107,6 +25634,9 @@
 
         _this.audioOnlyMode(_this.options_.audioOnlyMode);
       });
+=======
+      _this.responsive(_this.options_.responsive);
+>>>>>>> forked/LAE_400_PACKAGE
 
       return _this;
     }
@@ -25182,11 +25712,17 @@
         if (list && list.off) {
           list.off();
         }
+<<<<<<< HEAD
       }); // the actual .el_ is removed here, or replaced if
 
       _Component.prototype.dispose.call(this, {
         restoreEl: this.options_.restoreEl
       });
+=======
+      }); // the actual .el_ is removed here
+
+      _Component.prototype.dispose.call(this);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Create the `Player`'s DOM element.
@@ -25623,7 +26159,11 @@
 
 
       this.addClass(idClass);
+<<<<<<< HEAD
       setTextContent(this.styleEl_, "\n      ." + idClass + " {\n        width: " + width + "px;\n        height: " + height + "px;\n      }\n\n      ." + idClass + ".vjs-fluid:not(.vjs-audio-only-mode) {\n        padding-top: " + ratioMultiplier * 100 + "%;\n      }\n    ");
+=======
+      setTextContent(this.styleEl_, "\n      ." + idClass + " {\n        width: " + width + "px;\n        height: " + height + "px;\n      }\n\n      ." + idClass + ".vjs-fluid {\n        padding-top: " + ratioMultiplier * 100 + "%;\n      }\n    ");
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Load/Create an instance of playback {@link Tech} including element
@@ -26707,6 +27247,7 @@
     ;
 
     _proto.handleTechFullscreenChange_ = function handleTechFullscreenChange_(event, data) {
+<<<<<<< HEAD
       var _this9 = this;
 
       if (data) {
@@ -26715,6 +27256,11 @@
           this.tech_.one('webkitendfullscreen', function () {
             _this9.removeClass('vjs-ios-native-fs');
           });
+=======
+      if (data) {
+        if (data.nativeIOSFullscreen) {
+          this.toggleClass('vjs-ios-native-fs');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         this.isFullscreen(data.isFullscreen);
@@ -26936,13 +27482,21 @@
     ;
 
     _proto.play = function play() {
+<<<<<<< HEAD
       var _this10 = this;
+=======
+      var _this9 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       var PromiseClass = this.options_.Promise || window.Promise;
 
       if (PromiseClass) {
         return new PromiseClass(function (resolve) {
+<<<<<<< HEAD
           _this10.play_(resolve);
+=======
+          _this9.play_(resolve);
+>>>>>>> forked/LAE_400_PACKAGE
         });
       }
 
@@ -26960,7 +27514,11 @@
     ;
 
     _proto.play_ = function play_(callback) {
+<<<<<<< HEAD
       var _this11 = this;
+=======
+      var _this10 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (callback === void 0) {
         callback = silencePromise;
@@ -26978,7 +27536,11 @@
 
       if (!this.isReady_ || !isSrcReady) {
         this.waitToPlay_ = function (e) {
+<<<<<<< HEAD
           _this11.play_();
+=======
+          _this10.play_();
+>>>>>>> forked/LAE_400_PACKAGE
         };
 
         this.one(['ready', 'loadstart'], this.waitToPlay_); // if we are in Safari, there is a high chance that loadstart will trigger after the gesture timeperiod
@@ -27495,7 +28057,11 @@
     };
 
     _proto.requestFullscreenHelper_ = function requestFullscreenHelper_(fullscreenOptions) {
+<<<<<<< HEAD
       var _this12 = this;
+=======
+      var _this11 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       var fsOptions; // Only pass fullscreen options to requestFullscreen in spec-compliant browsers.
       // Use defaults or player configured option unless passed directly to this method.
@@ -27520,9 +28086,15 @@
 
         if (promise) {
           promise.then(function () {
+<<<<<<< HEAD
             return _this12.isFullscreen(true);
           }, function () {
             return _this12.isFullscreen(false);
+=======
+            return _this11.isFullscreen(true);
+          }, function () {
+            return _this11.isFullscreen(false);
+>>>>>>> forked/LAE_400_PACKAGE
           });
         }
 
@@ -27581,7 +28153,11 @@
     };
 
     _proto.exitFullscreenHelper_ = function exitFullscreenHelper_() {
+<<<<<<< HEAD
       var _this13 = this;
+=======
+      var _this12 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (this.fsApi_.requestFullscreen) {
         var promise = document[this.fsApi_.exitFullscreen]();
@@ -27590,7 +28166,11 @@
           // we're splitting the promise here, so, we want to catch the
           // potential error so that this chain doesn't have unhandled errors
           silencePromise(promise.then(function () {
+<<<<<<< HEAD
             return _this13.isFullscreen(false);
+=======
+            return _this12.isFullscreen(false);
+>>>>>>> forked/LAE_400_PACKAGE
           }));
         }
 
@@ -27918,7 +28498,11 @@
     ;
 
     _proto.selectSource = function selectSource(sources) {
+<<<<<<< HEAD
       var _this14 = this;
+=======
+      var _this13 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       // Get only the techs specified in `techOrder` that exist and are supported by the
       // current platform
@@ -27966,7 +28550,11 @@
         var techName = _ref2[0],
             tech = _ref2[1];
 
+<<<<<<< HEAD
         if (tech.canPlaySource(source, _this14.options_[techName.toLowerCase()])) {
+=======
+        if (tech.canPlaySource(source, _this13.options_[techName.toLowerCase()])) {
+>>>>>>> forked/LAE_400_PACKAGE
           return {
             source: source,
             tech: techName
@@ -28006,7 +28594,11 @@
     ;
 
     _proto.handleSrc_ = function handleSrc_(source, isRetry) {
+<<<<<<< HEAD
       var _this15 = this;
+=======
+      var _this14 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       // getter usage
       if (typeof source === 'undefined') {
@@ -28028,7 +28620,11 @@
         this.setTimeout(function () {
           this.error({
             code: 4,
+<<<<<<< HEAD
             message: this.options_.notSupportedMessage
+=======
+            message: this.localize(this.options_.notSupportedMessage)
+>>>>>>> forked/LAE_400_PACKAGE
           });
         }, 0);
         return;
@@ -28045,6 +28641,7 @@
       this.updateSourceCaches_(sources[0]); // middlewareSource is the source after it has been changed by middleware
 
       setSource(this, sources[0], function (middlewareSource, mws) {
+<<<<<<< HEAD
         _this15.middleware_ = mws; // since sourceSet is async we have to update the cache again after we select a source since
         // the source that is selected could be out of order from the cache update above this callback.
 
@@ -28067,22 +28664,55 @@
             this.error({
               code: 4,
               message: this.options_.notSupportedMessage
+=======
+        _this14.middleware_ = mws; // since sourceSet is async we have to update the cache again after we select a source since
+        // the source that is selected could be out of order from the cache update above this callback.
+
+        if (!isRetry) {
+          _this14.cache_.sources = sources;
+        }
+
+        _this14.updateSourceCaches_(middlewareSource);
+
+        var err = _this14.src_(middlewareSource);
+
+        if (err) {
+          if (sources.length > 1) {
+            return _this14.handleSrc_(sources.slice(1));
+          }
+
+          _this14.changingSrc_ = false; // We need to wrap this in a timeout to give folks a chance to add error event handlers
+
+          _this14.setTimeout(function () {
+            this.error({
+              code: 4,
+              message: this.localize(this.options_.notSupportedMessage)
+>>>>>>> forked/LAE_400_PACKAGE
             });
           }, 0); // we could not find an appropriate tech, but let's still notify the delegate that this is it
           // this needs a better comment about why this is needed
 
 
+<<<<<<< HEAD
           _this15.triggerReady();
+=======
+          _this14.triggerReady();
+>>>>>>> forked/LAE_400_PACKAGE
 
           return;
         }
 
+<<<<<<< HEAD
         setTech(mws, _this15.tech_);
+=======
+        setTech(mws, _this14.tech_);
+>>>>>>> forked/LAE_400_PACKAGE
       }); // Try another available source if this one fails before playback.
 
       if (this.options_.retryOnError && sources.length > 1) {
         var retry = function retry() {
           // Remove the error modal
+<<<<<<< HEAD
           _this15.error(null);
 
           _this15.handleSrc_(sources.slice(1), true);
@@ -28090,15 +28720,30 @@
 
         var stopListeningForErrors = function stopListeningForErrors() {
           _this15.off('error', retry);
+=======
+          _this14.error(null);
+
+          _this14.handleSrc_(sources.slice(1), true);
+        };
+
+        var stopListeningForErrors = function stopListeningForErrors() {
+          _this14.off('error', retry);
+>>>>>>> forked/LAE_400_PACKAGE
         };
 
         this.one('error', retry);
         this.one('playing', stopListeningForErrors);
 
         this.resetRetryOnError_ = function () {
+<<<<<<< HEAD
           _this15.off('error', retry);
 
           _this15.off('playing', stopListeningForErrors);
+=======
+          _this14.off('error', retry);
+
+          _this14.off('playing', stopListeningForErrors);
+>>>>>>> forked/LAE_400_PACKAGE
         };
       }
     }
@@ -28138,7 +28783,11 @@
     ;
 
     _proto.src_ = function src_(source) {
+<<<<<<< HEAD
       var _this16 = this;
+=======
+      var _this15 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       var sourceTech = this.selectSource([source]);
 
@@ -28151,7 +28800,11 @@
 
         this.loadTech_(sourceTech.tech, sourceTech.source);
         this.tech_.ready(function () {
+<<<<<<< HEAD
           _this16.changingSrc_ = false;
+=======
+          _this15.changingSrc_ = false;
+>>>>>>> forked/LAE_400_PACKAGE
         });
         return false;
       } // wait until the tech is ready to set the source
@@ -28189,7 +28842,11 @@
     ;
 
     _proto.reset = function reset() {
+<<<<<<< HEAD
       var _this17 = this;
+=======
+      var _this16 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       var PromiseClass = this.options_.Promise || window.Promise;
 
@@ -28198,7 +28855,11 @@
       } else {
         var playPromise = this.play();
         silencePromise(playPromise.then(function () {
+<<<<<<< HEAD
           return _this17.doReset_();
+=======
+          return _this16.doReset_();
+>>>>>>> forked/LAE_400_PACKAGE
         }));
       }
     };
@@ -28236,10 +28897,16 @@
 
     _proto.resetProgressBar_ = function resetProgressBar_() {
       this.currentTime(0);
+<<<<<<< HEAD
 
       var _ref3 = this.controlBar || {},
           durationDisplay = _ref3.durationDisplay,
           remainingTimeDisplay = _ref3.remainingTimeDisplay;
+=======
+      var _this$controlBar = this.controlBar,
+          durationDisplay = _this$controlBar.durationDisplay,
+          remainingTimeDisplay = _this$controlBar.remainingTimeDisplay;
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (durationDisplay) {
         durationDisplay.updateContent();
@@ -28633,7 +29300,11 @@
     ;
 
     _proto.error = function error(err) {
+<<<<<<< HEAD
       var _this18 = this;
+=======
+      var _this17 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (err === undefined) {
         return this.error_ || null;
@@ -28641,10 +29312,17 @@
 
 
       hooks('beforeerror').forEach(function (hookFunction) {
+<<<<<<< HEAD
         var newErr = hookFunction(_this18, err);
 
         if (!(isObject$1(newErr) && !Array.isArray(newErr) || typeof newErr === 'string' || typeof newErr === 'number' || newErr === null)) {
           _this18.log.error('please return a value that MediaError expects in beforeerror hooks');
+=======
+        var newErr = hookFunction(_this17, err);
+
+        if (!(isObject$1(newErr) && !Array.isArray(newErr) || typeof newErr === 'string' || typeof newErr === 'number' || newErr === null)) {
+          _this17.log.error('please return a value that MediaError expects in beforeerror hooks');
+>>>>>>> forked/LAE_400_PACKAGE
 
           return;
         }
@@ -28692,7 +29370,11 @@
       this.trigger('error'); // notify hooks of the per player error
 
       hooks('error').forEach(function (hookFunction) {
+<<<<<<< HEAD
         return hookFunction(_this18, _this18.error_);
+=======
+        return hookFunction(_this17, _this17.error_);
+>>>>>>> forked/LAE_400_PACKAGE
       });
       return;
     }
@@ -28951,6 +29633,7 @@
       }
 
       return !!this.isAudio_;
+<<<<<<< HEAD
     };
 
     _proto.enableAudioOnlyUI_ = function enableAudioOnlyUI_() {
@@ -29127,6 +29810,8 @@
       }
 
       this.disablePosterModeUI_();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * A helper method for adding a {@link TextTrack} to our
@@ -29253,7 +29938,11 @@
     /**
      * The player's language code.
      *
+<<<<<<< HEAD
      * Changing the language will trigger
+=======
+     * Changing the langauge will trigger
+>>>>>>> forked/LAE_400_PACKAGE
      * [languagechange]{@link Player#event:languagechange}
      * which Components can use to update control text.
      * ClickableComponent will update its control text by default on
@@ -29344,14 +30033,22 @@
     ;
 
     _proto.createModal = function createModal(content, options) {
+<<<<<<< HEAD
       var _this22 = this;
+=======
+      var _this18 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       options = options || {};
       options.content = content || '';
       var modal = new ModalDialog(this, options);
       this.addChild(modal);
       modal.on('dispose', function () {
+<<<<<<< HEAD
         _this22.removeChild(modal);
+=======
+        _this18.removeChild(modal);
+>>>>>>> forked/LAE_400_PACKAGE
       });
       modal.open();
       return modal;
@@ -29582,7 +30279,11 @@
     ;
 
     _proto.loadMedia = function loadMedia(media, ready) {
+<<<<<<< HEAD
       var _this23 = this;
+=======
+      var _this19 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (!media || typeof media !== 'object') {
         return;
@@ -29614,7 +30315,11 @@
 
       if (Array.isArray(textTracks)) {
         textTracks.forEach(function (tt) {
+<<<<<<< HEAD
           return _this23.addRemoteTextTrack(tt, false);
+=======
+          return _this19.addRemoteTextTrack(tt, false);
+>>>>>>> forked/LAE_400_PACKAGE
         });
       }
 
@@ -29935,9 +30640,13 @@
       }
     },
     breakpoints: {},
+<<<<<<< HEAD
     responsive: false,
     audioOnlyMode: false,
     audioPosterMode: false
+=======
+    responsive: false
+>>>>>>> forked/LAE_400_PACKAGE
   };
   [
   /**
@@ -30887,6 +31596,7 @@
       log$1.warn('The element supplied is not included in the DOM');
     }
 
+<<<<<<< HEAD
     options = options || {}; // Store a copy of the el before modification, if it is to be restored in destroy()
     // If div ingest, store the parent div
 
@@ -30894,6 +31604,9 @@
       options.restoreEl = (el.parentNode && el.parentNode.hasAttribute('data-vjs-player') ? el.parentNode : el).cloneNode(true);
     }
 
+=======
+    options = options || {};
+>>>>>>> forked/LAE_400_PACKAGE
     hooks('beforesetup').forEach(function (hookFunction) {
       var opts = hookFunction(el, mergeOptions$3(options));
 
@@ -30931,7 +31644,11 @@
         head.insertBefore(style, head.firstChild);
       }
 
+<<<<<<< HEAD
       setTextContent(style, "\n      .video-js {\n        width: 300px;\n        height: 150px;\n      }\n\n      .vjs-fluid:not(.vjs-audio-only-mode) {\n        padding-top: 56.25%\n      }\n    ");
+=======
+      setTextContent(style, "\n      .video-js {\n        width: 300px;\n        height: 150px;\n      }\n\n      .vjs-fluid {\n        padding-top: 56.25%\n      }\n    ");
+>>>>>>> forked/LAE_400_PACKAGE
     }
   } // Run Auto-load players
   // You have to wait at least once in case this script is loaded after your
@@ -31542,12 +32259,21 @@
     return Stream;
   }();
 
+<<<<<<< HEAD
   var atob$1 = function atob(s) {
     return window.atob ? window.atob(s) : Buffer.from(s, 'base64').toString('binary');
   };
 
   function decodeB64ToUint8Array$1(b64Text) {
     var decodedString = atob$1(b64Text);
+=======
+  var atob = function atob(s) {
+    return window.atob ? window.atob(s) : Buffer.from(s, 'base64').toString('binary');
+  };
+
+  function decodeB64ToUint8Array(b64Text) {
+    var decodedString = atob(b64Text);
+>>>>>>> forked/LAE_400_PACKAGE
     var array = new Uint8Array(decodedString.length);
 
     for (var i = 0; i < decodedString.length; i++) {
@@ -31557,7 +32283,11 @@
     return array;
   }
 
+<<<<<<< HEAD
   /*! @name m3u8-parser @version 4.7.1 @license Apache-2.0 */
+=======
+  /*! @name m3u8-parser @version 4.7.0 @license Apache-2.0 */
+>>>>>>> forked/LAE_400_PACKAGE
   /**
    * A stream that buffers string input and generates a `data` event for each
    * line.
@@ -32619,6 +33349,7 @@
                     attributes: entry.attributes
                   };
                   return;
+<<<<<<< HEAD
                 }
 
                 if (entry.attributes.KEYFORMAT === 'com.microsoft.playready') {
@@ -32628,6 +33359,8 @@
                     uri: entry.attributes.URI
                   };
                   return;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 } // check if the content is encrypted for Widevine
                 // Widevine/HLS spec: https://storage.googleapis.com/wvdocs/Widevine_DRM_HLS.pdf
 
@@ -32672,7 +33405,11 @@
                       keyId: entry.attributes.KEYID.substring(2)
                     },
                     // decode the base64-encoded PSSH box
+<<<<<<< HEAD
                     pssh: decodeB64ToUint8Array$1(entry.attributes.URI.split(',')[1])
+=======
+                    pssh: decodeB64ToUint8Array(entry.attributes.URI.split(',')[1])
+>>>>>>> forked/LAE_400_PACKAGE
                   };
                   return;
                 }
@@ -33341,6 +34078,7 @@
     return null;
   };
 
+<<<<<<< HEAD
   // const log2 = Math.log2 ? Math.log2 : (x) => (Math.log(x) / Math.log(2));
   // we used to do this with log2 but BigInt does not support builtin math
   // Math.ceil(log2(x));
@@ -33528,6 +34266,8 @@
     });
   };
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   var DEFAULT_LOCATION = 'http://example.com';
 
   var resolveUrl$1 = function resolveUrl(baseUrl, relativeUrl) {
@@ -33573,6 +34313,7 @@
   };
 
   /**
+<<<<<<< HEAD
    * Loops through all supported media groups in master and calls the provided
    * callback for each group
    *
@@ -33610,6 +34351,8 @@
   }
 
   /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
    * "Shallow freezes" an object to render it immutable.
    * Uses `Object.freeze` if available,
    * otherwise the immutability is only in the type.
@@ -33929,10 +34672,17 @@
     /**
      * Returns the indexth item in the collection. If index is greater than or equal to the number of nodes in the list, this returns null.
      * @standard level1
+<<<<<<< HEAD
      * @param index  unsigned long 
      *   Index into the collection.
      * @return Node
      * 	The node at the indexth position in the NodeList, or null if that is not a valid index. 
+=======
+     * @param index  unsigned long
+     *   Index into the collection.
+     * @return Node
+     * 	The node at the indexth position in the NodeList, or null if that is not a valid index.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     item: function item(index) {
       return this[index] || null;
@@ -33983,7 +34733,11 @@
    * but this is simply to allow convenient enumeration of the contents of a NamedNodeMap,
    * and does not imply that the DOM specifies an order to these Nodes.
    * NamedNodeMap objects in the DOM are live.
+<<<<<<< HEAD
    * used for attributes or DocumentType entities 
+=======
+   * used for attributes or DocumentType entities
+>>>>>>> forked/LAE_400_PACKAGE
    */
 
 
@@ -34253,11 +35007,19 @@
     localName: null,
     // Modified in DOM Level 2:
     insertBefore: function insertBefore(newChild, refChild) {
+<<<<<<< HEAD
       //raises 
       return _insertBefore(this, newChild, refChild);
     },
     replaceChild: function replaceChild(newChild, oldChild) {
       //raises 
+=======
+      //raises
+      return _insertBefore(this, newChild, refChild);
+    },
+    replaceChild: function replaceChild(newChild, oldChild) {
+      //raises
+>>>>>>> forked/LAE_400_PACKAGE
       this.insertBefore(newChild, oldChild);
 
       if (oldChild) {
@@ -34431,7 +35193,11 @@
   /**
    * attributes;
    * children;
+<<<<<<< HEAD
    * 
+=======
+   *
+>>>>>>> forked/LAE_400_PACKAGE
    * writeable properties:
    * nodeValue,Attr:value,CharacterData:data
    * prefix
@@ -35125,7 +35891,11 @@
           }
 
           serializeToString(attr, buf, isHTML, nodeFilter, visibleNamespaces);
+<<<<<<< HEAD
         } // add namespace for current node		
+=======
+        } // add namespace for current node
+>>>>>>> forked/LAE_400_PACKAGE
 
 
         if (nodeName === prefixedNodeName && needNamespaceDefine(node, isHTML, visibleNamespaces)) {
@@ -35738,7 +36508,11 @@
 
   var S_TAG = 0; //tag name offerring
 
+<<<<<<< HEAD
   var S_ATTR = 1; //attr name offerring 
+=======
+  var S_ATTR = 1; //attr name offerring
+>>>>>>> forked/LAE_400_PACKAGE
 
   var S_ATTR_SPACE = 2; //attr name end and space offer
 
@@ -36247,7 +37021,11 @@
       } //can not set prefix,because prefix !== ''
 
 
+<<<<<<< HEAD
       a.localName = localName; //prefix == null for no ns prefix attribute 
+=======
+      a.localName = localName; //prefix == null for no ns prefix attribute
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (nsPrefix !== false) {
         //hack!!
@@ -36354,7 +37132,11 @@
       closeMap[tagName] = pos;
     }
 
+<<<<<<< HEAD
     return pos < elStartEnd; //} 
+=======
+    return pos < elStartEnd; //}
+>>>>>>> forked/LAE_400_PACKAGE
   }
 
   function _copy(source, target) {
@@ -36392,7 +37174,11 @@
           domBuilder.endCDATA();
           return end + 3;
         } //<!DOCTYPE
+<<<<<<< HEAD
         //startDTD(java.lang.String name, java.lang.String publicId, java.lang.String systemId) 
+=======
+        //startDTD(java.lang.String name, java.lang.String publicId, java.lang.String systemId)
+>>>>>>> forked/LAE_400_PACKAGE
 
 
         var matchs = split(source, start);
@@ -36483,7 +37269,11 @@
       return this[i].value;
     } //	,getIndex:function(uri, localName)){
     //		if(localName){
+<<<<<<< HEAD
     //			
+=======
+    //
+>>>>>>> forked/LAE_400_PACKAGE
     //		}else{
     //			var qName = uri
     //		}
@@ -36813,7 +37603,11 @@
 
   var DOMParser = domParser.DOMParser;
 
+<<<<<<< HEAD
   /*! @name mpd-parser @version 0.21.1 @license Apache-2.0 */
+=======
+  /*! @name mpd-parser @version 0.19.2 @license Apache-2.0 */
+>>>>>>> forked/LAE_400_PACKAGE
 
   var isObject = function isObject(obj) {
     return !!obj && typeof obj === 'object';
@@ -36887,6 +37681,7 @@
       return a;
     }, []);
   };
+<<<<<<< HEAD
   /**
    * Returns the first index that satisfies the matching function, or -1 if not found.
    *
@@ -36926,6 +37721,8 @@
       return acc;
     }, {}));
   };
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   var errors = {
     INVALID_NUMBER_OF_PERIOD: 'INVALID_NUMBER_OF_PERIOD',
@@ -36978,6 +37775,7 @@
 
     if (range || indexRange) {
       var rangeStr = range ? range : indexRange;
+<<<<<<< HEAD
       var ranges = rangeStr.split('-'); // default to parsing this as a BigInt if possible
 
       var startRange = window.BigInt ? window.BigInt(ranges[0]) : parseInt(ranges[0], 10);
@@ -37007,6 +37805,15 @@
 
       segment.byterange = {
         length: length,
+=======
+      var ranges = rangeStr.split('-');
+      var startRange = parseInt(ranges[0], 10);
+      var endRange = parseInt(ranges[1], 10); // byterange should be inclusive according to
+      // RFC 2616, Clause 14.35.1
+
+      segment.byterange = {
+        length: endRange - startRange + 1,
+>>>>>>> forked/LAE_400_PACKAGE
         offset: startRange
       };
     }
@@ -37017,6 +37824,7 @@
   var byteRangeToString = function byteRangeToString(byterange) {
     // `endRange` is one less than `offset + length` because the HTTP range
     // header uses inclusive ranges
+<<<<<<< HEAD
     var endRange;
 
     if (typeof byterange.offset === 'bigint' || typeof byterange.length === 'bigint') {
@@ -37025,6 +37833,9 @@
       endRange = byterange.offset + byterange.length - 1;
     }
 
+=======
+    var endRange = byterange.offset + byterange.length - 1;
+>>>>>>> forked/LAE_400_PACKAGE
     return byterange.offset + "-" + endRange;
   };
   /**
@@ -37109,12 +37920,18 @@
           _attributes$timescale2 = attributes.timescale,
           timescale = _attributes$timescale2 === void 0 ? 1 : _attributes$timescale2,
           duration = attributes.duration,
+<<<<<<< HEAD
           _attributes$periodSta = attributes.periodStart,
           periodStart = _attributes$periodSta === void 0 ? 0 : _attributes$periodSta,
+=======
+          _attributes$start = attributes.start,
+          start = _attributes$start === void 0 ? 0 : _attributes$start,
+>>>>>>> forked/LAE_400_PACKAGE
           _attributes$minimumUp = attributes.minimumUpdatePeriod,
           minimumUpdatePeriod = _attributes$minimumUp === void 0 ? 0 : _attributes$minimumUp,
           _attributes$timeShift = attributes.timeShiftBufferDepth,
           timeShiftBufferDepth = _attributes$timeShift === void 0 ? Infinity : _attributes$timeShift;
+<<<<<<< HEAD
       var endNumber = parseEndNumber(attributes.endNumber); // clientOffset is passed in at the top level of mpd-parser and is an offset calculated
       // after retrieving UTC server time.
 
@@ -37123,6 +37940,11 @@
 
       var periodStartWC = availabilityStartTime + periodStart; // Period end in EPOCH is manifest's retrieval time + time until next update.
 
+=======
+      var endNumber = parseEndNumber(attributes.endNumber);
+      var now = (NOW + clientOffset) / 1000;
+      var periodStartWC = availabilityStartTime + start;
+>>>>>>> forked/LAE_400_PACKAGE
       var periodEndWC = now + minimumUpdatePeriod;
       var periodDuration = periodEndWC - periodStartWC;
       var segmentCount = Math.ceil(periodDuration * timescale / duration);
@@ -37159,18 +37981,31 @@
    */
 
   var toSegments = function toSegments(attributes) {
+<<<<<<< HEAD
     return function (number) {
       var duration = attributes.duration,
           _attributes$timescale3 = attributes.timescale,
           timescale = _attributes$timescale3 === void 0 ? 1 : _attributes$timescale3,
           periodStart = attributes.periodStart,
+=======
+    return function (number, index) {
+      var duration = attributes.duration,
+          _attributes$timescale3 = attributes.timescale,
+          timescale = _attributes$timescale3 === void 0 ? 1 : _attributes$timescale3,
+          periodIndex = attributes.periodIndex,
+>>>>>>> forked/LAE_400_PACKAGE
           _attributes$startNumb = attributes.startNumber,
           startNumber = _attributes$startNumb === void 0 ? 1 : _attributes$startNumb;
       return {
         number: startNumber + number,
         duration: duration / timescale,
+<<<<<<< HEAD
         timeline: periodStart,
         time: number * duration
+=======
+        timeline: periodIndex,
+        time: index * duration
+>>>>>>> forked/LAE_400_PACKAGE
       };
     };
   };
@@ -37229,10 +38064,13 @@
         sourceDuration = attributes.sourceDuration,
         _attributes$indexRang = attributes.indexRange,
         indexRange = _attributes$indexRang === void 0 ? '' : _attributes$indexRang,
+<<<<<<< HEAD
         periodStart = attributes.periodStart,
         presentationTime = attributes.presentationTime,
         _attributes$number = attributes.number,
         number = _attributes$number === void 0 ? 0 : _attributes$number,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         duration = attributes.duration; // base url is required for SegmentBase to work, per spec (Section 5.3.9.2.1)
 
     if (!baseUrl) {
@@ -37261,6 +38099,7 @@
       }
     } else if (sourceDuration) {
       segment.duration = sourceDuration;
+<<<<<<< HEAD
       segment.timeline = periodStart;
     } // If presentation time is provided, these segments are being generated by SIDX
     // references, and should use the time provided. For the general case of SegmentBase,
@@ -37270,6 +38109,13 @@
 
     segment.presentationTime = presentationTime || periodStart;
     segment.number = number;
+=======
+      segment.timeline = 0;
+    } // This is used for mediaSequence
+
+
+    segment.number = 0;
+>>>>>>> forked/LAE_400_PACKAGE
     return [segment];
   };
   /**
@@ -37285,7 +38131,11 @@
    */
 
 
+<<<<<<< HEAD
   var addSidxSegmentsToPlaylist$1 = function addSidxSegmentsToPlaylist(playlist, sidx, baseUrl) {
+=======
+  var addSidxSegmentsToPlaylist = function addSidxSegmentsToPlaylist(playlist, sidx, baseUrl) {
+>>>>>>> forked/LAE_400_PACKAGE
     // Retain init segment information
     var initSegment = playlist.sidx.map ? playlist.sidx.map : null; // Retain source duration from initial main manifest parsing
 
@@ -37301,6 +38151,7 @@
       return r.referenceType !== 1;
     });
     var segments = [];
+<<<<<<< HEAD
     var type = playlist.endList ? 'static' : 'dynamic';
     var periodStart = playlist.sidx.timeline;
     var presentationTime = periodStart;
@@ -37313,6 +38164,11 @@
     } else {
       startIndex = sidxEnd + sidx.firstOffset;
     }
+=======
+    var type = playlist.endList ? 'static' : 'dynamic'; // firstOffset is the offset from the end of the sidx box
+
+    var startIndex = sidxEnd + sidx.firstOffset;
+>>>>>>> forked/LAE_400_PACKAGE
 
     for (var i = 0; i < mediaReferences.length; i++) {
       var reference = sidx.references[i]; // size of the referenced (sub)segment
@@ -37322,6 +38178,7 @@
 
       var duration = reference.subsegmentDuration; // should be an inclusive range
 
+<<<<<<< HEAD
       var endIndex = void 0; // eslint-disable-next-line
 
       if (typeof startIndex === 'bigint') {
@@ -37330,14 +38187,22 @@
         endIndex = startIndex + size - 1;
       }
 
+=======
+      var endIndex = startIndex + size - 1;
+>>>>>>> forked/LAE_400_PACKAGE
       var indexRange = startIndex + "-" + endIndex;
       var attributes = {
         baseUrl: baseUrl,
         timescale: timescale,
         timeline: timeline,
+<<<<<<< HEAD
         periodStart: periodStart,
         presentationTime: presentationTime,
         number: number,
+=======
+        // this is used in parseByDuration
+        periodIndex: timeline,
+>>>>>>> forked/LAE_400_PACKAGE
         duration: duration,
         sourceDuration: sourceDuration,
         indexRange: indexRange,
@@ -37350,6 +38215,7 @@
       }
 
       segments.push(segment);
+<<<<<<< HEAD
 
       if (typeof startIndex === 'bigint') {
         startIndex += window.BigInt(size);
@@ -37359,12 +38225,16 @@
 
       presentationTime += duration / timescale;
       number++;
+=======
+      startIndex += size;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     playlist.segments = segments;
     return playlist;
   };
 
+<<<<<<< HEAD
   var SUPPORTED_MEDIA_TYPES = ['AUDIO', 'SUBTITLES']; // allow one 60fps frame as leniency (arbitrarily chosen)
 
   var TIME_FUDGE = 1 / 60;
@@ -37606,6 +38476,8 @@
     return newManifest;
   };
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   var generateSidxKey = function generateSidxKey(sidx) {
     return sidx && sidx.uri + '-' + byteRangeToString(sidx.byterange);
   };
@@ -37615,6 +38487,7 @@
       // assuming playlist IDs are the same across periods
       // TODO: handle multiperiod where representation sets are not the same
       // across periods
+<<<<<<< HEAD
       var name = playlist.attributes.id + (playlist.attributes.lang || '');
 
       if (!acc[name]) {
@@ -37633,12 +38506,26 @@
 
           (_acc$name$segments = acc[name].segments).push.apply(_acc$name$segments, playlist.segments);
         } // bubble up contentProtection, this assumes all DRM content
+=======
+      var name = playlist.attributes.id + (playlist.attributes.lang || ''); // Periods after first
+
+      if (acc[name]) {
+        var _acc$name$segments; // first segment of subsequent periods signal a discontinuity
+
+
+        if (playlist.segments[0]) {
+          playlist.segments[0].discontinuity = true;
+        }
+
+        (_acc$name$segments = acc[name].segments).push.apply(_acc$name$segments, playlist.segments); // bubble up contentProtection, this assumes all DRM content
+>>>>>>> forked/LAE_400_PACKAGE
         // has the same contentProtection
 
 
         if (playlist.attributes.contentProtection) {
           acc[name].attributes.contentProtection = playlist.attributes.contentProtection;
         }
+<<<<<<< HEAD
       }
 
       acc[name].attributes.timelineStarts.push({
@@ -37651,16 +38538,35 @@
     }, {}));
     return mergedPlaylists.map(function (playlist) {
       playlist.discontinuityStarts = findIndexes(playlist.segments || [], 'discontinuity');
+=======
+      } else {
+        // first Period
+        acc[name] = playlist;
+      }
+
+      return acc;
+    }, {}));
+    return mergedPlaylists.map(function (playlist) {
+      playlist.discontinuityStarts = findIndexes(playlist.segments, 'discontinuity');
+>>>>>>> forked/LAE_400_PACKAGE
       return playlist;
     });
   };
 
+<<<<<<< HEAD
   var addSidxSegmentsToPlaylist = function addSidxSegmentsToPlaylist(playlist, sidxMapping) {
+=======
+  var addSidxSegmentsToPlaylist$1 = function addSidxSegmentsToPlaylist$1(playlist, sidxMapping) {
+>>>>>>> forked/LAE_400_PACKAGE
     var sidxKey = generateSidxKey(playlist.sidx);
     var sidxMatch = sidxKey && sidxMapping[sidxKey] && sidxMapping[sidxKey].sidx;
 
     if (sidxMatch) {
+<<<<<<< HEAD
       addSidxSegmentsToPlaylist$1(playlist, sidxMatch, playlist.sidx.resolvedUri);
+=======
+      addSidxSegmentsToPlaylist(playlist, sidxMatch, playlist.sidx.resolvedUri);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     return playlist;
@@ -37676,7 +38582,11 @@
     }
 
     for (var i in playlists) {
+<<<<<<< HEAD
       playlists[i] = addSidxSegmentsToPlaylist(playlists[i], sidxMapping);
+=======
+      playlists[i] = addSidxSegmentsToPlaylist$1(playlists[i], sidxMapping);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     return playlists;
@@ -37687,10 +38597,14 @@
 
     var attributes = _ref.attributes,
         segments = _ref.segments,
+<<<<<<< HEAD
         sidx = _ref.sidx,
         mediaSequence = _ref.mediaSequence,
         discontinuitySequence = _ref.discontinuitySequence,
         discontinuityStarts = _ref.discontinuityStarts;
+=======
+        sidx = _ref.sidx;
+>>>>>>> forked/LAE_400_PACKAGE
     var playlist = {
       attributes: (_attributes = {
         NAME: attributes.id,
@@ -37699,6 +38613,7 @@
       }, _attributes['PROGRAM-ID'] = 1, _attributes),
       uri: '',
       endList: attributes.type === 'static',
+<<<<<<< HEAD
       timeline: attributes.periodStart,
       resolvedUri: '',
       targetDuration: attributes.duration,
@@ -37707,6 +38622,13 @@
       timelineStarts: attributes.timelineStarts,
       mediaSequence: mediaSequence,
       segments: segments
+=======
+      timeline: attributes.periodIndex,
+      resolvedUri: '',
+      targetDuration: attributes.duration,
+      segments: segments,
+      mediaSequence: segments.length ? segments[0].number : 1
+>>>>>>> forked/LAE_400_PACKAGE
     };
 
     if (attributes.contentProtection) {
@@ -37729,16 +38651,24 @@
     var _m3u8Attributes;
 
     var attributes = _ref2.attributes,
+<<<<<<< HEAD
         segments = _ref2.segments,
         mediaSequence = _ref2.mediaSequence,
         discontinuityStarts = _ref2.discontinuityStarts,
         discontinuitySequence = _ref2.discontinuitySequence;
+=======
+        segments = _ref2.segments;
+>>>>>>> forked/LAE_400_PACKAGE
 
     if (typeof segments === 'undefined') {
       // vtt tracks may use single file in BaseURL
       segments = [{
         uri: attributes.baseUrl,
+<<<<<<< HEAD
         timeline: attributes.periodStart,
+=======
+        timeline: attributes.periodIndex,
+>>>>>>> forked/LAE_400_PACKAGE
         resolvedUri: attributes.baseUrl || '',
         duration: attributes.sourceDuration,
         number: 0
@@ -37760,6 +38690,7 @@
       attributes: m3u8Attributes,
       uri: '',
       endList: attributes.type === 'static',
+<<<<<<< HEAD
       timeline: attributes.periodStart,
       resolvedUri: attributes.baseUrl || '',
       targetDuration: attributes.duration,
@@ -37768,6 +38699,13 @@
       discontinuitySequence: discontinuitySequence,
       mediaSequence: mediaSequence,
       segments: segments
+=======
+      timeline: attributes.periodIndex,
+      resolvedUri: attributes.baseUrl || '',
+      targetDuration: attributes.duration,
+      segments: segments,
+      mediaSequence: segments.length ? segments[0].number : 1
+>>>>>>> forked/LAE_400_PACKAGE
     };
   };
 
@@ -37801,7 +38739,11 @@
         };
       }
 
+<<<<<<< HEAD
       var formatted = addSidxSegmentsToPlaylist(formatAudioPlaylist(playlist, isAudioOnly), sidxMapping);
+=======
+      var formatted = addSidxSegmentsToPlaylist$1(formatAudioPlaylist(playlist, isAudioOnly), sidxMapping);
+>>>>>>> forked/LAE_400_PACKAGE
       a[label].playlists.push(formatted);
 
       if (typeof mainPlaylist === 'undefined' && role === 'main') {
@@ -37838,7 +38780,11 @@
         };
       }
 
+<<<<<<< HEAD
       a[label].playlists.push(addSidxSegmentsToPlaylist(formatVttPlaylist(playlist), sidxMapping));
+=======
+      a[label].playlists.push(addSidxSegmentsToPlaylist$1(formatVttPlaylist(playlist), sidxMapping));
+>>>>>>> forked/LAE_400_PACKAGE
       return a;
     }, {});
   };
@@ -37880,8 +38826,12 @@
 
     var attributes = _ref3.attributes,
         segments = _ref3.segments,
+<<<<<<< HEAD
         sidx = _ref3.sidx,
         discontinuityStarts = _ref3.discontinuityStarts;
+=======
+        sidx = _ref3.sidx;
+>>>>>>> forked/LAE_400_PACKAGE
     var playlist = {
       attributes: (_attributes2 = {
         NAME: attributes.id,
@@ -37896,12 +38846,20 @@
       }, _attributes2['PROGRAM-ID'] = 1, _attributes2),
       uri: '',
       endList: attributes.type === 'static',
+<<<<<<< HEAD
       timeline: attributes.periodStart,
       resolvedUri: '',
       targetDuration: attributes.duration,
       discontinuityStarts: discontinuityStarts,
       timelineStarts: attributes.timelineStarts,
       segments: segments
+=======
+      timeline: attributes.periodIndex,
+      resolvedUri: '',
+      targetDuration: attributes.duration,
+      segments: segments,
+      mediaSequence: segments.length ? segments[0].number : 1
+>>>>>>> forked/LAE_400_PACKAGE
     };
 
     if (attributes.contentProtection) {
@@ -37929,6 +38887,7 @@
     var attributes = _ref6.attributes;
     return attributes.mimeType === 'text/vtt' || attributes.contentType === 'text';
   };
+<<<<<<< HEAD
   /**
    * Contains start and timeline properties denoting a timeline start. For DASH, these will
    * be the same number.
@@ -38009,6 +38968,15 @@
         _ref8$sidxMapping = _ref8.sidxMapping,
         sidxMapping = _ref8$sidxMapping === void 0 ? {} : _ref8$sidxMapping,
         previousManifest = _ref8.previousManifest;
+=======
+
+  var toM3u8 = function toM3u8(dashPlaylists, locations, sidxMapping) {
+    var _mediaGroups;
+
+    if (sidxMapping === void 0) {
+      sidxMapping = {};
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 
     if (!dashPlaylists.length) {
       return {};
@@ -38022,7 +38990,11 @@
         minimumUpdatePeriod = _dashPlaylists$0$attr.minimumUpdatePeriod;
     var videoPlaylists = mergeDiscontiguousPlaylists(dashPlaylists.filter(videoOnly)).map(formatVideoPlaylist);
     var audioPlaylists = mergeDiscontiguousPlaylists(dashPlaylists.filter(audioOnly));
+<<<<<<< HEAD
     var vttPlaylists = mergeDiscontiguousPlaylists(dashPlaylists.filter(vttOnly));
+=======
+    var vttPlaylists = dashPlaylists.filter(vttOnly);
+>>>>>>> forked/LAE_400_PACKAGE
     var captions = dashPlaylists.map(function (playlist) {
       return playlist.attributes.captionServices;
     }).filter(Boolean);
@@ -38053,6 +39025,7 @@
     }
 
     var isAudioOnly = manifest.playlists.length === 0;
+<<<<<<< HEAD
     var organizedAudioGroup = audioPlaylists.length ? organizeAudioPlaylists(audioPlaylists, sidxMapping, isAudioOnly) : null;
     var organizedVttGroup = vttPlaylists.length ? organizeVttPlaylists(vttPlaylists, sidxMapping) : null;
     var formattedPlaylists = videoPlaylists.concat(flattenMediaGroupPlaylists(organizedAudioGroup), flattenMediaGroupPlaylists(organizedVttGroup));
@@ -38069,12 +39042,22 @@
 
     if (organizedVttGroup) {
       manifest.mediaGroups.SUBTITLES.subs = organizedVttGroup;
+=======
+
+    if (audioPlaylists.length) {
+      manifest.mediaGroups.AUDIO.audio = organizeAudioPlaylists(audioPlaylists, sidxMapping, isAudioOnly);
+    }
+
+    if (vttPlaylists.length) {
+      manifest.mediaGroups.SUBTITLES.subs = organizeVttPlaylists(vttPlaylists, sidxMapping);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (captions.length) {
       manifest.mediaGroups['CLOSED-CAPTIONS'].cc = organizeCaptionServices(captions);
     }
 
+<<<<<<< HEAD
     if (previousManifest) {
       return positionManifestOnTimeline({
         oldManifest: previousManifest,
@@ -38082,6 +39065,8 @@
       });
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     return manifest;
   };
   /**
@@ -38107,12 +39092,21 @@
         availabilityStartTime = attributes.availabilityStartTime,
         _attributes$timescale = attributes.timescale,
         timescale = _attributes$timescale === void 0 ? 1 : _attributes$timescale,
+<<<<<<< HEAD
         _attributes$periodSta = attributes.periodStart,
         periodStart = _attributes$periodSta === void 0 ? 0 : _attributes$periodSta,
         _attributes$minimumUp = attributes.minimumUpdatePeriod,
         minimumUpdatePeriod = _attributes$minimumUp === void 0 ? 0 : _attributes$minimumUp;
     var now = (NOW + clientOffset) / 1000;
     var periodStartWC = availabilityStartTime + periodStart;
+=======
+        _attributes$start = attributes.start,
+        start = _attributes$start === void 0 ? 0 : _attributes$start,
+        _attributes$minimumUp = attributes.minimumUpdatePeriod,
+        minimumUpdatePeriod = _attributes$minimumUp === void 0 ? 0 : _attributes$minimumUp;
+    var now = (NOW + clientOffset) / 1000;
+    var periodStartWC = availabilityStartTime + start;
+>>>>>>> forked/LAE_400_PACKAGE
     var periodEndWC = now + minimumUpdatePeriod;
     var periodDuration = periodEndWC - periodStartWC;
     return Math.ceil((periodDuration * timescale - time) / duration);
@@ -38143,7 +39137,11 @@
         timescale = _attributes$timescale2 === void 0 ? 1 : _attributes$timescale2,
         _attributes$startNumb = attributes.startNumber,
         startNumber = _attributes$startNumb === void 0 ? 1 : _attributes$startNumb,
+<<<<<<< HEAD
         timeline = attributes.periodStart;
+=======
+        timeline = attributes.periodIndex;
+>>>>>>> forked/LAE_400_PACKAGE
     var segments = [];
     var time = -1;
 
@@ -38335,7 +39333,11 @@
         number: attributes.startNumber || 1,
         duration: attributes.sourceDuration,
         time: 0,
+<<<<<<< HEAD
         timeline: attributes.periodStart
+=======
+        timeline: attributes.periodIndex
+>>>>>>> forked/LAE_400_PACKAGE
       }];
     }
 
@@ -39030,6 +40032,7 @@
 
   var generateKeySystemInformation = function generateKeySystemInformation(contentProtectionNodes) {
     return contentProtectionNodes.reduce(function (acc, node) {
+<<<<<<< HEAD
       var attributes = parseAttributes(node); // Although it could be argued that according to the UUID RFC spec the UUID string (a-f chars) should be generated
       // as a lowercase string it also mentions it should be treated as case-insensitive on input. Since the key system
       // UUIDs in the keySystemsMap are hardcoded as lowercase in the codebase there isn't any reason not to do
@@ -39039,6 +40042,9 @@
         attributes.schemeIdUri = attributes.schemeIdUri.toLowerCase();
       }
 
+=======
+      var attributes = parseAttributes(node);
+>>>>>>> forked/LAE_400_PACKAGE
       var keySystem = keySystemsMap[attributes.schemeIdUri];
 
       if (keySystem) {
@@ -39049,7 +40055,12 @@
 
         if (psshNode) {
           var pssh = getContent(psshNode);
+<<<<<<< HEAD
           acc[keySystem].pssh = pssh && decodeB64ToUint8Array(pssh);
+=======
+          var psshBuffer = pssh && decodeB64ToUint8Array(pssh);
+          acc[keySystem].pssh = psshBuffer;
+>>>>>>> forked/LAE_400_PACKAGE
         }
       }
 
@@ -39225,8 +40236,13 @@
    * @function
    * @param {PeriodInformation} period
    *        Period object containing necessary period information
+<<<<<<< HEAD
    * @param {number} periodStart
    *        Start time of the Period within the mpd
+=======
+   * @param {number} periodIndex
+   *        Index of the Period within the mpd
+>>>>>>> forked/LAE_400_PACKAGE
    * @return {RepresentationInformation[]}
    *         List of objects containing Representaion information
    */
@@ -39247,7 +40263,15 @@
   var toAdaptationSets = function toAdaptationSets(mpdAttributes, mpdBaseUrls) {
     return function (period, index) {
       var periodBaseUrls = buildBaseUrls(mpdBaseUrls, findChildren(period.node, 'BaseURL'));
+<<<<<<< HEAD
       var periodAttributes = merge(mpdAttributes, {
+=======
+      var parsedPeriodId = parseInt(period.attributes.id, 10); // fallback to mapping index if Period@id is not a number
+
+      var periodIndex = window.isNaN(parsedPeriodId) ? index : parsedPeriodId;
+      var periodAttributes = merge(mpdAttributes, {
+        periodIndex: periodIndex,
+>>>>>>> forked/LAE_400_PACKAGE
         periodStart: period.attributes.start
       });
 
@@ -39461,6 +40485,7 @@
 
     return attributes;
   };
+<<<<<<< HEAD
   /*
    * Given a DASH manifest string and options, parses the DASH manifest into an object in the
    * form outputed by m3u8-parser and accepted by videojs/http-streaming.
@@ -39474,6 +40499,8 @@
    *
    * @return {Object} the manifest object
    */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   var parse = function parse(manifestString, options) {
     if (options === void 0) {
@@ -39482,12 +40509,16 @@
 
     var parsedManifestInfo = inheritAttributes(stringToMpdXml(manifestString), options);
     var playlists = toPlaylists(parsedManifestInfo.representationInfo);
+<<<<<<< HEAD
     return toM3u8({
       dashPlaylists: playlists,
       locations: parsedManifestInfo.locations,
       sidxMapping: options.sidxMapping,
       previousManifest: options.previousManifest
     });
+=======
+    return toM3u8(playlists, parsedManifestInfo.locations, options.sidxMapping);
+>>>>>>> forked/LAE_400_PACKAGE
   };
   /**
    * Parses the manifest for a UTCTiming node, returning the nodes attributes if found
@@ -39505,6 +40536,7 @@
 
   var MAX_UINT32 = Math.pow(2, 32);
 
+<<<<<<< HEAD
   var getUint64$1 = function getUint64(uint8) {
     var dv = new DataView(uint8.buffer, uint8.byteOffset, uint8.byteLength);
     var value;
@@ -39529,6 +40561,8 @@
 
   var getUint64 = numbers.getUint64;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   var parseSidx = function parseSidx(data) {
     var view = new DataView(data.buffer, data.byteOffset, data.byteLength),
         result = {
@@ -39546,8 +40580,13 @@
       i += 8;
     } else {
       // read 64 bits
+<<<<<<< HEAD
       result.earliestPresentationTime = getUint64(data.subarray(i));
       result.firstOffset = getUint64(data.subarray(i + 8));
+=======
+      result.earliestPresentationTime = view.getUint32(i) * MAX_UINT32 + view.getUint32(i + 4);
+      result.firstOffset = view.getUint32(i + 8) * MAX_UINT32 + view.getUint32(i + 12);
+>>>>>>> forked/LAE_400_PACKAGE
       i += 16;
     }
 
@@ -39572,6 +40611,189 @@
 
   var parseSidx_1 = parseSidx;
 
+<<<<<<< HEAD
+=======
+  // const log2 = Math.log2 ? Math.log2 : (x) => (Math.log(x) / Math.log(2));
+  // we used to do this with log2 but BigInt does not support builtin math
+  // Math.ceil(log2(x));
+
+
+  var countBits = function countBits(x) {
+    return x.toString(2).length;
+  }; // count the number of whole bytes it would take to represent a number
+
+  var countBytes = function countBytes(x) {
+    return Math.ceil(countBits(x) / 8);
+  };
+  var isTypedArray = function isTypedArray(obj) {
+    return ArrayBuffer.isView(obj);
+  };
+  var toUint8 = function toUint8(bytes) {
+    if (bytes instanceof Uint8Array) {
+      return bytes;
+    }
+
+    if (!Array.isArray(bytes) && !isTypedArray(bytes) && !(bytes instanceof ArrayBuffer)) {
+      // any non-number or NaN leads to empty uint8array
+      // eslint-disable-next-line
+      if (typeof bytes !== 'number' || typeof bytes === 'number' && bytes !== bytes) {
+        bytes = 0;
+      } else {
+        bytes = [bytes];
+      }
+    }
+
+    return new Uint8Array(bytes && bytes.buffer || bytes, bytes && bytes.byteOffset || 0, bytes && bytes.byteLength || 0);
+  };
+  var BigInt = window.BigInt || Number;
+  var BYTE_TABLE = [BigInt('0x1'), BigInt('0x100'), BigInt('0x10000'), BigInt('0x1000000'), BigInt('0x100000000'), BigInt('0x10000000000'), BigInt('0x1000000000000'), BigInt('0x100000000000000'), BigInt('0x10000000000000000')];
+  var bytesToNumber = function bytesToNumber(bytes, _temp) {
+    var _ref = _temp === void 0 ? {} : _temp,
+        _ref$signed = _ref.signed,
+        signed = _ref$signed === void 0 ? false : _ref$signed,
+        _ref$le = _ref.le,
+        le = _ref$le === void 0 ? false : _ref$le;
+
+    bytes = toUint8(bytes);
+    var fn = le ? 'reduce' : 'reduceRight';
+    var obj = bytes[fn] ? bytes[fn] : Array.prototype[fn];
+    var number = obj.call(bytes, function (total, _byte, i) {
+      var exponent = le ? i : Math.abs(i + 1 - bytes.length);
+      return total + BigInt(_byte) * BYTE_TABLE[exponent];
+    }, BigInt(0));
+
+    if (signed) {
+      var max = BYTE_TABLE[bytes.length] / BigInt(2) - BigInt(1);
+      number = BigInt(number);
+
+      if (number > max) {
+        number -= max;
+        number -= max;
+        number -= BigInt(2);
+      }
+    }
+
+    return Number(number);
+  };
+  var numberToBytes = function numberToBytes(number, _temp2) {
+    var _ref2 = _temp2 === void 0 ? {} : _temp2,
+        _ref2$le = _ref2.le,
+        le = _ref2$le === void 0 ? false : _ref2$le; // eslint-disable-next-line
+
+
+    if (typeof number !== 'bigint' && typeof number !== 'number' || typeof number === 'number' && number !== number) {
+      number = 0;
+    }
+
+    number = BigInt(number);
+    var byteCount = countBytes(number);
+    var bytes = new Uint8Array(new ArrayBuffer(byteCount));
+
+    for (var i = 0; i < byteCount; i++) {
+      var byteIndex = le ? i : Math.abs(i + 1 - bytes.length);
+      bytes[byteIndex] = Number(number / BYTE_TABLE[i] & BigInt(0xFF));
+
+      if (number < 0) {
+        bytes[byteIndex] = Math.abs(~bytes[byteIndex]);
+        bytes[byteIndex] -= i === 0 ? 1 : 2;
+      }
+    }
+
+    return bytes;
+  };
+  var stringToBytes = function stringToBytes(string, stringIsBytes) {
+    if (typeof string !== 'string' && string && typeof string.toString === 'function') {
+      string = string.toString();
+    }
+
+    if (typeof string !== 'string') {
+      return new Uint8Array();
+    } // If the string already is bytes, we don't have to do this
+    // otherwise we do this so that we split multi length characters
+    // into individual bytes
+
+
+    if (!stringIsBytes) {
+      string = unescape(encodeURIComponent(string));
+    }
+
+    var view = new Uint8Array(string.length);
+
+    for (var i = 0; i < string.length; i++) {
+      view[i] = string.charCodeAt(i);
+    }
+
+    return view;
+  };
+  var concatTypedArrays = function concatTypedArrays() {
+    for (var _len = arguments.length, buffers = new Array(_len), _key = 0; _key < _len; _key++) {
+      buffers[_key] = arguments[_key];
+    }
+
+    buffers = buffers.filter(function (b) {
+      return b && (b.byteLength || b.length) && typeof b !== 'string';
+    });
+
+    if (buffers.length <= 1) {
+      // for 0 length we will return empty uint8
+      // for 1 length we return the first uint8
+      return toUint8(buffers[0]);
+    }
+
+    var totalLen = buffers.reduce(function (total, buf, i) {
+      return total + (buf.byteLength || buf.length);
+    }, 0);
+    var tempBuffer = new Uint8Array(totalLen);
+    var offset = 0;
+    buffers.forEach(function (buf) {
+      buf = toUint8(buf);
+      tempBuffer.set(buf, offset);
+      offset += buf.byteLength;
+    });
+    return tempBuffer;
+  };
+  /**
+   * Check if the bytes "b" are contained within bytes "a".
+   *
+   * @param {Uint8Array|Array} a
+   *        Bytes to check in
+   *
+   * @param {Uint8Array|Array} b
+   *        Bytes to check for
+   *
+   * @param {Object} options
+   *        options
+   *
+   * @param {Array|Uint8Array} [offset=0]
+   *        offset to use when looking at bytes in a
+   *
+   * @param {Array|Uint8Array} [mask=[]]
+   *        mask to use on bytes before comparison.
+   *
+   * @return {boolean}
+   *         If all bytes in b are inside of a, taking into account
+   *         bit masks.
+   */
+
+  var bytesMatch = function bytesMatch(a, b, _temp3) {
+    var _ref3 = _temp3 === void 0 ? {} : _temp3,
+        _ref3$offset = _ref3.offset,
+        offset = _ref3$offset === void 0 ? 0 : _ref3$offset,
+        _ref3$mask = _ref3.mask,
+        mask = _ref3$mask === void 0 ? [] : _ref3$mask;
+
+    a = toUint8(a);
+    b = toUint8(b); // ie 11 does not support uint8 every
+
+    var fn = b.every ? b.every : Array.prototype.every;
+    return b.length && a.length - offset >= b.length && // ie 11 doesn't support every on uin8
+    fn.call(b, function (bByte, i) {
+      var aByte = mask[i] ? mask[i] & a[offset + i] : a[offset + i];
+      return bByte === aByte;
+    });
+  };
+
+>>>>>>> forked/LAE_400_PACKAGE
   var ID3 = toUint8([0x49, 0x44, 0x33]);
   var getId3Size = function getId3Size(bytes, offset) {
     if (offset === void 0) {
@@ -40254,7 +41476,11 @@
   };
   var clock_1 = clock.ONE_SECOND_IN_TS;
 
+<<<<<<< HEAD
   /*! @name @videojs/http-streaming @version 2.14.3 @license Apache-2.0 */
+=======
+  /*! @name @videojs/http-streaming @version 2.12.0 @license Apache-2.0 */
+>>>>>>> forked/LAE_400_PACKAGE
   /**
    * @file resolve-url.js - Handling how URLs are resolved and manipulated
    */
@@ -42088,7 +43314,11 @@
 
       for (var _i2 = 0; _i2 < properties.playlists.length; _i2++) {
         if (newMedia.id === properties.playlists[_i2].id) {
+<<<<<<< HEAD
           properties.playlists[_i2] = mergedPlaylist;
+=======
+          properties.playlists[_i2] = newMedia;
+>>>>>>> forked/LAE_400_PACKAGE
         }
       }
     });
@@ -42789,6 +44019,7 @@
   var byterangeStr = function byterangeStr(byterange) {
     // `byterangeEnd` is one less than `offset + length` because the HTTP range
     // header uses inclusive ranges
+<<<<<<< HEAD
     var byterangeEnd;
     var byterangeStart = byterange.offset;
 
@@ -42798,6 +44029,10 @@
       byterangeEnd = byterange.offset + byterange.length - 1;
     }
 
+=======
+    var byterangeEnd = byterange.offset + byterange.length - 1;
+    var byterangeStart = byterange.offset;
+>>>>>>> forked/LAE_400_PACKAGE
     return 'bytes=' + byterangeStart + '-' + byterangeEnd;
   };
   /**
@@ -42871,7 +44106,11 @@
     Object.keys(message).forEach(function (key) {
       var value = message[key];
 
+<<<<<<< HEAD
       if (isArrayBufferView(value)) {
+=======
+      if (ArrayBuffer.isView(value)) {
+>>>>>>> forked/LAE_400_PACKAGE
         transferable[key] = {
           bytes: value.buffer,
           byteOffset: value.byteOffset,
@@ -43504,6 +44743,7 @@
     var masterXml = _ref.masterXml,
         srcUrl = _ref.srcUrl,
         clientOffset = _ref.clientOffset,
+<<<<<<< HEAD
         sidxMapping = _ref.sidxMapping,
         previousManifest = _ref.previousManifest;
     var manifest = parse(masterXml, {
@@ -43514,6 +44754,16 @@
     });
     addPropertiesToMaster(manifest, srcUrl);
     return manifest;
+=======
+        sidxMapping = _ref.sidxMapping;
+    var master = parse(masterXml, {
+      manifestUri: srcUrl,
+      clientOffset: clientOffset,
+      sidxMapping: sidxMapping
+    });
+    addPropertiesToMaster(master, srcUrl);
+    return master;
+>>>>>>> forked/LAE_400_PACKAGE
   };
   /**
    * Returns a new master manifest that is the result of merging an updated master manifest
@@ -43534,8 +44784,12 @@
     var update = mergeOptions(oldMaster, {
       // These are top level properties that can be updated
       duration: newMaster.duration,
+<<<<<<< HEAD
       minimumUpdatePeriod: newMaster.minimumUpdatePeriod,
       timelineStarts: newMaster.timelineStarts
+=======
+      minimumUpdatePeriod: newMaster.minimumUpdatePeriod
+>>>>>>> forked/LAE_400_PACKAGE
     }); // First update the playlists in playlist list
 
     for (var i = 0; i < newMaster.playlists.length; i++) {
@@ -43545,7 +44799,11 @@
         var sidxKey = generateSidxKey(playlist.sidx); // add sidx segments to the playlist if we have all the sidx info already
 
         if (sidxMapping && sidxMapping[sidxKey] && sidxMapping[sidxKey].sidx) {
+<<<<<<< HEAD
           addSidxSegmentsToPlaylist$1(playlist, sidxMapping[sidxKey].sidx, playlist.sidx.resolvedUri);
+=======
+          addSidxSegmentsToPlaylist(playlist, sidxMapping[sidxKey].sidx, playlist.sidx.resolvedUri);
+>>>>>>> forked/LAE_400_PACKAGE
         }
       }
 
@@ -43774,7 +45032,11 @@
           sidxInfo: playlist.sidx,
           sidx: sidx
         };
+<<<<<<< HEAD
         addSidxSegmentsToPlaylist$1(playlist, sidx, playlist.sidx.resolvedUri);
+=======
+        addSidxSegmentsToPlaylist(playlist, sidx, playlist.sidx.resolvedUri);
+>>>>>>> forked/LAE_400_PACKAGE
         return cb(true);
       };
 
@@ -44129,14 +45391,23 @@
     _proto.handleMaster_ = function handleMaster_() {
       // clear media request
       this.mediaRequest_ = null;
+<<<<<<< HEAD
       var oldMaster = this.masterPlaylistLoader_.master;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       var newMaster = parseMasterXml({
         masterXml: this.masterPlaylistLoader_.masterXml_,
         srcUrl: this.masterPlaylistLoader_.srcUrl,
         clientOffset: this.masterPlaylistLoader_.clientOffset_,
+<<<<<<< HEAD
         sidxMapping: this.masterPlaylistLoader_.sidxMapping_,
         previousManifest: oldMaster
       }); // if we have an old master to compare the new master against
+=======
+        sidxMapping: this.masterPlaylistLoader_.sidxMapping_
+      });
+      var oldMaster = this.masterPlaylistLoader_.master; // if we have an old master to compare the new master against
+>>>>>>> forked/LAE_400_PACKAGE
 
       if (oldMaster) {
         newMaster = updateMaster(oldMaster, newMaster, this.masterPlaylistLoader_.sidxMapping_);
@@ -44365,7 +45636,11 @@
   var getWorkerString = function getWorkerString(fn) {
     return fn.toString().replace(/^function.+?{/, '').slice(0, -1);
   };
+<<<<<<< HEAD
   /* rollup-plugin-worker-factory start for worker!/Users/abarstow/videojs/http-streaming/src/transmuxer-worker.js */
+=======
+  /* rollup-plugin-worker-factory start for worker!/Users/gkatsevman/p/http-streaming-release/src/transmuxer-worker.js */
+>>>>>>> forked/LAE_400_PACKAGE
 
 
   var workerCode$1 = transform(getWorkerString(function () {
@@ -44520,6 +45795,7 @@
     };
 
     var stream = Stream;
+<<<<<<< HEAD
     var MAX_UINT32$1 = Math.pow(2, 32);
 
     var getUint64$2 = function getUint64(uint8) {
@@ -44544,6 +45820,19 @@
       MAX_UINT32: MAX_UINT32$1
     };
     var MAX_UINT32 = numbers.MAX_UINT32;
+=======
+    /**
+     * mux.js
+     *
+     * Copyright (c) Brightcove
+     * Licensed Apache-2.0 https://github.com/videojs/mux.js/blob/master/LICENSE
+     *
+     * Functions that generate fragmented MP4s suitable for use with Media
+     * Source Extensions.
+     */
+
+    var UINT32_MAX = Math.pow(2, 32) - 1;
+>>>>>>> forked/LAE_400_PACKAGE
     var box, dinf, esds, ftyp, mdat, mfhd, minf, moof, moov, mvex, mvhd, trak, tkhd, mdia, mdhd, hdlr, sdtp, stbl, stsd, traf, trex, trun$1, types, MAJOR_BRAND, MINOR_VERSION, AVC1_BRAND, VIDEO_HDLR, AUDIO_HDLR, HDLR_TYPES, VMHD, SMHD, DREF, STCO, STSC, STSZ, STTS; // pre-calculate constants
 
     (function () {
@@ -44960,8 +46249,13 @@
       0x00, 0x00, 0x00, 0x00, // default_sample_size
       0x00, 0x00, 0x00, 0x00 // default_sample_flags
       ]));
+<<<<<<< HEAD
       upperWordBaseMediaDecodeTime = Math.floor(track.baseMediaDecodeTime / MAX_UINT32);
       lowerWordBaseMediaDecodeTime = Math.floor(track.baseMediaDecodeTime % MAX_UINT32);
+=======
+      upperWordBaseMediaDecodeTime = Math.floor(track.baseMediaDecodeTime / (UINT32_MAX + 1));
+      lowerWordBaseMediaDecodeTime = Math.floor(track.baseMediaDecodeTime % (UINT32_MAX + 1));
+>>>>>>> forked/LAE_400_PACKAGE
       trackFragmentDecodeTime = box(types.tfdt, new Uint8Array([0x01, // version 1
       0x00, 0x00, 0x00, // flags
       // baseMediaDecodeTime
@@ -51008,11 +52302,15 @@
 
     var findBox_1 = findBox;
     var toUnsigned$1 = bin.toUnsigned;
+<<<<<<< HEAD
     var getUint64$1 = numbers.getUint64;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     var tfdt = function tfdt(data) {
       var result = {
         version: data[0],
+<<<<<<< HEAD
         flags: new Uint8Array(data.subarray(1, 4))
       };
 
@@ -51020,6 +52318,15 @@
         result.baseMediaDecodeTime = getUint64$1(data.subarray(4));
       } else {
         result.baseMediaDecodeTime = toUnsigned$1(data[4] << 24 | data[5] << 16 | data[6] << 8 | data[7]);
+=======
+        flags: new Uint8Array(data.subarray(1, 4)),
+        baseMediaDecodeTime: toUnsigned$1(data[4] << 24 | data[5] << 16 | data[6] << 8 | data[7])
+      };
+
+      if (result.version === 1) {
+        result.baseMediaDecodeTime *= Math.pow(2, 32);
+        result.baseMediaDecodeTime += toUnsigned$1(data[8] << 24 | data[9] << 16 | data[10] << 8 | data[11]);
+>>>>>>> forked/LAE_400_PACKAGE
       }
 
       return result;
@@ -51195,6 +52502,7 @@
     };
 
     var parseTfhd = tfhd;
+<<<<<<< HEAD
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
     var win;
 
@@ -51209,6 +52517,8 @@
     }
 
     var window_1 = win;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     var discardEmulationPreventionBytes = captionPacketParser.discardEmulationPreventionBytes;
     var CaptionStream = captionStream.CaptionStream;
     /**
@@ -51313,7 +52623,11 @@
       * the absolute presentation and decode timestamps of each sample.
       *
       * @param {Array<Uint8Array>} truns - The Trun Run boxes to be parsed
+<<<<<<< HEAD
       * @param {Number|BigInt} baseMediaDecodeTime - base media decode time from tfdt
+=======
+      * @param {Number} baseMediaDecodeTime - base media decode time from tfdt
+>>>>>>> forked/LAE_400_PACKAGE
           @see ISO-BMFF-12/2015, Section 8.8.12
       * @param {Object} tfhd - The parsed Track Fragment Header
       *   @see inspect.parseTfhd
@@ -51351,6 +52665,7 @@
             sample.compositionTimeOffset = 0;
           }
 
+<<<<<<< HEAD
           if (typeof currentDts === 'bigint') {
             sample.pts = currentDts + window_1.BigInt(sample.compositionTimeOffset);
             currentDts += window_1.BigInt(sample.duration);
@@ -51358,6 +52673,10 @@
             sample.pts = currentDts + sample.compositionTimeOffset;
             currentDts += sample.duration;
           }
+=======
+          sample.pts = currentDts + sample.compositionTimeOffset;
+          currentDts += sample.duration;
+>>>>>>> forked/LAE_400_PACKAGE
         });
         allSamples = allSamples.concat(samples);
       });
@@ -51672,7 +52991,10 @@
     var captionParser = CaptionParser;
     var toUnsigned = bin.toUnsigned;
     var toHexString = bin.toHexString;
+<<<<<<< HEAD
     var getUint64 = numbers.getUint64;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     var timescale, startTime, compositionStartTime, getVideoTrackIds, getTracks, getTimescaleFromMediaHeader;
     /**
      * Parses an MP4 initialization segment and extracts the timescale
@@ -51739,6 +53061,7 @@
 
 
     startTime = function startTime(timescale, fragment) {
+<<<<<<< HEAD
       var trafs; // we need info from two childrend of each track fragment box
 
       trafs = findBox_1(fragment, ['moof', 'traf']); // determine the start times for each track
@@ -51780,6 +53103,40 @@
         return acc;
       }, Infinity);
       return typeof lowestTime === 'bigint' || isFinite(lowestTime) ? lowestTime : 0;
+=======
+      var trafs, baseTimes, result; // we need info from two childrend of each track fragment box
+
+      trafs = findBox_1(fragment, ['moof', 'traf']); // determine the start times for each track
+
+      baseTimes = [].concat.apply([], trafs.map(function (traf) {
+        return findBox_1(traf, ['tfhd']).map(function (tfhd) {
+          var id, scale, baseTime; // get the track id from the tfhd
+
+          id = toUnsigned(tfhd[4] << 24 | tfhd[5] << 16 | tfhd[6] << 8 | tfhd[7]); // assume a 90kHz clock if no timescale was specified
+
+          scale = timescale[id] || 90e3; // get the base media decode time from the tfdt
+
+          baseTime = findBox_1(traf, ['tfdt']).map(function (tfdt) {
+            var version, result;
+            version = tfdt[0];
+            result = toUnsigned(tfdt[4] << 24 | tfdt[5] << 16 | tfdt[6] << 8 | tfdt[7]);
+
+            if (version === 1) {
+              result *= Math.pow(2, 32);
+              result += toUnsigned(tfdt[8] << 24 | tfdt[9] << 16 | tfdt[10] << 8 | tfdt[11]);
+            }
+
+            return result;
+          })[0];
+          baseTime = typeof baseTime === 'number' && !isNaN(baseTime) ? baseTime : Infinity; // convert base time to seconds
+
+          return baseTime / scale;
+        });
+      })); // return the minimum
+
+      result = Math.min.apply(null, baseTimes);
+      return isFinite(result) ? result : 0;
+>>>>>>> forked/LAE_400_PACKAGE
     };
     /**
      * Determine the composition start, in seconds, for an MP4
@@ -51839,6 +53196,7 @@
 
       var timescale = timescales[trackId] || 90e3; // return the composition start time, in seconds
 
+<<<<<<< HEAD
       if (typeof baseMediaDecodeTime === 'bigint') {
         compositionTimeOffset = window_1.BigInt(compositionTimeOffset);
         timescale = window_1.BigInt(timescale);
@@ -51851,6 +53209,9 @@
       }
 
       return result;
+=======
+      return (baseMediaDecodeTime + compositionTimeOffset) / timescale;
+>>>>>>> forked/LAE_400_PACKAGE
     };
     /**
       * Find the trackIds of the video tracks in this source.
@@ -53171,7 +54532,11 @@
     };
   }));
   var TransmuxWorker = factory(workerCode$1);
+<<<<<<< HEAD
   /* rollup-plugin-worker-factory end for worker!/Users/abarstow/videojs/http-streaming/src/transmuxer-worker.js */
+=======
+  /* rollup-plugin-worker-factory end for worker!/Users/gkatsevman/p/http-streaming-release/src/transmuxer-worker.js */
+>>>>>>> forked/LAE_400_PACKAGE
 
   var handleData_ = function handleData_(event, transmuxedData, callback) {
     var _event$data$segment = event.data.segment,
@@ -56020,6 +57385,7 @@
     return false;
   };
 
+<<<<<<< HEAD
   var mediaDuration = function mediaDuration(timingInfos) {
     var maxDuration = 0;
     ['video', 'audio'].forEach(function (type) {
@@ -56050,6 +57416,12 @@
     }
 
     return maxDuration;
+=======
+  var mediaDuration = function mediaDuration(audioTimingInfo, videoTimingInfo) {
+    var audioDuration = audioTimingInfo && typeof audioTimingInfo.start === 'number' && typeof audioTimingInfo.end === 'number' ? audioTimingInfo.end - audioTimingInfo.start : 0;
+    var videoDuration = videoTimingInfo && typeof videoTimingInfo.start === 'number' && typeof videoTimingInfo.end === 'number' ? videoTimingInfo.end - videoTimingInfo.start : 0;
+    return Math.max(audioDuration, videoDuration);
+>>>>>>> forked/LAE_400_PACKAGE
   };
 
   var segmentTooLong = function segmentTooLong(_ref3) {
@@ -56082,10 +57454,14 @@
       return null;
     }
 
+<<<<<<< HEAD
     var segmentDuration = mediaDuration({
       audioTimingInfo: segmentInfo.audioTimingInfo,
       videoTimingInfo: segmentInfo.videoTimingInfo
     }); // Don't report if we lack information.
+=======
+    var segmentDuration = mediaDuration(segmentInfo.audioTimingInfo, segmentInfo.videoTimingInfo); // Don't report if we lack information.
+>>>>>>> forked/LAE_400_PACKAGE
     //
     // If the segment has a duration of 0 it is either a lack of information or a
     // metadata only segment and shouldn't be reported here.
@@ -56175,7 +57551,10 @@
       _this.timelineChangeController_ = settings.timelineChangeController;
       _this.shouldSaveSegmentTimingInfo_ = true;
       _this.parse708captions_ = settings.parse708captions;
+<<<<<<< HEAD
       _this.useDtsForTimestampOffset_ = settings.useDtsForTimestampOffset;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       _this.captionServices_ = settings.captionServices;
       _this.experimentalExactManifestTimings = settings.experimentalExactManifestTimings; // private instance variables
 
@@ -58492,11 +59871,15 @@
       // the video, this will trim the start of the audio.
       // This also trims any offset from 0 at the beginning of the media
 
+<<<<<<< HEAD
       segmentInfo.timestampOffset -= this.getSegmentStartTimeForTimestampOffsetCalculation_({
         videoTimingInfo: segmentInfo.segment.videoTimingInfo,
         audioTimingInfo: segmentInfo.segment.audioTimingInfo,
         timingInfo: segmentInfo.timingInfo
       }); // In the event that there are part segment downloads, each will try to update the
+=======
+      segmentInfo.timestampOffset -= segmentInfo.timingInfo.start; // In the event that there are part segment downloads, each will try to update the
+>>>>>>> forked/LAE_400_PACKAGE
       // timestamp offset. Retaining this bit of state prevents us from updating in the
       // future (within the same segment), however, there may be a better way to handle it.
 
@@ -58517,6 +59900,7 @@
       }
     };
 
+<<<<<<< HEAD
     _proto.getSegmentStartTimeForTimestampOffsetCalculation_ = function getSegmentStartTimeForTimestampOffsetCalculation_(_ref10) {
       var videoTimingInfo = _ref10.videoTimingInfo,
           audioTimingInfo = _ref10.audioTimingInfo,
@@ -58539,6 +59923,8 @@
       return timingInfo.start;
     };
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     _proto.updateTimingInfoEnd_ = function updateTimingInfoEnd_(segmentInfo) {
       segmentInfo.timingInfo = segmentInfo.timingInfo || {};
       var trackInfo = this.getMediaInfo_();
@@ -60019,12 +61405,16 @@
       var segmentInfo = this.pendingSegment_; // although the VTT segment loader bandwidth isn't really used, it's good to
       // maintain functionality between segment loaders
 
+<<<<<<< HEAD
       this.saveBandwidthRelatedStats_(segmentInfo.duration, simpleSegment.stats); // if this request included a segment key, save that data in the cache
 
       if (simpleSegment.key) {
         this.segmentKey(simpleSegment.key, true);
       }
 
+=======
+      this.saveBandwidthRelatedStats_(segmentInfo.duration, simpleSegment.stats);
+>>>>>>> forked/LAE_400_PACKAGE
       this.state = 'APPENDING'; // used for tests
 
       this.trigger('appending');
@@ -60963,12 +62353,19 @@
 
     return TimelineChangeController;
   }(videojs.EventTarget);
+<<<<<<< HEAD
   /* rollup-plugin-worker-factory start for worker!/Users/abarstow/videojs/http-streaming/src/decrypter-worker.js */
 
 
   var workerCode = transform(getWorkerString(function () {
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+=======
+  /* rollup-plugin-worker-factory start for worker!/Users/gkatsevman/p/http-streaming-release/src/decrypter-worker.js */
+
+
+  var workerCode = transform(getWorkerString(function () {
+>>>>>>> forked/LAE_400_PACKAGE
     function createCommonjsModule(fn, basedir, module) {
       return module = {
         path: basedir,
@@ -61161,7 +62558,11 @@
     function unpad(padded) {
       return padded.subarray(0, padded.byteLength - padded[padded.byteLength - 1]);
     }
+<<<<<<< HEAD
     /*! @name aes-decrypter @version 3.1.3 @license Apache-2.0 */
+=======
+    /*! @name aes-decrypter @version 3.1.2 @license Apache-2.0 */
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * @file aes.js
@@ -61586,6 +62987,7 @@
       }]);
       return Decrypter;
     }();
+<<<<<<< HEAD
 
     var win;
 
@@ -61611,6 +63013,12 @@
 
     var BigInt = window_1.BigInt || Number;
     [BigInt('0x1'), BigInt('0x100'), BigInt('0x10000'), BigInt('0x1000000'), BigInt('0x100000000'), BigInt('0x10000000000'), BigInt('0x1000000000000'), BigInt('0x100000000000000'), BigInt('0x10000000000000000')];
+=======
+    /**
+     * @file bin-utils.js
+     */
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Creates an object for sending to a web worker modifying properties that are TypedArrays
      * into a new object with seperated properties for the buffer, byteOffset, and byteLength.
@@ -61628,7 +63036,11 @@
       Object.keys(message).forEach(function (key) {
         var value = message[key];
 
+<<<<<<< HEAD
         if (isArrayBufferView(value)) {
+=======
+        if (ArrayBuffer.isView(value)) {
+>>>>>>> forked/LAE_400_PACKAGE
           transferable[key] = {
             bytes: value.buffer,
             byteOffset: value.byteOffset,
@@ -61666,7 +63078,11 @@
     };
   }));
   var Decrypter = factory(workerCode);
+<<<<<<< HEAD
   /* rollup-plugin-worker-factory end for worker!/Users/abarstow/videojs/http-streaming/src/decrypter-worker.js */
+=======
+  /* rollup-plugin-worker-factory end for worker!/Users/gkatsevman/p/http-streaming-release/src/decrypter-worker.js */
+>>>>>>> forked/LAE_400_PACKAGE
 
   /**
    * Convert the properties of an HLS track into an audioTrackKind.
@@ -62754,7 +64170,10 @@
       var segmentLoaderSettings = {
         vhs: _this.vhs_,
         parse708captions: options.parse708captions,
+<<<<<<< HEAD
         useDtsForTimestampOffset: options.useDtsForTimestampOffset,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         captionServices: captionServices,
         mediaSource: _this.mediaSource,
         currentTime: _this.tech_.currentTime.bind(_this.tech_),
@@ -64060,6 +65479,7 @@
     };
 
     _proto.onSyncInfoUpdate_ = function onSyncInfoUpdate_() {
+<<<<<<< HEAD
       var audioSeekable; // TODO check for creation of both source buffers before updating seekable
       //
       // A fix was made to this function where a check for
@@ -64081,6 +65501,12 @@
       // range may not be completely correct, leading to a suboptimal initial live point.
 
       if (!this.masterPlaylistLoader_) {
+=======
+      var audioSeekable; // If we have two source buffers and only one is created then the seekable range will be incorrect.
+      // We should wait until all source buffers are created.
+
+      if (!this.masterPlaylistLoader_ || this.sourceUpdater_.hasCreatedSourceBuffers()) {
+>>>>>>> forked/LAE_400_PACKAGE
         return;
       }
 
@@ -65502,11 +66928,19 @@
     initPlugin(this, options);
   };
 
+<<<<<<< HEAD
   var version$4 = "2.14.3";
   var version$3 = "6.0.1";
   var version$2 = "0.21.1";
   var version$1 = "4.7.1";
   var version = "3.1.3";
+=======
+  var version$4 = "2.12.0";
+  var version$3 = "5.14.1";
+  var version$2 = "0.19.2";
+  var version$1 = "4.7.0";
+  var version = "3.1.2";
+>>>>>>> forked/LAE_400_PACKAGE
   var Vhs = {
     PlaylistLoader: PlaylistLoader,
     Playlist: Playlist,
@@ -65948,7 +67382,11 @@
       _this = _Component.call(this, tech, videojs.mergeOptions(options.hls, options.vhs)) || this;
 
       if (options.hls && Object.keys(options.hls).length) {
+<<<<<<< HEAD
         videojs.log.warn('Using hls options is deprecated. Please rename `hls` to `vhs` in your options object.');
+=======
+        videojs.log.warn('Using hls options is deprecated. Use vhs instead.');
+>>>>>>> forked/LAE_400_PACKAGE
       } // if a tech level `initialBandwidth` option was passed
       // use that over the VHS level `bandwidth` option
 
@@ -66070,7 +67508,10 @@
       this.options_.smoothQualityChange = this.options_.smoothQualityChange || false;
       this.options_.useBandwidthFromLocalStorage = typeof this.source_.useBandwidthFromLocalStorage !== 'undefined' ? this.source_.useBandwidthFromLocalStorage : this.options_.useBandwidthFromLocalStorage || false;
       this.options_.useNetworkInformationApi = this.options_.useNetworkInformationApi || false;
+<<<<<<< HEAD
       this.options_.useDtsForTimestampOffset = this.options_.useDtsForTimestampOffset || false;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       this.options_.customTagParsers = this.options_.customTagParsers || [];
       this.options_.customTagMappers = this.options_.customTagMappers || [];
       this.options_.cacheEncryptionKeys = this.options_.cacheEncryptionKeys || false;
@@ -66119,7 +67560,11 @@
 
       this.options_.enableLowInitialPlaylist = this.options_.enableLowInitialPlaylist && this.options_.bandwidth === Config.INITIAL_BANDWIDTH; // grab options passed to player.src
 
+<<<<<<< HEAD
       ['withCredentials', 'useDevicePixelRatio', 'limitRenditionByPlayerDimensions', 'bandwidth', 'smoothQualityChange', 'customTagParsers', 'customTagMappers', 'handleManifestRedirects', 'cacheEncryptionKeys', 'playlistSelector', 'initialPlaylistSelector', 'experimentalBufferBasedABR', 'liveRangeSafeTimeDelta', 'experimentalLLHLS', 'useNetworkInformationApi', 'useDtsForTimestampOffset', 'experimentalExactManifestTimings', 'experimentalLeastPixelDiffSelector'].forEach(function (option) {
+=======
+      ['withCredentials', 'useDevicePixelRatio', 'limitRenditionByPlayerDimensions', 'bandwidth', 'smoothQualityChange', 'customTagParsers', 'customTagMappers', 'handleManifestRedirects', 'cacheEncryptionKeys', 'playlistSelector', 'initialPlaylistSelector', 'experimentalBufferBasedABR', 'liveRangeSafeTimeDelta', 'experimentalLLHLS', 'useNetworkInformationApi', 'experimentalExactManifestTimings', 'experimentalLeastPixelDiffSelector'].forEach(function (option) {
+>>>>>>> forked/LAE_400_PACKAGE
         if (typeof _this2.source_[option] !== 'undefined') {
           _this2.options_[option] = _this2.source_[option];
         }
@@ -66462,12 +67907,53 @@
 
       this.mediaSourceUrl_ = window.URL.createObjectURL(this.masterPlaylistController_.mediaSource);
       this.tech_.src(this.mediaSourceUrl_);
+<<<<<<< HEAD
     };
 
     _proto.createKeySessions_ = function createKeySessions_() {
       var _this4 = this;
 
       var audioPlaylistLoader = this.masterPlaylistController_.mediaTypes_.AUDIO.activePlaylistLoader;
+=======
+    }
+    /**
+     * If necessary and EME is available, sets up EME options and waits for key session
+     * creation.
+     *
+     * This function also updates the source updater so taht it can be used, as for some
+     * browsers, EME must be configured before content is appended (if appending unencrypted
+     * content before encrypted content).
+     */
+    ;
+
+    _proto.setupEme_ = function setupEme_() {
+      var _this4 = this;
+
+      var audioPlaylistLoader = this.masterPlaylistController_.mediaTypes_.AUDIO.activePlaylistLoader;
+      var didSetupEmeOptions = setupEmeOptions({
+        player: this.player_,
+        sourceKeySystems: this.source_.keySystems,
+        media: this.playlists.media(),
+        audioMedia: audioPlaylistLoader && audioPlaylistLoader.media()
+      });
+      this.player_.tech_.on('keystatuschange', function (e) {
+        if (e.status === 'output-restricted') {
+          _this4.masterPlaylistController_.blacklistCurrentPlaylist({
+            playlist: _this4.masterPlaylistController_.media(),
+            message: "DRM keystatus changed to " + e.status + ". Playlist will fail to play. Check for HDCP content.",
+            blacklistDuration: Infinity
+          });
+        }
+      }); // In IE11 this is too early to initialize media keys, and IE11 does not support
+      // promises.
+
+      if (videojs.browser.IE_VERSION === 11 || !didSetupEmeOptions) {
+        // If EME options were not set up, we've done all we could to initialize EME.
+        this.masterPlaylistController_.sourceUpdater_.initializedEme();
+        return;
+      }
+
+>>>>>>> forked/LAE_400_PACKAGE
       this.logger_('waiting for EME key session creation');
       waitForKeySessionCreation({
         player: this.player_,
@@ -66486,6 +67972,7 @@
           code: 3
         });
       });
+<<<<<<< HEAD
     };
 
     _proto.handleWaitingForKey_ = function handleWaitingForKey_() {
@@ -66562,6 +68049,8 @@
       }
 
       this.createKeySessions_();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Initializes the quality levels and sets listeners to update them.
@@ -66572,7 +68061,11 @@
     ;
 
     _proto.setupQualityLevels_ = function setupQualityLevels_() {
+<<<<<<< HEAD
       var _this6 = this;
+=======
+      var _this5 = this;
+>>>>>>> forked/LAE_400_PACKAGE
 
       var player = videojs.players[this.tech_.options_.playerId]; // if there isn't a player or there isn't a qualityLevels plugin
       // or qualityLevels_ listeners have already been setup, do nothing.
@@ -66583,10 +68076,17 @@
 
       this.qualityLevels_ = player.qualityLevels();
       this.masterPlaylistController_.on('selectedinitialmedia', function () {
+<<<<<<< HEAD
         handleVhsLoadedMetadata(_this6.qualityLevels_, _this6);
       });
       this.playlists.on('mediachange', function () {
         handleVhsMediaChange(_this6.qualityLevels_, _this6.playlists);
+=======
+        handleVhsLoadedMetadata(_this5.qualityLevels_, _this5);
+      });
+      this.playlists.on('mediachange', function () {
+        handleVhsMediaChange(_this5.qualityLevels_, _this5.playlists);
+>>>>>>> forked/LAE_400_PACKAGE
       });
     }
     /**
@@ -66685,10 +68185,13 @@
         this.mediaSourceUrl_ = null;
       }
 
+<<<<<<< HEAD
       if (this.tech_) {
         this.tech_.off('waitingforkey', this.handleWaitingForKey_);
       }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       _Component.prototype.dispose.call(this);
     };
 
@@ -66771,6 +68274,7 @@
       }
 
       var _videojs$mergeOptions = videojs.mergeOptions(videojs.options, options),
+<<<<<<< HEAD
           _videojs$mergeOptions2 = _videojs$mergeOptions.vhs;
 
       _videojs$mergeOptions2 = _videojs$mergeOptions2 === void 0 ? {} : _videojs$mergeOptions2;
@@ -66782,6 +68286,13 @@
           legacyOverrideNative = _videojs$mergeOptions5 === void 0 ? false : _videojs$mergeOptions5;
       var supportedType = simpleTypeFromSourceType(type);
       var canUseMsePlayback = supportedType && (!Vhs.supportsTypeNatively(supportedType) || legacyOverrideNative || overrideNative);
+=======
+          _videojs$mergeOptions2 = _videojs$mergeOptions.vhs.overrideNative,
+          overrideNative = _videojs$mergeOptions2 === void 0 ? !videojs.browser.IS_ANY_SAFARI : _videojs$mergeOptions2;
+
+      var supportedType = simpleTypeFromSourceType(type);
+      var canUseMsePlayback = supportedType && (!Vhs.supportsTypeNatively(supportedType) || overrideNative);
+>>>>>>> forked/LAE_400_PACKAGE
       return canUseMsePlayback ? 'maybe' : '';
     }
   };

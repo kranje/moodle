@@ -281,7 +281,11 @@ class ADODB_Active_Record {
 
 	static function TableBelongsTo($table, $foreignRef, $foreignKey=false, $parentKey='', $parentClass = 'ADODB_Active_Record')
 	{
+<<<<<<< HEAD
 		$ar = new ADODB_Active_Record($table);
+=======
+		$ar = new ADOdb_Active_Record($table);
+>>>>>>> forked/LAE_400_PACKAGE
 		$ar->belongsTo($foreignRef, $foreignKey, $parentKey, $parentClass);
 	}
 
@@ -290,7 +294,11 @@ class ADODB_Active_Record {
 		if (!is_array($tablePKey)) {
 			$tablePKey = array($tablePKey);
 		}
+<<<<<<< HEAD
 		$ar = new ADODB_Active_Record($table, $tablePKey);
+=======
+		$ar = new ADOdb_Active_Record($table, $tablePKey);
+>>>>>>> forked/LAE_400_PACKAGE
 		$ar->belongsTo($foreignRef, $foreignKey, $parentKey, $parentClass);
 	}
 

@@ -17,8 +17,11 @@
 defined('MOODLE_INTERNAL') || die;
 
 use \core_grades\output\action_bar;
+<<<<<<< HEAD
 use core_message\helper;
 use core_message\api;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Renderer class for the grade pages.
@@ -39,6 +42,7 @@ class core_grades_renderer extends plugin_renderer_base {
         $data = $actionbar->export_for_template($this);
         return $this->render_from_template($actionbar->get_template(), $data);
     }
+<<<<<<< HEAD
 
     /**
      * Renders the group selector trigger element.
@@ -147,4 +151,6 @@ class core_grades_renderer extends plugin_renderer_base {
 
         return $this->render_from_template('core_grades/user_heading', $headingdata);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

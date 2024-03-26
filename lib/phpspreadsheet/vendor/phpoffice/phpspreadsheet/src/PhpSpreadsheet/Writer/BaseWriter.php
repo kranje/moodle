@@ -115,12 +115,19 @@ abstract class BaseWriter implements IWriter
             return;
         }
 
+<<<<<<< HEAD
         $mode = 'wb';
         $scheme = parse_url($filename, PHP_URL_SCHEME);
         if ($scheme === 's3') {
             // @codeCoverageIgnoreStart
             $mode = 'w';
             // @codeCoverageIgnoreEnd
+=======
+        $mode = 'wb+';
+        $scheme = parse_url($filename, PHP_URL_SCHEME);
+        if ($scheme === 's3') {
+            $mode = 'w';
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $fileHandle = $filename ? fopen($filename, $mode) : false;
         if ($fileHandle === false) {

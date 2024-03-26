@@ -23,8 +23,16 @@
  */
 
 namespace core_question\statistics\questions;
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die();
 
+=======
+
+defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->dirroot . '/question/engine/lib.php');
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Class calculated_question_summary
  *
@@ -114,7 +122,11 @@ class calculated_question_summary extends calculated {
         $set = false;
 
         foreach ($this->subqstats as $subqstat) {
+<<<<<<< HEAD
             if (isset($subqstat->sd) && $subqstat->maxmark) {
+=======
+            if (isset($subqstat->sd) && $subqstat->maxmark > \question_utils::MARK_TOLERANCE) {
+>>>>>>> forked/LAE_400_PACKAGE
                 $value = $subqstat->sd / $subqstat->maxmark;
             } else {
                 $value = null;

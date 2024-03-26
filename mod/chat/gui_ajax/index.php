@@ -41,7 +41,11 @@ require_capability('mod/chat:chat', $context);
 if ($groupmode = groups_get_activity_groupmode($cm)) {   // Groups are being used.
     if ($groupid = groups_get_activity_group($cm)) {
         if (!$group = groups_get_group($groupid)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidgroupid');
+=======
+            print_error('invalidgroupid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $groupname = ': '.$group->name;
     } else {
@@ -58,7 +62,11 @@ if ($theme != 'course_theme' and !file_exists(__DIR__ . '/theme/'.$theme.'/chat.
 
 // Log into the chat room.
 if (!$chatsid = chat_login_user($chat->id, 'ajax', $groupid, $course)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cantlogin', 'chat');
+=======
+    print_error('cantlogin', 'chat');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $courseshortname = format_string($course->shortname, true, array('context' => context_course::instance($course->id)));
 $module = array(

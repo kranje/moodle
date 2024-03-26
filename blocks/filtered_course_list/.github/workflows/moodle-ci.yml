@@ -9,6 +9,7 @@ on:
       - '*'
   schedule:
     - cron: '0 8 * * 2'
+<<<<<<< HEAD
   workflow_dispatch:
 
 jobs:
@@ -18,6 +19,16 @@ jobs:
     services:
       postgres:
         image: postgres:13
+=======
+
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+
+    services:
+      postgres:
+        image: postgres:9.6
+>>>>>>> forked/LAE_400_PACKAGE
         env:
           POSTGRES_USER: 'postgres'
           POSTGRES_HOST_AUTH_METHOD: 'trust'
@@ -36,6 +47,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+<<<<<<< HEAD
         php: ['8.0', '8.1', '8.2']
         moodle-branch: ['MOODLE_400_STABLE', 'MOODLE_401_STABLE', 'MOODLE_402_STABLE', 'MOODLE_403_STABLE', 'master']
         database: [pgsql, mariadb]
@@ -53,6 +65,21 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+=======
+        php: ['7.3', '7.4']
+        moodle-branch: ['MOODLE_38_STABLE', 'MOODLE_39_STABLE', 'MOODLE_310_STABLE', 'MOODLE_311_STABLE', 'master']
+        database: [pgsql, mariadb]
+
+        include:
+          - {moodle-branch: 'MOODLE_311_STABLE', php: '8.0', operating-system: 'ubuntu-18.04', database: 'mariadb'}
+          - {moodle-branch: 'MOODLE_311_STABLE', php: '8.0', operating-system: 'ubuntu-18.04', database: 'pgsql'}
+          - {moodle-branch: 'master', php: '8.0', operating-system: 'ubuntu-18.04', database: 'mariadb'}
+          - {moodle-branch: 'master', php: '8.0', operating-system: 'ubuntu-18.04', database: 'pgsql'}
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+>>>>>>> forked/LAE_400_PACKAGE
         with:
           path: plugin
 

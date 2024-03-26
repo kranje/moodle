@@ -719,7 +719,11 @@ class mod_feedback_completion extends mod_feedback_structure {
             // Form was submitted (skip validation for "Previous page" button).
             $data = $this->form->get_submitted_data();
             if (!isset($SESSION->feedback->is_started) OR !$SESSION->feedback->is_started == true) {
+<<<<<<< HEAD
                 throw new \moodle_exception('error', '', $CFG->wwwroot.'/course/view.php?id='.$this->courseid);
+=======
+                print_error('error', '', $CFG->wwwroot.'/course/view.php?id='.$this->courseid);
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $this->save_response_tmp($data);
             if (!empty($data->savevalues) || !empty($data->gonextpage)) {

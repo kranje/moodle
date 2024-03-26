@@ -263,6 +263,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
     }
 
     /**
+<<<<<<< HEAD
      * Get whether events are present for the given select clause.
      *
      * @param string $selectwhere select conditions.
@@ -283,6 +284,8 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get a config value for the store.
      *
      * @param string $name Config name

@@ -2,8 +2,11 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Chart\ChartColor;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 class Font extends Supervisor
 {
     // Underline types
@@ -21,6 +24,7 @@ class Font extends Supervisor
     protected $name = 'Calibri';
 
     /**
+<<<<<<< HEAD
      * The following 7 are used only for chart titles, I think.
      *
      *@var string
@@ -47,6 +51,8 @@ class Font extends Supervisor
     // end of chart title items
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Font Size.
      *
      * @var null|float
@@ -198,6 +204,7 @@ class Font extends Supervisor
             if (isset($styleArray['name'])) {
                 $this->setName($styleArray['name']);
             }
+<<<<<<< HEAD
             if (isset($styleArray['latin'])) {
                 $this->setLatin($styleArray['latin']);
             }
@@ -207,6 +214,8 @@ class Font extends Supervisor
             if (isset($styleArray['complexScript'])) {
                 $this->setComplexScript($styleArray['complexScript']);
             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($styleArray['bold'])) {
                 $this->setBold($styleArray['bold']);
             }
@@ -250,6 +259,7 @@ class Font extends Supervisor
         return $this->name;
     }
 
+<<<<<<< HEAD
     public function getLatin(): string
     {
         if ($this->isSupervisor) {
@@ -277,6 +287,8 @@ class Font extends Supervisor
         return $this->complexScript;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Set Name.
      *
@@ -299,6 +311,7 @@ class Font extends Supervisor
         return $this;
     }
 
+<<<<<<< HEAD
     public function setLatin(string $fontname): self
     {
         if ($fontname == '') {
@@ -353,6 +366,8 @@ class Font extends Supervisor
         return $this;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Get Size.
      *
@@ -374,7 +389,11 @@ class Font extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setSize($sizeInPoints, bool $nullOk = false)
+=======
+    public function setSize($sizeInPoints)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (is_string($sizeInPoints) || is_int($sizeInPoints)) {
             $sizeInPoints = (float) $sizeInPoints; // $pValue = 0 if given string is not numeric
@@ -383,9 +402,13 @@ class Font extends Supervisor
         // Size must be a positive floating point number
         // ECMA-376-1:2016, part 1, chapter 18.4.11 sz (Font Size), p. 1536
         if (!is_float($sizeInPoints) || !($sizeInPoints > 0)) {
+<<<<<<< HEAD
             if (!$nullOk || $sizeInPoints !== null) {
                 $sizeInPoints = 10.0;
             }
+=======
+            $sizeInPoints = 10.0;
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($this->isSupervisor) {
@@ -538,6 +561,7 @@ class Font extends Supervisor
         return $this;
     }
 
+<<<<<<< HEAD
     public function getBaseLine(): int
     {
         if ($this->isSupervisor) {
@@ -634,6 +658,8 @@ class Font extends Supervisor
         return $this;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Get Underline.
      *
@@ -741,6 +767,7 @@ class Font extends Supervisor
         return $this;
     }
 
+<<<<<<< HEAD
     private function hashChartColor(?ChartColor $underlineColor): string
     {
         if ($underlineColor === null) {
@@ -753,6 +780,8 @@ class Font extends Supervisor
             . (string) $underlineColor->getAlpha();
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Get hash code.
      *
@@ -774,6 +803,7 @@ class Font extends Supervisor
             $this->underline .
             ($this->strikethrough ? 't' : 'f') .
             $this->color->getHashCode() .
+<<<<<<< HEAD
             implode(
                 '*',
                 [
@@ -786,6 +816,8 @@ class Font extends Supervisor
                     (string) $this->baseLine,
                 ]
             ) .
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             __CLASS__
         );
     }
@@ -793,6 +825,7 @@ class Font extends Supervisor
     protected function exportArray1(): array
     {
         $exportedArray = [];
+<<<<<<< HEAD
         $this->exportArray2($exportedArray, 'baseLine', $this->getBaseLine());
         $this->exportArray2($exportedArray, 'bold', $this->getBold());
         $this->exportArray2($exportedArray, 'chartColor', $this->getChartColor());
@@ -809,6 +842,17 @@ class Font extends Supervisor
         $this->exportArray2($exportedArray, 'superscript', $this->getSuperscript());
         $this->exportArray2($exportedArray, 'underline', $this->getUnderline());
         $this->exportArray2($exportedArray, 'underlineColor', $this->getUnderlineColor());
+=======
+        $this->exportArray2($exportedArray, 'bold', $this->getBold());
+        $this->exportArray2($exportedArray, 'color', $this->getColor());
+        $this->exportArray2($exportedArray, 'italic', $this->getItalic());
+        $this->exportArray2($exportedArray, 'name', $this->getName());
+        $this->exportArray2($exportedArray, 'size', $this->getSize());
+        $this->exportArray2($exportedArray, 'strikethrough', $this->getStrikethrough());
+        $this->exportArray2($exportedArray, 'subscript', $this->getSubscript());
+        $this->exportArray2($exportedArray, 'superscript', $this->getSuperscript());
+        $this->exportArray2($exportedArray, 'underline', $this->getUnderline());
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $exportedArray;
     }

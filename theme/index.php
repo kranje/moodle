@@ -37,7 +37,11 @@ if (!empty($device)) {
     $devices = core_useragent::get_device_type_list();
     if (!in_array($device, $devices)) {
         // The provided device isn't a valid device throw an error.
+<<<<<<< HEAD
         throw new \moodle_exception('invaliddevicetype');
+=======
+        print_error('invaliddevicetype');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

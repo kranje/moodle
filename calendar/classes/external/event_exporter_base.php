@@ -262,9 +262,12 @@ class event_exporter_base extends exporter {
             'formattedtime' => [
                 'type' => PARAM_RAW,
             ],
+<<<<<<< HEAD
             'formattedlocation' => [
                 'type' => PARAM_RAW,
             ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'isactionevent' => [
                 'type' => PARAM_BOOL
             ],
@@ -374,7 +377,10 @@ class event_exporter_base extends exporter {
         $values['viewurl'] = $viewurl->out(false);
         $values['formattedtime'] = calendar_format_event_time($legacyevent, time(), null, false,
                 $timesort);
+<<<<<<< HEAD
         $values['formattedlocation'] = calendar_format_event_location($legacyevent);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($group = $event->get_group()) {
             $values['groupname'] = format_string($group->get('name'), true,

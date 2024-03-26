@@ -104,14 +104,24 @@ class Workbook extends WriterPart
         // workbookView
         $objWriter->startElement('workbookView');
 
+<<<<<<< HEAD
         $objWriter->writeAttribute('activeTab', (string) $spreadsheet->getActiveSheetIndex());
         $objWriter->writeAttribute('autoFilterDateGrouping', ($spreadsheet->getAutoFilterDateGrouping() ? 'true' : 'false'));
         $objWriter->writeAttribute('firstSheet', (string) $spreadsheet->getFirstSheetIndex());
+=======
+        $objWriter->writeAttribute('activeTab', $spreadsheet->getActiveSheetIndex());
+        $objWriter->writeAttribute('autoFilterDateGrouping', ($spreadsheet->getAutoFilterDateGrouping() ? 'true' : 'false'));
+        $objWriter->writeAttribute('firstSheet', $spreadsheet->getFirstSheetIndex());
+>>>>>>> forked/LAE_400_PACKAGE
         $objWriter->writeAttribute('minimized', ($spreadsheet->getMinimized() ? 'true' : 'false'));
         $objWriter->writeAttribute('showHorizontalScroll', ($spreadsheet->getShowHorizontalScroll() ? 'true' : 'false'));
         $objWriter->writeAttribute('showSheetTabs', ($spreadsheet->getShowSheetTabs() ? 'true' : 'false'));
         $objWriter->writeAttribute('showVerticalScroll', ($spreadsheet->getShowVerticalScroll() ? 'true' : 'false'));
+<<<<<<< HEAD
         $objWriter->writeAttribute('tabRatio', (string) $spreadsheet->getTabRatio());
+=======
+        $objWriter->writeAttribute('tabRatio', $spreadsheet->getTabRatio());
+>>>>>>> forked/LAE_400_PACKAGE
         $objWriter->writeAttribute('visibility', $spreadsheet->getVisibility());
 
         $objWriter->endElement();
@@ -157,9 +167,15 @@ class Workbook extends WriterPart
         $objWriter->writeAttribute('calcId', '999999');
         $objWriter->writeAttribute('calcMode', 'auto');
         //    fullCalcOnLoad isn't needed if we've recalculating for the save
+<<<<<<< HEAD
         $objWriter->writeAttribute('calcCompleted', ($recalcRequired) ? '1' : '0');
         $objWriter->writeAttribute('fullCalcOnLoad', ($recalcRequired) ? '0' : '1');
         $objWriter->writeAttribute('forceFullCalc', ($recalcRequired) ? '0' : '1');
+=======
+        $objWriter->writeAttribute('calcCompleted', ($recalcRequired) ? 1 : 0);
+        $objWriter->writeAttribute('fullCalcOnLoad', ($recalcRequired) ? 0 : 1);
+        $objWriter->writeAttribute('forceFullCalc', ($recalcRequired) ? 0 : 1);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $objWriter->endElement();
     }
@@ -200,7 +216,11 @@ class Workbook extends WriterPart
             // Write sheet
             $objWriter->startElement('sheet');
             $objWriter->writeAttribute('name', $worksheetName);
+<<<<<<< HEAD
             $objWriter->writeAttribute('sheetId', (string) $worksheetId);
+=======
+            $objWriter->writeAttribute('sheetId', $worksheetId);
+>>>>>>> forked/LAE_400_PACKAGE
             if ($sheetState !== 'visible' && $sheetState != '') {
                 $objWriter->writeAttribute('state', $sheetState);
             }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Description of HTML Purifier library import into Moodle
+=======
+Description of HTML Purifier v4.12.0 library import into Moodle
+>>>>>>> forked/LAE_400_PACKAGE
 
 * Make new (or delete contents of) /lib/htmlpurifier/
 * Copy everything from /library/ folder to /lib/htmlpurifier/

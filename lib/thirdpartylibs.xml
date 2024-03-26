@@ -3,6 +3,7 @@
   <library>
     <location>adodb</location>
     <name>AdoDB</name>
+<<<<<<< HEAD
     <description>Database abstraction library for MySQL, PostgreSQL, MSSQL, Oracle, Interbase, Foxpro, Access, ADO, Sybase, DB2 and ODBC.</description>
     <version>5.22.2</version>
     <license>BSD/LGPL</license>
@@ -12,10 +13,16 @@
       <copyright>2000-2013 John Lim (jlim#natsoft.com). All rights reserved.</copyright>
       <copyright>2014 Damien Regad, Mark Newnham and the ADOdb community</copyright>
     </copyrights>
+=======
+    <license>BSD/LGPL</license>
+    <version>5.21.4</version>
+    <licenseversion>3-Clause/2.1+</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>behat/axe</location>
     <name>axe-core</name>
+<<<<<<< HEAD
     <description>Accessibility testing engine for websites and other HTML-based user interfaces.</description>
     <version>4.5.1</version>
     <license>MPL</license>
@@ -24,10 +31,16 @@
     <copyrights>
       <copyright>2005, Jon Papaioannou</copyright>
     </copyrights>
+=======
+    <license>MPL</license>
+    <version>4.3.5</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>bennu</location>
     <name>Bennu</name>
+<<<<<<< HEAD
     <description>Bennu is an object-oriented library written in PHP that implements the iCalendar standard (RFC 2445).</description>
     <version>0.2-custom</version>
     <license>LGPL</license>
@@ -37,10 +50,16 @@
       <copyright>2005, Jon Papaioannou</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>LGPL</license>
+    <version>0.1-custom</version>
+    <licenseversion>2.1+</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>evalmath</location>
     <name>EvalMath</name>
+<<<<<<< HEAD
     <description>Class to safely evaluate math expressions.</description>
     <version>1.0.0</version>
     <license>BSD</license>
@@ -49,10 +68,16 @@
       <copyright>Miles Kaufmann</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>BSD</license>
+    <version></version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>phpspreadsheet</location>
     <name>PhpSpreadsheet</name>
+<<<<<<< HEAD
     <description>Library to read, write and create spreadsheet documents in PHP.</description>
     <version>1.25.2</version>
     <license>MIT</license>
@@ -68,36 +93,67 @@
     <licenseversion>2.0</licenseversion>
     <repository>https://github.com/googleapis/google-api-php-client</repository>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>1.21.0</version>
+    <licenseversion></licenseversion>
+  </library>
+  <library>
+    <location>google</location>
+    <name>Google APIs Client Library</name>
+    <license>Apache</license>
+    <version>1.1.7</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>htmlpurifier</location>
     <name>HTML Purifier</name>
+<<<<<<< HEAD
     <description>Filters HTML.</description>
     <version>4.16.0</version>
     <license>LGPL</license>
     <licenseversion>2.1+</licenseversion>
     <repository>https://github.com/ezyang/htmlpurifier</repository>
+=======
+    <license>LGPL</license>
+    <version>4.13.0</version>
+    <licenseversion>2.1+</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>minify/matthiasmullie-minify</location>
     <name>MatthiasMullie\Minify</name>
+<<<<<<< HEAD
     <description>CSS &amp; JavaScript minifier, in PHP</description>
     <version>1.3.69</version>
     <license>MIT</license>
     <repository>https://github.com/matthiasmullie/minify</repository>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>1.3.66</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>minify/matthiasmullie-pathconverter</location>
     <name>MatthiasMullie\PathConverter</name>
+<<<<<<< HEAD
     <description>CSS path converter, in PHP</description>
     <version>1.1.3</version>
     <license>MIT</license>
     <repository>https://github.com/matthiasmullie/path-converter</repository>
+=======
+    <license>MIT</license>
+    <version>1.1.3</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>pear/HTML/Common.php</location>
     <name>Pear_HTML_Common</name>
+<<<<<<< HEAD
     <description>Class with many common HTML functions (used by HTML Quickform)</description>
     <version>1.7</version>
     <license>PHP</license>
@@ -108,10 +164,16 @@
     </copyrights>
     <customised/>
     <upgradable>false</upgradable>
+=======
+    <license>PHP</license>
+    <version>1.7</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>pear/HTML/QuickForm.php</location>
     <name>Pear_HTML_QuickForm.php</name>
+<<<<<<< HEAD
     <description>Class to write forms</description>
     <version>2.0</version>
     <license>PHP</license>
@@ -122,10 +184,16 @@
     </copyrights>
     <customised/>
     <upgradable>false</upgradable>
+=======
+    <license>PHP</license>
+    <version>2.0</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>pear/HTML/QuickForm</location>
     <name>Pear_HTML_QuickForm</name>
+<<<<<<< HEAD
     <description>Class to write forms</description>
     <version>2.0</version>
     <license>PHP</license>
@@ -136,10 +204,16 @@
     </copyrights>
     <customised/>
     <upgradable>false</upgradable>
+=======
+    <license>PHP</license>
+    <version>2.0</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>pear/PEAR.php</location>
     <name>Pear.php</name>
+<<<<<<< HEAD
     <description>Base class for other PEAR classes.</description>
     <version>1.4.5</version>
     <license>PHP</license>
@@ -150,10 +224,16 @@
     </copyrights>
     <customised/>
     <upgradable>false</upgradable>
+=======
+    <license>PHP</license>
+    <version>1.4.5</version>
+    <licenseversion>3.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>phpmailer</location>
     <name>PHPMailer</name>
+<<<<<<< HEAD
     <description>Class for sending email using either sendmail, PHP mail(), or SMTP. Methods are based upon the standard AspEmail(tm) classes.</description>
     <version>6.6.5</version>
     <license>LGPL</license>
@@ -162,18 +242,30 @@
     <copyrights>
       <copyright>2003 Brent R. Matzelle (bmatzelle AT yahoo DOT com)</copyright>
     </copyrights>
+=======
+    <license>LGPL</license>
+    <version>6.5.3</version>
+    <licenseversion>2.1</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>simplepie</location>
     <name>SimplePie</name>
+<<<<<<< HEAD
     <description>Simple Pie helps with blogs.</description>
     <version>1.6.0</version>
     <license>BSD</license>
     <repository>https://github.com/simplepie/simplepie</repository>
+=======
+    <license>BSD</license>
+    <version>1.5.6</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>tcpdf</location>
     <name>TCPDF</name>
+<<<<<<< HEAD
     <description>Class to generate PDF files</description>
     <version>6.5.0</version>
     <license>LGPL</license>
@@ -183,10 +275,16 @@
       <copyright>Olivier PLATHEY</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>LGPL</license>
+    <version>6.4.1</version>
+    <licenseversion>3.0-only</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>yuilib</location>
     <name>YUI</name>
+<<<<<<< HEAD
     <description>The Yahoo! User Interface Library is a set of utilities and controls, in JavaScript, for building richly interactive web applications using techniques such as DOM scripting, DHTML and AJAX. The YUI Library also includes several core CSS resources.Set of user-interface components using AJAX, DHTML etc. We use it for all our AJAX-related stuff.</description>
     <version>3.17.2</version>
     <license>BSD</license>
@@ -195,22 +293,32 @@
       <copyright>2006, Yahoo! Inc.</copyright>
     </copyrights>
     <upgradable>false</upgradable>
+=======
+    <license>BSD</license>
+    <version>3.17.2</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>yuilib/gallery</location>
     <name>YUI Gallery</name>
     <license>BSD</license>
     <version>gallery-2013.10.02-20-26</version>
+<<<<<<< HEAD
     <description>The Gallery is a collection of modules that have been developed by the YUI community to enhance the capabilities of YUI.</description>
     <repository>https://github.com/yui/yui3-gallery</repository>
     <copyrights>
       <copyright>2006, Yahoo! Inc.</copyright>
     </copyrights>
     <upgradable>false</upgradable>
+=======
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>jquery</location>
     <name>jQuery</name>
+<<<<<<< HEAD
     <description>jQuery is a fast, small, and feature-rich JavaScript library widely used on moodle.</description>
     <version>3.6.1</version>
     <license>MIT</license>
@@ -218,10 +326,16 @@
     <copyrights>
       <copyright>2016 The jQuery Foundation</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>3.6.0</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>jquery</location>
     <name>jQuery UI</name>
+<<<<<<< HEAD
     <description>jQuery UI is a set of user interface interactions, effects, widgets, and themes built on top of the jQuery library.</description>
     <version>1.13.2</version>
     <license>MIT</license>
@@ -229,10 +343,16 @@
     <copyrights>
       <copyright>2016 The jQuery Foundation and other contributors</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>1.13.0</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>html2text</location>
     <name>HTML2Text</name>
+<<<<<<< HEAD
     <description>PHP script to convert HTML into an approximate text equivalent.</description>
     <version>4.3.1</version>
     <license>GPL</license>
@@ -255,10 +375,23 @@
 All rights reserved.</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>GPL</license>
+    <version>4.3.1</version>
+    <licenseversion>2.0+</licenseversion>
+  </library>
+  <library>
+    <location>markdown</location>
+    <name>Markdown original</name>
+    <license>BSD</license>
+    <version>1.9.0</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>xhprof</location>
     <name>XHProf</name>
+<<<<<<< HEAD
     <description>A Hierarchical Profiler for PHP.</description>
     <version>2.3.5</version>
     <license>Apache</license>
@@ -268,10 +401,16 @@ All rights reserved.</copyright>
       <copyright>2009 Phacility</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>Apache</license>
+    <version>2.3.5</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>horde</location>
     <name>Horde</name>
+<<<<<<< HEAD
     <description>Library used by the inbound e-mail handling system.</description>
     <license>LGPL/BSD</license>
     <version>5.2.23</version>
@@ -281,10 +420,16 @@ All rights reserved.</copyright>
       <copyright>Horde LLC</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>LGPL/BSD</license>
+    <version>5.2.23</version>
+    <licenseversion>2.1</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>requirejs</location>
     <name>RequireJS</name>
+<<<<<<< HEAD
     <description>RequireJS is a JavaScript file and module loader.</description>
     <version>2.3.5</version>
     <license>MIT</license>
@@ -292,10 +437,16 @@ All rights reserved.</copyright>
     <copyrights>
     </copyrights>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>2.3.5</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>amd/src/loglevel.js</location>
     <name>loglevel.js</name>
+<<<<<<< HEAD
     <description>Minimal lightweight simple logging for JavaScript.</description>
     <version>1.8.0</version>
     <license>MIT</license>
@@ -303,10 +454,15 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>2019 Tim Perry</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>1.7.1</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>mustache</location>
     <name>Mustache</name>
+<<<<<<< HEAD
     <description>PHP library for displaying mustache templates.</description>
     <version>2.14.2</version>
     <license>MIT</license>
@@ -315,10 +471,15 @@ All rights reserved.</copyright>
       <copyright>2010-2016 Justin Hileman</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>2.14.1</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>amd/src/mustache.js</location>
     <name>Mustache.js</name>
+<<<<<<< HEAD
     <description>JS library for displaying mustache templates.</description>
     <version>4.2.0</version>
     <license>MIT</license>
@@ -328,20 +489,30 @@ All rights reserved.</copyright>
       <copyright>2010-2014 Jan Lehnardt (JavaScript)</copyright>
       <copyright>2010-2015 The mustache.js community</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>3.1.0</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>graphlib.php</location>
     <name>Graph Class</name>
+<<<<<<< HEAD
     <description>Class to draw line, point, bar, and area graphs, including numeric x-axis and double y-axis.</description>
     <version>1.6.3</version>
     <license>GPL</license>
     <copyrights>
       <copyright>2000 Herman Veluwenkamp (hermanV AT mindless DOT com)</copyright>
     </copyrights>
+=======
+    <license>GPL</license>
+    <version>1.6.3</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>php-css-parser</location>
     <name>PHP-CSS-Parser</name>
+<<<<<<< HEAD
     <description>A Parser for CSS Files written in PHP.</description>
     <version>8.4.0</version>
     <license>MIT</license>
@@ -350,10 +521,15 @@ All rights reserved.</copyright>
       <copyright>2011 Raphael Schweikert, http://sabberworm.com/</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>8.3.1</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>rtlcss</location>
     <name>RTLCSS for PHP</name>
+<<<<<<< HEAD
     <description>RTLCSS is a framework for converting Left-To-Right (LTR) Cascading Style Sheets(CSS) to Right-To-Left (RTL).</description>
     <version>1.0.1</version>
     <license>MIT</license>
@@ -361,10 +537,15 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>Frédéric Massart</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>1.0.1</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>scssphp</location>
     <name>scssphp</name>
+<<<<<<< HEAD
     <description>scssphp is a compiler for SCSS written in PHP.</description>
     <version>1.11.0</version>
     <license>MIT</license>
@@ -372,10 +553,15 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>2015 Leaf Corcoran</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>1.10.0</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>spout</location>
     <name>Spout</name>
+<<<<<<< HEAD
     <description>Library for importing and exporting csv / excel / ODS files.</description>
     <version>3.3.0</version>
     <license>Apache</license>
@@ -384,10 +570,16 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>2022 Box, Inc. All rights reserved</copyright>
     </copyrights>
+=======
+    <license>Apache</license>
+    <version>3.3.0</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>amd/src/chartjs-lazy.js</location>
     <name>Chart.js</name>
+<<<<<<< HEAD
     <description>Simple yet flexible JavaScript charting for designers &amp; developers.</description>
     <version>3.8.0</version>
     <license>MIT</license>
@@ -396,10 +588,15 @@ All rights reserved.</copyright>
       <copyright>2016 Nick Downie</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>2.9.4</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>maxmind/GeoIp2</location>
     <name>GeoIP2 PHP API</name>
+<<<<<<< HEAD
     <description>Library for processing of GeoIP data files.</description>
     <version>2.11.0</version>
     <license>Apache</license>
@@ -408,10 +605,15 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>MaxMind</copyright>
     </copyrights>
+=======
+    <license>Apache 2.0</license>
+    <version>2.11.0</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>maxmind/MaxMind</location>
     <name>MaxMind DB Reader API</name>
+<<<<<<< HEAD
     <description>PHP API for reading MaxMind DB files.</description>
     <version>1.11.0</version>
     <license>Apache</license>
@@ -420,10 +622,15 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>MaxMind</copyright>
     </copyrights>
+=======
+    <license>Apache 2.0</license>
+    <version>1.10.1</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>ltiprovider</location>
     <name>LTI Tool Provider Library PHP</name>
+<<<<<<< HEAD
     <description>PHP library for communicating with learning tools as per the LTI specification.</description>
     <version>3.0.2</version>
     <license>Apache</license>
@@ -432,10 +639,16 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>2016 IMS Global Learning Consortium Inc. All Rights Reserved. Trademark Policy - (www.imsglobal.org/trademarks)</copyright>
     </copyrights>
+=======
+    <license>Apache</license>
+    <version>3.0.2</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>lti1p3</location>
     <name>LTI 1.3 Tool Library</name>
+<<<<<<< HEAD
     <description>A library used for building IMS-certified LTI 1.3 tool providers in PHP.</description>
     <version>5.2.1</version>
     <license>Apache</license>
@@ -445,10 +658,16 @@ All rights reserved.</copyright>
       <copyright>MartinLenord</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>Apache</license>
+    <version>5.1.0</version>
+    <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>amd/src/truncate.js</location>
     <name>Truncate.js</name>
+<<<<<<< HEAD
     <description>Dead simple HTML-safe truncation via the DOM. It truncates HTML code, and has several options such as length, finishBlock and noBreak.</description>
     <version>0.0.1</version>
     <license>MIT</license>
@@ -466,10 +685,22 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>Dave Gandy</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>0.0.1</version>
+  </library>
+  <library>
+    <location>fonts</location>
+    <name>Font Awesome by Dave Gandy - http://fontawesome.io</name>
+    <license>SIL OFL</license>
+    <version>4.7.0</version>
+    <licenseversion>1.1</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>amd/src/adapter.js</location>
     <name>WebRTC adapter</name>
+<<<<<<< HEAD
     <description>JavaScript library to insulate apps from spec changes and prefix differences in WebRTC. The prefix differences are mostly gone these days but differences in behaviour between browsers remain.</description>
     <version>8.0.0</version>
     <license>BSD</license>
@@ -490,10 +721,22 @@ All rights reserved.</copyright>
     </copyrights>
     <customised/>
     <upgradable>false</upgradable>
+=======
+    <license>BSD</license>
+    <version>8.0.0</version>
+    <licenseversion>3-Clause</licenseversion>
+  </library>
+  <library>
+    <location>validateurlsyntax.php</location>
+    <name>Url Syntax Validation using PHP and Regular Expressions</name>
+    <license>GPL</license>
+    <licenseversion>2.0+</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>amd/src/popper.js</location>
     <name>Popper.js</name>
+<<<<<<< HEAD
     <description>A kickass library used to created Poppers in web applications.</description>
     <version>v1.12.6</version>
     <license>MIT</license>
@@ -512,10 +755,22 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>2015 Leaf Corcoran</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>v1.12.6</version>
+    <licenseversion></licenseversion>
+  </library>
+  <library>
+    <location>geopattern-php</location>
+    <name>Generate tiling SVG patterns from a string</name>
+    <license>MIT</license>
+    <version>1.1.2</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>php-jwt</location>
     <name>A simple library to encode and decode JSON Web Tokens (JWT) in PHP, conforming to RFC 7519</name>
+<<<<<<< HEAD
     <description>A simple library to encode and decode JSON Web Tokens (JWT) in PHP, conforming to RFC 7519</description>
     <version>6.3.0</version>
     <license>BSD</license>
@@ -524,34 +779,55 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>2011, Neuman Vong</copyright>
     </copyrights>
+=======
+    <license>BSD</license>
+    <version>6.0.0</version>
+    <licenseversion>3-Clause</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>polyfills</location>
     <name>regenerator-runtime</name>
+<<<<<<< HEAD
     <description>This package implements a fully-functional source transformation that takes the syntax for generators/yield from ECMAScript 2015 or ES2015 and Asynchronous Iteration proposal and spits out efficient JS-of-today (ES5) that behaves the same way.</description>
     <version>0.13.7</version>
     <license>MIT</license>
     <repository>https://github.com/facebook/regenerator/</repository>
+=======
+    <license>MIT</license>
+    <version>0.13.7</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>polyfills</location>
     <name>core-js-bundle</name>
+<<<<<<< HEAD
     <description>Modular standard library for JavaScript. Includes polyfills for ECMAScript up to 2021: promises, symbols, collections, iterators, typed arrays, many other features, ECMAScript proposals, some cross-platform WHATWG / W3C features and proposals like URL. You can load only required features or use it without global namespace pollution.</description>
     <version>3.15.0</version>
     <license>MIT</license>
     <repository>https://github.com/zloirock/core-js</repository>
+=======
+    <license>MIT</license>
+    <version>3.15.0</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>polyfills</location>
     <name>mdn-polyfill</name>
+<<<<<<< HEAD
     <description>A collection of side-effect ECMAScript modules. Minimized, mangled and extremely small thanks to Rollup - next-generation ES6 module bundler.</description>
     <version>5.20.0</version>
     <license>MIT</license>
     <repository>https://github.com/msn0/mdn-polyfills</repository>
+=======
+    <license>MIT</license>
+    <version>5.20.0</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>emoji-data</location>
     <name>Emoji data</name>
+<<<<<<< HEAD
     <description>Library to parse easily data and sprite sheets for emoji.</description>
     <version>14.0.1</version>
     <license>MIT</license>
@@ -560,18 +836,28 @@ All rights reserved.</copyright>
       <copyright>2013 Cal Henderson</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>7.0.2</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>polyfills</location>
     <name>url-polyfill</name>
+<<<<<<< HEAD
     <description>Polyfill URL and URLSearchParams to match last WHATWG specifications.</description>
     <version>1.1.12</version>
     <license>MIT</license>
     <repository>https://github.com/lifaon74/url-polyfill</repository>
+=======
+    <license>MIT</license>
+    <version>1.1.12</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>plist</location>
     <name>plist</name>
+<<<<<<< HEAD
     <description>PHP Implementation of Apple's PList (binary and XML).</description>
     <version>2.0.3</version>
     <license>MIT</license>
@@ -580,10 +866,15 @@ All rights reserved.</copyright>
       <copyright>2018 Teclib</copyright>
       <copyright>2009 Christian Kruse, Rodney Rehm</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>2.0.2</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>zipstream</location>
     <name>ZipStream-PHP</name>
+<<<<<<< HEAD
     <description>PHP ZIP Streaming Library</description>
     <version>2.2.0</version>
     <license>MIT</license>
@@ -594,10 +885,15 @@ All rights reserved.</copyright>
       <copyright>2014 Jesse G. Donat donatj@gmail.com</copyright>
       <copyright>2018 Nicolas CARPi nicolas.carpi@curie.fr</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>2.1.0</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>php-enum</location>
     <name>php-enum</name>
+<<<<<<< HEAD
     <description>PHP Enum implementation inspired from SplEnum</description>
     <version>1.8.3</version>
     <license>MIT</license>
@@ -605,10 +901,15 @@ All rights reserved.</copyright>
     <copyrights>
       <copyright>2015 My C-Labs</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>1.8.3</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>http-message</location>
     <name>http-message</name>
+<<<<<<< HEAD
     <description>Provide a set of common interfaces for HTTP messages as described in RFC 7230 and RFC 7231</description>
     <version>1.0.1</version>
     <license>MIT</license>
@@ -626,5 +927,9 @@ All rights reserved.</copyright>
       <copyright>1999,2000,2001 Edd Dumbill, Useful Information Company</copyright>
     </copyrights>
     <customised/>
+=======
+    <license>MIT</license>
+    <version>1.0.1</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
 </libraries>

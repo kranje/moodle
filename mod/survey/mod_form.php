@@ -26,7 +26,11 @@ class mod_survey_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
 
         if (!$options = $DB->get_records_menu("survey", array("template"=>0), "name", "id, name")) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfindsurveytmpt', 'survey');
+=======
+            print_error('cannotfindsurveytmpt', 'survey');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         foreach ($options as $id => $name) {

@@ -19,7 +19,10 @@ declare(strict_types=1);
 use core_reportbuilder\manager;
 use core_reportbuilder\local\helpers\aggregation;
 use core_reportbuilder\local\helpers\report;
+<<<<<<< HEAD
 use core_reportbuilder\local\helpers\user_filter_manager;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\table\custom_report_table_view;
 
 /**
@@ -36,6 +39,7 @@ abstract class core_reportbuilder_testcase extends advanced_testcase {
      *
      * @param int $reportid
      * @param int $pagesize
+<<<<<<< HEAD
      * @param array $filtervalues
      * @return array[]
      */
@@ -45,6 +49,13 @@ abstract class core_reportbuilder_testcase extends advanced_testcase {
         // Apply filter values.
         user_filter_manager::set($reportid, $filtervalues);
 
+=======
+     * @return array[]
+     */
+    protected function get_custom_report_content(int $reportid, int $pagesize = 30): array {
+        $records = [];
+
+>>>>>>> forked/LAE_400_PACKAGE
         // Create table instance.
         $table = custom_report_table_view::create($reportid);
         $table->setup();

@@ -27,7 +27,10 @@ Feature: Test creating a True/False question
       | Feedback for the response 'False'. | Read more about England.                   |
     Then I should see "true-false-001"
 
+<<<<<<< HEAD
   @javascript
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Create a True/False question with Correct answer as True
     When I am on the "Course 1" "core_question > course question bank" page logged in as teacher
     And I add a "True/False" question filling the form with:
@@ -36,6 +39,7 @@ Feature: Test creating a True/False question
       | Default mark                       | 1                                      |
       | General feedback                   | London is the capital city of England. |
       | Correct answer                     | True                                   |
+<<<<<<< HEAD
       | Show standard instructions         | Yes                                    |
       | Feedback for the response 'True'.  | Well done!                             |
       | Feedback for the response 'False'. | Read more about England.               |
@@ -46,3 +50,8 @@ Feature: Test creating a True/False question
     And I click on "Add" "button" in the "Choose a question type to add" "dialogue"
     And the following fields match these values:
       | Show standard instructions | Yes |
+=======
+      | Feedback for the response 'True'.  | Well done!                             |
+      | Feedback for the response 'False'. | Read more about England.               |
+    Then I should see "true-false-002"
+>>>>>>> forked/LAE_400_PACKAGE

@@ -24,10 +24,17 @@
 
 namespace gradereport_singleview\local\screen;
 
+<<<<<<< HEAD
 use gradereport_singleview\local\ui\be_readonly;
 use html_table;
 use html_writer;
 use stdClass;
+=======
+use html_table;
+use html_writer;
+use stdClass;
+use grade_item;
+>>>>>>> forked/LAE_400_PACKAGE
 use grade_grade;
 use gradereport_singleview\local\ui\bulk_insert;
 
@@ -40,6 +47,7 @@ defined('MOODLE_INTERNAL') || die;
  * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 abstract class tablelike extends screen implements be_readonly {
 
     /**
@@ -59,28 +67,55 @@ abstract class tablelike extends screen implements be_readonly {
      * @var array $definition
      */
     protected $definition = [];
+=======
+abstract class tablelike extends screen {
+
+    /** @var array $headers A list of table headers */
+    protected $headers = array();
+
+    /** @var array $initerrors A list of errors that mean we should not show the table */
+    protected $initerrors = array();
+
+    /** @var array $definition Describes the columns in the table */
+    protected $definition = array();
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Format a row of the table
      *
+<<<<<<< HEAD
      * @var mixed $item
      * @return array
      */
     abstract public function format_line($item): array;
+=======
+     * @param mixed $item
+     * @return string
+     */
+    public abstract function format_line($item);
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Get the summary for this table.
      *
      * @return string
      */
+<<<<<<< HEAD
     abstract public function summary(): string;
+=======
+    public abstract function summary();
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Get the table headers
      *
      * @return array
      */
+<<<<<<< HEAD
     public function headers(): array {
+=======
+    public function headers() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->headers;
     }
 
@@ -90,7 +125,11 @@ abstract class tablelike extends screen implements be_readonly {
      * @param array $overwrite New headers
      * @return tablelike This
      */
+<<<<<<< HEAD
     public function set_headers(array $overwrite): tablelike {
+=======
+    public function set_headers($overwrite) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->headers = $overwrite;
         return $this;
     }
@@ -100,7 +139,11 @@ abstract class tablelike extends screen implements be_readonly {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function init_errors(): array {
+=======
+    public function init_errors() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->initerrors;
     }
 
@@ -109,7 +152,11 @@ abstract class tablelike extends screen implements be_readonly {
      *
      * @param string $mesg
      */
+<<<<<<< HEAD
     public function set_init_error(string $mesg) {
+=======
+    public function set_init_error($mesg) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->initerrors[] = $mesg;
     }
 
@@ -118,7 +165,11 @@ abstract class tablelike extends screen implements be_readonly {
      *
      * @return array The definition.
      */
+<<<<<<< HEAD
     public function definition(): array {
+=======
+    public function definition() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->definition;
     }
 
@@ -128,18 +179,30 @@ abstract class tablelike extends screen implements be_readonly {
      * @param array $overwrite New definition
      * @return tablelike This
      */
+<<<<<<< HEAD
     public function set_definition(array $overwrite): tablelike {
+=======
+    public function set_definition($overwrite) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->definition = $overwrite;
         return $this;
     }
 
     /**
      * Get a element to generate the HTML for this table row
+<<<<<<< HEAD
      * @param grade_grade $grade The grade.
      * @return array
      */
     public function format_definition(grade_grade $grade): array {
         $line = [];
+=======
+     * @param array $line This is a list of lines in the table (modified)
+     * @param grade_grade $grade The grade.
+     * @return string
+     */
+    public function format_definition($line, $grade) {
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($this->definition() as $i => $field) {
             // Table tab index.
             $tab = ($i * $this->total) + $this->index;
@@ -147,16 +210,28 @@ abstract class tablelike extends screen implements be_readonly {
             $html = new $classname($grade, $tab);
 
             if ($field == 'finalgrade' and !empty($this->structure)) {
+<<<<<<< HEAD
                 $html .= $this->structure->get_grade_action_menu($grade);
+=======
+                $html .= $this->structure->get_grade_analysis_icon($grade);
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             // Singleview users without proper permissions should be presented
             // disabled checkboxes for the Exclude grade attribute.
+<<<<<<< HEAD
             if ($field == 'exclude' && !has_capability('moodle/grade:manage', $this->context)) {
                 $html->disabled = true;
             }
 
             $line[$field] = $html;
+=======
+            if ($field == 'exclude' && !has_capability('moodle/grade:manage', $this->context)){
+                $html->disabled = true;
+            }
+
+            $line[] = $html;
+>>>>>>> forked/LAE_400_PACKAGE
         }
         return $line;
     }
@@ -165,7 +240,11 @@ abstract class tablelike extends screen implements be_readonly {
      * Get the HTML for the whole table
      * @return string
      */
+<<<<<<< HEAD
     public function html(): string {
+=======
+    public function html() {
+>>>>>>> forked/LAE_400_PACKAGE
         global $OUTPUT;
 
         if (!empty($this->initerrors)) {
@@ -197,10 +276,16 @@ abstract class tablelike extends screen implements be_readonly {
             $this->index++;
         }
 
+<<<<<<< HEAD
+=======
+        $underlying = get_class($this);
+
+>>>>>>> forked/LAE_400_PACKAGE
         $data = new stdClass();
         $data->table = $table;
         $data->instance = $this;
 
+<<<<<<< HEAD
         $buttonattr = ['class' => 'singleview_buttons submit'];
         $buttonhtml = implode(' ', $this->buttons($this->is_readonly()));
         $buttons = html_writer::tag('div', $buttonhtml, $buttonattr);
@@ -214,6 +299,24 @@ abstract class tablelike extends screen implements be_readonly {
         );
 
         return html_writer::div($html, 'reporttable');
+=======
+        $buttonattr = array('class' => 'singleview_buttons submit');
+        $buttonhtml = implode(' ', $this->buttons());
+
+        $buttons = html_writer::tag('div', $buttonhtml, $buttonattr);
+        $selectview = new select($this->courseid, $this->itemid, $this->groupid);
+
+        $sessionvalidation = html_writer::empty_tag('input',
+            array('type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()));
+
+        $html = $selectview->html();
+        $html .= html_writer::tag('form',
+            $buttons . html_writer::table($table) . $this->bulk_insert() . $buttons . $sessionvalidation,
+            array('method' => 'POST')
+        );
+        $html .= $selectview->html();
+        return $html;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -225,11 +328,16 @@ abstract class tablelike extends screen implements be_readonly {
         return html_writer::tag(
             'div',
             (new bulk_insert($this->item))->html(),
+<<<<<<< HEAD
             ['class' => 'singleview_bulk', 'hidden' => true]
+=======
+            array('class' => 'singleview_bulk')
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 
     /**
+<<<<<<< HEAD
      * Return true if this is read-only.
      *
      * @return bool
@@ -252,5 +360,20 @@ abstract class tablelike extends screen implements be_readonly {
             $params['disabled'] = 'disabled';
         }
         return [$OUTPUT->render_from_template('gradereport_singleview/button', $params)];
+=======
+     * Get the buttons for saving changes.
+     *
+     * @return array
+     */
+    public function buttons() {
+        global $OUTPUT;
+
+        $save = $OUTPUT->render_from_template('gradereport_singleview/button', [
+            'type' => 'submit',
+            'value' => get_string('save', 'gradereport_singleview'),
+        ]);
+
+        return array($save);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

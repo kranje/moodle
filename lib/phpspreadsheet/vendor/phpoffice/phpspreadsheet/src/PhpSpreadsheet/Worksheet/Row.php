@@ -23,7 +23,11 @@ class Row
      *
      * @param int $rowIndex
      */
+<<<<<<< HEAD
     public function __construct(Worksheet $worksheet, $rowIndex = 1)
+=======
+    public function __construct(?Worksheet $worksheet = null, $rowIndex = 1)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         // Set parent and row index
         $this->worksheet = $worksheet;
@@ -35,7 +39,12 @@ class Row
      */
     public function __destruct()
     {
+<<<<<<< HEAD
         $this->worksheet = null; // @phpstan-ignore-line
+=======
+        // @phpstan-ignore-next-line
+        $this->worksheet = null;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -60,6 +69,7 @@ class Row
     }
 
     /**
+<<<<<<< HEAD
      * Returns a boolean true if the row contains no cells. By default, this means that no cell records exist in the
      *         collection for this row. false will be returned otherwise.
      *     This rule can be modified by passing a $definitionOfEmptyFlags value:
@@ -99,6 +109,8 @@ class Row
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns bound worksheet.
      */
     public function getWorksheet(): Worksheet

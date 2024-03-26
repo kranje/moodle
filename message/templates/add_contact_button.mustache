@@ -20,6 +20,7 @@
     Template for the contents of the add contact button on the user's profile page.
 
     Context variables required for this template:
+<<<<<<< HEAD
     * displaytextlabel - Whether to display text next to the action icon.
 
     Example context (json):
@@ -30,5 +31,16 @@
 <span>
     {{#pix}} t/addcontact, core, {{#str}} addtoyourcontacts, message {{/str}} {{/pix}}
     {{#displaytextlabel}}<span class="header-button-title">{{#str}} addtoyourcontacts, message {{/str}}</span>{{/displaytextlabel}}
+=======
+    * none
+
+    Example context (json):
+    {
+    }
+}}
+<span>
+    {{#pix}} t/addcontact, core {{/pix}}
+    <span class="header-button-title">{{#str}} addtoyourcontacts, message {{/str}}</span>
+>>>>>>> forked/LAE_400_PACKAGE
 </span>
 {{> core/loading }}

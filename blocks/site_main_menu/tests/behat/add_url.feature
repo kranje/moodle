@@ -4,12 +4,27 @@ Feature: Add URL to main menu block
   As a admin
   I need to add URLs to the main menu block and check it works.
 
+<<<<<<< HEAD
+=======
+  Background:
+    Given the following "courses" exist:
+      | fullname | shortname | category | enablecompletion |
+      | Course 1 | C1        | 0        | 1                |
+      | Course 2 | C2        | 0        |                  |
+    And the following "blocks" exist:
+      | blockname      | contextlevel | reference | pagetypepattern | defaultregion |
+      | site_main_menu | System       | 1         | site-index      | side-pre      |
+
+>>>>>>> forked/LAE_400_PACKAGE
   @javascript
   Scenario: Add a URL in menu block and ensure it appears
     Given I log in as "admin"
     And I am on site homepage
+<<<<<<< HEAD
     And I turn editing mode on
     And I add the "Main menu" block
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "activity" exists:
       | activity    | url                   |
       | course      | Acceptance test site  |
@@ -22,11 +37,16 @@ Feature: Add URL to main menu block
     And I set the following fields to these values:
       | id_display | In pop-up |
     And I press "Save and return to course"
+<<<<<<< HEAD
+=======
+    And I turn editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     Then "reference link" "link" should exist in the "Main menu" "block"
     And "Add an activity or resource" "button" should exist in the "Main menu" "block"
 
   @javascript
   Scenario: Add a URL in menu block can appear in the entire site
+<<<<<<< HEAD
     Given the following "course" exists:
       | fullname         | Course 1 |
       | shortname        | C1       |
@@ -36,6 +56,11 @@ Feature: Add URL to main menu block
     And I am on site homepage
     And I turn editing mode on
     And I add the "Main menu" block
+=======
+    When I log in as "admin"
+    And I am on site homepage
+    And I turn editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I configure the "Main menu" block
     And I set the following fields to these values:
       | Page contexts | Display throughout the entire site |
@@ -61,6 +86,7 @@ Feature: Add URL to main menu block
 
   @javascript
   Scenario: Add a URL in menu block can appear in any front page
+<<<<<<< HEAD
     Given the following "course" exists:
       | fullname         | Course 1 |
       | shortname        | C1       |
@@ -70,6 +96,11 @@ Feature: Add URL to main menu block
     And I am on site homepage
     And I turn editing mode on
     And I add the "Main menu" block
+=======
+    When I log in as "admin"
+    And I am on site homepage
+    And I turn editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I configure the "Main menu" block
     And I set the following fields to these values:
       | Page contexts | Display on the site home and any pages added to the site home. |
@@ -95,6 +126,7 @@ Feature: Add URL to main menu block
 
   @javascript
   Scenario: When the "Main Menu" block is displayed throrought the entire site, adding an URL in a course
+<<<<<<< HEAD
     results in adding it in the course and not in the frontpage
     Given the following "course" exists:
       | fullname         | Course 1 |
@@ -104,13 +136,23 @@ Feature: Add URL to main menu block
     And I am on site homepage
     And I turn editing mode on
     And I add the "Main menu" block
+=======
+  results in adding it in the course and not in the frontpage
+    Given I log in as "admin"
+    And I am on site homepage
+    And I turn editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I configure the "Main menu" block
     And I set the following fields to these values:
       | Page contexts | Display throughout the entire site |
     And I press "Save changes"
     When the following "activity" exists:
       | activity        | url                   |
+<<<<<<< HEAD
       | course          | C1                    |
+=======
+      | course          | C2                    |
+>>>>>>> forked/LAE_400_PACKAGE
       | name            | reference link        |
       | intro           | mooooooooodle         |
       | externalurl     | http://www.moodle.com |
@@ -119,7 +161,11 @@ Feature: Add URL to main menu block
     And I am on the "reference link" "url activity editing" page
     And I expand all fieldsets
     And I set the following fields to these values:
+<<<<<<< HEAD
       | id_display | In pop-up |
+=======
+      | id_display | Embed |
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Save and return to course"
     Then "reference link" "link" should not exist in the "Main menu" "block"
     And I should see "mooooooooodle" in the "region-main" "region"

@@ -180,7 +180,11 @@ class renderer extends \tool_brickfield\output\renderer {
             ];
         $data->errordata = !empty($data->errordata) ? $data->errordata : [];
         foreach ($data->errordata as $err) {
+<<<<<<< HEAD
             $err->htmlcode = htmlentities($err->htmlcode, ENT_COMPAT);
+=======
+            $err->htmlcode = htmlentities($err->htmlcode);
+>>>>>>> forked/LAE_400_PACKAGE
             $row = [$data->tarlabels[$err->component], $err->shortname, $err->errline, $err->htmlcode];
             $table->data[] = $row;
         }
@@ -254,6 +258,7 @@ class renderer extends \tool_brickfield\output\renderer {
                 <tr>
                     <td>
                         <img src="' . $this->image_path() . 'tachometer-alt-solid.svg" width="15" height="15">' .
+<<<<<<< HEAD
                         ' <td style="line-height: 10px;"> ' .
                         get_string('totalactivitiescount', manager::PLUGINNAME, $data->combodata['total']) .
                         '</td></td>
@@ -267,6 +272,18 @@ class renderer extends \tool_brickfield\output\renderer {
                         ' <td style="line-height: 10px;"> ' .
                         get_string('failedcount', manager::PLUGINNAME, $data->combodata['failed']) .
                         '</td></td>
+=======
+                        get_string('totalactivitiescount', manager::PLUGINNAME, $data->combodata['total']) .
+                    '</td>
+                    <td>
+                        <img src="' . $this->image_path() . 'check-square-regular.svg" width="15" height="15">' .
+                        get_string('passedcount', manager::PLUGINNAME, $data->combodata['passed']) .
+                    '</td>
+                    <td>
+                        <img src="' . $this->image_path() . 'times-circle-regular.svg" width="15" height="15">' .
+                        get_string('failedcount', manager::PLUGINNAME, $data->combodata['failed']) .
+                    '</td>
+>>>>>>> forked/LAE_400_PACKAGE
                 </tr>
             </table>';
 
@@ -396,8 +413,13 @@ class renderer extends \tool_brickfield\output\renderer {
         foreach ($data->groupdata as $key => $group) {
             $checkgroup = area_base::checkgroup_name($key);
             $icon = $icons[$key];
+<<<<<<< HEAD
             $tabledata[] = ['<img src="'.$icon.'" width="15" height="15">' . ' ' .' <td style="line-height: 10px;">  '.
                 get_string('checktype:' . $checkgroup, manager::PLUGINNAME).'</td>', $group->errorinstances];
+=======
+            $tabledata[] = ['<img src="'.$icon.'" width="15" height="15">' . ' ' .
+                get_string('checktype:' . $checkgroup, manager::PLUGINNAME), $group->errorinstances];
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $this->render_table(

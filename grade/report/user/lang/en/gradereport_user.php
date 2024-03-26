@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die();
 
 $string['allusersnum'] = 'All users ({$a})';
@@ -34,3 +35,13 @@ $string['userreportdesc'] = 'User reports include a user’s grades, feedback an
 $string['userreports'] = 'Select a user above to view their report';
 $string['privacy:metadata:preference:gradereport_user_view_user'] = 'Whether to view report as current user or another user in the gradebook reports';
 $string['tablesummary'] = 'The table is arranged as a list of graded items including categories of graded items. When items are in a category they will be indicated as such.';
+=======
+$string['eventgradereportviewed'] = 'Grade user report viewed';
+$string['pluginname'] = 'User report';
+$string['user:view'] = 'View user report';
+$string['myself'] = 'Myself';
+$string['otheruser'] = 'User';
+$string['privacy:metadata:preference:gradereport_user_view_user'] = 'Whether to view report as current user or another user in the gradebook reports';
+$string['tablesummary'] = 'The table is arranged as a list of graded items including categories of graded items. When items are in a category they will be indicated as such.';
+$string['viewas'] = 'View report as';
+>>>>>>> forked/LAE_400_PACKAGE

@@ -28,7 +28,10 @@ class Horde_Stream_Filter_Crc32 extends php_user_filter
     /**
      * @see stream_filter_register()
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function onCreate()
     {
         $this->params->crc32 = 0;
@@ -39,7 +42,10 @@ class Horde_Stream_Filter_Crc32 extends php_user_filter
     /**
      * @see stream_filter_register()
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function filter($in, $out, &$consumed, $closing)
     {
         while ($bucket = stream_bucket_make_writeable($in)) {

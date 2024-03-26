@@ -33,12 +33,18 @@ defined('MOODLE_INTERNAL') || die;
  * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class override extends grade_attribute_format implements be_checked, be_disabled, be_readonly {
 
     /**
      * The name for this input
      * @var string $name
      */
+=======
+class override extends grade_attribute_format implements be_checked, be_disabled {
+
+    /** @var string $name The name for this input */
+>>>>>>> forked/LAE_400_PACKAGE
     public $name = 'override';
 
     /**
@@ -46,7 +52,11 @@ class override extends grade_attribute_format implements be_checked, be_disabled
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function is_checked(): bool {
+=======
+    public function is_checked() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->grade->is_overridden();
     }
 
@@ -55,7 +65,11 @@ class override extends grade_attribute_format implements be_checked, be_disabled
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function is_disabled(): bool {
+=======
+    public function is_disabled() {
+>>>>>>> forked/LAE_400_PACKAGE
         $lockedgrade = $lockedgradeitem = 0;
         if (!empty($this->grade->locked)) {
             $lockedgrade = 1;
@@ -67,6 +81,7 @@ class override extends grade_attribute_format implements be_checked, be_disabled
     }
 
     /**
+<<<<<<< HEAD
      * Return true if this is read-only.
      *
      * @return bool
@@ -77,11 +92,17 @@ class override extends grade_attribute_format implements be_checked, be_disabled
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get the label for this form element.
      *
      * @return string
      */
+<<<<<<< HEAD
     public function get_label(): string {
+=======
+    public function get_label() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!isset($this->grade->label)) {
             $this->grade->label = '';
         }
@@ -93,7 +114,11 @@ class override extends grade_attribute_format implements be_checked, be_disabled
      *
      * @return element
      */
+<<<<<<< HEAD
     public function determine_format(): element {
+=======
+    public function determine_format() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!$this->grade->grade_item->is_overridable_item()) {
             return new empty_element();
         }
@@ -101,8 +126,12 @@ class override extends grade_attribute_format implements be_checked, be_disabled
             $this->get_name(),
             $this->get_label(),
             $this->is_checked(),
+<<<<<<< HEAD
             $this->is_disabled(),
             $this->is_readonly()
+=======
+            $this->is_disabled()
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 
@@ -117,7 +146,11 @@ class override extends grade_attribute_format implements be_checked, be_disabled
             return false;
         }
 
+<<<<<<< HEAD
         $state = !($value == 0);
+=======
+        $state = $value == 0 ? false : true;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->grade->set_overridden($state);
         $this->grade->grade_item->force_regrading();

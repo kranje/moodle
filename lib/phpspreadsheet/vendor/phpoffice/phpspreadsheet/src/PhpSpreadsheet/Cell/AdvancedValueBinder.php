@@ -179,8 +179,11 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
     {
         // Convert value to number
         [$hours, $minutes] = explode(':', $value);
+<<<<<<< HEAD
         $hours = (int) $hours;
         $minutes = (int) $minutes;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $days = ($hours / 24) + ($minutes / 1440);
         $cell->setValueExplicit($days, DataType::TYPE_NUMERIC);
 
@@ -195,9 +198,12 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
     {
         // Convert value to number
         [$hours, $minutes, $seconds] = explode(':', $value);
+<<<<<<< HEAD
         $hours = (int) $hours;
         $minutes = (int) $minutes;
         $seconds = (int) $seconds;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $days = ($hours / 24) + ($minutes / 1440) + ($seconds / 86400);
         $cell->setValueExplicit($days, DataType::TYPE_NUMERIC);
 

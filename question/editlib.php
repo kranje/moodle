@@ -30,8 +30,13 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/questionlib.php');
 
+<<<<<<< HEAD
 define('DEFAULT_QUESTIONS_PER_PAGE', 100);
 define('MAXIMUM_QUESTIONS_PER_PAGE', 4000);
+=======
+define('DEFAULT_QUESTIONS_PER_PAGE', 20);
+define('MAXIMUM_QUESTIONS_PER_PAGE', 1000);
+>>>>>>> forked/LAE_400_PACKAGE
 
 function get_module_from_cmid($cmid) {
     global $CFG, $DB;
@@ -40,9 +45,15 @@ function get_module_from_cmid($cmid) {
                                     {modules} md
                                WHERE cm.id = ? AND
                                      md.id = cm.module", array($cmid))){
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     } elseif (!$modrec =$DB->get_record($cmrec->modname, array('id' => $cmrec->instance))) {
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+    } elseif (!$modrec =$DB->get_record($cmrec->modname, array('id' => $cmrec->instance))) {
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $modrec->instance = $modrec->id;
     $modrec->cmid = $cmrec->id;
@@ -252,12 +263,19 @@ function question_edit_setup($edittab, $baseurl, $requirecmid = false, $unused =
  * @param string $edittab Code for this edit tab
  * @param string $baseurl The name of the script calling this funciton. For examle 'qusetion/edit.php'.
  * @param array $params The provided parameters to construct the resources with.
+<<<<<<< HEAD
  * @param int $defaultquestionsperpage number of questions per page, if not given in the URL.
  * @return array $thispageurl, $contexts, $cmid, $cm, $module, $pagevars
  */
 function question_build_edit_resources($edittab, $baseurl, $params,
         $defaultquestionsperpage = DEFAULT_QUESTIONS_PER_PAGE) {
     global $DB;
+=======
+ * @return array $thispageurl, $contexts, $cmid, $cm, $module, $pagevars
+ */
+function question_build_edit_resources($edittab, $baseurl, $params) {
+    global $DB, $PAGE, $CFG;
+>>>>>>> forked/LAE_400_PACKAGE
 
     $thispageurl = new moodle_url($baseurl);
     $thispageurl->remove_all_params(); // We are going to explicity add back everything important - this avoids unwanted params from being retained.
@@ -374,12 +392,17 @@ function question_build_edit_resources($edittab, $baseurl, $params,
         $pagevars['qpage'] = 0;
     }
 
+<<<<<<< HEAD
     if ($defaultquestionsperpage == DEFAULT_QUESTIONS_PER_PAGE) {
         $pagevars['qperpage'] = question_set_or_get_user_preference(
                 'qperpage', $qperpage, DEFAULT_QUESTIONS_PER_PAGE, $thispageurl);
     } else {
         $pagevars['qperpage'] = $qperpage ?? $defaultquestionsperpage;
     }
+=======
+    $pagevars['qperpage'] = question_set_or_get_user_preference(
+            'qperpage', $qperpage, DEFAULT_QUESTIONS_PER_PAGE, $thispageurl);
+>>>>>>> forked/LAE_400_PACKAGE
 
     $defaultcategory = question_make_default_categories($contexts->all());
 
@@ -392,7 +415,11 @@ function question_build_edit_resources($edittab, $baseurl, $params,
         $catparts = explode(',', $pagevars['cat']);
         if (!$catparts[0] || (false !== array_search($catparts[1], $contextlistarr)) ||
                 !$DB->count_records_select("question_categories", "id = ? AND contextid = ?", array($catparts[0], $catparts[1]))) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcategory', 'question');
+=======
+            print_error('invalidcategory', 'question');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     } else {
         $category = $defaultcategory;
@@ -492,12 +519,20 @@ function require_login_in_context($contextorid = null){
     } else if ($context && ($context->contextlevel == CONTEXT_MODULE)) {
         if ($cm = $DB->get_record('course_modules',array('id' =>$context->instanceid))) {
             if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidcourseid');
+=======
+                print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
             }
             require_course_login($course, true, $cm);
 
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
+=======
+            print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     } else if ($context && ($context->contextlevel == CONTEXT_SYSTEM)) {
         if (!empty($CFG->forcelogin)) {

@@ -1243,7 +1243,11 @@ class navigation_node_collection implements IteratorAggregate, Countable {
      *
      * @return int
      */
+<<<<<<< HEAD
     public function count(): int {
+=======
+    public function count() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->count;
     }
     /**
@@ -1254,7 +1258,11 @@ class navigation_node_collection implements IteratorAggregate, Countable {
      *
      * @return ArrayIterator
      */
+<<<<<<< HEAD
     public function getIterator(): Traversable {
+=======
+    public function getIterator() {
+>>>>>>> forked/LAE_400_PACKAGE
         return new ArrayIterator($this->collection);
     }
 }
@@ -5836,7 +5844,11 @@ class navigation_json {
         }
 
         if ($child->forcetitle || $child->title !== $child->text) {
+<<<<<<< HEAD
             $attributes['title'] = htmlentities($child->title ?? '', ENT_QUOTES, 'UTF-8');
+=======
+            $attributes['title'] = htmlentities($child->title, ENT_QUOTES, 'UTF-8');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if (array_key_exists($child->key.':'.$child->type, $this->expandable)) {
             $attributes['expandable'] = $child->key;

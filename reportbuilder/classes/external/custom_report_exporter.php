@@ -29,7 +29,11 @@ use core_reportbuilder\table\custom_report_table;
 use core_reportbuilder\table\custom_report_table_filterset;
 use core_reportbuilder\table\custom_report_table_view;
 use core_reportbuilder\table\custom_report_table_view_filterset;
+<<<<<<< HEAD
 use core_table\local\filter\integer_filter;
+=======
+use core_reportbuilder\local\helpers\report as report_helper;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Custom report exporter class
@@ -78,7 +82,10 @@ class custom_report_exporter extends persistent_exporter {
      */
     protected static function define_related(): array {
         return [
+<<<<<<< HEAD
             'pagesize' => 'int?',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -90,6 +97,7 @@ class custom_report_exporter extends persistent_exporter {
     protected static function define_other_properties(): array {
         return [
             'table' => ['type' => PARAM_RAW],
+<<<<<<< HEAD
             'filtersapplied' => ['type' => PARAM_INT],
             'filterspresent' => ['type' => PARAM_BOOL],
             'filtersform' => ['type' => PARAM_RAW],
@@ -114,6 +122,20 @@ class custom_report_exporter extends persistent_exporter {
                 'type' => custom_report_card_view_exporter::read_properties_definition(),
                 'optional' => true,
             ],
+=======
+            'sidebarmenucards' => ['type' => custom_report_menu_cards_exporter::read_properties_definition()],
+            'conditions' => ['type' => custom_report_conditions_exporter::read_properties_definition()],
+            'filters' => ['type' => custom_report_filters_exporter::read_properties_definition()],
+            'sorting' => ['type' => custom_report_columns_sorting_exporter::read_properties_definition()],
+            'cardview' => ['type' => custom_report_card_view_exporter::read_properties_definition()],
+            'filtersapplied' => ['type' => PARAM_INT],
+            'filterspresent' => ['type' => PARAM_BOOL],
+            'filtersform' => [
+                'type' => PARAM_RAW,
+                'optional' => true,
+            ],
+            'editmode' => ['type' => PARAM_INT],
+>>>>>>> forked/LAE_400_PACKAGE
             'javascript' => ['type' => PARAM_RAW],
         ];
     }
@@ -125,9 +147,12 @@ class custom_report_exporter extends persistent_exporter {
      * @return array
      */
     protected function get_other_values(renderer_base $output): array {
+<<<<<<< HEAD
         /** @var datasource $report */
         $report = manager::get_report_from_persistent($this->persistent);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $filterspresent = false;
         $filtersform = '';
 
@@ -135,6 +160,7 @@ class custom_report_exporter extends persistent_exporter {
             $table = custom_report_table::create($this->persistent->get('id'));
             $table->set_filterset(new custom_report_table_filterset());
         } else {
+<<<<<<< HEAD
             // We store the pagesize within the table filterset so that it's available between AJAX requests.
             $filterset = new custom_report_table_view_filterset();
             $filterset->add_filter(new integer_filter('pagesize', null, [$this->related['pagesize']]));
@@ -144,11 +170,23 @@ class custom_report_exporter extends persistent_exporter {
 
             // Generate filters form if report contains any filters.
             $filterspresent = !empty($report->get_active_filters());
+=======
+            $table = custom_report_table_view::create($this->persistent->get('id'), $this->download);
+            $table->set_filterset(new custom_report_table_view_filterset());
+
+            // Generate filters form if report contains any filters.
+            $source = $this->persistent->get('source');
+            /** @var datasource $datasource */
+            $datasource = new $source($this->persistent);
+
+            $filterspresent = !empty($datasource->get_active_filters());
+>>>>>>> forked/LAE_400_PACKAGE
             if ($filterspresent) {
                 $filtersform = $this->generate_filters_form()->render();
             }
         }
 
+<<<<<<< HEAD
         // If we are editing we need all this information for the template.
         $editordata = [];
         if ($this->editmode) {
@@ -166,16 +204,49 @@ class custom_report_exporter extends persistent_exporter {
 
             $cardviewexporter = new custom_report_card_view_exporter(null, ['report' => $report]);
             $editordata['cardview'] = (array) $cardviewexporter->export($output);
+=======
+        $report = manager::get_report_from_persistent($this->persistent);
+
+        // If we are editing we need all this information for the template.
+        if ($this->editmode) {
+            $menucardexporter = new custom_report_menu_cards_exporter(null, [
+                'menucards' => report_helper::get_available_columns($report->get_report_persistent())
+            ]);
+
+            $menucards = (array) $menucardexporter->export($output);
+            $conditionsexporter = new custom_report_conditions_exporter(null, ['report' => $report]);
+            $conditions = (array) $conditionsexporter->export($output);
+            $filtersexporter = new custom_report_filters_exporter(null, ['report' => $report]);
+            $filters = (array) $filtersexporter->export($output);
+            $sortingexporter = new custom_report_columns_sorting_exporter(null, ['report' => $report]);
+            $sorting = (array) $sortingexporter->export($output);
+            $cardviewexporter = new custom_report_card_view_exporter(null, ['report' => $report]);
+            $cardview = (array) $cardviewexporter->export($output);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return [
             'table' => $output->render($table),
+<<<<<<< HEAD
             'filtersapplied' => $report->get_applied_filter_count(),
             'filterspresent' => $filterspresent,
             'filtersform' => $filtersform,
             'editmode' => $this->editmode,
             'javascript' => '',
         ] + $editordata;
+=======
+            'sidebarmenucards' => $menucards ?? [],
+            'conditions' => $conditions ?? [],
+            'filters' => $filters ?? [],
+            'sorting' => $sorting ?? [],
+            'cardview' => $cardview ?? [],
+            'filtersapplied' => $report->get_applied_filter_count(),
+            'filterspresent' => $filterspresent,
+            'filtersform' => $filtersform,
+            'editmode' => (int)$this->editmode,
+            'javascript' => '',
+        ];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

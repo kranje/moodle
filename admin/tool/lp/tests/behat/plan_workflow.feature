@@ -15,6 +15,20 @@ Feature: Manage plan workflow
       | usermanageowndraftplan | User manage own draft plan role | user |
       | usermanageownplan | User manage own plan role | user |
       | manageplan | Manager all plans role | manager |
+<<<<<<< HEAD
+=======
+    And the following "role capabilities" exist:
+      | role                   | moodle/competency:planmanageowndraft | moodle/competency:planmanageown |
+      | usermanageowndraftplan | allow                                |                                 |
+      | usermanageownplan      | allow                                | allow                           |
+      | manageplan             | allow                                | allow                           |
+    And the following "role capability" exists:
+      | role                                | manageplan |
+      | moodle/competency:planmanage        | allow      |
+      | moodle/competency:planview          | allow      |
+      | moodle/competency:planreview        | allow      |
+      | moodle/competency:planrequestreview | allow      |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "role assigns" exist:
       | user  | role | contextlevel | reference |
       | user1 | usermanageowndraftplan | System |  |
@@ -40,6 +54,7 @@ Feature: Manage plan workflow
     And the following "blocks" exist:
       | blockname               | contextlevel | reference | pagetypepattern | defaultregion |
       | lp                      | System       | 1         | my-index        | content       |
+<<<<<<< HEAD
     And I log in as "admin"
     And I set the following system permissions of "User manage own draft plan role" role:
       | capability | permission |
@@ -57,6 +72,8 @@ Feature: Manage plan workflow
       | moodle/competency:planreview | Allow |
       | moodle/competency:planrequestreview | Allow |
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: User can manages his own plan draft
     Given I log in as "user1"
@@ -147,9 +164,13 @@ Feature: Manage plan workflow
       | name | user | description | status | reviewer |
       | Test-Plan3 | user1 | Description of plan 3 for user 1 | active | manager1 |
       | Test-Plan4 | user1 | Description of plan 4 for user 1 | active | manager1 |
+<<<<<<< HEAD
     And I log in as "manager1"
     And I navigate to "Users > Accounts > Browse list of users" in site administration
     And I follow "User 1"
+=======
+    And I am on the "user1" "user > profile" page logged in as "manager1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Learning plans"
     And I should see "List of learning plans"
     When I click on "Send back to draft" of edit menu in the "Test-Plan3" row
@@ -165,9 +186,13 @@ Feature: Manage plan workflow
       | name | user | description | status | reviewer |
       | Test-Plan3 | user1 | Description of plan 3 for user 1 | active | manager1 |
       | Test-Plan4 | user1 | Description of plan 4 for user 1 | active | manager1 |
+<<<<<<< HEAD
     And I log in as "manager1"
     And I navigate to "Users > Accounts > Browse list of users" in site administration
     And I follow "User 1"
+=======
+    And I am on the "user1" "user > profile" page logged in as "manager1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Learning plans"
     And I should see "List of learning plans"
     When I click on "Complete this learning plan" of edit menu in the "Test-Plan3" row
@@ -186,9 +211,13 @@ Feature: Manage plan workflow
       | name | user | description | status | reviewer |
       | Test-Plan3 | user1 | Description of plan 3 for user 1 | complete | manager1 |
       | Test-Plan4 | user1 | Description of plan 4 for user 1 | complete | manager1 |
+<<<<<<< HEAD
     And I log in as "manager1"
     And I navigate to "Users > Accounts > Browse list of users" in site administration
     And I follow "User 1"
+=======
+    And I am on the "user1" "user > profile" page logged in as "manager1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Learning plans"
     And I should see "List of learning plans"
     When I click on "Reopen this learning plan" of edit menu in the "Test-Plan3" row

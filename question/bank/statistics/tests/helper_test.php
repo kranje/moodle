@@ -225,6 +225,15 @@ class helper_test extends \advanced_testcase {
         foreach ($quiz2attempts as $attempt) {
             $this->submit_quiz($quiz2, $attempt);
         }
+<<<<<<< HEAD
+=======
+
+        // Calculate the statistics.
+        $this->expectOutputRegex('~.*Calculations completed.*~');
+        $statisticstask = new \quiz_statistics\task\recalculate();
+        $statisticstask->execute();
+
+>>>>>>> forked/LAE_400_PACKAGE
         return [$quiz1, $quiz2, $questions];
     }
 

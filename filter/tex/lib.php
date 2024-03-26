@@ -37,7 +37,11 @@ function filter_tex_get_executable($debug=false) {
         if (is_executable($pathmimetex)) {
             return $pathmimetex;
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('mimetexnotexecutable', 'error');
+=======
+            print_error('mimetexnotexecutable', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -46,7 +50,11 @@ function filter_tex_get_executable($debug=false) {
         if (is_executable($custom_commandpath)) {
             return $custom_commandpath;
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('mimetexnotexecutable', 'error');
+=======
+            print_error('mimetexnotexecutable', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -61,7 +69,11 @@ function filter_tex_get_executable($debug=false) {
             return "$CFG->dirroot/filter/tex/mimetex.linux";
     }
 
+<<<<<<< HEAD
     throw new \moodle_exception('mimetexisnotexist', 'error');
+=======
+    print_error('mimetexisnotexist', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -84,6 +96,10 @@ function filter_tex_sanitize_formula(string $texexp): string {
         '\afterassignment', '\expandafter', '\noexpand', '\special',
         '\let', '\futurelet', '\else', '\fi', '\chardef', '\makeatletter', '\afterground',
         '\noexpand', '\line', '\mathcode', '\item', '\section', '\mbox', '\declarerobustcommand',
+<<<<<<< HEAD
+=======
+        '\ExplSyntaxOn',
+>>>>>>> forked/LAE_400_PACKAGE
     ];
 
     $allowlist = ['inputenc'];

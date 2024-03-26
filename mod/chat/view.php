@@ -26,23 +26,36 @@ $edit = optional_param('edit', -1, PARAM_BOOL);
 
 if ($id) {
     if (! $cm = get_coursemodule_from_id('chat', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     }
 
     if (! $course = $DB->get_record('course', array('id' => $cm->course))) {
         throw new \moodle_exception('coursemisconf');
+=======
+        print_error('invalidcoursemodule');
+    }
+
+    if (! $course = $DB->get_record('course', array('id' => $cm->course))) {
+        print_error('coursemisconf');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     chat_update_chat_times($cm->instance);
 
     if (! $chat = $DB->get_record('chat', array('id' => $cm->instance))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidid', 'chat');
+=======
+        print_error('invalidid', 'chat');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else {
     chat_update_chat_times($c);
 
     if (! $chat = $DB->get_record('chat', array('id' => $c))) {
+<<<<<<< HEAD
         throw new \moodle_exception('coursemisconf');
     }
     if (! $course = $DB->get_record('course', array('id' => $chat->course))) {
@@ -50,6 +63,15 @@ if ($id) {
     }
     if (! $cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('coursemisconf');
+    }
+    if (! $course = $DB->get_record('course', array('id' => $chat->course))) {
+        print_error('coursemisconf');
+    }
+    if (! $cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

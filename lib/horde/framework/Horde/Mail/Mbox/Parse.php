@@ -133,7 +133,10 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return isset($this->_parsed[$offset]);
@@ -141,7 +144,10 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($offset)
     {
         if (!isset($this->_parsed[$offset])) {
@@ -181,7 +187,10 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         // NOOP
@@ -189,7 +198,10 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
         // NOOP
@@ -202,7 +214,10 @@ implements ArrayAccess, Countable, Iterator
      *
      * @return integer  The number of messages.
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->_parsed);
@@ -223,7 +238,10 @@ implements ArrayAccess, Countable, Iterator
 
     /* Iterator methods. */
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         $key = $this->key();
@@ -233,13 +251,19 @@ implements ArrayAccess, Countable, Iterator
             : $this[$key];
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return key($this->_parsed);
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         if ($this->valid()) {
@@ -247,13 +271,19 @@ implements ArrayAccess, Countable, Iterator
         }
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         reset($this->_parsed);
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return !is_null($this->key());

@@ -85,7 +85,11 @@ class canedit_test extends \advanced_testcase {
         }
 
         // Create the file.
+<<<<<<< HEAD
         $filename = 'greeting-card-887.h5p';
+=======
+        $filename = 'greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
         $path = __DIR__ . '/../../../../h5p/tests/fixtures/' . $filename;
         if ($filecomponent === 'contentbank') {
             $generator = $this->getDataGenerator()->get_plugin_generator('core_contentbank');

@@ -7,12 +7,20 @@ use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
+<<<<<<< HEAD
 class DataSeriesValues extends Properties
+=======
+class DataSeriesValues
+>>>>>>> forked/LAE_400_PACKAGE
 {
     const DATASERIES_TYPE_STRING = 'String';
     const DATASERIES_TYPE_NUMBER = 'Number';
 
+<<<<<<< HEAD
     private const DATA_TYPE_VALUES = [
+=======
+    private static $dataTypeValues = [
+>>>>>>> forked/LAE_400_PACKAGE
         self::DATASERIES_TYPE_STRING,
         self::DATASERIES_TYPE_NUMBER,
     ];
@@ -27,7 +35,11 @@ class DataSeriesValues extends Properties
     /**
      * Series Data Source.
      *
+<<<<<<< HEAD
      * @var ?string
+=======
+     * @var string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $dataSource;
 
@@ -45,6 +57,7 @@ class DataSeriesValues extends Properties
      */
     private $pointMarker;
 
+<<<<<<< HEAD
     /** @var ChartColor */
     private $markerFillColor;
 
@@ -58,6 +71,8 @@ class DataSeriesValues extends Properties
      */
     private $pointSize = 3;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Point Count (The number of datapoints in the dataseries).
      *
@@ -75,6 +90,7 @@ class DataSeriesValues extends Properties
     /**
      * Fill color (can be array with colors if dataseries have custom colors).
      *
+<<<<<<< HEAD
      * @var null|ChartColor|ChartColor[]
      */
     private $fillColor;
@@ -90,6 +106,18 @@ class DataSeriesValues extends Properties
 
     /** @var TrendLine[] */
     private $trendLines = [];
+=======
+     * @var string|string[]
+     */
+    private $fillColor;
+
+    /**
+     * Line Width.
+     *
+     * @var int
+     */
+    private $lineWidth = 12700;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Create a new DataSeriesValues object.
@@ -100,6 +128,7 @@ class DataSeriesValues extends Properties
      * @param int $pointCount
      * @param mixed $dataValues
      * @param null|mixed $marker
+<<<<<<< HEAD
      * @param null|ChartColor|ChartColor[]|string|string[] $fillColor
      * @param string $pointSize
      */
@@ -108,18 +137,28 @@ class DataSeriesValues extends Properties
         parent::__construct();
         $this->markerFillColor = new ChartColor();
         $this->markerBorderColor = new ChartColor();
+=======
+     * @param null|string|string[] $fillColor
+     */
+    public function __construct($dataType = self::DATASERIES_TYPE_NUMBER, $dataSource = null, $formatCode = null, $pointCount = 0, $dataValues = [], $marker = null, $fillColor = null)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->setDataType($dataType);
         $this->dataSource = $dataSource;
         $this->formatCode = $formatCode;
         $this->pointCount = $pointCount;
         $this->dataValues = $dataValues;
         $this->pointMarker = $marker;
+<<<<<<< HEAD
         if ($fillColor !== null) {
             $this->setFillColor($fillColor);
         }
         if (is_numeric($pointSize)) {
             $this->pointSize = (int) $pointSize;
         }
+=======
+        $this->fillColor = $fillColor;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -146,7 +185,11 @@ class DataSeriesValues extends Properties
      */
     public function setDataType($dataType)
     {
+<<<<<<< HEAD
         if (!in_array($dataType, self::DATA_TYPE_VALUES)) {
+=======
+        if (!in_array($dataType, self::$dataTypeValues)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new Exception('Invalid datatype for chart data series values');
         }
         $this->dataType = $dataType;
@@ -157,7 +200,11 @@ class DataSeriesValues extends Properties
     /**
      * Get Series Data Source (formula).
      *
+<<<<<<< HEAD
      * @return ?string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function getDataSource()
     {
@@ -167,7 +214,11 @@ class DataSeriesValues extends Properties
     /**
      * Set Series Data Source (formula).
      *
+<<<<<<< HEAD
      * @param ?string $dataSource
+=======
+     * @param string $dataSource
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return $this
      */
@@ -202,6 +253,7 @@ class DataSeriesValues extends Properties
         return $this;
     }
 
+<<<<<<< HEAD
     public function getMarkerFillColor(): ChartColor
     {
         return $this->markerFillColor;
@@ -232,6 +284,8 @@ class DataSeriesValues extends Properties
         return $this;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Get Series Format Code.
      *
@@ -267,6 +321,7 @@ class DataSeriesValues extends Properties
     }
 
     /**
+<<<<<<< HEAD
      * Get fill color object.
      *
      * @return null|ChartColor|ChartColor[]
@@ -312,12 +367,15 @@ class DataSeriesValues extends Properties
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get fill color.
      *
      * @return string|string[] HEX color or array with HEX colors
      */
     public function getFillColor()
     {
+<<<<<<< HEAD
         if ($this->fillColor === null) {
             return '';
         }
@@ -331,18 +389,26 @@ class DataSeriesValues extends Properties
         }
 
         return $this->chartColorToString($this->fillColor);
+=======
+        return $this->fillColor;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Set fill color for series.
      *
+<<<<<<< HEAD
      * @param ChartColor|ChartColor[]|string|string[] $color HEX color or array with HEX colors
+=======
+     * @param string|string[] $color HEX color or array with HEX colors
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return   DataSeriesValues
      */
     public function setFillColor($color)
     {
         if (is_array($color)) {
+<<<<<<< HEAD
             $this->fillColor = [];
             foreach ($color as $fillString) {
                 if ($fillString instanceof ChartColor) {
@@ -356,6 +422,15 @@ class DataSeriesValues extends Properties
         } else {
             $this->fillColor = $this->stringToChartColor($color);
         }
+=======
+            foreach ($color as $colorValue) {
+                $this->validateColor($colorValue);
+            }
+        } else {
+            $this->validateColor($color);
+        }
+        $this->fillColor = $color;
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $this;
     }
@@ -379,23 +454,40 @@ class DataSeriesValues extends Properties
     /**
      * Get line width for series.
      *
+<<<<<<< HEAD
      * @return null|float|int
      */
     public function getLineWidth()
     {
         return $this->lineStyleProperties['width'];
+=======
+     * @return int
+     */
+    public function getLineWidth()
+    {
+        return $this->lineWidth;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Set line width for the series.
      *
+<<<<<<< HEAD
      * @param null|float|int $width
+=======
+     * @param int $width
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return $this
      */
     public function setLineWidth($width)
     {
+<<<<<<< HEAD
         $this->lineStyleProperties['width'] = $width;
+=======
+        $minWidth = 12700;
+        $this->lineWidth = max($minWidth, $width);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $this;
     }
@@ -407,7 +499,11 @@ class DataSeriesValues extends Properties
      */
     public function isMultiLevelSeries()
     {
+<<<<<<< HEAD
         if (!empty($this->dataValues)) {
+=======
+        if (count($this->dataValues) > 0) {
+>>>>>>> forked/LAE_400_PACKAGE
             return is_array(array_values($this->dataValues)[0]);
         }
 
@@ -471,7 +567,11 @@ class DataSeriesValues extends Properties
         return $this;
     }
 
+<<<<<<< HEAD
     public function refresh(Worksheet $worksheet, bool $flatten = true): void
+=======
+    public function refresh(Worksheet $worksheet, $flatten = true): void
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($this->dataSource !== null) {
             $calcEngine = Calculation::getInstance($worksheet->getParent());
@@ -513,6 +613,7 @@ class DataSeriesValues extends Properties
             $this->pointCount = count($this->dataValues);
         }
     }
+<<<<<<< HEAD
 
     public function getScatterLines(): bool
     {
@@ -592,4 +693,6 @@ class DataSeriesValues extends Properties
     {
         return $this->trendLines;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -17,7 +17,10 @@
 namespace core_grades\output;
 
 use moodle_url;
+<<<<<<< HEAD
 use core\output\select_menu;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Renderable class for the general action bar in the gradebook pages.
@@ -66,14 +69,24 @@ class general_action_bar extends action_bar {
      * @return array
      */
     public function export_for_template(\renderer_base $output): array {
+<<<<<<< HEAD
         $selectmenu = $this->get_action_selector();
 
         if (is_null($selectmenu)) {
+=======
+        $urlselect = $this->get_action_selector();
+
+        if (is_null($urlselect)) {
+>>>>>>> forked/LAE_400_PACKAGE
             return [];
         }
 
         return [
+<<<<<<< HEAD
             'generalnavselector' => $selectmenu->export_for_template($output),
+=======
+            'generalnavselector' => $urlselect->export_for_template($output),
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -89,9 +102,15 @@ class general_action_bar extends action_bar {
     /**
      * Returns the URL selector object.
      *
+<<<<<<< HEAD
      * @return \select_menu|null The URL select object.
      */
     private function get_action_selector(): ?select_menu {
+=======
+     * @return \url_select|null The URL select object.
+     */
+    private function get_action_selector(): ?\url_select {
+>>>>>>> forked/LAE_400_PACKAGE
         if ($this->context->contextlevel !== CONTEXT_COURSE) {
             return null;
         }
@@ -187,9 +206,13 @@ class general_action_bar extends action_bar {
             $menu[][get_string('moremenu')] = $moregroup;
         }
 
+<<<<<<< HEAD
         $selectmenu = new select_menu('gradesactionselect', $menu, $this->activeurl->out(false));
         $selectmenu->set_label(get_string('gradebooknavigationmenu', 'grades'), ['class' => 'sr-only']);
 
         return $selectmenu;
+=======
+        return new \url_select($menu, $this->activeurl->out(false), null, 'gradesactionselect');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

@@ -88,6 +88,7 @@ class qtype_multianswer_renderer extends qtype_renderer {
                     array('class' => 'validationerror'));
         }
 
+<<<<<<< HEAD
         $this->page->requires->js_init_call('M.qtype_multianswer.init',
                 array('#' . $qa->get_outer_question_div_unique_id()), false, array(
                     'name'     => 'qtype_multianswer',
@@ -95,6 +96,8 @@ class qtype_multianswer_renderer extends qtype_renderer {
                     'requires' => array('base', 'node', 'event', 'overlay'),
                 ));
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $output;
     }
 
@@ -202,8 +205,42 @@ abstract class qtype_multianswer_subq_renderer_base extends qtype_renderer {
             return '';
         }
 
+<<<<<<< HEAD
         return html_writer::tag('span', implode('<br />', $feedback),
                 array('class' => 'feedbackspan accesshide'));
+=======
+        return html_writer::tag('span', implode('<br />', $feedback), [
+            'class' => 'feedbackspan',
+        ]);
+    }
+
+    /**
+     * Render the feedback icon for a sub-question which is also the trigger for the feedback popover.
+     *
+     * @param string $icon The feedback icon
+     * @param string $feedbackcontents The feedback contents to be shown on the popover.
+     * @return string
+     */
+    protected function get_feedback_image(string $icon, string $feedbackcontents): string {
+        global $PAGE;
+        if ($icon === '') {
+            return '';
+        }
+
+        $PAGE->requires->js_call_amd('qtype_multianswer/feedback', 'initPopovers');
+
+        return html_writer::link('#', $icon, [
+            'role' => 'button',
+            'tabindex' => 0,
+            'class' => 'feedbacktrigger btn btn-link p-0',
+            'data-toggle' => 'popover',
+            'data-container' => 'body',
+            'data-content' => $feedbackcontents,
+            'data-placement' => 'right',
+            'data-trigger' => 'hover focus',
+            'data-html' => 'true',
+        ]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -274,11 +311,19 @@ class qtype_multianswer_textfield_renderer extends qtype_multianswer_subq_render
         }
 
         // Work out a good input field size.
+<<<<<<< HEAD
         $size = max(1, core_text::strlen(trim($response ?? '')) + 1);
         foreach ($subq->answers as $ans) {
             $size = max($size, core_text::strlen(trim($ans->answer)));
         }
         $size = min(60, round($size + rand(0, (int)($size * 0.15))));
+=======
+        $size = max(1, core_text::strlen(trim($response)) + 1);
+        foreach ($subq->answers as $ans) {
+            $size = max($size, core_text::strlen(trim($ans->answer)));
+        }
+        $size = min(60, round($size + rand(0, $size * 0.15)));
+>>>>>>> forked/LAE_400_PACKAGE
         // The rand bit is to make guessing harder.
 
         $inputattributes = array(
@@ -315,8 +360,12 @@ class qtype_multianswer_textfield_renderer extends qtype_multianswer_subq_render
         $output .= html_writer::tag('label', $this->get_answer_label(),
                 array('class' => 'subq accesshide', 'for' => $inputattributes['id']));
         $output .= html_writer::empty_tag('input', $inputattributes);
+<<<<<<< HEAD
         $output .= $feedbackimg;
         $output .= $feedbackpopup;
+=======
+        $output .= $this->get_feedback_image($feedbackimg, $feedbackpopup);
+>>>>>>> forked/LAE_400_PACKAGE
         $output .= html_writer::end_tag('span');
 
         return $output;
@@ -385,8 +434,12 @@ class qtype_multianswer_multichoice_inline_renderer
         $output .= html_writer::tag('label', $this->get_answer_label(),
                 array('class' => 'subq accesshide', 'for' => $inputattributes['id']));
         $output .= $select;
+<<<<<<< HEAD
         $output .= $feedbackimg;
         $output .= $feedbackpopup;
+=======
+        $output .= $this->get_feedback_image($feedbackimg, $feedbackpopup);
+>>>>>>> forked/LAE_400_PACKAGE
         $output .= html_writer::end_tag('span');
 
         return $output;

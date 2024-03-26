@@ -860,6 +860,7 @@ class ADORecordset_ibase extends ADORecordSet
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 		
 		$t = strtoupper($t);
 		
@@ -868,6 +869,9 @@ class ADORecordset_ibase extends ADORecordSet
 
 		switch ($t) {
 			
+=======
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 		case 'CHAR':
 			return 'C';
 

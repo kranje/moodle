@@ -23,7 +23,11 @@
  */
 class Mustache_Engine
 {
+<<<<<<< HEAD
     const VERSION        = '2.14.2';
+=======
+    const VERSION        = '2.14.1';
+>>>>>>> forked/LAE_400_PACKAGE
     const SPEC_VERSION   = '1.2.2';
 
     const PRAGMA_FILTERS      = 'FILTERS';

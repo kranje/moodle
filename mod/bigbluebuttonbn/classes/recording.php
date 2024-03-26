@@ -17,6 +17,10 @@
 namespace mod_bigbluebuttonbn;
 
 use cache;
+<<<<<<< HEAD
+=======
+use context;
+>>>>>>> forked/LAE_400_PACKAGE
 use context_course;
 use context_module;
 use core\persistent;
@@ -772,6 +776,7 @@ class recording extends persistent {
      * Synchronise pending recordings from the server.
      *
      * This function should be called by the check_pending_recordings scheduled task.
+<<<<<<< HEAD
      */
     public static function sync_pending_recordings_from_server(): void {
         global $DB;
@@ -784,13 +789,41 @@ class recording extends persistent {
                 'withindays' => time() - (self::RECORDING_TIME_LIMIT_DAYS * DAYSECS),
                 'status_reset' => self::RECORDING_STATUS_RESET,
             ], self::DEFAULT_RECORDING_SORT);
+=======
+     *
+     * @param bool $dismissedonly fetch dismissed recording only
+     */
+    public static function sync_pending_recordings_from_server(bool $dismissedonly = false): void {
+        global $DB;
+        $params = [
+            'withindays' => time() - (self::RECORDING_TIME_LIMIT_DAYS * DAYSECS),
+        ];
+        // Fetch the local data.
+        if ($dismissedonly) {
+            mtrace("=> Looking for any recording that has been 'dismissed' in the past " . self::RECORDING_TIME_LIMIT_DAYS
+                . " days.");
+            $select = 'status = :status_dismissed AND timecreated > :withindays';
+            $params['status_dismissed'] = self::RECORDING_STATUS_DISMISSED;
+        } else {
+            mtrace("=> Looking for any recording awaiting processing from the past " . self::RECORDING_TIME_LIMIT_DAYS . " days.");
+            $select = '(status = :status_awaiting AND timecreated > :withindays) OR status = :status_reset';
+            $params['status_reset'] = self::RECORDING_STATUS_RESET;
+            $params['status_awaiting'] = self::RECORDING_STATUS_AWAITING;
+        }
+
+        $recordings = $DB->get_records_select(static::TABLE, $select, $params, self::DEFAULT_RECORDING_SORT);
+>>>>>>> forked/LAE_400_PACKAGE
         // Sort by DEFAULT_RECORDING_SORT we get the same result on different db engines.
 
         $recordingcount = count($recordings);
         mtrace("=> Found {$recordingcount} recordings to query");
 
         // Grab the recording IDs.
+<<<<<<< HEAD
         $recordingids = array_map(function ($recording) {
+=======
+        $recordingids = array_map(function($recording) {
+>>>>>>> forked/LAE_400_PACKAGE
             return $recording->recordingid;
         }, $recordings);
 

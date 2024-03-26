@@ -1,3 +1,8 @@
 leaveblank,mod_lti
+<<<<<<< HEAD
+=======
+organizationid,mod_lti
+organizationid_help,mod_lti
+>>>>>>> forked/LAE_400_PACKAGE
 contentitem,mod_lti
 contentitem_help,mod_lti

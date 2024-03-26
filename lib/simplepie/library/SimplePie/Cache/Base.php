@@ -111,5 +111,8 @@ interface SimplePie_Cache_Base
 	 */
 	public function unlink();
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Cache_Base', 'SimplePie\Cache\Base', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

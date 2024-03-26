@@ -1828,7 +1828,11 @@ class model {
      */
     public function get_name() {
 
+<<<<<<< HEAD
         if (trim($this->model->name ?? '') === '') {
+=======
+        if (trim($this->model->name) === '') {
+>>>>>>> forked/LAE_400_PACKAGE
             return $this->get_target()->get_name();
 
         } else {

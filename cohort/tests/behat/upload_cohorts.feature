@@ -29,12 +29,20 @@ Feature: A privileged user can create cohorts using a CSV file
     And I press "Upload cohorts"
     And I should see "Uploaded 6 cohorts"
     And I press "Continue"
+<<<<<<< HEAD
     And the following should exist in the "reportbuilder-table" table:
+=======
+    And the following should exist in the "cohorts" table:
+>>>>>>> forked/LAE_400_PACKAGE
       | Name          | Cohort ID | Description | Cohort size | Source           |
       | cohort name 1 | cohortid1 | first description | 0           | Created manually |
       | cohort name 2 | cohortid2 |             | 0           | Created manually |
     And I follow "All cohorts"
+<<<<<<< HEAD
     And the following should exist in the "reportbuilder-table" table:
+=======
+    And the following should exist in the "cohorts" table:
+>>>>>>> forked/LAE_400_PACKAGE
       | Category      | Name          | Cohort ID | Description       | Cohort size | Source           |
       | System        | cohort name 1 | cohortid1 | first description | 0           | Created manually |
       | System        | cohort name 2 | cohortid2 |                   | 0           | Created manually |
@@ -42,6 +50,7 @@ Feature: A privileged user can create cohorts using a CSV file
       | Cat 1         | cohort name 4 | cohortid4 |                   | 0           | Created manually |
       | Cat 2         | cohort name 5 | cohortid5 |                   | 0           | Created manually |
       | Cat 3         | cohort name 6 | cohortid6 |                   | 0           | Created manually |
+<<<<<<< HEAD
     And ".text-muted" "css_element" should not exist in the "cohort name 1" "table_row"
     And ".text-muted" "css_element" should not exist in the "cohort name 2" "table_row"
     And ".text-muted" "css_element" should exist in the "cohort name 3" "table_row"
@@ -49,6 +58,15 @@ Feature: A privileged user can create cohorts using a CSV file
     And ".text-muted" "css_element" should not exist in the "cohort name 4" "table_row"
     And the "class" attribute of "cohort name 5" "table_row" should contain "text-muted"
     And ".text-muted" "css_element" should not exist in the "cohort name 6" "table_row"
+=======
+    And ".dimmed_text" "css_element" should not exist in the "cohort name 1" "table_row"
+    And ".dimmed_text" "css_element" should not exist in the "cohort name 2" "table_row"
+    And ".dimmed_text" "css_element" should exist in the "cohort name 3" "table_row"
+    And the "class" attribute of "cohort name 3" "table_row" should contain "dimmed_text"
+    And ".dimmed_text" "css_element" should not exist in the "cohort name 4" "table_row"
+    And the "class" attribute of "cohort name 5" "table_row" should contain "dimmed_text"
+    And ".dimmed_text" "css_element" should not exist in the "cohort name 6" "table_row"
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript @_file_upload
   Scenario: Upload cohorts with default category context as admin
@@ -69,10 +87,17 @@ Feature: A privileged user can create cohorts using a CSV file
     And I press "Upload cohorts"
     And I should see "Uploaded 6 cohorts"
     And I press "Continue"
+<<<<<<< HEAD
     And I should see "Cat 3"
     And I navigate to "Users > Accounts >Cohorts" in site administration
     And I follow "All cohorts"
     And the following should exist in the "reportbuilder-table" table:
+=======
+    And I should see "Category: Cat 3: available cohorts (3)"
+    And I navigate to "Users > Accounts >Cohorts" in site administration
+    And I follow "All cohorts"
+    And the following should exist in the "cohorts" table:
+>>>>>>> forked/LAE_400_PACKAGE
       | Category      | Name          | Cohort ID | Description       | Cohort size | Source           |
       | Cat 3         | cohort name 1 | cohortid1 | first description | 0           | Created manually |
       | Cat 3         | cohort name 2 | cohortid2 |                   | 0           | Created manually |
@@ -180,12 +205,20 @@ Feature: A privileged user can create cohorts using a CSV file
     And I press "Upload cohorts"
     And I should see "Uploaded 6 cohorts"
     And I press "Continue"
+<<<<<<< HEAD
     And the following should exist in the "reportbuilder-table" table:
+=======
+    And the following should exist in the "cohorts" table:
+>>>>>>> forked/LAE_400_PACKAGE
       | Name          | Cohort ID | Description | Cohort size | Source           |
       | cohort name 1 | cohortid1 | first description | 0           | Created manually |
       | cohort name 2 | cohortid2 |             | 0           | Created manually |
     And I follow "All cohorts"
+<<<<<<< HEAD
     And the following should exist in the "reportbuilder-table" table:
+=======
+    And the following should exist in the "cohorts" table:
+>>>>>>> forked/LAE_400_PACKAGE
       | Category      | Name          | Cohort ID | Description       | Cohort size | Source           |
       | System        | cohort name 1 | cohortid1 | first description | 0           | Created manually |
       | System        | cohort name 2 | cohortid2 |                   | 0           | Created manually |

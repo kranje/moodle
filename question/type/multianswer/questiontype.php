@@ -281,7 +281,11 @@ class qtype_multianswer extends question_type {
         parent::initialise_question_instance($question, $questiondata);
 
         $bits = preg_split('/\{#(\d+)\}/', $question->questiontext,
+<<<<<<< HEAD
                 -1, PREG_SPLIT_DELIM_CAPTURE);
+=======
+                null, PREG_SPLIT_DELIM_CAPTURE);
+>>>>>>> forked/LAE_400_PACKAGE
         $question->textfragments[0] = array_shift($bits);
         $i = 1;
         while (!empty($bits)) {
@@ -314,11 +318,25 @@ class qtype_multianswer extends question_type {
         $fractionsum = 0;
         $fractionmax = 0;
         foreach ($questiondata->options->questions as $key => $subqdata) {
+<<<<<<< HEAD
+=======
+            if ($subqdata->qtype == 'subquestion_replacement') {
+                continue;
+            }
+>>>>>>> forked/LAE_400_PACKAGE
             $fractionmax += $subqdata->defaultmark;
             $fractionsum += question_bank::get_qtype(
                     $subqdata->qtype)->get_random_guess_score($subqdata);
         }
+<<<<<<< HEAD
         return $fractionsum / $fractionmax;
+=======
+        if ($fractionmax > question_utils::MARK_TOLERANCE) {
+            return $fractionsum / $fractionmax;
+        } else {
+            return null;
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function move_files($questionid, $oldcontextid, $newcontextid) {
@@ -501,7 +519,11 @@ function qtype_multianswer_extract_question($text) {
             $wrapped->shuffleanswers = 1;
             $wrapped->layout = qtype_multichoice_base::LAYOUT_HORIZONTAL;
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('unknownquestiontype', 'question', '', $answerregs[2]);
+=======
+            print_error('unknownquestiontype', 'question', '', $answerregs[2]);
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 

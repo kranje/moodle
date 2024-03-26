@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @mod @mod_lti @core_completion @javascript
+=======
+@mod @mod_lti @core_completion
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: Pass grade activity completion information in the LTI activity
 
   Background:
@@ -9,8 +13,13 @@ Feature: Pass grade activity completion information in the LTI activity
       | student3 | Vinnie    | Student3 | student3@example.com |
       | teacher1 | Darrell   | Teacher1 | teacher1@example.com |
     And the following "courses" exist:
+<<<<<<< HEAD
       | fullname | shortname | category |
       | Course 1 | C1        | 0        |
+=======
+      | fullname | shortname | category | enablecompletion | showcompletionconditions |
+      | Course 1 | C1        | 0        | 1                | 1                        |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "course enrolments" exist:
       | user     | course | role           |
       | student1 | C1     | student        |
@@ -18,6 +27,7 @@ Feature: Pass grade activity completion information in the LTI activity
       | student3 | C1     | student        |
       | teacher1 | C1     | editingteacher |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity | name          | course | idnumber |
       | lti      | Music history | C1     | lti1     |
     And I log in as "teacher1"
@@ -39,6 +49,10 @@ Feature: Pass grade activity completion information in the LTI activity
       | completionpassgrade | 1                                                 |
     And I press "Save and return to course"
     And I log out
+=======
+      | activity | name           | course | gradepass | completion | completionview | completionusegrade | completionpassgrade |
+      | lti      | Music history  | C1     | 50        | 2          | 1              | 1                  | 1                   |
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: View automatic completion items as a teacher
     Given I am on the "Music history" "lti activity" page logged in as teacher1
@@ -46,37 +60,58 @@ Feature: Pass grade activity completion information in the LTI activity
     And "Music history" should have the "Receive a grade" completion condition
     And "Music history" should have the "Receive a passing grade" completion condition
 
+<<<<<<< HEAD
+=======
+  @javascript
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: View automatic completion items as a student
     Given I am on the "Music history" "lti activity" page logged in as student1
     And the "View" completion condition of "Music history" is displayed as "done"
     And the "Receive a grade" completion condition of "Music history" is displayed as "todo"
     And the "Receive a passing grade" completion condition of "Music history" is displayed as "todo"
+<<<<<<< HEAD
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > Grader report > View" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     And I give the grade "90.00" to the user "Vinnie Student1" for the grade item "Music history"
     And I give the grade "20.00" to the user "Vinnie Student2" for the grade item "Music history"
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Music history" "lti activity" page logged in as student1
     Then the "Receive a grade" completion condition of "Music history" is displayed as "done"
     Then the "Receive a passing grade" completion condition of "Music history" is displayed as "done"
     And the "View" completion condition of "Music history" is displayed as "done"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Music history" "lti activity" page logged in as student2
     Then the "Receive a grade" completion condition of "Music history" is displayed as "done"
     Then the "Receive a passing grade" completion condition of "Music history" is displayed as "failed"
     And the "View" completion condition of "Music history" is displayed as "done"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Music history" "lti activity" page logged in as student3
     Then the "Receive a grade" completion condition of "Music history" is displayed as "todo"
     Then the "Receive a passing grade" completion condition of "Music history" is displayed as "todo"
     And the "View" completion condition of "Music history" is displayed as "done"
+<<<<<<< HEAD
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And "Vinnie Student1" user has completed "Music history" activity
     And "Vinnie Student2" user has completed "Music history" activity
     And "Vinnie Student3" user has not completed "Music history" activity

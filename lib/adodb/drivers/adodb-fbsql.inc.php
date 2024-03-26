@@ -232,6 +232,7 @@ class ADORecordSet_fbsql extends ADORecordSet{
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 
 		$t = strtoupper($t);
 
@@ -241,6 +242,10 @@ class ADORecordSet_fbsql extends ADORecordSet{
 		$len = -1; // fbsql max_length is not accurate
 
 		switch ($t) {
+=======
+		$len = -1; // fbsql max_length is not accurate
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 		case 'CHARACTER':
 		case 'CHARACTER VARYING':
 		case 'BLOB':

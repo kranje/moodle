@@ -40,6 +40,14 @@ class restore_quiz_activity_structure_step extends restore_questions_activity_st
      */
     protected $legacyshufflequestionsoption = false;
 
+<<<<<<< HEAD
+=======
+    /**
+     * @var array Track old question ids that need to be removed at the end of the restore.
+     */
+    protected $oldquestionids = [];
+
+>>>>>>> forked/LAE_400_PACKAGE
     protected function define_structure() {
 
         $paths = array();
@@ -339,11 +347,18 @@ class restore_quiz_activity_structure_step extends restore_questions_activity_st
             $questionsetreference->questionscontextid = $question->questioncontextid;
             $filtercondition = new stdClass();
             $filtercondition->questioncategoryid = $question->category;
+<<<<<<< HEAD
             $filtercondition->includingsubcategories = $data->includingsubcategories;
             $questionsetreference->filtercondition = json_encode($filtercondition);
             $DB->insert_record('question_set_references', $questionsetreference);
             // Cleanup leftover random qtype data from question table.
             question_delete_question($question->questionid);
+=======
+            $filtercondition->includingsubcategories = $data->includingsubcategories ?? false;
+            $questionsetreference->filtercondition = json_encode($filtercondition);
+            $DB->insert_record('question_set_references', $questionsetreference);
+            $this->oldquestionids[$question->questionid] = 1;
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             // Reference data.
             $questionreference = new \stdClass();
@@ -604,4 +619,15 @@ class restore_quiz_activity_structure_step extends restore_questions_activity_st
                     'shufflequestions' => $this->legacyshufflequestionsoption));
         }
     }
+<<<<<<< HEAD
+=======
+
+    protected function after_restore() {
+        parent::after_restore();
+        // Delete old random questions that have been converted to set references.
+        foreach (array_keys($this->oldquestionids) as $oldquestionid) {
+            question_delete_question($oldquestionid);
+        }
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

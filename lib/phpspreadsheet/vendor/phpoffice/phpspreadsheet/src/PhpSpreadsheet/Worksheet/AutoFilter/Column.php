@@ -243,7 +243,11 @@ class Column
      * Set An AutoFilter Attribute.
      *
      * @param string $name Attribute Name
+<<<<<<< HEAD
      * @param int|string $value Attribute Value
+=======
+     * @param string $value Attribute Value
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return $this
      */

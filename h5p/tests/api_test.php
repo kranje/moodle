@@ -349,7 +349,11 @@ class api_test extends \advanced_testcase {
         $syscontext = \context_system::instance();
 
         // Create the original file.
+<<<<<<< HEAD
         $filename = 'greeting-card-887.h5p';
+=======
+        $filename = 'greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
         $path = __DIR__ . '/fixtures/' . $filename;
         $originalfile = helper::create_fake_stored_file_from_path($path);
         $originalfilerecord = [
@@ -491,7 +495,11 @@ class api_test extends \advanced_testcase {
         }
 
         // Create the file.
+<<<<<<< HEAD
         $filename = 'greeting-card-887.h5p';
+=======
+        $filename = 'greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
         $path = __DIR__ . '/fixtures/' . $filename;
         if ($filecomponent === 'contentbank') {
             $generator = $this->getDataGenerator()->get_plugin_generator('core_contentbank');
@@ -1197,33 +1205,53 @@ class api_test extends \advanced_testcase {
     public function is_valid_package_provider(): array {
         return [
             'Valid H5P file (as admin)' => [
+<<<<<<< HEAD
                 'filename' => '/fixtures/greeting-card-887.h5p',
+=======
+                'filename' => '/fixtures/greeting-card.h5p',
+>>>>>>> forked/LAE_400_PACKAGE
                 'expected' => true,
                 'isadmin' => true,
             ],
             'Valid H5P file (as user) without library update and checking content' => [
+<<<<<<< HEAD
                 'filename' => '/fixtures/greeting-card-887.h5p',
+=======
+                'filename' => '/fixtures/greeting-card.h5p',
+>>>>>>> forked/LAE_400_PACKAGE
                 'expected' => false, // Libraries are missing and user hasn't the right permissions to upload them.
                 'isadmin' => false,
                 'onlyupdatelibs' => false,
                 'skipcontent' => false,
             ],
             'Valid H5P file (as user) with library update and checking content' => [
+<<<<<<< HEAD
                 'filename' => '/fixtures/greeting-card-887.h5p',
+=======
+                'filename' => '/fixtures/greeting-card.h5p',
+>>>>>>> forked/LAE_400_PACKAGE
                 'expected' => false, // Libraries are missing and user hasn't the right permissions to upload them.
                 'isadmin' => false,
                 'onlyupdatelibs' => true,
                 'skipcontent' => false,
             ],
             'Valid H5P file (as user) without library update and skipping content' => [
+<<<<<<< HEAD
                 'filename' => '/fixtures/greeting-card-887.h5p',
+=======
+                'filename' => '/fixtures/greeting-card.h5p',
+>>>>>>> forked/LAE_400_PACKAGE
                 'expected' => true, // Content check is skipped so the package will be considered valid.
                 'isadmin' => false,
                 'onlyupdatelibs' => false,
                 'skipcontent' => true,
             ],
             'Valid H5P file (as user) with library update and skipping content' => [
+<<<<<<< HEAD
                 'filename' => '/fixtures/greeting-card-887.h5p',
+=======
+                'filename' => '/fixtures/greeting-card.h5p',
+>>>>>>> forked/LAE_400_PACKAGE
                 'expected' => true, // Content check is skipped so the package will be considered valid.
                 'isadmin' => false,
                 'onlyupdatelibs' => true,

@@ -45,7 +45,11 @@ if ($confirm) {
         throw new moodle_exception('confirmsesskeybad');
     }
     if (!$workshop->switch_phase($phase)) {
+<<<<<<< HEAD
         throw new \moodle_exception('errorswitchingphase', 'workshop', $workshop->view_url());
+=======
+        print_error('errorswitchingphase', 'workshop', $workshop->view_url());
+>>>>>>> forked/LAE_400_PACKAGE
     }
     redirect($workshop->view_url());
 }

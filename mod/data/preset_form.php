@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -21,6 +22,8 @@
  * @copyright 2010 Sam Hemelryk
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden!');
@@ -39,13 +42,18 @@ class data_existing_preset_form extends moodleform {
         $this->_form->setType('action', PARAM_ALPHANUM);
         $delete = get_string('delete');
         foreach ($this->_customdata['presets'] as $preset) {
+<<<<<<< HEAD
             $userid = $preset instanceof \mod_data\preset ? $preset->get_userid() : $preset->userid;
             $this->_form->addElement('radio', 'fullname', null, ' '.$preset->description, $userid.'/'.$preset->shortname);
+=======
+            $this->_form->addElement('radio', 'fullname', null, ' '.$preset->description, $preset->userid.'/'.$preset->shortname);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $this->_form->addElement('submit', 'importexisting', get_string('choose'));
     }
 }
 
+<<<<<<< HEAD
 /**
  * Import preset class
  *
@@ -62,6 +70,9 @@ class data_import_preset_zip_form extends moodleform {
      * @return void
      * @throws coding_exception
      */
+=======
+class data_import_preset_zip_form extends moodleform {
+>>>>>>> forked/LAE_400_PACKAGE
     public function definition() {
         $this->_form->addElement('header', 'uploadpreset', get_string('fromfile', 'data'));
         $this->_form->addHelpButton('uploadpreset', 'fromfile', 'data');

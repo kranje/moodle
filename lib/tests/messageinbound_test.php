@@ -116,7 +116,11 @@ class messageinbound_test extends \advanced_testcase {
         $content = file_get_contents($file->getRealPath());
         $content = preg_replace("#\r\n#", "\n", $content);
         $tokens = preg_split('#(?:^|\n*)----([A-Z]+)----\n#', $content,
+<<<<<<< HEAD
                 -1, PREG_SPLIT_DELIM_CAPTURE);
+=======
+                null, PREG_SPLIT_DELIM_CAPTURE);
+>>>>>>> forked/LAE_400_PACKAGE
         $sections = array(
             // Key              => Required.
             'FULLSOURCE'        => true,

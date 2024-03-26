@@ -21,10 +21,17 @@
 <field>
 <type>picture</type>
 <name>image</name>
+<<<<<<< HEAD
 <param1></param1>
 <param2></param2>
 <param3>2097152</param3>
 <param4></param4>
+=======
+<param1>100%</param1>
+<param2>100%</param2>
+<param3>2097152</param3>
+<param4>120</param4>
+>>>>>>> forked/LAE_400_PACKAGE
 </field>
 
 <field>
@@ -33,6 +40,7 @@
 </field>
 
 <field>
+<<<<<<< HEAD
 <type>textarea</type>
 <name>description</name>
 <required>0</required>
@@ -43,3 +51,10 @@
 </field>
 
 </preset>
+=======
+<type>text</type>
+<name>caption</name>
+</field>
+
+</preset>
+>>>>>>> forked/LAE_400_PACKAGE

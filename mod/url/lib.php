@@ -245,6 +245,11 @@ function url_get_coursemodule_info($coursemodule) {
     }
 
     $info->customdata['display'] = $display;
+<<<<<<< HEAD
+=======
+    // The icon will be filtered if it will be the default module icon.
+    $info->customdata['filtericon'] = empty($info->icon);
+>>>>>>> forked/LAE_400_PACKAGE
 
     return $info;
 }

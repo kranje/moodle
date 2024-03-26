@@ -2,20 +2,29 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Trig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Helpers;
 
 class Tangent
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * TAN.
      *
      * Returns the result of builtin function tan after validating args.
      *
+<<<<<<< HEAD
      * @param mixed $angle Should be numeric, or can be an array of numbers
      *
      * @return array|float|string tangent
@@ -28,6 +37,14 @@ class Tangent
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);
         }
 
+=======
+     * @param mixed $angle Should be numeric
+     *
+     * @return float|string tangent
+     */
+    public static function tan($angle)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $angle = Helpers::validateNumericNullBool($angle);
         } catch (Exception $e) {
@@ -42,6 +59,7 @@ class Tangent
      *
      * Returns the result of builtin function sinh after validating args.
      *
+<<<<<<< HEAD
      * @param mixed $angle Should be numeric, or can be an array of numbers
      *
      * @return array|float|string hyperbolic tangent
@@ -54,6 +72,14 @@ class Tangent
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);
         }
 
+=======
+     * @param mixed $angle Should be numeric
+     *
+     * @return float|string hyperbolic tangent
+     */
+    public static function tanh($angle)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $angle = Helpers::validateNumericNullBool($angle);
         } catch (Exception $e) {
@@ -68,6 +94,7 @@ class Tangent
      *
      * Returns the arctangent of a number.
      *
+<<<<<<< HEAD
      * @param array|float $number Number, or can be an array of numbers
      *
      * @return array|float|string The arctangent of the number
@@ -80,6 +107,14 @@ class Tangent
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number
+     *
+     * @return float|string The arctangent of the number
+     */
+    public static function atan($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {
@@ -94,6 +129,7 @@ class Tangent
      *
      * Returns the inverse hyperbolic tangent of a number.
      *
+<<<<<<< HEAD
      * @param array|float $number Number, or can be an array of numbers
      *
      * @return array|float|string The inverse hyperbolic tangent of the number
@@ -106,6 +142,14 @@ class Tangent
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number
+     *
+     * @return float|string The inverse hyperbolic tangent of the number
+     */
+    public static function atanh($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {
@@ -131,6 +175,7 @@ class Tangent
      * Excel Function:
      *        ATAN2(xCoordinate,yCoordinate)
      *
+<<<<<<< HEAD
      * @param mixed $xCoordinate should be float, the x-coordinate of the point, or can be an array of numbers
      * @param mixed $yCoordinate should be float, the y-coordinate of the point, or can be an array of numbers
      *
@@ -145,6 +190,15 @@ class Tangent
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $xCoordinate, $yCoordinate);
         }
 
+=======
+     * @param mixed $xCoordinate should be float, the x-coordinate of the point
+     * @param mixed $yCoordinate should be float, the y-coordinate of the point
+     *
+     * @return float|string the inverse tangent of the specified x- and y-coordinates, or a string containing an error
+     */
+    public static function atan2($xCoordinate, $yCoordinate)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $xCoordinate = Helpers::validateNumericNullBool($xCoordinate);
             $yCoordinate = Helpers::validateNumericNullBool($yCoordinate);
@@ -153,7 +207,11 @@ class Tangent
         }
 
         if (($xCoordinate == 0) && ($yCoordinate == 0)) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return atan2($yCoordinate, $xCoordinate);

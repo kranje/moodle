@@ -126,7 +126,11 @@ $PAGE->set_context($context);
 $user = get_complete_user_data('id', $userid);
 
 // Let enrol plugins deal with new enrolments if necessary.
+<<<<<<< HEAD
 enrol_check_plugins($user, false);
+=======
+enrol_check_plugins($user);
+>>>>>>> forked/LAE_400_PACKAGE
 
 \core\session\manager::set_user($user); // For login and capability checks.
 

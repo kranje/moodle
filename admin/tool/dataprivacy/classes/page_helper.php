@@ -53,7 +53,11 @@ class page_helper {
 
         require_login();
         if (isguestuser()) {
+<<<<<<< HEAD
             throw new \moodle_exception('noguest');
+=======
+            print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // TODO Check that data privacy is enabled.

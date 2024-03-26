@@ -40,11 +40,19 @@ class core_requirejs {
      *
      * @param string $component The component determines the folder the js file should be in.
      * @param string $jsfilename The filename for the module (with the js extension).
+<<<<<<< HEAD
      * @param bool $unused
      * @return array $files An array of mappings from module names to file paths.
      *                      Empty array if the file does not exist.
      */
     public static function find_one_amd_module($component, $jsfilename, $unused = false) {
+=======
+     * @param boolean $debug If true, returns the paths to the original (unminified) source files.
+     * @return array $files An array of mappings from module names to file paths.
+     *                      Empty array if the file does not exist.
+     */
+    public static function find_one_amd_module($component, $jsfilename, $debug = false) {
+>>>>>>> forked/LAE_400_PACKAGE
         $jsfileroot = core_component::get_component_directory($component);
         if (!$jsfileroot) {
             return array();
@@ -54,6 +62,13 @@ class core_requirejs {
 
         $srcdir = $jsfileroot . '/amd/build';
         $minpart = '.min';
+<<<<<<< HEAD
+=======
+        if ($debug) {
+            $srcdir = $jsfileroot . '/amd/src';
+            $minpart = '';
+        }
+>>>>>>> forked/LAE_400_PACKAGE
 
         $filename = $srcdir . '/' . $module . $minpart . '.js';
         if (!file_exists($filename)) {
@@ -70,11 +85,19 @@ class core_requirejs {
      * The expected location for amd modules is:
      *  <componentdir>/amd/src/modulename.js
      *
+<<<<<<< HEAD
      * @param boolean $unused
      * @param boolean $includelazy If true, includes modules with the -lazy suffix.
      * @return array $files An array of mappings from module names to file paths.
      */
     public static function find_all_amd_modules($unused = false, $includelazy = false) {
+=======
+     * @param boolean $debug If true, returns the paths to the original (unminified) source files.
+     * @param boolean $includelazy If true, includes modules with the -lazy suffix.
+     * @return array $files An array of mappings from module names to file paths.
+     */
+    public static function find_all_amd_modules($debug = false, $includelazy = false) {
+>>>>>>> forked/LAE_400_PACKAGE
         global $CFG;
 
         $jsdirs = array();
@@ -102,6 +125,12 @@ class core_requirejs {
 
         foreach ($jsdirs as $component => $dir) {
             $srcdir = $dir . '/build';
+<<<<<<< HEAD
+=======
+            if ($debug) {
+                $srcdir = $dir . '/src';
+            }
+>>>>>>> forked/LAE_400_PACKAGE
             if (!is_dir($srcdir) || !is_readable($srcdir)) {
                 // This is probably an empty amd directory without src or build.
                 // Skip it - RecursiveDirectoryIterator fatals if the directory is not readable as an iterator.

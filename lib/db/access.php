@@ -1094,7 +1094,10 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
+<<<<<<< HEAD
     // Ability to set a forced language for a course or activity.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     'moodle/course:setforcedlanguage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,

@@ -503,7 +503,11 @@ class grade_edit_tree {
         }
 
         if(!$after_el = $this->gtree->locate_element("cg$moveafter")) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidelementid', '', $returnurl);
+=======
+            print_error('invalidelementid', '', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $after = $after_el['object'];
@@ -512,7 +516,11 @@ class grade_edit_tree {
 
         foreach ($eids as $eid) {
             if (!$element = $this->gtree->locate_element($eid)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidelementid', '', $returnurl);
+=======
+                print_error('invalidelementid', '', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $object = $element['object'];
 
@@ -1046,7 +1054,11 @@ class grade_edit_tree_column_select extends grade_edit_tree_column {
 
     public function get_item_cell($item, $params) {
         if (empty($params['itemtype']) || empty($params['eid'])) {
+<<<<<<< HEAD
             throw new \moodle_exception('missingitemtypeoreid', 'core_grades');
+=======
+            print_error('missingitemtypeoreid', 'core_grades');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $itemcell = parent::get_item_cell($item, $params);
 

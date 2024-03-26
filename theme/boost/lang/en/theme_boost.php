@@ -32,6 +32,10 @@ $string['brandcolor_desc'] = 'The accent colour.';
 $string['bootswatch'] = 'Bootswatch';
 $string['bootswatch_desc'] = 'A bootswatch is a set of Bootstrap variables and css to style Bootstrap';
 $string['choosereadme'] = 'Boost is a modern highly-customisable theme. This theme is intended to be used directly, or as a parent theme when creating new themes utilising Bootstrap 4.';
+<<<<<<< HEAD
+=======
+$string['currentinparentheses'] = '(current)';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['configtitle'] = 'Boost';
 $string['generalsettings'] = 'General settings';
 $string['loginbackgroundimage'] = 'Login page background image';
@@ -58,6 +62,7 @@ $string['privacy:drawerindexclosed'] = 'The current preference for the index dra
 $string['privacy:drawerindexopen'] = 'The current preference for the index drawer is open.';
 $string['privacy:drawerblockclosed'] = 'The current preference for the block drawer is closed.';
 $string['privacy:drawerblockopen'] = 'The current preference for the block drawer is open.';
+<<<<<<< HEAD
 
 // Deprecated since Moodle 4.0.
 $string['totop'] = 'Go to top';
@@ -66,3 +71,10 @@ $string['totop'] = 'Go to top';
 $string['currentinparentheses'] = '(current)';
 $string['privacy:drawernavclosed'] = 'The current preference for the navigation drawer is closed.';
 $string['privacy:drawernavopen'] = 'The current preference for the navigation drawer is open.';
+=======
+$string['privacy:drawernavclosed'] = 'The current preference for the navigation drawer is closed.';
+$string['privacy:drawernavopen'] = 'The current preference for the navigation drawer is open.';
+
+// Deprecated since Moodle 4.0.
+$string['totop'] = 'Go to top';
+>>>>>>> forked/LAE_400_PACKAGE

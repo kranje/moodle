@@ -26,7 +26,13 @@ namespace gradereport_user\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 use core_privacy\local\request\writer;
+=======
+use core_privacy\local\metadata\collection;
+use core_privacy\local\request\writer;
+use gradereport_user\privacy\provider;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Unit tests for the gradereport_user implementation of the privacy API.

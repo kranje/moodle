@@ -6,7 +6,11 @@ Feature: Test that the meeting has the right lock setting.
 
   Background:
     Given a BigBlueButton mock server is configured
+<<<<<<< HEAD
     And I enable "bigbluebuttonbn" "mod" plugin
+=======
+    And I accept dpa and enable bigbluebuttonbn plugin
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario Outline: Teacher should be able to set the right lock feature in a given meeting
@@ -31,6 +35,7 @@ Feature: Test that the meeting has the right lock setting.
     Then I should see "<bbbsettingvalue>" in the "lockSettings" "mod_bigbluebuttonbn > Meeting field"
 
     Examples:
+<<<<<<< HEAD
       | locksettingname    | value | bbbsettingvalue              |
       | disablecam         | 1     | disableCam : enabled         |
       | disablemic         | 1     | disableMic : enabled         |
@@ -61,3 +66,12 @@ Feature: Test that the meeting has the right lock setting.
     And I switch to "bigbluebutton_conference" window
     Then I should see "disableCam : enabled" in the "lockSettings" "mod_bigbluebuttonbn > Meeting field"
     Then I should see "lockOnJoin : enabled" in the "lockSettings" "mod_bigbluebuttonbn > Meeting field"
+=======
+      | locksettingname        | value | bbbsettingvalue                  |
+      | disablecam             | 1     | disableCam : enabled             |
+      | disablemic             | 1     | disableMic : enabled             |
+      | disableprivatechat     | 1     | disablePrivateChat : enabled     |
+      | disablepublicchat      | 1     | disablePublicChat : enabled      |
+      | disablenote            | 1     | disableNote : enabled            |
+      | hideuserlist           | 1     | hideUserList : enabled           |
+>>>>>>> forked/LAE_400_PACKAGE

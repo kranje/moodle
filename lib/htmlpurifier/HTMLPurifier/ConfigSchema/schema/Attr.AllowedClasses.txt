@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Attr.AllowedClasses
 TYPE: lookup/null
 VERSION: 4.0.0
@@ -6,3 +7,13 @@ DEFAULT: null
 List of allowed class values in the class attribute. By default, this is null,
 which means all classes are allowed.
 --# vim: et sw=4 sts=4
+=======
+Attr.AllowedClasses
+TYPE: lookup/null
+VERSION: 4.0.0
+DEFAULT: null
+--DESCRIPTION--
+List of allowed class values in the class attribute. By default, this is null,
+which means all classes are allowed.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

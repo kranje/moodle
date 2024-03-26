@@ -49,6 +49,7 @@ $ADMIN->add(
         empty($CFG->enablecustomreports)
     )
 );
+<<<<<<< HEAD
 
 $settings = new admin_settingpage('reportbuildersettings', get_string('customreportssettings', 'core_reportbuilder'),
     'moodle/site:config', empty($CFG->enablecustomreports));
@@ -64,3 +65,5 @@ $settings->add(new admin_setting_configcheckbox(
     new lang_string('customreportsliveediting_desc', 'core_reportbuilder'), 1));
 
 $ADMIN->add('reportbuilder', $settings);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

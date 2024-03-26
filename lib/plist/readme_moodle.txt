@@ -1,7 +1,11 @@
 CFPropertyList library
 ---------------
 
+<<<<<<< HEAD
 Downloaded last release from: https://github.com/TECLIB/CFPropertyList/tags
+=======
+Downloaded last release from: https://github.com/TECLIB/CFPropertyList/releases/
+>>>>>>> forked/LAE_400_PACKAGE
 
 Import procedure:
 
@@ -18,3 +22,7 @@ Removed:
 Added:
  * readme_moodle.txt
 
+<<<<<<< HEAD
+=======
+Downloaded version: 2.0.2
+>>>>>>> forked/LAE_400_PACKAGE

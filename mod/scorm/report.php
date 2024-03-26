@@ -45,7 +45,11 @@ $url->param('id', $id);
 if (empty($mode)) {
     $mode = reset($reportlist);
 } else if (!in_array($mode, $reportlist)) {
+<<<<<<< HEAD
     throw new \moodle_exception('erroraccessingreport', 'scorm');
+=======
+    print_error('erroraccessingreport', 'scorm');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $url->param('mode', $mode);
 
@@ -60,7 +64,11 @@ require_capability('mod/scorm:viewreport', $contextmodule);
 navigation_node::override_active_url(new moodle_url('/mod/scorm/report.php', ['id' => $id]));
 
 if (count($reportlist) < 1) {
+<<<<<<< HEAD
     throw new \moodle_exception('erroraccessingreport', 'scorm');
+=======
+    print_error('erroraccessingreport', 'scorm');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Trigger a report viewed event.

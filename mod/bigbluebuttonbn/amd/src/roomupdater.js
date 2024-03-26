@@ -26,6 +26,7 @@ import Templates from "core/templates";
 import {exception as displayException} from 'core/notification';
 import {getMeetingInfo} from './repository';
 
+<<<<<<< HEAD
 let timerReference = null;
 let timerRunning = false;
 let pollInterval = 0;
@@ -37,10 +38,24 @@ const resetValues = () => {
     timerReference = null;
     pollInterval = 0;
     pollIntervalFactor = 1;
+=======
+const timeout = 5000;
+const maxFactor = 10;
+
+let updateCount = 0;
+let updateFactor = 1;
+let timerReference = null;
+let timerRunning = false;
+
+const resetValues = () => {
+    updateCount = 0;
+    updateFactor = 1;
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**
  * Start the information poller.
+<<<<<<< HEAD
  * @param {Number} interval interval in miliseconds between each poll action.
  */
 export const start = (interval) => {
@@ -48,12 +63,19 @@ export const start = (interval) => {
     timerRunning = true;
     pollInterval = interval;
     poll();
+=======
+ */
+export const start = () => {
+    timerRunning = true;
+    timerReference = setTimeout(() => poll(), timeout);
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**
  * Stop the room updater.
  */
 export const stop = () => {
+<<<<<<< HEAD
     if (timerReference) {
         clearTimeout(timerReference);
     }
@@ -79,16 +101,59 @@ const poll = () => {
             return true;
         })
         .catch();
+=======
+    timerRunning = false;
+    if (timerReference) {
+        clearInterval(timerReference);
+        timerReference = null;
+    }
+
+    resetValues();
+};
+
+const poll = () => {
+    if (!timerRunning) {
+        // The poller has been stopped.
+        return;
+    }
+    if ((updateCount % updateFactor) === 0) {
+        updateRoom()
+        .then(() => {
+            if (updateFactor >= maxFactor) {
+                updateFactor = 1;
+            } else {
+                updateFactor++;
+            }
+
+            return;
+
+        })
+        .catch()
+        .then(() => {
+            timerReference = setTimeout(() => poll(), timeout);
+            return;
+        })
+        .catch();
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**
  * Update the room information.
  *
+<<<<<<< HEAD
  * @param {boolean} [updatecache=false] should we update cache
  * @returns {Promise}
  */
 export const updateRoom = (updatecache = false) => {
     const bbbRoomViewElement = document.getElementById('bigbluebuttonbn-room-view');
+=======
+ * @param {boolean} [updatecache=false]
+ * @returns {Promise}
+ */
+export const updateRoom = (updatecache = false) => {
+    const bbbRoomViewElement = document.getElementById('bbb-room-view');
+>>>>>>> forked/LAE_400_PACKAGE
     if (bbbRoomViewElement === null) {
         return Promise.resolve(false);
     }
@@ -101,10 +166,20 @@ export const updateRoom = (updatecache = false) => {
     return getMeetingInfo(bbbId, groupId, updatecache)
         .then(data => {
             // Just make sure we have the right information for the template.
+<<<<<<< HEAD
             data.haspresentations = !!(data.presentations && data.presentations.length);
             return Templates.renderForPromise('mod_bigbluebuttonbn/room_view', data);
         })
         .then(({html, js}) => Templates.replaceNode(bbbRoomViewElement, html, js))
+=======
+            data.haspresentations = false;
+            if (data.presentations && data.presentations.length) {
+                data.haspresentations = true;
+            }
+            return Templates.renderForPromise('mod_bigbluebuttonbn/room_view', data);
+        })
+        .then(({html, js}) => Templates.replaceNodeContents(bbbRoomViewElement, html, js))
+>>>>>>> forked/LAE_400_PACKAGE
         .then(() => pendingPromise.resolve())
         .catch(displayException);
 };

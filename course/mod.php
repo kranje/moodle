@@ -144,21 +144,36 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
 
     if (!empty($movetosection)) {
         if (!$section = $DB->get_record('course_sections', array('id'=>$movetosection, 'course'=>$cm->course))) {
+<<<<<<< HEAD
             throw new \moodle_exception('sectionnotexist');
+=======
+            print_error('sectionnotexist');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $beforecm = NULL;
 
     } else {                      // normal moveto
         if (!$beforecm = get_coursemodule_from_id('', $moveto, $cm->course, true)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
         }
         if (!$section = $DB->get_record('course_sections', array('id'=>$beforecm->section, 'course'=>$cm->course))) {
             throw new \moodle_exception('sectionnotexist');
+=======
+            print_error('invalidcoursemodule');
+        }
+        if (!$section = $DB->get_record('course_sections', array('id'=>$beforecm->section, 'course'=>$cm->course))) {
+            print_error('sectionnotexist');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
     if (!ismoving($section->course)) {
+<<<<<<< HEAD
         throw new \moodle_exception('needcopy', '', "view.php?id=$section->course");
+=======
+        print_error('needcopy', '', "view.php?id=$section->course");
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     moveto_module($cm, $section, $beforecm);
@@ -277,5 +292,9 @@ if ((!empty($movetosection) or !empty($moveto)) and confirm_sesskey()) {
     unset($USER->activitycopysectionreturn);
     redirect(course_get_url($course, $cm->sectionnum, array('sr' => $sectionreturn)));
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('unknowaction');
+=======
+    print_error('unknowaction');
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -478,7 +478,11 @@ class calendar_event {
         if (empty($this->properties->id) || $this->properties->id < 1) {
             if ($checkcapability) {
                 if (!calendar_add_event_allowed($this->properties)) {
+<<<<<<< HEAD
                     throw new \moodle_exception('nopermissiontoupdatecalendar');
+=======
+                    print_error('nopermissiontoupdatecalendar');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
 
@@ -594,7 +598,11 @@ class calendar_event {
 
             if ($checkcapability) {
                 if (!calendar_edit_event_allowed($this->properties)) {
+<<<<<<< HEAD
                     throw new \moodle_exception('nopermissiontoupdatecalendar');
+=======
+                    print_error('nopermissiontoupdatecalendar');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
 
@@ -810,7 +818,11 @@ class calendar_event {
                     // First check the course is valid.
                     $course = $DB->get_record('course', array('id' => $properties->courseid));
                     if (!$course) {
+<<<<<<< HEAD
                         throw new \moodle_exception('invalidcourse');
+=======
+                        print_error('invalidcourse');
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                     // Course context.
                     $this->editorcontext = $this->get_context();
@@ -2446,7 +2458,11 @@ function calendar_get_default_courses($courseid = null, $fields = '*', $canmanag
 
         $courses = get_courses('all', 'c.shortname', implode(',', $prefixedfields));
     } else {
+<<<<<<< HEAD
         $courses = enrol_get_users_courses($userid, true, $fields, 'c.shortname');
+=======
+        $courses = enrol_get_users_courses($userid, true, $fields);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if ($courseid && $courseid != SITEID) {
@@ -2552,6 +2568,7 @@ function calendar_format_event_time($event, $now, $linkparams = null, $usecommon
 }
 
 /**
+<<<<<<< HEAD
  * Format event location property
  *
  * @param calendar_event $event
@@ -2571,6 +2588,8 @@ function calendar_format_event_location(calendar_event $event): string {
 }
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Checks to see if the requested type of event should be shown for the given user.
  *
  * @param int $type The type to check the display for (default is to display all)
@@ -2580,7 +2599,11 @@ function calendar_format_event_location(calendar_event $event): string {
 function calendar_show_event_type($type, $user = null) {
     $default = CALENDAR_EVENT_SITE + CALENDAR_EVENT_COURSE + CALENDAR_EVENT_GROUP + CALENDAR_EVENT_USER;
 
+<<<<<<< HEAD
     if (get_user_preferences('calendar_persistflt', 0, $user) === 0) {
+=======
+    if ((int)get_user_preferences('calendar_persistflt', 0, $user) === 0) {
+>>>>>>> forked/LAE_400_PACKAGE
         global $SESSION;
         if (!isset($SESSION->calendarshoweventtype)) {
             $SESSION->calendarshoweventtype = $default;
@@ -2603,7 +2626,11 @@ function calendar_show_event_type($type, $user = null) {
  * @param stdClass|int $user moodle user object or id, null means current user
  */
 function calendar_set_event_type_display($type, $display = null, $user = null) {
+<<<<<<< HEAD
     $persist = get_user_preferences('calendar_persistflt', 0, $user);
+=======
+    $persist = (int)get_user_preferences('calendar_persistflt', 0, $user);
+>>>>>>> forked/LAE_400_PACKAGE
     $default = CALENDAR_EVENT_SITE + CALENDAR_EVENT_COURSE + CALENDAR_EVENT_GROUP
             + CALENDAR_EVENT_USER + CALENDAR_EVENT_COURSECAT;
     if ($persist === 0) {
@@ -2876,7 +2903,11 @@ function calendar_add_subscription($sub) {
             return $sub->id;
         }
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('errorbadsubscription', 'importcalendar');
+=======
+        print_error('errorbadsubscription', 'importcalendar');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -3630,7 +3661,11 @@ function calendar_output_fragment_event_form($args) {
         $event = calendar_event::load($eventid);
 
         if (!calendar_edit_event_allowed($event)) {
+<<<<<<< HEAD
             throw new \moodle_exception('nopermissiontoupdatecalendar');
+=======
+            print_error('nopermissiontoupdatecalendar');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $mapper = new \core_calendar\local\event\mappers\create_update_form_mapper();

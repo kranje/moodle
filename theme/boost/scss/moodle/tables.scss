@@ -11,8 +11,12 @@
         border-top: $table-border-width solid $table-border-color;
     }
 
+<<<<<<< HEAD
     thead th,
     thead td {
+=======
+    thead th {
+>>>>>>> forked/LAE_400_PACKAGE
         vertical-align: bottom;
         border-bottom: (2 * $table-border-width) solid $table-border-color;
     }

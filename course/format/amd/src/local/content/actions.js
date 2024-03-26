@@ -45,11 +45,16 @@ prefetchStrings('core', ['movecoursesection', 'movecoursemodule', 'confirm', 'de
 // Formats can use this module addActions static method to add custom actions.
 // Direct mutations can be simple strings (mutation) name or functions.
 const directMutations = {
+<<<<<<< HEAD
     sectionHide: 'sectionHide',
     sectionShow: 'sectionShow',
     cmHide: 'cmHide',
     cmShow: 'cmShow',
     cmStealth: 'cmStealth',
+=======
+    cmMoveRight: 'cmMoveRight',
+    cmMoveLeft: 'cmMoveLeft',
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 export default class extends BaseComponent {
@@ -142,6 +147,10 @@ export default class extends BaseComponent {
         const actionName = target.dataset.action;
         const methodName = this._actionMethodName(actionName);
 
+<<<<<<< HEAD
+=======
+        // Invoke proper method.
+>>>>>>> forked/LAE_400_PACKAGE
         if (this[methodName] !== undefined) {
             this[methodName](target, event);
             return;
@@ -190,6 +199,11 @@ export default class extends BaseComponent {
 
         event.preventDefault();
 
+<<<<<<< HEAD
+=======
+        const pendingModalReady = new Pending(`courseformat/actions:prepareMoveSectionModal`);
+
+>>>>>>> forked/LAE_400_PACKAGE
         // The section edit menu to refocus on end.
         const editTools = this._getClosestActionMenuToogler(target);
 
@@ -242,6 +256,11 @@ export default class extends BaseComponent {
             this.reactive.dispatch('sectionMove', [sectionId], target.dataset.id);
             this._destroyModal(modal, editTools);
         });
+<<<<<<< HEAD
+=======
+
+        pendingModalReady.resolve();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -260,6 +279,11 @@ export default class extends BaseComponent {
 
         event.preventDefault();
 
+<<<<<<< HEAD
+=======
+        const pendingModalReady = new Pending(`courseformat/actions:prepareMoveCmModal`);
+
+>>>>>>> forked/LAE_400_PACKAGE
         // The section edit menu to refocus on end.
         const editTools = this._getClosestActionMenuToogler(target);
 
@@ -335,6 +359,11 @@ export default class extends BaseComponent {
             this.reactive.dispatch('cmMove', [cmId], targetSectionId, targetCmId);
             this._destroyModal(modal, editTools);
         });
+<<<<<<< HEAD
+=======
+
+        pendingModalReady.resolve();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

@@ -64,11 +64,14 @@ class workshop_summary_exporter extends exporter {
                 'default' => FORMAT_MOODLE,
                 'description' => 'Workshop intro text format.',
             ),
+<<<<<<< HEAD
             'lang' => array(
                 'type' => PARAM_LANG,
                 'description' => 'Forced activity language',
                 'null' => NULL_ALLOWED,
             ),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'instructauthors' => array(
                 'type' => PARAM_RAW,
                 'description' => 'Instructions for the submission phase.',

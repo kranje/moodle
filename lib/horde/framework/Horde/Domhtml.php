@@ -265,7 +265,10 @@ class Horde_Domhtml implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         if ($this->_iterator instanceof DOMDocument) {
@@ -278,7 +281,10 @@ class Horde_Domhtml implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return 0;
@@ -286,7 +292,10 @@ class Horde_Domhtml implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         /* Iterate in the reverse direction through the node list. This allows
@@ -324,7 +333,10 @@ class Horde_Domhtml implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         $this->_iterator = $this->dom;
@@ -332,7 +344,10 @@ class Horde_Domhtml implements Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return !is_null($this->_iterator);

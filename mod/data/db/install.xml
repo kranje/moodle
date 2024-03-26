@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <XMLDB PATH="mod/data/db" VERSION="20220530" COMMENT="XMLDB file for Moodle mod/data"
+=======
+<XMLDB PATH="mod/data/db" VERSION="20160906" COMMENT="XMLDB file for Moodle mod/data"
+>>>>>>> forked/LAE_400_PACKAGE
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -91,7 +95,10 @@
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="dataid" TYPE="foreign" FIELDS="dataid" REFTABLE="data" REFFIELDS="id"/>
+<<<<<<< HEAD
         <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       </KEYS>
     </TABLE>
     <TABLE NAME="data_content" COMMENT="the content introduced in each record/fields">

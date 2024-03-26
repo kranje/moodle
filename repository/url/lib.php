@@ -38,6 +38,13 @@ require_once(__DIR__.'/locallib.php');
 class repository_url extends repository {
     /** @var int Maximum time of recursion. */
     const MAX_RECURSION_TIME = 5;
+<<<<<<< HEAD
+=======
+    /** @var int Maximum number of CSS imports. */
+    const MAX_CSS_IMPORTS = 10;
+    /** @var int CSS import counter. */
+    var $cssimportcounter = 0;
+>>>>>>> forked/LAE_400_PACKAGE
     var $processedfiles = array();
     /** @var int Recursion counter. */
     var $recursioncounter = 0;
@@ -128,14 +135,23 @@ EOD;
         if (empty($baseurl)) {
             $url = $relativeurl;
         } else {
+<<<<<<< HEAD
             $url = htmlspecialchars_decode(url_to_absolute($baseurl, $relativeurl), ENT_COMPAT);
+=======
+            $url = htmlspecialchars_decode(url_to_absolute($baseurl, $relativeurl));
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if (in_array($url, $this->processedfiles)) {
             // Avoid endless recursion for the same URL with same parameters.
             return;
         }
+<<<<<<< HEAD
         // Remove the query string before check.
         $recursioncheckurl = preg_replace('/\?.*/', '', $url);
+=======
+        // Remove the query string and anchors before check.
+        $recursioncheckurl = (new moodle_url($url))->out_omit_querystring();
+>>>>>>> forked/LAE_400_PACKAGE
         if (in_array($recursioncheckurl, $this->processedfiles)) {
             $this->recursioncounter++;
         }
@@ -200,6 +216,14 @@ EOD;
                 }
                 if (!empty($urls['import'])) {
                     foreach ($urls['import'] as $cssurl) {
+<<<<<<< HEAD
+=======
+                        // Limit the number of CSS imports to avoid infinite imports.
+                        if ($this->cssimportcounter >= self::MAX_CSS_IMPORTS) {
+                            return;
+                        }
+                        $this->cssimportcounter++;
+>>>>>>> forked/LAE_400_PACKAGE
                         $this->parse_file($info['url'], $cssurl, $list);
                     }
                 }
@@ -210,7 +234,11 @@ EOD;
         if (empty($list['list'])) {
             $list['list'] = array();
         }
+<<<<<<< HEAD
         $src = url_to_absolute($baseurl, htmlspecialchars_decode($url, ENT_COMPAT));
+=======
+        $src = url_to_absolute($baseurl, htmlspecialchars_decode($url));
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($list['list'] as $image) {
             if ($image['source'] == $src) {
                 return;

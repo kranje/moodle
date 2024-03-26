@@ -44,14 +44,22 @@ $PAGE->set_url($url);
 if (empty($cfgscorm->allowaicchacp)) {
     require_login();
     if (!confirm_sesskey($sessionid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidsesskey');
+=======
+        print_error('invalidsesskey');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $aiccuser = $USER;
     $scormsession = $SESSION->scorm;
 } else {
     $scormsession = scorm_aicc_confirm_hacp_session($sessionid);
     if (empty($scormsession)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidhacpsession', 'scorm');
+=======
+        print_error('invalidhacpsession', 'scorm');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $aiccuser = $DB->get_record('user', array('id' => $scormsession->userid), 'id,username,lastname,firstname', MUST_EXIST);
 }
@@ -62,7 +70,11 @@ if (!empty($command)) {
     if (isset($scormsession->scoid)) {
         $scoid = $scormsession->scoid;
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotcallscript');
+=======
+        print_error('cannotcallscript');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $mode = 'normal';
     if (isset($scormsession->scormmode)) {
@@ -80,10 +92,17 @@ if (!empty($command)) {
 
     if ($sco = scorm_get_sco($scoid, SCO_ONLY)) {
         if (!$scorm = $DB->get_record('scorm', array('id' => $sco->scorm))) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotcallscript');
         }
     } else {
         throw new \moodle_exception('cannotcallscript');
+=======
+            print_error('cannotcallscript');
+        }
+    } else {
+        print_error('cannotcallscript');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $aiccrequest = "MOODLE scoid: $scoid"
                  . "\r\nMOODLE mode: $mode"
@@ -192,7 +211,11 @@ if (!empty($command)) {
                         echo 'Max_Time_Allowed='.$userdata->max_time_allowed."\r\n";
                         echo 'Time_Limit_Action='.$userdata->time_limit_action."\r\n";
                     } else {
+<<<<<<< HEAD
                         throw new \moodle_exception('cannotfindsco', 'scorm');
+=======
+                        print_error('cannotfindsco', 'scorm');
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                 }
             break;

@@ -16,15 +16,27 @@ Feature: availability_group
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
+<<<<<<< HEAD
+=======
+    And the following "activities" exist:
+      | activity | course | name  |
+      | page     | C1     | P1    |
+      | page     | C1     | P2    |
+      | page     | C1     | P3    |
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario: Test condition
     # Basic setup.
+<<<<<<< HEAD
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
 
     # Start to add a Page. If there aren't any groups, there's no Group option.
     And I add a "Page" to section "1"
+=======
+    Given I am on the "P1" "page activity editing" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     Then "Group" "button" should not exist in the "Add restriction..." "dialogue"
@@ -37,8 +49,12 @@ Feature: availability_group
       | G2       | C1     | GI2      |
     # This step used to be 'And I follow "C1"', but Chrome thinks the breadcrumb
     # is not clickable, so we'll go via the home page instead.
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I add a "Page" to section "1"
+=======
+    And I am on the "P1" "page activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     Then "Group" "button" should exist in the "Add restriction..." "dialogue"
@@ -47,6 +63,7 @@ Feature: availability_group
     Given I click on "Group" "button" in the "Add restriction..." "dialogue"
     And I set the field "Group" to "(Any group)"
     And I click on ".availability-item .availability-eye img" "css_element"
+<<<<<<< HEAD
     And I set the following fields to these values:
       | Name         | P1 |
       | Description  | x  |
@@ -59,6 +76,12 @@ Feature: availability_group
       | Name         | P2 |
       | Description  | x  |
       | Page content | x  |
+=======
+    And I click on "Save and return to course" "button"
+
+    # Page P2 with group G1.
+    And I am on the "P2" "page activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Group" "button" in the "Add restriction..." "dialogue"
@@ -67,11 +90,15 @@ Feature: availability_group
     And I click on "Save and return to course" "button"
 
     # Page P3 with group G2
+<<<<<<< HEAD
     And I add a "Page" to section "3"
     And I set the following fields to these values:
       | Name         | P3 |
       | Description  | x  |
       | Page content | x  |
+=======
+    And I am on the "P3" "page activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Group" "button" in the "Add restriction..." "dialogue"
@@ -80,9 +107,13 @@ Feature: availability_group
     And I click on "Save and return to course" "button"
 
     # Log back in as student.
+<<<<<<< HEAD
     When I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    When I am on the "Course 1" "course" page logged in as "student1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # No pages should appear yet.
     Then I should not see "P1" in the "region-main" "region"
@@ -93,8 +124,11 @@ Feature: availability_group
     Given the following "group members" exist:
       | user     | group |
       | student1 | GI1   |
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on "Course 1" course homepage
 
     # P1 (any groups) and P2 should show but not P3.
@@ -113,6 +147,7 @@ Feature: availability_group
     # The activity names filter is enabled because it triggered a bug in older versions.
     And the "activitynames" filter is "on"
     And the "activitynames" filter applies to "content and headings"
+<<<<<<< HEAD
     And I am on the "C1" "Course" page logged in as "teacher1"
     And I turn editing mode on
     And I add a "Page" to section "1"
@@ -121,11 +156,18 @@ Feature: availability_group
       | Name         | P1 |
       | Description  | x  |
       | Page content | x  |
+=======
+    And I am on the "P1" "page activity editing" page logged in as "teacher1"
+    And I expand all fieldsets
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Add restriction..." "button"
     And I click on "Group" "button" in the "Add restriction..." "dialogue"
     And I set the field "Group" to "G-One"
     And I click on "Save and return to course" "button"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Student sees information about no access to group, with group name in correct language.
     When I am on the "C1" "Course" page logged in as "student1"

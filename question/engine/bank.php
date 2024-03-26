@@ -289,6 +289,7 @@ abstract class question_bank {
     }
 
     /**
+<<<<<<< HEAD
      * Get all the versions of a particular question.
      *
      * @param int $questionid id of the question
@@ -310,6 +311,8 @@ abstract class question_bank {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @return question_finder a question finder.
      */
     public static function get_finder() {

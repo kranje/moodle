@@ -8,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class PageSettings
 {
+<<<<<<< HEAD
     /**
      * @var string
      */
@@ -43,6 +44,18 @@ class PageSettings
     /**
      * @var string[]
      */
+=======
+    private $officeNs;
+
+    private $stylesNs;
+
+    private $stylesFo;
+
+    private $pageLayoutStyles = [];
+
+    private $masterStylesCrossReference = [];
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $masterPrintStylesCrossReference = [];
 
     public function __construct(DOMDocument $styleDom)
@@ -57,7 +70,10 @@ class PageSettings
         $this->officeNs = $styleDom->lookupNamespaceUri('office');
         $this->stylesNs = $styleDom->lookupNamespaceUri('style');
         $this->stylesFo = $styleDom->lookupNamespaceUri('fo');
+<<<<<<< HEAD
         $this->tableNs = $styleDom->lookupNamespaceUri('table');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private function readPageSettingStyles(DOMDocument $styleDom): void
@@ -124,6 +140,7 @@ class PageSettings
         foreach ($styleXReferences as $styleXreferenceSet) {
             $styleXRefName = $styleXreferenceSet->getAttributeNS($this->stylesNs, 'name');
             $stylePageLayoutName = $styleXreferenceSet->getAttributeNS($this->stylesNs, 'master-page-name');
+<<<<<<< HEAD
             $styleFamilyName = $styleXreferenceSet->getAttributeNS($this->stylesNs, 'family');
             if (!empty($styleFamilyName) && $styleFamilyName === 'table') {
                 $styleVisibility = 'true';
@@ -132,12 +149,15 @@ class PageSettings
                 }
                 $this->tableStylesCrossReference[$styleXRefName] = $styleVisibility;
             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if (!empty($stylePageLayoutName)) {
                 $this->masterStylesCrossReference[$styleXRefName] = $stylePageLayoutName;
             }
         }
     }
 
+<<<<<<< HEAD
     public function setVisibilityForWorksheet(Worksheet $worksheet, string $styleName): void
     {
         if (!array_key_exists($styleName, $this->tableStylesCrossReference)) {
@@ -151,6 +171,8 @@ class PageSettings
         );
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function setPrintSettingsForWorksheet(Worksheet $worksheet, string $styleName): void
     {
         if (!array_key_exists($styleName, $this->masterStylesCrossReference)) {

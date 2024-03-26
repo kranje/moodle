@@ -377,7 +377,10 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return is_array($this->_ids)
@@ -389,7 +392,10 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return is_array($this->_ids)
@@ -399,7 +405,10 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return is_array($this->_ids)
@@ -409,7 +418,10 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         if (is_array($this->_ids)) {
@@ -419,7 +431,10 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         if (is_array($this->_ids)) {
@@ -429,12 +444,16 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return !is_null($this->key());
     }
 
+<<<<<<< HEAD
     public function serialize()
     {
         return serialize($this->__serialize());
@@ -453,6 +472,13 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
     /**
      */
     public function __serialize()
+=======
+    /* Serializable methods. */
+
+    /**
+     */
+    public function serialize()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $save = array();
 
@@ -486,11 +512,16 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
             break;
         }
 
+<<<<<<< HEAD
         return $save;
+=======
+        return serialize($save);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
+<<<<<<< HEAD
     public function __unserialize($data)
     {
         $this->duplicates = !empty($data['d']);
@@ -505,6 +536,24 @@ class Horde_Imap_Client_Ids implements Countable, Iterator, Serializable
             $this->_ids = self::SEARCH_RES;
         } elseif (isset($data['i'])) {
             $this->add($data['i']);
+=======
+    public function unserialize($data)
+    {
+        $save = @unserialize($data);
+
+        $this->duplicates = !empty($save['d']);
+        $this->_sequence = !empty($save['s']);
+        $this->_sorted = !empty($save['is']);
+
+        if (isset($save['a'])) {
+            $this->_ids = self::ALL;
+        } elseif (isset($save['l'])) {
+            $this->_ids = self::LARGEST;
+        } elseif (isset($save['sr'])) {
+            $this->_ids = self::SEARCH_RES;
+        } elseif (isset($save['i'])) {
+            $this->add($save['i']);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 

@@ -15,6 +15,7 @@ class Alignment extends Supervisor
     const HORIZONTAL_JUSTIFY = 'justify';
     const HORIZONTAL_FILL = 'fill';
     const HORIZONTAL_DISTRIBUTED = 'distributed'; // Excel2007 only
+<<<<<<< HEAD
     private const HORIZONTAL_CENTER_CONTINUOUS_LC = 'centercontinuous';
     // Mapping for horizontal alignment
     const HORIZONTAL_ALIGNMENT_FOR_XLSX = [
@@ -36,6 +37,8 @@ class Alignment extends Supervisor
         //self::HORIZONTAL_FILL => self::HORIZONTAL_FILL, // no reasonable equivalent for fill
         self::HORIZONTAL_DISTRIBUTED => self::HORIZONTAL_JUSTIFY,
     ];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     // Vertical alignment styles
     const VERTICAL_BOTTOM = 'bottom';
@@ -43,6 +46,7 @@ class Alignment extends Supervisor
     const VERTICAL_CENTER = 'center';
     const VERTICAL_JUSTIFY = 'justify';
     const VERTICAL_DISTRIBUTED = 'distributed'; // Excel2007 only
+<<<<<<< HEAD
     // Vertical alignment CSS
     private const VERTICAL_BASELINE = 'baseline';
     private const VERTICAL_MIDDLE = 'middle';
@@ -82,6 +86,8 @@ class Alignment extends Supervisor
         self::VERTICAL_TEXT_BOTTOM => self::VERTICAL_TEXT_BOTTOM,
         self::VERTICAL_TEXT_TOP => self::VERTICAL_TEXT_TOP,
     ];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     // Read order
     const READORDER_CONTEXT = 0;
@@ -262,9 +268,14 @@ class Alignment extends Supervisor
      */
     public function setHorizontal(string $horizontalAlignment)
     {
+<<<<<<< HEAD
         $horizontalAlignment = strtolower($horizontalAlignment);
         if ($horizontalAlignment === self::HORIZONTAL_CENTER_CONTINUOUS_LC) {
             $horizontalAlignment = self::HORIZONTAL_CENTER_CONTINUOUS;
+=======
+        if ($horizontalAlignment == '') {
+            $horizontalAlignment = self::HORIZONTAL_GENERAL;
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($this->isSupervisor) {
@@ -300,7 +311,13 @@ class Alignment extends Supervisor
      */
     public function setVertical($verticalAlignment)
     {
+<<<<<<< HEAD
         $verticalAlignment = strtolower($verticalAlignment);
+=======
+        if ($verticalAlignment == '') {
+            $verticalAlignment = self::VERTICAL_BOTTOM;
+        }
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($this->isSupervisor) {
             $styleArray = $this->getStyleArray(['vertical' => $verticalAlignment]);

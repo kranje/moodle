@@ -24,6 +24,7 @@
 require_once('../config.php');
 require_once($CFG->dirroot . '/user/lib.php');
 
+<<<<<<< HEAD
 $user = isloggedin() && !isguestuser() ? $USER : null;
 
 // If not allowed to view this page, redirect to the homepage. This would be where the site has
@@ -34,6 +35,8 @@ if (!isset($CFG->supportavailability) ||
     redirect($CFG->wwwroot);
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 if (!empty($CFG->supportpage)) {
     redirect($CFG->supportpage);
 }
@@ -44,6 +47,10 @@ $PAGE->set_title(get_string('contactsitesupport', 'admin'));
 $PAGE->set_heading(get_string('contactsitesupport', 'admin'));
 $PAGE->set_pagelayout('standard');
 
+<<<<<<< HEAD
+=======
+$user = isloggedin() && !isguestuser() ? $USER : null;
+>>>>>>> forked/LAE_400_PACKAGE
 $renderer = $PAGE->get_renderer('user');
 
 $form = new \core_user\form\contactsitesupport_form(null, $user);

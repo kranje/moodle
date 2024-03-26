@@ -24,7 +24,10 @@
 "use strict";
 
 import 'core/inplace_editable';
+<<<<<<< HEAD
 import {addIconToContainer} from 'core/loadingicon';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 import Notification from 'core/notification';
 import Pending from 'core/pending';
 import Templates from 'core/templates';
@@ -70,8 +73,12 @@ export const init = () => {
 
             let customjs = '';
 
+<<<<<<< HEAD
             addIconToContainer(toggleEditViewMode)
                 .then(() => getReport(reportElement.dataset.reportId, toggledEditMode))
+=======
+            getReport(reportElement.dataset.reportId, toggledEditMode)
+>>>>>>> forked/LAE_400_PACKAGE
                 .then(response => {
                     customjs = response.javascript;
                     return Templates.render('core_reportbuilder/local/dynamictabs/editor', response);

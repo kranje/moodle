@@ -57,7 +57,11 @@ list($options, $unrecognized) = cli_get_params(
         'torun'       => 0,
         'optimize-runs' => '',
         'add-core-features-to-theme' => false,
+<<<<<<< HEAD
         'axe'         => false,
+=======
+        'axe'         => true,
+>>>>>>> forked/LAE_400_PACKAGE
     ),
     array(
         'h' => 'help',
@@ -73,7 +77,11 @@ $help = "
 Behat utilities to manage the test environment
 
 Usage:
+<<<<<<< HEAD
   php util.php [--install|--drop|--enable|--disable|--diag|--updatesteps|--axe|--help] [--parallel=value [--maxruns=value]]
+=======
+  php util.php [--install|--drop|--enable|--disable|--diag|--updatesteps|--no-axe|--help] [--parallel=value [--maxruns=value]]
+>>>>>>> forked/LAE_400_PACKAGE
 
 Options:
 --install      Installs the test environment for acceptance tests
@@ -82,7 +90,11 @@ Options:
 --disable      Disables test environment
 --diag         Get behat test environment status code
 --updatesteps  Update feature step file.
+<<<<<<< HEAD
 --axe          Include axe accessibility tests
+=======
+--no-axe       Disable axe accessibility tests.
+>>>>>>> forked/LAE_400_PACKAGE
 
 -j, --parallel Number of parallel behat run operation
 -m, --maxruns Max parallel processes to be executed at one time.
@@ -320,12 +332,16 @@ function commands_to_execute($options) {
     }
 
     foreach ($extraoptions as $option => $value) {
+<<<<<<< HEAD
         if ($options[$option]) {
             $extra .= " --$option";
             if ($value) {
                 $extra .= "=\"$value\"";
             }
         }
+=======
+        $extra .= behat_get_command_flags($option, $value);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (empty($options['parallel'])) {
@@ -360,7 +376,11 @@ function print_combined_drop_output($processes) {
                 $op = $process->getIncrementalOutput();
                 if (trim($op)) {
                     $update = preg_filter('#^\s*([FS\.\-]+)(?:\s+\d+)?\s*$#', '$1', $op);
+<<<<<<< HEAD
                     $strlentoprint = $update ? strlen($update) : 0;
+=======
+                    $strlentoprint = strlen($update);
+>>>>>>> forked/LAE_400_PACKAGE
 
                     // If not enough dots printed on line then just print.
                     if ($strlentoprint < $remainingprintlen) {

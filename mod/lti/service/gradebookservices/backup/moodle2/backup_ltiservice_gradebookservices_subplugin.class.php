@@ -64,9 +64,13 @@ class backup_ltiservice_gradebookservices_subplugin extends backup_subplugin {
                 'resourceid',
                 'tag',
                 'vendorcode',
+<<<<<<< HEAD
                 'guid',
                 'subreviewurl',
                 'subreviewparams'
+=======
+                'guid'
+>>>>>>> forked/LAE_400_PACKAGE
                 )
         );
 

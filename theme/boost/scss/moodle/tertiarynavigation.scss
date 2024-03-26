@@ -1,6 +1,7 @@
 .tertiary-navigation {
     padding-top: 10px;
 
+<<<<<<< HEAD
     &.full-width-bottom-border {
         width: calc(100% + 1rem + 30px);
         margin-left: calc(-0.5rem - 15px);
@@ -23,15 +24,21 @@
 
     .navitem,
     .navitem-divider {
+=======
+    .navitem {
+>>>>>>> forked/LAE_400_PACKAGE
         display: flex;
         margin-bottom: 25px;
     }
 
+<<<<<<< HEAD
     .navitem-divider {
         width: 1px;
         background-color: $gray-300;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     & > a.btn,
     & > div.urlselect {
         margin-bottom: 25px;
@@ -40,6 +47,7 @@
     .row {
         column-gap: 20px;
     }
+<<<<<<< HEAD
 
     .tertiary-navigation-selector {
         .dropdown-toggle {
@@ -53,6 +61,8 @@
     .navitem-divider:not(:last-child) {
         margin-right: 20px;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 @include media-breakpoint-down(sm) {

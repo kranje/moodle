@@ -58,11 +58,17 @@ Feature: Anonymous feedback
 
   @javascript
   Scenario: Complete anonymous feedback and view analysis on the front page as an authenticated user
+<<<<<<< HEAD
     And I log in as "admin"
     And I set the following system permissions of "Authenticated user on site home" role:
       | capability                   | permission |
       | mod/feedback:viewanalysepage | Allow      |
     And I log out
+=======
+    Given the following "role capability" exists:
+      | role                         | frontpage |
+      | mod/feedback:viewanalysepage | allow     |
+>>>>>>> forked/LAE_400_PACKAGE
     And I log in as "user1"
     And I am on site homepage
     When I follow "Site feedback"
@@ -118,11 +124,17 @@ Feature: Anonymous feedback
   Scenario: Complete fully anonymous feedback and view analyze on the front page as a guest
     Given the following config values are set as admin:
       | feedback_allowfullanonymous | 1 |
+<<<<<<< HEAD
     And I log in as "admin"
     And I set the following system permissions of "Guest" role:
       | capability                   | permission |
       | mod/feedback:viewanalysepage | Allow      |
     And I log out
+=======
+    And the following "role capability" exists:
+      | role                         | guest |
+      | mod/feedback:viewanalysepage | allow |
+>>>>>>> forked/LAE_400_PACKAGE
     When I follow "Site feedback"
     And I should not see "Preview questions"
     And I follow "Answer the questions"

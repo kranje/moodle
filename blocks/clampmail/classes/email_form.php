@@ -92,7 +92,11 @@ class email_form extends \moodleform {
         if ($this->_customdata['groupmode'] != NOGROUPS) {
             $user->groups[] = 'all';
         }
+<<<<<<< HEAD
         $user->roles[] = 'none';
+=======
+        $user->roles[]  = 'none';
+>>>>>>> forked/LAE_400_PACKAGE
 
         $option = \html_writer::tag(
             'option',

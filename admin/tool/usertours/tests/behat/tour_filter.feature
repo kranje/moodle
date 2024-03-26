@@ -153,6 +153,7 @@ Feature: Apply tour filters to a tour
       | Course 1 | C1        | topics | 1                |
       | Course 2 | C2        | topics | 1                |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity | course | name           | firstpagetitle | wikimode      |
       | wiki     | C1     | Test wiki name | First page     | collaborative |
     And I log in as "admin"
@@ -161,6 +162,12 @@ Feature: Apply tour filters to a tour
       | Forum name  | Test forum name                |
       | Forum type  | Standard forum for general use |
       | Description | Test forum description         |
+=======
+      | activity | course | name            | firstpagetitle | wikimode      | idnumber | intro                  | type    |
+      | wiki     | C1     | Test wiki name  | First page     | collaborative |          |                        |         |
+      | forum    | C2     | Test forum name |                |               | 001      | Test forum description | general |
+    And I log in as "admin"
+>>>>>>> forked/LAE_400_PACKAGE
     And I add a new user tour with:
       | Name               | Wiki tour                |
       | Description        | A tour with both matches |

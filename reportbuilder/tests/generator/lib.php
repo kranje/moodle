@@ -16,7 +16,10 @@
 
 declare(strict_types=1);
 
+<<<<<<< HEAD
 use core_reportbuilder\manager;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\helpers\report as helper;
 use core_reportbuilder\local\helpers\schedule as schedule_helper;
 use core_reportbuilder\local\models\column;
@@ -54,6 +57,7 @@ class core_reportbuilder_generator extends component_generator_base {
         // Include default setup unless specifically disabled in passed record.
         $default = (bool) ($record['default'] ?? true);
 
+<<<<<<< HEAD
         // If setting up default report, purge caches to ensure any default attributes are always loaded in tests.
         $report = helper::create_report((object) $record, $default);
         if ($default) {
@@ -61,6 +65,9 @@ class core_reportbuilder_generator extends component_generator_base {
         }
 
         return $report;
+=======
+        return helper::create_report((object) $record, $default);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

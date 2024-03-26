@@ -24,8 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 $plugin->version   = 2021011504;
 $plugin->requires  = 2019111800; // Requires Moodle 3.8.
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = 'v4.4.5';
+=======
+$plugin->version   = 2021011501;
+$plugin->requires  = 2019111800; // Requires Moodle 3.8.
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = 'v4.4.2';
+>>>>>>> forked/LAE_400_PACKAGE
 $plugin->component = 'block_filtered_course_list';

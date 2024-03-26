@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,13 @@ class ConvertUOM
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class ConvertUOM
+{
+>>>>>>> forked/LAE_400_PACKAGE
     public const CATEGORY_WEIGHT_AND_MASS = 'Weight and Mass';
     public const CATEGORY_DISTANCE = 'Distance';
     public const CATEGORY_TIME = 'Time';
@@ -106,7 +114,10 @@ class ConvertUOM
         'W' => ['Group' => self::CATEGORY_POWER, 'Unit Name' => 'Watt', 'AllowPrefix' => true],
         'w' => ['Group' => self::CATEGORY_POWER, 'Unit Name' => 'Watt', 'AllowPrefix' => true],
         'PS' => ['Group' => self::CATEGORY_POWER, 'Unit Name' => 'Pferdestärke', 'AllowPrefix' => false],
+<<<<<<< HEAD
         // Magnetism
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'T' => ['Group' => self::CATEGORY_MAGNETISM, 'Unit Name' => 'Tesla', 'AllowPrefix' => true],
         'ga' => ['Group' => self::CATEGORY_MAGNETISM, 'Unit Name' => 'Gauss', 'AllowPrefix' => true],
         // Temperature
@@ -522,6 +533,7 @@ class ConvertUOM
      *    Excel Function:
      *        CONVERT(value,fromUOM,toUOM)
      *
+<<<<<<< HEAD
      * @param array|float|int|string $value the value in fromUOM to convert
      *                      Or can be an array of values
      * @param array|string $fromUOM the units for value
@@ -541,12 +553,29 @@ class ConvertUOM
 
         if (!is_numeric($value)) {
             return ExcelError::VALUE();
+=======
+     * @param float|int $value the value in fromUOM to convert
+     * @param string $fromUOM the units for value
+     * @param string $toUOM the units for the result
+     *
+     * @return float|string
+     */
+    public static function CONVERT($value, $fromUOM, $toUOM)
+    {
+        $value = Functions::flattenSingleValue($value);
+        $fromUOM = Functions::flattenSingleValue($fromUOM);
+        $toUOM = Functions::flattenSingleValue($toUOM);
+
+        if (!is_numeric($value)) {
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         try {
             [$fromUOM, $fromCategory, $fromMultiplier] = self::getUOMDetails($fromUOM);
             [$toUOM, $toCategory, $toMultiplier] = self::getUOMDetails($toUOM);
         } catch (Exception $e) {
+<<<<<<< HEAD
             return ExcelError::NA();
         }
 
@@ -555,6 +584,15 @@ class ConvertUOM
         }
 
         // @var float $value
+=======
+            return Functions::NA();
+        }
+
+        if ($fromCategory !== $toCategory) {
+            return Functions::NA();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $value *= $fromMultiplier;
 
         if (($fromUOM === $toUOM) && ($fromMultiplier === $toMultiplier)) {

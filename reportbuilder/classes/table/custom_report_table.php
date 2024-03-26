@@ -44,9 +44,12 @@ class custom_report_table extends base_report_table {
     /** @var bool Whether report is being edited (we don't want user filters/sorting to be applied when editing) */
     protected const REPORT_EDITING = true;
 
+<<<<<<< HEAD
     /** @var float $querytimestart Time we began executing table SQL */
     private $querytimestart = 0.0;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Table constructor. Note that the passed unique ID value must match the pattern "custom-report-table-(\d+)" so that
      * dynamic updates continue to load the same report
@@ -81,11 +84,18 @@ class custom_report_table extends base_report_table {
         $this->showdownloadbuttonsat = [TABLE_P_BOTTOM];
         $this->is_downloading($download ?? null, $this->persistent->get_formatted_name());
 
+<<<<<<< HEAD
         // Retrieve all report columns, exit early if there are none. Defining empty columns prevents errors during out().
         $columns = $this->get_active_columns();
         if (empty($columns)) {
             $this->init_sql("{$maintablealias}.*", "{{$maintable}} {$maintablealias}", $joins, '1=0', []);
             $this->define_columns([0]);
+=======
+        // Retrieve all report columns, exit early if there are none.
+        $columns = $this->get_active_columns();
+        if (empty($columns)) {
+            $this->init_sql("{$maintablealias}.*", "{{$maintable}} {$maintablealias}", $joins, '1=0', []);
+>>>>>>> forked/LAE_400_PACKAGE
             return;
         }
 
@@ -144,7 +154,10 @@ class custom_report_table extends base_report_table {
         $this->initialbars(false);
         $this->collapsible(false);
         $this->pageable(true);
+<<<<<<< HEAD
         $this->set_default_per_page($this->report->get_default_per_page());
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Initialise table SQL properties.
         $this->set_report_editing(static::REPORT_EDITING);
@@ -285,6 +298,7 @@ class custom_report_table extends base_report_table {
         echo html_writer::end_tag('div');
         $this->wrap_html_finish();
 
+<<<<<<< HEAD
         // With the live editing disabled we need to notify user that data is shown only in preview mode.
         if ($this->editing && !self::show_live_editing()) {
             $notificationmsg = get_string('customreportsliveeditingdisabled', 'core_reportbuilder');
@@ -295,6 +309,9 @@ class custom_report_table extends base_report_table {
         }
 
         $notification = (new notification($notificationmsg, $notificationtype, false))
+=======
+        $notification = (new notification(get_string('nothingtodisplay'), notification::NOTIFY_INFO, false))
+>>>>>>> forked/LAE_400_PACKAGE
             ->set_extra_classes(['mt-3']);
         echo $OUTPUT->render($notification);
 
@@ -302,6 +319,7 @@ class custom_report_table extends base_report_table {
     }
 
     /**
+<<<<<<< HEAD
      * Provide additional table debugging during editing
      */
     public function wrap_html_finish(): void {
@@ -322,6 +340,8 @@ class custom_report_table extends base_report_table {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Override get_row_cells_html to add an extra cell with the toggle button for card view.
      *
      * @param string $rowid
@@ -340,7 +360,11 @@ class custom_report_table extends base_report_table {
             // We need a cleaned version (without tags/entities) of the first row column to use as toggle button.
             $rowfirstcolumn = strip_tags((string) reset($row));
             $buttontitle = $rowfirstcolumn !== ''
+<<<<<<< HEAD
                 ? get_string('showhide', 'core_reportbuilder', html_entity_decode($rowfirstcolumn, ENT_COMPAT))
+=======
+                ? get_string('showhide', 'core_reportbuilder', html_entity_decode($rowfirstcolumn))
+>>>>>>> forked/LAE_400_PACKAGE
                 : get_string('showhidecard', 'core_reportbuilder');
 
             $button = html_writer::tag('button', $buttonicon, [
@@ -354,6 +378,7 @@ class custom_report_table extends base_report_table {
         }
         return $html;
     }
+<<<<<<< HEAD
 
     /**
      * Overriding this method to handle live editing setting.
@@ -386,4 +411,6 @@ class custom_report_table extends base_report_table {
 
         return !empty($CFG->customreportsliveediting);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

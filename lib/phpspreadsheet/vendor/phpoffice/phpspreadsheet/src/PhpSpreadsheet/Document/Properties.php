@@ -115,7 +115,11 @@ class Properties
         // Initialise values
         $this->lastModifiedBy = $this->creator;
         $this->created = self::intOrFloatTimestamp(null);
+<<<<<<< HEAD
         $this->modified = $this->created;
+=======
+        $this->modified = self::intOrFloatTimestamp(null);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -171,9 +175,15 @@ class Properties
             if (is_numeric($timestamp)) {
                 $timestamp = (float) $timestamp;
             } else {
+<<<<<<< HEAD
                 $timestamp = (string) preg_replace('/[.][0-9]*$/', '', $timestamp);
                 $timestamp = (string) preg_replace('/^(\\d{4})- (\\d)/', '$1-0$2', $timestamp);
                 $timestamp = (string) preg_replace('/^(\\d{4}-\\d{2})- (\\d)/', '$1-0$2', $timestamp);
+=======
+                $timestamp = preg_replace('/[.][0-9]*$/', '', $timestamp) ?? '';
+                $timestamp = preg_replace('/^(\\d{4})- (\\d)/', '$1-0$2', $timestamp) ?? '';
+                $timestamp = preg_replace('/^(\\d{4}-\\d{2})- (\\d)/', '$1-0$2', $timestamp) ?? '';
+>>>>>>> forked/LAE_400_PACKAGE
                 $timestamp = (float) (new DateTime($timestamp))->format('U');
             }
         }

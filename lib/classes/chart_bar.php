@@ -43,7 +43,11 @@ class chart_bar extends chart_base {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function jsonSerialize(): array {
+=======
+    public function jsonSerialize() {
+>>>>>>> forked/LAE_400_PACKAGE
         $data = parent::jsonSerialize();
         $data['horizontal'] = $this->get_horizontal();
         $data['stacked'] = $this->get_stacked();

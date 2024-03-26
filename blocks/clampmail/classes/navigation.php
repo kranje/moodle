@@ -24,6 +24,11 @@
 
 namespace block_clampmail;
 
+<<<<<<< HEAD
+=======
+defined('MOODLE_INTERNAL') || die();
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Navigation functions.
  *

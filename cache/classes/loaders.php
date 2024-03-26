@@ -457,7 +457,11 @@ class cache implements cache_loader {
             }
         } else {
             // If there's no result, obviously it doesn't meet the required version.
+<<<<<<< HEAD
             if (!$result) {
+=======
+            if (!cache_helper::result_found($result)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 return false;
             }
             if (!($result instanceof \core_cache\version_wrapper)) {
@@ -490,7 +494,11 @@ class cache implements cache_loader {
 
         if ($usesstaticacceleration) {
             $result = $this->static_acceleration_get($key);
+<<<<<<< HEAD
             if ($result && self::check_version($result, $requiredversion)) {
+=======
+            if (cache_helper::result_found($result) && self::check_version($result, $requiredversion)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 if ($requiredversion === self::VERSION_NONE) {
                     return $result;
                 } else {
@@ -505,7 +513,11 @@ class cache implements cache_loader {
 
         // 3. Get it from the store. Obviously wasn't in the static acceleration array.
         $result = $this->store->get($parsedkey);
+<<<<<<< HEAD
         if ($result) {
+=======
+        if (cache_helper::result_found($result)) {
+>>>>>>> forked/LAE_400_PACKAGE
             // Check the result has at least the required version.
             try {
                 $validversion = self::check_version($result, $requiredversion);
@@ -535,7 +547,11 @@ class cache implements cache_loader {
                 $this->store->delete($parsedkey);
             }
         }
+<<<<<<< HEAD
         if ($result !== false) {
+=======
+        if (cache_helper::result_found($result)) {
+>>>>>>> forked/LAE_400_PACKAGE
             // Look to see if there's a TTL wrapper. It might be inside a version wrapper.
             if ($requiredversion !== self::VERSION_NONE) {
                 $ttlconsider = $result->data;
@@ -569,7 +585,11 @@ class cache implements cache_loader {
 
         // 4. Load if from the loader/datasource if we don't already have it.
         $setaftervalidation = false;
+<<<<<<< HEAD
         if ($result === false) {
+=======
+        if (!cache_helper::result_found($result)) {
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->perfdebug) {
                 cache_helper::record_cache_miss($this->store, $this->definition);
             }
@@ -595,30 +615,44 @@ class cache implements cache_loader {
                     }
                 }
             }
+<<<<<<< HEAD
             $setaftervalidation = ($result !== false);
+=======
+            $setaftervalidation = (cache_helper::result_found($result));
+>>>>>>> forked/LAE_400_PACKAGE
         } else if ($this->perfdebug) {
             $readbytes = $this->store->get_last_io_bytes();
             cache_helper::record_cache_hit($this->store, $this->definition, 1, $readbytes);
         }
         // 5. Validate strictness.
+<<<<<<< HEAD
         if ($strictness === MUST_EXIST && $result === false) {
+=======
+        if ($strictness === MUST_EXIST && !cache_helper::result_found($result)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new coding_exception('Requested key did not exist in any cache stores and could not be loaded.');
         }
         // 6. Set it to the store if we got it from the loader/datasource. Only set to this direct
         // store; parent method will have set it to all stores if needed.
         if ($setaftervalidation) {
+<<<<<<< HEAD
             $lock = null;
             if (!empty($this->requirelockingbeforewrite)) {
                 $lock = $this->acquire_lock($key);
             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if ($requiredversion === self::VERSION_NONE) {
                 $this->set_implementation($key, self::VERSION_NONE, $result, false);
             } else {
                 $this->set_implementation($key, $actualversion, $result, false);
             }
+<<<<<<< HEAD
             if ($lock) {
                 $this->release_lock($key);
             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
         // 7. Make sure we don't pass back anything that could be a reference.
         //    We don't want people modifying the data in the cache.
@@ -726,6 +760,7 @@ class cache implements cache_loader {
                 }
                 foreach ($resultmissing as $key => $value) {
                     $result[$keysparsed[$key]] = $value;
+<<<<<<< HEAD
                     $lock = null;
                     if (!empty($this->requirelockingbeforewrite)) {
                         $lock = $this->acquire_lock($key);
@@ -736,6 +771,11 @@ class cache implements cache_loader {
                     if ($lock) {
                         $this->release_lock($key);
                     }
+=======
+                    if ($value !== false) {
+                        $this->set($key, $value);
+                    }
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 unset($resultmissing);
             }
@@ -1359,7 +1399,11 @@ class cache implements cache_loader {
                 $result = $data;
             }
         }
+<<<<<<< HEAD
         if ($result !== false) {
+=======
+        if (cache_helper::result_found($result)) {
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->perfdebug) {
                 cache_helper::record_cache_hit(cache_store::STATIC_ACCEL, $this->definition);
             }
@@ -1596,24 +1640,30 @@ class cache_application extends cache implements cache_loader_with_locking {
     protected $requirelockingwrite = false;
 
     /**
+<<<<<<< HEAD
      * Gets set to true if the cache writes (set|delete) must have a manual lock created first
      * @var bool
      */
     protected $requirelockingbeforewrite = false;
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Gets set to a cache_store to use for locking if the caches primary store doesn't support locking natively.
      * @var cache_lock_interface
      */
     protected $cachelockinstance;
 
     /**
+<<<<<<< HEAD
      * Store a list of locks acquired by this process.
      * @var array
      */
     protected $locks;
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Overrides the cache construct method.
      *
      * You should not call this method from your code, instead you should use the cache::make methods.
@@ -1629,7 +1679,10 @@ class cache_application extends cache implements cache_loader_with_locking {
             $this->requirelocking = true;
             $this->requirelockingread = $definition->require_locking_read();
             $this->requirelockingwrite = $definition->require_locking_write();
+<<<<<<< HEAD
             $this->requirelockingbeforewrite = $definition->require_locking_before_write();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $this->handle_invalidation_events();
@@ -1675,6 +1728,7 @@ class cache_application extends cache implements cache_loader_with_locking {
      * @return bool Returns true if the lock could be acquired, false otherwise.
      */
     public function acquire_lock($key) {
+<<<<<<< HEAD
         global $CFG;
         if ($this->get_loader() !== false) {
             $this->get_loader()->acquire_lock($key);
@@ -1696,6 +1750,15 @@ class cache_application extends cache implements cache_loader_with_locking {
             }
         }
         return $lock;
+=======
+        $key = $this->parse_key($key);
+        if ($this->nativelocking) {
+            return $this->get_store()->acquire_lock($key, $this->get_identifier());
+        } else {
+            $this->ensure_cachelock_available();
+            return $this->cachelockinstance->lock($key, $this->get_identifier());
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -1706,10 +1769,14 @@ class cache_application extends cache implements cache_loader_with_locking {
      *      someone else has the lock.
      */
     public function check_lock_state($key) {
+<<<<<<< HEAD
         $key = cache_helper::hash_key($key, $this->get_definition());
         if (!empty($this->locks[$key])) {
             return true; // Shortcut to save having to make a call to the cache store if the lock is held by this process.
         }
+=======
+        $key = $this->parse_key($key);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($this->nativelocking) {
             return $this->get_store()->check_lock_state($key, $this->get_identifier());
         } else {
@@ -1725,6 +1792,7 @@ class cache_application extends cache implements cache_loader_with_locking {
      * @return bool True if the operation succeeded, false otherwise.
      */
     public function release_lock($key) {
+<<<<<<< HEAD
         $loaderkey = $key;
         $key = cache_helper::hash_key($key, $this->get_definition());
         if ($this->nativelocking) {
@@ -1743,6 +1811,15 @@ class cache_application extends cache implements cache_loader_with_locking {
             $this->get_loader()->release_lock($loaderkey);
         }
         return $released;
+=======
+        $key = $this->parse_key($key);
+        if ($this->nativelocking) {
+            return $this->get_store()->release_lock($key, $this->get_identifier());
+        } else {
+            $this->ensure_cachelock_available();
+            return $this->cachelockinstance->unlock($key, $this->get_identifier());
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -1774,10 +1851,13 @@ class cache_application extends cache implements cache_loader_with_locking {
      * @return bool True on success, false otherwise.
      */
     protected function set_implementation($key, int $version, $data, bool $setparents = true): bool {
+<<<<<<< HEAD
         if ($this->requirelockingbeforewrite && !$this->check_lock_state($key)) {
             throw new coding_exception('Attempted to set cache key "' . $key . '" without a lock. '
                 . 'Locking before writes is required for ' . $this->get_definition()->get_id());
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if ($this->requirelockingwrite && !$this->acquire_lock($key)) {
             return false;
         }
@@ -1812,6 +1892,7 @@ class cache_application extends cache implements cache_loader_with_locking {
      *      ... if they care that is.
      */
     public function set_many(array $keyvaluearray) {
+<<<<<<< HEAD
         if ($this->requirelockingbeforewrite) {
             foreach ($keyvaluearray as $key => $value) {
                 if (!$this->check_lock_state($key)) {
@@ -1821,6 +1902,8 @@ class cache_application extends cache implements cache_loader_with_locking {
                 }
             }
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if ($this->requirelockingwrite) {
             $locks = array();
             foreach ($keyvaluearray as $id => $pair) {
@@ -1877,11 +1960,18 @@ class cache_application extends cache implements cache_loader_with_locking {
      * @throws coding_exception
      */
     public function get_many(array $keys, $strictness = IGNORE_MISSING) {
+<<<<<<< HEAD
         $locks = [];
         if ($this->requirelockingread) {
             foreach ($keys as $id => $key) {
                 $locks[$key] = $this->acquire_lock($key);
                 if (!$locks[$key]) {
+=======
+        if ($this->requirelockingread) {
+            foreach ($keys as $id => $key) {
+                $lock =$this->acquire_lock($key);
+                if (!$lock) {
+>>>>>>> forked/LAE_400_PACKAGE
                     if ($strictness === MUST_EXIST) {
                         throw new coding_exception('Could not acquire read locks for all of the items being requested.');
                     } else {
@@ -1892,6 +1982,7 @@ class cache_application extends cache implements cache_loader_with_locking {
 
             }
         }
+<<<<<<< HEAD
         $result = parent::get_many($keys, $strictness);
         if ($this->requirelockingread) {
             foreach ($locks as $key => $lock) {
@@ -1899,6 +1990,9 @@ class cache_application extends cache implements cache_loader_with_locking {
             }
         }
         return $result;
+=======
+        return parent::get_many($keys, $strictness);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

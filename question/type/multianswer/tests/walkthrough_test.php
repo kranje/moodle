@@ -41,7 +41,11 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
 
     protected function get_contains_subq_status(question_state $state) {
         return new \question_pattern_expectation('~' .
+<<<<<<< HEAD
                 preg_quote($state->default_string(true), '~') . '<br />~');
+=======
+                preg_quote($state->default_string(true), '~') . '~');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_deferred_feedback() {

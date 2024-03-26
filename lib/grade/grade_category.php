@@ -359,7 +359,11 @@ class grade_category extends grade_object {
     public function insert($source = null, $isbulkupdate = false) {
 
         if (empty($this->courseid)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotinsertgrade');
+=======
+            print_error('cannotinsertgrade');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (empty($this->parent)) {
@@ -2376,11 +2380,19 @@ class grade_category extends grade_object {
         }
 
         if ($parentid == $this->id) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotassignselfasparent');
         }
 
         if (empty($this->parent) and $this->is_course_category()) {
             throw new \moodle_exception('cannothaveparentcate');
+=======
+            print_error('cannotassignselfasparent');
+        }
+
+        if (empty($this->parent) and $this->is_course_category()) {
+            print_error('cannothaveparentcate');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // find parent and check course id

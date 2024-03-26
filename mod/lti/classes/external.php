@@ -24,8 +24,11 @@
  * @since      Moodle 3.0
  */
 
+<<<<<<< HEAD
 use core_course\external\helper_for_get_mods_by_courses;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
@@ -300,21 +303,49 @@ class mod_lti_external extends external_api {
                 $context = context_module::instance($lti->coursemodule);
 
                 // Entry to return.
+<<<<<<< HEAD
                 $module = helper_for_get_mods_by_courses::standard_coursemodule_element_values(
                         $lti, 'mod_lti', 'moodle/course:manageactivities', 'mod/lti:view');
 
                 $viewablefields = [];
                 if (has_capability('mod/lti:view', $context)) {
+=======
+                $module = array();
+
+                // First, we return information that any user can see in (or can deduce from) the web interface.
+                $module['id'] = $lti->id;
+                $module['coursemodule'] = $lti->coursemodule;
+                $module['course'] = $lti->course;
+                $module['name']  = external_format_string($lti->name, $context->id);
+
+                $viewablefields = [];
+                if (has_capability('mod/lti:view', $context)) {
+                    $options = array('noclean' => true);
+                    list($module['intro'], $module['introformat']) =
+                        external_format_text($lti->intro, $lti->introformat, $context->id, 'mod_lti', 'intro', null, $options);
+
+                    $module['introfiles'] = external_util::get_area_files($context->id, 'mod_lti', 'intro', false, false);
+>>>>>>> forked/LAE_400_PACKAGE
                     $viewablefields = array('launchcontainer', 'showtitlelaunch', 'showdescriptionlaunch', 'icon', 'secureicon');
                 }
 
                 // Check additional permissions for returning optional private settings.
                 if (has_capability('moodle/course:manageactivities', $context)) {
+<<<<<<< HEAD
                     $additionalfields = array('timecreated', 'timemodified', 'typeid', 'toolurl', 'securetoolurl',
                         'instructorchoicesendname', 'instructorchoicesendemailaddr', 'instructorchoiceallowroster',
                         'instructorchoiceallowsetting', 'instructorcustomparameters', 'instructorchoiceacceptgrades', 'grade',
                         'resourcekey', 'password', 'debuglaunch', 'servicesalt');
                     $viewablefields = array_merge($viewablefields, $additionalfields);
+=======
+
+                    $additionalfields = array('timecreated', 'timemodified', 'typeid', 'toolurl', 'securetoolurl',
+                        'instructorchoicesendname', 'instructorchoicesendemailaddr', 'instructorchoiceallowroster',
+                        'instructorchoiceallowsetting', 'instructorcustomparameters', 'instructorchoiceacceptgrades', 'grade',
+                        'resourcekey', 'password', 'debuglaunch', 'servicesalt', 'visible', 'groupmode', 'groupingid');
+                    $viewablefields = array_merge($viewablefields, $additionalfields);
+
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 foreach ($viewablefields as $field) {
@@ -342,9 +373,21 @@ class mod_lti_external extends external_api {
         return new external_single_structure(
             array(
                 'ltis' => new external_multiple_structure(
+<<<<<<< HEAD
                     new external_single_structure(array_merge(
                         helper_for_get_mods_by_courses::standard_coursemodule_elements_returns(true),
                         [
+=======
+                    new external_single_structure(
+                        array(
+                            'id' => new external_value(PARAM_INT, 'External tool id'),
+                            'coursemodule' => new external_value(PARAM_INT, 'Course module id'),
+                            'course' => new external_value(PARAM_INT, 'Course id'),
+                            'name' => new external_value(PARAM_RAW, 'LTI name'),
+                            'intro' => new external_value(PARAM_RAW, 'The LTI intro', VALUE_OPTIONAL),
+                            'introformat' => new external_format_value('intro', VALUE_OPTIONAL),
+                            'introfiles' => new external_files('Files in the introduction text', VALUE_OPTIONAL),
+>>>>>>> forked/LAE_400_PACKAGE
                             'timecreated' => new external_value(PARAM_INT, 'Time of creation', VALUE_OPTIONAL),
                             'timemodified' => new external_value(PARAM_INT, 'Time of last modification', VALUE_OPTIONAL),
                             'typeid' => new external_value(PARAM_INT, 'Type id', VALUE_OPTIONAL),
@@ -372,8 +415,17 @@ class mod_lti_external extends external_api {
                             'servicesalt' => new external_value(PARAM_RAW, 'Service salt', VALUE_OPTIONAL),
                             'icon' => new external_value(PARAM_URL, 'Alternative icon URL', VALUE_OPTIONAL),
                             'secureicon' => new external_value(PARAM_URL, 'Secure icon URL', VALUE_OPTIONAL),
+<<<<<<< HEAD
                         ]
                     ), 'Tool')
+=======
+                            'section' => new external_value(PARAM_INT, 'course section id', VALUE_OPTIONAL),
+                            'visible' => new external_value(PARAM_INT, 'visible', VALUE_OPTIONAL),
+                            'groupmode' => new external_value(PARAM_INT, 'group mode', VALUE_OPTIONAL),
+                            'groupingid' => new external_value(PARAM_INT, 'group id', VALUE_OPTIONAL),
+                        ), 'Tool'
+                    )
+>>>>>>> forked/LAE_400_PACKAGE
                 ),
                 'warnings' => new external_warnings(),
             )

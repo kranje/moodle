@@ -23,7 +23,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 $string['modifiedby'] = 'Modified by';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['pluginname'] = 'View creator';
 $string['privacy:metadata'] = 'The View creator question bank plugin does not store any personal data.';
 $string['version'] = 'Version {$a}';

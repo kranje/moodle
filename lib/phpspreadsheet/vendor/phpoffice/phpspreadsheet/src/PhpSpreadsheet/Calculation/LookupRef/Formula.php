@@ -3,7 +3,11 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 
 class Formula
@@ -19,7 +23,11 @@ class Formula
     public static function text($cellReference = '', ?Cell $cell = null)
     {
         if ($cell === null) {
+<<<<<<< HEAD
             return ExcelError::REF();
+=======
+            return Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         preg_match('/^' . Calculation::CALCULATION_REGEXP_CELLREF . '$/i', $cellReference, $matches);
@@ -35,7 +43,11 @@ class Formula
             !$worksheet->cellExists($cellReference) ||
             !$worksheet->getCell($cellReference)->isFormula()
         ) {
+<<<<<<< HEAD
             return ExcelError::NA();
+=======
+            return Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $worksheet->getCell($cellReference)->getValue();

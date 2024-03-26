@@ -27,6 +27,7 @@ Feature: The starred courses filter displays a user's starred courses
     """
     starred | expanded | My starred courses
     """
+<<<<<<< HEAD
     Given I am on the "My courses" page logged in as "student2"
     And I hover "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
     And I click on ".coursemenubtn" "css_element" in the "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
@@ -34,6 +35,13 @@ Feature: The starred courses filter displays a user's starred courses
     And I log out
     Given I am on the "My courses" page logged in as "student1"
     And I hover "//div[@class='card dashboard-card' and contains(.,'Course 1')]" "xpath_element"
+=======
+    When I log in as "student2"
+    And I click on ".coursemenubtn" "css_element" in the "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
+    And I click on "Star this course" "link" in the "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
+    And I log out
+    And I log in as "student1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on ".coursemenubtn" "css_element" in the "//div[@class='card dashboard-card' and contains(.,'Course 1')]" "xpath_element"
     And I click on "Star this course" "link" in the "//div[@class='card dashboard-card' and contains(.,'Course 1')]" "xpath_element"
     And I am on site homepage

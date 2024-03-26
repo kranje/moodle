@@ -41,12 +41,20 @@ $systemcontext = context_system::instance();
 if ($id) {
     /// editing existing scale
     if (!$scale_rec = $DB->get_record('scale', array('id' => $id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidscaleid');
+=======
+        print_error('invalidscaleid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if ($scale_rec->courseid) {
         $scale_rec->standard = 0;
         if (!$course = $DB->get_record('course', array('id' => $scale_rec->courseid))) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcourseid');
+=======
+            print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         require_login($course);
         $context = context_course::instance($course->id);
@@ -55,7 +63,11 @@ if ($id) {
     } else {
         if ($courseid) {
             if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidcourseid');
+=======
+                print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         $scale_rec->standard = 1;
@@ -67,7 +79,11 @@ if ($id) {
 } else if ($courseid){
     /// adding new scale from course
     if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $scale_rec = new stdClass();
     $scale_rec->standard = 0;

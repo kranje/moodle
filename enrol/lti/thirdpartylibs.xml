@@ -3,10 +3,16 @@
     <library>
         <location>ims-blti</location>
         <name>IMS-BLTI</name>
+<<<<<<< HEAD
         <description>Set of IMS-LTI tools originaly provided by IMS.</description>
         <version>1.0</version>
         <license>MIT</license>
         <repository>https://github.com/jfederico/ims-dev</repository>
         <customised/>
+=======
+        <license>MIT</license>
+        <version></version>
+        <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
     </library>
 </libraries>

@@ -507,7 +507,11 @@ class grade_item extends grade_object {
         global $CFG, $DB;
 
         if (empty($this->courseid)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotinsertgrade');
+=======
+            print_error('cannotinsertgrade');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // load scale if needed
@@ -1538,7 +1542,11 @@ class grade_item extends grade_object {
      */
     public function set_parent($parentid, $updateaggregationfields = true) {
         if ($this->is_course_item() or $this->is_category_item()) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotsetparentforcatoritem');
+=======
+            print_error('cannotsetparentforcatoritem');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($this->categoryid == $parentid) {

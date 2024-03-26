@@ -22,9 +22,15 @@ use renderable;
 use renderer_base;
 use stdClass;
 use templatable;
+<<<<<<< HEAD
 use core_reportbuilder\system_report as system_report_base;
 use core_reportbuilder\external\system_report_exporter;
 use core_reportbuilder\local\models\report;
+=======
+use core_reportbuilder\external\system_report_exporter;
+use core_reportbuilder\local\models\report;
+use core_reportbuilder\local\report\base;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * System report output class
@@ -38,7 +44,11 @@ class system_report implements renderable, templatable {
     /** @var report $report */
     protected $report;
 
+<<<<<<< HEAD
     /** @var system_report_base $source */
+=======
+    /** @var base $source */
+>>>>>>> forked/LAE_400_PACKAGE
     protected $source;
 
     /** @var array $parameters */
@@ -48,10 +58,17 @@ class system_report implements renderable, templatable {
      * Class constructor
      *
      * @param report $report
+<<<<<<< HEAD
      * @param system_report_base $source
      * @param array $parameters
      */
     public function __construct(report $report, system_report_base $source, array $parameters) {
+=======
+     * @param base $source
+     * @param array $parameters
+     */
+    public function __construct(report $report, base $source, array $parameters) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->report = $report;
         $this->source = $source;
         $this->parameters = $parameters;

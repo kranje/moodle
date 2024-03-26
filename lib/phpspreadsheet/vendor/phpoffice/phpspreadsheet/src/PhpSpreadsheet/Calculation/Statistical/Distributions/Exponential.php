@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,13 @@ class Exponential
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Exponential
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * EXPONDIST.
      *
@@ -18,6 +26,7 @@ class Exponential
      *        use EXPONDIST to determine the probability that the process takes at most 1 minute.
      *
      * @param mixed $value Float value for which we want the probability
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $lambda The parameter value as a float
      *                      Or can be an array of values
@@ -33,6 +42,18 @@ class Exponential
         if (is_array($value) || is_array($lambda) || is_array($cumulative)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $lambda, $cumulative);
         }
+=======
+     * @param mixed $lambda The parameter value as a float
+     * @param mixed $cumulative Boolean value indicating if we want the cdf (true) or the pdf (false)
+     *
+     * @return float|string
+     */
+    public static function distribution($value, $lambda, $cumulative)
+    {
+        $value = Functions::flattenSingleValue($value);
+        $lambda = Functions::flattenSingleValue($lambda);
+        $cumulative = Functions::flattenSingleValue($cumulative);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $value = DistributionValidations::validateFloat($value);
@@ -43,7 +64,11 @@ class Exponential
         }
 
         if (($value < 0) || ($lambda < 0)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($cumulative === true) {

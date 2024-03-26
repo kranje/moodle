@@ -295,7 +295,10 @@ abstract class filterset implements JsonSerializable {
      *
      * @return mixed|object
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function jsonSerialize() {
         return (object) [
             'jointype' => $this->get_join_type(),

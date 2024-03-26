@@ -20,13 +20,21 @@ require_once '../../../config.php';
 
 $id = required_param('id', PARAM_INT); // course id
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_user_key_login('grade/import', $id); // we want different keys for each course
 
 if (empty($CFG->gradepublishing)) {
+<<<<<<< HEAD
     throw new \moodle_exception('gradepubdisable');
+=======
+    print_error('gradepubdisable');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context = context_course::instance($id);

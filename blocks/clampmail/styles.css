@@ -1,29 +1,52 @@
+<<<<<<< HEAD
 #page-CLAMPMail div.region-content select.select,
 #page-CLAMPMail div.region-content table.generaltable,
 #page-CLAMPMail div.region-content div.generalbox {
+=======
+#page-Quickmail div.region-content select.select,
+#page-Quickmail div.region-content table.generaltable,
+#page-Quickmail div.region-content div.generalbox {
+>>>>>>> forked/LAE_400_PACKAGE
     margin-left: 20px;
     margin-right: 20px;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail select[multiple] {
+=======
+#page-Quickmail select[multiple] {
+>>>>>>> forked/LAE_400_PACKAGE
     min-width: 250px;
     max-width: 250px;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .emailtable {
     background-color: inherit;
 }
 
 #page-CLAMPMail .emailtable .r1 .c0,
+=======
+#page-Quickmail .emailtable {
+    background-color: inherit;
+}
+
+#page-Quickmail .emailtable .r1 .c0,
+>>>>>>> forked/LAE_400_PACKAGE
 .emailtable .r1 .c2 {
     width: 275px;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .object_labels {
+=======
+#page-Quickmail .object_labels {
+>>>>>>> forked/LAE_400_PACKAGE
     margin-right: 20px;
     font-weight: bold;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .emailtable .cell {
     border: none;
 }
@@ -33,10 +56,22 @@
 }
 
 #page-CLAMPMail .emailtable .r1 .c1 {
+=======
+#page-Quickmail .emailtable .cell {
+    border: none;
+}
+
+#page-Quickmail .emailtable .r0 .cell {
+    padding: .5em .5em .3em .5em;
+}
+
+#page-Quickmail .emailtable .r1 .c1 {
+>>>>>>> forked/LAE_400_PACKAGE
     text-align: center;
     vertical-align: middle;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .emailtable .r1 .c2 div {
     padding: 2px 0;
 }
@@ -47,19 +82,42 @@
 }
 
 #page-CLAMPMail .mform fieldset.hidden > div {
+=======
+#page-Quickmail .emailtable .r1 .c2 div {
+    padding: 2px 0;
+}
+
+#page-Quickmail .emailtable .r1 .c2,
+.emailtable .r0 .c1 {
+    text-align: right;
+}
+
+#page-Quickmail .mform fieldset.hidden > div {
+>>>>>>> forked/LAE_400_PACKAGE
     text-align: left;
     margin-left: auto;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .mform #add_button,
 #page-CLAMPMail #remove_button,
 #page-CLAMPMail #add_all,
 #page-CLAMPMail #remove_all {
+=======
+#page-Quickmail .mform #add_button,
+#remove_button,
+#add_all,
+#remove_all {
+>>>>>>> forked/LAE_400_PACKAGE
     width: 100px;
     height: 25px;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .mform input#id_subject {
+=======
+#page-Quickmail .mform input#id_subject {
+>>>>>>> forked/LAE_400_PACKAGE
     width: 75%;
 }
 
@@ -68,22 +126,38 @@
     vertical-align: unset;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .internal-navigation {
+=======
+#page-Quickmail .internal-navigation {
+>>>>>>> forked/LAE_400_PACKAGE
     display: flex;
     list-style: none;
     padding-left: 0;
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .internal-navigation li {
     list-style: none;
 }
 
 #page-CLAMPMail .internal-navigation li:first-child:before {
+=======
+#page-Quickmail .internal-navigation li {
+    list-style: none;
+}
+
+#page-Quickmail .internal-navigation li:first-child:before {
+>>>>>>> forked/LAE_400_PACKAGE
     padding: 0;
     content: "";
 }
 
+<<<<<<< HEAD
 #page-CLAMPMail .internal-navigation li:not(:first-child):before {
+=======
+#page-Quickmail .internal-navigation li:not(:first-child):before {
+>>>>>>> forked/LAE_400_PACKAGE
     display: inline-block;
     padding-right: .5rem;
     padding-left: .5rem;

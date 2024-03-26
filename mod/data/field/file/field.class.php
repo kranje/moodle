@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -46,6 +47,36 @@ class data_field_file extends data_field_base {
 
         // Necessary for the constants used in args.
         require_once($CFG->dirroot . '/repository/lib.php');
+=======
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+// NOTICE OF COPYRIGHT                                                   //
+//                                                                       //
+// Moodle - Modular Object-Oriented Dynamic Learning Environment         //
+//          http://moodle.org                                            //
+//                                                                       //
+// Copyright (C) 1999-onwards Moodle Pty Ltd  http://moodle.com          //
+//                                                                       //
+// This program is free software; you can redistribute it and/or modify  //
+// it under the terms of the GNU General Public License as published by  //
+// the Free Software Foundation; either version 2 of the License, or     //
+// (at your option) any later version.                                   //
+//                                                                       //
+// This program is distributed in the hope that it will be useful,       //
+// but WITHOUT ANY WARRANTY; without even the implied warranty of        //
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         //
+// GNU General Public License for more details:                          //
+//                                                                       //
+//          http://www.gnu.org/copyleft/gpl.html                         //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+
+class data_field_file extends data_field_base {
+    var $type = 'file';
+
+    function display_add_field($recordid = 0, $formdata = null) {
+        global $DB, $OUTPUT, $PAGE;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $itemid = null;
 
@@ -130,7 +161,11 @@ class data_field_file extends data_field_base {
     function get_file($recordid, $content=null) {
         global $DB;
         if (empty($content)) {
+<<<<<<< HEAD
             if (!$content = $this->get_data_content($recordid)) {
+=======
+            if (!$content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
+>>>>>>> forked/LAE_400_PACKAGE
                 return null;
             }
         }
@@ -143,6 +178,7 @@ class data_field_file extends data_field_base {
     }
 
     function display_browse_field($recordid, $template) {
+<<<<<<< HEAD
         global $OUTPUT;
 
         $content = $this->get_data_content($recordid);
@@ -185,6 +221,30 @@ class data_field_file extends data_field_base {
         );
 
         return $icon . '&nbsp;<a class="data-field-link" href="'.$url.'" >' . s($name) . '</a>';
+=======
+        global $CFG, $DB, $OUTPUT;
+
+        if (!$content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
+            return '';
+        }
+
+        if (empty($content->content)) {
+            return '';
+        }
+
+        if (!$file = $this->get_file($recordid, $content)) {
+            return '';
+        }
+
+        $name   = empty($content->content1) ? $file->get_filename() : $content->content1;
+        $src    = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'.$this->context->id.'/mod_data/content/'.$content->id.'/'.$file->get_filename());
+        $width  = $this->field->param1 ? ' width  = "'.s($this->field->param1).'" ':' ';
+        $height = $this->field->param2 ? ' height = "'.s($this->field->param2).'" ':' ';
+
+        $str = $OUTPUT->pix_icon(file_file_icon($file), get_mimetype_description($file), 'moodle', array('width' => 16, 'height' => 16)). '&nbsp;'.
+               '<a href="'.$src.'" >'.s($name).'</a>';
+        return $str;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 

@@ -243,7 +243,10 @@ ROWS = RADER
 RTD = RTD
 TRANSPOSE = TRANSPONERA
 VLOOKUP = LETARAD
+<<<<<<< HEAD
 *RC = RK
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Matematiska och trigonometriska funktioner (Math & Trig Functions)

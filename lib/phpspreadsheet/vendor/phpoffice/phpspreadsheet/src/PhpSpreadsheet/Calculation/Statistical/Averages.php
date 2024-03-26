@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Averages extends AggregateBase
 {
@@ -25,6 +28,7 @@ class Averages extends AggregateBase
         $aArgs = Functions::flattenArrayIndexed($args);
 
         // Return value
+<<<<<<< HEAD
         $returnValue = 0.0;
 
         $aMean = self::average(...$args);
@@ -32,6 +36,15 @@ class Averages extends AggregateBase
             return ExcelError::NAN();
         } elseif ($aMean === ExcelError::VALUE()) {
             return ExcelError::VALUE();
+=======
+        $returnValue = 0;
+
+        $aMean = self::average(...$args);
+        if ($aMean === Functions::DIV0()) {
+            return Functions::NAN();
+        } elseif ($aMean === Functions::VALUE()) {
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $aCount = 0;
@@ -41,7 +54,11 @@ class Averages extends AggregateBase
             // Strings containing numeric values are only counted if they are string literals (not cell values)
             //    and then only in MS Excel and in Open Office, not in Gnumeric
             if ((is_string($arg)) && (!is_numeric($arg)) && (!Functions::isCellValue($k))) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             if (self::isAcceptedCountable($arg, $k)) {
                 $returnValue += abs($arg - $aMean);
@@ -51,7 +68,11 @@ class Averages extends AggregateBase
 
         // Return
         if ($aCount === 0) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $returnValue / $aCount;
@@ -80,7 +101,11 @@ class Averages extends AggregateBase
             // Strings containing numeric values are only counted if they are string literals (not cell values)
             //    and then only in MS Excel and in Open Office, not in Gnumeric
             if ((is_string($arg)) && (!is_numeric($arg)) && (!Functions::isCellValue($k))) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             if (self::isAcceptedCountable($arg, $k)) {
                 $returnValue += $arg;
@@ -93,7 +118,11 @@ class Averages extends AggregateBase
             return $returnValue / $aCount;
         }
 
+<<<<<<< HEAD
         return ExcelError::DIV0();
+=======
+        return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -133,7 +162,11 @@ class Averages extends AggregateBase
             return $returnValue / $aCount;
         }
 
+<<<<<<< HEAD
         return ExcelError::DIV0();
+=======
+        return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -152,7 +185,11 @@ class Averages extends AggregateBase
     {
         $aArgs = Functions::flattenArray($args);
 
+<<<<<<< HEAD
         $returnValue = ExcelError::NAN();
+=======
+        $returnValue = Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $aArgs = self::filterArguments($aArgs);
         $valueCount = count($aArgs);
@@ -184,7 +221,11 @@ class Averages extends AggregateBase
      */
     public static function mode(...$args)
     {
+<<<<<<< HEAD
         $returnValue = ExcelError::NA();
+=======
+        $returnValue = Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Loop through arguments
         $aArgs = Functions::flattenArray($args);
@@ -203,7 +244,11 @@ class Averages extends AggregateBase
             $args,
             function ($value) {
                 // Is it a numeric value?
+<<<<<<< HEAD
                 return  is_numeric($value) && (!is_string($value));
+=======
+                return  (is_numeric($value)) && (!is_string($value));
+>>>>>>> forked/LAE_400_PACKAGE
             }
         );
     }
@@ -252,7 +297,11 @@ class Averages extends AggregateBase
         }
 
         if ($maxfreq <= 1) {
+<<<<<<< HEAD
             return ExcelError::NA();
+=======
+            return Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $maxfreqdatum;

@@ -205,13 +205,21 @@ class Horde_Imap_Client_Data_Envelope implements Serializable
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        return serialize(array(
+            'd' => $this->_data,
+            'v' => self::VERSION
+        ));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
     public function unserialize($data)
     {
+<<<<<<< HEAD
         $this->__unserialize(@unserialize($data));
     }
 
@@ -229,6 +237,10 @@ class Horde_Imap_Client_Data_Envelope implements Serializable
     public function __unserialize(array $data)
     {
         if (empty($data['v']) || $data['v'] != self::VERSION) {
+=======
+        $data = @unserialize($data);
+        if (empty($data['v']) || ($data['v'] != self::VERSION)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new Exception('Cache version change');
         }
 

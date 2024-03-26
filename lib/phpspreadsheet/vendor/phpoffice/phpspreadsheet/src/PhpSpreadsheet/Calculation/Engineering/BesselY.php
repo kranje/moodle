@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,13 @@ class BesselY
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class BesselY
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * BESSELY.
      *
@@ -20,11 +28,15 @@ class BesselY
      *
      * @param mixed $x A float value at which to evaluate the function.
      *                   If x is nonnumeric, BESSELY returns the #VALUE! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $ord The integer order of the Bessel function.
      *                       If ord is not an integer, it is truncated.
      *                       If $ord is nonnumeric, BESSELY returns the #VALUE! error value.
      *                       If $ord < 0, BESSELY returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|float|string Result, or a string containing an error
@@ -36,6 +48,15 @@ class BesselY
         if (is_array($x) || is_array($ord)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $x, $ord);
         }
+=======
+     *
+     * @return float|string Result, or a string containing an error
+     */
+    public static function BESSELY($x, $ord)
+    {
+        $x = Functions::flattenSingleValue($x);
+        $ord = Functions::flattenSingleValue($ord);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $x = EngineeringValidations::validateFloat($x);
@@ -45,12 +66,20 @@ class BesselY
         }
 
         if (($ord < 0) || ($x <= 0.0)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $fBy = self::calculate($x, $ord);
 
+<<<<<<< HEAD
         return (is_nan($fBy)) ? ExcelError::NAN() : $fBy;
+=======
+        return (is_nan($fBy)) ? Functions::NAN() : $fBy;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private static function calculate(float $x, int $ord): float
@@ -66,6 +95,7 @@ class BesselY
         return self::besselY2($x, $ord);
     }
 
+<<<<<<< HEAD
     /**
      * Mollify Phpstan.
      *
@@ -81,6 +111,8 @@ class BesselY
         return $rslt;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     private static function besselY0(float $x): float
     {
         if ($x < 8.0) {
@@ -90,7 +122,11 @@ class BesselY
             $ans2 = 40076544269.0 + $y * (745249964.8 + $y * (7189466.438 + $y *
                         (47447.26470 + $y * (226.1030244 + $y))));
 
+<<<<<<< HEAD
             return $ans1 / $ans2 + 0.636619772 * self::callBesselJ($x, 0) * log($x);
+=======
+            return $ans1 / $ans2 + 0.636619772 * BesselJ::BESSELJ($x, 0) * log($x);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $z = 8.0 / $x;
@@ -112,7 +148,11 @@ class BesselY
             $ans2 = 0.2499580570e14 + $y * (0.4244419664e12 + $y * (0.3733650367e10 + $y * (0.2245904002e8 + $y *
                             (0.1020426050e6 + $y * (0.3549632885e3 + $y)))));
 
+<<<<<<< HEAD
             return ($ans1 / $ans2) + 0.636619772 * (self::callBesselJ($x, 1) * log($x) - 1 / $x);
+=======
+            return ($ans1 / $ans2) + 0.636619772 * (BesselJ::BESSELJ($x, 1) * log($x) - 1 / $x);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $z = 8.0 / $x;

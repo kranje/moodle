@@ -14,8 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 namespace core_privacy\local\request;
 
+=======
+/**
+ * This file contains the moodle format implementation of the content writer.
+ *
+ * @package core_privacy
+ * @copyright 2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+namespace core_privacy\local\request;
+
+defined('MOODLE_INTERNAL') || die();
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * The moodle_content_writer is the default Moodle implementation of a content writer.
  *
@@ -24,7 +38,10 @@ namespace core_privacy\local\request;
  *
  * Objects of data are stored as JSON.
  *
+<<<<<<< HEAD
  * @package core_privacy
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright 2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -160,10 +177,14 @@ class moodle_content_writer implements content_writer {
      * @param   string          $text       The text to be processed
      * @return  string                      The processed string
      */
+<<<<<<< HEAD
     public function rewrite_pluginfile_urls(array $subcontext, $component, $filearea, $itemid, $text): string {
         if ($text === null || $text === '') {
             return '';
         }
+=======
+    public function rewrite_pluginfile_urls(array $subcontext, $component, $filearea, $itemid, $text) : string {
+>>>>>>> forked/LAE_400_PACKAGE
         // Need to take into consideration the subcontext to provide the full path to this file.
         $subcontextpath = '';
         if (!empty($subcontext)) {
@@ -622,8 +643,13 @@ class moodle_content_writer implements content_writer {
         $targetpath = ['js', 'general.js'];
         $this->copy_data($jspath, $targetpath);
 
+<<<<<<< HEAD
         $jquery = ['lib', 'jquery', 'jquery-3.6.1.min.js'];
         $jquerydestination = ['js', 'jquery-3.6.1.min.js'];
+=======
+        $jquery = ['lib', 'jquery', 'jquery-3.6.0.min.js'];
+        $jquerydestination = ['js', 'jquery-3.6.0.min.js'];
+>>>>>>> forked/LAE_400_PACKAGE
         $this->copy_data($jquery, $jquerydestination);
 
         $requirecurrentpath = ['lib', 'requirejs', 'require.min.js'];

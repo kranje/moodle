@@ -47,7 +47,11 @@ $pageurl = new moodle_url('/' . $CFG->admin . '/tool/availabilityconditions/');
 if (($plugin = optional_param('plugin', '', PARAM_PLUGIN))) {
     require_sesskey();
     if (!array_key_exists($plugin, $plugins)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcomponent', 'error', $pageurl);
+=======
+        print_error('invalidcomponent', 'error', $pageurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $action = required_param('action', PARAM_ALPHA);
     switch ($action) {

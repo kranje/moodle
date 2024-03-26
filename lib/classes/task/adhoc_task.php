@@ -47,6 +47,7 @@ abstract class adhoc_task extends task_base {
     private $concurrencylock = null;
 
     /**
+<<<<<<< HEAD
      * Provide default implementation of the task name for backward compatibility. Extending classes are expected to implement
      * this method to provide a descriptive name for the task (shown to admins)
      *
@@ -61,6 +62,8 @@ abstract class adhoc_task extends task_base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Setter for $id.
      * @param int|null $id
      */

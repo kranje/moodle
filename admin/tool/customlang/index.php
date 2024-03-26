@@ -47,7 +47,11 @@ if ($action === 'checkout') {
     require_sesskey();
     require_capability('tool/customlang:edit', context_system::instance());
     if (empty($lng)) {
+<<<<<<< HEAD
         throw new \moodle_exception('missingparameter');
+=======
+        print_error('missingparameter');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $PAGE->set_cacheable(false);    // progress bar is used here
@@ -70,7 +74,11 @@ if ($action === 'checkin') {
     require_sesskey();
     require_capability('tool/customlang:edit', context_system::instance());
     if (empty($lng)) {
+<<<<<<< HEAD
         throw new \moodle_exception('missingparameter');
+=======
+        print_error('missingparameter');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!$confirm) {

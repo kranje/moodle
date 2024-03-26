@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +27,10 @@ namespace MongoDB\Operation;
 
 use ArrayIterator;
 use MongoDB\Driver\Command;
+<<<<<<< HEAD
 use MongoDB\Driver\Cursor;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
 use MongoDB\Driver\ReadConcern;
 use MongoDB\Driver\ReadPreference;
@@ -30,7 +41,11 @@ use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnexpectedValueException;
 use MongoDB\Exception\UnsupportedException;
 use stdClass;
+<<<<<<< HEAD
 
+=======
+use Traversable;
+>>>>>>> forked/LAE_400_PACKAGE
 use function current;
 use function is_array;
 use function is_bool;
@@ -39,6 +54,10 @@ use function is_object;
 use function is_string;
 use function MongoDB\create_field_path_type_map;
 use function MongoDB\is_last_pipeline_operator_write;
+<<<<<<< HEAD
+=======
+use function MongoDB\server_supports_feature;
+>>>>>>> forked/LAE_400_PACKAGE
 use function sprintf;
 
 /**
@@ -46,10 +65,29 @@ use function sprintf;
  *
  * @api
  * @see \MongoDB\Collection::aggregate()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/aggregate/
  */
 class Aggregate implements Executable, Explainable
 {
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/aggregate/
+ */
+class Aggregate implements Executable, Explainable
+{
+    /** @var integer */
+    private static $wireVersionForCollation = 5;
+
+    /** @var integer */
+    private static $wireVersionForDocumentLevelValidation = 4;
+
+    /** @var integer */
+    private static $wireVersionForReadConcern = 4;
+
+    /** @var integer */
+    private static $wireVersionForWriteConcern = 5;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var string */
     private $databaseName;
 
@@ -62,12 +100,15 @@ class Aggregate implements Executable, Explainable
     /** @var array */
     private $options;
 
+<<<<<<< HEAD
     /** @var bool */
     private $isExplain;
 
     /** @var bool */
     private $isWrite;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Constructs an aggregate command.
      *
@@ -75,7 +116,11 @@ class Aggregate implements Executable, Explainable
      *
      *  * allowDiskUse (boolean): Enables writing to temporary files. When set
      *    to true, aggregation stages can write data to the _tmp sub-directory
+<<<<<<< HEAD
      *    in the dbPath directory.
+=======
+     *    in the dbPath directory. The default is false.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * batchSize (integer): The number of documents to return per batch.
      *
@@ -83,11 +128,24 @@ class Aggregate implements Executable, Explainable
      *    circumvent document level validation. This only applies when an $out
      *    or $merge stage is specified.
      *
+<<<<<<< HEAD
      *  * collation (document): Collation specification.
      *
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    Only string values are supported for server versions < 4.4.
+=======
+     *    For servers < 3.2, this option is ignored as document level validation
+     *    is not available.
+     *
+     *  * collation (document): Collation specification.
+     *
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+     *
+     *  * comment (string): An arbitrary string to help trace the operation
+     *    through the database profiler, currentOp, and logs.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * explain (boolean): Specifies whether or not to return the information
      *    on the processing of the pipeline.
@@ -96,6 +154,7 @@ class Aggregate implements Executable, Explainable
      *    name as a string or the index key pattern as a document. If specified,
      *    then the query system will only consider plans using the hinted index.
      *
+<<<<<<< HEAD
      *  * let (document): Map of parameter names and values. Values must be
      *    constant or closed expressions that do not reference document fields.
      *    Parameters can then be accessed as variables in an aggregate
@@ -104,17 +163,30 @@ class Aggregate implements Executable, Explainable
      *    This is not supported for server versions < 5.0 and will result in an
      *    exception at execution time if used.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *  * maxTimeMS (integer): The maximum amount of time to allow the query to
      *    run.
      *
      *  * readConcern (MongoDB\Driver\ReadConcern): Read concern.
      *
+<<<<<<< HEAD
+=======
+     *    This is not supported for server versions < 3.2 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * readPreference (MongoDB\Driver\ReadPreference): Read preference.
      *
      *    This option is ignored if an $out or $merge stage is specified.
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * typeMap (array): Type map for BSON deserialization. This will be
      *    applied to the returned Cursor (it is not sent to the server).
      *
@@ -127,6 +199,12 @@ class Aggregate implements Executable, Explainable
      *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern. This only
      *    applies when an $out or $merge stage is specified.
      *
+<<<<<<< HEAD
+=======
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * Note: Collection-agnostic commands (e.g. $currentOp) may be executed by
      * specifying null for the collection name.
      *
@@ -136,7 +214,11 @@ class Aggregate implements Executable, Explainable
      * @param array       $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, ?string $collectionName, array $pipeline, array $options = [])
+=======
+    public function __construct($databaseName, $collectionName, array $pipeline, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $expectedIndex = 0;
 
@@ -152,9 +234,18 @@ class Aggregate implements Executable, Explainable
             $expectedIndex += 1;
         }
 
+<<<<<<< HEAD
         $options += ['useCursor' => true];
 
         if (isset($options['allowDiskUse']) && ! is_bool($options['allowDiskUse'])) {
+=======
+        $options += [
+            'allowDiskUse' => false,
+            'useCursor' => true,
+        ];
+
+        if (! is_bool($options['allowDiskUse'])) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw InvalidArgumentException::invalidType('"allowDiskUse" option', $options['allowDiskUse'], 'boolean');
         }
 
@@ -170,6 +261,13 @@ class Aggregate implements Executable, Explainable
             throw InvalidArgumentException::invalidType('"collation" option', $options['collation'], 'array or object');
         }
 
+<<<<<<< HEAD
+=======
+        if (isset($options['comment']) && ! is_string($options['comment'])) {
+            throw InvalidArgumentException::invalidType('"comment" option', $options['comment'], 'string');
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['explain']) && ! is_bool($options['explain'])) {
             throw InvalidArgumentException::invalidType('"explain" option', $options['explain'], 'boolean');
         }
@@ -178,10 +276,13 @@ class Aggregate implements Executable, Explainable
             throw InvalidArgumentException::invalidType('"hint" option', $options['hint'], 'string or array or object');
         }
 
+<<<<<<< HEAD
         if (isset($options['let']) && ! is_array($options['let']) && ! is_object($options['let'])) {
             throw InvalidArgumentException::invalidType('"let" option', $options['let'], ['array', 'object']);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['maxAwaitTimeMS']) && ! is_integer($options['maxAwaitTimeMS'])) {
             throw InvalidArgumentException::invalidType('"maxAwaitTimeMS" option', $options['maxAwaitTimeMS'], 'integer');
         }
@@ -218,10 +319,13 @@ class Aggregate implements Executable, Explainable
             throw new InvalidArgumentException('"batchSize" option should not be used if "useCursor" is false');
         }
 
+<<<<<<< HEAD
         if (isset($options['bypassDocumentValidation']) && ! $options['bypassDocumentValidation']) {
             unset($options['bypassDocumentValidation']);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['readConcern']) && $options['readConcern']->isDefault()) {
             unset($options['readConcern']);
         }
@@ -230,6 +334,7 @@ class Aggregate implements Executable, Explainable
             unset($options['writeConcern']);
         }
 
+<<<<<<< HEAD
         $this->isExplain = ! empty($options['explain']);
         $this->isWrite = is_last_pipeline_operator_write($pipeline) && ! $this->isExplain;
 
@@ -247,6 +352,14 @@ class Aggregate implements Executable, Explainable
 
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        if (! empty($options['explain'])) {
+            $options['useCursor'] = false;
+        }
+
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = isset($collectionName) ? (string) $collectionName : null;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->pipeline = $pipeline;
         $this->options = $options;
     }
@@ -255,24 +368,50 @@ class Aggregate implements Executable, Explainable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return ArrayIterator|Cursor
      * @throws UnexpectedValueException if the command response was malformed
      * @throws UnsupportedException if read concern or write concern is used and unsupported
+=======
+     * @param Server $server
+     * @return Traversable
+     * @throws UnexpectedValueException if the command response was malformed
+     * @throws UnsupportedException if collation, read concern, or write concern is used and unsupported
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server)
     {
+<<<<<<< HEAD
+=======
+        if (isset($this->options['collation']) && ! server_supports_feature($server, self::$wireVersionForCollation)) {
+            throw UnsupportedException::collationNotSupported();
+        }
+
+        if (isset($this->options['readConcern']) && ! server_supports_feature($server, self::$wireVersionForReadConcern)) {
+            throw UnsupportedException::readConcernNotSupported();
+        }
+
+        if (isset($this->options['writeConcern']) && ! server_supports_feature($server, self::$wireVersionForWriteConcern)) {
+            throw UnsupportedException::writeConcernNotSupported();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $inTransaction = isset($this->options['session']) && $this->options['session']->isInTransaction();
         if ($inTransaction) {
             if (isset($this->options['readConcern'])) {
                 throw UnsupportedException::readConcernNotSupportedInTransaction();
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($this->options['writeConcern'])) {
                 throw UnsupportedException::writeConcernNotSupportedInTransaction();
             }
         }
 
+<<<<<<< HEAD
         $command = new Command(
             $this->createCommandDocument(),
             $this->createCommandOptions()
@@ -281,6 +420,22 @@ class Aggregate implements Executable, Explainable
         $cursor = $this->executeCommand($server, $command);
 
         if ($this->options['useCursor'] || $this->isExplain) {
+=======
+        $hasExplain = ! empty($this->options['explain']);
+        $hasWriteStage = $this->hasWriteStage();
+
+        $command = new Command(
+            $this->createCommandDocument($server, $hasWriteStage),
+            $this->createCommandOptions()
+        );
+        $options = $this->createOptions($hasWriteStage, $hasExplain);
+
+        $cursor = $hasWriteStage && ! $hasExplain
+            ? $server->executeReadWriteCommand($this->databaseName, $command, $options)
+            : $server->executeReadCommand($this->databaseName, $command, $options);
+
+        if ($this->options['useCursor'] || $hasExplain) {
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($this->options['typeMap'])) {
                 $cursor->setTypeMap($this->options['typeMap']);
             }
@@ -294,13 +449,18 @@ class Aggregate implements Executable, Explainable
 
         $result = current($cursor->toArray());
 
+<<<<<<< HEAD
         if (! is_object($result) || ! isset($result->result) || ! is_array($result->result)) {
+=======
+        if (! isset($result->result) || ! is_array($result->result)) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new UnexpectedValueException('aggregate command did not return a "result" array');
         }
 
         return new ArrayIterator($result->result);
     }
 
+<<<<<<< HEAD
     /**
      * Returns the command document for this operation.
      *
@@ -316,22 +476,47 @@ class Aggregate implements Executable, Explainable
      * Create the aggregate command document.
      */
     private function createCommandDocument(): array
+=======
+    public function getCommandDocument(Server $server)
+    {
+        return $this->createCommandDocument($server, $this->hasWriteStage());
+    }
+
+    private function createCommandDocument(Server $server, bool $hasWriteStage) : array
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $cmd = [
             'aggregate' => $this->collectionName ?? 1,
             'pipeline' => $this->pipeline,
         ];
 
+<<<<<<< HEAD
         foreach (['allowDiskUse', 'bypassDocumentValidation', 'comment', 'explain', 'maxTimeMS'] as $option) {
+=======
+        $cmd['allowDiskUse'] = $this->options['allowDiskUse'];
+
+        if (! empty($this->options['bypassDocumentValidation']) &&
+            server_supports_feature($server, self::$wireVersionForDocumentLevelValidation)
+        ) {
+            $cmd['bypassDocumentValidation'] = $this->options['bypassDocumentValidation'];
+        }
+
+        foreach (['comment', 'explain', 'maxTimeMS'] as $option) {
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($this->options[$option])) {
                 $cmd[$option] = $this->options[$option];
             }
         }
 
+<<<<<<< HEAD
         foreach (['collation', 'let'] as $option) {
             if (isset($this->options[$option])) {
                 $cmd[$option] = (object) $this->options[$option];
             }
+=======
+        if (isset($this->options['collation'])) {
+            $cmd['collation'] = (object) $this->options['collation'];
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (isset($this->options['hint'])) {
@@ -339,7 +524,14 @@ class Aggregate implements Executable, Explainable
         }
 
         if ($this->options['useCursor']) {
+<<<<<<< HEAD
             $cmd['cursor'] = isset($this->options["batchSize"])
+=======
+            /* Ignore batchSize if pipeline includes an $out or $merge stage, as
+             * no documents will be returned and sending a batchSize of zero
+             * could prevent the pipeline from executing at all. */
+            $cmd['cursor'] = isset($this->options["batchSize"]) && ! $hasWriteStage
+>>>>>>> forked/LAE_400_PACKAGE
                 ? ['batchSize' => $this->options["batchSize"]]
                 : new stdClass();
         }
@@ -347,7 +539,11 @@ class Aggregate implements Executable, Explainable
         return $cmd;
     }
 
+<<<<<<< HEAD
     private function createCommandOptions(): array
+=======
+    private function createCommandOptions() : array
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $cmdOptions = [];
 
@@ -359,6 +555,7 @@ class Aggregate implements Executable, Explainable
     }
 
     /**
+<<<<<<< HEAD
      * Execute the aggregate command using the appropriate Server method.
      *
      * @see https://php.net/manual/en/mongodb-driver-server.executecommand.php
@@ -392,5 +589,41 @@ class Aggregate implements Executable, Explainable
         }
 
         return $server->executeReadWriteCommand($this->databaseName, $command, $options);
+=======
+     * Create options for executing the command.
+     *
+     * @see http://php.net/manual/en/mongodb-driver-server.executereadcommand.php
+     * @see http://php.net/manual/en/mongodb-driver-server.executereadwritecommand.php
+     * @param boolean $hasWriteStage
+     * @param boolean $hasExplain
+     * @return array
+     */
+    private function createOptions($hasWriteStage, $hasExplain)
+    {
+        $options = [];
+
+        if (isset($this->options['readConcern'])) {
+            $options['readConcern'] = $this->options['readConcern'];
+        }
+
+        if (! $hasWriteStage && isset($this->options['readPreference'])) {
+            $options['readPreference'] = $this->options['readPreference'];
+        }
+
+        if (isset($this->options['session'])) {
+            $options['session'] = $this->options['session'];
+        }
+
+        if ($hasWriteStage && ! $hasExplain && isset($this->options['writeConcern'])) {
+            $options['writeConcern'] = $this->options['writeConcern'];
+        }
+
+        return $options;
+    }
+
+    private function hasWriteStage() : bool
+    {
+        return is_last_pipeline_operator_write($this->pipeline);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

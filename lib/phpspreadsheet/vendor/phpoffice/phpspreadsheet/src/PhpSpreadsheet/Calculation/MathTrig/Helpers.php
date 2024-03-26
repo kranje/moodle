@@ -4,7 +4,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Helpers
 {
@@ -15,7 +18,11 @@ class Helpers
      */
     public static function verySmallDenominator(float $numerator, float $denominator)
     {
+<<<<<<< HEAD
         return (abs($denominator) < 1.0E-12) ? ExcelError::DIV0() : ($numerator / $denominator);
+=======
+        return (abs($denominator) < 1.0E-12) ? Functions::DIV0() : ($numerator / $denominator);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -38,7 +45,11 @@ class Helpers
             return 0 + $number;
         }
 
+<<<<<<< HEAD
         throw new Exception(ExcelError::throwError($number));
+=======
+        throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -59,7 +70,11 @@ class Helpers
             return 0 + $number;
         }
 
+<<<<<<< HEAD
         throw new Exception(ExcelError::throwError($number));
+=======
+        throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -73,7 +88,11 @@ class Helpers
             return;
         }
 
+<<<<<<< HEAD
         throw new Exception($except ?? ExcelError::NAN());
+=======
+        throw new Exception($except ?? Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -87,7 +106,11 @@ class Helpers
             return;
         }
 
+<<<<<<< HEAD
         throw new Exception($except ?? ExcelError::NAN());
+=======
+        throw new Exception($except ?? Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -101,7 +124,11 @@ class Helpers
             return;
         }
 
+<<<<<<< HEAD
         throw new Exception(ExcelError::DIV0());
+=======
+        throw new Exception(Functions::DIV0());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public static function returnSign(float $number): int
@@ -125,6 +152,10 @@ class Helpers
      */
     public static function numberOrNan($result)
     {
+<<<<<<< HEAD
         return is_nan($result) ? ExcelError::NAN() : $result;
+=======
+        return is_nan($result) ? Functions::NAN() : $result;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

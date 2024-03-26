@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace ZipStream;
 
 use Psr\Http\Message\StreamInterface;
+<<<<<<< HEAD
 use RuntimeException;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use ZipStream\Exception\EncodingException;
 use ZipStream\Exception\FileNotFoundException;
 use ZipStream\Exception\FileNotReadableException;
@@ -76,9 +79,14 @@ class File
      * @var resource
      */
     private $deflate;
+<<<<<<< HEAD
 
     /**
      * @var \HashContext
+=======
+    /**
+     * @var resource
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $hash;
 
@@ -293,6 +301,7 @@ class File
             $this->version = Version::ZIP64();
         }
 
+<<<<<<< HEAD
         if ($this->bits & self::BIT_EFS_UTF8) {
             // Put the tricky entry to
             // force Linux unzip to lookup EFS flag.
@@ -300,6 +309,8 @@ class File
             $fields[] = ['v', 0x0000];  // zero length
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return ZipStream::packFields($fields);
     }
 
@@ -375,8 +386,12 @@ class File
 
     protected function deflateInit(): void
     {
+<<<<<<< HEAD
         $hash = hash_init(self::HASH_ALGORITHM);
         $this->hash = $hash;
+=======
+        $this->hash = hash_init(self::HASH_ALGORITHM);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($this->method->equals(Method::DEFLATE())) {
             $this->deflate = deflate_init(
                 ZLIB_ENCODING_RAW,

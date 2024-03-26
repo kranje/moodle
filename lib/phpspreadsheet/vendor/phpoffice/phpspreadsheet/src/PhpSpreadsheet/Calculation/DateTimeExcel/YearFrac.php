@@ -2,16 +2,24 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class YearFrac
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * YEARFRAC.
      *
@@ -27,16 +35,23 @@ class YearFrac
      *
      * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $endDate Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
      *                         Or can be an array of methods
      * @param array|int $method Method used for the calculation
+=======
+     * @param mixed $endDate Excel date serial value (float), PHP date timestamp (integer),
+     *                                    PHP DateTime object, or a standard date string
+     * @param int $method Method used for the calculation
+>>>>>>> forked/LAE_400_PACKAGE
      *                                        0 or omitted    US (NASD) 30/360
      *                                        1                Actual/actual
      *                                        2                Actual/360
      *                                        3                Actual/365
      *                                        4                European 30/360
+<<<<<<< HEAD
      *                         Or can be an array of methods
      *
      * @return array|float|string fraction of the year, or a string containing an error
@@ -49,6 +64,13 @@ class YearFrac
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $startDate, $endDate, $method);
         }
 
+=======
+     *
+     * @return float|string fraction of the year, or a string containing an error
+     */
+    public static function fraction($startDate, $endDate, $method = 0)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $method = (int) Helpers::validateNumericNull($method);
             $sDate = Helpers::getDateValue($startDate);
@@ -63,6 +85,7 @@ class YearFrac
 
         switch ($method) {
             case 0:
+<<<<<<< HEAD
                 return Functions::scalar(Days360::between($startDate, $endDate)) / 360;
             case 1:
                 return self::method1($startDate, $endDate);
@@ -75,6 +98,20 @@ class YearFrac
         }
 
         return ExcelError::NAN();
+=======
+                return Days360::between($startDate, $endDate) / 360;
+            case 1:
+                return self::method1($startDate, $endDate);
+            case 2:
+                return Difference::interval($startDate, $endDate) / 360;
+            case 3:
+                return Difference::interval($startDate, $endDate) / 365;
+            case 4:
+                return Days360::between($startDate, $endDate, true) / 360;
+        }
+
+        return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -100,7 +137,11 @@ class YearFrac
 
     private static function method1(float $startDate, float $endDate): float
     {
+<<<<<<< HEAD
         $days = Functions::scalar(Difference::interval($startDate, $endDate));
+=======
+        $days = Difference::interval($startDate, $endDate);
+>>>>>>> forked/LAE_400_PACKAGE
         $startYear = (int) DateParts::year($startDate);
         $endYear = (int) DateParts::year($endDate);
         $years = $endYear - $startYear + 1;

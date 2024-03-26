@@ -769,16 +769,31 @@ class base_test extends \advanced_testcase {
         $event4->trigger();
         $this->assertDebuggingNotCalled();
 
+<<<<<<< HEAD
         $event5 = \core_tests\event\problematic_event1::create(array('context'=>\context_system::instance(), 'other'=>(object)array('a'=>1)));
+=======
+        // Check the invalid content that cannot be converted to JSON will trigger debugging messages.
+        $event5 = \core_tests\event\problematic_event1::create(array('context' => \context_system::instance(), 'other' => [
+            'a' => NAN
+        ]));
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertDebuggingNotCalled();
         $event5->trigger();
         $this->assertDebuggingCalled();
 
+<<<<<<< HEAD
         $url = new \moodle_url('/admin/');
         $event6 = \core_tests\event\problematic_event1::create(array('context'=>\context_system::instance(), 'other'=>array('a'=>$url)));
         $this->assertDebuggingNotCalled();
         $event6->trigger();
         $this->assertDebuggingCalled();
+=======
+        // Check that moodle_url object does not trigger debugging messages.
+        $url = new \moodle_url('/admin/');
+        $event6 = \core_tests\event\problematic_event1::create(array('context'=>\context_system::instance(), 'other'=>array('a'=>$url)));
+        $event6->trigger();
+        $this->assertDebuggingNotCalled();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Check that whole float numbers do not trigger debugging messages.
         $event7 = \core_tests\event\unittest_executed::create(array('context'=>\context_system::instance(),

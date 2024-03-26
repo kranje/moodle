@@ -25,6 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $renamedclasses = [
+<<<<<<< HEAD
     // Since Moodle 4.1.
+=======
+    // Since Moodle 4.0.5.
+>>>>>>> forked/LAE_400_PACKAGE
     'mod_quiz\local\views\secondary' => 'mod_quiz\navigation\views\secondary',
 ];

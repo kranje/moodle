@@ -24,7 +24,10 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
       | activity                            | assign                      |
       | course                              | C1                          |
       | name                                | Test assignment name        |
+<<<<<<< HEAD
       | intro                               | Test assignment description |
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       | assignsubmission_onlinetext_enabled | 1                           |
       | assignsubmission_file_enabled       | 0                           |
       | markingworkflow                     | 1                           |
@@ -39,7 +42,10 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
     And I set the following fields to these values:
       | Online text | I'm student1's submission |
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # Add another submission.
     And I am on the "Test assignment name" "assign activity" page logged in as "student2"
     Then I should not see "Feedback"
@@ -48,7 +54,10 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
     And I set the following fields to these values:
       | Online text | I'm student2's submission |
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # Mark the submissions.
     And I am on the "Test assignment name" "assign activity" page logged in as "teacher1"
     And I follow "View all submissions"
@@ -87,6 +96,7 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
     And I follow "View all submissions"
     Then I should see "Released" in the "I'm student1's submission" "table_row"
     And I should see "Released" in the "I'm student2's submission" "table_row"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
@@ -100,12 +110,21 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
     Then I should not see "50"
     And I should not see "Great job!"
     And I log out
+=======
+    And I am on the "Course 1" "grades > User report > View" page logged in as "student1"
+    Then I should not see "50"
+    And I should not see "Great job!"
+    And I am on the "Course 1" "grades > User report > View" page logged in as "student2"
+    Then I should not see "50"
+    And I should not see "Great job!"
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test assignment name" "assign activity" page logged in as "teacher1"
     And I follow "View all submissions"
     And I set the field "Grading action" to "Reveal student identities"
     And I press "Continue"
     Then I should see "Released" in the "Student 1" "table_row"
     And I should see "Released" in the "Student 2" "table_row"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
@@ -116,6 +135,12 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
     And I log in as "student2"
     And I am on "Course 1" course homepage
     And I navigate to "User report" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > User report > View" page logged in as "student1"
+    Then I should see "50"
+    And I should see "Great job!"
+    And I am on the "Course 1" "grades > User report > View" page logged in as "student2"
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "50"
     And I should see "Great job!"
 
@@ -135,6 +160,7 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
     And I follow "View all submissions"
     Then I should see "Released" in the "Student 1" "table_row"
     And I should see "Released" in the "Student 2" "table_row"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
@@ -145,5 +171,11 @@ Feature: Bulk released grades should not be sent to gradebook while submissions 
     And I log in as "student2"
     And I am on "Course 1" course homepage
     And I navigate to "User report" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > User report > View" page logged in as "student1"
+    Then I should see "50"
+    And I should see "Great job!"
+    And I am on the "Course 1" "grades > User report > View" page logged in as "student2"
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "50"
     And I should see "Great job!"

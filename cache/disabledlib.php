@@ -200,6 +200,7 @@ class cache_disabled extends cache {
     public function purge() {
         return true;
     }
+<<<<<<< HEAD
 
     /**
      * Pretend that we got a lock to avoid errors.
@@ -220,6 +221,8 @@ class cache_disabled extends cache {
     public function release_lock(string $key) : bool {
         return true;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**

@@ -161,7 +161,10 @@ class external_test extends externallib_advanced_testcase {
         $workshop1->coursemodule = $workshop1->cmid;
         $workshop1->introformat = 1;
         $workshop1->introfiles = [];
+<<<<<<< HEAD
         $workshop1->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $workshop1->instructauthorsfiles = [];
         $workshop1->instructauthorsformat = 1;
         $workshop1->instructreviewersfiles = [];
@@ -174,7 +177,10 @@ class external_test extends externallib_advanced_testcase {
         $workshop2->coursemodule = $workshop2->cmid;
         $workshop2->introformat = 1;
         $workshop2->introfiles = [];
+<<<<<<< HEAD
         $workshop2->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $workshop2->instructauthorsfiles = [];
         $workshop2->instructauthorsformat = 1;
         $workshop2->instructreviewersfiles = [];

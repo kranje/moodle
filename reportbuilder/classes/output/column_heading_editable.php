@@ -24,11 +24,14 @@ use core_reportbuilder\manager;
 use core_reportbuilder\permission;
 use core_reportbuilder\local\models\column;
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die;
 
 global $CFG;
 require_once("{$CFG->libdir}/external/externallib.php");
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Column heading editable component
  *

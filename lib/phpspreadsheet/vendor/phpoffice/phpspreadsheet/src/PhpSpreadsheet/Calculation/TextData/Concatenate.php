@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ErrorValue;
@@ -13,6 +14,12 @@ class Concatenate
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Concatenate
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * CONCATENATE.
      *
@@ -26,6 +33,7 @@ class Concatenate
         $aArgs = Functions::flattenArray($args);
 
         foreach ($aArgs as $arg) {
+<<<<<<< HEAD
             $value = Helpers::extractString($arg);
             if (ErrorValue::isError($value)) {
                 $returnValue = $value;
@@ -38,6 +46,9 @@ class Concatenate
 
                 break;
             }
+=======
+            $returnValue .= Helpers::extractString($arg);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $returnValue;
@@ -46,6 +57,7 @@ class Concatenate
     /**
      * TEXTJOIN.
      *
+<<<<<<< HEAD
      * @param mixed $delimiter The delimter to use between the joined arguments
      *                         Or can be an array of values
      * @param mixed $ignoreEmpty true/false Flag indicating whether empty arguments should be skipped
@@ -78,6 +90,19 @@ class Concatenate
 
                 break;
             }
+=======
+     * @param mixed $delimiter
+     * @param mixed $ignoreEmpty
+     * @param mixed $args
+     */
+    public static function TEXTJOIN($delimiter, $ignoreEmpty, ...$args): string
+    {
+        $delimiter = Functions::flattenSingleValue($delimiter);
+        $ignoreEmpty = Functions::flattenSingleValue($ignoreEmpty);
+        // Loop through arguments
+        $aArgs = Functions::flattenArray($args);
+        foreach ($aArgs as $key => &$arg) {
+>>>>>>> forked/LAE_400_PACKAGE
             if ($ignoreEmpty === true && is_string($arg) && trim($arg) === '') {
                 unset($aArgs[$key]);
             } elseif (is_bool($arg)) {
@@ -85,12 +110,16 @@ class Concatenate
             }
         }
 
+<<<<<<< HEAD
         $returnValue = ($returnValue !== '') ? $returnValue : implode($delimiter, $aArgs);
         if (StringHelper::countCharacters($returnValue) > DataType::MAX_STRING_LENGTH) {
             $returnValue = ExcelError::CALC();
         }
 
         return $returnValue;
+=======
+        return implode($delimiter, $aArgs);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -99,6 +128,7 @@ class Concatenate
      * Returns the result of builtin function round after validating args.
      *
      * @param mixed $stringValue The value to repeat
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $repeatCount The number of times the string value should be repeated
      *                         Or can be an array of values
@@ -127,5 +157,19 @@ class Concatenate
         }
 
         return $returnValue;
+=======
+     * @param mixed $repeatCount The number of times the string value should be repeated
+     */
+    public static function builtinREPT($stringValue, $repeatCount): string
+    {
+        $repeatCount = Functions::flattenSingleValue($repeatCount);
+        $stringValue = Helpers::extractString($stringValue);
+
+        if (!is_numeric($repeatCount) || $repeatCount < 0) {
+            return Functions::VALUE();
+        }
+
+        return str_repeat($stringValue, (int) $repeatCount);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

@@ -7,6 +7,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class PlotArea
 {
     /**
+<<<<<<< HEAD
      * No fill in plot area (show Excel gridlines through chart).
      *
      * @var bool
@@ -34,6 +35,11 @@ class PlotArea
      * PlotArea Layout.
      *
      * @var ?Layout
+=======
+     * PlotArea Layout.
+     *
+     * @var Layout
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $layout;
 
@@ -55,7 +61,16 @@ class PlotArea
         $this->plotSeries = $plotSeries;
     }
 
+<<<<<<< HEAD
     public function getLayout(): ?Layout
+=======
+    /**
+     * Get Layout.
+     *
+     * @return Layout
+     */
+    public function getLayout()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->layout;
     }
@@ -125,6 +140,7 @@ class PlotArea
             $plotSeries->refresh($worksheet);
         }
     }
+<<<<<<< HEAD
 
     public function setNoFill(bool $noFill): self
     {
@@ -163,4 +179,6 @@ class PlotArea
     {
         return $this->gradientFillStops;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

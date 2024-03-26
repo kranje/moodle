@@ -48,7 +48,11 @@ $assignment = new \assign($context, null, null);
 require_login($assignment->get_course(), false, $cm);
 
 if (!$assignment->can_view_submission($userid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('nopermission');
+=======
+    print_error('nopermission');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($action === 'pollconversions') {

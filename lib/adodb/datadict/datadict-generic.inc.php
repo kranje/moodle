@@ -28,6 +28,7 @@ class ADODB2_generic extends ADODB_DataDict {
 	var $seqField = false;
 
 
+<<<<<<< HEAD
 
  	function ActualType($meta)
 	{
@@ -41,6 +42,10 @@ class ADODB2_generic extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+ 	function ActualType($meta)
+	{
+>>>>>>> forked/LAE_400_PACKAGE
 		switch($meta) {
 		case 'C': return 'VARCHAR';
 		case 'XL':

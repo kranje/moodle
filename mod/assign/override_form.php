@@ -123,7 +123,11 @@ class assign_override_form extends moodleform {
                 if (empty($groups)) {
                     // Generate an error.
                     $link = new moodle_url('/mod/assign/overrides.php', array('cmid' => $cm->id));
+<<<<<<< HEAD
                     throw new \moodle_exception('groupsnone', 'assign', $link);
+=======
+                    print_error('groupsnone', 'assign', $link);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 $groupchoices = array();
@@ -183,7 +187,11 @@ class assign_override_form extends moodleform {
                 if (empty($users)) {
                     // Generate an error.
                     $link = new moodle_url('/mod/assign/overrides.php', array('cmid' => $cm->id));
+<<<<<<< HEAD
                     throw new \moodle_exception('usersnone', 'assign', $link);
+=======
+                    print_error('usersnone', 'assign', $link);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 $userchoices = array();

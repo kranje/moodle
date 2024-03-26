@@ -18,7 +18,11 @@ $PAGE->set_url($url);
 admin_externalpage_setup('managemodules'); // this is hacky, tehre should be a special hidden page for it
 
 if ( !$displayformat = $DB->get_record("glossary_formats", array("id"=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidglossaryformat', 'glossary');
+=======
+    print_error('invalidglossaryformat', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $form = data_submitted();

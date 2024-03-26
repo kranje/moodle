@@ -526,7 +526,11 @@ class core_string_manager_standard implements core_string_manager {
         $cachekey = 'list_'.$this->get_key_suffix();
         $cachedlist = $this->menucache->get($cachekey);
         if ($cachedlist !== false) {
+<<<<<<< HEAD
             // The cache content is valid.
+=======
+            // The cache content is invalid.
+>>>>>>> forked/LAE_400_PACKAGE
             if ($returnall or empty($this->translist)) {
                 return $cachedlist;
             }

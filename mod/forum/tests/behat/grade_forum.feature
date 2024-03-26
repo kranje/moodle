@@ -23,6 +23,7 @@ Feature: I can grade a students interaction across a forum
     And the following "scales" exist:
       | name | scale |
       | Test Scale 1 | Disappointing, Good, Very good, Excellent |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I change window size to "large"
     And I am on "Course 1" course homepage
@@ -34,6 +35,20 @@ Feature: I can grade a students interaction across a forum
     And I set the following fields to these values:
       | Forum name     | Test Forum 1    |
       | Description    | Test               |
+=======
+    And the following "activity" exists:
+      | activity    | forum        |
+      | course      | C1           |
+      | idnumber    | 0001         |
+      | name        | Test Forum 1 |
+    And I log in as "teacher1"
+    And I change window size to "large"
+    And I am on "Course 1" course homepage with editing mode on
+
+  Scenario: Ensure that forum grade settings do not leak to Ratings
+    Given I am on the "Test Forum 1" "forum activity editing" page
+    And I expand all fieldsets
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Fields should be hidden when grading is not set.
     When I set the field "Whole forum grading > Type" to "None"
@@ -59,7 +74,10 @@ Feature: I can grade a students interaction across a forum
     And I set the field "Whole forum grading > Grade to pass" to "4"
     When I press "Save and return to course"
     And I navigate to "View > Grader report" in the course gradebook
+<<<<<<< HEAD
     And I turn editing mode on
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     # There shouldn't be any Ratings grade item.
     Then I should see "Test Forum 1 whole forum"
@@ -73,11 +91,16 @@ Feature: I can grade a students interaction across a forum
     And I should see "Tutor" in the "Parent category" "fieldset"
 
   Scenario: Ensure that Ratings settings do not leak to Forum grading
+<<<<<<< HEAD
     Given I add a "Forum" to section "1"
     And I expand all fieldsets
     And I set the following fields to these values:
       | Forum name     | Test Forum 1    |
       | Description    | Test               |
+=======
+    Given I am on the "Test Forum 1" "forum activity editing" page
+    And I expand all fieldsets
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Fields should be hidden when grading is not set.
     When I set the field "Ratings > Aggregate type" to "No ratings"
@@ -128,6 +151,7 @@ Feature: I can grade a students interaction across a forum
     And I should see "Tutor" in the "Parent category" "fieldset"
 
   Scenario: Setting both a rating and a whole forum grade does not bleed
+<<<<<<< HEAD
     Given the following "activity" exists:
       | activity                      | forum        |
       | course                        | C1           |
@@ -139,6 +163,11 @@ Feature: I can grade a students interaction across a forum
     And I follow "Test Forum 1"
     And I navigate to "Settings" in current page administration
     And I expand all fieldsets
+=======
+    Given I am on the "Test Forum 1" "forum activity editing" page
+    And I expand all fieldsets
+
+>>>>>>> forked/LAE_400_PACKAGE
     And I set the field "Ratings > Aggregate type" to "Count of ratings"
     And I set the field "Ratings > Type" to "Point"
     And I set the field "Ratings > Maximum grade" to "100"
@@ -150,7 +179,10 @@ Feature: I can grade a students interaction across a forum
     And I set the field "Whole forum grading > Grade to pass" to "4"
     And I press "Save and return to course"
     And I navigate to "View > Grader report" in the course gradebook
+<<<<<<< HEAD
     And I turn editing mode on
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     # There shouldn't be any Whole forum grade gradeitem.
     Then I should see "Test Forum 1 rating"

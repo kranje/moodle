@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * License manager helper class.
  *
@@ -21,12 +22,17 @@
  * @copyright  2019 Tom Dickman <tomdickman@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 namespace tool_licensemanager;
 
 use moodle_url;
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * License manager helper class.
@@ -48,12 +54,16 @@ class helper {
      * @return \moodle_url
      */
     public static function get_licensemanager_url() : moodle_url {
+<<<<<<< HEAD
         global $CFG;
 
         $url = new moodle_url($CFG->wwwroot . self::MANAGER_PATH,
             ['sesskey' => sesskey()]);
 
         return $url;
+=======
+        return new moodle_url(self::MANAGER_PATH);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -90,9 +100,14 @@ class helper {
      * @return \moodle_url
      */
     public static function get_create_license_url() : moodle_url {
+<<<<<<< HEAD
         $url = new moodle_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_CREATE, 'sesskey' => sesskey()]);
 
+=======
+        $url = self::get_licensemanager_url();
+        $url->params(['action' => manager::ACTION_CREATE]);
+>>>>>>> forked/LAE_400_PACKAGE
         return $url;
     }
 
@@ -104,9 +119,14 @@ class helper {
      * @return \moodle_url
      */
     public static function get_update_license_url(string $licenseshortname) : moodle_url {
+<<<<<<< HEAD
         $url = new moodle_url(self::MANAGER_PATH,
             ['action' => manager::ACTION_UPDATE, 'license' => $licenseshortname, 'sesskey' => sesskey()]);
 
+=======
+        $url = self::get_licensemanager_url();
+        $url->params(['action' => manager::ACTION_UPDATE, 'license' => $licenseshortname]);
+>>>>>>> forked/LAE_400_PACKAGE
         return $url;
     }
 

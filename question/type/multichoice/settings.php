@@ -25,10 +25,17 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
+<<<<<<< HEAD
     $menu = [
         new lang_string('answersingleno', 'qtype_multichoice'),
         new lang_string('answersingleyes', 'qtype_multichoice')
     ];
+=======
+    $menu = array(
+        new lang_string('answersingleno', 'qtype_multichoice'),
+        new lang_string('answersingleyes', 'qtype_multichoice'),
+    );
+>>>>>>> forked/LAE_400_PACKAGE
     $settings->add(new admin_setting_configselect('qtype_multichoice/answerhowmany',
     new lang_string('answerhowmany', 'qtype_multichoice'),
     new lang_string('answerhowmany_desc', 'qtype_multichoice'), '1', $menu));
@@ -39,10 +46,14 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new qtype_multichoice_admin_setting_answernumbering('qtype_multichoice/answernumbering',
     new lang_string('answernumbering', 'qtype_multichoice'),
+<<<<<<< HEAD
     new lang_string('answernumbering_desc', 'qtype_multichoice'), 'abc', null));
 
     $settings->add(new admin_setting_configcheckbox('qtype_multichoice/showstandardinstruction',
             new lang_string('showstandardinstruction', 'qtype_multichoice'),
             new lang_string('showstandardinstruction_desc', 'qtype_multichoice'), 0));
+=======
+    new lang_string('answernumbering_desc', 'qtype_multichoice'), 'abc', null ));
+>>>>>>> forked/LAE_400_PACKAGE
 
 }

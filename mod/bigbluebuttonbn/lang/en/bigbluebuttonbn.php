@@ -48,7 +48,11 @@ $string['bigbluebuttondisablednotification_subject'] = 'BigBlueButton activity m
 $string['bigbluebuttondisablednotification'] = 'The BigBlueButton activity module has been disabled and any existing BigBlueButton course activities are currently not accessible. Prior to re-enabling this plugin, please ensure that you have read and accepted the <a href="{$a}" target="_blank">data processing agreement</a> with Blindside Networks Inc.';
 $string['cannotperformaction'] = 'Cannot perform action {$a} on this recording';
 $string['enablingbigbluebutton'] = 'Enabling BigBlueButton activity';
+<<<<<<< HEAD
 $string['enablingbigbluebuttondpainfo'] = 'In order to meet your data protection obligations, prior to enabling this plugin, you may need to ensure that you have read and accepted the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
+=======
+$string['enablingbigbluebuttondpainfo'] = 'In order to meet your data protection obligations, before enabling this plugin, you must confirm that you have read and accepted the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['dpainfonotsigned'] = 'Before enabling this plugin, you must confirm that you have read and accepted the <a href="{$a}">Blindside Networks data processing agreement</a>.';
 $string['indicator:cognitivedepth'] = 'BigBlueButton cognitive';
 $string['indicator:cognitivedepth_help'] = 'This indicator is based on the cognitive depth reached by the student in a BigBlueButton activity.';
@@ -131,10 +135,13 @@ $string['minute'] = 'minute';
 $string['minutes'] = 'minutes';
 
 $string['config_dpa_note'] = 'Note: In order to meet your data protection obligations, before using a service provider for this plugin, you must ensure that you have read and accepted the service provider\'s data processing agreement. For the default free BigBlueButton service, this is the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
+<<<<<<< HEAD
 
 $string['config_guestaccess_enabled'] = 'External guest access';
 $string['config_guestaccess_enabled_description'] = 'Allow users without an account on your site to access the room.';
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['config_general'] = 'General settings';
 $string['config_general_description'] = 'These settings are always used.';
 $string['config_server_url'] = 'BigBlueButton server URL';
@@ -221,9 +228,12 @@ $string['config_participant_description'] = 'These settings define the default r
 $string['config_participant_moderator_default'] = 'Moderator';
 $string['config_participant_moderator_default_description'] = 'This rule is used by default when a new room is added.';
 
+<<<<<<< HEAD
 $string['config_poll_interval'] = 'Poll interval (in seconds) to refresh the room\'s status';
 $string['config_poll_interval_description'] = 'The poll interval must be at least 2 seconds. If necessary, you can lower the load on the remote server by increasing the interval.';
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['config_userlimit'] = 'User limit';
 $string['config_userlimit_description'] = 'These settings enable or disable options in the UI and also define default values for these options.';
 $string['config_userlimit_default'] = 'User limit enabled by default';
@@ -294,6 +304,14 @@ $string['config_hideuserlist_default_description'] = 'If enabled the session use
 $string['config_hideuserlist_editable'] = 'Hide user list can be edited';
 $string['config_hideuserlist_editable_description'] = 'Hide user list by default can be edited when the instance is added or updated.';
 
+<<<<<<< HEAD
+=======
+$string['config_lockonjoin_default'] = 'Lock on join enabled by default';
+$string['config_lockonjoin_default_description'] = 'If enabled the settings locked by configuration are applied to the user when they join. Lock configuration must be enabled for this to apply.';
+$string['config_lockonjoin_editable'] = 'Lock on join can be edited';
+$string['config_lockonjoin_editable_description'] = 'Lock on join by default can be edited when the instance is added or updated.';
+
+>>>>>>> forked/LAE_400_PACKAGE
 $string['config_experimental_features'] = 'Experimental features';
 $string['config_experimental_features_description'] = 'Configuration for experimental features.';
 
@@ -301,6 +319,7 @@ $string['general_error_unable_connect'] = 'Unable to connect. Please check the u
 Details : {$a}';
 $string['general_error_no_answer'] = 'Empty response. Please check the url of the BigBlueButton server AND check to see if the BigBlueButton server is running.';
 $string['general_error_not_allowed_to_create_instances'] = 'User is not allowed to create any type of instance.';
+<<<<<<< HEAD
 $string['general_error_not_found'] = 'Cannot find the BigBlueButton activity with ID {$a}.';
 $string['general_error_cannot_create_meeting'] = 'Cannot create session.';
 $string['general_error_cannot_get_recordings'] = 'Cannot get recordings.';
@@ -338,6 +357,11 @@ $string['guest_invitation_full_message'] = 'Hi,
 <p>Password: {$a->guestpassword}</p>
 <p>If you need help, please contact {$a->sender}.</p>';
 
+=======
+$string['general_error_not_found'] = 'Entity not found : {$a}.';
+$string['general_error_cannot_create_meeting'] = 'Cannot create session.';
+$string['general_error_cannot_get_recordings'] = 'Cannot get recordings.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['index_confirm_end'] = 'Do you want to end the session?';
 $string['index_disabled'] = 'disabled';
 $string['index_enabled'] = 'enabled';
@@ -355,7 +379,10 @@ $string['index_heading_viewer'] = 'Viewers';
 $string['index_heading'] = 'BigBlueButton rooms';
 $string['instanceprofilewithoutrecordings'] = 'This instance profile cannot display recordings';
 $string['mod_form_block_general'] = 'General';
+<<<<<<< HEAD
 $string['mod_form_block_guestaccess'] = 'Guest access';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['mod_form_block_room'] = 'Room settings';
 $string['mod_form_block_recordings'] = 'Recording view';
 $string['mod_form_block_presentation'] = 'Presentation content';
@@ -369,8 +396,11 @@ $string['mod_form_field_intro'] = 'Description';
 $string['mod_form_field_intro_help'] = 'A short description of the room.';
 $string['mod_form_field_duration_help'] = 'Setting the duration for a meeting will establish the maximum time for a meeting to keep alive before the recording finish';
 $string['mod_form_field_duration'] = 'Duration';
+<<<<<<< HEAD
 $string['mod_form_field_guestallowed'] = 'Allow guest access';
 $string['mod_form_field_mustapproveuser'] = 'Guests joining must be admitted by a moderator';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['mod_form_field_userlimit'] = 'User limit';
 $string['mod_form_field_userlimit_help'] = 'The maximum number of users allowed in a session. Set to 0 to allow an unlimited number of users.';
 $string['mod_form_field_name'] = 'Room name';
@@ -413,10 +443,18 @@ $string['mod_form_field_disableprivatechat'] = 'Disable private chat';
 $string['mod_form_field_disablepublicchat'] = 'Disable public chat';
 $string['mod_form_field_disablenote'] = 'Disable shared notes';
 $string['mod_form_field_hideuserlist'] = 'Hide user list';
+<<<<<<< HEAD
 $string['mod_form_locksettings'] = 'Lock settings';
 $string['report_join_info']  = '{$a} meeting(s)';
 $string['report_play_recording_info']  = '{$a} recording(s) played';
 $string['report_room_view']  = 'viewed';
+=======
+$string['mod_form_field_lockonjoin'] = 'Lock settings on join';
+$string['mod_form_locksettings'] = 'Lock settings';
+$string['report_join_info']  = 'Has joined the room {$a} time(s)';
+$string['report_play_recording_info']  = 'Has played a recording {$a} time(s)';
+$string['report_room_view']  = 'Has viewed the room';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['starts_at'] = 'Starts';
 $string['started_at'] = 'Started';
 $string['ends_at'] = 'Ends';
@@ -431,7 +469,11 @@ $string['view_error_unable_join'] = 'Unable to enter the room. Please check the 
 $string['view_error_bigbluebutton'] = 'BigBlueButton responded with errors. {$a}';
 $string['view_error_create'] = 'The BigBlueButton server responded with an error message. The room could not be created.';
 $string['view_error_max_concurrent'] = 'The number of concurrent sessions allowed has been reached.';
+<<<<<<< HEAD
 $string['view_error_userlimit_reached'] = 'The number of users allowed in a session has been reached.';
+=======
+$string['view_error_userlimit_reached'] = 'The limit of how many users allowed in a session has been reached.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['view_error_url_missing_parameters'] = 'There are parameters missing in this URL';
 $string['view_error_import_no_courses'] = 'There are no courses to look up for recordings.';
 $string['view_error_import_no_recordings'] = 'There are no recordings in this course for importing.';
@@ -484,18 +526,31 @@ $string['view_message_notavailableyet'] = 'This session is not yet available.';
 $string['view_recording_select_course'] = 'Select a course first in the drop down menu';
 
 
+<<<<<<< HEAD
 $string['view_message_session_started_at'] = 'Session started at';
+=======
+$string['view_message_session_started_at'] = 'This session started at';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['view_message_session_running_for'] = 'This session has been running for';
 $string['view_message_hour'] = 'hour';
 $string['view_message_hours'] = 'hours';
 $string['view_message_minute'] = 'minute';
 $string['view_message_minutes'] = 'minutes';
+<<<<<<< HEAD
 $string['view_message_moderator'] = 'Moderator';
 $string['view_message_moderators'] = 'Moderators';
 $string['view_message_viewer'] = 'Viewer';
 $string['view_message_viewers'] = 'Viewers';
 $string['view_message_user'] = 'User';
 $string['view_message_users'] = 'Users';
+=======
+$string['view_message_moderator'] = 'moderator';
+$string['view_message_moderators'] = 'moderators';
+$string['view_message_viewer'] = 'viewer';
+$string['view_message_viewers'] = 'viewers';
+$string['view_message_user'] = 'user';
+$string['view_message_users'] = 'users';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['view_message_has_joined'] = 'has joined';
 $string['view_message_have_joined'] = 'have joined';
 $string['view_message_session_no_users'] = 'There are no users in this session';
@@ -513,9 +568,15 @@ $string['view_message_conference_not_started'] = 'The session has not started ye
 $string['view_message_conference_wait_for_moderator'] = 'Waiting for a moderator to join.';
 $string['view_message_conference_in_progress'] = 'The session is in progress.';
 $string['view_message_conference_has_ended'] = 'The session has ended.';
+<<<<<<< HEAD
 $string['view_message_tab_close'] = 'This tab/window must be closed manually';
 $string['view_message_recordings_disabled'] = 'Recordings are disabled on the server. BigBlueButton activities of type \'Recordings only\' cannot be used.';
 $string['view_message_cron_disabled'] = 'The list of recordings may not be up to date. Please contact the site administrator with the following information: {$a}';
+=======
+$string['view_message_conference_user_limit_reached'] = 'The limit of how many users allowed in a session has been reached.';
+$string['view_message_tab_close'] = 'This tab/window must be closed manually';
+$string['view_message_recordings_disabled'] = 'Recordings are disabled on the server. BigBlueButton activities of type \'Recordings only\' cannot be used.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['view_message_importrecordings_disabled'] = 'Import recording links is disabled on the server.';
 
 $string['view_groups_selection_warning'] = 'There is a room for each group and you have access to more than one. Be sure to select the correct one.';
@@ -643,6 +704,10 @@ $string['cachedef_serverinfo'] = 'Remote server information';
 $string['cachedef_recordings'] = 'Recording metadata';
 $string['cachedef_validatedurls'] = 'Cache of validated URL checks';
 $string['taskname:check_pending_recordings'] = 'Fetch pending recordings';
+<<<<<<< HEAD
+=======
+$string['taskname:check_dismissed_recordings'] = 'Check for recordings that haven\'t been found yet';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['userlimitreached'] = 'The number of users allowed in a session has been reached.';
 $string['waitformoderator'] = 'Waiting for a moderator to join.';
 

@@ -24,6 +24,9 @@
  */
 
 $string['modulename'] = 'Image gallery';
+<<<<<<< HEAD
 $string['modulename_help'] = 'Use this preset to collect images.';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['pluginname'] = 'Image gallery';
 $string['privacy:metadata'] = 'The Image gallery plugin does not store any personal data.';

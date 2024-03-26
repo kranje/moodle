@@ -37,6 +37,7 @@ define('CORE_TASK_TASKS_FILENAME', 'db/tasks.php');
 class manager {
 
     /**
+<<<<<<< HEAD
      * @var int Used to tell the adhoc task queue to fairly distribute tasks.
      */
     const ADHOC_TASK_QUEUE_MODE_DISTRIBUTING = 0;
@@ -62,6 +63,8 @@ class manager {
     public static $mode;
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Given a component name, will load the list of tasks in the db/tasks.php file for that component.
      *
      * @param string $componentname - The name of the component to fetch the tasks for.
@@ -567,6 +570,7 @@ class manager {
      *
      * @param array $records array of task records
      * @param array $records array of same task records shuffled
+<<<<<<< HEAD
      * @deprecated since Moodle 4.1 MDL-67648 - please do not use this method anymore.
      * @todo MDL-74843 This method will be deleted in Moodle 4.5
      * @see \core\task\manager::get_next_adhoc_task
@@ -574,6 +578,10 @@ class manager {
     public static function ensure_adhoc_task_qos(array $records): array {
         debugging('The method \core\task\manager::ensure_adhoc_task_qos is deprecated.
              Please use \core\task\manager::get_next_adhoc_task instead.', DEBUG_DEVELOPER);
+=======
+     */
+    public static function ensure_adhoc_task_qos(array $records): array {
+>>>>>>> forked/LAE_400_PACKAGE
 
         $count = count($records);
         if ($count == 0) {
@@ -651,6 +659,7 @@ class manager {
     public static function get_next_adhoc_task($timestart, $checklimits = true) {
         global $DB;
 
+<<<<<<< HEAD
         $concurrencylimit = get_config('core', 'task_adhoc_concurrency_limit');
         $cachedqueuesize = 1200;
 
@@ -753,12 +762,22 @@ class manager {
                 return ($ordering[$a->classname] ?? -1) - ($ordering[$b->classname] ?? -1);
             }
         );
+=======
+        $where = '(nextruntime IS NULL OR nextruntime < :timestart1)';
+        $params = array('timestart1' => $timestart);
+        $records = $DB->get_records_select('task_adhoc', $where, $params, 'nextruntime ASC, id ASC', '*', 0, 2000);
+        $records = self::ensure_adhoc_task_qos($records);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $cronlockfactory = \core\lock\lock_config::get_lock_factory('cron');
 
         $skipclasses = array();
 
+<<<<<<< HEAD
         foreach (self::$miniqueue as $taskid => $record) {
+=======
+        foreach ($records as $record) {
+>>>>>>> forked/LAE_400_PACKAGE
 
             if (in_array($record->classname, $skipclasses)) {
                 // Skip the task if it can't be started due to per-task concurrency limit.
@@ -771,7 +790,10 @@ class manager {
                 $record = $DB->get_record('task_adhoc', array('id' => $record->id));
                 if (!$record) {
                     $lock->release();
+<<<<<<< HEAD
                     unset(self::$miniqueue[$taskid]);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                     continue;
                 }
 
@@ -779,7 +801,10 @@ class manager {
                 // Safety check in case the task in the DB does not match a real class (maybe something was uninstalled).
                 if (!$task) {
                     $lock->release();
+<<<<<<< HEAD
                     unset(self::$miniqueue[$taskid]);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                     continue;
                 }
 
@@ -791,7 +816,10 @@ class manager {
                         // Unable to obtain a concurrency lock.
                         mtrace("Skipping $record->classname adhoc task class as the per-task limit of $tasklimit is reached.");
                         $skipclasses[] = $record->classname;
+<<<<<<< HEAD
                         unset(self::$miniqueue[$taskid]);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                         $lock->release();
                         continue;
                     }
@@ -810,11 +838,15 @@ class manager {
                 } else {
                     $task->set_cron_lock($cronlock);
                 }
+<<<<<<< HEAD
 
                 unset(self::$miniqueue[$taskid]);
                 return $task;
             } else {
                 unset(self::$miniqueue[$taskid]);
+=======
+                return $task;
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -822,6 +854,7 @@ class manager {
     }
 
     /**
+<<<<<<< HEAD
      * Return a list of candidate adhoc tasks to run.
      *
      * @param int $timestart Only return tasks where nextruntime is less than this value
@@ -881,6 +914,8 @@ class manager {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * This function will dispatch the next scheduled task in the queue. The task will be handed out
      * with an open lock - possibly on the entire cron process. Make sure you call either
      * {@link scheduled_task_failed} or {@link scheduled_task_complete} to release the lock and reschedule the task.
@@ -1207,6 +1242,7 @@ class manager {
     }
 
     /**
+<<<<<<< HEAD
      * Cleanup stale task metadata.
      */
     public static function cleanup_metadata() {
@@ -1272,6 +1308,8 @@ class manager {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * This function is used to indicate that any long running cron processes should exit at the
      * next opportunity and restart. This is because something (e.g. DB changes) has changed and
      * the static caches may be stale.
@@ -1392,13 +1430,48 @@ class manager {
             $command = "{$phpbinary} {$scriptpath} {$taskarg}";
 
             // Execute it.
+<<<<<<< HEAD
             passthru($command);
+=======
+            self::passthru_via_mtrace($command);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return true;
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * This behaves similar to passthru but filters every line via
+     * the mtrace function so it can be post processed.
+     *
+     * @param string $command to run
+     * @return void
+     */
+    public static function passthru_via_mtrace(string $command) {
+        $descriptorspec = [
+            0 => ['pipe', 'r'], // STDIN.
+            1 => ['pipe', 'w'], // STDOUT.
+            2 => ['pipe', 'w'], // STDERR.
+        ];
+        flush();
+        $process = proc_open($command, $descriptorspec, $pipes, realpath('./'), []);
+        if (is_resource($process)) {
+            while ($s = fgets($pipes[1])) {
+                mtrace($s, '');
+                flush();
+            }
+        }
+
+        fclose($pipes[0]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        proc_close($process);
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * For a given scheduled task record, this method will check to see if any overrides have
      * been applied in config and return a copy of the record with any overridden values.
      *

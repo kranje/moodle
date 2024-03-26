@@ -3,6 +3,7 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
 use DateTimeInterface;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
@@ -11,14 +12,23 @@ use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
+use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class Format
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * DOLLAR.
      *
@@ -26,6 +36,7 @@ class Format
      * The format used is $#,##0.00_);($#,##0.00)..
      *
      * @param mixed $value The value to format
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $decimals The number of digits to display to the right of the decimal point (as an integer).
      *                            If decimals is negative, number is rounded to the left of the decimal point.
@@ -42,6 +53,14 @@ class Format
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $decimals);
         }
 
+=======
+     * @param mixed $decimals The number of digits to display to the right of the decimal point (as an integer).
+     *                            If decimals is negative, number is rounded to the left of the decimal point.
+     *                            If you omit decimals, it is assumed to be 2
+     */
+    public static function DOLLAR($value = 0, $decimals = 2): string
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $value = Helpers::extractFloat($value);
             $decimals = Helpers::extractInt($decimals, -100, 0, true);
@@ -68,6 +87,7 @@ class Format
      * FIXED.
      *
      * @param mixed $value The value to format
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $decimals Integer value for the number of decimal places that should be formatted
      *                         Or can be an array of values
@@ -87,6 +107,17 @@ class Format
         try {
             $value = Helpers::extractFloat($value);
             $decimals = Helpers::extractInt($decimals, -100, 0, true);
+=======
+     * @param mixed $decimals Integer value for the number of decimal places that should be formatted
+     * @param mixed $noCommas Boolean value indicating whether the value should have thousands separators or not
+     */
+    public static function FIXEDFORMAT($value, $decimals = 2, $noCommas = false): string
+    {
+        try {
+            $value = Helpers::extractFloat($value);
+            $decimals = Helpers::extractInt($decimals, -100, 0, true);
+            $noCommas = Functions::flattenSingleValue($noCommas);
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (CalcExp $e) {
             return $e->getMessage();
         }
@@ -111,6 +142,7 @@ class Format
      * TEXT.
      *
      * @param mixed $value The value to format
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $format A string with the Format mask that should be used
      *                         Or can be an array of values
@@ -125,6 +157,12 @@ class Format
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $format);
         }
 
+=======
+     * @param mixed $format A string with the Format mask that should be used
+     */
+    public static function TEXTFORMAT($value, $format): string
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $value = Helpers::extractString($value);
         $format = Helpers::extractString($format);
 
@@ -142,12 +180,20 @@ class Format
      */
     private static function convertValue($value)
     {
+<<<<<<< HEAD
         $value = $value ?? 0;
+=======
+        $value = ($value === null) ? 0 : Functions::flattenSingleValue($value);
+>>>>>>> forked/LAE_400_PACKAGE
         if (is_bool($value)) {
             if (Functions::getCompatibilityMode() === Functions::COMPATIBILITY_OPENOFFICE) {
                 $value = (int) $value;
             } else {
+<<<<<<< HEAD
                 throw new CalcExp(ExcelError::VALUE());
+=======
+                throw new CalcExp(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -158,6 +204,7 @@ class Format
      * VALUE.
      *
      * @param mixed $value Value to check
+<<<<<<< HEAD
      *                         Or can be an array of values
      *
      * @return array|DateTimeInterface|float|int|string A string if arguments are invalid
@@ -170,6 +217,13 @@ class Format
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $value);
         }
 
+=======
+     *
+     * @return DateTimeInterface|float|int|string A string if arguments are invalid
+     */
+    public static function VALUE($value = '')
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $value = self::convertValue($value);
         } catch (CalcExp $e) {
@@ -189,28 +243,43 @@ class Format
             Functions::setReturnDateType(Functions::RETURNDATE_EXCEL);
 
             if (strpos($value, ':') !== false) {
+<<<<<<< HEAD
                 $timeValue = Functions::scalar(DateTimeExcel\TimeValue::fromString($value));
                 if ($timeValue !== ExcelError::VALUE()) {
+=======
+                $timeValue = DateTimeExcel\TimeValue::fromString($value);
+                if ($timeValue !== Functions::VALUE()) {
+>>>>>>> forked/LAE_400_PACKAGE
                     Functions::setReturnDateType($dateSetting);
 
                     return $timeValue;
                 }
             }
+<<<<<<< HEAD
             $dateValue = Functions::scalar(DateTimeExcel\DateValue::fromString($value));
             if ($dateValue !== ExcelError::VALUE()) {
+=======
+            $dateValue = DateTimeExcel\DateValue::fromString($value);
+            if ($dateValue !== Functions::VALUE()) {
+>>>>>>> forked/LAE_400_PACKAGE
                 Functions::setReturnDateType($dateSetting);
 
                 return $dateValue;
             }
             Functions::setReturnDateType($dateSetting);
 
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (float) $value;
     }
 
     /**
+<<<<<<< HEAD
      * TEXT.
      *
      * @param mixed $value The value to format
@@ -243,10 +312,17 @@ class Format
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $decimalSeparator
      */
     private static function getDecimalSeparator($decimalSeparator): string
     {
+<<<<<<< HEAD
+=======
+        $decimalSeparator = Functions::flattenSingleValue($decimalSeparator);
+
+>>>>>>> forked/LAE_400_PACKAGE
         return empty($decimalSeparator) ? StringHelper::getDecimalSeparator() : (string) $decimalSeparator;
     }
 
@@ -255,6 +331,11 @@ class Format
      */
     private static function getGroupSeparator($groupSeparator): string
     {
+<<<<<<< HEAD
+=======
+        $groupSeparator = Functions::flattenSingleValue($groupSeparator);
+
+>>>>>>> forked/LAE_400_PACKAGE
         return empty($groupSeparator) ? StringHelper::getThousandsSeparator() : (string) $groupSeparator;
     }
 
@@ -262,6 +343,7 @@ class Format
      * NUMBERVALUE.
      *
      * @param mixed $value The value to format
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $decimalSeparator A string with the decimal separator to use, defaults to locale defined value
      *                         Or can be an array of values
@@ -276,6 +358,15 @@ class Format
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $decimalSeparator, $groupSeparator);
         }
 
+=======
+     * @param mixed $decimalSeparator A string with the decimal separator to use, defaults to locale defined value
+     * @param mixed $groupSeparator A string with the group/thousands separator to use, defaults to locale defined value
+     *
+     * @return float|string
+     */
+    public static function NUMBERVALUE($value = '', $decimalSeparator = null, $groupSeparator = null)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $value = self::convertValue($value);
             $decimalSeparator = self::getDecimalSeparator($decimalSeparator);
@@ -287,11 +378,19 @@ class Format
         if (!is_numeric($value)) {
             $decimalPositions = preg_match_all('/' . preg_quote($decimalSeparator) . '/', $value, $matches, PREG_OFFSET_CAPTURE);
             if ($decimalPositions > 1) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
             }
             $decimalOffset = array_pop($matches[0])[1];
             if (strpos($value, $groupSeparator, $decimalOffset) !== false) {
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+            }
+            $decimalOffset = array_pop($matches[0])[1];
+            if (strpos($value, $groupSeparator, $decimalOffset) !== false) {
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $value = str_replace([$groupSeparator, $decimalSeparator], ['', '.'], $value);
@@ -299,7 +398,11 @@ class Format
             // Handle the special case of trailing % signs
             $percentageString = rtrim($value, '%');
             if (!is_numeric($percentageString)) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $percentageAdjustment = strlen($value) - strlen($percentageString);
@@ -309,6 +412,10 @@ class Format
             }
         }
 
+<<<<<<< HEAD
         return is_array($value) ? ExcelError::VALUE() : (float) $value;
+=======
+        return is_array($value) ? Functions::VALUE() : (float) $value;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

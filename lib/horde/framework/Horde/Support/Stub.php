@@ -95,7 +95,10 @@ class Horde_Support_Stub implements ArrayAccess, Countable, IteratorAggregate
 
      /**
       */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      public function offsetGet($offset)
      {
          return null;
@@ -103,14 +106,20 @@ class Horde_Support_Stub implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
     }
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return false;
@@ -118,7 +127,10 @@ class Horde_Support_Stub implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
     }
@@ -127,7 +139,10 @@ class Horde_Support_Stub implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return 0;
@@ -137,7 +152,10 @@ class Horde_Support_Stub implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator(array());

@@ -14,6 +14,7 @@ Feature: Add preconfigured tools via teacher interface
     And the following "course enrolments" exist:
       | user | course | role |
       | teacher1 | C1 | editingteacher |
+<<<<<<< HEAD
 
   @javascript
   Scenario: Add a tool from a cartridge
@@ -25,6 +26,14 @@ Feature: Add preconfigured tools via teacher interface
     And I set the field "Tool URL" to local url "/mod/lti/tests/fixtures/ims_cartridge_basic_lti_link.xml"
     And I press "Save and return to course"
     And I am on the "Test tool activity" "lti activity editing" page
+=======
+    And the following "activities" exist:
+      | activity | course | name      | typeid | toolurl                                                  |
+      | lti      | C1     | Test tool | 0      | /mod/lti/tests/fixtures/ims_cartridge_basic_lti_link.xml |
+
+  Scenario: Add a tool from a cartridge
+    Given I am on the "Test tool" "lti activity editing" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     Then the field "Tool URL" matches value "http://www.example.com/lti/provider.php"
     And the field "Secure tool URL" matches value "https://www.example.com/lti/provider.php"
@@ -33,11 +42,15 @@ Feature: Add preconfigured tools via teacher interface
 
   @javascript @_switch_window
   Scenario: Add a preconfigured tool from a cartridge
+<<<<<<< HEAD
     Given the following "activity" exists:
       | course   | C1                   |
       | activity | lti                  |
       | name     | Test tool activity 1 |
     When I am on the "Test tool activity 1" "lti activity editing" page logged in as teacher1
+=======
+    Given I am on the "Test tool" "lti activity editing" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Add preconfigured tool"
     And I switch to "add_tool" window
     And I set the field "Tool name" to "Placeholder"
@@ -46,18 +59,28 @@ Feature: Add preconfigured tools via teacher interface
     And I switch to the main window
     And I wait "2" seconds
     And I follow "Edit preconfigured tool"
+<<<<<<< HEAD
     And I switch to "edit_tool" window
+=======
+    When I switch to "edit_tool" window
+>>>>>>> forked/LAE_400_PACKAGE
     Then the field "Tool URL" matches value "http://www.example.com/lti/provider.php"
     And the field "Icon URL" matches value "http://download.moodle.org/unittest/test.jpg"
     And the field "Secure icon URL" matches value "https://download.moodle.org/unittest/test.jpg"
     And I press "Cancel"
     And I switch to the main window
+<<<<<<< HEAD
     And I press "Save and return to course"
     And I am on the "Test tool activity 1" "lti activity editing" page
+=======
+    And I press "Save and display"
+    And I am on the "Test tool" "lti activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And the field "Preconfigured tool" matches value "Placeholder"
 
   @javascript @_switch_window
   Scenario: Add and use a preconfigured tool
+<<<<<<< HEAD
     Given the following "activity" exists:
       | course   | C1                 |
       | activity | lti                |
@@ -67,4 +90,10 @@ Feature: Add preconfigured tools via teacher interface
     And I press "Save and return to course"
     And I am on the "Test tool activity" "lti activity" page
     And I switch to "contentframe" iframe
+=======
+    Given I am on the "Test tool" "lti activity editing" page logged in as teacher1
+    And I set the field "Tool URL" to local url "/mod/lti/tests/fixtures/tool_provider.php"
+    And I press "Save and display"
+    When I switch to "contentframe" iframe
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "This represents a tool provider"

@@ -368,7 +368,10 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
 
     /**
      */
+<<<<<<< HEAD
 	#[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return isset($this->_params[$offset]);
@@ -376,7 +379,10 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
 
     /**
      */
+<<<<<<< HEAD
 	#[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($offset)
     {
         return $this->_params[$offset];
@@ -384,7 +390,10 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
 
     /**
      */
+<<<<<<< HEAD
 	#[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         $this->_params[$offset] = $this->_sanityCheck($value);
@@ -392,7 +401,10 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
 
     /**
      */
+<<<<<<< HEAD
 	#[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
         unset($this->_params[$offset]);
@@ -401,6 +413,7 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
     /* Serializable methods */
 
     /**
+<<<<<<< HEAD
      * Serialize (until PHP 7.3)
      * 
      * @return string serialized object state
@@ -417,10 +430,16 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
      */
     public function __serialize(): array
     {
+=======
+     */
+    public function serialize()
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $vars = array_filter(get_object_vars($this));
         if (isset($vars['_params'])) {
             $vars['_params'] = $vars['_params']->getArrayCopy();
         }
+<<<<<<< HEAD
         return $vars;
     }
 
@@ -431,6 +450,17 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
      */
     public function __unserialize(array $data): void
     {
+=======
+        return serialize($vars);
+    }
+
+    /**
+     */
+    public function unserialize($data)
+    {
+        $data = unserialize($data);
+
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($data as $key => $val) {
             switch ($key) {
             case '_params':
@@ -444,6 +474,7 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
         }
     }
 
+<<<<<<< HEAD
     /**
      * Unserialize (until PHP 7.3)
      * 
@@ -454,4 +485,6 @@ implements ArrayAccess, Horde_Mime_Headers_Extension_Mime, Serializable
         $this->__unserialize(unserialize($data));
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

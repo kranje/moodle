@@ -127,7 +127,11 @@ class calculated_question_summary_test extends \advanced_testcase {
             ],
             'zero mark' => [
                 [
+<<<<<<< HEAD
                     (object)['questionid' => 1, 'sd' => 0.2, 'maxmark' => 0],
+=======
+                    (object)['questionid' => 1, 'sd' => 0, 'maxmark' => 0],
+>>>>>>> forked/LAE_400_PACKAGE
                     (object)['questionid' => 2, 'sd' => 0.1049, 'maxmark' => 1],
                 ],
                 [null, 0.1049]
@@ -139,6 +143,16 @@ class calculated_question_summary_test extends \advanced_testcase {
                 ],
                 [0.35, 0.4]
             ],
+<<<<<<< HEAD
+=======
+            'zero max mark as loaded from the DB' => [
+                [
+                    (object)['questionid' => 1, 'sd' => '0.0000000000', 'maxmark' => '0.0000000'],
+                    (object)['questionid' => 2, 'sd' => '0.0000000000', 'maxmark' => '0.0000000'],
+                ],
+                [null, null]
+            ],
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 

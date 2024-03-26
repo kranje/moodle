@@ -169,6 +169,7 @@ class plugin_misplaced_exception extends moodle_exception {
 class core_upgrade_time {
     /** @var float Time at start of current upgrade (plugin/system) */
     protected static $before;
+<<<<<<< HEAD
     /** @var float Time at end of last recorded savepoint or detail */
     protected static $lastdetail;
     /** @var bool Flag to indicate whether we are recording timestamps or not. */
@@ -208,6 +209,20 @@ class core_upgrade_time {
         }
 
         self::$isrecording = false;
+=======
+    /** @var float Time at end of last savepoint */
+    protected static $lastsavepoint;
+    /** @var bool Flag to indicate whether we are recording timestamps or not. */
+    protected static $isrecording = false;
+
+    /**
+     * Records current time at the start of the current upgrade item, e.g. plugin.
+     */
+    public static function record_start() {
+        self::$before = microtime(true);
+        self::$lastsavepoint = self::$before;
+        self::$isrecording = true;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -216,6 +231,7 @@ class core_upgrade_time {
      * @param float $version Version number (may have decimals, or not)
      */
     public static function record_savepoint($version) {
+<<<<<<< HEAD
         // Skip savepoints during installation because there is always exactly one and it's not
         // interesting.
         if (self::$installation) {
@@ -253,6 +269,20 @@ class core_upgrade_time {
 
             // Record the time.
             self::$lastdetail = $time;
+=======
+        global $CFG, $OUTPUT;
+
+        // In developer debug mode we show a notification after each individual save point.
+        if ($CFG->debugdeveloper && self::$isrecording) {
+            $time = microtime(true);
+
+            $notification = new \core\output\notification($version . ': ' .
+                    get_string('successduration', '', format_float($time - self::$lastsavepoint, 2)),
+                    \core\output\notification::NOTIFY_SUCCESS);
+            $notification->set_show_closebutton(false);
+            echo $OUTPUT->render($notification);
+            self::$lastsavepoint = $time;
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -290,7 +320,11 @@ function upgrade_set_timeout($max_execution_time=300) {
             $upgraderunning = 0;
         } else {
             // web upgrade not running or aborted
+<<<<<<< HEAD
             throw new \moodle_exception('upgradetimedout', 'admin', "$CFG->wwwroot/$CFG->admin/");
+=======
+            print_error('upgradetimedout', 'admin', "$CFG->wwwroot/$CFG->admin/");
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -385,7 +419,11 @@ function upgrade_mod_savepoint($result, $version, $modname, $allowabort=true) {
     $dbversion = $DB->get_field('config_plugins', 'value', array('plugin'=>$component, 'name'=>'version'));
 
     if (!$module = $DB->get_record('modules', array('name'=>$modname))) {
+<<<<<<< HEAD
         throw new \moodle_exception('modulenotexist', 'debug', '', $modname);
+=======
+        print_error('modulenotexist', 'debug', '', $modname);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if ($dbversion >= $version) {
@@ -431,7 +469,11 @@ function upgrade_block_savepoint($result, $version, $blockname, $allowabort=true
     $dbversion = $DB->get_field('config_plugins', 'value', array('plugin'=>$component, 'name'=>'version'));
 
     if (!$block = $DB->get_record('block', array('name'=>$blockname))) {
+<<<<<<< HEAD
         throw new \moodle_exception('blocknotexist', 'debug', '', $blockname);
+=======
+        print_error('blocknotexist', 'debug', '', $blockname);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if ($dbversion >= $version) {
@@ -508,10 +550,13 @@ function upgrade_stale_php_files_present(): bool {
     global $CFG;
 
     $someexamplesofremovedfiles = [
+<<<<<<< HEAD
         // Removed in 4.1.
         '/mod/forum/classes/task/refresh_forum_post_counts.php',
         '/user/amd/build/participantsfilter.min.js',
         '/user/amd/src/participantsfilter.js',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Removed in 4.0.
         '/admin/classes/task_log_table.php',
         '/admin/cli/mysql_engine.php',
@@ -583,6 +628,10 @@ function upgrade_stale_php_files_present(): bool {
         '/mod/forum/pix/icon.gif',
         '/tag/templates/tagname.mustache',
         // Removed in 3.0.
+<<<<<<< HEAD
+=======
+        '/mod/lti/grade.php',
+>>>>>>> forked/LAE_400_PACKAGE
         '/tag/coursetagslib.php',
         // Removed in 2.9.
         '/lib/timezone.txt',
@@ -625,6 +674,7 @@ function upgrade_stale_php_files_present(): bool {
 }
 
 /**
+<<<<<<< HEAD
  * After upgrading a module, block, or generic plugin, various parts of the system need to be
  * informed.
  *
@@ -665,6 +715,8 @@ function upgrade_component_updated(string $component, string $messageplug = '',
 }
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Upgrade plugins
  * @param string $type The type of plugins that should be updated (e.g. 'enrol', 'qtype')
  * return void
@@ -740,7 +792,22 @@ function upgrade_plugins($type, $startcallback, $endcallback, $verbose) {
                     $startcallback($component, true, $verbose);
                     $recover_install_function();
                     unset_config('installrunning', $plugin->fullname);
+<<<<<<< HEAD
                     upgrade_component_updated($component, $type === 'message' ? $plug : '');
+=======
+                    update_capabilities($component);
+                    log_update_descriptions($component);
+                    external_update_descriptions($component);
+                    \core\task\manager::reset_scheduled_tasks_for_component($component);
+                    \core_analytics\manager::update_default_models_for_component($component);
+                    message_update_providers($component);
+                    \core\message\inbound\manager::update_handlers_for_component($component);
+                    if ($type === 'message') {
+                        message_update_processors($plug);
+                    }
+                    upgrade_plugin_mnet_functions($component);
+                    core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
                     $endcallback($component, true, $verbose);
                 }
             }
@@ -753,7 +820,10 @@ function upgrade_plugins($type, $startcallback, $endcallback, $verbose) {
         /// Install tables if defined
             if (file_exists($fullplug.'/db/install.xml')) {
                 $DB->get_manager()->install_from_xmldb_file($fullplug.'/db/install.xml');
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('install.xml');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
         /// store version
@@ -766,11 +836,29 @@ function upgrade_plugins($type, $startcallback, $endcallback, $verbose) {
                 $post_install_function = 'xmldb_'.$plugin->fullname.'_install';
                 $post_install_function();
                 unset_config('installrunning', $plugin->fullname);
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('install.php');
             }
 
         /// Install various components
             upgrade_component_updated($component, $type === 'message' ? $plug : '');
+=======
+            }
+
+        /// Install various components
+            update_capabilities($component);
+            log_update_descriptions($component);
+            external_update_descriptions($component);
+            \core\task\manager::reset_scheduled_tasks_for_component($component);
+            \core_analytics\manager::update_default_models_for_component($component);
+            message_update_providers($component);
+            \core\message\inbound\manager::update_handlers_for_component($component);
+            if ($type === 'message') {
+                message_update_processors($plug);
+            }
+            upgrade_plugin_mnet_functions($component);
+            core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
             $endcallback($component, true, $verbose);
 
         } else if ($installedversion < $plugin->version) { // upgrade
@@ -782,7 +870,10 @@ function upgrade_plugins($type, $startcallback, $endcallback, $verbose) {
 
                 $newupgrade_function = 'xmldb_'.$plugin->fullname.'_upgrade';
                 $result = $newupgrade_function($installedversion);
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('upgrade.php');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 $result = true;
             }
@@ -794,7 +885,23 @@ function upgrade_plugins($type, $startcallback, $endcallback, $verbose) {
             }
 
         /// Upgrade various components
+<<<<<<< HEAD
             upgrade_component_updated($component, $type === 'message' ? $plug : '');
+=======
+            update_capabilities($component);
+            log_update_descriptions($component);
+            external_update_descriptions($component);
+            \core\task\manager::reset_scheduled_tasks_for_component($component);
+            \core_analytics\manager::update_default_models_for_component($component);
+            message_update_providers($component);
+            \core\message\inbound\manager::update_handlers_for_component($component);
+            if ($type === 'message') {
+                // Ugly hack!
+                message_update_processors($plug);
+            }
+            upgrade_plugin_mnet_functions($component);
+            core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
             $endcallback($component, false, $verbose);
 
         } else if ($installedversion > $plugin->version) {
@@ -890,7 +997,19 @@ function upgrade_plugins_modules($startcallback, $endcallback, $verbose) {
                     $recover_install_function();
                     unset_config('installrunning', $module->name);
                     // Install various components too
+<<<<<<< HEAD
                     upgrade_component_updated($component);
+=======
+                    update_capabilities($component);
+                    log_update_descriptions($component);
+                    external_update_descriptions($component);
+                    \core\task\manager::reset_scheduled_tasks_for_component($component);
+                    \core_analytics\manager::update_default_models_for_component($component);
+                    message_update_providers($component);
+                    \core\message\inbound\manager::update_handlers_for_component($component);
+                    upgrade_plugin_mnet_functions($component);
+                    core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
                     $endcallback($component, true, $verbose);
                 }
             }
@@ -901,11 +1020,17 @@ function upgrade_plugins_modules($startcallback, $endcallback, $verbose) {
 
         /// Execute install.xml (XMLDB) - must be present in all modules
             $DB->get_manager()->install_from_xmldb_file($fullmod.'/db/install.xml');
+<<<<<<< HEAD
             core_upgrade_time::record_detail('install.xml');
 
         /// Add record into modules table - may be needed in install.php already
             $module->id = $DB->insert_record('modules', $module);
             core_upgrade_time::record_detail('insert_record');
+=======
+
+        /// Add record into modules table - may be needed in install.php already
+            $module->id = $DB->insert_record('modules', $module);
+>>>>>>> forked/LAE_400_PACKAGE
             upgrade_mod_savepoint(true, $plugin->version, $module->name, false);
 
         /// Post installation hook - optional
@@ -916,11 +1041,26 @@ function upgrade_plugins_modules($startcallback, $endcallback, $verbose) {
                 $post_install_function = 'xmldb_'.$module->name.'_install';
                 $post_install_function();
                 unset_config('installrunning', $module->name);
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('install.php');
             }
 
         /// Install various components
             upgrade_component_updated($component);
+=======
+            }
+
+        /// Install various components
+            update_capabilities($component);
+            log_update_descriptions($component);
+            external_update_descriptions($component);
+            \core\task\manager::reset_scheduled_tasks_for_component($component);
+            \core_analytics\manager::update_default_models_for_component($component);
+            message_update_providers($component);
+            \core\message\inbound\manager::update_handlers_for_component($component);
+            upgrade_plugin_mnet_functions($component);
+            core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $endcallback($component, true, $verbose);
 
@@ -932,7 +1072,10 @@ function upgrade_plugins_modules($startcallback, $endcallback, $verbose) {
                 require_once($fullmod.'/db/upgrade.php');  // defines new upgrading function
                 $newupgrade_function = 'xmldb_'.$module->name.'_upgrade';
                 $result = $newupgrade_function($installedversion, $module);
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('upgrade.php');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 $result = true;
             }
@@ -950,7 +1093,19 @@ function upgrade_plugins_modules($startcallback, $endcallback, $verbose) {
             }
 
             // Upgrade various components
+<<<<<<< HEAD
             upgrade_component_updated($component);
+=======
+            update_capabilities($component);
+            log_update_descriptions($component);
+            external_update_descriptions($component);
+            \core\task\manager::reset_scheduled_tasks_for_component($component);
+            \core_analytics\manager::update_default_models_for_component($component);
+            message_update_providers($component);
+            \core\message\inbound\manager::update_handlers_for_component($component);
+            upgrade_plugin_mnet_functions($component);
+            core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $endcallback($component, false, $verbose);
 
@@ -1064,7 +1219,19 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
                     $recover_install_function();
                     unset_config('installrunning', 'block_'.$blockname);
                     // Install various components
+<<<<<<< HEAD
                     upgrade_component_updated($component);
+=======
+                    update_capabilities($component);
+                    log_update_descriptions($component);
+                    external_update_descriptions($component);
+                    \core\task\manager::reset_scheduled_tasks_for_component($component);
+                    \core_analytics\manager::update_default_models_for_component($component);
+                    message_update_providers($component);
+                    \core\message\inbound\manager::update_handlers_for_component($component);
+                    upgrade_plugin_mnet_functions($component);
+                    core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
                     $endcallback($component, true, $verbose);
                 }
             }
@@ -1081,10 +1248,15 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
 
             if (file_exists($fullblock.'/db/install.xml')) {
                 $DB->get_manager()->install_from_xmldb_file($fullblock.'/db/install.xml');
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('install.xml');
             }
             $block->id = $DB->insert_record('block', $block);
             core_upgrade_time::record_detail('insert_record');
+=======
+            }
+            $block->id = $DB->insert_record('block', $block);
+>>>>>>> forked/LAE_400_PACKAGE
             upgrade_block_savepoint(true, $plugin->version, $block->name, false);
 
             if (file_exists($fullblock.'/db/install.php')) {
@@ -1094,13 +1266,28 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
                 $post_install_function = 'xmldb_block_'.$blockname.'_install';
                 $post_install_function();
                 unset_config('installrunning', 'block_'.$blockname);
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('install.php');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $blocktitles[$block->name] = $blocktitle;
 
             // Install various components
+<<<<<<< HEAD
             upgrade_component_updated($component);
+=======
+            update_capabilities($component);
+            log_update_descriptions($component);
+            external_update_descriptions($component);
+            \core\task\manager::reset_scheduled_tasks_for_component($component);
+            \core_analytics\manager::update_default_models_for_component($component);
+            message_update_providers($component);
+            \core\message\inbound\manager::update_handlers_for_component($component);
+            core_tag_area::reset_definitions_for_component($component);
+            upgrade_plugin_mnet_functions($component);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $endcallback($component, true, $verbose);
 
@@ -1111,7 +1298,10 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
                 require_once($fullblock.'/db/upgrade.php');  // defines new upgrading function
                 $newupgrade_function = 'xmldb_block_'.$blockname.'_upgrade';
                 $result = $newupgrade_function($installedversion, $block);
+<<<<<<< HEAD
                 core_upgrade_time::record_detail('upgrade.php');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 $result = true;
             }
@@ -1129,7 +1319,19 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
             }
 
             // Upgrade various components
+<<<<<<< HEAD
             upgrade_component_updated($component);
+=======
+            update_capabilities($component);
+            log_update_descriptions($component);
+            external_update_descriptions($component);
+            \core\task\manager::reset_scheduled_tasks_for_component($component);
+            \core_analytics\manager::update_default_models_for_component($component);
+            message_update_providers($component);
+            \core\message\inbound\manager::update_handlers_for_component($component);
+            upgrade_plugin_mnet_functions($component);
+            core_tag_area::reset_definitions_for_component($component);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $endcallback($component, false, $verbose);
 
@@ -1671,7 +1873,10 @@ function print_upgrade_part_start($plugin, $installation, $verbose) {
             echo $OUTPUT->heading($plugin);
         }
     }
+<<<<<<< HEAD
     core_upgrade_time::record_start($installation);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if ($installation) {
         if (empty($plugin) or $plugin == 'moodle') {
             // no need to log - log table not yet there ;-)
@@ -1679,6 +1884,10 @@ function print_upgrade_part_start($plugin, $installation, $verbose) {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Starting plugin installation');
         }
     } else {
+<<<<<<< HEAD
+=======
+        core_upgrade_time::record_start();
+>>>>>>> forked/LAE_400_PACKAGE
         if (empty($plugin) or $plugin == 'moodle') {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Starting core upgrade');
         } else {
@@ -1709,7 +1918,19 @@ function print_upgrade_part_end($plugin, $installation, $verbose) {
         }
     }
     if ($verbose) {
+<<<<<<< HEAD
         core_upgrade_time::record_end();
+=======
+        if ($installation) {
+            $message = get_string('success');
+        } else {
+            $duration = core_upgrade_time::get_elapsed();
+            $message = get_string('successduration', '', format_float($duration, 2));
+        }
+        $notification = new \core\output\notification($message, \core\output\notification::NOTIFY_SUCCESS);
+        $notification->set_show_closebutton(false);
+        echo $OUTPUT->render($notification);
+>>>>>>> forked/LAE_400_PACKAGE
         print_upgrade_separator();
     }
 }
@@ -1822,6 +2043,7 @@ function install_core($version, $verbose) {
         print_upgrade_part_start('moodle', true, $verbose); // does not store upgrade running flag
 
         $DB->get_manager()->install_from_xmldb_file("$CFG->libdir/db/install.xml");
+<<<<<<< HEAD
         core_upgrade_time::record_detail('install.xml');
         upgrade_started();     // we want the flag to be stored in config table ;-)
         core_upgrade_time::record_detail('upgrade_started');
@@ -1831,16 +2053,36 @@ function install_core($version, $verbose) {
         core_upgrade_time::record_detail('install.php');
         xmldb_main_install(); // installs the capabilities too
         core_upgrade_time::record_detail('xmldb_main_install');
+=======
+        upgrade_started();     // we want the flag to be stored in config table ;-)
+
+        // set all core default records and default settings
+        require_once("$CFG->libdir/db/install.php");
+        xmldb_main_install(); // installs the capabilities too
+>>>>>>> forked/LAE_400_PACKAGE
 
         // store version
         upgrade_main_savepoint(true, $version, false);
 
         // Continue with the installation
+<<<<<<< HEAD
         upgrade_component_updated('moodle', '', true);
 
         // Write default settings unconditionally
         admin_apply_default_settings(NULL, true);
         core_upgrade_time::record_detail('admin_apply_default_settings');
+=======
+        log_update_descriptions('moodle');
+        external_update_descriptions('moodle');
+        \core\task\manager::reset_scheduled_tasks_for_component('moodle');
+        \core_analytics\manager::update_default_models_for_component('moodle');
+        message_update_providers('moodle');
+        \core\message\inbound\manager::update_handlers_for_component('moodle');
+        core_tag_area::reset_definitions_for_component('moodle');
+
+        // Write default settings unconditionally
+        admin_apply_default_settings(NULL, true);
+>>>>>>> forked/LAE_400_PACKAGE
 
         print_upgrade_part_end(null, true, $verbose);
 
@@ -1885,11 +2127,17 @@ function upgrade_core($version, $verbose) {
             require($preupgradefile);
             // Reset upgrade timeout to default.
             upgrade_set_timeout();
+<<<<<<< HEAD
             core_upgrade_time::record_detail('local/preupgrade.php');
         }
 
         $result = xmldb_main_upgrade($CFG->version);
         core_upgrade_time::record_detail('xmldb_main_upgrade');
+=======
+        }
+
+        $result = xmldb_main_upgrade($CFG->version);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($version > $CFG->version) {
             // store version if not already there
             upgrade_main_savepoint($result, $version, false);
@@ -1900,6 +2148,7 @@ function upgrade_core($version, $verbose) {
         $COURSE = clone($SITE);
 
         // perform all other component upgrade routines
+<<<<<<< HEAD
         upgrade_component_updated('moodle');
         // Update core definitions.
         cache_helper::update_definitions(true);
@@ -1921,6 +2170,29 @@ function upgrade_core($version, $verbose) {
         $syscontext = context_system::instance();
         $syscontext->mark_dirty();
         core_upgrade_time::record_detail('context_system::mark_dirty');
+=======
+        update_capabilities('moodle');
+        log_update_descriptions('moodle');
+        external_update_descriptions('moodle');
+        \core\task\manager::reset_scheduled_tasks_for_component('moodle');
+        \core_analytics\manager::update_default_models_for_component('moodle');
+        message_update_providers('moodle');
+        \core\message\inbound\manager::update_handlers_for_component('moodle');
+        core_tag_area::reset_definitions_for_component('moodle');
+        // Update core definitions.
+        cache_helper::update_definitions(true);
+
+        // Purge caches again, just to be sure we arn't holding onto old stuff now.
+        cache_helper::purge_all(true);
+        purge_all_caches();
+
+        // Clean up contexts - more and more stuff depends on existence of paths and contexts
+        context_helper::cleanup_instances();
+        context_helper::create_instances(null, false);
+        context_helper::build_all_paths(false);
+        $syscontext = context_system::instance();
+        $syscontext->mark_dirty();
+>>>>>>> forked/LAE_400_PACKAGE
 
         print_upgrade_part_end('moodle', false, $verbose);
     } catch (Exception $ex) {
@@ -1937,7 +2209,11 @@ function upgrade_core($version, $verbose) {
  * @return void, may throw exception
  */
 function upgrade_noncore($verbose) {
+<<<<<<< HEAD
     global $CFG, $OUTPUT;
+=======
+    global $CFG;
+>>>>>>> forked/LAE_400_PACKAGE
 
     raise_memory_limit(MEMORY_EXTRA);
 
@@ -1948,6 +2224,7 @@ function upgrade_noncore($verbose) {
         purge_all_caches();
 
         $plugintypes = core_component::get_plugin_types();
+<<<<<<< HEAD
         upgrade_started();
         foreach ($plugintypes as $type=>$location) {
             upgrade_plugins($type, 'print_upgrade_part_start', 'print_upgrade_part_end', $verbose);
@@ -1978,6 +2255,24 @@ function upgrade_noncore($verbose) {
 
         // Only display the final 'Success' if we also showed the heading.
         core_upgrade_time::record_end($CFG->debugdeveloper);
+=======
+        foreach ($plugintypes as $type=>$location) {
+            upgrade_plugins($type, 'print_upgrade_part_start', 'print_upgrade_part_end', $verbose);
+        }
+        // Upgrade services.
+        // This function gives plugins and subsystems a chance to add functions to existing built-in services.
+        external_update_services();
+
+        // Update cache definitions. Involves scanning each plugin for any changes.
+        cache_helper::update_definitions();
+        // Mark the site as upgraded.
+        set_config('allversionshash', core_component::get_all_versions_hash());
+
+        // Purge caches again, just to be sure we arn't holding onto old stuff now.
+        cache_helper::purge_all(true);
+        purge_all_caches();
+
+>>>>>>> forked/LAE_400_PACKAGE
     } catch (Exception $ex) {
         upgrade_handle_exception($ex);
     } catch (Throwable $ex) {
@@ -2525,6 +2820,29 @@ function check_igbinary322_version(environment_results $result) {
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * This function checks that the database prefix ($CFG->prefix) is <= 10
+ *
+ * @param environment_results $result
+ * @return environment_results|null updated results object, or null if the prefix check is passing ok.
+ */
+function check_db_prefix_length(environment_results $result) {
+    global $CFG;
+
+    $prefixlen = strlen($CFG->prefix) ?? 0;
+    if ($prefixlen > 10) {
+        $parameters = (object)['current' => $prefixlen, 'maximum' => 10];
+        $result->setFeedbackStr(['dbprefixtoolong', 'admin', $parameters]);
+        $result->setInfo('db prefix too long');
+        $result->setStatus(false);
+        return $result;
+    }
+    return null; // All, good. By returning null we hide the check.
+}
+
+/**
+>>>>>>> forked/LAE_400_PACKAGE
  * Assert the upgrade key is provided, if it is defined.
  *
  * The upgrade key can be defined in the main config.php as $CFG->upgradekey. If
@@ -2787,5 +3105,60 @@ function check_xmlrpc_usage(environment_results $result): ?environment_results {
         }
     }
 
+<<<<<<< HEAD
+=======
+    if (isset($CFG->mnet_dispatcher_mode) && $CFG->mnet_dispatcher_mode == 'strict') {
+        // Checking Mnet hosts.
+        $mnethosts = mnet_get_hosts();
+        if ($mnethosts) {
+            $actualhost = 0;
+            foreach ($mnethosts as $mnethost) {
+                if ($mnethost->id != $CFG->mnet_all_hosts_id) {
+                    $actualhost++;
+                }
+            }
+            if ($actualhost > 0) {
+                $result->setInfo('xmlrpc_mnet_usage');
+                $result->setFeedbackStr('xmlrpcmnetenabled');
+                return $result;
+            }
+        }
+
+        // Checking Mahara.
+        $portfolios = \core\plugininfo\portfolio::get_enabled_plugins();
+        if (array_key_exists('mahara', $portfolios)) {
+            $result->setInfo('xmlrpc_mahara_usage');
+            $result->setFeedbackStr('xmlrpcmaharaenabled');
+            return $result;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Check whether the mod_assignment is currently being used.
+ *
+ * @param environment_results $result
+ * @return environment_results|null
+ */
+function check_mod_assignment(environment_results $result): ?environment_results {
+    global $DB, $CFG;
+
+    // Check the number of records.
+    if ($DB->get_manager()->table_exists('assignment') && $DB->count_records('assignment') > 0) {
+        $result->setInfo('Assignment 2.2 is in use');
+        $result->setFeedbackStr('modassignmentinuse');
+        return $result;
+    }
+
+    // Check for mod_assignment subplugins.
+    if (is_dir($CFG->dirroot . '/mod/assignment/type')) {
+        $result->setInfo('Assignment 2.2 subplugins present');
+        $result->setFeedbackStr('modassignmentsubpluginsexist');
+        return $result;
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     return null;
 }

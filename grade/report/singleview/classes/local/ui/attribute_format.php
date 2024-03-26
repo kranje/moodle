@@ -39,13 +39,21 @@ abstract class attribute_format {
      * Used to convert this class to an "element" which can be converted to a string.
      * @return element
      */
+<<<<<<< HEAD
     abstract public function determine_format(): element;
+=======
+    abstract public function determine_format();
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Convert this to an element and then to a string
      * @return string
      */
+<<<<<<< HEAD
     public function __toString(): string {
+=======
+    public function __toString() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->determine_format()->html();
     }
 }

@@ -7,7 +7,11 @@ Sass:
 This theme uses Bootstrap version 4.6.0
 The Bootstrap repository is available on:
 
+<<<<<<< HEAD
 https://github.com/twbs/bootstrap
+=======
+https://github.com/twitter/bootstrap.git
+>>>>>>> forked/LAE_400_PACKAGE
 
 To update to the latest release of twitter bootstrap:
 

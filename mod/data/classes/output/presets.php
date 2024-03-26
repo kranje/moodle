@@ -16,6 +16,7 @@
 
 namespace mod_data\output;
 
+<<<<<<< HEAD
 use action_menu;
 use action_menu_link_secondary;
 use mod_data\manager;
@@ -25,6 +26,11 @@ use templatable;
 use renderable;
 use renderer_base;
 use stdClass;
+=======
+use moodle_url;
+use templatable;
+use renderable;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Renderable class for the presets table in the database activity.
@@ -35,8 +41,13 @@ use stdClass;
  */
 class presets implements templatable, renderable {
 
+<<<<<<< HEAD
     /** @var manager $manager The database module manager. */
     private $manager;
+=======
+    /** @var int $id The database module id. */
+    private $id;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var array $presets The array containing the existing presets. */
     private $presets;
@@ -50,6 +61,7 @@ class presets implements templatable, renderable {
     /**
      * The class constructor.
      *
+<<<<<<< HEAD
      * @param manager $manager The database manager
      * @param array $presets The array containing the existing presets
      * @param moodle_url $formactionurl The action url for the form
@@ -57,6 +69,15 @@ class presets implements templatable, renderable {
      */
     public function __construct(manager $manager, array $presets, moodle_url $formactionurl, bool $manage = false) {
         $this->manager = $manager;
+=======
+     * @param int $id The database module id
+     * @param array $presets The array containing the existing presets
+     * @param moodle_url $formactionurl The the action url for the form
+     * @param bool $manage Whether the manage preset options should be displayed
+     */
+    public function __construct(int $id, array $presets, moodle_url $formactionurl, bool $manage = false) {
+        $this->id = $id;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->presets = $presets;
         $this->formactionurl = $formactionurl;
         $this->manage = $manage;
@@ -65,6 +86,7 @@ class presets implements templatable, renderable {
     /**
      * Export the data for the mustache template.
      *
+<<<<<<< HEAD
      * @param renderer_base $output The renderer to be used to render the action bar elements.
      * @return array
      */
@@ -75,10 +97,22 @@ class presets implements templatable, renderable {
             'formactionurl' => $this->formactionurl->out(),
             'showmanage' => $this->manage,
             'presets' => $presets,
+=======
+     * @param \renderer_base $output The renderer to be used to render the action bar elements.
+     * @return array
+     */
+    public function export_for_template(\renderer_base $output): array {
+
+        return [
+            'd' => $this->id,
+            'formactionul' => $this->formactionurl->out(),
+            'presetstable' => $this->get_presets_table(),
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
     /**
+<<<<<<< HEAD
      * Returns the presets list with the information required to display them.
      *
      * @param renderer_base $output The renderer to be used to render the action bar elements.
@@ -207,5 +241,48 @@ class presets implements templatable, renderable {
         }
 
         return $actions;
+=======
+     * Generates and returns the HTML for the presets table.
+     *
+     * @return string
+     */
+    private function get_presets_table(): string {
+        global $OUTPUT, $PAGE, $DB;
+
+        $presetstable = new \html_table();
+        $presetstable->align = ['center', 'left', 'left'];
+        $presetstable->size = ['1%', '90%', '1%'];
+
+        foreach ($this->presets as $preset) {
+            $presetname = $preset->name;
+            if (!empty($preset->userid)) {
+                $userfieldsapi = \core_user\fields::for_name();
+                $namefields = $userfieldsapi->get_sql('', false, '', '', false)->selects;
+                $presetuser = $DB->get_record('user', array('id' => $preset->userid), 'id, ' . $namefields, MUST_EXIST);
+                $username = fullname($presetuser, true);
+                $presetname = "{$presetname} ({$username})";
+            }
+
+            $deleteaction = '';
+            if ($this->manage) {
+                if (data_user_can_delete_preset($PAGE->context, $preset) && $preset->name != 'Image gallery') {
+                    $deleteactionurl = new moodle_url('/mod/data/preset.php',
+                        ['d' => $this->id, 'fullname' => "{$preset->userid}/{$preset->shortname}",
+                        'action' => 'confirmdelete']);
+                    $deleteaction = $OUTPUT->action_icon($deleteactionurl,
+                        new \pix_icon('t/delete', get_string('delete')));
+                }
+            }
+
+            $presetstable->data[] = [
+                \html_writer::tag('input', '', array('type' => 'radio', 'name' => 'fullname',
+                    'value' => "{$preset->userid}/{$preset->shortname}")),
+                $presetname,
+                $deleteaction,
+            ];
+        }
+
+        return \html_writer::table($presetstable);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

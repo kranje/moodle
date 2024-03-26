@@ -25,6 +25,11 @@ define('NO_OUTPUT_BUFFERING', true);
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 
+<<<<<<< HEAD
+=======
+admin_externalpage_setup('toollpimportcsv');
+
+>>>>>>> forked/LAE_400_PACKAGE
 $pagetitle = get_string('pluginname', 'tool_lpimportcsv');
 
 $context = context_system::instance();

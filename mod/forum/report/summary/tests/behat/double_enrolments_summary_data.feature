@@ -23,10 +23,17 @@ Feature: forum report shows post/reply/word counts correctly
       | student2 | C1     | student        | self   |
       | teacher1 | C2     | editingteacher | manual |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity | name   | description     | course | idnumber |
       | forum    | forum1 | C1 first forum  | C1     | forum1   |
       | forum    | forum2 | C1 second forum | C1     | forum2   |
       | forum    | forum1 | C2 first forum  | C2     | forum1   |
+=======
+      | activity | name   | course | idnumber |
+      | forum    | forum1 | C1     | forum1   |
+      | forum    | forum2 | C1     | forum2   |
+      | forum    | forum1 | C2     | forum1   |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following forum discussions exist in course "Course 1":
       | user     | forum  | name        | message     | attachments        | inlineattachments |
       | teacher1 | forum1 | discussion1 | message1    | att1.jpg, att2.txt |                   |
@@ -44,8 +51,12 @@ Feature: forum report shows post/reply/word counts correctly
     And the following forum discussions exist in course "Course 2":
       | user     | forum  | name        | message  | attachments        | inlineattachments |
       | teacher1 | forum1 | discussion1 | message1 | att1.jpg, att2.txt |                   |
+<<<<<<< HEAD
     When I log in as "teacher1"
     And I am on "Course 1" course homepage
+=======
+    When I am on the "Course 1" course page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "forum1"
     And I navigate to "Reports" in current page administration
     Then "Teacher 1" row "Number of attachments" column of "forumreport_summary_table" table should contain "6"

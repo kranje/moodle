@@ -18,7 +18,11 @@ class Legend
     const POSITION_TOP = 't';
     const POSITION_TOPRIGHT = 'tr';
 
+<<<<<<< HEAD
     const POSITION_XLREF = [
+=======
+    private static $positionXLref = [
+>>>>>>> forked/LAE_400_PACKAGE
         self::XL_LEGEND_POSITION_BOTTOM => self::POSITION_BOTTOM,
         self::XL_LEGEND_POSITION_CORNER => self::POSITION_TOPRIGHT,
         self::XL_LEGEND_POSITION_CUSTOM => '??',
@@ -44,7 +48,11 @@ class Legend
     /**
      * Legend Layout.
      *
+<<<<<<< HEAD
      * @var ?Layout
+=======
+     * @var Layout
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $layout;
 
@@ -80,7 +88,11 @@ class Legend
      */
     public function setPosition($position)
     {
+<<<<<<< HEAD
         if (!in_array($position, self::POSITION_XLREF)) {
+=======
+        if (!in_array($position, self::$positionXLref)) {
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 
@@ -92,11 +104,19 @@ class Legend
     /**
      * Get legend position as an Excel internal numeric value.
      *
+<<<<<<< HEAD
      * @return false|int
      */
     public function getPositionXL()
     {
         return array_search($this->position, self::POSITION_XLREF);
+=======
+     * @return int
+     */
+    public function getPositionXL()
+    {
+        return array_search($this->position, self::$positionXLref);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -108,11 +128,19 @@ class Legend
      */
     public function setPositionXL($positionXL)
     {
+<<<<<<< HEAD
         if (!isset(self::POSITION_XLREF[$positionXL])) {
             return false;
         }
 
         $this->position = self::POSITION_XLREF[$positionXL];
+=======
+        if (!isset(self::$positionXLref[$positionXL])) {
+            return false;
+        }
+
+        $this->position = self::$positionXLref[$positionXL];
+>>>>>>> forked/LAE_400_PACKAGE
 
         return true;
     }
@@ -140,7 +168,11 @@ class Legend
     /**
      * Get Layout.
      *
+<<<<<<< HEAD
      * @return ?Layout
+=======
+     * @return Layout
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function getLayout()
     {

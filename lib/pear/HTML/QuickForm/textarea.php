@@ -199,7 +199,11 @@ class HTML_QuickForm_textarea extends HTML_QuickForm_element
             return $this->_getTabs() .
                    '<textarea' . $this->_getAttrString($this->_attributes) . '>' .
                    // because we wrap the form later we don't want the text indented
+<<<<<<< HEAD
                    preg_replace("/(\r\n|\n|\r)/", '&#010;', htmlspecialchars($this->_value ?? '')) .
+=======
+                   preg_replace("/(\r\n|\n|\r)/", '&#010;', htmlspecialchars($this->_value)) .
+>>>>>>> forked/LAE_400_PACKAGE
                    '</textarea>';
         }
     } //end func toHtml

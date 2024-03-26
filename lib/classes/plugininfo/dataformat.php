@@ -48,6 +48,7 @@ class dataformat extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Given a list of dataformat types, return them sorted according to site configuration (if set)
      *
      * @param string[] $formats List of formats, ['csv', 'pdf', etc]
@@ -67,6 +68,8 @@ class dataformat extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Gathers and returns the information about all plugins of the given type
      *
      * @param string $type the name of the plugintype, eg. mod, auth or workshopform
@@ -76,9 +79,22 @@ class dataformat extends base {
      * @return array of plugintype classes, indexed by the plugin name
      */
     public static function get_plugins($type, $typerootdir, $typeclass, $pluginman) {
+<<<<<<< HEAD
         $formats = parent::get_plugins($type, $typerootdir, $typeclass, $pluginman);
 
         $order = static::get_plugins_sortorder(array_keys($formats));
+=======
+        global $CFG;
+        $formats = parent::get_plugins($type, $typerootdir, $typeclass, $pluginman);
+
+        if (!empty($CFG->dataformat_plugins_sortorder)) {
+            $order = explode(',', $CFG->dataformat_plugins_sortorder);
+            $order = array_merge(array_intersect($order, array_keys($formats)),
+                        array_diff(array_keys($formats), $order));
+        } else {
+            $order = array_keys($formats);
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         $sortedformats = array();
         foreach ($order as $formatname) {
             $sortedformats[$formatname] = $formats[$formatname];
@@ -91,17 +107,31 @@ class dataformat extends base {
      * @return array|null of enabled plugins $pluginname=>$pluginname, null means unknown
      */
     public static function get_enabled_plugins() {
+<<<<<<< HEAD
         $plugins = core_plugin_manager::instance()->get_installed_plugins('dataformat');
+=======
+        $enabled = array();
+        $plugins = core_plugin_manager::instance()->get_installed_plugins('dataformat');
+
+>>>>>>> forked/LAE_400_PACKAGE
         if (!$plugins) {
             return array();
         }
 
+<<<<<<< HEAD
         $order = static::get_plugins_sortorder(array_keys($plugins));
         $enabled = array();
         foreach ($order as $formatname) {
             $disabled = get_config('dataformat_' . $formatname, 'disabled');
             if (empty($disabled)) {
                 $enabled[$formatname] = $formatname;
+=======
+        $enabled = array();
+        foreach ($plugins as $plugin => $version) {
+            $disabled = get_config('dataformat_' . $plugin, 'disabled');
+            if (empty($disabled)) {
+                $enabled[$plugin] = $plugin;
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         return $enabled;

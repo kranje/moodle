@@ -188,7 +188,11 @@ abstract class data_object {
         if ($instances = self::fetch_all_helper($table, $classname, $params)) {
             if (count($instances) > 1) {
                 // we should not tolerate any errors here - problems might appear later
+<<<<<<< HEAD
                 throw new \moodle_exception('morethanonerecordinfetch', 'debug');
+=======
+                print_error('morethanonerecordinfetch','debug');
+>>>>>>> forked/LAE_400_PACKAGE
             }
             return reset($instances);
         } else {

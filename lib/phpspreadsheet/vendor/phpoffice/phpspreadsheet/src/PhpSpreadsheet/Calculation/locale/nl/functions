@@ -244,7 +244,10 @@ ROWS = RIJEN
 RTD = RTG
 TRANSPOSE = TRANSPONEREN
 VLOOKUP = VERT.ZOEKEN
+<<<<<<< HEAD
 *RC = RK
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Wiskundige en trigonometrische functies (Math & Trig Functions)

@@ -42,7 +42,11 @@ class chart_line extends chart_base {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function jsonSerialize(): array {
+=======
+    public function jsonSerialize() {
+>>>>>>> forked/LAE_400_PACKAGE
         $data = parent::jsonSerialize();
         $data['smooth'] = $this->get_smooth();
         return $data;

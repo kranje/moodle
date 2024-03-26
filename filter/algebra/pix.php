@@ -10,7 +10,11 @@ define('NO_MOODLE_COOKIES', true); // Because it interferes with caching
     require_once('../../config.php');
 
     if (!filter_is_enabled('algebra')) {
+<<<<<<< HEAD
         throw new \moodle_exception('filternotenabled');
+=======
+        print_error('filternotenabled');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     require_once($CFG->libdir.'/filelib.php');
@@ -27,7 +31,11 @@ define('NO_MOODLE_COOKIES', true); // Because it interferes with caching
         $image    = $args[0];
         $pathname = $CFG->dataroot.'/filter/algebra/'.$image;
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidarguments', 'error');
+=======
+        print_error('invalidarguments', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!file_exists($pathname)) {

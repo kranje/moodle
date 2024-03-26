@@ -84,6 +84,10 @@ class manager_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['admin', ''],
+<<<<<<< HEAD
+=======
+            ['anonymous_user', ''],
+>>>>>>> forked/LAE_400_PACKAGE
             ['usertwo', 'Hello'],
         ], array_map('array_values', $content));
 
@@ -93,6 +97,10 @@ class manager_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['admin'],
+<<<<<<< HEAD
+=======
+            ['anonymous_user'],
+>>>>>>> forked/LAE_400_PACKAGE
             ['usertwo'],
         ], array_map('array_values', $content));
     }
@@ -174,6 +182,7 @@ class manager_test extends core_reportbuilder_testcase {
         $this->assertEquals(system_report_available::class, $report->get('source'));
         $this->assertInstanceOf(context_system::class, $report->get_context());
     }
+<<<<<<< HEAD
 
     /**
      * Data provider for {@see test_report_limit_reached}
@@ -212,4 +221,6 @@ class manager_test extends core_reportbuilder_testcase {
         $CFG->customreportslimit = $customreportslimit;
         $this->assertEquals($expected, manager::report_limit_reached());
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

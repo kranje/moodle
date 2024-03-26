@@ -133,11 +133,18 @@ class pgsql_native_moodle_recordset extends moodle_recordset {
         return $row;
     }
 
+<<<<<<< HEAD
     public function current(): stdClass {
         return (object)$this->current;
     }
 
     #[\ReturnTypeWillChange]
+=======
+    public function current() {
+        return (object)$this->current;
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         // return first column value as key
         if (!$this->current) {
@@ -147,11 +154,19 @@ class pgsql_native_moodle_recordset extends moodle_recordset {
         return $key;
     }
 
+<<<<<<< HEAD
     public function next(): void {
         $this->current = $this->fetch_next();
     }
 
     public function valid(): bool {
+=======
+    public function next() {
+        $this->current = $this->fetch_next();
+    }
+
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return !empty($this->current);
     }
 

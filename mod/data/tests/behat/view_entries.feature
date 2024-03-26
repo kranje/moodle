@@ -28,6 +28,7 @@ Feature: Users can view and search database entries
       | database | type | name              | description              |
       | data1    | text | Test field name   | Test field description   |
       | data1    | text | Test field 2 name | Test field 2 description |
+<<<<<<< HEAD
       | data1    | url  | Test field 3 name | Test field 3 description |
 
   @javascript
@@ -42,12 +43,35 @@ Feature: Users can view and search database entries
     Then I should see "Student entry 1"
     # Confirm that the URL field is displayed as a link.
     And "https://moodledev.io" "link" should exist
+=======
+    And the following "mod_data > templates" exist:
+      | database | name            |
+      | data1    | singletemplate  |
+      | data1    | listtemplate    |
+      | data1    | addtemplate     |
+      | data1    | asearchtemplate |
+      | data1    | rsstemplate     |
+
+  @javascript
+  Scenario: Students can add view, list and search entries
+    Given the following "mod_data > entries" exist:
+      | database | Test field name | Test field 2 name |
+      | data1    | Student entry 1 |                   |
+      | data1    | Student entry 2 |                   |
+      | data1    | Student entry 3 |                   |
+    When I log in as "student1"
+    And I am on the "Test database name" "data activity" page
+    Then I should see "Student entry 1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Student entry 2"
     And I should see "Student entry 3"
     And I select "Single view" from the "jump" singleselect
     And I should see "Student entry 1"
+<<<<<<< HEAD
     # Confirm that the URL field is displayed as a link.
     And "https://moodledev.io" "link" should exist
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I should not see "Student entry 2"
     And "2" "link" should exist
     And "3" "link" should exist
@@ -64,13 +88,21 @@ Feature: Users can view and search database entries
     And I select "List view" from the "jump" singleselect
     And I click on "Advanced search" "checkbox"
     And I set the field "Test field name" to "Student entry 1"
+<<<<<<< HEAD
     And I click on "Save settings" "button" in the "data_adv_form" "region"
+=======
+    And I press "Save settings"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Student entry 1"
     And I should not see "Student entry 2"
     And I should not see "Student entry 3"
     And I set the field "Test field name" to "Student entry"
     And I set the field "Order" to "Descending"
+<<<<<<< HEAD
     And I click on "Save settings" "button" in the "data_adv_form" "region"
+=======
+    And I press "Save settings"
+>>>>>>> forked/LAE_400_PACKAGE
     And "Student entry 3" "text" should appear before "Student entry 2" "text"
     And "Student entry 2" "text" should appear before "Student entry 1" "text"
 
@@ -90,8 +122,12 @@ Feature: Users can view and search database entries
     And I press "Save"
     And I should see "Student original entry"
     And I should see "Tag1" in the "div.tag_list" "css_element"
+<<<<<<< HEAD
     And I open the action menu in "#defaulttemplate-single" "css_element"
     And I choose "Edit" in the open action menu
+=======
+    And I follow "Edit"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Tag1" in the ".form-autocomplete-selection" "css_element"
     And I follow "Cancel"
     And I select "List view" from the "jump" singleselect
@@ -99,7 +135,11 @@ Feature: Users can view and search database entries
     And I click on "Advanced search" "checkbox"
     And I set the field with xpath "//div[@class='datatagcontrol']//input[@type='text']" to "Tag1"
     And I click on "[data-value='Tag1']" "css_element"
+<<<<<<< HEAD
     When I click on "Save settings" "button" in the "data_adv_form" "region"
+=======
+    When I press "Save settings"
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "Student original entry tagged"
     And I should see "Student original entry tagged 2"
     And I should not see "Student original entry untagged"
@@ -121,6 +161,7 @@ Feature: Users can view and search database entries
     And I log out
     When I am on the "Test database name" "data activity" page logged in as teacher1
     And I click on "Advanced search" "checkbox"
+<<<<<<< HEAD
     And I set the field "First name" to "Bob"
     And I click on "Save settings" "button" in the "data_adv_form" "region"
     Then I should see "Found 1 out of 2 records."
@@ -173,3 +214,14 @@ Feature: Users can view and search database entries
     And I am on the "Test database name" "data activity" page logged in as teacher1
     Then I should not see "Select all"
     And I should not see "Delete selected"
+=======
+    And I set the field "Author first name" to "Bob"
+    And I press "Save settings"
+    Then I should see "Student entry 1"
+    And I should not see "Student entry 2"
+    And I set the field "Author first name" to ""
+    And I set the field "Author last name" to "2"
+    And I press "Save settings"
+    And I should not see "Student entry 1"
+    And I should see "Student entry 2"
+>>>>>>> forked/LAE_400_PACKAGE

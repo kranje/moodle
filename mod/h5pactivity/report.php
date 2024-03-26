@@ -49,7 +49,11 @@ $manager = manager::create_from_coursemodule($cm);
 
 $report = $manager->get_report($userid, $attemptid, $currentgroup);
 if (!$report) {
+<<<<<<< HEAD
     throw new \moodle_exception('permissiondenied');
+=======
+    print_error('permissiondenied');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $user = $report->get_user();

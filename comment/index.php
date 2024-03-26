@@ -77,7 +77,11 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('comments'));
 echo $OUTPUT->box_start('generalbox commentsreport');
 if (!empty($err)) {
+<<<<<<< HEAD
     throw new \moodle_exception($err, 'error', $CFG->wwwroot.'/comment/');
+=======
+    print_error($err, 'error', $CFG->wwwroot.'/comment/');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 if (empty($action)) {
     echo '<form method="post">';

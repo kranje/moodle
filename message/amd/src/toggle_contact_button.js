@@ -77,6 +77,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/notification', 'core/cust
     };
 
     /**
+<<<<<<< HEAD
      * Check whether a text label should be displayed or not.
      *
      * @method getUserId
@@ -88,6 +89,8 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/notification', 'core/cust
     };
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Check if this element is currently loading.
      *
      * @method isLoading
@@ -145,10 +148,14 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/notification', 'core/cust
         };
         sendRequest(element, request).done(function() {
             setContact(element);
+<<<<<<< HEAD
             const templateContext = {
                 'displaytextlabel': displayTextLabel(element)
             };
             Templates.render('message/remove_contact_button', templateContext).done(function(html, js) {
+=======
+            Templates.render('message/remove_contact_button', {}).done(function(html, js) {
+>>>>>>> forked/LAE_400_PACKAGE
                 Templates.replaceNodeContents(element, html, js);
             });
         });
@@ -176,10 +183,14 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/notification', 'core/cust
 
         sendRequest(element, request).done(function() {
             setNotContact(element);
+<<<<<<< HEAD
             const templateContext = {
                 'displaytextlabel': displayTextLabel(element)
             };
             Templates.render('message/add_contact_button', templateContext).done(function(html, js) {
+=======
+            Templates.render('message/add_contact_button', {}).done(function(html, js) {
+>>>>>>> forked/LAE_400_PACKAGE
                 Templates.replaceNodeContents(element, html, js);
             });
         });

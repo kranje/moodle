@@ -27,7 +27,11 @@ require_once($CFG->dirroot . '/admin/tool/mobile/lib.php');
 require_once($CFG->dirroot . '/webservice/lib.php');
 
 if (!$CFG->enablemobilewebservice) {
+<<<<<<< HEAD
     throw new \moodle_exception('enablewsdescription', 'webservice');
+=======
+    print_error('enablewsdescription', 'webservice');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login(null, false);

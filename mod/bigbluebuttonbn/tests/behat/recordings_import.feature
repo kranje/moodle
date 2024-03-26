@@ -7,7 +7,11 @@ Feature: Manage and list recordings
     And the following config values are set as admin:
       | bigbluebuttonbn_importrecordings_enabled | 1 |
       | bigbluebuttonbn_importrecordings_from_deleted_enabled | 1 |
+<<<<<<< HEAD
     And I enable "bigbluebuttonbn" "mod" plugin
+=======
+    And I accept dpa and enable bigbluebuttonbn plugin
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "courses" exist:
       | fullname      | shortname | category |
       | Test Course 1 | C1        | 0        |
@@ -107,6 +111,11 @@ Feature: Manage and list recordings
     # There is no confirmation dialog when deleting an imported record.
     And I wait until the page is ready
     Then I should not see "Recording 1"
+<<<<<<< HEAD
+=======
+    # Change window size to large to avoid the "Import recording links" button being hidden (random failure).
+    And I change window size to "large"
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Import recording links" "button"
     And I select "Recordings from deleted activities" from the "sourcecourseid" singleselect
     And I should see "Recording 1"

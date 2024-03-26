@@ -56,7 +56,11 @@ if ($return) {
 $strparticipants = get_string('participants');
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // require proper login; guest user can not change password
@@ -78,7 +82,11 @@ if (!get_user_preferences('auth_forcepasswordchange', false)) {
 
 // do not allow "Logged in as" users to change any passwords
 if (\core\session\manager::is_loggedinas()) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotcallscript');
+=======
+    print_error('cannotcallscript');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if (is_mnet_remote_user($USER)) {
@@ -86,14 +94,22 @@ if (is_mnet_remote_user($USER)) {
     if ($idprovider = $DB->get_record('mnet_host', array('id'=>$USER->mnethostid))) {
         $message .= get_string('userchangepasswordlink', 'mnet', $idprovider);
     }
+<<<<<<< HEAD
     throw new \moodle_exception('userchangepasswordlink', 'mnet', '', $message);
+=======
+    print_error('userchangepasswordlink', 'mnet', '', $message);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // load the appropriate auth plugin
 $userauth = get_auth_plugin($USER->auth);
 
 if (!$userauth->can_change_password()) {
+<<<<<<< HEAD
     throw new \moodle_exception('nopasswordchange', 'auth');
+=======
+    print_error('nopasswordchange', 'auth');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($changeurl = $userauth->change_password_url()) {
@@ -112,7 +128,11 @@ if ($mform->is_cancelled()) {
 } else if ($data = $mform->get_data()) {
 
     if (!$userauth->user_update_password($USER, $data->newpassword1)) {
+<<<<<<< HEAD
         throw new \moodle_exception('errorpasswordupdate', 'auth');
+=======
+        print_error('errorpasswordupdate', 'auth');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     user_add_password_history($USER->id, $data->newpassword1);

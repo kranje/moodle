@@ -42,6 +42,7 @@ if ($confirmdelete !== 0) {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('chat', $id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
 }
 if (! $chat = $DB->get_record('chat', array('id' => $cm->instance))) {
@@ -49,6 +50,15 @@ if (! $chat = $DB->get_record('chat', array('id' => $cm->instance))) {
 }
 if (! $course = $DB->get_record('course', array('id' => $chat->course))) {
     throw new \moodle_exception('coursemisconf');
+=======
+    print_error('invalidcoursemodule');
+}
+if (! $chat = $DB->get_record('chat', array('id' => $cm->instance))) {
+    print_error('invalidcoursemodule');
+}
+if (! $course = $DB->get_record('course', array('id' => $chat->course))) {
+    print_error('coursemisconf');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context = context_module::instance($cm->id);

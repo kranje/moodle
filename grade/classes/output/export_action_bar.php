@@ -27,6 +27,12 @@ use moodle_url;
  */
 class export_action_bar extends action_bar {
 
+<<<<<<< HEAD
+=======
+    /** @var moodle_url $exportactiveurl The URL that should be set as active in the exports URL selector element. */
+    protected $exportactiveurl;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var string $activeplugin The plugin of the current export grades page (xml, ods, ...). */
     protected $activeplugin;
 
@@ -34,6 +40,7 @@ class export_action_bar extends action_bar {
      * The class constructor.
      *
      * @param \context $context The context object.
+<<<<<<< HEAD
      * @param null $unused This parameter has been deprecated since 4.1 and should not be used anymore.
      * @param string $activeplugin The plugin of the current export grades page (xml, ods, ...).
      */
@@ -42,6 +49,14 @@ class export_action_bar extends action_bar {
             debugging('Deprecated argument passed to ' . __FUNCTION__, DEBUG_DEVELOPER);
         }
         parent::__construct($context);
+=======
+     * @param moodle_url $exportactiveurl The URL that should be set as active in the exports URL selector element.
+     * @param string $activeplugin The plugin of the current export grades page (xml, ods, ...).
+     */
+    public function __construct(\context $context, moodle_url $exportactiveurl, string $activeplugin) {
+        parent::__construct($context);
+        $this->exportactiveurl = $exportactiveurl;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->activeplugin = $activeplugin;
     }
 
@@ -84,6 +99,7 @@ class export_action_bar extends action_bar {
         }
 
         $exportsmenu = [];
+<<<<<<< HEAD
         $exportactiveurl = null;
         // Generate the data for the exports navigation selector menu.
         foreach ($exports as $export) {
@@ -96,6 +112,16 @@ class export_action_bar extends action_bar {
         // This navigation selector menu will contain the links to all available grade export plugin pages.
         $exportsurlselect = new \core\output\select_menu('exportas', $exportsmenu, $exportactiveurl);
         $exportsurlselect->set_label(get_string('exportas', 'grades'));
+=======
+        // Generate the data for the exports navigation selector menu.
+        foreach ($exports as $export) {
+            $exportsmenu[$export->link->out()] = $export->string;
+        }
+
+        // This navigation selector menu will contain the links to all available grade export plugin pages.
+        $exportsurlselect = new \url_select($exportsmenu, $this->exportactiveurl->out(false), null,
+            'gradesexportactionselect');
+>>>>>>> forked/LAE_400_PACKAGE
         $data['exportselector'] = $exportsurlselect->export_for_template($output);
 
         return $data;

@@ -50,7 +50,11 @@ if ($mode == STATS_MODE_RANKED) {
 }
 
 if (!$course = $DB->get_record("course", array("id"=>$courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception("invalidcourseid");
+=======
+    print_error("invalidcourseid");
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if (!empty($userid)) {
@@ -100,7 +104,11 @@ if (empty($CFG->enablestats)) {
     if (has_capability('moodle/site:config', context_system::instance())) {
         redirect("$CFG->wwwroot/$CFG->admin/settings.php?section=stats", get_string('mustenablestats', 'admin'), 3);
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('statsdisable');
+=======
+        print_error('statsdisable');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

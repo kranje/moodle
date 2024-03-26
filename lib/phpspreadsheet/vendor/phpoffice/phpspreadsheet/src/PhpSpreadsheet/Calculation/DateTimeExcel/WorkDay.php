@@ -2,14 +2,20 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 
 class WorkDay
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * WORKDAY.
      *
@@ -21,6 +27,7 @@ class WorkDay
      * Excel Function:
      *        WORKDAY(startDate,endDays[,holidays[,holiday[,...]]])
      *
+<<<<<<< HEAD
      * @param array|mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
      *                                        PHP DateTime object, or a standard date string
      *                         Or can be an array of date values
@@ -47,11 +54,33 @@ class WorkDay
             );
         }
 
+=======
+     * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
+     *                                        PHP DateTime object, or a standard date string
+     * @param int $endDays The number of nonweekend and nonholiday days before or after
+     *                                        startDate. A positive value for days yields a future date; a
+     *                                        negative value yields a past date.
+     * @param mixed $dateArgs
+     *
+     * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+     *                        depending on the value of the ReturnDateType flag
+     */
+    public static function date($startDate, $endDays, ...$dateArgs)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         //    Retrieve the mandatory start date and days that are referenced in the function definition
         try {
             $startDate = Helpers::getDateValue($startDate);
             $endDays = Helpers::validateNumericNull($endDays);
+<<<<<<< HEAD
             $holidayArray = array_map([Helpers::class, 'getDateValue'], Functions::flattenArray($dateArgs));
+=======
+            $dateArgs = Functions::flattenArray($dateArgs);
+            $holidayArray = [];
+            foreach ($dateArgs as $holidayDate) {
+                $holidayArray[] = Helpers::getDateValue($holidayDate);
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -77,8 +106,14 @@ class WorkDay
     private static function incrementing(float $startDate, int $endDays, array $holidayArray)
     {
         //    Adjust the start date if it falls over a weekend
+<<<<<<< HEAD
         $startDoW = self::getWeekDay($startDate, 3);
         if ($startDoW >= 5) {
+=======
+
+        $startDoW = self::getWeekDay($startDate, 3);
+        if (self::getWeekDay($startDate, 3) >= 5) {
+>>>>>>> forked/LAE_400_PACKAGE
             $startDate += 7 - $startDoW;
             --$endDays;
         }
@@ -138,8 +173,14 @@ class WorkDay
     private static function decrementing(float $startDate, int $endDays, array $holidayArray)
     {
         //    Adjust the start date if it falls over a weekend
+<<<<<<< HEAD
         $startDoW = self::getWeekDay($startDate, 3);
         if ($startDoW >= 5) {
+=======
+
+        $startDoW = self::getWeekDay($startDate, 3);
+        if (self::getWeekDay($startDate, 3) >= 5) {
+>>>>>>> forked/LAE_400_PACKAGE
             $startDate += -$startDoW + 4;
             ++$endDays;
         }
@@ -183,7 +224,10 @@ class WorkDay
             }
             //    Adjust the calculated end date if it falls over a weekend
             $endDoW = self::getWeekDay($endDate, 3);
+<<<<<<< HEAD
             /** int $endDoW */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if ($endDoW >= 5) {
                 $endDate += -$endDoW + 4;
             }
@@ -194,8 +238,14 @@ class WorkDay
 
     private static function getWeekDay(float $date, int $wd): int
     {
+<<<<<<< HEAD
         $result = Functions::scalar(Week::day($date, $wd));
 
         return is_int($result) ? $result : -1;
+=======
+        $result = Week::day($date, $wd);
+
+        return is_string($result) ? -1 : $result;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

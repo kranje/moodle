@@ -116,7 +116,10 @@ function lti_get_jwt_message_type_mapping() {
         'basic-lti-launch-request' => 'LtiResourceLinkRequest',
         'ContentItemSelectionRequest' => 'LtiDeepLinkingRequest',
         'LtiDeepLinkingResponse' => 'ContentItemSelection',
+<<<<<<< HEAD
         'LtiSubmissionReviewRequest' => 'LtiSubmissionReviewRequest',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     );
 }
 
@@ -263,12 +266,15 @@ function lti_get_jwt_claim_mapping() {
             'claim' => 'type',
             'isarray' => true
         ],
+<<<<<<< HEAD
         'for_user_id' => [
             'suffix' => '',
             'group' => 'for_user',
             'claim' => 'user_id',
             'isarray' => false
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'lis_course_offering_sourcedid' => [
             'suffix' => '',
             'group' => 'lis',
@@ -478,9 +484,15 @@ function lti_get_instance_type(object $instance) : ?object {
  * @return array the endpoint URL and parameters (including the signature)
  * @since  Moodle 3.0
  */
+<<<<<<< HEAD
 function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-launch-request', $foruserid = 0) {
     global $PAGE, $USER;
     $messagetype = $messagetype ? $messagetype : 'basic-lti-launch-request';
+=======
+function lti_get_launch_data($instance, $nonce = '') {
+    global $PAGE, $CFG, $USER;
+
+>>>>>>> forked/LAE_400_PACKAGE
     $tool = lti_get_instance_type($instance);
     if ($tool) {
         $typeid = $tool->id;
@@ -553,22 +565,33 @@ function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-l
 
     $course = $PAGE->course;
     $islti2 = isset($tool->toolproxyid);
+<<<<<<< HEAD
     $allparams = lti_build_request($instance, $typeconfig, $course, $typeid, $islti2, $messagetype, $foruserid);
+=======
+    $allparams = lti_build_request($instance, $typeconfig, $course, $typeid, $islti2);
+>>>>>>> forked/LAE_400_PACKAGE
     if ($islti2) {
         $requestparams = lti_build_request_lti2($tool, $allparams);
     } else {
         $requestparams = $allparams;
     }
+<<<<<<< HEAD
     $requestparams = array_merge($requestparams, lti_build_standard_message($instance, $orgid, $ltiversion, $messagetype));
+=======
+    $requestparams = array_merge($requestparams, lti_build_standard_message($instance, $orgid, $ltiversion));
+>>>>>>> forked/LAE_400_PACKAGE
     $customstr = '';
     if (isset($typeconfig['customparameters'])) {
         $customstr = $typeconfig['customparameters'];
     }
+<<<<<<< HEAD
     $services = lti_get_services();
     foreach ($services as $service) {
         [$endpoint, $customstr] = $service->override_endpoint($messagetype,
             $endpoint, $customstr, $instance->course, $instance);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $requestparams = array_merge($requestparams, lti_build_custom_parameters($toolproxy, $tool, $instance, $allparams, $customstr,
         $instance->instructorcustomparameters, $islti2));
 
@@ -660,6 +683,7 @@ function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-l
 /**
  * Launch an external tool activity.
  *
+<<<<<<< HEAD
  * @param stdClass $instance the external tool activity settings
  * @param int $foruserid for user param, optional
  * @return string The HTML code containing the javascript code for the launch
@@ -667,6 +691,14 @@ function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-l
 function lti_launch_tool($instance, $foruserid=0) {
 
     list($endpoint, $parms) = lti_get_launch_data($instance, '', '', $foruserid);
+=======
+ * @param  stdClass $instance the external tool activity settings
+ * @return string The HTML code containing the javascript code for the launch
+ */
+function lti_launch_tool($instance) {
+
+    list($endpoint, $parms) = lti_get_launch_data($instance);
+>>>>>>> forked/LAE_400_PACKAGE
     $debuglaunch = ( $instance->debuglaunch == 1 );
 
     $content = lti_post_launch_html($parms, $endpoint, $debuglaunch);
@@ -786,6 +818,7 @@ function lti_build_sourcedid($instanceid, $userid, $servicesalt, $typeid = null,
  * @param object    $course         Course object
  * @param int|null  $typeid         Basic LTI tool ID
  * @param boolean   $islti2         True if an LTI 2 tool is being launched
+<<<<<<< HEAD
  * @param string    $messagetype    LTI Message Type for this launch
  * @param int       $foruserid      User targeted by this launch
  *
@@ -793,6 +826,12 @@ function lti_build_sourcedid($instanceid, $userid, $servicesalt, $typeid = null,
  */
 function lti_build_request($instance, $typeconfig, $course, $typeid = null, $islti2 = false,
     $messagetype = 'basic-lti-launch-request', $foruserid = 0) {
+=======
+ *
+ * @return array                    Request details
+ */
+function lti_build_request($instance, $typeconfig, $course, $typeid = null, $islti2 = false) {
+>>>>>>> forked/LAE_400_PACKAGE
     global $USER, $CFG;
 
     if (empty($instance->cmid)) {
@@ -809,12 +848,15 @@ function lti_build_request($instance, $typeconfig, $course, $typeid = null, $isl
         'context_label' => trim(html_to_text($course->shortname, 0)),
         'context_title' => trim(html_to_text($course->fullname, 0)),
     );
+<<<<<<< HEAD
     if ($foruserid) {
         $requestparams['for_user_id'] = $foruserid;
     }
     if ($messagetype) {
         $requestparams['lti_message_type'] = $messagetype;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if (!empty($instance->name)) {
         $requestparams['resource_link_title'] = trim(html_to_text($instance->name, 0));
     }
@@ -1399,6 +1441,7 @@ function lti_verify_jwt_signature($typeid, $consumerkey, $jwtparam) {
 }
 
 /**
+<<<<<<< HEAD
  * Converts an array of custom parameters to a new line separated string.
  *
  * @param object $params list of params to concatenate
@@ -1414,6 +1457,8 @@ function params_to_string(object $params) {
 }
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Converts LTI 1.1 Content Item for LTI Link to Form data.
  *
  * @param object $tool Tool for which the item is created for.
@@ -1483,14 +1528,18 @@ function content_item_to_form(object $tool, object $typeconfig, object $item) : 
                 $config->grade_modgrade_point = $maxscore;
                 $config->lineitemresourceid = '';
                 $config->lineitemtag = '';
+<<<<<<< HEAD
                 $config->lineitemsubreviewurl = '';
                 $config->lineitemsubreviewparams = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 if (isset($lineitem->assignedActivity) && isset($lineitem->assignedActivity->activityId)) {
                     $config->lineitemresourceid = $lineitem->assignedActivity->activityId?:'';
                 }
                 if (isset($lineitem->tag)) {
                     $config->lineitemtag = $lineitem->tag?:'';
                 }
+<<<<<<< HEAD
                 if (isset($lineitem->submissionReview)) {
                     $subreview = $lineitem->submissionReview;
                     $config->lineitemsubreviewurl = 'DEFAULT';
@@ -1501,6 +1550,8 @@ function content_item_to_form(object $tool, object $typeconfig, object $item) : 
                         $config->lineitemsubreviewparams = params_to_string($subreview->custom);
                     }
                 }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
     }
@@ -1517,7 +1568,15 @@ function content_item_to_form(object $tool, object $typeconfig, object $item) : 
         }
     }
     if (isset($item->custom)) {
+<<<<<<< HEAD
         $config->instructorcustomparameters = params_to_string($item->custom);
+=======
+        $customparameters = [];
+        foreach ($item->custom as $key => $value) {
+            $customparameters[] = "{$key}={$value}";
+        }
+        $config->instructorcustomparameters = implode("\n", $customparameters);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     return $config;
 }
@@ -1687,9 +1746,12 @@ function lti_convert_content_items($param) {
                         $newitem->lineItem->scoreConstraints->{'@type'} = 'NumericLimits';
                         $newitem->lineItem->scoreConstraints->totalMaximum = $item->lineItem->scoreMaximum;
                     }
+<<<<<<< HEAD
                     if (isset($item->lineItem->submissionReview)) {
                         $newitem->lineItem->submissionReview = $item->lineItem->submissionReview;
                     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 $items[] = $newitem;
             }
@@ -1942,6 +2004,7 @@ function lti_get_enabled_capabilities($tool) {
 }
 
 /**
+<<<<<<< HEAD
  * Splits the custom parameters
  *
  * @param string    $customstr      String containing the parameters
@@ -1949,6 +2012,19 @@ function lti_get_enabled_capabilities($tool) {
  * @return array of custom parameters
  */
 function lti_split_parameters($customstr) {
+=======
+ * Splits the custom parameters field to the various parameters
+ *
+ * @param object    $toolproxy      Tool proxy instance object
+ * @param object    $tool           Tool instance object
+ * @param array     $params         LTI launch parameters
+ * @param string    $customstr      String containing the parameters
+ * @param boolean   $islti2         True if an LTI 2 tool is being launched
+ *
+ * @return array of custom parameters
+ */
+function lti_split_custom_parameters($toolproxy, $tool, $params, $customstr, $islti2 = false) {
+>>>>>>> forked/LAE_400_PACKAGE
     $customstr = str_replace("\r\n", "\n", $customstr);
     $customstr = str_replace("\n\r", "\n", $customstr);
     $customstr = str_replace("\r", "\n", $customstr);
@@ -1961,6 +2037,7 @@ function lti_split_parameters($customstr) {
         }
         $key = trim(core_text::substr($line, 0, $pos));
         $val = trim(core_text::substr($line, $pos + 1, strlen($line)));
+<<<<<<< HEAD
         $retval[$key] = $val;
     }
     return $retval;
@@ -1981,6 +2058,8 @@ function lti_split_custom_parameters($toolproxy, $tool, $params, $customstr, $is
     $splitted = lti_split_parameters($customstr);
     $retval = array();
     foreach ($splitted as $key => $val) {
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $val = lti_parse_custom_parameter($toolproxy, $tool, $params, $val, $islti2);
         $key2 = lti_map_keyname($key);
         $retval['custom_'.$key2] = $val;
@@ -2381,13 +2460,29 @@ function lti_get_configured_types($courseid, $sectionreturn = 0) {
         $type->name     = 'lti_type_' . $ltitype->id;
         // Clean the name. We don't want tags here.
         $type->title    = clean_param($ltitype->name, PARAM_NOTAGS);
+<<<<<<< HEAD
         $trimmeddescription = trim($ltitype->description ?? '');
+=======
+        $trimmeddescription = trim($ltitype->description);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($trimmeddescription != '') {
             // Clean the description. We don't want tags here.
             $type->help     = clean_param($trimmeddescription, PARAM_NOTAGS);
             $type->helplink = get_string('modulename_shortcut_link', 'lti');
         }
+<<<<<<< HEAD
         $type->icon = html_writer::empty_tag('img', ['src' => get_tool_type_icon_url($ltitype), 'alt' => '', 'class' => 'icon']);
+=======
+
+        $iconurl = get_tool_type_icon_url($ltitype);
+        $iconclass = '';
+        if ($iconurl !== $OUTPUT->image_url('monologo', 'lti')->out()) {
+            // Do not filter the icon if it is not the default LTI activity icon.
+            $iconclass = 'nofilter';
+        }
+        $type->icon = html_writer::empty_tag('img', ['src' => $iconurl, 'alt' => '', 'class' => "icon $iconclass"]);
+
+>>>>>>> forked/LAE_400_PACKAGE
         $type->link = new moodle_url('/course/modedit.php', array('add' => 'lti', 'return' => 0, 'course' => $courseid,
             'sr' => $sectionreturn, 'typeid' => $ltitype->id));
         $types[] = $type;
@@ -2398,7 +2493,11 @@ function lti_get_configured_types($courseid, $sectionreturn = 0) {
 function lti_get_domain_from_url($url) {
     $matches = array();
 
+<<<<<<< HEAD
     if (preg_match(LTI_URL_DOMAIN_REGEX, $url ?? '', $matches)) {
+=======
+    if (preg_match(LTI_URL_DOMAIN_REGEX, $url, $matches)) {
+>>>>>>> forked/LAE_400_PACKAGE
         return $matches[1];
     }
 }
@@ -3501,8 +3600,13 @@ function lti_post_launch_html($newparms, $endpoint, $debug=false) {
 
     // Contruct html for the launch parameters.
     foreach ($newparms as $key => $value) {
+<<<<<<< HEAD
         $key = htmlspecialchars($key, ENT_COMPAT);
         $value = htmlspecialchars($value, ENT_COMPAT);
+=======
+        $key = htmlspecialchars($key);
+        $value = htmlspecialchars($value);
+>>>>>>> forked/LAE_400_PACKAGE
         if ( $key == "ext_submit" ) {
             $r .= "<input type=\"submit\"";
         } else {
@@ -3534,8 +3638,13 @@ function lti_post_launch_html($newparms, $endpoint, $debug=false) {
         $r .= $endpoint . "<br/>\n&nbsp;<br/>\n";
         $r .= "<b>".get_string("basiclti_parameters", "lti")."</b><br/>\n";
         foreach ($newparms as $key => $value) {
+<<<<<<< HEAD
             $key = htmlspecialchars($key, ENT_COMPAT);
             $value = htmlspecialchars($value, ENT_COMPAT);
+=======
+            $key = htmlspecialchars($key);
+            $value = htmlspecialchars($value);
+>>>>>>> forked/LAE_400_PACKAGE
             $r .= "$key = $value<br/>\n";
         }
         $r .= "&nbsp;<br/>\n";
@@ -3558,12 +3667,17 @@ function lti_post_launch_html($newparms, $endpoint, $debug=false) {
  * Generate the form for initiating a login request for an LTI 1.3 message
  *
  * @param int            $courseid  Course ID
+<<<<<<< HEAD
  * @param int            $cmid        LTI instance ID
+=======
+ * @param int            $id        LTI instance ID
+>>>>>>> forked/LAE_400_PACKAGE
  * @param stdClass|null  $instance  LTI instance
  * @param stdClass       $config    Tool type configuration
  * @param string         $messagetype   LTI message type
  * @param string         $title     Title of content item
  * @param string         $text      Description of content item
+<<<<<<< HEAD
  * @param int            $foruserid Id of the user targeted by the launch
  * @return string
  */
@@ -3572,14 +3686,30 @@ function lti_initiate_login($courseid, $cmid, $instance, $config, $messagetype =
     global $SESSION;
 
     $params = lti_build_login_request($courseid, $cmid, $instance, $config, $messagetype, $foruserid, $title, $text);
+=======
+ * @return string
+ */
+function lti_initiate_login($courseid, $id, $instance, $config, $messagetype = 'basic-lti-launch-request', $title = '',
+        $text = '') {
+    global $SESSION;
+
+    $params = lti_build_login_request($courseid, $id, $instance, $config, $messagetype);
+    $SESSION->lti_message_hint = "{$courseid},{$config->typeid},{$id}," . base64_encode($title) . ',' .
+        base64_encode($text);
+>>>>>>> forked/LAE_400_PACKAGE
 
     $r = "<form action=\"" . $config->lti_initiatelogin .
         "\" name=\"ltiInitiateLoginForm\" id=\"ltiInitiateLoginForm\" method=\"post\" " .
         "encType=\"application/x-www-form-urlencoded\">\n";
 
     foreach ($params as $key => $value) {
+<<<<<<< HEAD
         $key = htmlspecialchars($key, ENT_COMPAT);
         $value = htmlspecialchars($value, ENT_COMPAT);
+=======
+        $key = htmlspecialchars($key);
+        $value = htmlspecialchars($value);
+>>>>>>> forked/LAE_400_PACKAGE
         $r .= "  <input type=\"hidden\" name=\"{$key}\" value=\"{$value}\"/>\n";
     }
     $r .= "</form>\n";
@@ -3597,6 +3727,7 @@ function lti_initiate_login($courseid, $cmid, $instance, $config, $messagetype =
  * Prepares an LTI 1.3 login request
  *
  * @param int            $courseid  Course ID
+<<<<<<< HEAD
  * @param int            $cmid        Course Module instance ID
  * @param stdClass|null  $instance  LTI instance
  * @param stdClass       $config    Tool type configuration
@@ -3614,11 +3745,25 @@ function lti_build_login_request($courseid, $cmid, $instance, $config, $messaget
         $launchid = 'ltilaunch'.$instance->id.'_'.rand();
         $ltihint['cmid'] = $cmid;
         $SESSION->$launchid = "{$courseid},{$config->typeid},{$cmid},{$messagetype},{$foruserid},,";
+=======
+ * @param int            $id        LTI instance ID
+ * @param stdClass|null  $instance  LTI instance
+ * @param stdClass       $config    Tool type configuration
+ * @param string         $messagetype   LTI message type
+ * @return array Login request parameters
+ */
+function lti_build_login_request($courseid, $id, $instance, $config, $messagetype) {
+    global $USER, $CFG;
+
+    if (!empty($instance)) {
+        $endpoint = !empty($instance->toolurl) ? $instance->toolurl : $config->lti_toolurl;
+>>>>>>> forked/LAE_400_PACKAGE
     } else {
         $endpoint = $config->lti_toolurl;
         if (($messagetype === 'ContentItemSelectionRequest') && !empty($config->lti_toolurl_ContentItemSelectionRequest)) {
             $endpoint = $config->lti_toolurl_ContentItemSelectionRequest;
         }
+<<<<<<< HEAD
         $launchid = "ltilaunch_$messagetype".rand();
         $SESSION->$launchid =
             "{$courseid},{$config->typeid},,{$messagetype},{$foruserid}," . base64_encode($title) . ',' . base64_encode($text);
@@ -3630,6 +3775,11 @@ function lti_build_login_request($courseid, $cmid, $instance, $config, $messaget
     }
 
     $ltihint['launchid'] = $launchid;
+=======
+    }
+    $endpoint = trim($endpoint);
+
+>>>>>>> forked/LAE_400_PACKAGE
     // If SSL is forced make sure https is on the normal launch URL.
     if (isset($config->lti_forcessl) && ($config->lti_forcessl == '1')) {
         $endpoint = lti_ensure_url_is_https($endpoint);
@@ -3641,7 +3791,11 @@ function lti_build_login_request($courseid, $cmid, $instance, $config, $messaget
     $params['iss'] = $CFG->wwwroot;
     $params['target_link_uri'] = $endpoint;
     $params['login_hint'] = $USER->id;
+<<<<<<< HEAD
     $params['lti_message_hint'] = json_encode($ltihint);
+=======
+    $params['lti_message_hint'] = $id;
+>>>>>>> forked/LAE_400_PACKAGE
     $params['client_id'] = $config->lti_clientid;
     $params['lti_deployment_id'] = $config->typeid;
     return $params;

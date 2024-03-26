@@ -89,7 +89,11 @@ function array_remove_by_key($arr,$key) {
 
 
 function cc_print_object($object) {
+<<<<<<< HEAD
     echo '<pre>' . htmlspecialchars(print_r($object,true), ENT_COMPAT) . '</pre>';
+=======
+    echo '<pre>' . htmlspecialchars(print_r($object,true)) . '</pre>';
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 

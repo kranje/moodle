@@ -23,11 +23,15 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 $string['a11yTitle:label'] = 'Assistive Technologies label';
 $string['actions'] = 'Actions';
 $string['acceptTerms'] = 'I accept the <a href=":url" target="_blank">terms of use</a>';
 $string['accountDetailsLinkText'] = 'here';
 $string['add'] = 'Add';
+=======
+$string['actions'] = 'Actions';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['addedandupdatedpp'] = 'Added {$a->%new} new H5P libraries and updated {$a->%old} old ones.';
 $string['addedandupdatedps'] = 'Added {$a->%new} new H5P libraries and updated {$a->%old} old one.';
 $string['addedandupdatedsp'] = 'Added {$a->%new} new H5P library and updated {$a->%old} old ones.';
@@ -35,10 +39,13 @@ $string['addedandupdatedss'] = 'Added {$a->%new} new H5P library and updated {$a
 $string['addednewlibraries'] = 'Added {$a->%new} new H5P libraries.';
 $string['addednewlibrary'] = 'Added {$a->%new} new H5P library.';
 $string['additionallicenseinfo'] = 'Any additional information about the licence';
+<<<<<<< HEAD
 $string['address'] = 'Address';
 $string['age'] = 'Typical age';
 $string['ageDescription'] = 'The target audience of this content. Possible input formats separated by commas: "1,34-45,-50,59-".';
 $string['altText'] = 'Alt text';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['atto_h5p'] = 'Insert H5P button';
 $string['atto_h5p_description'] = 'The Insert H5P button in the Atto editor enables users to insert H5P content by either entering a URL or embed code, or by uploading an H5P file.';
 $string['author'] = 'Author';
@@ -46,6 +53,7 @@ $string['authorcomments'] = 'Author comments';
 $string['authorcommentsdescription'] = 'Comments for the editor of the content. (This text will not be published as a part of the copyright info.)';
 $string['authorname'] = 'Author\'s name';
 $string['authorrole'] = 'Author\'s role';
+<<<<<<< HEAD
 $string['back'] = 'Back';
 $string['by'] = 'by';
 $string['cancellabel'] = 'Cancel';
@@ -53,6 +61,10 @@ $string['cancelPublishConfirmationDialogCancelButtonText'] = 'No';
 $string['cancelPublishConfirmationDialogConfirmButtonText'] = 'Yes';
 $string['cancelPublishConfirmationDialogDescription'] = 'Are you sure you want to cancel the sharing process?';
 $string['cancelPublishConfirmationDialogTitle'] = 'Cancel sharing';
+=======
+$string['by'] = 'by';
+$string['cancellabel'] = 'Cancel';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['ccattribution'] = 'Attribution (CC BY)';
 $string['ccattributionnc'] = 'Attribution-NonCommercial (CC BY-NC)';
 $string['ccattributionncnd'] = 'Attribution-NonCommercial-NoDerivs (CC BY-NC-ND)';
@@ -62,16 +74,22 @@ $string['ccattributionsa'] = 'Attribution-ShareAlike (CC BY-SA)';
 $string['ccpdd'] = 'Public Domain Dedication (CC0)';
 $string['changedby'] = 'Changed by';
 $string['changedescription'] = 'Description of change';
+<<<<<<< HEAD
 $string['changeHasBeenSubmitted'] = 'A change has been submited for';
 $string['changelog'] = 'Changelog';
 $string['changeplaceholder'] = 'Photo cropped, text changed, etc.';
 $string['city'] = 'City';
+=======
+$string['changelog'] = 'Changelog';
+$string['changeplaceholder'] = 'Photo cropped, text changed, etc.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['close'] = 'Close';
 $string['confirmdialogbody'] = 'Please confirm that you wish to proceed. This action cannot be undone.';
 $string['confirmdialogheader'] = 'Confirm action';
 $string['confirmlabel'] = 'Confirm';
 $string['connectionLost'] = 'Connection lost. Results will be stored and sent when the connection is reestablished.';
 $string['connectionReestablished'] = 'Connection reestablished.';
+<<<<<<< HEAD
 $string['contactPerson'] = 'Contact person';
 $string['contactPersonDescription'] = 'H5P will reach out to the contact person in case there are any issues with the content shared by the publisher. The contact person\'s name or other information will not be published or shared with third parties';
 $string['contentAvailable'] = 'Your content will normally be available in the Hub within one business day.';
@@ -81,22 +99,35 @@ $string['contentinuse'] = 'This content may be in use in other places.';
 $string['contentLicenseTitle'] = 'Content license info';
 $string['contenttype'] = 'Content type';
 $string['contentUpdateSoon'] = 'Your content will update soon';
+=======
+$string['contentCopied'] = 'Content is copied to the clipboard';
+$string['contentchanged'] = 'This content has changed since you last used it.';
+$string['contentinuse'] = 'This content may be in use in other places.';
+$string['contenttype'] = 'Content type';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['copyright'] = 'Rights of use';
 $string['copyrightinfo'] = 'Copyright information';
 $string['copyrightstring'] = 'Copyright';
 $string['copyrighttitle'] = 'View copyright information for this content.';
+<<<<<<< HEAD
 $string['copyrightWarning'] = 'Copyrighted material cannot be shared in the H5P Content Hub. If the content is licensed with a OER friendly license like Creative Commons, please choose the appropriate license. If not this content cannot be shared.';
 $string['couldNotParseJSONFromZip'] = 'Unable to parse JSON from the package: {$a->%fileName}';
 $string['couldNotReadFileFromZip'] = 'Unable to read file from the package: {$a->%fileName}';
 $string['country'] = 'Country';
 $string['creativecommons'] = 'Creative Commons';
 $string['currentStep'] = 'Step :step of :total';
+=======
+$string['couldNotParseJSONFromZip'] = 'Unable to parse JSON from the package: {$a->%fileName}';
+$string['couldNotReadFileFromZip'] = 'Unable to read file from the package: {$a->%fileName}';
+$string['creativecommons'] = 'Creative Commons';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['date'] = 'Date';
 $string['deletelibraryconfirm'] = '<p>Are you sure you want to delete version <em>\'{$a->version}\'</em> from library <em>\'{$a->name}\'</em>? It will remove the library and all its uses.</p><p>This operation can not be undone.</p>';
 $string['deletelibraryversion'] = 'Delete version';
 $string['deleting'] = 'Deleting a library';
 $string['description'] = 'Description';
 $string['disablefullscreen'] = 'Disable fullscreen';
+<<<<<<< HEAD
 $string['discipline:dropdownButton'] = 'Dropdown button';
 $string['discipline:in'] = 'in';
 $string['discipline:searchPlaceholder'] = 'Type to search for disciplines';
@@ -112,6 +143,12 @@ $string['editingFailed'] = 'Editing failed.';
 $string['editor'] = 'Editor';
 $string['emailAddress'] = 'Email address';
 $string['emailAddressDescription'] = 'The email address will be used by H5P to reach out to the publisher in case of any issues with the content or in case the publisher needs to recover their account. It will not be published or shared with any third parties';
+=======
+$string['download'] = 'Download';
+$string['downloadtitle'] = 'Download this content as a H5P file.';
+$string['editcontent'] = 'Edit H5P content';
+$string['editor'] = 'Editor';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['embed'] = 'Embed';
 $string['embedtitle'] = 'View the embed code for this content.';
 $string['error:emptycontentid'] = 'The given URL is incorrect or you cannot edit this file.';
@@ -137,6 +174,7 @@ $string['h5poverview'] = 'H5P overview';
 $string['h5ppackage'] = 'H5P content type';
 $string['h5ppackage_help'] = 'An H5P content type is a file with an H5P or ZIP extension containing all libraries required to display the content.';
 $string['h5psettings'] = 'H5P settings';
+<<<<<<< HEAD
 $string['helpChoosingLicense'] = 'Help me choose a license';
 $string['hideadvanced'] = 'Hide advanced';
 $string['icon'] = 'Icon';
@@ -145,6 +183,12 @@ $string['installedcontentlibraries'] = 'Installed H5P libraries';
 $string['installedcontenttypes'] = 'Installed H5P content types';
 $string['installedh5p'] = 'Installed H5P';
 $string['invalidAge'] = 'Invalid input format for Typical age. Possible input formats separated by commas: "1, 34-45, -50, -59-".';
+=======
+$string['hideadvanced'] = 'Hide advanced';
+$string['installedcontentlibraries'] = 'Installed H5P libraries';
+$string['installedcontenttypes'] = 'Installed H5P content types';
+$string['installedh5p'] = 'Installed H5P';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['invalidcontextid'] = 'H5P file not found (invalid contextid)';
 $string['invalidfile'] = 'File "{$a->%filename}" not allowed. Only files with the following extensions are allowed: {$a->%files-allowed}.';
 $string['invalidlanguagefile'] = 'Invalid language file {$a->%file} in library {$a->%library}';
@@ -162,6 +206,7 @@ $string['invalidselectoption'] = 'Invalid selected option in select.';
 $string['invalidsemanticsjson'] = 'Invalid semantics.json file has been included in the library {$a->%name}';
 $string['invalidsemanticstype'] = 'H5P internal error: unknown content type "{$a->@type}" in semantics. Removing content!';
 $string['invalidstring'] = 'Provided string is not valid according to regexp in semantics. (value: "{$a->%value}", regexp: "{$a->%regexp}")';
+<<<<<<< HEAD
 $string['isNowSubmitted'] = 'Is now submitted to H5P Hub';
 $string['keywords'] = 'Keywords';
 $string['keywordsDescription'] = 'You can add multiple keywords separated by commas. Press "Enter" or "Add" to confirm keywords';
@@ -170,6 +215,8 @@ $string['keywordsExits'] = 'Keywords already exists!';
 $string['keywordsPlaceholder'] = 'Add keywords';
 $string['language'] = 'Language';
 $string['level'] = 'Level';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['librarydirectoryerror'] = 'Library directory name must match machineName or machineName-majorVersion.minorVersion (from library.json). (Directory: {$a->%directoryName} , machineName: {$a->%machineName}, majorVersion: {$a->%majorVersion}, minorVersion: {$a->%minorVersion})';
 $string['librariesmanagerdescription'] = '<p>H5P enables users to create interactive content by providing a range of content types.</p><p>To ensure that only trusted H5P content types are used on your site, you need to <i>either</i></p><ul><li>Upload H5P content types from h5p.org <i>or</i></li><li>Enable the scheduled task \'Download available H5P content types from h5p.org\'</li></ul><p>Note that users will only be able to use the H5P content types which are installed on your site.</p>';
 $string['license'] = 'Licence';
@@ -180,9 +227,12 @@ $string['licenseCC20'] = '2.0 Generic';
 $string['licenseCC25'] = '2.5 Generic';
 $string['licenseCC30'] = '3.0 Unported';
 $string['licenseCC40'] = '4.0 International';
+<<<<<<< HEAD
 $string['licenseDescription'] = 'Select a license for your content';
 $string['licenseDetails'] = 'License details';
 $string['licenseDialogDescription'] = 'Click on a specific license to get info about proper usage';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['licenseGPL'] = 'General Public License';
 $string['licenseV1'] = 'Version 1';
 $string['licenseV2'] = 'Version 2';
@@ -190,6 +240,7 @@ $string['licenseV3'] = 'Version 3';
 $string['licensee'] = 'Licensee';
 $string['licenseextras'] = 'Licence extras';
 $string['licenseversion'] = 'Licence version';
+<<<<<<< HEAD
 $string['licenseVersionDescription'] = 'Select a license version';
 $string['lockh5pdeploy'] = 'This H5P content cannot be accessed because it is being deployed. Please try again later.';
 $string['logoUploadText'] = 'Organization logo or avatar';
@@ -198,6 +249,10 @@ $string['longDescriptionPlaceholder'] = 'Long description of your content';
 $string['mainTitle'] = 'Sharing <strong>:title</strong>';
 $string['mainlibrarydisabled'] = 'This file can\'t be displayed because its content type is disabled. Please contact your administrator to ask for the content type to be enabled.';
 $string['maxLength'] = ':length is the maximum number of characters';
+=======
+$string['lockh5pdeploy'] = 'This H5P content cannot be accessed because it is being deployed. Please try again later.';
+$string['mainlibrarydisabled'] = 'This file can\'t be displayed because its content type is disabled. Please contact your administrator to ask for the content type to be enabled.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['missingcontentfolder'] = 'A valid content folder is missing';
 $string['missingcoreversion'] = 'The system was unable to install the {$a->%component} component from the package, as it requires a newer version of the H5P plugin. This site is currently running version {$a->%current}, whereas the required version is {$a->%required} or higher. Please upgrade and then try again.';
 $string['missingdependency'] = 'Missing dependency {$a->@dep} required by {$a->@lib}.';
@@ -207,7 +262,10 @@ $string['missinglibraryjson'] = 'Could not find library.json file with valid jso
 $string['missinglibraryproperty'] = 'The required property {$a->%property} is missing from {$a->%library}';
 $string['missingmbstring'] = 'The mbstring PHP extension is not loaded. It is required for H5P to function properly.';
 $string['missinguploadpermissions'] = 'Note that the libraries may exist in the file you uploaded, but you\'re not allowed to upload new libraries. Please contact your administrator.';
+<<<<<<< HEAD
 $string['next'] = 'Next';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['nocopyright'] = 'No copyright information available for this content.';
 $string['noextension'] = 'The file you uploaded is not a valid HTML5 Package. (It doesn\'t have the .h5p file extension.)';
 $string['noh5plibhandlerdefined'] = 'There isn\'t any H5P framework handler installed, so H5P content can\'t be displayed.';
@@ -221,11 +279,15 @@ $string['offlineDialogHeader'] = 'Your connection to the server was lost';
 $string['offlineDialogRetryButtonLabel'] = 'Retry now';
 $string['offlineDialogRetryMessage'] = 'Retrying in :num....';
 $string['offlineSuccessfulSubmit'] = 'Successfully submitted results.';
+<<<<<<< HEAD
 $string['optionalInfo'] = 'Optional info';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['originator'] = 'Originator';
 $string['pd'] = 'Public Domain';
 $string['pddl'] = 'Public Domain Dedication and Licence';
 $string['pdm'] = 'Public Domain Mark (PDM)';
+<<<<<<< HEAD
 $string['phone'] = 'Phone';
 $string['pleaseWait'] = 'Please wait...';
 $string['pluginname'] = 'H5P Package';
@@ -242,11 +304,16 @@ $string['remove'] = 'Remove';
 $string['removeChip'] = 'Remove :chip from the list';
 $string['removeImage'] = 'Remove image';
 $string['requiredInfo'] = 'Required info';
+=======
+$string['pluginname'] = 'H5P Package';
+$string['privacy:metadata'] = 'H5P subsystem does not store any personal data.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['resizescript'] = 'Include this script on your website if you want dynamic sizing of the embedded content:';
 $string['resubmitScores'] = 'Attempting to submit stored results.';
 $string['reuse'] = 'Reuse';
 $string['reuseContent'] = 'Reuse content';
 $string['reuseDescription'] = 'Reuse this content.';
+<<<<<<< HEAD
 $string['reviewAndSave'] = 'Review & Save';
 $string['reviewAndShare'] = 'Review & Share';
 $string['reviewInfo'] = 'Review info';
@@ -261,11 +328,14 @@ $string['shareTryAgain'] = 'Something went wrong, please try to share again.';
 $string['sharingNote'] = 'All content details can be edited after sharing';
 $string['shortDescription'] = 'Short description';
 $string['shortDescriptionPlaceholder'] = 'Short description of your content';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['showadvanced'] = 'Show advanced';
 $string['showless'] = 'Show less';
 $string['showmore'] = 'Show more';
 $string['status'] = 'Status';
 $string['size'] = 'Size';
+<<<<<<< HEAD
 $string['someKeywordsExits'] = 'Some of these keywords already exist';
 $string['source'] = 'Source';
 $string['startingover'] = 'You\'ll be starting over.';
@@ -275,6 +345,11 @@ $string['submitted'] = 'Submitted!';
 $string['successfullyRegistred'] = 'You have successfully registered an account on the H5P Hub';
 $string['successfullyRegistredDescription'] = 'You account details can be changed';
 $string['successfullyUpdated'] = 'Your H5P Hub account settings have successfully been changed';
+=======
+$string['source'] = 'Source';
+$string['startingover'] = 'You\'ll be starting over.';
+$string['sublevel'] = 'Sublevel';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['task_h5p'] = 'H5P scheduled task';
 $string['task_h5p_description'] = 'The H5P scheduled task downloads available H5P content types from h5p.org.';
 $string['thumbnail'] = 'Thumbnail';
@@ -284,11 +359,17 @@ $string['unpackedFilesExceedsMaxSize'] = 'The total size of the unpacked files e
 $string['updatedlibraries'] = 'Updated {$a->%old} H5P libraries.';
 $string['updatedlibrary'] = 'Updated {$a->%old} H5P library.';
 $string['uploadlibraries'] = 'Upload H5P content types';
+<<<<<<< HEAD
 $string['updateRegistrationOnHub'] = 'Save account settings';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['uploadsuccess'] = 'H5P content types uploaded successfully';
 $string['wrongversion'] = 'The version of the H5P library {$a->%machineName} used in this content is not valid. Content contains {$a->%contentLibrary}, but it should be {$a->%semanticsLibrary}.';
 $string['year'] = 'Year';
 $string['years'] = 'Year(s)';
 $string['yearsfrom'] = 'Years (from)';
 $string['yearsto'] = 'Years (to)';
+<<<<<<< HEAD
 $string['zip'] = 'Zip';
+=======
+>>>>>>> forked/LAE_400_PACKAGE

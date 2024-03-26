@@ -21,8 +21,15 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 const selectors = {
     presetRadioButton: 'input[name="fullname"]',
+=======
+import Notification from 'core/notification';
+import {get_string as getString} from 'core/str';
+
+const selectors = {
+>>>>>>> forked/LAE_400_PACKAGE
     selectPresetButton: 'input[name="selectpreset"]',
     selectedPresetRadioButton: 'input[name="fullname"]:checked',
 };
@@ -31,6 +38,7 @@ const selectors = {
  * Initialize module.
  */
 export const init = () => {
+<<<<<<< HEAD
     const radioButton = document.querySelectorAll(selectors.presetRadioButton);
 
     // Initialize the "Use a preset" button properly.
@@ -72,4 +80,24 @@ const disableUsePresetButton = () => {
         selectPresetButton.removeAttribute('data-presetname');
         selectPresetButton.removeAttribute('data-cmid');
     }
+=======
+    const selectPresetButton = document.querySelector(selectors.selectPresetButton);
+
+    selectPresetButton.addEventListener('click', event => {
+        event.preventDefault();
+        // Validate whether there is a selected preset before submitting the form.
+        if (document.querySelectorAll(selectors.selectedPresetRadioButton).length > 0) {
+            const presetsForm = event.target.closest('form');
+            presetsForm.submit();
+        } else {
+            // No selected presets. Display an error message to user.
+            getString('presetnotselected', 'mod_data').then((str) => {
+                return Notification.addNotification({
+                    type: 'error',
+                    message: str
+                });
+            }).catch(Notification.exception);
+        }
+    });
+>>>>>>> forked/LAE_400_PACKAGE
 };

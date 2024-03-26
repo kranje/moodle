@@ -96,6 +96,7 @@ class provider implements
             'privacy:metadata:analytics:predictionactions'
         );
 
+<<<<<<< HEAD
         // Regarding this block, we are unable to export or purge this data, as
         // it would damage the analytics data across the whole site.
         $collection->add_database_table(
@@ -116,6 +117,8 @@ class provider implements
             'privacy:metadata:analytics:analyticsmodelslog'
         );
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $collection;
     }
 

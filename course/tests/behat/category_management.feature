@@ -282,7 +282,11 @@ Feature: Test category management actions
     And I should see the "Course categories and courses" management page
     And I click on "cohorts" action for "Cat 1" in management category listing
     # Redirect
+<<<<<<< HEAD
     And I should see "Cohorts"
+=======
+    And I should see "Category: Cat 1: available cohorts"
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Test configuring filters for a category
     Given the following "categories" exist:

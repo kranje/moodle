@@ -61,11 +61,19 @@ $PAGE->set_context($usercontext);
 require_login($courseid);
 
 if (empty($CFG->enableblogs)) {
+<<<<<<< HEAD
     throw new \moodle_exception('blogdisable', 'blog');
 }
 
 if (isguestuser()) {
     throw new \moodle_exception('noguest');
+=======
+    print_error('blogdisable', 'blog');
+}
+
+if (isguestuser()) {
+    print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // The preference is site wide not blog specific. Hence user should have permissions in site level.
@@ -80,7 +88,11 @@ if (!$mform->is_cancelled() && $data = $mform->get_data()) {
     $pagesize = $data->pagesize;
 
     if ($pagesize < 1) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidpagesize');
+=======
+        print_error('invalidpagesize');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     useredit_update_user_preference(['id' => $USER->id,
         'preference_blogpagesize' => $pagesize]);

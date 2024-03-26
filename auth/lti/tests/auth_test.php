@@ -249,12 +249,21 @@ class auth_test extends \advanced_testcase {
         $mockjwtdata = $this->get_mock_launchdata_for_user($launchdata['user'], $launchdata['migration_claim'] ?? []);
 
         // Authenticate the platform user.
+<<<<<<< HEAD
+=======
+        $sink = $this->redirectEvents();
+>>>>>>> forked/LAE_400_PACKAGE
         $countusersbefore = $DB->count_records('user');
         $user = $auth->find_or_create_user_from_launch($mockjwtdata, true, $legacysecrets);
         if (!empty($expected['migration_debugging'])) {
             $this->assertDebuggingCalled();
         }
         $countusersafter = $DB->count_records('user');
+<<<<<<< HEAD
+=======
+        $events = $sink->get_events();
+        $sink->close();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Verify user count is correct. i.e. no user is created when migration claim is correctly processed or when
         // the user has authenticated with the tool before.
@@ -295,6 +304,7 @@ class auth_test extends \advanced_testcase {
             $this->verify_user_profile_image_updated($user->id);
         }
 
+<<<<<<< HEAD
         // If migrated, verify the user account is reusing the legacy user account.
         if (!empty($expected['migrated']) && $expected['migrated']) {
             $legacyuserids = array_column($legacyusers, 'id');
@@ -304,6 +314,20 @@ class auth_test extends \advanced_testcase {
         // If the user is authenticating a second time, confirm the same account is being returned.
         if (isset($firstauthuser)) {
             $this->assertEquals($firstauthuser->id, $user->id);
+=======
+        if (!empty($expected['migrated']) && $expected['migrated']) {
+            // If migrated, verify the user account is reusing the legacy user account.
+            $legacyuserids = array_column($legacyusers, 'id');
+            $this->assertContains($user->id, $legacyuserids);
+            $this->assertInstanceOf(\core\event\user_updated::class, $events[0]);
+        } else if (isset($firstauthuser)) {
+            // If the user is authenticating a second time, confirm the same account is being returned.
+            $this->assertEquals($firstauthuser->id, $user->id);
+            $this->assertEmpty($events); // The user authenticated with the same data once before, so we don't expect an update.
+        } else {
+            // The user wasn't migrated and hasn't launched before, so we expect a user_created event.
+            $this->assertInstanceOf(\core\event\user_created::class, $events[0]);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -819,9 +843,18 @@ class auth_test extends \advanced_testcase {
         $mockmemberdata = $this->get_mock_member_data_for_user($memberdata['user'], $memberdata['legacy_user_id'] ?? '');
 
         // Authenticate the platform user.
+<<<<<<< HEAD
         $countusersbefore = $DB->count_records('user');
         $user = $auth->find_or_create_user_from_membership($mockmemberdata, $iss, $legacyconsumerkey ?? '');
         $countusersafter = $DB->count_records('user');
+=======
+        $sink = $this->redirectEvents();
+        $countusersbefore = $DB->count_records('user');
+        $user = $auth->find_or_create_user_from_membership($mockmemberdata, $iss, $legacyconsumerkey ?? '');
+        $countusersafter = $DB->count_records('user');
+        $events = $sink->get_events();
+        $sink->close();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Verify user count is correct. i.e. no user is created when migration claim is correctly processed or when
         // the user has authenticated with the tool before.
@@ -857,6 +890,7 @@ class auth_test extends \advanced_testcase {
                 break;
         }
 
+<<<<<<< HEAD
         // If migrated, verify the user account is reusing the legacy user account.
         if (!empty($expected['migrated']) && $expected['migrated']) {
             $legacyuserids = array_column($legacyusers, 'id');
@@ -866,6 +900,20 @@ class auth_test extends \advanced_testcase {
         // If the user is authenticating a second time, confirm the same account is being returned.
         if (isset($firstauthuser)) {
             $this->assertEquals($firstauthuser->id, $user->id);
+=======
+        if (!empty($expected['migrated']) && $expected['migrated']) {
+            // If migrated, verify the user account is reusing the legacy user account.
+            $legacyuserids = array_column($legacyusers, 'id');
+            $this->assertContains($user->id, $legacyuserids);
+            $this->assertInstanceOf(\core\event\user_updated::class, $events[0]);
+        } else if (isset($firstauthuser)) {
+            // If the user is authenticating a second time, confirm the same account is being returned.
+            $this->assertEquals($firstauthuser->id, $user->id);
+            $this->assertEmpty($events); // The user authenticated with the same data once before, so we don't expect an update.
+        } else {
+            // The user wasn't migrated and hasn't launched before, so we expect a user_created event.
+            $this->assertInstanceOf(\core\event\user_created::class, $events[0]);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -1090,7 +1138,27 @@ class auth_test extends \advanced_testcase {
                     'PII' => self::PII_NONE,
                     'migrated' => false
                 ]
+<<<<<<< HEAD
             ]
+=======
+            ],
+            'Existing (linked) platform learner including PII, no legacy data, no consumer key bound, no legacy id' => [
+                'legacy_data' => null,
+                'launch_data' => [
+                    'has_authenticated_before' => true,
+                    'user' => $this->get_mock_users_with_ids(
+                        ['1'],
+                        'http://purl.imsglobal.org/vocab/lis/v2/membership#Learner'
+                    )[0],
+                ],
+                'iss' => $this->issuer,
+                'legacy_consumer_key' => null,
+                'expected' => [
+                    'PII' => self::PII_ALL,
+                    'migrated' => false
+                ]
+            ],
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 

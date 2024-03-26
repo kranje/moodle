@@ -39,13 +39,17 @@ class core_role_admins_potential_selector extends user_selector_base {
             $name = 'addselect';
         }
         $options['multiselect'] = false;
+<<<<<<< HEAD
         $options['includecustomfields'] = true;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $options['exclude'] = explode(',', $CFG->siteadmins);
         parent::__construct($name, $options);
     }
 
     public function find_users($search) {
         global $CFG, $DB;
+<<<<<<< HEAD
 
         [$wherecondition, $params] = $this->search_sql($search, 'u');
         $params = array_merge($params, $this->userfieldsparams);
@@ -55,12 +59,24 @@ class core_role_admins_potential_selector extends user_selector_base {
 
         $sql = " FROM {user} u
                       $this->userfieldsjoin
+=======
+        list($wherecondition, $params) = $this->search_sql($search, '');
+
+        $fields      = 'SELECT ' . $this->required_fields_sql('');
+        $countfields = 'SELECT COUNT(1)';
+
+        $sql = " FROM {user}
+>>>>>>> forked/LAE_400_PACKAGE
                 WHERE $wherecondition AND mnethostid = :localmnet";
 
         // It could be dangerous to make remote users admins and also this could lead to other problems.
         $params['localmnet'] = $CFG->mnet_localhost_id;
 
+<<<<<<< HEAD
         [$sort, $sortparams] = users_order_by_sql('u', $search, $this->accesscontext, $this->userfieldsmappings);
+=======
+        list($sort, $sortparams) = users_order_by_sql('', $search, $this->accesscontext);
+>>>>>>> forked/LAE_400_PACKAGE
         $order = ' ORDER BY ' . $sort;
 
         // Check to see if there are too many to show sensibly.

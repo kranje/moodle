@@ -36,6 +36,7 @@ if ($action !== false) {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('feedback', $id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
 }
 
@@ -45,6 +46,17 @@ if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
 
 if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcoursemodule');
+}
+
+if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+    print_error('coursemisconf');
+}
+
+if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context = context_module::instance($cm->id);
@@ -55,7 +67,11 @@ require_capability('mod/feedback:edititems', $context);
 
 if ($action == 'exportfile') {
     if (!$exportdata = feedback_get_xml_data($feedback->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nodata');
+=======
+        print_error('nodata');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     @feedback_send_xml_data($exportdata, 'feedback_'.$feedback->id.'.xml');
     exit;

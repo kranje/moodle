@@ -56,12 +56,18 @@ $string['cachedef_courseeditorstate'] = 'Session course state cache keys to dete
 $string['cachedef_course_image'] = 'Course images';
 $string['cachedef_course_user_dates'] = 'The user dates for courses set to relative dates mode';
 $string['cachedef_completion'] = 'Activity completion status';
+<<<<<<< HEAD
 $string['cachedef_deprecatedcapabilities'] = 'System deprecated capabilities list';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['cachedef_databasemeta'] = 'Database meta information';
 $string['cachedef_eventinvalidation'] = 'Event invalidation';
 $string['cachedef_externalbadges'] = 'External badges for particular user';
 $string['cachedef_fontawesomeiconmapping'] = 'Mapping of icons for font awesome';
+<<<<<<< HEAD
 $string['cachedef_file_imageinfo'] = 'File image info e.g. dimensions';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['cachedef_suspended_userids'] = 'List of suspended users per course';
 $string['cachedef_groupdata'] = 'Course group information';
 $string['cachedef_h5p_content_type_translations'] = 'H5P content-type libraries translations';

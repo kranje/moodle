@@ -143,7 +143,10 @@ class Horde_Imap_Client_Interaction_Pipeline implements Countable, IteratorAggre
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->_commands);
@@ -153,7 +156,10 @@ class Horde_Imap_Client_Interaction_Pipeline implements Countable, IteratorAggre
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_commands);

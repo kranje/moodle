@@ -24,6 +24,11 @@
 
 namespace gradereport_singleview\local\ui;
 
+<<<<<<< HEAD
+=======
+use html_writer;
+
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -50,30 +55,51 @@ class bulk_insert extends element {
     /**
      * Is this checkbox checked?
      *
+<<<<<<< HEAD
      * @param array|object $data The form data
      * @return bool
      */
     public function is_applied($data): bool {
+=======
+     * @param array $data The form data
+     * @return bool
+     */
+    public function is_applied($data) {
+>>>>>>> forked/LAE_400_PACKAGE
         return isset($data->{$this->applyname});
     }
 
     /**
      * Get the type of this input (user or grade)
      *
+<<<<<<< HEAD
      * @param array|object $data The form data
      * @return string
      */
     public function get_type($data): string {
+=======
+     * @param array $data The form data
+     * @return string
+     */
+    public function get_type($data) {
+>>>>>>> forked/LAE_400_PACKAGE
         return $data->{$this->selectname};
     }
 
     /**
      * Get the value from either the user or grade.
      *
+<<<<<<< HEAD
      * @param array|object $data The form data
      * @return string
      */
     public function get_insert_value($data): string {
+=======
+     * @param array $data The form data
+     * @return string
+     */
+    public function get_insert_value($data) {
+>>>>>>> forked/LAE_400_PACKAGE
         return $data->{$this->insertname};
     }
 
@@ -82,7 +108,11 @@ class bulk_insert extends element {
      *
      * @return string HTML
      */
+<<<<<<< HEAD
     public function html(): string {
+=======
+    public function html() {
+>>>>>>> forked/LAE_400_PACKAGE
         global $OUTPUT;
 
         $text = new text_attribute($this->insertname, "0", 'bulk');
@@ -97,6 +127,10 @@ class bulk_insert extends element {
                 ['value' => 'blanks', 'name' => get_string('blanks', 'gradereport_singleview'), 'selected' => true],
             ],
             'valuename' => $this->insertname,
+<<<<<<< HEAD
+=======
+            'valuelabel' => get_string('bulkinsertvalue', 'gradereport_singleview'),
+>>>>>>> forked/LAE_400_PACKAGE
             'valuefield' => $text->html()
         ];
 

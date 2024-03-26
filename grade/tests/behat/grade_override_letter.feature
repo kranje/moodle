@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_grades @javascript
+=======
+@core @core_grades
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: Grade letters can be overridden
   In order to test the grade letters functionality
   As a teacher I override site defaults
@@ -21,6 +25,7 @@ Feature: Grade letters can be overridden
 
   Scenario Outline: Grade letters can be completely overridden
     When I set the following fields to these values:
+<<<<<<< HEAD
       | Override site defaults | 1    |
       | Grade letter 1         | <l1> |
       | Letter grade boundary 1| <b1> |
@@ -44,6 +49,37 @@ Feature: Grade letters can be overridden
       | Letter grade boundary 10|     |
       | Grade letter 11        |      |
       | Letter grade boundary 11|     |
+=======
+      | override               | 1    |
+      | Grade letter 1         | <l1> |
+      | gradeboundary1         | <b1> |
+      | Grade letter 2         | <l2> |
+      | gradeboundary2         | <b2> |
+      | Grade letter 3         | <l3> |
+      | gradeboundary3         | <b3> |
+      | Grade letter 4         | <l4> |
+      | gradeboundary4         | <b4> |
+      | Grade letter 5         | <l5> |
+      | gradeboundary5         | <b5> |
+      | Grade letter 6         | <l6> |
+      | gradeboundary6         | <b6> |
+      | Grade letter 7         | <l7> |
+      | gradeboundary7         | <b7> |
+      | Grade letter 8         | <l8> |
+      | gradeboundary8         | <b8> |
+      | Grade letter 9         | <l9> |
+      | gradeboundary9         | <b9> |
+      | Grade letter 10        |      |
+      | gradeboundary10        |      |
+      | Grade letter 11        |      |
+      | gradeboundary11        |      |
+      | Grade letter 12        |      |
+      | gradeboundary12        |      |
+      | Grade letter 13        |      |
+      | gradeboundary13        |      |
+      | Grade letter 14        |      |
+      | gradeboundary14        |      |
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Save changes"
     Then I should see "The default grade letters are currently overridden."
     And the following should exist in the "grade-letters-view" table:
@@ -68,6 +104,7 @@ Feature: Grade letters can be overridden
       | component       | stringid | value        |
       | core_langconfig | decsep   | <decsep>     |
     When I set the following fields to these values:
+<<<<<<< HEAD
       | Override site defaults | 1    |
       | Grade letter 1         | <l1> |
       | Letter grade boundary 1| <b1> |
@@ -91,6 +128,31 @@ Feature: Grade letters can be overridden
       | Letter grade boundary 10|     |
       | Grade letter 11        |      |
       | Letter grade boundary 11|     |
+=======
+      | override               | 1    |
+      | Grade letter 1         | <l1> |
+      | gradeboundary1         | <b1> |
+      | Grade letter 2         | <l2> |
+      | gradeboundary2         | <b2> |
+      | Grade letter 3         | <l3> |
+      | gradeboundary3         | <b3> |
+      | Grade letter 4         |      |
+      | gradeboundary4         |      |
+      | Grade letter 5         |      |
+      | gradeboundary5         |      |
+      | Grade letter 6         |      |
+      | gradeboundary6         |      |
+      | Grade letter 7         |      |
+      | gradeboundary7         |      |
+      | Grade letter 8         |      |
+      | gradeboundary8         |      |
+      | Grade letter 9         |      |
+      | gradeboundary9         |      |
+      | Grade letter 10        |      |
+      | gradeboundary10        |      |
+      | Grade letter 11        |      |
+      | gradeboundary11        |      |
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Save changes"
     Then I should see "The default grade letters are currently overridden."
     And the following should exist in the "grade-letters-view" table:
@@ -104,6 +166,7 @@ Feature: Grade letters can be overridden
       | .      | A  | 88.88 | B  | 50.00 | C  | 0.00 | 100.00 % | 88.88 % | 88.87 % | 50.00 % | 49.99 % | 0.00 % |
       | #      | A  | 88#88 | B  | 50#00 | C  | 0#00 | 100#00 % | 88#88 % | 88#87 % | 50#00 % | 49#99 % | 0#00 % |
 
+<<<<<<< HEAD
   Scenario: Define additional grade letters
     Given I set the field "Override site defaults" to "1"
     When I press "Add 3 field(s) to form"
@@ -160,6 +223,39 @@ Feature: Grade letters can be overridden
       | Letter grade boundary 10|   |
       | Grade letter 11        |    |
       | Letter grade boundary 11|   |
+=======
+  Scenario: I delete a grade letter
+    Given I set the following fields to these values:
+      | override               | 1  |
+      | Grade letter 1         | A  |
+      | gradeboundary1         | 90 |
+      | Grade letter 2         | B  |
+      | gradeboundary2         | 80 |
+      | Grade letter 3         | C  |
+      | gradeboundary3         | 50 |
+      | Grade letter 4         | D  |
+      | gradeboundary4         | 40 |
+      | Grade letter 5         | E  |
+      | gradeboundary5         | 20 |
+      | Grade letter 6         | F  |
+      | gradeboundary6         | 0  |
+      | Grade letter 7         |    |
+      | gradeboundary7         |    |
+      | Grade letter 8         |    |
+      | gradeboundary8         |    |
+      | Grade letter 9         |    |
+      | gradeboundary9         |    |
+      | Grade letter 10        |    |
+      | gradeboundary10        |    |
+      | Grade letter 11        |    |
+      | gradeboundary11        |    |
+      | Grade letter 12        |    |
+      | gradeboundary12        |    |
+      | Grade letter 13        |    |
+      | gradeboundary13        |    |
+      | Grade letter 14        |    |
+      | gradeboundary14        |    |
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Save changes"
     And I should see "The default grade letters are currently overridden."
     And the following should exist in the "grade-letters-view" table:
@@ -172,6 +268,7 @@ Feature: Grade letters can be overridden
       | 19.99 %  | 0.00 %   | F      |
     When I click on "Edit" "button"
     And I set the following fields to these values:
+<<<<<<< HEAD
       | Override site defaults | 1  |
       | Grade letter 1         | A  |
       | Letter grade boundary 1| 90 |
@@ -185,6 +282,21 @@ Feature: Grade letters can be overridden
       | Letter grade boundary 5|    |
       | Grade letter 6         | F  |
       | Letter grade boundary 6| 0  |
+=======
+      | override               | 1  |
+      | Grade letter 1         | A  |
+      | gradeboundary1         | 90 |
+      | Grade letter 2         | B  |
+      | gradeboundary2         | 80 |
+      | Grade letter 3         | C  |
+      | gradeboundary3         | 50 |
+      | Grade letter 4         | D  |
+      | gradeboundary4         | 40 |
+      | Grade letter 5         |    |
+      | gradeboundary5         |    |
+      | Grade letter 6         | F  |
+      | gradeboundary6         | 0  |
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Save changes"
     Then I should see "The default grade letters are currently overridden."
     And the following should exist in the "grade-letters-view" table:
@@ -197,6 +309,7 @@ Feature: Grade letters can be overridden
 
   Scenario: I override grade letters for a second time
     Given I set the following fields to these values:
+<<<<<<< HEAD
       | Override site defaults | 1  |
       | Grade letter 1         | A+ |
       | Letter grade boundary 1| 90 |
@@ -220,6 +333,37 @@ Feature: Grade letters can be overridden
       | Letter grade boundary 10|   |
       | Grade letter 11        |    |
       | Letter grade boundary 11|   |
+=======
+      | override               | 1  |
+      | Grade letter 1         | A+ |
+      | gradeboundary1         | 90 |
+      | Grade letter 2         | A  |
+      | gradeboundary2         | 80 |
+      | Grade letter 3         | B+ |
+      | gradeboundary3         | 70 |
+      | Grade letter 4         | B  |
+      | gradeboundary4         | 60 |
+      | Grade letter 5         | C  |
+      | gradeboundary5         | 50 |
+      | Grade letter 6         | D  |
+      | gradeboundary6         | 40 |
+      | Grade letter 7         | F  |
+      | gradeboundary7         | 0  |
+      | Grade letter 8         |    |
+      | gradeboundary8         |    |
+      | Grade letter 9         |    |
+      | gradeboundary9         |    |
+      | Grade letter 10        |    |
+      | gradeboundary10        |    |
+      | Grade letter 11        |    |
+      | gradeboundary11        |    |
+      | Grade letter 12        |    |
+      | gradeboundary12        |    |
+      | Grade letter 13        |    |
+      | gradeboundary13        |    |
+      | Grade letter 14        |    |
+      | gradeboundary14        |    |
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Save changes"
     And I should see "The default grade letters are currently overridden."
     And the following should exist in the "grade-letters-view" table:
@@ -233,6 +377,7 @@ Feature: Grade letters can be overridden
       | 39.99 %  | 0.00 %   | F      |
     When I click on "Edit" "button"
     And I set the following fields to these values:
+<<<<<<< HEAD
       | Override site defaults | 1  |
       | Grade letter 1         | α  |
       | Letter grade boundary 1| 95 |
@@ -248,6 +393,23 @@ Feature: Grade letters can be overridden
       | Letter grade boundary 6| 0  |
       | Grade letter 7         | π  |
       | Letter grade boundary 7| 90 |
+=======
+      | override               | 1  |
+      | Grade letter 1         | α  |
+      | gradeboundary1         | 95 |
+      | Grade letter 2         | β  |
+      | gradeboundary2         | 85 |
+      | Grade letter 3         | γ  |
+      | gradeboundary3         | 70 |
+      | Grade letter 4         | δ  |
+      | gradeboundary4         | 55 |
+      | Grade letter 5         |    |
+      | gradeboundary5         |    |
+      | Grade letter 6         | Ω  |
+      | gradeboundary6         | 0  |
+      | Grade letter 7         | π  |
+      | gradeboundary7         | 90 |
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Save changes"
     Then I should see "The default grade letters are currently overridden."
     And the following should exist in the "grade-letters-view" table:

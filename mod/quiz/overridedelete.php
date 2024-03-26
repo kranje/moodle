@@ -32,6 +32,7 @@ $overrideid = required_param('id', PARAM_INT);
 $confirm = optional_param('confirm', false, PARAM_BOOL);
 
 if (! $override = $DB->get_record('quiz_overrides', array('id' => $overrideid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidoverrideid', 'quiz');
 }
 if (! $quiz = $DB->get_record('quiz', array('id' => $override->quiz))) {
@@ -39,6 +40,15 @@ if (! $quiz = $DB->get_record('quiz', array('id' => $override->quiz))) {
 }
 if (! $cm = get_coursemodule_from_instance("quiz", $quiz->id, $quiz->course)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidoverrideid', 'quiz');
+}
+if (! $quiz = $DB->get_record('quiz', array('id' => $override->quiz))) {
+    print_error('invalidcoursemodule');
+}
+if (! $cm = get_coursemodule_from_instance("quiz", $quiz->id, $quiz->course)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $course = $DB->get_record('course', array('id'=>$cm->course), '*', MUST_EXIST);
 
@@ -51,11 +61,19 @@ require_capability('mod/quiz:manageoverrides', $context);
 
 if ($override->groupid) {
     if (!groups_group_visible($override->groupid, $course, $cm)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidoverrideid', 'quiz');
     }
 } else {
     if (!groups_user_groups_visible($course, $override->userid, $cm)) {
         throw new \moodle_exception('invalidoverrideid', 'quiz');
+=======
+        print_error('invalidoverrideid', 'quiz');
+    }
+} else {
+    if (!groups_user_groups_visible($course, $override->userid, $cm)) {
+        print_error('invalidoverrideid', 'quiz');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,11 +27,15 @@ namespace MongoDB;
 
 use Exception;
 use MongoDB\BSON\Serializable;
+<<<<<<< HEAD
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use MongoDB\Driver\Manager;
 use MongoDB\Driver\ReadPreference;
 use MongoDB\Driver\Server;
 use MongoDB\Driver\Session;
+<<<<<<< HEAD
 use MongoDB\Driver\WriteConcern;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\RuntimeException;
@@ -33,6 +45,13 @@ use ReflectionClass;
 use ReflectionException;
 
 use function assert;
+=======
+use MongoDB\Exception\InvalidArgumentException;
+use MongoDB\Exception\RuntimeException;
+use MongoDB\Operation\WithTransaction;
+use ReflectionClass;
+use ReflectionException;
+>>>>>>> forked/LAE_400_PACKAGE
 use function end;
 use function get_object_vars;
 use function in_array;
@@ -46,6 +65,7 @@ use function reset;
 use function substr;
 
 /**
+<<<<<<< HEAD
  * Check whether all servers support executing a write stage on a secondary.
  *
  * @internal
@@ -72,6 +92,8 @@ function all_servers_support_write_stage_on_secondary(array $servers): bool
 }
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Applies a type map to a document.
  *
  * This function is used by operations where it is not possible to apply a type
@@ -99,9 +121,16 @@ function apply_type_map_to_document($document, array $typeMap)
  * @internal
  * @param array|object $document Document containing fields mapped to values,
  *                               which denote order or an index type
+<<<<<<< HEAD
  * @throws InvalidArgumentException
  */
 function generate_index_name($document): string
+=======
+ * @return string
+ * @throws InvalidArgumentException
+ */
+function generate_index_name($document)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if ($document instanceof Serializable) {
         $document = $document->bsonSerialize();
@@ -125,6 +154,7 @@ function generate_index_name($document): string
 }
 
 /**
+<<<<<<< HEAD
  * Return a collection's encryptedFields from the encryptedFieldsMap
  * autoEncryption driver option (if available).
  *
@@ -172,15 +202,24 @@ function get_encrypted_fields_from_server(string $databaseName, string $collecti
 }
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Return whether the first key in the document starts with a "$" character.
  *
  * This is used for differentiating update and replacement documents.
  *
  * @internal
  * @param array|object $document Update or replacement document
+<<<<<<< HEAD
  * @throws InvalidArgumentException
  */
 function is_first_key_operator($document): bool
+=======
+ * @return boolean
+ * @throws InvalidArgumentException
+ */
+function is_first_key_operator($document)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if ($document instanceof Serializable) {
         $document = $document->bsonSerialize();
@@ -205,8 +244,14 @@ function is_first_key_operator($document): bool
  *
  * @internal
  * @param mixed $pipeline
+<<<<<<< HEAD
  */
 function is_pipeline($pipeline): bool
+=======
+ * @return boolean
+ */
+function is_pipeline($pipeline)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if (! is_array($pipeline)) {
         return false;
@@ -232,7 +277,11 @@ function is_pipeline($pipeline): bool
         reset($stage);
         $key = key($stage);
 
+<<<<<<< HEAD
         if (! is_string($key) || substr($key, 0, 1) !== '$') {
+=======
+        if (! isset($key[0]) || $key[0] !== '$') {
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
     }
@@ -245,8 +294,14 @@ function is_pipeline($pipeline): bool
  *
  * @internal
  * @param array $options Command options
+<<<<<<< HEAD
  */
 function is_in_transaction(array $options): bool
+=======
+ * @return boolean
+ */
+function is_in_transaction(array $options)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if (isset($options['session']) && $options['session'] instanceof Session && $options['session']->isInTransaction()) {
         return true;
@@ -263,8 +318,14 @@ function is_in_transaction(array $options): bool
  *
  * @internal
  * @param array $pipeline List of pipeline operations
+<<<<<<< HEAD
  */
 function is_last_pipeline_operator_write(array $pipeline): bool
+=======
+ * @return boolean
+ */
+function is_last_pipeline_operator_write(array $pipeline)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     $lastOp = end($pipeline);
 
@@ -283,11 +344,20 @@ function is_last_pipeline_operator_write(array $pipeline): bool
  * This is used to determine if a mapReduce command requires a primary.
  *
  * @internal
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/mapReduce/#output-inline
  * @param string|array|object $out Output specification
  * @throws InvalidArgumentException
  */
 function is_mapreduce_output_inline($out): bool
+=======
+ * @see https://docs.mongodb.com/manual/reference/command/mapReduce/#output-inline
+ * @param string|array|object $out Output specification
+ * @return boolean
+ * @throws InvalidArgumentException
+ */
+function is_mapreduce_output_inline($out)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if (! is_array($out) && ! is_object($out)) {
         return false;
@@ -311,6 +381,7 @@ function is_mapreduce_output_inline($out): bool
 }
 
 /**
+<<<<<<< HEAD
  * Return whether the write concern is acknowledged.
  *
  * This function is similar to mongoc_write_concern_is_acknowledged but does not
@@ -328,13 +399,21 @@ function is_write_concern_acknowledged(WriteConcern $writeConcern): bool
 }
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Return whether the server supports a particular feature.
  *
  * @internal
  * @param Server  $server  Server to check
  * @param integer $feature Feature constant (i.e. wire protocol version)
+<<<<<<< HEAD
  */
 function server_supports_feature(Server $server, int $feature): bool
+=======
+ * @return boolean
+ */
+function server_supports_feature(Server $server, $feature)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     $info = $server->getInfo();
     $maxWireVersion = isset($info['maxWireVersion']) ? (integer) $info['maxWireVersion'] : 0;
@@ -343,6 +422,7 @@ function server_supports_feature(Server $server, int $feature): bool
     return $minWireVersion <= $feature && $maxWireVersion >= $feature;
 }
 
+<<<<<<< HEAD
 /**
  * Return whether the input is an array of strings.
  *
@@ -350,11 +430,17 @@ function server_supports_feature(Server $server, int $feature): bool
  * @param mixed $input
  */
 function is_string_array($input): bool
+=======
+function is_string_array($input)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if (! is_array($input)) {
         return false;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     foreach ($input as $item) {
         if (! is_string($item)) {
             return false;
@@ -408,8 +494,14 @@ function recursive_copy($element)
  * @internal
  * @param array  $typeMap   The existing typeMap
  * @param string $fieldPath The field path to apply the root type to
+<<<<<<< HEAD
  */
 function create_field_path_type_map(array $typeMap, string $fieldPath): array
+=======
+ * @return array
+ */
+function create_field_path_type_map(array $typeMap, $fieldPath)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     // If some field paths already exist, we prefix them with the field path we are assuming as the new root
     if (isset($typeMap['fieldPaths']) && is_array($typeMap['fieldPaths'])) {
@@ -460,10 +552,18 @@ function create_field_path_type_map(array $typeMap, string $fieldPath): array
  * @param Session  $session            A session object as retrieved by Client::startSession
  * @param callable $callback           A callback that will be invoked within the transaction
  * @param array    $transactionOptions Additional options that are passed to Session::startTransaction
+<<<<<<< HEAD
  * @throws RuntimeException for driver errors while committing the transaction
  * @throws Exception for any other errors, including those thrown in the callback
  */
 function with_transaction(Session $session, callable $callback, array $transactionOptions = []): void
+=======
+ * @return void
+ * @throws RuntimeException for driver errors while committing the transaction
+ * @throws Exception for any other errors, including those thrown in the callback
+ */
+function with_transaction(Session $session, callable $callback, array $transactionOptions = [])
+>>>>>>> forked/LAE_400_PACKAGE
 {
     $operation = new WithTransaction($callback, $transactionOptions);
     $operation->execute($session);
@@ -473,8 +573,15 @@ function with_transaction(Session $session, callable $callback, array $transacti
  * Returns the session option if it is set and valid.
  *
  * @internal
+<<<<<<< HEAD
  */
 function extract_session_from_options(array $options): ?Session
+=======
+ * @param array $options
+ * @return Session|null
+ */
+function extract_session_from_options(array $options)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if (! isset($options['session']) || ! $options['session'] instanceof Session) {
         return null;
@@ -487,8 +594,15 @@ function extract_session_from_options(array $options): ?Session
  * Returns the readPreference option if it is set and valid.
  *
  * @internal
+<<<<<<< HEAD
  */
 function extract_read_preference_from_options(array $options): ?ReadPreference
+=======
+ * @param array $options
+ * @return ReadPreference|null
+ */
+function extract_read_preference_from_options(array $options)
+>>>>>>> forked/LAE_400_PACKAGE
 {
     if (! isset($options['readPreference']) || ! $options['readPreference'] instanceof ReadPreference) {
         return null;
@@ -502,6 +616,7 @@ function extract_read_preference_from_options(array $options): ?ReadPreference
  * (if given)
  *
  * @internal
+<<<<<<< HEAD
  */
 function select_server(Manager $manager, array $options): Server
 {
@@ -509,6 +624,15 @@ function select_server(Manager $manager, array $options): Server
     $server = $session instanceof Session ? $session->getServer() : null;
     if ($server !== null) {
         return $server;
+=======
+ * @return Server
+ */
+function select_server(Manager $manager, array $options)
+{
+    $session = extract_session_from_options($options);
+    if ($session instanceof Session && $session->getServer() !== null) {
+        return $session->getServer();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $readPreference = extract_read_preference_from_options($options);
@@ -519,6 +643,7 @@ function select_server(Manager $manager, array $options): Server
 
     return $manager->selectServer($readPreference);
 }
+<<<<<<< HEAD
 
 /**
  * Performs server selection for an aggregate operation with a write stage. The
@@ -567,3 +692,5 @@ function select_server_for_aggregate_write_stage(Manager $manager, array &$optio
 
     return $server;
 }
+=======
+>>>>>>> forked/LAE_400_PACKAGE

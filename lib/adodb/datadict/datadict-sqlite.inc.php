@@ -35,6 +35,7 @@ class ADODB2_sqlite extends ADODB_DataDict {
     
 	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		
 		$meta = strtoupper($meta);
 		
@@ -45,6 +46,8 @@ class ADODB2_sqlite extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		switch(strtoupper($meta)) {
 		case 'C': return 'VARCHAR'; //  TEXT , TEXT affinity
 		case 'XL':return 'LONGTEXT'; //  TEXT , TEXT affinity

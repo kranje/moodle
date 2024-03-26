@@ -46,11 +46,19 @@ if ($id) {
 
     if($id == SITEID){
         // Don't allow editing of 'site course' using this form.
+<<<<<<< HEAD
         throw new \moodle_exception('cannoteditsiteform');
     }
 
     if (!$course = $DB->get_record('course', array('id'=>$id))) {
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('cannoteditsiteform');
+    }
+
+    if (!$course = $DB->get_record('course', array('id'=>$id))) {
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     require_login($course);
     $context = context_course::instance($course->id);
@@ -67,7 +75,11 @@ if ($id) {
 
 } else {
     require_login();
+<<<<<<< HEAD
     throw new \moodle_exception('needcourseid');
+=======
+    print_error('needcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Set up the page.

@@ -163,7 +163,10 @@ $table->head = [
 ];
 
 $searchareas = \core_search\manager::get_search_areas_list();
+<<<<<<< HEAD
 core_collator::asort_objects_by_method($searchareas, 'get_visible_name');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $areasconfig = isset($searchmanager) ? $searchmanager->get_areas_config($searchareas) : false;
 foreach ($searchareas as $area) {
     $areaid = $area->get_area_id();

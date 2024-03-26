@@ -42,7 +42,11 @@ $plugins = core_plugin_manager::instance()->get_plugins_of_type('dataformat');
 $sortorder = array_flip(array_keys($plugins));
 
 if (!isset($plugins[$name])) {
+<<<<<<< HEAD
     throw new \moodle_exception('courseformatnotfound', 'error', $return, $name);
+=======
+    print_error('courseformatnotfound', 'error', $return, $name);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 switch ($action) {

@@ -123,21 +123,34 @@ class provider_test extends provider_testcase {
         $data = $writer->get_data([]);
         $this->assertEquals('H5P 1', $data->name);
 
+<<<<<<< HEAD
         $data = (array)$writer->get_data($subcontextattempt1);
         $this->assertCount(1, $data);
+=======
+        $data = $writer->get_data($subcontextattempt1);
+        $this->assertCount(1, (array) $data);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertCount(3, (array) reset($data));
         $subcontextattempt2 = [
             get_string('myattempts', 'mod_h5pactivity'),
             get_string('attempt', 'mod_h5pactivity'). " 2"
         ];
+<<<<<<< HEAD
         $data = (array)$writer->get_data($subcontextattempt2);
+=======
+        $data = $writer->get_data($subcontextattempt2);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertCount(3, (array) reset($data));
         // The student1 has only 1 tracked attempts.
         $subcontextattempt3 = [
             get_string('myattempts', 'mod_h5pactivity'),
             get_string('attempt', 'mod_h5pactivity'). " 3"
         ];
+<<<<<<< HEAD
         $data = (array)$writer->get_data($subcontextattempt3);
+=======
+        $data = $writer->get_data($subcontextattempt3);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEmpty($data);
     }
 

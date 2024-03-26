@@ -329,6 +329,7 @@ class permission_test extends advanced_testcase {
         $this->expectExceptionMessage('You cannot create a new report');
         permission::require_can_create_report();
     }
+<<<<<<< HEAD
 
     /**
      * Data provider for {@see test_can_create_report_limit_reached}
@@ -367,4 +368,6 @@ class permission_test extends advanced_testcase {
         $CFG->customreportslimit = $customreportslimit;
         $this->assertEquals($expected, permission::can_create_report());
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

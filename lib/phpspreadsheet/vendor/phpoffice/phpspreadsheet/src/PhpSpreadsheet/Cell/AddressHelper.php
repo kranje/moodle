@@ -2,14 +2,18 @@
 
 namespace PhpOffice\PhpSpreadsheet\Cell;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Exception;
 
 class AddressHelper
 {
     public const R1C1_COORDINATE_REGEX = '/(R((?:\[-?\d*\])|(?:\d*))?)(C((?:\[-?\d*\])|(?:\d*))?)/i';
 
+<<<<<<< HEAD
     /** @return string[] */
     public static function getRowAndColumnChars()
     {
@@ -26,12 +30,15 @@ class AddressHelper
         return [$rowChar, $colChar];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Converts an R1C1 format cell address to an A1 format cell address.
      */
     public static function convertToA1(
         string $address,
         int $currentRowNumber = 1,
+<<<<<<< HEAD
         int $currentColumnNumber = 1,
         bool $useLocale = true
     ): string {
@@ -40,6 +47,13 @@ class AddressHelper
         $validityCheck = preg_match($regex, $address, $cellReference);
 
         if (empty($validityCheck)) {
+=======
+        int $currentColumnNumber = 1
+    ): string {
+        $validityCheck = preg_match('/^(R(\[?-?\d*\]?))(C(\[?-?\d*\]?))$/i', $address, $cellReference);
+
+        if ($validityCheck === 0) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new Exception('Invalid R1C1-format Cell Reference');
         }
 
@@ -113,7 +127,11 @@ class AddressHelper
                 //    Loop through each R1C1 style reference in turn, converting it to its A1 style equivalent,
                 //        then modify the formula to use that new reference
                 foreach ($cellReferences as $cellReference) {
+<<<<<<< HEAD
                     $A1CellReference = self::convertToA1($cellReference[0][0], $currentRowNumber, $currentColumnNumber, false);
+=======
+                    $A1CellReference = self::convertToA1($cellReference[0][0], $currentRowNumber, $currentColumnNumber);
+>>>>>>> forked/LAE_400_PACKAGE
                     $value = substr_replace($value, $A1CellReference, $cellReference[0][1], strlen($cellReference[0][0]));
                 }
             }
@@ -139,6 +157,7 @@ class AddressHelper
             throw new Exception('Invalid A1-format Cell Reference');
         }
 
+<<<<<<< HEAD
         if ($cellReference['col'][0] === '$') {
             // Column must be absolute address
             $currentColumnNumber = null;
@@ -150,6 +169,19 @@ class AddressHelper
             $currentRowNumber = null;
         }
         $rowId = (int) ltrim($cellReference['row'], '$');
+=======
+        $columnId = Coordinate::columnIndexFromString($cellReference['col_ref']);
+        if ($cellReference['absolute_col'] === '$') {
+            // Column must be absolute address
+            $currentColumnNumber = null;
+        }
+
+        $rowId = (int) $cellReference['row_ref'];
+        if ($cellReference['absolute_row'] === '$') {
+            // Row must be absolute address
+            $currentRowNumber = null;
+        }
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($currentRowNumber !== null) {
             if ($rowId === $currentRowNumber) {

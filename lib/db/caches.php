@@ -149,6 +149,7 @@ $definitions = array(
         'ttl' => 3600, // Just in case.
     ),
 
+<<<<<<< HEAD
     // Cache the deprecated capabilities list. See get_deprecated_capability_info in accesslib.
     'deprecatedcapabilities' => array(
         'mode' => cache_store::MODE_APPLICATION,
@@ -159,6 +160,8 @@ $definitions = array(
         'ttl' => 3600, // Just in case.
     ),
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     // YUI Module cache.
     // This stores the YUI module metadata for Shifted YUI modules in Moodle.
     'yuimodules' => array(
@@ -251,7 +254,10 @@ $definitions = array(
         'mode' => cache_store::MODE_APPLICATION,
         'simplekeys' => true,
         'canuselocalstore' => true,
+<<<<<<< HEAD
         'requirelockingbeforewrite' => true
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     ),
     // This is the session user selections cache.
     // It's a special cache that is used to record user selections that should persist for the lifetime of the session.
@@ -557,6 +563,7 @@ $definitions = array(
         'staticacceleration' => true,
         'ttl' => 1800,
     ],
+<<<<<<< HEAD
 
     // Cache image dimensions.
     'file_imageinfo' => [
@@ -567,4 +574,6 @@ $definitions = array(
         'canuselocalstore' => true,
         'staticaccelerationsize' => 100,
     ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 );

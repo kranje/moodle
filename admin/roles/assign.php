@@ -75,7 +75,11 @@ if ($roleid && !isset($assignableroles[$roleid])) {
     $a = new stdClass;
     $a->roleid = $roleid;
     $a->context = $contextname;
+<<<<<<< HEAD
     throw new \moodle_exception('cannotassignrolehere', '', $context->get_url(), $a);
+=======
+    print_error('cannotassignrolehere', '', $context->get_url(), $a);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Work out an appropriate page title.

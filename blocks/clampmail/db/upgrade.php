@@ -22,6 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
+=======
+defined('MOODLE_INTERNAL') || die;
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Handle plugin upgrades.
  *

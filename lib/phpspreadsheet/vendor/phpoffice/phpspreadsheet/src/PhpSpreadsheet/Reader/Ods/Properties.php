@@ -26,11 +26,18 @@ class Properties
                 $this->setCoreProperties($docProps, $officePropertiesDC);
             }
 
+<<<<<<< HEAD
             $officePropertyMeta = null;
             if (isset($namespacesMeta['dc'])) {
                 $officePropertyMeta = $officePropertyData->children($namespacesMeta['meta']);
             }
             $officePropertyMeta = $officePropertyMeta ?? [];
+=======
+            $officePropertyMeta = [];
+            if (isset($namespacesMeta['dc'])) {
+                $officePropertyMeta = $officePropertyData->children($namespacesMeta['meta']);
+            }
+>>>>>>> forked/LAE_400_PACKAGE
             foreach ($officePropertyMeta as $propertyName => $propertyValue) {
                 $this->setMetaProperties($namespacesMeta, $propertyValue, $propertyName, $docProps);
             }

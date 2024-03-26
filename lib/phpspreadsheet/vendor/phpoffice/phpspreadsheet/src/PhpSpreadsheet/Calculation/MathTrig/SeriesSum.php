@@ -2,14 +2,20 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 
 class SeriesSum
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * SERIESSUM.
      *
@@ -20,6 +26,7 @@ class SeriesSum
      * @param mixed $m Step
      * @param mixed[] $args An array of coefficients for the Data Series
      *
+<<<<<<< HEAD
      * @return array|float|string The result, or a string containing an error
      */
     public static function evaluate($x, $n, $m, ...$args)
@@ -28,6 +35,12 @@ class SeriesSum
             return self::evaluateArrayArgumentsSubset([self::class, __FUNCTION__], 3, $x, $n, $m, ...$args);
         }
 
+=======
+     * @return float|string The result, or a string containing an error
+     */
+    public static function evaluate($x, $n, $m, ...$args)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $x = Helpers::validateNumericNullSubstitution($x, 0);
             $n = Helpers::validateNumericNullSubstitution($n, 0);

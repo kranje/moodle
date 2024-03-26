@@ -44,27 +44,42 @@ class read_slave_moodle_recordset_special extends moodle_recordset {
      * Iterator interface
      * @return stdClass
      */
+<<<<<<< HEAD
     public function current(): stdClass {
+=======
+    public function current() {
+>>>>>>> forked/LAE_400_PACKAGE
         return new stdClass();
     }
     /**
      * Iterator interface
      * @return void
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
     }
     /**
      * Iterator interface
      * @return mixed
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
     }
     /**
      * Iterator interface
      * @return bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return false;
     }
 }

@@ -57,6 +57,7 @@ class systemrole extends base {
         $prefix = database::generate_param_name() . '_';
         [$insql, $inparams] = $DB->get_in_or_equal($roles, SQL_PARAMS_NAMED, $prefix);
 
+<<<<<<< HEAD
         // Ensure parameter names and aliases are unique, as the same audience type can be added multiple times to a report.
         $paramcontextid = database::generate_param_name();
         [$roleassignments, $context] = database::generate_aliases(2);
@@ -68,6 +69,19 @@ class systemrole extends base {
         $where = "{$roleassignments}.contextid = :{$paramcontextid} AND {$roleassignments}.roleid {$insql}";
 
         return [$join, $where, $inparams + [$paramcontextid => context_system::instance()->id]];
+=======
+        $contextid = database::generate_param_name();
+        $ra = database::generate_alias();
+        $ctx = database::generate_alias();
+
+        $join = "
+            JOIN {role_assignments} {$ra} ON {$ra}.userid = {$usertablealias}.id
+            JOIN {context} {$ctx} ON {$ctx}.id = {$ra}.contextid";
+
+        $where = "{$ra}.contextid = :{$contextid} AND {$ra}.roleid {$insql}";
+
+        return [$join, $where, $inparams + [$contextid => context_system::instance()->id]];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

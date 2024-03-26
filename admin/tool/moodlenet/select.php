@@ -31,7 +31,11 @@ $id = required_param('id', PARAM_ALPHANUM);
 // Access control.
 require_login();
 if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
+<<<<<<< HEAD
     throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+=======
+    print_error('moodlenetnotenabled', 'tool_moodlenet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if (is_null($importinfo = import_info::load($id))) {

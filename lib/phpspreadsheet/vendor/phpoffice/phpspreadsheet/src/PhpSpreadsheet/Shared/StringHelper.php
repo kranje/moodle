@@ -9,7 +9,11 @@ class StringHelper
     /**    Constants                */
     /**    Regular Expressions        */
     //    Fraction
+<<<<<<< HEAD
     const STRING_REGEXP_FRACTION = '~^\s*(-?)((\d*)\s+)?(\d+\/\d+)\s*$~';
+=======
+    const STRING_REGEXP_FRACTION = '(-?)(\d+)\s+(\d+\/\d+)';
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Control characters array.
@@ -28,14 +32,22 @@ class StringHelper
     /**
      * Decimal separator.
      *
+<<<<<<< HEAD
      * @var ?string
+=======
+     * @var string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private static $decimalSeparator;
 
     /**
      * Thousands separator.
      *
+<<<<<<< HEAD
      * @var ?string
+=======
+     * @var string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private static $thousandsSeparator;
 
@@ -49,7 +61,11 @@ class StringHelper
     /**
      * Is iconv extension avalable?
      *
+<<<<<<< HEAD
      * @var ?bool
+=======
+     * @var bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private static $isIconvEnabled;
 
@@ -328,6 +344,7 @@ class StringHelper
     }
 
     /**
+<<<<<<< HEAD
      * Try to sanitize UTF8, replacing invalid sequences with Unicode substitution characters.
      */
     public static function sanitizeUTF8(string $textValue): string
@@ -350,26 +367,67 @@ class StringHelper
     private static function returnString($value): string
     {
         return is_string($value) ? $value : '';
+=======
+     * Try to sanitize UTF8, stripping invalid byte sequences. Not perfect. Does not surrogate characters.
+     *
+     * @param string $textValue
+     *
+     * @return string
+     */
+    public static function sanitizeUTF8($textValue)
+    {
+        if (self::getIsIconvEnabled()) {
+            $textValue = @iconv('UTF-8', 'UTF-8', $textValue);
+
+            return $textValue;
+        }
+
+        $textValue = mb_convert_encoding($textValue, 'UTF-8', 'UTF-8');
+
+        return $textValue;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Check if a string contains UTF8 data.
+<<<<<<< HEAD
      */
     public static function isUTF8(string $textValue): bool
     {
         return $textValue === self::sanitizeUTF8($textValue);
+=======
+     *
+     * @param string $textValue
+     *
+     * @return bool
+     */
+    public static function isUTF8($textValue)
+    {
+        return $textValue === '' || preg_match('/^./su', $textValue) === 1;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Formats a numeric value as a string for output in various output writers forcing
      * point as decimal separator in case locale is other than English.
      *
+<<<<<<< HEAD
      * @param float|int|string $numericValue
      */
     public static function formatNumber($numericValue): string
     {
         if (is_float($numericValue)) {
             return str_replace(',', '.', (string) $numericValue);
+=======
+     * @param mixed $numericValue
+     *
+     * @return string
+     */
+    public static function formatNumber($numericValue)
+    {
+        if (is_float($numericValue)) {
+            return str_replace(',', '.', $numericValue);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (string) $numericValue;
@@ -384,8 +442,15 @@ class StringHelper
      *
      * @param string $textValue UTF-8 encoded string
      * @param mixed[] $arrcRuns Details of rich text runs in $value
+<<<<<<< HEAD
      */
     public static function UTF8toBIFF8UnicodeShort(string $textValue, array $arrcRuns = []): string
+=======
+     *
+     * @return string
+     */
+    public static function UTF8toBIFF8UnicodeShort($textValue, $arrcRuns = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         // character count
         $ln = self::countCharacters($textValue, 'UTF-8');
@@ -416,8 +481,15 @@ class StringHelper
      * see OpenOffice.org's Documentation of the Microsoft Excel File Format, sect. 2.5.3.
      *
      * @param string $textValue UTF-8 encoded string
+<<<<<<< HEAD
      */
     public static function UTF8toBIFF8UnicodeLong(string $textValue): string
+=======
+     *
+     * @return string
+     */
+    public static function UTF8toBIFF8UnicodeLong($textValue)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         // character count
         $ln = self::countCharacters($textValue, 'UTF-8');
@@ -431,10 +503,20 @@ class StringHelper
     /**
      * Convert string from one encoding to another.
      *
+<<<<<<< HEAD
      * @param string $to Encoding to convert to, e.g. 'UTF-8'
      * @param string $from Encoding to convert from, e.g. 'UTF-16LE'
      */
     public static function convertEncoding(string $textValue, string $to, string $from): string
+=======
+     * @param string $textValue
+     * @param string $to Encoding to convert to, e.g. 'UTF-8'
+     * @param string $from Encoding to convert from, e.g. 'UTF-16LE'
+     *
+     * @return string
+     */
+    public static function convertEncoding($textValue, $to, $from)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (self::getIsIconvEnabled()) {
             $result = iconv($from, $to . self::$iconvOptions, $textValue);
@@ -443,19 +525,33 @@ class StringHelper
             }
         }
 
+<<<<<<< HEAD
         return self::returnString(mb_convert_encoding($textValue, $to, $from));
+=======
+        return mb_convert_encoding($textValue, $to, $from);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Get character count.
      *
+<<<<<<< HEAD
+=======
+     * @param string $textValue
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $encoding Encoding
      *
      * @return int Character count
      */
+<<<<<<< HEAD
     public static function countCharacters(string $textValue, string $encoding = 'UTF-8'): int
     {
         return mb_strlen($textValue, $encoding);
+=======
+    public static function countCharacters($textValue, $encoding = 'UTF-8')
+    {
+        return mb_strlen($textValue ?? '', $encoding);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -463,9 +559,17 @@ class StringHelper
      *
      * @param string $textValue UTF-8 encoded string
      * @param int $offset Start offset
+<<<<<<< HEAD
      * @param ?int $length Maximum number of characters in substring
      */
     public static function substring(string $textValue, int $offset, ?int $length = 0): string
+=======
+     * @param int $length Maximum number of characters in substring
+     *
+     * @return string
+     */
+    public static function substring($textValue, $offset, $length = 0)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return mb_substr($textValue, $offset, $length, 'UTF-8');
     }
@@ -474,20 +578,38 @@ class StringHelper
      * Convert a UTF-8 encoded string to upper case.
      *
      * @param string $textValue UTF-8 encoded string
+<<<<<<< HEAD
      */
     public static function strToUpper(string $textValue): string
     {
         return mb_convert_case($textValue, MB_CASE_UPPER, 'UTF-8');
+=======
+     *
+     * @return string
+     */
+    public static function strToUpper($textValue)
+    {
+        return mb_convert_case($textValue ?? '', MB_CASE_UPPER, 'UTF-8');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Convert a UTF-8 encoded string to lower case.
      *
      * @param string $textValue UTF-8 encoded string
+<<<<<<< HEAD
      */
     public static function strToLower(string $textValue): string
     {
         return mb_convert_case($textValue, MB_CASE_LOWER, 'UTF-8');
+=======
+     *
+     * @return string
+     */
+    public static function strToLower($textValue)
+    {
+        return mb_convert_case($textValue ?? '', MB_CASE_LOWER, 'UTF-8');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -495,12 +617,20 @@ class StringHelper
      * (uppercase every first character in each word, lower case all other characters).
      *
      * @param string $textValue UTF-8 encoded string
+<<<<<<< HEAD
      */
     public static function strToTitle(string $textValue): string
+=======
+     *
+     * @return string
+     */
+    public static function strToTitle($textValue)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return mb_convert_case($textValue, MB_CASE_TITLE, 'UTF-8');
     }
 
+<<<<<<< HEAD
     public static function mbIsUpper(string $character): bool
     {
         return mb_strtolower($character, 'UTF-8') !== $character;
@@ -516,6 +646,18 @@ class StringHelper
         $split = preg_split('/(?<!^)(?!$)/u', $string);
 
         return ($split === false) ? [] : $split;
+=======
+    public static function mbIsUpper($character)
+    {
+        return mb_strtolower($character, 'UTF-8') != $character;
+    }
+
+    public static function mbStrSplit($string)
+    {
+        // Split at all position not after the start: ^
+        // and not before the end: $
+        return preg_split('/(?<!^)(?!$)/u', $string);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -523,8 +665,15 @@ class StringHelper
      * and all lowercase characters become uppercase.
      *
      * @param string $textValue UTF-8 encoded string
+<<<<<<< HEAD
      */
     public static function strCaseReverse(string $textValue): string
+=======
+     *
+     * @return string
+     */
+    public static function strCaseReverse($textValue)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $characters = self::mbStrSplit($textValue);
         foreach ($characters as &$character) {
@@ -543,6 +692,7 @@ class StringHelper
      * and convert it to a numeric if it is.
      *
      * @param string $operand string value to test
+<<<<<<< HEAD
      */
     public static function convertToNumberIfFraction(string &$operand): bool
     {
@@ -550,6 +700,16 @@ class StringHelper
             $sign = ($match[1] == '-') ? '-' : '+';
             $wholePart = ($match[3] === '') ? '' : ($sign . $match[3]);
             $fractionFormula = '=' . $wholePart . $sign . $match[4];
+=======
+     *
+     * @return bool
+     */
+    public static function convertToNumberIfFraction(&$operand)
+    {
+        if (preg_match('/^' . self::STRING_REGEXP_FRACTION . '$/i', $operand, $match)) {
+            $sign = ($match[1] == '-') ? '-' : '+';
+            $fractionFormula = '=' . $sign . $match[2] . $sign . $match[3];
+>>>>>>> forked/LAE_400_PACKAGE
             $operand = Calculation::getInstance()->_calculateFormulaValue($fractionFormula);
 
             return true;
@@ -563,8 +723,15 @@ class StringHelper
     /**
      * Get the decimal separator. If it has not yet been set explicitly, try to obtain number
      * formatting information from locale.
+<<<<<<< HEAD
      */
     public static function getDecimalSeparator(): string
+=======
+     *
+     * @return string
+     */
+    public static function getDecimalSeparator()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (!isset(self::$decimalSeparator)) {
             $localeconv = localeconv();
@@ -586,7 +753,11 @@ class StringHelper
      *
      * @param string $separator Character for decimal separator
      */
+<<<<<<< HEAD
     public static function setDecimalSeparator(string $separator): void
+=======
+    public static function setDecimalSeparator($separator): void
+>>>>>>> forked/LAE_400_PACKAGE
     {
         self::$decimalSeparator = $separator;
     }
@@ -594,8 +765,15 @@ class StringHelper
     /**
      * Get the thousands separator. If it has not yet been set explicitly, try to obtain number
      * formatting information from locale.
+<<<<<<< HEAD
      */
     public static function getThousandsSeparator(): string
+=======
+     *
+     * @return string
+     */
+    public static function getThousandsSeparator()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (!isset(self::$thousandsSeparator)) {
             $localeconv = localeconv();
@@ -617,7 +795,11 @@ class StringHelper
      *
      * @param string $separator Character for thousands separator
      */
+<<<<<<< HEAD
     public static function setThousandsSeparator(string $separator): void
+=======
+    public static function setThousandsSeparator($separator): void
+>>>>>>> forked/LAE_400_PACKAGE
     {
         self::$thousandsSeparator = $separator;
     }
@@ -625,8 +807,15 @@ class StringHelper
     /**
      *    Get the currency code. If it has not yet been set explicitly, try to obtain the
      *        symbol information from locale.
+<<<<<<< HEAD
      */
     public static function getCurrencyCode(): string
+=======
+     *
+     * @return string
+     */
+    public static function getCurrencyCode()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (!empty(self::$currencyCode)) {
             return self::$currencyCode;
@@ -653,7 +842,11 @@ class StringHelper
      *
      * @param string $currencyCode Character for currency code
      */
+<<<<<<< HEAD
     public static function setCurrencyCode(string $currencyCode): void
+=======
+    public static function setCurrencyCode($currencyCode): void
+>>>>>>> forked/LAE_400_PACKAGE
     {
         self::$currencyCode = $currencyCode;
     }
@@ -661,11 +854,19 @@ class StringHelper
     /**
      * Convert SYLK encoded string to UTF-8.
      *
+<<<<<<< HEAD
      * @param string $textValue SYLK encoded string
      *
      * @return string UTF-8 encoded string
      */
     public static function SYLKtoUTF8(string $textValue): string
+=======
+     * @param string $textValue
+     *
+     * @return string UTF-8 encoded string
+     */
+    public static function SYLKtoUTF8($textValue)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         self::buildCharacterSets();
 
@@ -696,6 +897,10 @@ class StringHelper
         }
         $v = (float) $textValue;
 
+<<<<<<< HEAD
         return (is_numeric(substr($textValue, 0, strlen((string) $v)))) ? $v : $textValue;
+=======
+        return (is_numeric(substr($textValue, 0, strlen($v)))) ? $v : $textValue;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

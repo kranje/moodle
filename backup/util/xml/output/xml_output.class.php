@@ -107,7 +107,11 @@ abstract class xml_output {
         if (!$this->running) {
             throw new xml_output_exception('xml_output_not_started');
         }
+<<<<<<< HEAD
         $lenc = strlen($content ?? ''); // Get length in bytes.
+=======
+        $lenc = strlen($content); // Get length in bytes
+>>>>>>> forked/LAE_400_PACKAGE
         if ($lenc == 0) { // 0 length contents, nothing to do
             return;
         }

@@ -53,6 +53,7 @@ Feature: Activities content download can be controlled
     Given I log in as "manager1"
     And I am on the Folder1 "Folder Activity editing" page
     And "Include in course content download" "field" should exist
+<<<<<<< HEAD
     And I log out
     And I log in as "admin"
     When I set the following system permissions of "Manager" role:
@@ -61,6 +62,12 @@ Feature: Activities content download can be controlled
     And I log out
     And I log in as "manager1"
     And I am on the Folder1 "Folder Activity editing" page
+=======
+    And the following "role capability" exists:
+      | role                                   | manager  |
+      | moodle/course:configuredownloadcontent | prohibit |
+    When I am on the Folder1 "Folder Activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "Include in course content download"
     And I should see "No"
     And "Include in course content download" "select" should not exist

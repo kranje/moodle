@@ -58,6 +58,7 @@ class file_lock_factory implements lock_factory {
      * Create this lock factory.
      *
      * @param string $type - The type, e.g. cron, cache, session
+<<<<<<< HEAD
      * @param string|null $lockdirectory - Optional path to the lock directory, to override defaults.
      */
     public function __construct($type, ?string $lockdirectory = null) {
@@ -67,6 +68,14 @@ class file_lock_factory implements lock_factory {
         if (!is_null($lockdirectory)) {
             $this->lockdirectory = $lockdirectory;
         } else if (!isset($CFG->file_lock_root)) {
+=======
+     */
+    public function __construct($type) {
+        global $CFG;
+
+        $this->type = $type;
+        if (!isset($CFG->file_lock_root)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->lockdirectory = $CFG->dataroot . '/lock';
         } else {
             $this->lockdirectory = $CFG->file_lock_root;
@@ -103,7 +112,11 @@ class file_lock_factory implements lock_factory {
         global $CFG;
         $preventfilelocking = !empty($CFG->preventfilelocking);
         $lockdirisdataroot = true;
+<<<<<<< HEAD
         if (strpos($this->lockdirectory, $CFG->dataroot) !== 0) {
+=======
+        if (!empty($CFG->file_lock_root) && strpos($CFG->file_lock_root, $CFG->dataroot) !== 0) {
+>>>>>>> forked/LAE_400_PACKAGE
             $lockdirisdataroot = false;
         }
         return !$preventfilelocking || !$lockdirisdataroot;

@@ -153,7 +153,11 @@ a {
     padding: 10px 30px 10px 8px;
     font-family: $font-family;
     font-size: 16px;
+<<<<<<< HEAD
     border: 1px solid $form-border-color;
+=======
+    border: 1px solid $form-border-color;;
+>>>>>>> forked/LAE_400_PACKAGE
     background: $form-input-color inline-image('down.png') no-repeat;
     background-position: calc(100% - 10px);
     @include box-shadow($form-input-box-shadow);
@@ -358,13 +362,20 @@ a {
 
         &:before {
           font-family: 'H5P';
+<<<<<<< HEAD
           position: absolute;
+=======
+          content: "\e904";
+          position: absolute;
+          color: #dd0505;
+>>>>>>> forked/LAE_400_PACKAGE
           left: 0;
           top: 0.083em;
           font-size: 3.8em;
           line-height: 1;
         }
 
+<<<<<<< HEAD
         &.video:before {
           content: "\e904";
           color: #dd0505;
@@ -375,6 +386,8 @@ a {
           color: #747275;
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         input {
           border-color: #bbb;
           text-align: left;
@@ -394,7 +407,11 @@ a {
         border: 1px solid #bbb;
 
         .h5p-file-drop-upload-inner {
+<<<<<<< HEAD
           border: 2px dashed #bbb;
+=======
+          border: 2px dashed #bbb;;
+>>>>>>> forked/LAE_400_PACKAGE
           background-color: white;
           position: absolute;
           top: 3px;
@@ -404,10 +421,15 @@ a {
 
           &:after {
             font-family: "H5P";
+<<<<<<< HEAD
+=======
+            content: "\e903";
+>>>>>>> forked/LAE_400_PACKAGE
             line-height: 1.4em;
             font-size: 3.5em;
             color: #bbb;
           }
+<<<<<<< HEAD
 
           &.video:after {
             content: "\e903";
@@ -416,6 +438,8 @@ a {
           &.audio:after {
             content: "\e914";
           }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         &:hover,
@@ -1071,7 +1095,46 @@ a {
   overflow: hidden;
 }
 
+<<<<<<< HEAD
 @import "tutorial-and-example-links";
+=======
+.h5p-tutorial-url,
+.h5p-example-url {
+  font-size: 1em;
+  color: #2270B9;
+  display: inline-block;
+  line-height: 1;
+  height: 2em;
+  margin-right: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+
+  &:focus {
+    border-color: #bbdae8;
+  }
+  &:active {
+    border-color: #1C70BA;
+  }
+}
+
+.h5p-tutorial-url:before,
+.h5p-example-url:before {
+  font-family: $icon-font-family;
+  font-size: 1.5em;
+  position: relative;
+  top: 0.15em;
+  left: 0.2em;
+  margin-right: 10px;
+}
+.h5p-tutorial-url:before {
+  content: "\e907";
+}
+.h5p-example-url:before {
+  content: "\e906";
+}
+>>>>>>> forked/LAE_400_PACKAGE
 
 .h5peditor-widget-select {
   overflow: hidden;

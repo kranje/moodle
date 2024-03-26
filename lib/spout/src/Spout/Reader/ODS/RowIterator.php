@@ -118,7 +118,10 @@ class RowIterator implements IteratorInterface
      * @throws \Box\Spout\Reader\Exception\IteratorNotRewindableException If the iterator is rewound more than once
      * @return void
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         // Because sheet and row data is located in the file, we can't rewind both the
@@ -143,7 +146,10 @@ class RowIterator implements IteratorInterface
      *
      * @return bool
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return (!$this->hasReachedEndOfFile);
@@ -157,7 +163,10 @@ class RowIterator implements IteratorInterface
      * @throws \Box\Spout\Common\Exception\IOException If unable to read the sheet data XML
      * @return void
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         if ($this->doesNeedDataForNextRowToBeProcessed()) {
@@ -359,7 +368,10 @@ class RowIterator implements IteratorInterface
      *
      * @return Row
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->rowBuffer;
@@ -371,7 +383,10 @@ class RowIterator implements IteratorInterface
      *
      * @return int
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return $this->lastRowIndexProcessed;
@@ -382,7 +397,10 @@ class RowIterator implements IteratorInterface
      *
      * @return void
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function end()
     {
         $this->xmlReader->close();

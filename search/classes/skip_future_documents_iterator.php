@@ -67,7 +67,10 @@ class skip_future_documents_iterator implements \Iterator {
         }
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         if (!$this->gotcurrent) {
             $this->currentdoc = $this->parent->current();
@@ -76,17 +79,28 @@ class skip_future_documents_iterator implements \Iterator {
         return $this->currentdoc;
     }
 
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->parent->next();
         $this->gotcurrent = false;
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->parent->key();
     }
 
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         // Check that the parent is valid.
         if (!$this->parent->valid()) {
             return false;
@@ -101,7 +115,11 @@ class skip_future_documents_iterator implements \Iterator {
         }
     }
 
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->parent->rewind();
         $this->gotcurrent = false;
     }

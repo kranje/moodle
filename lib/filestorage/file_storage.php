@@ -1800,7 +1800,11 @@ class file_storage {
                 // the latter of which can go to 100, we need to make sure that quality here is
                 // in a safe range or PHP WILL CRASH AND DIE. You have been warned.
                 $quality = $quality > 9 ? (int)(max(1.0, (float)$quality / 100.0) * 9.0) : $quality;
+<<<<<<< HEAD
                 imagepng($img, null, $quality, PNG_NO_FILTER);
+=======
+                imagepng($img, NULL, $quality, NULL);
+>>>>>>> forked/LAE_400_PACKAGE
                 break;
 
             default:
@@ -1951,7 +1955,11 @@ class file_storage {
         if ($decoded === false) {
             throw new file_reference_exception(null, $str, null, null, 'Invalid base64 format');
         }
+<<<<<<< HEAD
         $params = @unserialize($decoded); // hide E_NOTICE
+=======
+        $params = unserialize_array($decoded);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($params === false) {
             throw new file_reference_exception(null, $decoded, null, null, 'Not an unserializeable value');
         }
@@ -2462,6 +2470,10 @@ class file_storage {
      * @return  string The file's content hash
      */
     public static function hash_from_string($content) {
+<<<<<<< HEAD
         return sha1($content ?? '');
+=======
+        return sha1($content);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

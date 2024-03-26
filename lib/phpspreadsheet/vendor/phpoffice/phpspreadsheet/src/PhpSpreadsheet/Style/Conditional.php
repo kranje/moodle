@@ -9,6 +9,7 @@ class Conditional implements IComparable
 {
     // Condition types
     const CONDITION_NONE = 'none';
+<<<<<<< HEAD
     const CONDITION_BEGINSWITH = 'beginsWith';
     const CONDITION_CELLIS = 'cellIs';
     const CONDITION_CONTAINSBLANKS = 'containsBlanks';
@@ -40,6 +41,25 @@ class Conditional implements IComparable
         self::CONDITION_NOTCONTAINSTEXT,
         self::CONDITION_TIMEPERIOD,
         self::CONDITION_UNIQUE,
+=======
+    const CONDITION_CELLIS = 'cellIs';
+    const CONDITION_CONTAINSTEXT = 'containsText';
+    const CONDITION_EXPRESSION = 'expression';
+    const CONDITION_CONTAINSBLANKS = 'containsBlanks';
+    const CONDITION_NOTCONTAINSBLANKS = 'notContainsBlanks';
+    const CONDITION_DATABAR = 'dataBar';
+    const CONDITION_NOTCONTAINSTEXT = 'notContainsText';
+
+    private const CONDITION_TYPES = [
+        self::CONDITION_CELLIS,
+        self::CONDITION_CONTAINSBLANKS,
+        self::CONDITION_CONTAINSTEXT,
+        self::CONDITION_DATABAR,
+        self::CONDITION_EXPRESSION,
+        self::CONDITION_NONE,
+        self::CONDITION_NOTCONTAINSBLANKS,
+        self::CONDITION_NOTCONTAINSTEXT,
+>>>>>>> forked/LAE_400_PACKAGE
     ];
 
     // Operator types
@@ -57,6 +77,7 @@ class Conditional implements IComparable
     const OPERATOR_BETWEEN = 'between';
     const OPERATOR_NOTBETWEEN = 'notBetween';
 
+<<<<<<< HEAD
     const TIMEPERIOD_TODAY = 'today';
     const TIMEPERIOD_YESTERDAY = 'yesterday';
     const TIMEPERIOD_TOMORROW = 'tomorrow';
@@ -68,6 +89,8 @@ class Conditional implements IComparable
     const TIMEPERIOD_THIS_MONTH = 'thisMonth';
     const TIMEPERIOD_NEXT_MONTH = 'nextMonth';
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Condition type.
      *
@@ -99,7 +122,11 @@ class Conditional implements IComparable
     /**
      * Condition.
      *
+<<<<<<< HEAD
      * @var (bool|float|int|string)[]
+=======
+     * @var string[]
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $condition = [];
 
@@ -223,7 +250,11 @@ class Conditional implements IComparable
     /**
      * Get Conditions.
      *
+<<<<<<< HEAD
      * @return (bool|float|int|string)[]
+=======
+     * @return string[]
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function getConditions()
     {
@@ -233,7 +264,11 @@ class Conditional implements IComparable
     /**
      * Set Conditions.
      *
+<<<<<<< HEAD
      * @param bool|float|int|string|(bool|float|int|string)[] $conditions Condition
+=======
+     * @param bool|float|int|string|string[] $conditions Condition
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return $this
      */
@@ -250,7 +285,11 @@ class Conditional implements IComparable
     /**
      * Add Condition.
      *
+<<<<<<< HEAD
      * @param bool|float|int|string $condition Condition
+=======
+     * @param string $condition Condition
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return $this
      */
@@ -276,7 +315,11 @@ class Conditional implements IComparable
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setStyle(Style $style)
+=======
+    public function setStyle(?Style $style = null)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->style = $style;
 

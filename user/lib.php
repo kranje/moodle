@@ -400,21 +400,38 @@ function user_get_user_details($user, $course = null, array $userfields = array(
     // Hidden user field.
     if ($canviewhiddenuserfields) {
         $hiddenfields = array();
+<<<<<<< HEAD
         // Address, phone1 and phone2 not appears in hidden fields list but require viewhiddenfields capability
         // according to user/profile.php.
         if (!empty($user->address) && in_array('address', $userfields)) {
             $userdetails['address'] = $user->address;
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     } else {
         $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
     }
 
+<<<<<<< HEAD
     if (!empty($user->phone1) && in_array('phone1', $userfields) &&
             (in_array('phone1', $showuseridentityfields) or $canviewhiddenuserfields)) {
         $userdetails['phone1'] = $user->phone1;
     }
     if (!empty($user->phone2) && in_array('phone2', $userfields) &&
             (in_array('phone2', $showuseridentityfields) or $canviewhiddenuserfields)) {
+=======
+
+    if (!empty($user->address) && (in_array('address', $userfields)
+            && in_array('address', $showuseridentityfields) || $isadmin)) {
+        $userdetails['address'] = $user->address;
+    }
+    if (!empty($user->phone1) && (in_array('phone1', $userfields)
+            && in_array('phone1', $showuseridentityfields) || $isadmin)) {
+        $userdetails['phone1'] = $user->phone1;
+    }
+    if (!empty($user->phone2) && (in_array('phone2', $userfields)
+            && in_array('phone2', $showuseridentityfields) || $isadmin)) {
+>>>>>>> forked/LAE_400_PACKAGE
         $userdetails['phone2'] = $user->phone2;
     }
 
@@ -436,6 +453,13 @@ function user_get_user_details($user, $course = null, array $userfields = array(
         $userdetails['city'] = $user->city;
     }
 
+<<<<<<< HEAD
+=======
+    if (in_array('timezone', $userfields) && (!isset($hiddenfields['timezone']) || $isadmin) && $user->timezone) {
+        $userdetails['timezone'] = $user->timezone;
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     if (in_array('suspended', $userfields) && (!isset($hiddenfields['suspended']) or $isadmin)) {
         $userdetails['suspended'] = (bool)$user->suspended;
     }
@@ -518,6 +542,7 @@ function user_get_user_details($user, $course = null, array $userfields = array(
         }
     }
 
+<<<<<<< HEAD
     // If groups are in use and enforced throughout the course, then make sure we can meet in at least one course level group.
     if (in_array('groups', $userfields) && !empty($course) && $canaccessallgroups) {
         $usergroups = groups_get_all_groups($course->id, $user->id, $course->defaultgroupingid,
@@ -529,6 +554,27 @@ function user_get_user_details($user, $course = null, array $userfields = array(
                         $context->id, 'group', 'description', $group->id);
             $userdetails['groups'][] = array('id' => $group->id, 'name' => $group->name,
                 'description' => $group->description, 'descriptionformat' => $group->descriptionformat);
+=======
+    // Return user groups.
+    if (in_array('groups', $userfields) && !empty($course)) {
+        if ($usergroups = groups_get_all_groups($course->id, $user->id)) {
+            $userdetails['groups'] = [];
+            foreach ($usergroups as $group) {
+                if ($course->groupmode == SEPARATEGROUPS && !$canaccessallgroups && $user->id != $USER->id) {
+                    // In separate groups, I only have to see the groups shared between both users.
+                    if (!groups_is_member($group->id, $USER->id)) {
+                        continue;
+                    }
+                }
+
+                $userdetails['groups'][] = [
+                    'id' => $group->id,
+                    'name' => format_string($group->name),
+                    'description' => format_text($group->description, $group->descriptionformat, ['context' => $context]),
+                    'descriptionformat' => $group->descriptionformat
+                ];
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
     // List of courses where the user is enrolled.
@@ -560,7 +606,11 @@ function user_get_user_details($user, $course = null, array $userfields = array(
     }
 
     if ($currentuser or has_capability('moodle/user:viewalldetails', $context)) {
+<<<<<<< HEAD
         $extrafields = ['auth', 'confirmed', 'lang', 'theme', 'timezone', 'mailformat'];
+=======
+        $extrafields = ['auth', 'confirmed', 'lang', 'theme', 'mailformat'];
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($extrafields as $extrafield) {
             if (in_array($extrafield, $userfields) && isset($user->$extrafield)) {
                 $userdetails[$extrafield] = $user->$extrafield;
@@ -583,6 +633,7 @@ function user_get_user_details($user, $course = null, array $userfields = array(
  * Tries to obtain user details, either recurring directly to the user's system profile
  * or through one of the user's course enrollments (course profile).
  *
+<<<<<<< HEAD
  * You can use the $userfields parameter to reduce the amount of a user record that is required by the method.
  * The minimum user fields are:
  *  * id
@@ -595,6 +646,12 @@ function user_get_user_details($user, $course = null, array $userfields = array(
  * @return array if unsuccessful or the allowed user details.
  */
 function user_get_user_details_courses($user, array $userfields = []) {
+=======
+ * @param stdClass $user The user.
+ * @return array if unsuccessful or the allowed user details.
+ */
+function user_get_user_details_courses($user) {
+>>>>>>> forked/LAE_400_PACKAGE
     global $USER;
     $userdetails = null;
 
@@ -605,14 +662,22 @@ function user_get_user_details_courses($user, array $userfields = []) {
 
     // Try using system profile.
     if ($systemprofile) {
+<<<<<<< HEAD
         $userdetails = user_get_user_details($user, null, $userfields);
+=======
+        $userdetails = user_get_user_details($user, null);
+>>>>>>> forked/LAE_400_PACKAGE
     } else {
         // Try through course profile.
         // Get the courses that the user is enrolled in (only active).
         $courses = enrol_get_users_courses($user->id, true);
         foreach ($courses as $course) {
             if (user_can_view_profile($user, $course)) {
+<<<<<<< HEAD
                 $userdetails = user_get_user_details($user, $course, $userfields);
+=======
+                $userdetails = user_get_user_details($user, $course);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
     }

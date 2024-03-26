@@ -131,6 +131,7 @@ export default class {
     }
 
     /**
+<<<<<<< HEAD
      * Hides sections.
      * @param {StateManager} stateManager the current state manager
      * @param {array} sectionIds the list of section ids
@@ -176,6 +177,8 @@ export default class {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Move course modules to specific course location.
      *
      * Note that one of targetSectionId or targetCmId should be provided in order to identify the
@@ -283,6 +286,27 @@ export default class {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Move cms to the right: indent = 1.
+     * @param {StateManager} stateManager the current state manager
+     * @param {array} cmIds the list of cm ids
+     */
+    async cmMoveRight(stateManager, cmIds) {
+        await this._cmBasicAction(stateManager, 'cm_moveright', cmIds);
+    }
+
+    /**
+     * Move cms to the left: indent = 0.
+     * @param {StateManager} stateManager the current state manager
+     * @param {array} cmIds the list of cm ids
+     */
+    async cmMoveLeft(stateManager, cmIds) {
+        await this._cmBasicAction(stateManager, 'cm_moveleft', cmIds);
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Lock or unlock course modules.
      *
      * @param {StateManager} stateManager the current state manager

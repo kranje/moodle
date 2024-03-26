@@ -18,7 +18,10 @@ declare(strict_types=1);
 
 namespace core_reportbuilder;
 
+<<<<<<< HEAD
 use action_menu_filler;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use coding_exception;
 use stdClass;
 use core_reportbuilder\local\models\report;
@@ -41,10 +44,14 @@ abstract class system_report extends base {
     /** @var string[] $basefields List of base fields */
     private $basefields = [];
 
+<<<<<<< HEAD
     /** @var bool $filterformdefault Whether to use the default filters form */
     private $filterformdefault = true;
 
     /** @var action|action_menu_filler[] $actions */
+=======
+    /** @var action[] $actions */
+>>>>>>> forked/LAE_400_PACKAGE
     private $actions = [];
 
     /** @var column $initialsortcolumn */
@@ -124,6 +131,7 @@ abstract class system_report extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Override whether to use the default system report filters form, for instance this can be disabled if the UI requires
      * it's own custom filter management form for a specific report
      *
@@ -143,6 +151,8 @@ abstract class system_report extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Adds an action to the report
      *
      * @param action $action
@@ -152,6 +162,7 @@ abstract class system_report extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Adds action divider to the report
      *
      */
@@ -163,6 +174,8 @@ abstract class system_report extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Whether report has any actions
      *
      * @return bool
@@ -174,7 +187,11 @@ abstract class system_report extends base {
     /**
      * Return report actions
      *
+<<<<<<< HEAD
      * @return action|action_menu_filler[]
+=======
+     * @return action[]
+>>>>>>> forked/LAE_400_PACKAGE
      */
     final public function get_actions(): array {
         return $this->actions;
@@ -243,6 +260,18 @@ abstract class system_report extends base {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Default 'per page' size. Can be overridden by system reports to define a different paging value
+     *
+     * @return int
+     */
+    public function get_default_per_page(): int {
+        return self::DEFAULT_PAGESIZE;
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Called before rendering each row. Can be overridden to pre-fetch/create objects and store them in the class, which can
      * later be used in column and action callbacks
      *

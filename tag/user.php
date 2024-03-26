@@ -8,6 +8,7 @@ $action = optional_param('action', '', PARAM_ALPHA);
 require_login();
 
 if (empty($CFG->usetags)) {
+<<<<<<< HEAD
     throw new \moodle_exception('tagdisabled');
 }
 
@@ -17,6 +18,17 @@ if (isguestuser()) {
 
 if (!confirm_sesskey()) {
     throw new \moodle_exception('sesskey');
+=======
+    print_error('tagdisabled');
+}
+
+if (isguestuser()) {
+    print_error('noguest');
+}
+
+if (!confirm_sesskey()) {
+    print_error('sesskey');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $usercontext = context_user::instance($USER->id);
@@ -24,7 +36,11 @@ $usercontext = context_user::instance($USER->id);
 switch ($action) {
     case 'addinterest':
         if (!core_tag_tag::is_enabled('core', 'user')) {
+<<<<<<< HEAD
             throw new \moodle_exception('tagdisabled');
+=======
+            print_error('tagdisabled');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $tag = required_param('tag', PARAM_TAG);
         core_tag_tag::add_item_tag('core', 'user', $USER->id, $usercontext, $tag);
@@ -34,7 +50,11 @@ switch ($action) {
 
     case 'removeinterest':
         if (!core_tag_tag::is_enabled('core', 'user')) {
+<<<<<<< HEAD
             throw new \moodle_exception('tagdisabled');
+=======
+            print_error('tagdisabled');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $tag = required_param('tag', PARAM_TAG);
         core_tag_tag::remove_item_tag('core', 'user', $USER->id, $tag);
@@ -51,6 +71,10 @@ switch ($action) {
         break;
 
     default:
+<<<<<<< HEAD
         throw new \moodle_exception('unknowaction');
+=======
+        print_error('unknowaction');
+>>>>>>> forked/LAE_400_PACKAGE
         break;
 }

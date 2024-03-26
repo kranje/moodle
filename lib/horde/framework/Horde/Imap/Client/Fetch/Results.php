@@ -132,7 +132,10 @@ implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return isset($this->_data[$offset]);
@@ -140,7 +143,10 @@ implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($offset)
     {
         return isset($this->_data[$offset])
@@ -150,7 +156,10 @@ implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         $this->_data[$offset] = $value;
@@ -158,7 +167,10 @@ implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
         unset($this->_data[$offset]);
@@ -168,7 +180,10 @@ implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->_data);
@@ -178,7 +193,10 @@ implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         ksort($this->_data);

@@ -98,8 +98,13 @@ class blog_edit_external_form extends moodleform {
         global $CFG, $COURSE;
         $mform =& $this->_form;
 
+<<<<<<< HEAD
         $name = trim($mform->getElementValue('name') ?? '');
         $description = trim($mform->getElementValue('description') ?? '');
+=======
+        $name = trim($mform->getElementValue('name'));
+        $description = trim($mform->getElementValue('description'));
+>>>>>>> forked/LAE_400_PACKAGE
         $url = $mform->getElementValue('url');
 
         if (empty($name) || empty($description)) {

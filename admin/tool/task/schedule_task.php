@@ -30,6 +30,7 @@ require('../../../config.php');
 
 require_once($CFG->libdir.'/cronlib.php');
 
+<<<<<<< HEAD
 /**
  * Function used to handle mtrace by outputting the text to normal browser window.
  *
@@ -40,6 +41,8 @@ function tool_task_mtrace_wrapper($message, $eol) {
     echo s($message . $eol);
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 // Allow execution of single task. This requires login and has different rules.
 $taskname = required_param('task', PARAM_RAW_TRIMMED);
 
@@ -97,6 +100,10 @@ require_sesskey();
 
 // Prepare to handle output via mtrace.
 echo html_writer::start_tag('pre');
+<<<<<<< HEAD
+=======
+require('lib.php');
+>>>>>>> forked/LAE_400_PACKAGE
 $CFG->mtrace_wrapper = 'tool_task_mtrace_wrapper';
 
 // Run the specified task (this will output an error if it doesn't exist).

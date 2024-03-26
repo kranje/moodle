@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Logical;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -11,6 +12,13 @@ class Operations
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Operations
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * LOGICAL_AND.
      *
@@ -36,7 +44,11 @@ class Operations
         $args = Functions::flattenArray($args);
 
         if (count($args) == 0) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $args = array_filter($args, function ($value) {
@@ -77,7 +89,11 @@ class Operations
         $args = Functions::flattenArray($args);
 
         if (count($args) == 0) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $args = array_filter($args, function ($value) {
@@ -119,7 +135,11 @@ class Operations
         $args = Functions::flattenArray($args);
 
         if (count($args) == 0) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $args = array_filter($args, function ($value) {
@@ -150,6 +170,7 @@ class Operations
      *            holds the value TRUE or FALSE, in which case it is evaluated as the corresponding boolean value
      *
      * @param mixed $logical A value or expression that can be evaluated to TRUE or FALSE
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|bool|string the boolean inverse of the argument
@@ -161,6 +182,14 @@ class Operations
         if (is_array($logical)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $logical);
         }
+=======
+     *
+     * @return bool|string the boolean inverse of the argument
+     */
+    public static function NOT($logical = false)
+    {
+        $logical = Functions::flattenSingleValue($logical);
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (is_string($logical)) {
             $logical = mb_strtoupper($logical, 'UTF-8');
@@ -170,7 +199,11 @@ class Operations
                 return true;
             }
 
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return !$logical;
@@ -196,7 +229,11 @@ class Operations
                 } elseif (($arg == 'FALSE') || ($arg == Calculation::getFALSE())) {
                     $arg = false;
                 } else {
+<<<<<<< HEAD
                     return ExcelError::VALUE();
+=======
+                    return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 $trueValueCount += ($arg != 0);
             }

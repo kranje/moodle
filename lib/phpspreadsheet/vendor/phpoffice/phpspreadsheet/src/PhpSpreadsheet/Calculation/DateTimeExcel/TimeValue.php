@@ -3,15 +3,22 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
 use Datetime;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class TimeValue
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * TIMEVALUE.
      *
@@ -25,6 +32,7 @@ class TimeValue
      * Excel Function:
      *        TIMEVALUE(timeValue)
      *
+<<<<<<< HEAD
      * @param array|string $timeValue A text string that represents a time in any one of the Microsoft
      *                                    Excel time formats; for example, "6:45 PM" and "18:45" text strings
      *                                    within quotation marks that represent time.
@@ -43,6 +51,19 @@ class TimeValue
         }
 
         $timeValue = trim($timeValue ?? '', '"');
+=======
+     * @param string $timeValue A text string that represents a time in any one of the Microsoft
+     *                                    Excel time formats; for example, "6:45 PM" and "18:45" text strings
+     *                                    within quotation marks that represent time.
+     *                                    Date information in time_text is ignored.
+     *
+     * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+     *                        depending on the value of the ReturnDateType flag
+     */
+    public static function fromString($timeValue)
+    {
+        $timeValue = trim(Functions::flattenSingleValue($timeValue ?? ''), '"');
+>>>>>>> forked/LAE_400_PACKAGE
         $timeValue = str_replace(['/', '.'], '-', $timeValue);
 
         $arraySplit = preg_split('/[\/:\-\s]/', $timeValue) ?: [];
@@ -52,7 +73,11 @@ class TimeValue
         }
 
         $PHPDateArray = Helpers::dateParse($timeValue);
+<<<<<<< HEAD
         $retValue = ExcelError::VALUE();
+=======
+        $retValue = Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         if (Helpers::dateParseSucceeded($PHPDateArray)) {
             /** @var int */
             $hour = $PHPDateArray['hour'];

@@ -147,5 +147,8 @@ class SimplePie_Author
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Author', 'SimplePie\Author', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

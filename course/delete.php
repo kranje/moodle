@@ -36,7 +36,11 @@ require_login();
 
 if ($SITE->id == $course->id || !can_delete_course($id)) {
     // Can not delete frontpage or don't have permission to delete the course.
+<<<<<<< HEAD
     throw new \moodle_exception('cannotdeletecourse');
+=======
+    print_error('cannotdeletecourse');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $categorycontext = context_coursecat::instance($course->category);

@@ -69,7 +69,11 @@ $usercontext = context_user::instance($user->id, MUST_EXIST);
 if (isguestuser($user)) {
     // The guest user cannot post, so it is not possible to view any posts.
     // May as well just bail aggressively here.
+<<<<<<< HEAD
     throw new \moodle_exception('invaliduserid');
+=======
+    print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 // Make sure the user has not been deleted
 if ($user->deleted) {

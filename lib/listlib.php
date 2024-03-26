@@ -171,7 +171,11 @@ abstract class moodle_list {
         }
 
         if (!$suppresserror) {
+<<<<<<< HEAD
             throw new \moodle_exception('listnoitem');
+=======
+            print_error('listnoitem');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         return null;
     }
@@ -324,7 +328,11 @@ abstract class moodle_list {
                     $peers[$itemkey+1] = $id;
                     $peers[$itemkey] = $olditem;
                 } else {
+<<<<<<< HEAD
                     throw new \moodle_exception('listcantmoveup');
+=======
+                    print_error('listcantmoveup');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 break;
 
@@ -334,7 +342,11 @@ abstract class moodle_list {
                     $peers[$itemkey-1] = $id;
                     $peers[$itemkey] = $olditem;
                 } else {
+<<<<<<< HEAD
                     throw new \moodle_exception('listcantmovedown');
+=======
+                    print_error('listcantmovedown');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 break;
         }
@@ -359,7 +371,11 @@ abstract class moodle_list {
 
         $item = $this->find_item($id);
         if (!isset($item->parentlist->parentitem->parentlist)) {
+<<<<<<< HEAD
             throw new \moodle_exception('listcantmoveleft');
+=======
+            print_error('listcantmoveleft');
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             $newpeers = $this->get_items_peers($item->parentlist->parentitem->id);
             if (isset($item->parentlist->parentitem->parentlist->parentitem)) {
@@ -386,7 +402,11 @@ abstract class moodle_list {
         $peers = $this->get_items_peers($id);
         $itemkey = array_search($id, $peers);
         if (!isset($peers[$itemkey-1])) {
+<<<<<<< HEAD
             throw new \moodle_exception('listcantmoveright');
+=======
+            print_error('listcantmoveright');
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             $DB->set_field($this->table, "parent", $peers[$itemkey-1], array("id"=>$peers[$itemkey]));
             $newparent = $this->find_item($peers[$itemkey-1]);

@@ -658,6 +658,7 @@ class contenttype_test extends \advanced_testcase {
         $url = $contenttype->get_download_url($content);
         $this->assertEmpty($url);
     }
+<<<<<<< HEAD
 
     /**
      * Tests pluginfile result.
@@ -671,4 +672,6 @@ class contenttype_test extends \advanced_testcase {
         $contenttype = new contenttype($systemcontext);
         $this->assertIsCallable([$contenttype, 'pluginfile']);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

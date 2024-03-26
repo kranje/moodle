@@ -50,6 +50,7 @@ Feature: Completion pass grade
     And I press "Save and display"
     And I add a "Short text" field to "Music history" database and I fill the form with:
       | Field name | Instrument types |
+<<<<<<< HEAD
     And I log out
 
   @javascript
@@ -59,6 +60,16 @@ Feature: Completion pass grade
     When I add an entry to "Music history" database with:
       | Instrument types | Drums |
     And I press "Save"
+=======
+    And I navigate to "Templates" in current page administration
+    And I press "Save template"
+    And I log out
+
+  Scenario: View automatic completion items as a teacher
+    Given I log in as "teacher1"
+    And I am on "Course 1" course homepage
+    When I follow "Music history"
+>>>>>>> forked/LAE_400_PACKAGE
     Then "Music history" should have the "View" completion condition
     And "Music history" should have the "Make entries: 2" completion condition
     And "Music history" should have the "Receive a grade" completion condition

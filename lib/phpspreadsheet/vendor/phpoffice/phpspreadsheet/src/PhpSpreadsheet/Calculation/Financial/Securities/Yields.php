@@ -61,7 +61,11 @@ class Yields
         if (!is_numeric($daysPerYear)) {
             return $daysPerYear;
         }
+<<<<<<< HEAD
         $daysBetweenSettlementAndMaturity = Functions::scalar(DateTimeExcel\YearFrac::fraction($settlement, $maturity, $basis));
+=======
+        $daysBetweenSettlementAndMaturity = DateTimeExcel\YearFrac::fraction($settlement, $maturity, $basis);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!is_numeric($daysBetweenSettlementAndMaturity)) {
             //    return date error
             return $daysBetweenSettlementAndMaturity;
@@ -126,19 +130,31 @@ class Yields
         if (!is_numeric($daysPerYear)) {
             return $daysPerYear;
         }
+<<<<<<< HEAD
         $daysBetweenIssueAndSettlement = Functions::scalar(DateTimeExcel\YearFrac::fraction($issue, $settlement, $basis));
+=======
+        $daysBetweenIssueAndSettlement = DateTimeExcel\YearFrac::fraction($issue, $settlement, $basis);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!is_numeric($daysBetweenIssueAndSettlement)) {
             //    return date error
             return $daysBetweenIssueAndSettlement;
         }
         $daysBetweenIssueAndSettlement *= $daysPerYear;
+<<<<<<< HEAD
         $daysBetweenIssueAndMaturity = Functions::scalar(DateTimeExcel\YearFrac::fraction($issue, $maturity, $basis));
+=======
+        $daysBetweenIssueAndMaturity = DateTimeExcel\YearFrac::fraction($issue, $maturity, $basis);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!is_numeric($daysBetweenIssueAndMaturity)) {
             //    return date error
             return $daysBetweenIssueAndMaturity;
         }
         $daysBetweenIssueAndMaturity *= $daysPerYear;
+<<<<<<< HEAD
         $daysBetweenSettlementAndMaturity = Functions::scalar(DateTimeExcel\YearFrac::fraction($settlement, $maturity, $basis));
+=======
+        $daysBetweenSettlementAndMaturity = DateTimeExcel\YearFrac::fraction($settlement, $maturity, $basis);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!is_numeric($daysBetweenSettlementAndMaturity)) {
             //    return date error
             return $daysBetweenSettlementAndMaturity;

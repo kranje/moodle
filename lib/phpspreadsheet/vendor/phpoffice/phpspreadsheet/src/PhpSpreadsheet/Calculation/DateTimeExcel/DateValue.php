@@ -3,14 +3,21 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
 use DateTimeImmutable;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class DateValue
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * DATEVALUE.
      *
@@ -24,7 +31,11 @@ class DateValue
      * Excel Function:
      *        DATEVALUE(dateValue)
      *
+<<<<<<< HEAD
      * @param array|string $dateValue Text that represents a date in a Microsoft Excel date format.
+=======
+     * @param string $dateValue Text that represents a date in a Microsoft Excel date format.
+>>>>>>> forked/LAE_400_PACKAGE
      *                                    For example, "1/30/2008" or "30-Jan-2008" are text strings within
      *                                    quotation marks that represent dates. Using the default date
      *                                    system in Excel for Windows, date_text must represent a date from
@@ -32,6 +43,7 @@ class DateValue
      *                                    system in Excel for the Macintosh, date_text must represent a date
      *                                    from January 1, 1904, to December 31, 9999. DATEVALUE returns the
      *                                    #VALUE! error value if date_text is out of this range.
+<<<<<<< HEAD
      *                         Or can be an array of date values
      *
      * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
@@ -50,6 +62,19 @@ class DateValue
         $dateValue = trim($dateValue ?? '', '"');
         //    Strip any ordinals because they're allowed in Excel (English only)
         $dateValue = (string) preg_replace('/(\d)(st|nd|rd|th)([ -\/])/Ui', '$1$3', $dateValue);
+=======
+     *
+     * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+     *                        depending on the value of the ReturnDateType flag
+     */
+    public static function fromString($dateValue)
+    {
+        $dti = new DateTimeImmutable();
+        $baseYear = SharedDateHelper::getExcelCalendar();
+        $dateValue = trim(Functions::flattenSingleValue($dateValue ?? ''), '"');
+        //    Strip any ordinals because they're allowed in Excel (English only)
+        $dateValue = preg_replace('/(\d)(st|nd|rd|th)([ -\/])/Ui', '$1$3', $dateValue) ?? '';
+>>>>>>> forked/LAE_400_PACKAGE
         //    Convert separators (/ . or space) to hyphens (should also handle dot used for ordinals in some countries, e.g. Denmark, Germany)
         $dateValue = str_replace(['/', '.', '-', '  '], ' ', $dateValue);
 
@@ -59,7 +84,11 @@ class DateValue
         foreach ($t1 as &$t) {
             if ((is_numeric($t)) && ($t > 31)) {
                 if ($yearFound) {
+<<<<<<< HEAD
                     return ExcelError::VALUE();
+=======
+                    return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 if ($t < 100) {
                     $t += 1900;
@@ -69,7 +98,11 @@ class DateValue
         }
         if (count($t1) === 1) {
             //    We've been fed a time value without any date
+<<<<<<< HEAD
             return ((strpos((string) $t, ':') === false)) ? ExcelError::Value() : 0.0;
+=======
+            return ((strpos((string) $t, ':') === false)) ? Functions::Value() : 0.0;
+>>>>>>> forked/LAE_400_PACKAGE
         }
         unset($t);
 
@@ -131,12 +164,20 @@ class DateValue
      */
     private static function finalResults(array $PHPDateArray, DateTimeImmutable $dti, int $baseYear)
     {
+<<<<<<< HEAD
         $retValue = ExcelError::Value();
+=======
+        $retValue = Functions::Value();
+>>>>>>> forked/LAE_400_PACKAGE
         if (Helpers::dateParseSucceeded($PHPDateArray)) {
             // Execute function
             Helpers::replaceIfEmpty($PHPDateArray['year'], $dti->format('Y'));
             if ($PHPDateArray['year'] < $baseYear) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             Helpers::replaceIfEmpty($PHPDateArray['month'], $dti->format('m'));
             Helpers::replaceIfEmpty($PHPDateArray['day'], $dti->format('d'));
@@ -147,7 +188,11 @@ class DateValue
             $day = (int) $PHPDateArray['day'];
             $year = (int) $PHPDateArray['year'];
             if (!checkdate($month, $day, $year)) {
+<<<<<<< HEAD
                 return ($year === 1900 && $month === 2 && $day === 29) ? Helpers::returnIn3FormatsFloat(60.0) : ExcelError::VALUE();
+=======
+                return ($year === 1900 && $month === 2 && $day === 29) ? Helpers::returnIn3FormatsFloat(60.0) : Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $retValue = Helpers::returnIn3FormatsArray($PHPDateArray, true);
         }

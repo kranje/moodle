@@ -32,11 +32,16 @@ class edit_letter_form extends moodleform {
 
     public function definition() {
         $mform =& $this->_form;
+<<<<<<< HEAD
 
         [
             'lettercount' => $lettercount,
             'admin' => $admin,
         ] = $this->_customdata;
+=======
+        $num   = $this->_customdata['num'];
+        $admin = $this->_customdata['admin'];
+>>>>>>> forked/LAE_400_PACKAGE
 
         $mform->addElement('header', 'gradeletters', get_string('gradeletters', 'grades'));
 
@@ -49,6 +54,7 @@ class edit_letter_form extends moodleform {
         $gradeletter       = get_string('gradeletter', 'grades');
         $gradeboundary     = get_string('gradeboundary', 'grades');
 
+<<<<<<< HEAD
         // The fields to create the grade letter/boundary.
         $elements = [];
         $elements[] = $mform->createElement('text', 'gradeletter', "{$gradeletter} {no}");
@@ -81,3 +87,43 @@ class edit_letter_form extends moodleform {
         $this->add_action_buttons();
     }
 }
+=======
+        for ($i=1; $i<$num+1; $i++) {
+            $gradelettername = 'gradeletter'.$i;
+            $gradeboundaryname = 'gradeboundary'.$i;
+
+            $entry = array();
+            $entry[] = $mform->createElement('text', $gradelettername, $gradeletter . " $i");
+            $mform->setType($gradelettername, PARAM_TEXT);
+
+            if (!$admin) {
+                $mform->disabledIf($gradelettername, 'override', 'notchecked');
+            }
+
+            $entry[] = $mform->createElement('static', '', '', '&ge;');
+            $entry[] = $mform->createElement('float', $gradeboundaryname, $gradeboundary." $i");
+            $entry[] = $mform->createElement('static', '', '', '%');
+            $mform->addGroup($entry, 'gradeentry'.$i, $gradeletter." $i", array(' '), false);
+
+            if (!$admin) {
+                $mform->disabledIf($gradeboundaryname, 'override', 'notchecked');
+            }
+        }
+
+        if ($num > 0) {
+            $mform->addHelpButton('gradeentry1', 'gradeletter', 'grades');
+        }
+
+        // hidden params
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+
+//-------------------------------------------------------------------------------
+        // buttons
+        $this->add_action_buttons();
+    }
+
+}
+
+
+>>>>>>> forked/LAE_400_PACKAGE

@@ -3,8 +3,11 @@ declare(strict_types=1);
 
 namespace ZipStream\Option;
 
+<<<<<<< HEAD
 use Psr\Http\Message\StreamInterface;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 final class Archive
 {
     const DEFAULT_DEFLATE_LEVEL = 6;
@@ -106,7 +109,11 @@ final class Archive
     private $deflateLevel = 6;
 
     /**
+<<<<<<< HEAD
      * @var StreamInterface|resource
+=======
+     * @var resource
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $outputStream;
 
@@ -230,7 +237,11 @@ final class Archive
     }
 
     /**
+<<<<<<< HEAD
      * @return StreamInterface|resource
+=======
+     * @return resource
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function getOutputStream()
     {
@@ -238,7 +249,11 @@ final class Archive
     }
 
     /**
+<<<<<<< HEAD
      * @param StreamInterface|resource $outputStream
+=======
+     * @param resource $outputStream
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function setOutputStream($outputStream): void
     {

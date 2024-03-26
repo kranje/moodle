@@ -129,7 +129,11 @@ class chart_axis implements JsonSerializable {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function jsonSerialize(): array {
+=======
+    public function jsonSerialize() {
+>>>>>>> forked/LAE_400_PACKAGE
         return [
             'label' => $this->label,
             'labels' => $this->labels,

@@ -47,6 +47,10 @@ const CLASSES = {
     SCROLLED: 'scrolled',
     SHOW: 'show',
     NOTINITIALISED: 'not-initialized',
+<<<<<<< HEAD
+=======
+    TOGGLERIGHT: '.drawer-right-toggle',
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**
@@ -589,6 +593,14 @@ const scroller = () => {
     const body = document.querySelector('body');
     const drawerLayout = document.querySelector(SELECTORS.CONTAINER);
     if (drawerLayout) {
+<<<<<<< HEAD
+=======
+        // If there is not visible scrollbar then remove extra margin from right drawer.
+        const drawerRight = document.querySelector(SELECTORS.CONTAINER + ' ' + CLASSES.TOGGLERIGHT);
+        if (!scrollbarVisible(drawerLayout) && drawerRight) {
+            drawerRight.style.marginRight = '0';
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         drawerLayout.addEventListener("scroll", () => {
             if (drawerLayout.scrollTop >= window.innerHeight) {
                 body.classList.add(CLASSES.SCROLLED);
@@ -600,6 +612,19 @@ const scroller = () => {
 };
 
 /**
+<<<<<<< HEAD
+=======
+ * Check if there is a visible scrollbar in the given html element.
+ *
+ * @param {object} htmlNode The html element.
+ * @returns {boolean} true if the scroll height is greater than client height.
+ */
+const scrollbarVisible = (htmlNode) => {
+   return htmlNode.scrollHeight > htmlNode.clientHeight;
+};
+
+/**
+>>>>>>> forked/LAE_400_PACKAGE
  * Set the last used attribute for the last used toggle button for a drawer.
  *
  * @param {object} toggleButton The clicked button.

@@ -59,7 +59,11 @@ if (!isset($config->course)) {
 require_login($config->course, false);
 require_capability('moodle/course:manageactivities', context_course::instance($config->course));
 if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
+<<<<<<< HEAD
     throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+=======
+    print_error('moodlenetnotenabled', 'tool_moodlenet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // If the user cancelled, break early.

@@ -35,7 +35,11 @@ $courseid = required_param('courseid', PARAM_INT);
 $PAGE->set_url('/group/autogroup.php', array('courseid' => $courseid));
 
 if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Make sure that the user has permissions to manage groups.
@@ -83,7 +87,11 @@ if ($editform->is_cancelled()) {
         case 'idnumber':
             $orderby = 'idnumber'; break;
         default:
+<<<<<<< HEAD
             throw new \moodle_exception('unknoworder');
+=======
+            print_error('unknoworder');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $source = array();
     if ($data->cohortid) {

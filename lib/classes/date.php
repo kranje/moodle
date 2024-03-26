@@ -319,7 +319,11 @@ class core_date {
         if (!defined('PHPUNIT_TEST')) {
             throw new coding_exception('core_date::phpunit_override_default_php_timezone() must be used only from unit tests');
         }
+<<<<<<< HEAD
         $result = timezone_open($tz ?? ''); // This triggers error if $tz invalid.
+=======
+        $result = timezone_open($tz); // This triggers error if $tz invalid.
+>>>>>>> forked/LAE_400_PACKAGE
         if ($result !== false) {
             self::$defaultphptimezone = $tz;
         } else {
@@ -692,6 +696,7 @@ class core_date {
             }
         }
     }
+<<<<<<< HEAD
 
     /**
      * Locale-formatted strftime using IntlDateFormatter (PHP 8.1 compatible)
@@ -904,4 +909,6 @@ class core_date {
         return $out;
         // phpcs:enable
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

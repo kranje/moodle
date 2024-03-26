@@ -20,6 +20,7 @@ if ($mode !== '') {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('glossary', $id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
 }
 
@@ -29,6 +30,17 @@ if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
 
 if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
     throw new \moodle_exception('invalidid', 'glossary');
+=======
+    print_error('invalidcoursemodule');
+}
+
+if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+    print_error('coursemisconf');
+}
+
+if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
+    print_error('invalidid', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course, false, $cm);

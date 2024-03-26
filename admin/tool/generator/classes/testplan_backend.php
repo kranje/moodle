@@ -186,7 +186,11 @@ class tool_generator_testplan_backend extends tool_generator_backend {
         $planusers = self::$users[$size] ?? 0;
         $users = get_enrolled_users($coursecontext, '', 0, 'u.id, u.username, u.auth', 'u.username ASC', 0, $planusers);
         if (!$users) {
+<<<<<<< HEAD
             throw new \moodle_exception('coursewithoutusers', 'tool_generator');
+=======
+            print_error('coursewithoutusers', 'tool_generator');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $lines = array();
@@ -196,7 +200,11 @@ class tool_generator_testplan_backend extends tool_generator_backend {
             if ($updateuserspassword) {
                 $userauth = get_auth_plugin($user->auth);
                 if (!$userauth->user_update_password($user, $CFG->tool_generator_users_password)) {
+<<<<<<< HEAD
                     throw new \moodle_exception('errorpasswordupdate', 'auth');
+=======
+                    print_error('errorpasswordupdate', 'auth');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
 
@@ -249,19 +257,31 @@ class tool_generator_testplan_backend extends tool_generator_backend {
 
         // Getting the first page module instance.
         if (!$pages = $courseinfo->get_instances_of('page')) {
+<<<<<<< HEAD
             throw new \moodle_exception('error_nopageinstances', 'tool_generator');
+=======
+            print_error('error_nopageinstances', 'tool_generator');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $data->pageid = reset($pages)->id;
 
         // Getting the first forum module instance and it's first discussion and reply as well.
         if (!$forums = $courseinfo->get_instances_of('forum')) {
+<<<<<<< HEAD
             throw new \moodle_exception('error_noforuminstances', 'tool_generator');
+=======
+            print_error('error_noforuminstances', 'tool_generator');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $forum = reset($forums);
 
         // Getting the first discussion (and reply).
         if (!$discussions = forum_get_discussions($forum, 'd.timemodified ASC', false, -1, 1)) {
+<<<<<<< HEAD
             throw new \moodle_exception('error_noforumdiscussions', 'tool_generator');
+=======
+            print_error('error_noforumdiscussions', 'tool_generator');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $discussion = reset($discussions);
 

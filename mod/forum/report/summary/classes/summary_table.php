@@ -568,7 +568,26 @@ class summary_table extends table_sql {
             $privaterepliesparams['privatereplyfrom'] = $USER->id;
         }
 
+<<<<<<< HEAD
         list($enrolleduserssql, $enrolledusersparams) = get_enrolled_sql($this->get_context());
+=======
+        if ($this->iscoursereport) {
+            $course = get_course($this->courseid);
+            $groupmode = groups_get_course_groupmode($course);
+        } else {
+            $cm = \cm_info::create($this->cms[0]);
+            $groupmode = $cm->effectivegroupmode;
+        }
+
+        if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $this->get_context())) {
+            $groups = groups_get_all_groups($this->courseid, $USER->id, 0, 'g.id');
+            $groupids = array_column($groups, 'id');
+        } else {
+            $groupids = [];
+        }
+
+        [$enrolleduserssql, $enrolledusersparams] = get_enrolled_sql($this->get_context(), '', $groupids);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->sql->params += $enrolledusersparams;
 
         $queryattachments = 'SELECT COUNT(fi.id) AS attcount, fi.itemid AS postid, fi.userid

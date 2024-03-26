@@ -36,7 +36,10 @@ class enrol_manual_potential_participant extends user_selector_base {
 
     public function __construct($name, $options) {
         $this->enrolid  = $options['enrolid'];
+<<<<<<< HEAD
         $options['includecustomfields'] = true;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         parent::__construct($name, $options);
     }
 
@@ -47,6 +50,7 @@ class enrol_manual_potential_participant extends user_selector_base {
      */
     public function find_users($search) {
         global $DB;
+<<<<<<< HEAD
 
         // By default wherecondition retrieves all users except the deleted, not confirmed and guest.
         list($wherecondition, $params) = $this->search_sql($search, 'u');
@@ -55,15 +59,29 @@ class enrol_manual_potential_participant extends user_selector_base {
         $params['enrolid'] = $this->enrolid;
 
         $fields      = 'SELECT u.id, ' . $this->userfieldsselects;
+=======
+        // By default wherecondition retrieves all users except the deleted, not confirmed and guest.
+        list($wherecondition, $params) = $this->search_sql($search, 'u');
+        $params['enrolid'] = $this->enrolid;
+
+        $fields      = 'SELECT ' . $this->required_fields_sql('u');
+>>>>>>> forked/LAE_400_PACKAGE
         $countfields = 'SELECT COUNT(1)';
 
         $sql = " FROM {user} u
             LEFT JOIN {user_enrolments} ue ON (ue.userid = u.id AND ue.enrolid = :enrolid)
+<<<<<<< HEAD
                       $this->userfieldsjoin
                 WHERE $wherecondition
                       AND ue.id IS NULL";
 
         list($sort, $sortparams) = users_order_by_sql('u', $search, $this->accesscontext, $this->userfieldsmappings);
+=======
+                WHERE $wherecondition
+                      AND ue.id IS NULL";
+
+        list($sort, $sortparams) = users_order_by_sql('u', $search, $this->accesscontext);
+>>>>>>> forked/LAE_400_PACKAGE
         $order = ' ORDER BY ' . $sort;
 
         if (!$this->is_validating()) {
@@ -106,7 +124,10 @@ class enrol_manual_current_participant extends user_selector_base {
 
     public function __construct($name, $options) {
         $this->enrolid  = $options['enrolid'];
+<<<<<<< HEAD
         $options['includecustomfields'] = true;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         parent::__construct($name, $options);
     }
 
@@ -117,6 +138,7 @@ class enrol_manual_current_participant extends user_selector_base {
      */
     public function find_users($search) {
         global $DB;
+<<<<<<< HEAD
 
         // By default wherecondition retrieves all users except the deleted, not confirmed and guest.
         list($wherecondition, $params) = $this->search_sql($search, 'u');
@@ -125,14 +147,27 @@ class enrol_manual_current_participant extends user_selector_base {
         $params['enrolid'] = $this->enrolid;
 
         $fields      = 'SELECT u.id, ' . $this->userfieldsselects;
+=======
+        // By default wherecondition retrieves all users except the deleted, not confirmed and guest.
+        list($wherecondition, $params) = $this->search_sql($search, 'u');
+        $params['enrolid'] = $this->enrolid;
+
+        $fields      = 'SELECT ' . $this->required_fields_sql('u');
+>>>>>>> forked/LAE_400_PACKAGE
         $countfields = 'SELECT COUNT(1)';
 
         $sql = " FROM {user} u
                  JOIN {user_enrolments} ue ON (ue.userid = u.id AND ue.enrolid = :enrolid)
+<<<<<<< HEAD
                       $this->userfieldsjoin
                 WHERE $wherecondition";
 
         list($sort, $sortparams) = users_order_by_sql('u', $search, $this->accesscontext, $this->userfieldsmappings);
+=======
+                WHERE $wherecondition";
+
+        list($sort, $sortparams) = users_order_by_sql('u', $search, $this->accesscontext);
+>>>>>>> forked/LAE_400_PACKAGE
         $order = ' ORDER BY ' . $sort;
 
         if (!$this->is_validating()) {

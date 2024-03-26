@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,10 +11,17 @@ class CharacterConvert
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class CharacterConvert
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * CHAR.
      *
      * @param mixed $character Integer Value to convert to its character representation
+<<<<<<< HEAD
      *                              Or can be an array of values
      *
      * @return array|string The character string
@@ -30,6 +38,15 @@ class CharacterConvert
         $min = Functions::getCompatibilityMode() === Functions::COMPATIBILITY_OPENOFFICE ? 0 : 1;
         if ($character < $min || $character > 255) {
             return ExcelError::VALUE();
+=======
+     */
+    public static function character($character): string
+    {
+        $character = Helpers::validateInt($character);
+        $min = Functions::getCompatibilityMode() === Functions::COMPATIBILITY_OPENOFFICE ? 0 : 1;
+        if ($character < $min || $character > 255) {
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $result = iconv('UCS-4LE', 'UTF-8', pack('V', $character));
 
@@ -40,6 +57,7 @@ class CharacterConvert
      * CODE.
      *
      * @param mixed $characters String character to convert to its ASCII value
+<<<<<<< HEAD
      *                              Or can be an array of values
      *
      * @return array|int|string A string if arguments are invalid
@@ -55,6 +73,16 @@ class CharacterConvert
         $characters = Helpers::extractString($characters);
         if ($characters === '') {
             return ExcelError::VALUE();
+=======
+     *
+     * @return int|string A string if arguments are invalid
+     */
+    public static function code($characters)
+    {
+        $characters = Helpers::extractString($characters);
+        if ($characters === '') {
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $character = $characters;

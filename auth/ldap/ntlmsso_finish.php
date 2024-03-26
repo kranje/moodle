@@ -10,12 +10,20 @@ $site = get_site();
 
 $authsequence = get_enabled_auth_plugins(); // Auths, in sequence.
 if (!in_array('ldap', $authsequence, true)) {
+<<<<<<< HEAD
     throw new \moodle_exception('ldap_isdisabled', 'auth');
+=======
+    print_error('ldap_isdisabled', 'auth');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $authplugin = get_auth_plugin('ldap');
 if (empty($authplugin->config->ntlmsso_enabled)) {
+<<<<<<< HEAD
     throw new \moodle_exception('ntlmsso_isdisabled', 'auth_ldap');
+=======
+    print_error('ntlmsso_isdisabled', 'auth_ldap');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // If ntlmsso_finish() succeeds, then the code never returns,

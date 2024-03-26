@@ -348,6 +348,7 @@ ns.Html.prototype.appendTo = function ($wrapper) {
     ns.Html.removeWysiwyg();
 
     CKEDITOR.document.getBody = function () {
+<<<<<<< HEAD
       // Have to attach to an element that does not get hidden or removed, since an internal "calculator" element
       // inside CKeditor relies on this element to always exist and not be hidden.
       return new CKEDITOR.dom.element(window.document.body);
@@ -386,6 +387,9 @@ ns.Html.prototype.appendTo = function ($wrapper) {
           calculator.$.parentNode.removeChild(calculator.$);
         }
         return cssLength;
+=======
+      return new CKEDITOR.dom.element(that.$item[0]);
+>>>>>>> forked/LAE_400_PACKAGE
     };
 
     ns.Html.current = that;

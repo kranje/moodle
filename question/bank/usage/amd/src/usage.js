@@ -23,9 +23,27 @@
  */
 
 import Fragment from 'core/fragment';
+<<<<<<< HEAD
 import ModalFactory from 'core/modal_factory';
 import Notification from 'core/notification';
 import * as Str from 'core/str';
+=======
+import * as Str from 'core/str';
+import ModalFactory from 'core/modal_factory';
+import Notification from 'core/notification';
+
+/**
+ * Get the fragment.
+ *
+ * @method getFragment
+ * @param {{questioned: int}} args
+ * @param {int} contextId
+ * @return {string}
+ */
+const getFragment = (args, contextId) => {
+    return Fragment.loadFragment('qbank_usage', 'question_usage', contextId, args);
+};
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Event listeners for the module.
@@ -41,7 +59,11 @@ const usageEvent = (questionId, contextId) => {
     ModalFactory.create({
         type: ModalFactory.types.CANCEL,
         title: Str.get_string('usageheader', 'qbank_usage'),
+<<<<<<< HEAD
         body: Fragment.loadFragment('qbank_usage', 'question_usage', contextId, args),
+=======
+        body: getFragment(args, contextId),
+>>>>>>> forked/LAE_400_PACKAGE
         large: true,
     }).then((modal) => {
         modal.show();
@@ -50,6 +72,7 @@ const usageEvent = (questionId, contextId) => {
             let attr = e.target.getAttribute("href");
             if (attr !== '#') {
                 args.querystring = attr;
+<<<<<<< HEAD
                 modal.setBody(Fragment.loadFragment('qbank_usage', 'question_usage', contextId, args));
             }
         });
@@ -58,6 +81,11 @@ const usageEvent = (questionId, contextId) => {
             args.questionid = e.target.value;
             modal.setBody(Fragment.loadFragment('qbank_usage', 'question_usage', contextId, args));
         });
+=======
+                modal.setBody(getFragment(args, contextId));
+            }
+        });
+>>>>>>> forked/LAE_400_PACKAGE
         return modal;
     }).fail(Notification.exception);
 };

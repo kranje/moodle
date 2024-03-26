@@ -8,10 +8,15 @@ use SimpleXMLElement;
 
 class PageSetup extends BaseParserClass
 {
+<<<<<<< HEAD
     /** @var Worksheet */
     private $worksheet;
 
     /** @var ?SimpleXMLElement */
+=======
+    private $worksheet;
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $worksheetXml;
 
     public function __construct(Worksheet $workSheet, ?SimpleXMLElement $worksheetXml = null)
@@ -20,6 +25,7 @@ class PageSetup extends BaseParserClass
         $this->worksheetXml = $worksheetXml;
     }
 
+<<<<<<< HEAD
     public function load(array $unparsedLoadedData): array
     {
         $worksheetXml = $this->worksheetXml;
@@ -31,6 +37,18 @@ class PageSetup extends BaseParserClass
         $unparsedLoadedData = $this->pageSetup($worksheetXml, $this->worksheet, $unparsedLoadedData);
         $this->headerFooter($worksheetXml, $this->worksheet);
         $this->pageBreaks($worksheetXml, $this->worksheet);
+=======
+    public function load(array $unparsedLoadedData)
+    {
+        if (!$this->worksheetXml) {
+            return $unparsedLoadedData;
+        }
+
+        $this->margins($this->worksheetXml, $this->worksheet);
+        $unparsedLoadedData = $this->pageSetup($this->worksheetXml, $this->worksheet, $unparsedLoadedData);
+        $this->headerFooter($this->worksheetXml, $this->worksheet);
+        $this->pageBreaks($this->worksheetXml, $this->worksheet);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $unparsedLoadedData;
     }
@@ -48,7 +66,11 @@ class PageSetup extends BaseParserClass
         }
     }
 
+<<<<<<< HEAD
     private function pageSetup(SimpleXMLElement $xmlSheet, Worksheet $worksheet, array $unparsedLoadedData): array
+=======
+    private function pageSetup(SimpleXMLElement $xmlSheet, Worksheet $worksheet, array $unparsedLoadedData)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($xmlSheet->pageSetup) {
             $docPageSetup = $worksheet->getPageSetup();

@@ -27,7 +27,11 @@ class Horde_Exception_PermissionDenied extends Horde_Exception
      *
      * @see Horde_Exception::__construct()
      *
+<<<<<<< HEAD
      * @param string|Exception $message           The exception message, a PEAR_Error
+=======
+     * @param mixed $message           The exception message, a PEAR_Error
+>>>>>>> forked/LAE_400_PACKAGE
      *                                 object, or an Exception object.
      * @param integer $code            A numeric error code.
      */

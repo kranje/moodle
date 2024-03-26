@@ -33,6 +33,7 @@
  */
 class gradereport_user_renderer extends plugin_renderer_base {
 
+<<<<<<< HEAD
     /**
      * Small rendering function that helps with outputting the relevant user selector.
      *
@@ -49,6 +50,14 @@ class gradereport_user_renderer extends plugin_renderer_base {
         $select = grade_get_graded_users_select($report, $course, $userid, $groupid, $includeall);
         $output = html_writer::tag('div', $this->output->render($select), ['id' => 'graded_users_selector']);
         $output .= html_writer::tag('p', '', ['style' => 'page-break-after: always;']);
+=======
+    public function graded_users_selector($report, $course, $userid, $groupid, $includeall) {
+        global $USER;
+
+        $select = grade_get_graded_users_select($report, $course, $userid, $groupid, $includeall);
+        $output = html_writer::tag('div', $this->output->render($select), array('id'=>'graded_users_selector'));
+        $output .= html_writer::tag('p', '', array('style'=>'page-break-after: always;'));
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $output;
     }
@@ -60,13 +69,18 @@ class gradereport_user_renderer extends plugin_renderer_base {
      * @param int $userview The current view user setting constant
      * @return string
      */
+<<<<<<< HEAD
     public function view_user_selector(int $userid, int $userview): string {
+=======
+    public function view_user_selector($userid, $userview) {
+>>>>>>> forked/LAE_400_PACKAGE
         global $USER;
         $url = $this->page->url;
         if ($userid != $USER->id) {
             $url->param('userid', $userid);
         }
 
+<<<<<<< HEAD
         $options = [
             GRADE_REPORT_USER_VIEW_USER => get_string('otheruser', 'grades'),
             GRADE_REPORT_USER_VIEW_SELF => get_string('myself', 'grades')
@@ -76,10 +90,20 @@ class gradereport_user_renderer extends plugin_renderer_base {
         $select->label = get_string('viewas', 'grades');
 
         $output = html_writer::tag('div', $this->output->render($select), ['class' => 'view_users_selector']);
+=======
+        $options = array(GRADE_REPORT_USER_VIEW_USER => get_string('otheruser', 'gradereport_user'),
+                GRADE_REPORT_USER_VIEW_SELF => get_string('myself', 'gradereport_user'));
+        $select = new single_select($url, 'userview', $options, $userview, null);
+
+        $select->label = get_string('viewas', 'gradereport_user');
+
+        $output = html_writer::tag('div', $this->output->render($select), array('class' => 'view_users_selector'));
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $output;
     }
 
+<<<<<<< HEAD
     /**
      * Renders the user selector trigger element.
      *
@@ -206,4 +230,6 @@ class gradereport_user_renderer extends plugin_renderer_base {
         return $this->render_from_template('gradereport_user/view_mode_selector',
             $viewasselect->export_for_template($this));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

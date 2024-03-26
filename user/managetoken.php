@@ -32,7 +32,10 @@ $usercontext = context_user::instance($USER->id);
 $PAGE->set_context($usercontext);
 $PAGE->set_url('/user/managetoken.php');
 $PAGE->set_title(get_string('securitykeys', 'webservice'));
+<<<<<<< HEAD
 $PAGE->set_heading(get_string('securitykeys', 'webservice'));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $PAGE->set_pagelayout('admin');
 
 $rsstokenboxhtml = $webservicetokenboxhtml = '';

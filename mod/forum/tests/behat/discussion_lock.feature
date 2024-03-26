@@ -15,6 +15,7 @@ Feature: As a teacher, you can manually lock individual discussions when viewing
       | course   | C1              |
       | activity | forum           |
       | name     | Test forum name |
+<<<<<<< HEAD
     And I am on the "Course 1" course page logged in as admin
     And I add a new discussion to "Test forum name" forum with:
       | Subject | Discussion 1 |
@@ -31,6 +32,20 @@ Feature: As a teacher, you can manually lock individual discussions when viewing
 
   Scenario: Lock a discussion and view
     Given I am on the "Course 1" course page
+=======
+      | idnumber | forum1          |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name         | message                              |
+      | admin | forum1 | Discussion 1 | Discussion contents 1, first message |
+      | admin | forum1 | Discussion 2 | Discussion contents 2, first message |
+    And the following "mod_forum > posts" exist:
+      | user  | parentsubject | subject                 | message                               |
+      | admin | Discussion 1  | Reply 1 to discussion 1 | Discussion contents 1, second message |
+      | admin | Discussion 2  | Reply 1 to discussion 2 | Discussion contents 2, second message |
+
+  Scenario: Lock a discussion and view
+    Given I am on the "Course 1" course page logged in as admin
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to post "Discussion 1" in "Test forum name" forum
     And I press "Settings"
     Then "Lock this discussion" "link" should be visible
@@ -42,16 +57,24 @@ Feature: As a teacher, you can manually lock individual discussions when viewing
     And I press "Settings"
     And I follow "Discussion 2"
     Then I should not see "This discussion has been locked so you can no longer reply to it."
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to post "Discussion 1" in "Test forum name" forum
     Then I should see "This discussion has been locked so you can no longer reply to it."
     And "Reply" "link" should not be visible
 
   @accessibility
   Scenario: A locked discussion must be accessible
+<<<<<<< HEAD
     Given I am on the "Course 1" course page
+=======
+    Given I am on the "Course 1" course page logged in as admin
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to post "Discussion 1" in "Test forum name" forum
     When I reply "Discussion 1" post from "Test forum name" forum with:
       | Subject | Discussion 1: Hello world! |
@@ -62,7 +85,10 @@ Feature: As a teacher, you can manually lock individual discussions when viewing
     When I follow "Lock this discussion"
     # Check discussion view accessibility with info notification shown when discussion is locked.
     And the page should meet accessibility standards with "wcag143" extra tests
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student1
     # Check discussion list accessibility with danger pill shown when discussion is locked.
     And the page should meet accessibility standards with "wcag143" extra tests

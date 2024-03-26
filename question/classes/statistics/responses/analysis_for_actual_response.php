@@ -111,8 +111,14 @@ class analysis_for_actual_response {
      * @param int               $variantno  which variant.
      * @param string            $subpartid which sub part is this actual response in?
      * @param string            $responseclassid which response class is this actual response in?
+<<<<<<< HEAD
      */
     public function cache($qubaids, $whichtries, $questionid, $variantno, $subpartid, $responseclassid) {
+=======
+     * @param int|null          $calculationtime time when the analysis was done. (Defaults to time()).
+     */
+    public function cache($qubaids, $whichtries, $questionid, $variantno, $subpartid, $responseclassid, $calculationtime = null) {
+>>>>>>> forked/LAE_400_PACKAGE
         global $DB;
         $row = new \stdClass();
         $row->hashcode = $qubaids->get_hash_code();
@@ -127,7 +133,11 @@ class analysis_for_actual_response {
         }
         $row->response = $this->response;
         $row->credit = $this->fraction;
+<<<<<<< HEAD
         $row->timemodified = time();
+=======
+        $row->timemodified = $calculationtime ? $calculationtime : time();
+>>>>>>> forked/LAE_400_PACKAGE
         $analysisid = $DB->insert_record('question_response_analysis', $row);
         if ($whichtries === \question_attempt::ALL_TRIES) {
             foreach ($this->trycount as $try => $count) {

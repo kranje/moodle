@@ -278,7 +278,11 @@ class SimplePie_Cache_MySQL extends SimplePie_Cache_DB
 					$query->bindValue(':data', serialize($data));
 					$query->bindValue(':time', time());
 					$query->bindValue(':feed', $this->id);
+<<<<<<< HEAD
 					if ($query->execute())
+=======
+					if ($this->execute())
+>>>>>>> forked/LAE_400_PACKAGE
 					{
 						return true;
 					}
@@ -438,5 +442,8 @@ class SimplePie_Cache_MySQL extends SimplePie_Cache_DB
 		return $query->execute() && $query2->execute();
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Cache_MySQL', 'SimplePie\Cache\MySQL', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

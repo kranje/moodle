@@ -619,7 +619,10 @@ class Html
         //    Load the HTML file into the DOM object
         //  Note the use of error suppression, because typically this will be an html fragment, so not fully valid markup
         $prefix = '<?xml encoding="UTF-8">';
+<<<<<<< HEAD
         /** @scrutinizer ignore-unhandled */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         @$dom->loadHTML($prefix . $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         //    Discard excess white space
         $dom->preserveWhiteSpace = false;
@@ -642,7 +645,11 @@ class Html
                 $text = ltrim($text);
             }
             // Trim any spaces immediately after a line break
+<<<<<<< HEAD
             $text = (string) preg_replace('/\n */mu', "\n", $text);
+=======
+            $text = preg_replace('/\n */mu', "\n", $text);
+>>>>>>> forked/LAE_400_PACKAGE
             $element->setText($text);
         }
     }
@@ -792,10 +799,17 @@ class Html
 
     protected function parseTextNode(DOMText $textNode): void
     {
+<<<<<<< HEAD
         $domText = (string) preg_replace(
             '/\s+/u',
             ' ',
             str_replace(["\r", "\n"], ' ', $textNode->nodeValue ?? '')
+=======
+        $domText = preg_replace(
+            '/\s+/u',
+            ' ',
+            str_replace(["\r", "\n"], ' ', $textNode->nodeValue)
+>>>>>>> forked/LAE_400_PACKAGE
         );
         $this->stringData .= $domText;
         $this->buildTextRun();
@@ -809,7 +823,10 @@ class Html
         if (isset($callbacks[$callbackTag])) {
             $elementHandler = $callbacks[$callbackTag];
             if (method_exists($this, $elementHandler)) {
+<<<<<<< HEAD
                 /** @phpstan-ignore-next-line */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 call_user_func([$this, $elementHandler], $element);
             }
         }

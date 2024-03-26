@@ -35,6 +35,7 @@ $q = optional_param('q',  0, PARAM_INT);  // Quiz ID.
 
 if ($id) {
     if (!$cm = get_coursemodule_from_id('quiz', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     }
     if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
@@ -49,6 +50,22 @@ if ($id) {
     }
     if (!$cm = get_coursemodule_from_instance("quiz", $quiz->id, $course->id)) {
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+    }
+    if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
+        print_error('coursemisconf');
+    }
+} else {
+    if (!$quiz = $DB->get_record('quiz', array('id' => $q))) {
+        print_error('invalidquizid', 'quiz');
+    }
+    if (!$course = $DB->get_record('course', array('id' => $quiz->course))) {
+        print_error('invalidcourseid');
+    }
+    if (!$cm = get_coursemodule_from_instance("quiz", $quiz->id, $course->id)) {
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

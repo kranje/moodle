@@ -351,7 +351,11 @@ class HTML_QuickForm_element extends HTML_Common
         if (empty($values)) {
             return null;
         }
+<<<<<<< HEAD
         $elementName = $this->getName() ?? '';
+=======
+        $elementName = $this->getName();
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($values[$elementName])) {
             return $values[$elementName];
         } elseif (strpos($elementName, '[')) {
@@ -447,7 +451,11 @@ class HTML_QuickForm_element extends HTML_Common
             return;
         }
 
+<<<<<<< HEAD
         $id = $this->getName() ?? '';
+=======
+        $id = $this->getName();
+>>>>>>> forked/LAE_400_PACKAGE
         $id = 'id_' . str_replace(array('qf_', '[', ']'), array('', '_', ''), $id);
         $id = clean_param($id, PARAM_ALPHANUMEXT);
         $this->updateAttributes(array('id' => $id));

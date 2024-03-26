@@ -7,10 +7,15 @@ use SimpleXMLElement;
 
 class SheetViewOptions extends BaseParserClass
 {
+<<<<<<< HEAD
     /** @var Worksheet */
     private $worksheet;
 
     /** @var ?SimpleXMLElement */
+=======
+    private $worksheet;
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $worksheetXml;
 
     public function __construct(Worksheet $workSheet, ?SimpleXMLElement $worksheetXml = null)
@@ -26,11 +31,18 @@ class SheetViewOptions extends BaseParserClass
         }
 
         if (isset($this->worksheetXml->sheetPr)) {
+<<<<<<< HEAD
             $sheetPr = $this->worksheetXml->sheetPr;
             $this->tabColor($sheetPr, $styleReader);
             $this->codeName($sheetPr);
             $this->outlines($sheetPr);
             $this->pageSetup($sheetPr);
+=======
+            $this->tabColor($this->worksheetXml->sheetPr, $styleReader);
+            $this->codeName($this->worksheetXml->sheetPr);
+            $this->outlines($this->worksheetXml->sheetPr);
+            $this->pageSetup($this->worksheetXml->sheetPr);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (isset($this->worksheetXml->sheetFormatPr)) {

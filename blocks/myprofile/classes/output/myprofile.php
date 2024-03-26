@@ -100,10 +100,13 @@ class myprofile implements renderable, templatable {
             $data->useraddress = format_string($USER->address);
         }
 
+<<<<<<< HEAD
         if (!empty($this->config->display_idnumber) && !empty($USER->idnumber)) {
             $data->useridnumber = s($USER->idnumber);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (!empty($this->config->display_firstaccess) && !empty($USER->firstaccess)) {
             $data->userfirstaccess = userdate($USER->firstaccess);
         }
@@ -120,10 +123,13 @@ class myprofile implements renderable, templatable {
             $data->userlastip = $USER->lastip;
         }
 
+<<<<<<< HEAD
         if (!empty($this->config->display_lastlogin) && !empty($USER->lastlogin)) {
             $data->userlastlogin = userdate($USER->lastlogin);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $data;
     }
 }

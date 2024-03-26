@@ -52,7 +52,11 @@ class signature_form extends \moodleform {
         $mform->addRule('title', get_string('maximumchars', '', 125), 'maxlength', 125, 'client');
         $mform->addRule('title', null, 'required', null, 'client');
 
+<<<<<<< HEAD
         $mform->addElement('editor', 'signature_editor', get_string('signature_text', 'block_clampmail'));
+=======
+        $mform->addElement('editor', 'signature_editor', get_string('signature', 'block_clampmail'));
+>>>>>>> forked/LAE_400_PACKAGE
         $mform->setType('signature', PARAM_RAW);
         $mform->addElement('checkbox', 'default_flag', get_string('default'));
 

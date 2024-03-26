@@ -30,7 +30,10 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         $this->hasReadUniqueSheet = false;
@@ -42,7 +45,10 @@ class SheetIterator implements IteratorInterface
      *
      * @return bool
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return (!$this->hasReadUniqueSheet);
@@ -54,7 +60,10 @@ class SheetIterator implements IteratorInterface
      *
      * @return void
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         $this->hasReadUniqueSheet = true;
@@ -66,7 +75,10 @@ class SheetIterator implements IteratorInterface
      *
      * @return \Box\Spout\Reader\CSV\Sheet
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->sheet;
@@ -78,7 +90,10 @@ class SheetIterator implements IteratorInterface
      *
      * @return int
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return 1;

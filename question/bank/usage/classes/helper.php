@@ -134,6 +134,7 @@ class helper {
         return $sql;
     }
 
+<<<<<<< HEAD
 
     /**
      * Get the question last used sql.
@@ -152,4 +153,6 @@ class helper {
         return $sql;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

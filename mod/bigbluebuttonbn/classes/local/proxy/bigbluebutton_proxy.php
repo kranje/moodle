@@ -41,6 +41,7 @@ use stdClass;
 class bigbluebutton_proxy extends proxy_base {
 
     /**
+<<<<<<< HEAD
      * Minimum poll interval for remote bigbluebutton server in seconds.
      */
     const MIN_POLL_INTERVAL = 2;
@@ -51,6 +52,8 @@ class bigbluebutton_proxy extends proxy_base {
     const DEFAULT_POLL_INTERVAL = 5;
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Builds and returns a url for joining a bigbluebutton meeting.
      *
      * @param string $meetingid
@@ -59,7 +62,11 @@ class bigbluebutton_proxy extends proxy_base {
      * @param string $logouturl
      * @param string $role
      * @param string|null $configtoken
+<<<<<<< HEAD
      * @param int $userid
+=======
+     * @param string|null $userid
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string|null $createtime
      *
      * @return string
@@ -71,9 +78,15 @@ class bigbluebutton_proxy extends proxy_base {
         string $logouturl,
         string $role,
         string $configtoken = null,
+<<<<<<< HEAD
         int $userid = 0,
         string $createtime = null
     ): string {
+=======
+        string $userid = null,
+        string $createtime = null
+    ): ?string {
+>>>>>>> forked/LAE_400_PACKAGE
         $data = [
             'meetingID' => $meetingid,
             'fullName' => $username,
@@ -86,20 +99,29 @@ class bigbluebutton_proxy extends proxy_base {
             $data['configToken'] = $configtoken;
         }
 
+<<<<<<< HEAD
         if (!empty($userid)) {
             $data['userID'] = $userid;
             $data['guest'] = "false";
         } else {
             $data['guest'] = "true";
+=======
+        if (!is_null($userid)) {
+            $data['userID'] = $userid;
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (!is_null($createtime)) {
             $data['createTime'] = $createtime;
         }
+<<<<<<< HEAD
         $currentlang = current_language();
         if (!empty(trim($currentlang))) {
             $data['userdata-bbb_override_default_locale'] = $currentlang;
         }
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
         return self::action_url('join', $data);
     }
 
@@ -505,6 +527,7 @@ class bigbluebutton_proxy extends proxy_base {
         $hendslength = count($hends);
         return ($hends[$hendslength - 1] == 'com' && $hends[$hendslength - 2] == 'blindsidenetworks');
     }
+<<<<<<< HEAD
 
     /**
      * Get the poll interval as it is set in the configuration
@@ -521,4 +544,6 @@ class bigbluebutton_proxy extends proxy_base {
         }
         return $pollinterval;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

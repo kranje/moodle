@@ -205,7 +205,11 @@ class manager {
      * @return string
      */
     public static function get_contenthash(?string $content = null): string {
+<<<<<<< HEAD
         return sha1($content ?? '');
+=======
+        return sha1($content);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

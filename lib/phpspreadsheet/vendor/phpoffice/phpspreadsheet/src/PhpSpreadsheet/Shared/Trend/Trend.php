@@ -72,7 +72,10 @@ class Trend
             case self::TREND_POWER:
                 if (!isset(self::$trendCache[$key])) {
                     $className = '\PhpOffice\PhpSpreadsheet\Shared\Trend\\' . $trendType . 'BestFit';
+<<<<<<< HEAD
                     // @phpstan-ignore-next-line
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                     self::$trendCache[$key] = new $className($yValues, $xValues, $const);
                 }
 
@@ -83,7 +86,11 @@ class Trend
             case self::TREND_POLYNOMIAL_5:
             case self::TREND_POLYNOMIAL_6:
                 if (!isset(self::$trendCache[$key])) {
+<<<<<<< HEAD
                     $order = (int) substr($trendType, -1);
+=======
+                    $order = substr($trendType, -1);
+>>>>>>> forked/LAE_400_PACKAGE
                     self::$trendCache[$key] = new PolynomialBestFit($order, $yValues, $xValues);
                 }
 
@@ -101,7 +108,11 @@ class Trend
                 }
                 if ($trendType != self::TREND_BEST_FIT_NO_POLY) {
                     foreach (self::$trendTypePolynomialOrders as $trendMethod) {
+<<<<<<< HEAD
                         $order = (int) substr($trendMethod, -1);
+=======
+                        $order = substr($trendMethod, -1);
+>>>>>>> forked/LAE_400_PACKAGE
                         $bestFit[$trendMethod] = new PolynomialBestFit($order, $yValues, $xValues);
                         if ($bestFit[$trendMethod]->getError()) {
                             unset($bestFit[$trendMethod]);

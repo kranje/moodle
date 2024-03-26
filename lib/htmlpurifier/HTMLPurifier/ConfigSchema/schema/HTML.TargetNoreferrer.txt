@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HTML.TargetNoreferrer
 TYPE: bool
 VERSION: 4.8.0
@@ -7,3 +8,14 @@ If enabled, noreferrer rel attributes are added to links which have
 a target attribute associated with them.  This prevents malicious
 destinations from overwriting the original window.
 --# vim: et sw=4 sts=4
+=======
+HTML.TargetNoreferrer
+TYPE: bool
+VERSION: 4.8.0
+DEFAULT: TRUE
+--DESCRIPTION--
+If enabled, noreferrer rel attributes are added to links which have
+a target attribute associated with them.  This prevents malicious
+destinations from overwriting the original window.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

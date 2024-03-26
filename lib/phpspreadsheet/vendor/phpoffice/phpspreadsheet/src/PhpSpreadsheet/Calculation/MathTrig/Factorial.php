@@ -2,15 +2,21 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 class Factorial
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * FACT.
      *
@@ -20,6 +26,7 @@ class Factorial
      * Excel Function:
      *        FACT(factVal)
      *
+<<<<<<< HEAD
      * @param array|float $factVal Factorial Value, or can be an array of numbers
      *
      * @return array|float|int|string Factorial, or a string containing an error
@@ -32,6 +39,14 @@ class Factorial
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $factVal);
         }
 
+=======
+     * @param float $factVal Factorial Value
+     *
+     * @return float|int|string Factorial, or a string containing an error
+     */
+    public static function fact($factVal)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $factVal = Helpers::validateNumericNullBool($factVal);
             Helpers::validateNotNegative($factVal);
@@ -62,6 +77,7 @@ class Factorial
      * Excel Function:
      *        FACTDOUBLE(factVal)
      *
+<<<<<<< HEAD
      * @param array|float $factVal Factorial Value, or can be an array of numbers
      *
      * @return array|float|int|string Double Factorial, or a string containing an error
@@ -74,6 +90,14 @@ class Factorial
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $factVal);
         }
 
+=======
+     * @param float $factVal Factorial Value
+     *
+     * @return float|int|string Double Factorial, or a string containing an error
+     */
+    public static function factDouble($factVal)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $factVal = Helpers::validateNumericNullSubstitution($factVal, 0);
             Helpers::validateNotNegative($factVal);

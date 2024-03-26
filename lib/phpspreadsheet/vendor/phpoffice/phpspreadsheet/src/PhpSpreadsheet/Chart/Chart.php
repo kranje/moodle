@@ -17,42 +17,66 @@ class Chart
     /**
      * Worksheet.
      *
+<<<<<<< HEAD
      * @var ?Worksheet
+=======
+     * @var Worksheet
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $worksheet;
 
     /**
      * Chart Title.
      *
+<<<<<<< HEAD
      * @var ?Title
+=======
+     * @var Title
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $title;
 
     /**
      * Chart Legend.
      *
+<<<<<<< HEAD
      * @var ?Legend
+=======
+     * @var Legend
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $legend;
 
     /**
      * X-Axis Label.
      *
+<<<<<<< HEAD
      * @var ?Title
+=======
+     * @var Title
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $xAxisLabel;
 
     /**
      * Y-Axis Label.
      *
+<<<<<<< HEAD
      * @var ?Title
+=======
+     * @var Title
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $yAxisLabel;
 
     /**
      * Chart Plot Area.
      *
+<<<<<<< HEAD
      * @var ?PlotArea
+=======
+     * @var PlotArea
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $plotArea;
 
@@ -85,6 +109,23 @@ class Chart
     private $xAxis;
 
     /**
+<<<<<<< HEAD
+=======
+     * Chart Major Gridlines as.
+     *
+     * @var GridLines
+     */
+    private $majorGridlines;
+
+    /**
+     * Chart Minor Gridlines as.
+     *
+     * @var GridLines
+     */
+    private $minorGridlines;
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Top-Left Cell Position.
      *
      * @var string
@@ -110,7 +151,11 @@ class Chart
      *
      * @var string
      */
+<<<<<<< HEAD
     private $bottomRightCellRef = '';
+=======
+    private $bottomRightCellRef = 'A1';
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Bottom-Right X-Offset.
@@ -126,6 +171,7 @@ class Chart
      */
     private $bottomRightYOffset = 10;
 
+<<<<<<< HEAD
     /** @var ?int */
     private $rotX;
 
@@ -153,6 +199,10 @@ class Chart
     /**
      * Create a new Chart.
      * majorGridlines and minorGridlines are deprecated, moved to Axis.
+=======
+    /**
+     * Create a new Chart.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param mixed $name
      * @param mixed $plotVisibleOnly
@@ -168,6 +218,7 @@ class Chart
         $this->plotArea = $plotArea;
         $this->plotVisibleOnly = $plotVisibleOnly;
         $this->displayBlanksAs = $displayBlanksAs;
+<<<<<<< HEAD
         $this->xAxis = $xAxis ?? new Axis();
         $this->yAxis = $yAxis ?? new Axis();
         if ($majorGridlines !== null) {
@@ -176,6 +227,12 @@ class Chart
         if ($minorGridlines !== null) {
             $this->yAxis->setMinorGridlines($minorGridlines);
         }
+=======
+        $this->xAxis = $xAxis;
+        $this->yAxis = $yAxis;
+        $this->majorGridlines = $majorGridlines;
+        $this->minorGridlines = $minorGridlines;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -188,6 +245,7 @@ class Chart
         return $this->name;
     }
 
+<<<<<<< HEAD
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -199,6 +257,14 @@ class Chart
      * Get Worksheet.
      */
     public function getWorksheet(): ?Worksheet
+=======
+    /**
+     * Get Worksheet.
+     *
+     * @return Worksheet
+     */
+    public function getWorksheet()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->worksheet;
     }
@@ -215,7 +281,16 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getTitle(): ?Title
+=======
+    /**
+     * Get Title.
+     *
+     * @return Title
+     */
+    public function getTitle()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->title;
     }
@@ -232,7 +307,16 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getLegend(): ?Legend
+=======
+    /**
+     * Get Legend.
+     *
+     * @return Legend
+     */
+    public function getLegend()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->legend;
     }
@@ -249,7 +333,16 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getXAxisLabel(): ?Title
+=======
+    /**
+     * Get X-Axis Label.
+     *
+     * @return Title
+     */
+    public function getXAxisLabel()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->xAxisLabel;
     }
@@ -266,7 +359,16 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getYAxisLabel(): ?Title
+=======
+    /**
+     * Get Y-Axis Label.
+     *
+     * @return Title
+     */
+    public function getYAxisLabel()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->yAxisLabel;
     }
@@ -283,12 +385,22 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getPlotArea(): ?PlotArea
+=======
+    /**
+     * Get Plot Area.
+     *
+     * @return PlotArea
+     */
+    public function getPlotArea()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->plotArea;
     }
 
     /**
+<<<<<<< HEAD
      * Set Plot Area.
      */
     public function setPlotArea(PlotArea $plotArea): self
@@ -299,6 +411,8 @@ class Chart
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get Plot Visible Only.
      *
      * @return bool
@@ -346,6 +460,7 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getChartAxisY(): Axis
     {
         return $this->yAxis;
@@ -374,11 +489,40 @@ class Chart
         $this->xAxis = $axis ?? new Axis();
 
         return $this;
+=======
+    /**
+     * Get yAxis.
+     *
+     * @return Axis
+     */
+    public function getChartAxisY()
+    {
+        if ($this->yAxis !== null) {
+            return $this->yAxis;
+        }
+
+        return new Axis();
+    }
+
+    /**
+     * Get xAxis.
+     *
+     * @return Axis
+     */
+    public function getChartAxisX()
+    {
+        if ($this->xAxis !== null) {
+            return $this->xAxis;
+        }
+
+        return new Axis();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Get Major Gridlines.
      *
+<<<<<<< HEAD
      * @Deprecated 1.24.0 Use Axis->getMajorGridlines
      *
      * @codeCoverageIgnore
@@ -386,11 +530,23 @@ class Chart
     public function getMajorGridlines(): ?GridLines
     {
         return $this->yAxis->getMajorGridLines();
+=======
+     * @return GridLines
+     */
+    public function getMajorGridlines()
+    {
+        if ($this->majorGridlines !== null) {
+            return $this->majorGridlines;
+        }
+
+        return new GridLines();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Get Minor Gridlines.
      *
+<<<<<<< HEAD
      * @Deprecated 1.24.0 Use Axis->getMinorGridlines
      *
      * @codeCoverageIgnore
@@ -398,20 +554,41 @@ class Chart
     public function getMinorGridlines(): ?GridLines
     {
         return $this->yAxis->getMinorGridLines();
+=======
+     * @return GridLines
+     */
+    public function getMinorGridlines()
+    {
+        if ($this->minorGridlines !== null) {
+            return $this->minorGridlines;
+        }
+
+        return new GridLines();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Set the Top Left position for the chart.
      *
+<<<<<<< HEAD
      * @param string $cellAddress
+=======
+     * @param string $cell
+>>>>>>> forked/LAE_400_PACKAGE
      * @param int $xOffset
      * @param int $yOffset
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setTopLeftPosition($cellAddress, $xOffset = null, $yOffset = null)
     {
         $this->topLeftCellRef = $cellAddress;
+=======
+    public function setTopLeftPosition($cell, $xOffset = null, $yOffset = null)
+    {
+        $this->topLeftCellRef = $cell;
+>>>>>>> forked/LAE_400_PACKAGE
         if ($xOffset !== null) {
             $this->setTopLeftXOffset($xOffset);
         }
@@ -449,6 +626,7 @@ class Chart
     /**
      * Set the Top Left cell position for the chart.
      *
+<<<<<<< HEAD
      * @param string $cellAddress
      *
      * @return $this
@@ -456,6 +634,15 @@ class Chart
     public function setTopLeftCell($cellAddress)
     {
         $this->topLeftCellRef = $cellAddress;
+=======
+     * @param string $cell
+     *
+     * @return $this
+     */
+    public function setTopLeftCell($cell)
+    {
+        $this->topLeftCellRef = $cell;
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $this;
     }
@@ -494,11 +681,14 @@ class Chart
         ];
     }
 
+<<<<<<< HEAD
     /**
      * @param int $xOffset
      *
      * @return $this
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function setTopLeftXOffset($xOffset)
     {
         $this->topLeftXOffset = $xOffset;
@@ -506,16 +696,23 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getTopLeftXOffset(): int
+=======
+    public function getTopLeftXOffset()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->topLeftXOffset;
     }
 
+<<<<<<< HEAD
     /**
      * @param int $yOffset
      *
      * @return $this
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function setTopLeftYOffset($yOffset)
     {
         $this->topLeftYOffset = $yOffset;
@@ -523,7 +720,11 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getTopLeftYOffset(): int
+=======
+    public function getTopLeftYOffset()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->topLeftYOffset;
     }
@@ -531,15 +732,25 @@ class Chart
     /**
      * Set the Bottom Right position of the chart.
      *
+<<<<<<< HEAD
      * @param string $cellAddress
+=======
+     * @param string $cell
+>>>>>>> forked/LAE_400_PACKAGE
      * @param int $xOffset
      * @param int $yOffset
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setBottomRightPosition($cellAddress = '', $xOffset = null, $yOffset = null)
     {
         $this->bottomRightCellRef = $cellAddress;
+=======
+    public function setBottomRightPosition($cell, $xOffset = null, $yOffset = null)
+    {
+        $this->bottomRightCellRef = $cell;
+>>>>>>> forked/LAE_400_PACKAGE
         if ($xOffset !== null) {
             $this->setBottomRightXOffset($xOffset);
         }
@@ -564,6 +775,7 @@ class Chart
         ];
     }
 
+<<<<<<< HEAD
     /**
      * Set the Bottom Right cell for the chart.
      *
@@ -572,14 +784,26 @@ class Chart
     public function setBottomRightCell(string $cellAddress = '')
     {
         $this->bottomRightCellRef = $cellAddress;
+=======
+    public function setBottomRightCell($cell)
+    {
+        $this->bottomRightCellRef = $cell;
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $this;
     }
 
     /**
      * Get the cell address where the bottom right of the chart is fixed.
+<<<<<<< HEAD
      */
     public function getBottomRightCell(): string
+=======
+     *
+     * @return string
+     */
+    public function getBottomRightCell()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->bottomRightCellRef;
     }
@@ -618,11 +842,14 @@ class Chart
         ];
     }
 
+<<<<<<< HEAD
     /**
      * @param int $xOffset
      *
      * @return $this
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function setBottomRightXOffset($xOffset)
     {
         $this->bottomRightXOffset = $xOffset;
@@ -630,16 +857,23 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getBottomRightXOffset(): int
+=======
+    public function getBottomRightXOffset()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->bottomRightXOffset;
     }
 
+<<<<<<< HEAD
     /**
      * @param int $yOffset
      *
      * @return $this
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function setBottomRightYOffset($yOffset)
     {
         $this->bottomRightYOffset = $yOffset;
@@ -647,14 +881,22 @@ class Chart
         return $this;
     }
 
+<<<<<<< HEAD
     public function getBottomRightYOffset(): int
+=======
+    public function getBottomRightYOffset()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->bottomRightYOffset;
     }
 
     public function refresh(): void
     {
+<<<<<<< HEAD
         if ($this->worksheet !== null && $this->plotArea !== null) {
+=======
+        if ($this->worksheet !== null) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->plotArea->refresh($this->worksheet);
         }
     }
@@ -682,6 +924,7 @@ class Chart
 
         $renderer = new $libraryName($this);
 
+<<<<<<< HEAD
         return $renderer->render($outputDestination); // @phpstan-ignore-line
     }
 
@@ -781,5 +1024,8 @@ class Chart
         }
 
         return $this;
+=======
+        return $renderer->render($outputDestination);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

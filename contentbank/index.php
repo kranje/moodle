@@ -32,7 +32,11 @@ $context = context::instance_by_id($contextid, MUST_EXIST);
 
 $cb = new \core_contentbank\contentbank();
 if (!$cb->is_context_allowed($context)) {
+<<<<<<< HEAD
     throw new \moodle_exception('contextnotallowed', 'core_contentbank');
+=======
+    print_error('contextnotallowed', 'core_contentbank');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_capability('moodle/contentbank:access', $context);

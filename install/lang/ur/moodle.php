@@ -30,6 +30,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['language'] = 'زبان';
+<<<<<<< HEAD
+=======
+$string['moodlelogo'] = 'موڈل لوگو';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['next'] = 'اگلے';
 $string['previous'] = 'پچھلا';
 $string['reload'] = 'دوبارہ لوڈ کریں';

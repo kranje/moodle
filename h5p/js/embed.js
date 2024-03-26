@@ -97,6 +97,7 @@ H5PEmbedCommunicator = (function() {
     return (window.postMessage && window.addEventListener ? new Communicator() : undefined);
 })();
 
+<<<<<<< HEAD
 var getH5PObject = async (iFrame) => {
     var H5P = iFrame.contentWindow.H5P;
     if (H5P?.instances?.[0]) {
@@ -115,6 +116,9 @@ var getH5PObject = async (iFrame) => {
 };
 
 document.onreadystatechange = async() => {
+=======
+document.onreadystatechange = function() {
+>>>>>>> forked/LAE_400_PACKAGE
     // Wait for instances to be initialize.
     if (document.readyState !== 'complete') {
         return;
@@ -125,8 +129,15 @@ document.onreadystatechange = async() => {
     if (!iFrame || !iFrame.contentWindow) {
         return;
     }
+<<<<<<< HEAD
     var H5P = await getH5PObject(iFrame);
     if (!H5P?.instances?.[0]) {
+=======
+    var H5P = iFrame.contentWindow.H5P;
+
+    // Check for H5P instances.
+    if (!H5P || !H5P.instances || !H5P.instances[0]) {
+>>>>>>> forked/LAE_400_PACKAGE
         return;
     }
 

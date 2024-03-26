@@ -19,6 +19,12 @@ Feature: Toggle activities visibility from the course page
     And the following "activities" exist:
       | activity | course | section | idnumber | name                 | intro                       | id_visible |
       | assign   | C1     | 1       | 1        | Test assignment name | Test assignment description | 1          |
+<<<<<<< HEAD
+=======
+    And the following "blocks" exist:
+      | blockname       | contextlevel | reference | pagetypepattern | defaultregion |
+      | recent_activity | Course       | C1        | course-view-*   | side-pre      |
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario: Hide/Show toggle with javascript enabled
@@ -27,7 +33,10 @@ Feature: Toggle activities visibility from the course page
       | course   | C1                     |
       | idnumber | C1F1                   |
       | name     | Test forum name        |
+<<<<<<< HEAD
       | intro    | Test forum description |
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       | visible  | 1                      |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
@@ -63,10 +72,15 @@ Feature: Toggle activities visibility from the course page
     And "Test forum name" activity should be hidden
     And I turn editing mode off
     And "Test forum name" activity should be hidden
+<<<<<<< HEAD
     And I log out
     # Student should not see this activity.
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    # Student should not see this activity.
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should not see "Test forum name"
 
   @javascript
@@ -77,11 +91,17 @@ Feature: Toggle activities visibility from the course page
       | idnumber | C1F1                   |
       | section  | 2                      |
       | name     | Test forum name        |
+<<<<<<< HEAD
       | intro    | Test forum description |
       | visible  | 1                      |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
     And I add the "Recent activity" block
+=======
+      | visible  | 1                      |
+    And I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     When I hide section "2"
     Then "Test forum name" activity should be hidden
     And I open "Test forum name" actions menu
@@ -108,10 +128,15 @@ Feature: Toggle activities visibility from the course page
     And "Test forum name" activity should be available but hidden from course page
     And I turn editing mode off
     And "Test forum name" activity should be available but hidden from course page
+<<<<<<< HEAD
     And I log out
     # Student will not see the module on the course page but can access it from other reports and blocks:
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    # Student will not see the module on the course page but can access it from other reports and blocks:
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And "Test forum name" activity should be hidden
     And I click on "Test forum name" "link" in the "Recent activity" "block"
     And I should see "Test forum name"
@@ -123,7 +148,10 @@ Feature: Toggle activities visibility from the course page
       | allowstealth | 1 |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
+<<<<<<< HEAD
     And I add the "Recent activity" block
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     When I open "Test assignment name" actions menu
     Then "Test assignment name" actions menu should not have "Show" item
     And "Test assignment name" actions menu should have "Hide" item

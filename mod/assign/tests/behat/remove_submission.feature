@@ -5,6 +5,7 @@ Feature: Remove a submission
   I need to remove a student submission at any time
 
   Background:
+<<<<<<< HEAD
     Given I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability                     | permission |
@@ -12,6 +13,10 @@ Feature: Remove a submission
     And I set the following administration settings values:
       | Enable timed assignments | 1 |
     And I log out
+=======
+    Given the following config values are set as admin:
+      | enabletimelimit | 1 | assign |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "courses" exist:
       | fullname | shortname | category | groupmode |
       | Course 1 | C1 | 0 | 0 |
@@ -25,6 +30,12 @@ Feature: Remove a submission
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
       | student2 | C1 | student |
+<<<<<<< HEAD
+=======
+    And the following "role capability" exists:
+      | role                           | editingteacher |
+      | mod/assign:editothersubmission | allow          |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "groups" exist:
       | name    | course | idnumber |
       | Group 1 | C1     | G1       |

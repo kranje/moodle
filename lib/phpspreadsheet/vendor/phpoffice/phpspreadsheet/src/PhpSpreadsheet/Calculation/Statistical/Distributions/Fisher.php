@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,13 @@ class Fisher
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Fisher
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * FISHER.
      *
@@ -18,6 +26,7 @@ class Fisher
      *        testing on the correlation coefficient.
      *
      * @param mixed $value Float value for which we want the probability
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|float|string
@@ -29,6 +38,14 @@ class Fisher
         if (is_array($value)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $value);
         }
+=======
+     *
+     * @return float|string
+     */
+    public static function distribution($value)
+    {
+        $value = Functions::flattenSingleValue($value);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             DistributionValidations::validateFloat($value);
@@ -37,7 +54,11 @@ class Fisher
         }
 
         if (($value <= -1) || ($value >= 1)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return 0.5 * log((1 + $value) / (1 - $value));
@@ -51,6 +72,7 @@ class Fisher
      *        FISHERINV(y) = x.
      *
      * @param mixed $probability Float probability at which you want to evaluate the distribution
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|float|string
@@ -62,6 +84,14 @@ class Fisher
         if (is_array($probability)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $probability);
         }
+=======
+     *
+     * @return float|string
+     */
+    public static function inverse($probability)
+    {
+        $probability = Functions::flattenSingleValue($probability);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             DistributionValidations::validateFloat($probability);

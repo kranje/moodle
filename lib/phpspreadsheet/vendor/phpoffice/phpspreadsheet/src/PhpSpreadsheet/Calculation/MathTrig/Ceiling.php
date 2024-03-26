@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -11,6 +12,13 @@ class Ceiling
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Ceiling
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * CEILING.
      *
@@ -22,6 +30,7 @@ class Ceiling
      * Excel Function:
      *        CEILING(number[,significance])
      *
+<<<<<<< HEAD
      * @param array|float $number the number you want the ceiling
      *                      Or can be an array of values
      * @param array|float $significance the multiple to which you want to round
@@ -37,6 +46,15 @@ class Ceiling
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance);
         }
 
+=======
+     * @param float $number the number you want the ceiling
+     * @param float $significance the multiple to which you want to round
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function ceiling($number, $significance = null)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         if ($significance === null) {
             self::floorCheck1Arg();
         }
@@ -60,6 +78,7 @@ class Ceiling
      *        CEILING.MATH(number[,significance[,mode]])
      *
      * @param mixed $number Number to round
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $significance Significance
      *                      Or can be an array of values
@@ -76,6 +95,15 @@ class Ceiling
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance, $mode);
         }
 
+=======
+     * @param mixed $significance Significance
+     * @param int $mode direction to round negative numbers
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function math($number, $significance = null, $mode = 0)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
             $significance = Helpers::validateNumericNullSubstitution($significance, ($number < 0) ? -1 : 1);
@@ -103,6 +131,7 @@ class Ceiling
      *        CEILING.PRECISE(number[,significance])
      *
      * @param mixed $number the number you want to round
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param array|float $significance the multiple to which you want to round
      *                      Or can be an array of values
@@ -117,6 +146,14 @@ class Ceiling
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance);
         }
 
+=======
+     * @param float $significance the multiple to which you want to round
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function precise($number, $significance = 1)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
             $significance = Helpers::validateNumericNullSubstitution($significance, null);
@@ -154,7 +191,11 @@ class Ceiling
             return ceil($number / $significance) * $significance;
         }
 
+<<<<<<< HEAD
         return ExcelError::NAN();
+=======
+        return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private static function floorCheck1Arg(): void

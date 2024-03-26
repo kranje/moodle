@@ -92,6 +92,10 @@ class field extends persistent {
      * @return array
      */
     protected function get_configdata() : array {
+<<<<<<< HEAD
         return json_decode($this->raw_get('configdata') ?? '', true) ?? array();
+=======
+        return json_decode($this->raw_get('configdata'), true) ?? array();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

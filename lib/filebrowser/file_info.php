@@ -100,8 +100,13 @@ abstract class file_info {
      */
     protected function build_search_files_sql($extensions, $prefix = null) {
         global $DB;
+<<<<<<< HEAD
         if ($prefix && strlen($prefix)) {
             $prefix = $prefix . '.';
+=======
+        if (strlen($prefix)) {
+            $prefix = $prefix.'.';
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             $prefix = '';
         }

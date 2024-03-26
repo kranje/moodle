@@ -23,6 +23,7 @@ $chatmessage = required_param('chat_message', PARAM_RAW);
 $PAGE->set_url('/mod/chat/gui_header_js/insert.php', array('chat_sid' => $chatsid, 'chat_message' => $chatmessage));
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('notlogged', 'chat');
 }
 
@@ -36,12 +37,31 @@ if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
 
 if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('notlogged', 'chat');
+}
+
+if (!$chat = $DB->get_record('chat', array('id' => $chatuser->chatid))) {
+    print_error('nochat', 'chat');
+}
+
+if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
+    print_error('invalidcourseid');
+}
+
+if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course, false, $cm);
 
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('noguests');
+=======
+    print_error('noguests');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 \core\session\manager::write_close();

@@ -20,6 +20,7 @@ use UnexpectedValueException;
  */
 class JWK
 {
+<<<<<<< HEAD
     private const OID = '1.2.840.10045.2.1';
     private const ASN1_OBJECT_IDENTIFIER = 0x06;
     private const ASN1_SEQUENCE = 0x10; // also defined in JWT
@@ -36,6 +37,12 @@ class JWK
      * @param array<mixed> $jwks The JSON Web Key Set as an associative array
      * @param string       $defaultAlg The algorithm for the Key object if "alg" is not set in the
      *                                 JSON Web Key Set
+=======
+    /**
+     * Parse a set of JWK keys
+     *
+     * @param array $jwks The JSON Web Key Set as an associative array
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return array<string, Key> An associative array of key IDs (kid) to Key objects
      *
@@ -45,22 +52,36 @@ class JWK
      *
      * @uses parseKey
      */
+<<<<<<< HEAD
     public static function parseKeySet(array $jwks, string $defaultAlg = null): array
     {
         $keys = [];
+=======
+    public static function parseKeySet(array $jwks)
+    {
+        $keys = array();
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (!isset($jwks['keys'])) {
             throw new UnexpectedValueException('"keys" member must exist in the JWK Set');
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (empty($jwks['keys'])) {
             throw new InvalidArgumentException('JWK Set did not contain any keys');
         }
 
         foreach ($jwks['keys'] as $k => $v) {
             $kid = isset($v['kid']) ? $v['kid'] : $k;
+<<<<<<< HEAD
             if ($key = self::parseKey($v, $defaultAlg)) {
                 $keys[(string) $kid] = $key;
+=======
+            if ($key = self::parseKey($v)) {
+                $keys[$kid] = $key;
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -74,9 +95,13 @@ class JWK
     /**
      * Parse a JWK key
      *
+<<<<<<< HEAD
      * @param array<mixed> $jwk An individual JWK
      * @param string       $defaultAlg The algorithm for the Key object if "alg" is not set in the
      *                                 JSON Web Key Set
+=======
+     * @param array $jwk An individual JWK
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return Key The key object for the JWK
      *
@@ -86,11 +111,16 @@ class JWK
      *
      * @uses createPemFromModulusAndExponent
      */
+<<<<<<< HEAD
     public static function parseKey(array $jwk, string $defaultAlg = null): ?Key
+=======
+    public static function parseKey(array $jwk)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (empty($jwk)) {
             throw new InvalidArgumentException('JWK must not be empty');
         }
+<<<<<<< HEAD
 
         if (!isset($jwk['kty'])) {
             throw new UnexpectedValueException('JWK must contain a "kty" parameter');
@@ -105,6 +135,16 @@ class JWK
                 throw new UnexpectedValueException('JWK must contain an "alg" parameter');
             }
             $jwk['alg'] = $defaultAlg;
+=======
+        if (!isset($jwk['kty'])) {
+            throw new UnexpectedValueException('JWK must contain a "kty" parameter');
+        }
+        if (!isset($jwk['alg'])) {
+            // The "alg" parameter is optional in a KTY, but is required for parsing in
+            // this library. Add it manually to your JWK array if it doesn't already exist.
+            // @see https://datatracker.ietf.org/doc/html/rfc7517#section-4.4
+            throw new UnexpectedValueException('JWK must contain an "alg" parameter');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         switch ($jwk['kty']) {
@@ -124,6 +164,7 @@ class JWK
                     );
                 }
                 return new Key($publicKey, $jwk['alg']);
+<<<<<<< HEAD
             case 'EC':
                 if (isset($jwk['d'])) {
                     // The key is actually a private key
@@ -144,10 +185,13 @@ class JWK
 
                 $publicKey = self::createPemFromCrvAndXYCoordinates($jwk['crv'], $jwk['x'], $jwk['y']);
                 return new Key($publicKey, $jwk['alg']);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             default:
                 // Currently only RSA is supported
                 break;
         }
+<<<<<<< HEAD
 
         return null;
     }
@@ -189,6 +233,8 @@ class JWK
             "-----BEGIN PUBLIC KEY-----\n%s\n-----END PUBLIC KEY-----\n",
             wordwrap(base64_encode($pem), 64, "\n", true)
         );
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -201,6 +247,7 @@ class JWK
      *
      * @uses encodeLength
      */
+<<<<<<< HEAD
     private static function createPemFromModulusAndExponent(
         string $n,
         string $e
@@ -210,13 +257,30 @@ class JWK
 
         $modulus = \pack('Ca*a*', 2, self::encodeLength(\strlen($mod)), $mod);
         $publicExponent = \pack('Ca*a*', 2, self::encodeLength(\strlen($exp)), $exp);
+=======
+    private static function createPemFromModulusAndExponent($n, $e)
+    {
+        $modulus = JWT::urlsafeB64Decode($n);
+        $publicExponent = JWT::urlsafeB64Decode($e);
+
+        $components = array(
+            'modulus' => \pack('Ca*a*', 2, self::encodeLength(\strlen($modulus)), $modulus),
+            'publicExponent' => \pack('Ca*a*', 2, self::encodeLength(\strlen($publicExponent)), $publicExponent)
+        );
+>>>>>>> forked/LAE_400_PACKAGE
 
         $rsaPublicKey = \pack(
             'Ca*a*a*',
             48,
+<<<<<<< HEAD
             self::encodeLength(\strlen($modulus) + \strlen($publicExponent)),
             $modulus,
             $publicExponent
+=======
+            self::encodeLength(\strlen($components['modulus']) + \strlen($components['publicExponent'])),
+            $components['modulus'],
+            $components['publicExponent']
+>>>>>>> forked/LAE_400_PACKAGE
         );
 
         // sequence(oid(1.2.840.113549.1.1.1), null)) = rsaEncryption.
@@ -231,9 +295,17 @@ class JWK
             $rsaOID . $rsaPublicKey
         );
 
+<<<<<<< HEAD
         return "-----BEGIN PUBLIC KEY-----\r\n" .
             \chunk_split(\base64_encode($rsaPublicKey), 64) .
             '-----END PUBLIC KEY-----';
+=======
+        $rsaPublicKey = "-----BEGIN PUBLIC KEY-----\r\n" .
+            \chunk_split(\base64_encode($rsaPublicKey), 64) .
+            '-----END PUBLIC KEY-----';
+
+        return $rsaPublicKey;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -245,7 +317,11 @@ class JWK
      * @param int $length
      * @return string
      */
+<<<<<<< HEAD
     private static function encodeLength(int $length): string
+=======
+    private static function encodeLength($length)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($length <= 0x7F) {
             return \chr($length);
@@ -255,6 +331,7 @@ class JWK
 
         return \pack('Ca*', 0x80 | \strlen($temp), $temp);
     }
+<<<<<<< HEAD
 
     /**
      * Encodes a value into a DER object.
@@ -319,4 +396,6 @@ class JWK
 
         return $oid;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

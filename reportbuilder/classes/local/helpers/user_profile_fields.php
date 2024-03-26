@@ -19,11 +19,18 @@ declare(strict_types=1);
 namespace core_reportbuilder\local\helpers;
 
 use context_system;
+<<<<<<< HEAD
 use core_text;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\filters\boolean_select;
 use core_reportbuilder\local\filters\date;
 use core_reportbuilder\local\filters\select;
 use core_reportbuilder\local\filters\text;
+<<<<<<< HEAD
+=======
+use core_reportbuilder\local\helpers\database;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\report\column;
 use core_reportbuilder\local\report\filter;
 use lang_string;
@@ -113,6 +120,7 @@ class user_profile_fields {
     }
 
     /**
+<<<<<<< HEAD
      * Generate table alias for given profile field
      *
      * @param profile_field_base $profilefield
@@ -137,6 +145,8 @@ class user_profile_fields {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Return the user profile fields visible columns.
      *
      * @return column[]
@@ -146,14 +156,23 @@ class user_profile_fields {
 
         $columns = [];
         foreach ($this->userprofilefields as $profilefield) {
+<<<<<<< HEAD
             $columntype = $this->get_user_field_type($profilefield->field->datatype);
 
             $columnfieldsql = $this->get_table_alias($profilefield) . '.data';
+=======
+            $userinfotablealias = database::generate_alias();
+
+            $columntype = $this->get_user_field_type($profilefield->field->datatype);
+
+            $columnfieldsql = "{$userinfotablealias}.data";
+>>>>>>> forked/LAE_400_PACKAGE
             if ($DB->get_dbfamily() === 'oracle') {
                 $columnfieldsql = $DB->sql_order_by_text($columnfieldsql, 1024);
             }
 
             $column = (new column(
+<<<<<<< HEAD
                 'profilefield_' . core_text::strtolower($profilefield->field->shortname),
                 new lang_string('customfieldcolumn', 'core_reportbuilder',
                     format_string($profilefield->field->name, true,
@@ -162,6 +181,18 @@ class user_profile_fields {
             ))
                 ->add_joins($this->get_joins())
                 ->add_join($this->get_table_join($profilefield))
+=======
+                'profilefield_' . $profilefield->field->shortname,
+                new lang_string('customfieldcolumn', 'core_reportbuilder',
+                    format_string($profilefield->field->name, true,
+                        ['escape' => true, 'context' => context_system::instance()])),
+                $this->entityname
+            ))
+                ->add_joins($this->get_joins())
+                ->add_join("LEFT JOIN {user_info_data} {$userinfotablealias} " .
+                    "ON {$userinfotablealias}.userid = {$this->usertablefieldalias} " .
+                    "AND {$userinfotablealias}.fieldid = {$profilefield->fieldid}")
+>>>>>>> forked/LAE_400_PACKAGE
                 ->add_field($columnfieldsql, 'data')
                 ->set_type($columntype)
                 ->set_is_sortable($columntype !== column::TYPE_LONGTEXT)
@@ -183,7 +214,12 @@ class user_profile_fields {
 
         $filters = [];
         foreach ($this->userprofilefields as $profilefield) {
+<<<<<<< HEAD
             $field = $this->get_table_alias($profilefield) . '.data';
+=======
+            $userinfotablealias = database::generate_alias();
+            $field = "{$userinfotablealias}.data";
+>>>>>>> forked/LAE_400_PACKAGE
             $params = [];
 
             switch ($profilefield->field->datatype) {
@@ -217,7 +253,11 @@ class user_profile_fields {
 
             $filter = (new filter(
                 $classname,
+<<<<<<< HEAD
                 'profilefield_' . core_text::strtolower($profilefield->field->shortname),
+=======
+                'profilefield_' . $profilefield->field->shortname,
+>>>>>>> forked/LAE_400_PACKAGE
                 new lang_string('customfieldcolumn', 'core_reportbuilder',
                     format_string($profilefield->field->name, true,
                         ['escape' => false, 'context' => context_system::instance()])),
@@ -226,7 +266,13 @@ class user_profile_fields {
                 $params
             ))
                 ->add_joins($this->get_joins())
+<<<<<<< HEAD
                 ->add_join($this->get_table_join($profilefield));
+=======
+                ->add_join("LEFT JOIN {user_info_data} {$userinfotablealias} " .
+                    "ON {$userinfotablealias}.userid = {$this->usertablefieldalias} " .
+                    "AND {$userinfotablealias}.fieldid = {$profilefield->fieldid}");
+>>>>>>> forked/LAE_400_PACKAGE
 
             // If menu type then set filter options as appropriate.
             if ($profilefield->field->datatype === 'menu') {

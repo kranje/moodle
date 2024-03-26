@@ -45,7 +45,11 @@ $pagesize = optional_param('s', 0, PARAM_INT);
 $sortorder = optional_param('o', null, PARAM_INT);
 
 if (!$cmid && !$forumid) {
+<<<<<<< HEAD
     throw new \moodle_exception('missingparameter');
+=======
+    print_error('missingparameter');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($cmid) {

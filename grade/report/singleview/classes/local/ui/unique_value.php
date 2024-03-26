@@ -36,7 +36,13 @@ defined('MOODLE_INTERNAL') || die;
 interface unique_value {
     /**
      * Get the value for this item.
+<<<<<<< HEAD
      * @return null|string
      */
     public function get_value(): ?string;
+=======
+     * @return string
+     */
+    public function get_value();
+>>>>>>> forked/LAE_400_PACKAGE
 }

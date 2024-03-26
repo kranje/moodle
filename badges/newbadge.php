@@ -33,11 +33,19 @@ $courseid = optional_param('id', 0, PARAM_INT);
 require_login();
 
 if (empty($CFG->enablebadges)) {
+<<<<<<< HEAD
     throw new \moodle_exception('badgesdisabled', 'badges');
 }
 
 if (empty($CFG->badges_allowcoursebadges) && ($type == BADGE_TYPE_COURSE)) {
     throw new \moodle_exception('coursebadgesdisabled', 'badges');
+=======
+    print_error('badgesdisabled', 'badges');
+}
+
+if (empty($CFG->badges_allowcoursebadges) && ($type == BADGE_TYPE_COURSE)) {
+    print_error('coursebadgesdisabled', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $title = get_string('create', 'badges');

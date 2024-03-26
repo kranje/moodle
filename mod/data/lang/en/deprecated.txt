@@ -1,4 +1,5 @@
 unsupportedexport,mod_data
+<<<<<<< HEAD
 buttons,mod_data
 nosingletemplate,mod_data
 nolisttemplate,mod_data
@@ -9,3 +10,5 @@ addedby,mod_data
 addentries,mod_data
 todatabase,mod_data
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE

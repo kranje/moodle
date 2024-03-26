@@ -35,6 +35,7 @@ class send_schedule extends adhoc_task {
     use \core\task\logging_trait;
 
     /**
+<<<<<<< HEAD
      * Return name of the task
      *
      * @return string
@@ -44,6 +45,8 @@ class send_schedule extends adhoc_task {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Execute the task
      */
     public function execute(): void {
@@ -65,6 +68,7 @@ class send_schedule extends adhoc_task {
             return;
         }
 
+<<<<<<< HEAD
         $originaluser = $USER;
 
         $scheduleuserviewas = $schedule->get('userviewas');
@@ -110,6 +114,59 @@ class send_schedule extends adhoc_task {
                 $recipientattachment = helper::get_schedule_report_file($schedule);
                 helper::send_schedule_message($schedule, $user, $recipientattachment);
                 $recipientattachment->delete();
+=======
+        $this->log_start('Sending schedule: ' . $schedule->get_formatted_name());
+
+        $scheduleattachment = null;
+        $originaluser = $USER;
+
+        // Switch to schedule creator, and retrieve list of recipient users.
+        cron_setup_user(core_user::get_user($schedule->get('usercreated')));
+
+        $users = helper::get_schedule_report_users($schedule);
+        if (count($users) > 0) {
+
+            $scheduleuserviewas = $schedule->get('userviewas');
+            $schedulereportempty = $schedule->get('reportempty');
+
+            // Handle schedule configuration as to who the report should be viewed as.
+            if ($scheduleuserviewas === schedule::REPORT_VIEWAS_CREATOR) {
+                $scheduleattachment = helper::get_schedule_report_file($schedule);
+            } else if ($scheduleuserviewas !== schedule::REPORT_VIEWAS_RECIPIENT) {
+                cron_setup_user(core_user::get_user($scheduleuserviewas));
+                $scheduleattachment = helper::get_schedule_report_file($schedule);
+            }
+
+            // Apply special handling if report is empty (default is to send it anyway).
+            if ($schedulereportempty === schedule::REPORT_EMPTY_DONT_SEND &&
+                    $scheduleattachment !== null && helper::get_schedule_report_count($schedule) === 0) {
+
+                $this->log('Empty report, skipping');
+            } else {
+
+                // Now iterate over recipient users, send the report to each.
+                foreach ($users as $user) {
+                    $this->log('Sending to: ' . fullname($user, true));
+
+                    // If we already created the attachment, send that. Otherwise generate per recipient.
+                    if ($scheduleattachment !== null) {
+                        helper::send_schedule_message($schedule, $user, $scheduleattachment);
+                    } else {
+                        cron_setup_user($user);
+
+                        if ($schedulereportempty === schedule::REPORT_EMPTY_DONT_SEND &&
+                            helper::get_schedule_report_count($schedule) === 0) {
+
+                            $this->log('Empty report, skipping', 2);
+                            continue;
+                        }
+
+                        $recipientattachment = helper::get_schedule_report_file($schedule);
+                        helper::send_schedule_message($schedule, $user, $recipientattachment);
+                        $recipientattachment->delete();
+                    }
+                }
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 

@@ -179,6 +179,12 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
         $whereclause = implode(' AND ', $whereconditions);
 
         // Build SQL subquery and conditions for filtered events based on priorities.
+<<<<<<< HEAD
+=======
+        $subquerytimeconditions = array_filter($whereconditions, function($condition) {
+            return (strpos($condition, 'time') !== false);
+        });
+>>>>>>> forked/LAE_400_PACKAGE
         $subquerywhere = '';
         $subqueryconditions = [];
         $subqueryparams = [];
@@ -194,7 +200,16 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
                 // Set calendar filters.
                 list($usercourses, $usergroups, $user) = calendar_set_filters($usercourses, true, $userrecord);
 
+<<<<<<< HEAD
                 $allusercourses = array_merge($allusercourses, $usercourses);
+=======
+                $filteredcourses = is_array($courses) ? $courses : [$courses];
+                $filteredcourses = array_filter($usercourses, function($course) use ($filteredcourses) {
+                    return in_array($course, $filteredcourses);
+                });
+
+                $allusercourses = array_merge($allusercourses, $filteredcourses);
+>>>>>>> forked/LAE_400_PACKAGE
 
                 // Flag to indicate whether the query needs to exclude group overrides.
                 $viewgroupsonly = false;
@@ -203,7 +218,12 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
                     // Set filter condition for the user's events.
                     // Even though $user is a single scalar, we still use get_in_or_equal() because we are inside a loop.
                     list($inusers, $inuserparams) = $DB->get_in_or_equal($user, SQL_PARAMS_NAMED);
+<<<<<<< HEAD
                     $subqueryconditions[] = "(ev.userid $inusers AND ev.courseid = 0 AND ev.groupid = 0 AND ev.categoryid = 0)";
+=======
+                    $condition = "(ev.userid $inusers AND ev.courseid = 0 AND ev.groupid = 0 AND ev.categoryid = 0)";
+                    $subqueryconditions[] = $condition;
+>>>>>>> forked/LAE_400_PACKAGE
                     $subqueryparams = array_merge($subqueryparams, $inuserparams);
 
                     foreach ($usercourses as $courseid) {
@@ -220,11 +240,19 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
                 // Set filter condition for the user's group events.
                 if ($usergroups === true || $viewgroupsonly) {
                     // Fetch group events, but not group overrides.
+<<<<<<< HEAD
                     $subqueryconditions[] = "(ev.groupid != 0 AND ev.eventtype = 'group')";
                 } else if (!empty($usergroups)) {
                     // Fetch group events and group overrides.
                     list($inusergroups, $inusergroupparams) = $DB->get_in_or_equal($usergroups, SQL_PARAMS_NAMED);
                     $subqueryconditions[] = "(ev.groupid $inusergroups)";
+=======
+                    $groupconditions = "(ev.groupid != 0 AND ev.eventtype = 'group')";
+                } else if (!empty($usergroups)) {
+                    // Fetch group events and group overrides.
+                    list($inusergroups, $inusergroupparams) = $DB->get_in_or_equal($usergroups, SQL_PARAMS_NAMED);
+                    $groupconditions = "(ev.groupid $inusergroups)";
+>>>>>>> forked/LAE_400_PACKAGE
                     $subqueryparams = array_merge($subqueryparams, $inusergroupparams);
                 }
             }
@@ -263,8 +291,25 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
         // Set subquery filter condition for the courses.
         if (!empty($subquerycourses)) {
             list($incourses, $incoursesparams) = $DB->get_in_or_equal($subquerycourses, SQL_PARAMS_NAMED);
+<<<<<<< HEAD
             $subqueryconditions[] = "(ev.groupid = 0 AND ev.courseid $incourses AND ev.categoryid = 0)";
             $subqueryparams = array_merge($subqueryparams, $incoursesparams);
+=======
+            if (isset($groupconditions)) {
+                $groupconditions = $groupconditions." OR ";
+            } else {
+                $groupconditions = '';
+            }
+            $condition = "($groupconditions(ev.groupid = 0 AND ev.courseid $incourses AND ev.categoryid = 0))";
+            $subtimesparams = [];
+            if (!empty($subquerytimeconditions)) {
+                $subtimes = $this->subquerytimeconditions("courses", $subquerytimeconditions, $whereparams);
+                $condition .= $subtimes['where'];
+                $subtimesparams = $subtimes['params'];
+            }
+            $subqueryconditions[] = $condition;
+            $subqueryparams = array_merge($subqueryparams, $incoursesparams, $subtimesparams);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Set subquery filter condition for the categories.
@@ -272,8 +317,20 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
             $subqueryconditions[] = "(ev.categoryid != 0 AND ev.eventtype = 'category')";
         } else if (!empty($categories)) {
             list($incategories, $incategoriesparams) = $DB->get_in_or_equal($categories, SQL_PARAMS_NAMED);
+<<<<<<< HEAD
             $subqueryconditions[] = "(ev.groupid = 0 AND ev.courseid = 0 AND ev.categoryid $incategories)";
             $subqueryparams = array_merge($subqueryparams, $incategoriesparams);
+=======
+            $condition = "(ev.groupid = 0 AND ev.courseid = 0 AND ev.categoryid $incategories)";
+            $subtimesparams = [];
+            if (!empty($subquerytimeconditions)) {
+                $subtimes = $this->subquerytimeconditions("cats", $subquerytimeconditions, $whereparams);
+                $condition .= $subtimes['where'];
+                $subtimesparams = $subtimes['params'];
+            }
+            $subqueryconditions[] = $condition;
+            $subqueryparams = array_merge($subqueryparams, $incategoriesparams, $subtimesparams);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Build the WHERE condition for the sub-query.
@@ -322,4 +379,39 @@ class raw_event_retrieval_strategy implements raw_event_retrieval_strategy_inter
 
         return  $events === false ? [] : $events;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Returns a query fragment and params, with time constraints applied
+     *
+     * @param  string $prefix
+     * @param  array $conditions
+     * @param  array $params
+     * @return array [<where>, <params>]
+     */
+    protected function subquerytimeconditions(string $prefix, array $conditions, array $params): array {
+        $outwhere = '';
+        $outparams = [];
+        // Most specific to least specific.
+        $timeparams = ['timefromid', 'timefrom3', 'timefrom2', 'timefrom1', 'timefrom', 'timetoid', 'timeto2', 'timeto1', 'timeto'];
+        $whereconditions = [];
+        foreach ($conditions as $condition) {
+            $where = $condition;
+            // This query has been borrowed from the main WHERE clause, so the alias needs to be renamed to match the union.
+            $where = str_replace('e.id', 'ev.id', $where);
+            foreach ($timeparams as $timeparam) {
+                if (isset($params[$timeparam])) {
+                    $where = str_replace(":{$timeparam}", ":{$prefix}{$timeparam}", $where);
+                    $outparams["{$prefix}{$timeparam}"] = $params[$timeparam];
+                }
+            }
+            $whereconditions[] = $where;
+        }
+        if (count($whereconditions) > 0) {
+            $outwhere = ' AND ' . implode(' AND ', $whereconditions);
+        }
+        return ['where' => $outwhere, 'params' => $outparams];
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

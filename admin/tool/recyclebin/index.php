@@ -70,12 +70,20 @@ switch ($context->contextlevel) {
     break;
 
     default:
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcontext', 'tool_recyclebin');
+=======
+        print_error('invalidcontext', 'tool_recyclebin');
+>>>>>>> forked/LAE_400_PACKAGE
     break;
 }
 
 if (!$recyclebin::is_enabled()) {
+<<<<<<< HEAD
     throw new \moodle_exception('notenabled', 'tool_recyclebin');
+=======
+    print_error('notenabled', 'tool_recyclebin');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->set_url('/admin/tool/recyclebin/index.php', array(
@@ -101,7 +109,11 @@ if (!empty($action)) {
                 $recyclebin->restore_item($item);
                 redirect($PAGE->url, get_string('alertrestored', 'tool_recyclebin', $item), 2);
             } else {
+<<<<<<< HEAD
                 throw new \moodle_exception('nopermissions', 'error');
+=======
+                print_error('nopermissions', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         break;
 
@@ -111,7 +123,11 @@ if (!empty($action)) {
                 $recyclebin->delete_item($item);
                 redirect($PAGE->url, get_string('alertdeleted', 'tool_recyclebin', $item), 2);
             } else {
+<<<<<<< HEAD
                 throw new \moodle_exception('nopermissions', 'error');
+=======
+                print_error('nopermissions', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         break;
 

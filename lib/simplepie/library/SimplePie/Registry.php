@@ -208,8 +208,12 @@ class SimplePie_Registry
 			{
 				case 'Cache':
 					// For backwards compatibility with old non-static
+<<<<<<< HEAD
 					// Cache::create() methods in PHP < 8.0.
 					// No longer supported as of PHP 8.0.
+=======
+					// Cache::create() methods
+>>>>>>> forked/LAE_400_PACKAGE
 					if ($method === 'get_handler')
 					{
 						$result = @call_user_func_array(array($class, 'create'), $parameters);
@@ -223,5 +227,8 @@ class SimplePie_Registry
 		return $result;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Registry', 'SimplePie\Registry', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

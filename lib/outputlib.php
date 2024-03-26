@@ -1854,7 +1854,11 @@ class theme_config {
         // Now resolve all theme settings or do any other postprocessing.
         // This needs to be done before calling core parser, since the parser strips [[settings]] tags.
         $csspostprocess = $this->csspostprocess;
+<<<<<<< HEAD
         if ($csspostprocess && function_exists($csspostprocess)) {
+=======
+        if (function_exists($csspostprocess)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $css = $csspostprocess($css, $this);
         }
 

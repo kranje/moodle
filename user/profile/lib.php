@@ -133,7 +133,11 @@ class profile_field_base {
      * @param MoodleQuickForm $mform instance of the moodleform class
      */
     public function edit_field_add($mform) {
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'edit_field_add');
+=======
+        print_error('mustbeoveride', 'debug', '', 'edit_field_add');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

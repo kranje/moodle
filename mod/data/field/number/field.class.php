@@ -25,6 +25,7 @@
 class data_field_number extends data_field_base {
     var $type = 'number';
 
+<<<<<<< HEAD
     public function supports_preview(): bool {
         return true;
     }
@@ -42,6 +43,8 @@ class data_field_number extends data_field_base {
         ];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     function update_content($recordid, $value, $name='') {
         global $DB;
 
@@ -63,6 +66,7 @@ class data_field_number extends data_field_base {
     }
 
     function display_browse_field($recordid, $template) {
+<<<<<<< HEAD
         $content = $this->get_data_content($recordid);
         if (!$content || $content->content === '') {
             return '';
@@ -78,6 +82,29 @@ class data_field_number extends data_field_base {
             $str = $number;
         }
         return $str;
+=======
+        global $DB;
+
+        if ($content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
+            if (strlen($content->content) < 1) {
+                return false;
+            }
+            $number = $content->content;
+            $decimals = trim($this->field->param1);
+            // only apply number formatting if param1 contains an integer number >= 0:
+            if (preg_match("/^\d+$/", $decimals)) {
+                $decimals = $decimals * 1;
+                // removes leading zeros (eg. '007' -> '7'; '00' -> '0')
+                $str = format_float($number, $decimals, true);
+                // For debugging only:
+#                $str .= " ($decimals)";
+            } else {
+                $str = $number;
+            }
+            return $str;
+        }
+        return false;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     function display_search_field($value = '') {
@@ -136,3 +163,8 @@ class data_field_number extends data_field_base {
         return $configs;
     }
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> forked/LAE_400_PACKAGE

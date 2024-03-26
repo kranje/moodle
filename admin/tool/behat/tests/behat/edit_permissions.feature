@@ -21,12 +21,22 @@ Feature: Edit capabilities
 
   Scenario: Default system capabilities modification
     Given I log in as "admin"
+<<<<<<< HEAD
     And I set the following system permissions of "Teacher" role:
+=======
+    And I navigate to "Users > Permissions > Define roles" in site administration
+    And I click on "Edit Teacher role" "link"
+    And I fill the capabilities form with the following permissions:
+>>>>>>> forked/LAE_400_PACKAGE
       | capability | permission |
       | block/mnet_hosts:myaddinstance | Allow |
       | moodle/site:messageanyuser | Inherit |
       | moodle/grade:managesharedforms | Prevent |
       | moodle/course:request | Prohibit |
+<<<<<<< HEAD
+=======
+    And I press "Save changes"
+>>>>>>> forked/LAE_400_PACKAGE
     When I follow "Edit Teacher role"
     Then "block/mnet_hosts:myaddinstance" capability has "Allow" permission
     And "moodle/site:messageanyuser" capability has "Not set" permission
@@ -48,16 +58,24 @@ Feature: Edit capabilities
     And "mod/forum:addquestion" capability has "Allow" permission
 
   Scenario: Module capabilities overrides
+<<<<<<< HEAD
     Given I log in as "teacher1"
     And the following "activity" exists:
+=======
+    Given the following "activity" exists:
+>>>>>>> forked/LAE_400_PACKAGE
       | activity | forum                |
       | course   | C1                   |
       | idnumber | 00001                |
       | name     | I'm the name         |
+<<<<<<< HEAD
       | intro    | I'm the introduction |
       | section  | 1                    |
     And I am on "Course 1" course homepage with editing mode on
     And I follow "I'm the name"
+=======
+    And I am on the "I'm the name" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Permissions" in current page administration
     And I override the system permissions of "Student" role with:
       | mod/forum:deleteanypost | Prohibit |

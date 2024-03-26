@@ -21,7 +21,11 @@ Feature: Alternate email addresses
   Scenario: Add alternate email
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Alternate emails"
     Then I should see "No alternate emails found for Test Course"
     When I press "Continue"
@@ -35,7 +39,11 @@ Feature: Alternate email addresses
     And I log out
     And I log in as "teacher2"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Alternate emails"
     And I should see "teacher1_alt@example.com"
     And I follow "Delete"

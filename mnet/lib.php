@@ -56,6 +56,7 @@ function mnet_get_public_key($uri, $application=null) {
         $application = $DB->get_record('mnet_application', array('name'=>'moodle'));
     }
 
+<<<<<<< HEAD
     $params = [
         new \PhpXmlRpc\Value($CFG->wwwroot),
         new \PhpXmlRpc\Value($mnet->public_key),
@@ -128,6 +129,67 @@ function mnet_get_public_key($uri, $application=null) {
 
     // Get the peer actual public key from the response.
     $res = $response->value()->scalarval();
+=======
+    $rq = xmlrpc_encode_request('system/keyswap', array($CFG->wwwroot, $mnet->public_key, $application->name), array(
+        'encoding' => 'utf-8',
+        'escaping' => 'markup',
+    ));
+    $ch = curl_init($uri . $application->xmlrpc_server_url);
+
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Moodle');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $rq);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: text/xml charset=UTF-8"));
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+
+    // check for proxy
+    if (!empty($CFG->proxyhost) and !is_proxybypass($uri)) {
+        // SOCKS supported in PHP5 only
+        if (!empty($CFG->proxytype) and ($CFG->proxytype == 'SOCKS5')) {
+            if (defined('CURLPROXY_SOCKS5')) {
+                curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+            } else {
+                curl_close($ch);
+                print_error( 'socksnotsupported','mnet' );
+            }
+        }
+
+        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, false);
+
+        if (empty($CFG->proxyport)) {
+            curl_setopt($ch, CURLOPT_PROXY, $CFG->proxyhost);
+        } else {
+            curl_setopt($ch, CURLOPT_PROXY, $CFG->proxyhost.':'.$CFG->proxyport);
+        }
+
+        if (!empty($CFG->proxyuser) and !empty($CFG->proxypassword)) {
+            curl_setopt($ch, CURLOPT_PROXYUSERPWD, $CFG->proxyuser.':'.$CFG->proxypassword);
+            if (defined('CURLOPT_PROXYAUTH')) {
+                // any proxy authentication if PHP 5.1
+                curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC | CURLAUTH_NTLM);
+            }
+        }
+    }
+
+    $res = xmlrpc_decode(curl_exec($ch));
+
+    // check for curl errors
+    $curlerrno = curl_errno($ch);
+    if ($curlerrno!=0) {
+        debugging("Request for $uri failed with curl error $curlerrno");
+    }
+
+    // check HTTP error code
+    $info =  curl_getinfo($ch);
+    if (!empty($info['http_code']) and ($info['http_code'] != 200)) {
+        debugging("Request for $uri failed with HTTP code ".$info['http_code']);
+    }
+
+    curl_close($ch);
+>>>>>>> forked/LAE_400_PACKAGE
 
     if (!is_array($res)) { // ! error
         $public_certificate = $res;
@@ -542,7 +604,11 @@ function mnet_sso_apply_indirection ($jumpurl, $url) {
             // if our wwwroot has a path component, need to strip that path from beginning of the
             // 'localpart' to make it relative to moodle's wwwroot
             $wwwrootpath = parse_url($CFG->wwwroot, PHP_URL_PATH);
+<<<<<<< HEAD
             if (!empty($wwwrootpath) && strpos($path, $wwwrootpath) === 0) {
+=======
+            if (!empty($wwwrootpath) and strpos($path, $wwwrootpath) === 0) {
+>>>>>>> forked/LAE_400_PACKAGE
                 $path = substr($path, strlen($wwwrootpath));
             }
             $localpart .= $path;
@@ -935,3 +1001,18 @@ function mnet_strip_user($user, $fields) {
     }
     return $user;
 }
+<<<<<<< HEAD
+=======
+
+/**
+ * Return the deprecation notice of the Mnet.
+ *
+ * @return \core\output\notification
+ */
+function mnet_get_deprecation_notice(): \core\output\notification {
+    $notice = new \core\output\notification(get_string('xmlrpcmnetenabled', 'admin'),
+        \core\output\notification::NOTIFY_WARNING);
+
+    return $notice;
+}
+>>>>>>> forked/LAE_400_PACKAGE

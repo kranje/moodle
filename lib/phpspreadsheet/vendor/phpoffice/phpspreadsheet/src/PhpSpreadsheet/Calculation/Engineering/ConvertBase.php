@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -11,11 +12,22 @@ abstract class ConvertBase
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class ConvertBase
+{
+>>>>>>> forked/LAE_400_PACKAGE
     protected static function validateValue($value): string
     {
         if (is_bool($value)) {
             if (Functions::getCompatibilityMode() !== Functions::COMPATIBILITY_OPENOFFICE) {
+<<<<<<< HEAD
                 throw new Exception(ExcelError::VALUE());
+=======
+                throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $value = (int) $value;
         }
@@ -37,13 +49,21 @@ abstract class ConvertBase
 
         if (is_numeric($places)) {
             if ($places < 0 || $places > 10) {
+<<<<<<< HEAD
                 throw new Exception(ExcelError::NAN());
+=======
+                throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             return (int) $places;
         }
 
+<<<<<<< HEAD
         throw new Exception(ExcelError::VALUE());
+=======
+        throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -61,7 +81,11 @@ abstract class ConvertBase
                 return substr(str_pad($value, $places, '0', STR_PAD_LEFT), -10);
             }
 
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return substr($value, -10);

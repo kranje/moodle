@@ -731,7 +731,11 @@ class xmldb_table extends xmldb_object {
         $o = '';
         $o.= '    <TABLE NAME="' . $this->name . '"';
         if ($this->comment) {
+<<<<<<< HEAD
             $o.= ' COMMENT="' . htmlspecialchars($this->comment, ENT_COMPAT) . '"';
+=======
+            $o.= ' COMMENT="' . htmlspecialchars($this->comment) . '"';
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $o.= '>' . "\n";
         // Now the fields

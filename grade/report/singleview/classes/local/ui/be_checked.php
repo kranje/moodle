@@ -38,5 +38,9 @@ interface be_checked {
      * Return true if this is checked.
      * @return bool
      */
+<<<<<<< HEAD
     public function is_checked(): bool;
+=======
+    public function is_checked();
+>>>>>>> forked/LAE_400_PACKAGE
 }

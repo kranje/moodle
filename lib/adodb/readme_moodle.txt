@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Description of ADOdb library import into Moodle
+=======
+Description of ADOdb v5.21.4 library import into Moodle 4.0 and up
+>>>>>>> forked/LAE_400_PACKAGE
 
 Source: https://github.com/ADOdb/ADOdb
 
@@ -16,10 +20,20 @@ Removed:
  * pear/
  * replicate/ (if present)
  * scripts/ (if present)
+<<<<<<< HEAD
  * server.php (if present)
+=======
+ * server.php
+>>>>>>> forked/LAE_400_PACKAGE
  * session/
  * tests/ (if present)
 
 Added:
  * index.html - prevent directory browsing on misconfigured servers
  * readme_moodle.txt - this file ;-)
+<<<<<<< HEAD
+=======
+
+Our changes (to be checked on next update if they are already applied upstream):
+ * https://github.com/ADOdb/ADOdb/issues/791
+>>>>>>> forked/LAE_400_PACKAGE

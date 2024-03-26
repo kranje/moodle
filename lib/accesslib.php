@@ -1194,7 +1194,11 @@ function assign_legacy_capabilities($capability, $legacyperms) {
         }
 
         if (!array_key_exists($type, $archetypes)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidlegacy', '', '', $type);
+=======
+            print_error('invalidlegacy', '', '', $type);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($roles = get_archetype_roles($type)) {
@@ -2385,8 +2389,12 @@ function capabilities_cleanup($component, $newcapdef = null) {
                 if ($roles = get_roles_with_capability($cachedcap->name)) {
                     foreach ($roles as $role) {
                         if (!unassign_capability($cachedcap->name, $role->id)) {
+<<<<<<< HEAD
                             throw new \moodle_exception('cannotunassigncap', 'error', '',
                                 (object)array('cap' => $cachedcap->name, 'role' => $role->name));
+=======
+                            print_error('cannotunassigncap', 'error', '', (object)array('cap'=>$cachedcap->name, 'role'=>$role->name));
+>>>>>>> forked/LAE_400_PACKAGE
                         }
                     }
                 }
@@ -2525,6 +2533,7 @@ function is_inside_frontpage(context $context) {
 function get_capability_info($capabilityname) {
     $caps = get_all_capabilities();
 
+<<<<<<< HEAD
     // Check for deprecated capability.
     if ($deprecatedinfo = get_deprecated_capability_info($capabilityname)) {
         if (!empty($deprecatedinfo['replacement'])) {
@@ -2539,6 +2548,8 @@ function get_capability_info($capabilityname) {
         $fullmessage = $deprecatedinfo['fullmessage'];
         debugging($fullmessage, DEBUG_DEVELOPER);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if (!isset($caps[$capabilityname])) {
         return null;
     }
@@ -2547,6 +2558,7 @@ function get_capability_info($capabilityname) {
 }
 
 /**
+<<<<<<< HEAD
  * Returns deprecation info for this particular capabilty (cached)
  *
  * Do not use this function except in the get_capability_info
@@ -2598,6 +2610,8 @@ function get_deprecated_capability_info($capabilityname) {
 }
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Returns all capabilitiy records, preferably from MUC and not database.
  *
  * @return array All capability records indexed by capability name
@@ -4200,11 +4214,14 @@ function get_user_capability_contexts(string $capability, bool $getcategories, $
         $userid = $USER->id;
     }
 
+<<<<<<< HEAD
     if (!$capinfo = get_capability_info($capability)) {
         debugging('Capability "'.$capability.'" was not found! This has to be fixed in code.');
         return [false, false];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if ($doanything && is_siteadmin($userid)) {
         // If the user is a site admin and $doanything is enabled then there is no need to restrict
         // the list of courses.
@@ -4213,7 +4230,11 @@ function get_user_capability_contexts(string $capability, bool $getcategories, $
     } else {
         // Gets SQL to limit contexts ('x' table) to those where the user has this capability.
         list ($contextlimitsql, $contextlimitparams) = \core\access\get_user_capability_course_helper::get_sql(
+<<<<<<< HEAD
             $userid, $capinfo->name);
+=======
+            $userid, $capability);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!$contextlimitsql) {
             // If the does not have this capability in any context, return false without querying.
             return [false, false];
@@ -4227,6 +4248,7 @@ function get_user_capability_contexts(string $capability, bool $getcategories, $
         $fieldlist = \core\access\get_user_capability_course_helper::map_fieldnames($categoryfieldsexceptid);
         if ($categoryorderby) {
             $fields = explode(',', $categoryorderby);
+<<<<<<< HEAD
             $orderby = '';
             foreach ($fields as $field) {
                 if ($orderby) {
@@ -4235,13 +4257,27 @@ function get_user_capability_contexts(string $capability, bool $getcategories, $
                 $orderby .= 'c.'.$field;
             }
             $orderby = 'ORDER BY '.$orderby;
+=======
+            $categoryorderby = '';
+            foreach ($fields as $field) {
+                if ($categoryorderby) {
+                    $categoryorderby .= ',';
+                }
+                $categoryorderby .= 'c.'.$field;
+            }
+            $categoryorderby = 'ORDER BY '.$categoryorderby;
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $rs = $DB->get_recordset_sql("
             SELECT c.id $fieldlist
               FROM {course_categories} c
                JOIN {context} x ON c.id = x.instanceid AND x.contextlevel = ?
             $contextlimitsql
+<<<<<<< HEAD
             $orderby", array_merge([CONTEXT_COURSECAT], $contextlimitparams));
+=======
+            $categoryorderby", array_merge([CONTEXT_COURSECAT], $contextlimitparams));
+>>>>>>> forked/LAE_400_PACKAGE
         $basedlimit = $limit;
         foreach ($rs as $category) {
             $categories[] = $category;
@@ -4250,6 +4286,10 @@ function get_user_capability_contexts(string $capability, bool $getcategories, $
                 break;
             }
         }
+<<<<<<< HEAD
+=======
+        $rs->close();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $courses = [];
@@ -4524,7 +4564,11 @@ function role_get_name(stdClass $role, $context = null, $rolenamedisplay = ROLEN
     }
 
     if ($rolenamedisplay == ROLENAME_ALIAS) {
+<<<<<<< HEAD
         if ($coursecontext && $role->coursealias && trim($role->coursealias) !== '') {
+=======
+        if ($coursecontext and trim($role->coursealias) !== '') {
+>>>>>>> forked/LAE_400_PACKAGE
             return format_string($role->coursealias, true, array('context'=>$coursecontext));
         } else {
             return $original;
@@ -4532,7 +4576,11 @@ function role_get_name(stdClass $role, $context = null, $rolenamedisplay = ROLEN
     }
 
     if ($rolenamedisplay == ROLENAME_BOTH) {
+<<<<<<< HEAD
         if ($coursecontext && $role->coursealias && trim($role->coursealias) !== '') {
+=======
+        if ($coursecontext and trim($role->coursealias) !== '') {
+>>>>>>> forked/LAE_400_PACKAGE
             return format_string($role->coursealias, true, array('context'=>$coursecontext)) . " ($original)";
         } else {
             return $original;
@@ -5292,7 +5340,11 @@ abstract class context extends stdClass implements IteratorAggregate {
      * Now we can convert context object to array using convert_to_array(),
      * and feed it properly to json_encode().
      */
+<<<<<<< HEAD
     public function getIterator(): Traversable {
+=======
+    public function getIterator() {
+>>>>>>> forked/LAE_400_PACKAGE
         $ret = array(
             'id'           => $this->id,
             'contextlevel' => $this->contextlevel,

@@ -29,7 +29,10 @@
 
 require_once(__DIR__ . '/../config.php');
 require_once($CFG->dirroot . '/my/lib.php');
+<<<<<<< HEAD
 require_once($CFG->dirroot . '/course/lib.php');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 redirect_if_major_upgrade_required();
 
@@ -79,6 +82,7 @@ if ($coursecat && ($category = core_course_category::get_nearest_editable_subcat
     // The user has the capability to manage the course category.
     $coursemanagemenu['manageurl'] = new moodle_url('/course/management.php', ['categoryid' => $category->id]);
 }
+<<<<<<< HEAD
 if ($coursecat) {
     $category = core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:request']);
     if ($category && $category->can_request_course()) {
@@ -86,6 +90,8 @@ if ($coursecat) {
 
     }
 }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 if (!empty($coursemanagemenu)) {
     // Render the course management menu.
     $PAGE->add_header_action($OUTPUT->render_from_template('my/dropdown', $coursemanagemenu));

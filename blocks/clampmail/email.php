@@ -23,6 +23,10 @@
  */
 
 require_once('../../config.php');
+<<<<<<< HEAD
+=======
+require_once('lib.php');
+>>>>>>> forked/LAE_400_PACKAGE
 require_once($CFG->libdir . '/formslib.php');
 
 require_login();
@@ -81,7 +85,11 @@ $PAGE->requires->js('/blocks/clampmail/js/selection.js');
 $courseroles = get_roles_used_in_context($context);
 $filterroles = $DB->get_records_select('role',
     sprintf('id IN (%s)', $config['roleselection']));
+<<<<<<< HEAD
 $roles = block_clampmail\email::filter_roles($courseroles, $filterroles);
+=======
+$roles = clampmail::filter_roles($courseroles, $filterroles);
+>>>>>>> forked/LAE_400_PACKAGE
 
 // Add role names.
 foreach ($roles as $id => $role) {
@@ -119,11 +127,19 @@ if (!empty($type)) {
     $email = $DB->get_record('block_clampmail_'.$type, array('id' => $typeid));
     $email->messageformat = $email->format;
 } else {
+<<<<<<< HEAD
     $email = new stdClass;
     $email->id = null;
     $email->subject = optional_param('subject', '', PARAM_TEXT);
     $email->message = optional_param('message_editor[text]', '', PARAM_RAW);
     $email->mailto = optional_param('mailto', '', PARAM_TEXT);
+=======
+    $email                = new stdClass;
+    $email->id            = null;
+    $email->subject       = optional_param('subject', '', PARAM_TEXT);
+    $email->message       = optional_param('message_editor[text]', '', PARAM_RAW);
+    $email->mailto        = optional_param('mailto', '', PARAM_TEXT);
+>>>>>>> forked/LAE_400_PACKAGE
     $email->messageformat = editors_get_preferred_format();
 }
 $email->messagetext = $email->message;
@@ -148,6 +164,7 @@ $editoroptions = array(
 $email = file_prepare_standard_editor($email, 'message', $editoroptions,
     $context, 'block_clampmail', $type, $email->id);
 
+<<<<<<< HEAD
 $warnings = array();
 $selected = array();
 if (!empty($email->mailto)) {
@@ -158,6 +175,13 @@ if (!empty($email->mailto)) {
         } else {
             $warnings[] = get_string('missing_recipient', 'block_clampmail', $id);
         }
+=======
+$selected = array();
+if (!empty($email->mailto)) {
+    foreach (explode(',', $email->mailto) as $id) {
+        $selected[$id] = $users[$id];
+        unset($users[$id]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -175,6 +199,11 @@ $form = new block_clampmail\email_form(null,
     )
 );
 
+<<<<<<< HEAD
+=======
+$warnings = array();
+
+>>>>>>> forked/LAE_400_PACKAGE
 if ($form->is_cancelled()) {
     redirect(new moodle_url('/course/view.php?id='.$courseid));
 } else if ($data = $form->get_data()) {
@@ -192,7 +221,11 @@ if ($form->is_cancelled()) {
         $data->time = time();
         $data->format = $data->message_editor['format'];
         $data->message = $data->message_editor['text'];
+<<<<<<< HEAD
         $data->attachment = block_clampmail\email::attachment_names($data->attachments);
+=======
+        $data->attachment = clampmail::attachment_names($data->attachments);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Store data; id is needed for file storage.
         if (isset($data->send)) {
@@ -228,10 +261,17 @@ if ($form->is_cancelled()) {
         // Send emails.
         if (isset($data->send)) {
             if ($type == 'drafts') {
+<<<<<<< HEAD
                 block_clampmail\email::draft_cleanup($context->id, $typeid);
             }
 
             list($filename, $file, $actualfile) = block_clampmail\email::process_attachments(
+=======
+                clampmail::draft_cleanup($context->id, $typeid);
+            }
+
+            list($filename, $file, $actualfile) = clampmail::process_attachments(
+>>>>>>> forked/LAE_400_PACKAGE
                 $context, $data, $table, $data->id
             );
 

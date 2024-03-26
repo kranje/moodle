@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * Class containing data for a content view.
  *
@@ -24,6 +25,12 @@
 
 namespace core_contentbank\output;
 
+=======
+
+namespace core_contentbank\output;
+
+use context;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_contentbank\content;
 use core_contentbank\contenttype;
 use moodle_url;
@@ -180,8 +187,18 @@ class viewcontent implements renderable, templatable {
             $data->editcontenturl = $editcontenturl->out(false);
         }
 
+<<<<<<< HEAD
         $closeurl = new moodle_url('/contentbank/index.php', ['contextid' => $this->content->get_contextid()]);
         $data->closeurl = $closeurl->out(false);
+=======
+        // Close/exit link for those users who can access that context.
+        $context = context::instance_by_id($this->content->get_contextid());
+        if (has_capability('moodle/contentbank:access', $context)) {
+            $closeurl = new moodle_url('/contentbank/index.php', ['contextid' => $context->id]);
+            $data->closeurl = $closeurl->out(false);
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $data->actionmenu = $this->get_edit_actions_dropdown();
         $data->heading = $this->content->get_name();
         if ($this->content->get_visibility() == content::VISIBILITY_UNLISTED) {

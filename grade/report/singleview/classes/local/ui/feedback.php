@@ -33,12 +33,18 @@ defined('MOODLE_INTERNAL') || die;
  * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class feedback extends grade_attribute_format implements unique_value, be_disabled, be_readonly {
 
     /**
      * Name of this input
      * @var string $name
      */
+=======
+class feedback extends grade_attribute_format implements unique_value, be_disabled {
+
+    /** @var string $name Name of this input */
+>>>>>>> forked/LAE_400_PACKAGE
     public $name = 'feedback';
 
     /**
@@ -46,7 +52,11 @@ class feedback extends grade_attribute_format implements unique_value, be_disabl
      *
      * @return string The value
      */
+<<<<<<< HEAD
     public function get_value(): ?string {
+=======
+    public function get_value() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->grade->feedback ? $this->grade->feedback : '';
     }
 
@@ -55,7 +65,11 @@ class feedback extends grade_attribute_format implements unique_value, be_disabl
      *
      * @return string The label text
      */
+<<<<<<< HEAD
     public function get_label(): string {
+=======
+    public function get_label() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!isset($this->grade->label)) {
             $this->grade->label = '';
         }
@@ -67,7 +81,11 @@ class feedback extends grade_attribute_format implements unique_value, be_disabl
      *
      * @return boolean Should this input be disabled when the page loads.
      */
+<<<<<<< HEAD
     public function is_disabled(): bool {
+=======
+    public function is_disabled() {
+>>>>>>> forked/LAE_400_PACKAGE
         $locked = 0;
         $gradeitemlocked = 0;
         $overridden = 0;
@@ -89,6 +107,7 @@ class feedback extends grade_attribute_format implements unique_value, be_disabl
     }
 
     /**
+<<<<<<< HEAD
      * Return true if this is read-only.
      *
      * @return bool
@@ -104,12 +123,23 @@ class feedback extends grade_attribute_format implements unique_value, be_disabl
      * @return element
      */
     public function determine_format(): element {
+=======
+     * Create a text_attribute for this ui element.
+     *
+     * @return text_attribute
+     */
+    public function determine_format() {
+>>>>>>> forked/LAE_400_PACKAGE
         return new text_attribute(
             $this->get_name(),
             $this->get_value(),
             $this->get_label(),
+<<<<<<< HEAD
             $this->is_disabled(),
             $this->is_readonly()
+=======
+            $this->is_disabled()
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 
@@ -117,7 +147,11 @@ class feedback extends grade_attribute_format implements unique_value, be_disabl
      * Update the value for this input.
      *
      * @param string $value The new feedback value.
+<<<<<<< HEAD
      * @return null|string Any error message
+=======
+     * @return string Any error message
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function set($value) {
         $finalgrade = false;

@@ -75,9 +75,13 @@ $string['combineselected'] = 'Combine selected';
 $string['id'] = 'id';
 $string['inalltagcoll'] = 'Everywhere';
 $string['inputstandardtags'] = 'Enter comma-separated list of new tags';
+<<<<<<< HEAD
 $string['itemid'] = 'Item ID';
 $string['itemstaggedwith'] = '{$a->tagarea} tagged with "{$a->tag}"';
 $string['itemtype'] = 'Item type';
+=======
+$string['itemstaggedwith'] = '{$a->tagarea} tagged with "{$a->tag}"';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['lesstags'] = 'less...';
 $string['managestandardtags'] = 'Manage standard tags';
 $string['managetags'] = 'Manage tags';
@@ -86,7 +90,10 @@ $string['moretags'] = 'more...';
 $string['name'] = 'Tag name';
 $string['namesalreadybeeingused'] = 'Tag names already being used';
 $string['nameuseddocombine'] = 'The tag name is already in use. Do you want to combine these tags?';
+<<<<<<< HEAD
 $string['namewithlink'] = 'Tag name with link';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['newcollnamefor'] = 'New name for tag collection {$a}';
 $string['newnamefor'] = 'New name for tag {$a}';
 $string['nextpage'] = 'More';
@@ -140,7 +147,10 @@ $string['standardsuggest'] = 'Suggest';
 $string['standardtag'] = 'Standard';
 $string['suredeletecoll'] = 'Are you sure you want to delete tag collection "{$a}"?';
 $string['tag'] = 'Tag';
+<<<<<<< HEAD
 $string['tagarea'] = 'Tag area';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['tagarea_blog_external'] = 'External blog posts';
 $string['tagarea_post'] = 'Blog posts';
 $string['tagarea_user'] = 'User interests';
@@ -149,12 +159,18 @@ $string['tagarea_course_modules'] = 'Activities and resources';
 $string['tagareaenabled'] = 'Enabled';
 $string['tagareaname'] = 'Name';
 $string['tagareas'] = 'Tag areas';
+<<<<<<< HEAD
 $string['tagauthor'] = 'Tag author';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['tagcollection'] = 'Tag collection';
 $string['tagcollection_help'] = 'Tag collections are sets of tags for different areas. For example, a collection of standard tags can be used to tag courses, with user interests and blog post tags kept in a separate collection. When a user clicks on a tag, the tag page displays only items with that tag in the same collection. Tags can be automatically added to a collection according to the area tagged or can be added manually as standard tags.';
 $string['tagcollections'] = 'Tag collections';
 $string['tagdescription'] = 'Tag description';
+<<<<<<< HEAD
 $string['taginstance'] = 'Tag instance';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['tags'] = 'Tags';
 $string['tagsaredisabled'] = 'Tags are disabled';
 $string['thingstaggedwith'] = '"{$a->name}" is used {$a->count} times';

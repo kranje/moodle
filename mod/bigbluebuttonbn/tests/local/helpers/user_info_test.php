@@ -53,12 +53,20 @@ class user_info_test extends \advanced_testcase {
         logger::log_recording_played_event($instance, $recordings[0]->id);
         [$logjoins, $logtimes] = user_info::get_user_info_outline($this->get_course(), $user, $bbactivitycm);
         $this->assertEquals([
+<<<<<<< HEAD
             '1 meeting(s)',
             '1 recording(s) played'
         ], $logjoins);
         $this->assertCount(2, $logtimes);
     }
 
+=======
+            'Has joined the room 1 time(s)',
+            'Has played a recording 1 time(s)'
+        ], $logjoins);
+        $this->assertCount(2, $logtimes);
+    }
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Test user info outline with several logs
      *
@@ -79,6 +87,7 @@ class user_info_test extends \advanced_testcase {
 
         [$logjoins, $logtimes] = user_info::get_user_info_outline($this->get_course(), $user, $bbactivitycm);
         $this->assertEquals([
+<<<<<<< HEAD
             '2 meeting(s)',
         ], $logjoins);
         $this->assertCount(1, $logtimes);
@@ -110,6 +119,9 @@ class user_info_test extends \advanced_testcase {
         [$logjoins, $logtimes] = user_info::get_user_info_outline($this->get_course(), $user, $bbactivitycm);
         $this->assertEquals([
             'viewed',
+=======
+            'Has joined the room 2 time(s)',
+>>>>>>> forked/LAE_400_PACKAGE
         ], $logjoins);
         $this->assertCount(1, $logtimes);
     }

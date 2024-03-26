@@ -22,6 +22,7 @@ $PAGE->set_url('/mod/feedback/item/captcha/print_captcha.php', array('id'=>$id))
 
 if ($id) {
     if (! $cm = get_coursemodule_from_id('feedback', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     }
 
@@ -31,11 +32,26 @@ if ($id) {
 
     if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+    }
+
+    if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+        print_error('coursemisconf');
+    }
+
+    if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
 if (!isset($SESSION->feedback->item->captcha)) {
+<<<<<<< HEAD
     throw new \moodle_exception('captchanotset', 'feedback');
+=======
+    print_error('captchanotset', 'feedback');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $height = 40;

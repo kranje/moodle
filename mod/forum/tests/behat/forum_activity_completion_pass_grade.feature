@@ -16,8 +16,12 @@ Feature: Completion pass grade  view activity completion in the forum activity
       | user | course | role           |
       | student1 | C1 | student        |
       | teacher1 | C1 | editingteacher |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Settings" in current page administration
     And I expand all fieldsets
     And I set the following fields to these values:
@@ -29,9 +33,13 @@ Feature: Completion pass grade  view activity completion in the forum activity
       | course   | C1            |
       | idnumber | mh1           |
       | name     | Music history |
+<<<<<<< HEAD
       | section  | 1             |
     And I am on the "Music history" "forum activity" page
     And I navigate to "Settings" in current page administration
+=======
+    And I am on the "Music history" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I set the following fields to these values:
       | Whole forum grading > Type            | Point                                             |
@@ -47,7 +55,10 @@ Feature: Completion pass grade  view activity completion in the forum activity
       | completionrepliesenabled              | 1                                                 |
       | completionreplies                     | 1                                                 |
     And I press "Save and display"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: View automatic completion items as a teacher
     Given I am on the "Music history" "forum activity" page logged in as teacher1
@@ -87,14 +98,20 @@ Feature: Completion pass grade  view activity completion in the forum activity
     And the "Post replies: 1" completion condition of "Music history" is displayed as "done"
     And the "Receive a grade" completion condition of "Music history" is displayed as "todo"
     And the "Receive a passing grade" completion condition of "Music history" is displayed as "todo"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # Grade the student
     And I am on the "Music history" "forum activity" page logged in as teacher1
     And I press "Grade users"
     And I set the field "grade" to "33"
     And I press "Save"
     And I press "Close grader"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # All conditions should now be completed.
     When I am on the "Music history" "forum activity" page logged in as student1
     Then the "View" completion condition of "Music history" is displayed as "done"
@@ -133,14 +150,20 @@ Feature: Completion pass grade  view activity completion in the forum activity
     And the "Post replies: 1" completion condition of "Music history" is displayed as "done"
     And the "Receive a grade" completion condition of "Music history" is displayed as "todo"
     And the "Receive a passing grade" completion condition of "Music history" is displayed as "todo"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # Grade the student
     And I am on the "Music history" "forum activity" page logged in as teacher1
     And I press "Grade users"
     And I set the field "grade" to "60"
     And I press "Save"
     And I press "Close grader"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # All conditions should now be completed.
     When I am on the "Music history" "forum activity" page logged in as student1
     Then the "View" completion condition of "Music history" is displayed as "done"

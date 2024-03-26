@@ -20,7 +20,10 @@ namespace core_reportbuilder\local\aggregation;
 
 use core_reportbuilder_testcase;
 use core_reportbuilder_generator;
+<<<<<<< HEAD
 use core_reportbuilder\local\report\column;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_user\reportbuilder\datasource\users;
 
 defined('MOODLE_INTERNAL') || die();
@@ -45,8 +48,14 @@ class groupconcatdistinct_test extends core_reportbuilder_testcase {
     public function setUp(): void {
         global $DB;
 
+<<<<<<< HEAD
         if (!groupconcatdistinct::compatible(column::TYPE_TEXT)) {
             $this->markTestSkipped('Distinct group concatenation not supported in ' . $DB->get_dbfamily());
+=======
+        $dbfamily = $DB->get_dbfamily();
+        if (!in_array($dbfamily, ['mysql', 'postgres'])) {
+            $this->markTestSkipped("Distinct group concatenation not supported in {$dbfamily}");
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -94,6 +103,7 @@ class groupconcatdistinct_test extends core_reportbuilder_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test aggregation when applied to column with multiple fields
      */
     public function test_column_aggregation_multiple_fields(): void {
@@ -122,6 +132,8 @@ class groupconcatdistinct_test extends core_reportbuilder_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test aggregation when applied to column with callback
      */
     public function test_column_aggregation_with_callback(): void {

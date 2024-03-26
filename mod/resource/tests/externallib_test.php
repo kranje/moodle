@@ -148,7 +148,11 @@ class externallib_test extends externallib_advanced_testcase {
         $returndescription = mod_resource_external::get_resources_by_courses_returns();
 
         // Create what we expect to be returned when querying the two courses.
+<<<<<<< HEAD
         $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'lang',
+=======
+        $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles',
+>>>>>>> forked/LAE_400_PACKAGE
                                 'contentfiles', 'tobemigrated', 'legacyfiles', 'legacyfileslast', 'display', 'displayoptions',
                                 'filterfiles', 'revision', 'timemodified', 'section', 'visible', 'groupmode', 'groupingid');
 
@@ -162,7 +166,10 @@ class externallib_test extends externallib_advanced_testcase {
         $resource1->groupingid = 0;
         $resource1->introfiles = [];
         $resource1->contentfiles = [];
+<<<<<<< HEAD
         $resource1->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $resource2->coursemodule = $resource2->cmid;
         $resource2->introformat = 1;
@@ -173,7 +180,10 @@ class externallib_test extends externallib_advanced_testcase {
         $resource2->groupingid = 0;
         $resource2->introfiles = [];
         $resource2->contentfiles = [];
+<<<<<<< HEAD
         $resource2->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($expectedfields as $field) {
             $expected1[$field] = $resource1->{$field};

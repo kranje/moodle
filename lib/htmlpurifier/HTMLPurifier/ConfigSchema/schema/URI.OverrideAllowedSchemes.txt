@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 URI.OverrideAllowedSchemes
 TYPE: bool
 DEFAULT: true
@@ -7,3 +8,14 @@ If this is set to true (which it is by default), you can override
 registry.  If false, you will also have to update that directive in order
 to add more schemes.
 --# vim: et sw=4 sts=4
+=======
+URI.OverrideAllowedSchemes
+TYPE: bool
+DEFAULT: true
+--DESCRIPTION--
+If this is set to true (which it is by default), you can override
+%URI.AllowedSchemes by simply registering a HTMLPurifier_URIScheme to the
+registry.  If false, you will also have to update that directive in order
+to add more schemes.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

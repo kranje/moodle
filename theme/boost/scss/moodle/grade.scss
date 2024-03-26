@@ -33,6 +33,10 @@
 
 .path-grade-report-grader {
     #region-main {
+<<<<<<< HEAD
+=======
+        overflow-x: visible;
+>>>>>>> forked/LAE_400_PACKAGE
         min-width: 100%;
         width: auto;
         display: flex;
@@ -61,6 +65,7 @@
     }
 }
 
+<<<<<<< HEAD
 .path-grade {
     #region-main {
         overflow-x: visible;
@@ -72,6 +77,8 @@
     }
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 // Rubrics
 #page-grade-grading-manage {
     #activemethodselector {
@@ -515,6 +522,7 @@
 /**
  * Single view.
  */
+<<<<<<< HEAD
 .path-grade-report-singleview .reporttable {
     input[name^="finalgrade"] {
         width: 80px;
@@ -574,4 +582,8 @@
             font-size: 90%;
         }
     }
+=======
+.path-grade-report-singleview input[name^="finalgrade"] {
+    width: 80px;
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * Unit tests for rating/lib.php
  *
@@ -23,6 +24,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 namespace core_rating;
 
 use rating_manager;
@@ -41,6 +44,10 @@ require_once($CFG->dirroot . '/rating/lib.php');
  * @category   test
  * @copyright  2011 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
+=======
+ * @covers     \rating
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class rating_test extends \advanced_testcase {
 
@@ -103,7 +110,11 @@ class rating_test extends \advanced_testcase {
                   'ratingarea' => 'post',
                   'itemid' => 2,
                   'scaleid' => 10,
+<<<<<<< HEAD
                   'rating' => 5,
+=======
+                  'rating' => 4,
+>>>>>>> forked/LAE_400_PACKAGE
                   'userid' => 3,
                   'timecreated' => 1,
                   'timemodified' => 1),
@@ -167,7 +178,11 @@ class rating_test extends \advanced_testcase {
         // Note that $result[0]->rating->rating is somewhat random.
         // We didn't supply a user ID so $USER was used which will vary depending on who runs the tests.
 
+<<<<<<< HEAD
         // Get results for items of user 2 (expected average 1 + 5 / 2 = 3).
+=======
+        // Get results for items of user 2 (expected average 1 + 4 / 2 = 2.5).
+>>>>>>> forked/LAE_400_PACKAGE
         $toptions = (object)array_merge($defaultoptions, array('items' => $user2posts));
         $result = $rm->get_ratings($toptions);
         $this->assertEquals(count($result), count($user2posts));
@@ -175,7 +190,11 @@ class rating_test extends \advanced_testcase {
         $this->assertEquals($result[0]->userid, $user2posts[0]->userid);
         $this->assertEquals($result[0]->message, $user2posts[0]->message);
         $this->assertEquals($result[0]->rating->count, 2);
+<<<<<<< HEAD
         $this->assertEquals($result[0]->rating->aggregate, 3);
+=======
+        $this->assertEquals($result[0]->rating->aggregate, 2.5);
+>>>>>>> forked/LAE_400_PACKAGE
         // Note that $result[0]->rating->rating is somewhat random.
         // We didn't supply a user ID so $USER was used which will vary depending on who runs the tests.
 
@@ -191,7 +210,11 @@ class rating_test extends \advanced_testcase {
         // Note that $result[0]->rating->rating is somewhat random.
         // We didn't supply a user ID so $USER was used which will vary depending on who runs the tests.
 
+<<<<<<< HEAD
         // Get results for items of user 1 & 2 together (expected averages are 2 and 3, as tested above).
+=======
+        // Get results for items of user 1 & 2 together (expected averages are 2 and 2.5, as tested above).
+>>>>>>> forked/LAE_400_PACKAGE
         $posts = array_merge($user1posts, $user2posts);
         $toptions = (object)array_merge($defaultoptions, array('items' => $posts));
         $result = $rm->get_ratings($toptions);
@@ -208,7 +231,11 @@ class rating_test extends \advanced_testcase {
         $this->assertEquals($result[1]->userid, $posts[1]->userid);
         $this->assertEquals($result[1]->message, $posts[1]->message);
         $this->assertEquals($result[1]->rating->count, 2);
+<<<<<<< HEAD
         $this->assertEquals($result[1]->rating->aggregate, 3);
+=======
+        $this->assertEquals($result[1]->rating->aggregate, 2.5);
+>>>>>>> forked/LAE_400_PACKAGE
         // Note that $result[0]->rating->rating is somewhat random.
         // We didn't supply a user ID so $USER was used which will vary depending on who runs the tests.
 
@@ -256,7 +283,11 @@ class rating_test extends \advanced_testcase {
         $this->assertEquals($result[1]->userid, $posts[1]->userid);
         $this->assertEquals($result[1]->message, $posts[1]->message);
         $this->assertEquals($result[1]->rating->count, 2);
+<<<<<<< HEAD
         $this->assertEquals($result[1]->rating->aggregate, 3);
+=======
+        $this->assertEquals($result[1]->rating->aggregate, 2.5);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals($result[0]->rating->rating, 3); // User 3 rated user 2 "5".
         $this->assertEquals($result[1]->rating->userid, $toptions->userid); // Must be the passed userid.
 
@@ -271,7 +302,11 @@ class rating_test extends \advanced_testcase {
         $this->assertNull($result[0]->rating->rating);
         $this->assertEquals($result[0]->rating->aggregate, 2); // Should still get the aggregate.
 
+<<<<<<< HEAD
         // Get results for items of user 2 (expected average 1 + 5 / 2 = 3).
+=======
+        // Get results for items of user 2 (expected average 1 + 4 / 2 = 2.5).
+>>>>>>> forked/LAE_400_PACKAGE
         // Supplying the user id of the user who owns the items so no rating should be found.
         $toptions = (object)array_merge($defaultoptions, array('items' => $user2posts));
         $toptions->userid = 2; // User 2 viewing the ratings of their own item.
@@ -279,7 +314,11 @@ class rating_test extends \advanced_testcase {
         // These should be null as the user is viewing their own item and thus cannot rate.
         $this->assertNull($result[0]->rating->userid);
         $this->assertNull($result[0]->rating->rating);
+<<<<<<< HEAD
         $this->assertEquals($result[0]->rating->aggregate, 3); // Should still get the aggregate.
+=======
+        $this->assertEquals($result[0]->rating->aggregate, 2.5); // Should still get the aggregate.
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

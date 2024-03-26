@@ -3,7 +3,11 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 
 class ConvertBinary extends ConvertBase
 {
@@ -15,12 +19,17 @@ class ConvertBinary extends ConvertBase
      * Excel Function:
      *        BIN2DEC(x)
      *
+<<<<<<< HEAD
      * @param array|string $value The binary number (as a string) that you want to convert. The number
+=======
+     * @param string $value The binary number (as a string) that you want to convert. The number
+>>>>>>> forked/LAE_400_PACKAGE
      *                                cannot contain more than 10 characters (10 bits). The most significant
      *                                bit of number is the sign bit. The remaining 9 bits are magnitude bits.
      *                                Negative numbers are represented using two's-complement notation.
      *                                If number is not a valid binary number, or if number contains more than
      *                                10 characters (10 bits), BIN2DEC returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|string Result, or an error
@@ -35,6 +44,13 @@ class ConvertBinary extends ConvertBase
 
         try {
             $value = self::validateValue($value);
+=======
+     */
+    public static function toDecimal($value): string
+    {
+        try {
+            $value = self::validateValue(Functions::flattenSingleValue($value));
+>>>>>>> forked/LAE_400_PACKAGE
             $value = self::validateBinary($value);
         } catch (Exception $e) {
             return $e->getMessage();
@@ -58,19 +74,28 @@ class ConvertBinary extends ConvertBase
      * Excel Function:
      *        BIN2HEX(x[,places])
      *
+<<<<<<< HEAD
      * @param array|string $value The binary number (as a string) that you want to convert. The number
+=======
+     * @param string $value The binary number (as a string) that you want to convert. The number
+>>>>>>> forked/LAE_400_PACKAGE
      *                                cannot contain more than 10 characters (10 bits). The most significant
      *                                bit of number is the sign bit. The remaining 9 bits are magnitude bits.
      *                                Negative numbers are represented using two's-complement notation.
      *                                If number is not a valid binary number, or if number contains more than
      *                                10 characters (10 bits), BIN2HEX returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param array|int $places The number of characters to use. If places is omitted, BIN2HEX uses the
+=======
+     * @param int $places The number of characters to use. If places is omitted, BIN2HEX uses the
+>>>>>>> forked/LAE_400_PACKAGE
      *                                minimum number of characters necessary. Places is useful for padding the
      *                                return value with leading 0s (zeros).
      *                                If places is not an integer, it is truncated.
      *                                If places is nonnumeric, BIN2HEX returns the #VALUE! error value.
      *                                If places is negative, BIN2HEX returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|string Result, or an error
@@ -87,6 +112,15 @@ class ConvertBinary extends ConvertBase
             $value = self::validateValue($value);
             $value = self::validateBinary($value);
             $places = self::validatePlaces($places);
+=======
+     */
+    public static function toHex($value, $places = null): string
+    {
+        try {
+            $value = self::validateValue(Functions::flattenSingleValue($value));
+            $value = self::validateBinary($value);
+            $places = self::validatePlaces(Functions::flattenSingleValue($places));
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -111,19 +145,28 @@ class ConvertBinary extends ConvertBase
      * Excel Function:
      *        BIN2OCT(x[,places])
      *
+<<<<<<< HEAD
      * @param array|string $value The binary number (as a string) that you want to convert. The number
+=======
+     * @param string $value The binary number (as a string) that you want to convert. The number
+>>>>>>> forked/LAE_400_PACKAGE
      *                                cannot contain more than 10 characters (10 bits). The most significant
      *                                bit of number is the sign bit. The remaining 9 bits are magnitude bits.
      *                                Negative numbers are represented using two's-complement notation.
      *                                If number is not a valid binary number, or if number contains more than
      *                                10 characters (10 bits), BIN2OCT returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param array|int $places The number of characters to use. If places is omitted, BIN2OCT uses the
+=======
+     * @param int $places The number of characters to use. If places is omitted, BIN2OCT uses the
+>>>>>>> forked/LAE_400_PACKAGE
      *                                minimum number of characters necessary. Places is useful for padding the
      *                                return value with leading 0s (zeros).
      *                                If places is not an integer, it is truncated.
      *                                If places is nonnumeric, BIN2OCT returns the #VALUE! error value.
      *                                If places is negative, BIN2OCT returns the #NUM! error value.
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|string Result, or an error
@@ -140,6 +183,15 @@ class ConvertBinary extends ConvertBase
             $value = self::validateValue($value);
             $value = self::validateBinary($value);
             $places = self::validatePlaces($places);
+=======
+     */
+    public static function toOctal($value, $places = null): string
+    {
+        try {
+            $value = self::validateValue(Functions::flattenSingleValue($value));
+            $value = self::validateBinary($value);
+            $places = self::validatePlaces(Functions::flattenSingleValue($places));
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -155,7 +207,11 @@ class ConvertBinary extends ConvertBase
     protected static function validateBinary(string $value): string
     {
         if ((strlen($value) > preg_match_all('/[01]/', $value)) || (strlen($value) > 10)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $value;

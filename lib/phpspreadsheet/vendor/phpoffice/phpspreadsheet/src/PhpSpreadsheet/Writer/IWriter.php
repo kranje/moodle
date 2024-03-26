@@ -62,8 +62,11 @@ interface IWriter
      * Save PhpSpreadsheet to file.
      *
      * @param resource|string $filename Name of the file to save
+<<<<<<< HEAD
      *
      * @throws Exception
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function save($filename, int $flags = 0): void;
 

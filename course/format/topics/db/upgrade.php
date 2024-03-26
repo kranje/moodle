@@ -33,14 +33,39 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_format_topics_upgrade($oldversion) {
     global $CFG, $DB;
 
+<<<<<<< HEAD
+=======
+    // Automatically generated Moodle v3.6.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.7.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.8.0 release upgrade line.
+    // Put any upgrade step following this.
+
+>>>>>>> forked/LAE_400_PACKAGE
     // Automatically generated Moodle v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+=======
+    if ($oldversion < 2022041901) {
+        // For sites migrating from 4.0.x or 4.1.x where the indentation was removed,
+        // we are disabling 'indentation' value by default.
+        if ($oldversion >= 2022041900) {
+            set_config('indentation', 0, 'format_topics');
+        } else {
+            set_config('indentation', 1, 'format_topics');
+        }
+        upgrade_plugin_savepoint(true, 2022041901, 'format', 'topics');
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 
     return true;
 }

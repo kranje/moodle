@@ -778,6 +778,7 @@ class locallib_test extends \advanced_testcase {
         $this->assertTrue($workshop3->check_group_membership($student2->id));
         $this->assertFalse($workshop3->check_group_membership($student3->id));
     }
+<<<<<<< HEAD
 
     /**
      * Test init_initial_bar function.
@@ -871,4 +872,6 @@ class locallib_test extends \advanced_testcase {
 
         return $initialbarprefs;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

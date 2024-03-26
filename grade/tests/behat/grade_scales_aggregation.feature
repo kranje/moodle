@@ -34,12 +34,18 @@ Feature: Control the aggregation of the scales
       | Scale me | C1     | Letterscale |
     And the following config values are set as admin:
       | grade_includescalesinaggregation | 0 |
+<<<<<<< HEAD
     And I log out
 
   Scenario Outline: Scales can be excluded from aggregation
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+
+  Scenario Outline: Scales can be excluded from aggregation
+    Given I am on the "Course 1" "grades > Grader report > View" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     When I give the grade "10" to the user "Student 1" for the grade item "Grade me"
     And I give the grade "B" to the user "Student 1" for the grade item "Scale me"
@@ -47,7 +53,11 @@ Feature: Control the aggregation of the scales
     And I set the following settings for grade item "Course 1":
       | Aggregation | <aggregation> |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I select "Student 1" from the "Select all or one user" singleselect
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item             | Grade          | Percentage  | Contribution to course total |
       | Grade me               | 10.00          | 10.00 %     | <gradecontrib>               |
@@ -57,11 +67,16 @@ Feature: Control the aggregation of the scales
     And I log in as "admin"
     And I set the following administration settings values:
       | grade_includescalesinaggregation | 1 |
+<<<<<<< HEAD
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > User report" in the course gradebook
     And I click on "Student 1" in the "user" search widget
+=======
+    And I am on the "Course 1" "grades > User report > View" page logged in as "teacher1"
+    And I select "Student 1" from the "Select all or one user" singleselect
+>>>>>>> forked/LAE_400_PACKAGE
     And the following should exist in the "user-grade" table:
       | Grade item             | Grade          | Percentage  | Contribution to course total |
       | Grade me               | 10.00          | 10.00 %     | <gradecontrib2>              |
@@ -81,9 +96,13 @@ Feature: Control the aggregation of the scales
       | Mode of grades                      | Mode of grades.                      | 10.00       | 10.00 %  | 10.00        | 0.00         | 75.00        | 75.00 %   | 0.00 %        | 75.00 %       |
 
   Scenario: Weights of scales cannot be edited when they are not aggregated
+<<<<<<< HEAD
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    Given I am on the "Course 1" "grades > Grader report > View" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     When I set the following settings for grade item "Course 1":
       | Aggregation | Natural |

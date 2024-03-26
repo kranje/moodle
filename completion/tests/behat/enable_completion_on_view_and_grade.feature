@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_completion @javascript
+=======
+@core @core_completion
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: Students will be marked as completed and pass/fail
   if they have viewed an activity and achieved a grade.
 
@@ -23,7 +27,10 @@ Feature: Students will be marked as completed and pass/fail
       | course                              | C1                      |
       | idnumber                            | a1                      |
       | name                                | Test assignment name    |
+<<<<<<< HEAD
       | intro                               | Submit your online text |
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       | assignsubmission_onlinetext_enabled | 1                       |
       | assignsubmission_file_enabled       | 0                       |
       | completion                          | 2                       |
@@ -31,6 +38,7 @@ Feature: Students will be marked as completed and pass/fail
       | completionusegrade                  | 1                       |
       | gradepass                           | 50                      |
       | completionpassgrade                 | 1                       |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And "Student First" user has not completed "Test assignment name" activity
@@ -89,3 +97,28 @@ Feature: Students will be marked as completed and pass/fail
     And I log out
     When I am on the "Course 1" course page logged in as student2
     Then the "View" completion condition of "Test assignment name" is displayed as "done"
+=======
+    And I am on the "Course 1" course page logged in as teacher1
+    And "Student First" user has not completed "Test assignment name" activity
+    And I am on the "Test assignment name" "assign activity" page logged in as student2
+    And I am on the "Test assignment name" "assign activity" page logged in as student1
+
+  Scenario: Confirm completion (incomplete/pass/fail) are set correctly
+    Given the following "grade grades" exist:
+      | gradeitem            | user     | grade |
+      | Test assignment name | student1 | 21.00 |
+      | Test assignment name | student2 | 50.00 |
+      | Test assignment name | student3 | 30.00 |
+    When I am on "Course 1" course homepage
+    Then the "View" completion condition of "Test assignment name" is displayed as "done"
+    And the "Receive a grade" completion condition of "Test assignment name" is displayed as "done"
+    And the "Receive a passing grade" completion condition of "Test assignment name" is displayed as "failed"
+    And I am on the "Course 1" course page logged in as student2
+    And the "View" completion condition of "Test assignment name" is displayed as "done"
+    And the "Receive a grade" completion condition of "Test assignment name" is displayed as "done"
+    And the "Receive a passing grade" completion condition of "Test assignment name" is displayed as "done"
+    And I am on the "Course 1" course page logged in as student3
+    And the "View" completion condition of "Test assignment name" is displayed as "todo"
+    And the "Receive a grade" completion condition of "Test assignment name" is displayed as "done"
+    And the "Receive a passing grade" completion condition of "Test assignment name" is displayed as "failed"
+>>>>>>> forked/LAE_400_PACKAGE

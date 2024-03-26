@@ -307,7 +307,11 @@ class tool_provider extends ToolProvider {
                 $isforceembed = true;
             }
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcontext');
+=======
+            print_error('invalidcontext');
+>>>>>>> forked/LAE_400_PACKAGE
             exit();
         }
 
@@ -324,7 +328,11 @@ class tool_provider extends ToolProvider {
 
         // Display an error, if there is one.
         if ($result !== helper::ENROLMENT_SUCCESSFUL) {
+<<<<<<< HEAD
             throw new \moodle_exception($result, 'enrol_lti');
+=======
+            print_error($result, 'enrol_lti');
+>>>>>>> forked/LAE_400_PACKAGE
             exit();
         }
 

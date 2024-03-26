@@ -84,7 +84,11 @@ if (!empty($config->disabledbehaviours)) {
 // Disable.
 if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$disable])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $disable);
+=======
+        print_error('unknownbehaviour', 'question', $thispageurl, $disable);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (array_search($disable, $disabledbehaviours) === false) {
@@ -97,11 +101,19 @@ if (($disable = optional_param('disable', '', PARAM_PLUGIN)) && confirm_sesskey(
 // Enable.
 if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$enable])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $enable);
     }
 
     if (!$archetypal[$enable]) {
         throw new \moodle_exception('cannotenablebehaviour', 'question', $thispageurl, $enable);
+=======
+        print_error('unknownbehaviour', 'question', $thispageurl, $enable);
+    }
+
+    if (!$archetypal[$enable]) {
+        print_error('cannotenablebehaviour', 'question', $thispageurl, $enable);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (($key = array_search($enable, $disabledbehaviours)) !== false) {
@@ -114,7 +126,11 @@ if (($enable = optional_param('enable', '', PARAM_PLUGIN)) && confirm_sesskey())
 // Move up in order.
 if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$up])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $up);
+=======
+        print_error('unknownbehaviour', 'question', $thispageurl, $up);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // This function works fine for behaviours, as well as qtypes.
@@ -126,7 +142,11 @@ if (($up = optional_param('up', '', PARAM_PLUGIN)) && confirm_sesskey()) {
 // Move down in order.
 if (($down = optional_param('down', '', PARAM_PLUGIN)) && confirm_sesskey()) {
     if (!isset($behaviours[$down])) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknownbehaviour', 'question', $thispageurl, $down);
+=======
+        print_error('unknownbehaviour', 'question', $thispageurl, $down);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // This function works fine for behaviours, as well as qtypes.

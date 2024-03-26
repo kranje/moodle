@@ -22,11 +22,14 @@ abstract class H5PEditorEndpoints {
   const CONTENT_TYPE_CACHE = 'content-type-cache';
 
   /**
+<<<<<<< HEAD
    * Endpoint for retrieving the currently stored content hub metadata cache
    */
   const CONTENT_HUB_METADATA_CACHE = 'content-hub-metadata-cache';
 
   /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
    * Endpoint for installing libraries from the Content Type Hub
    */
   const LIBRARY_INSTALL = 'library-install';
@@ -51,11 +54,14 @@ abstract class H5PEditorEndpoints {
    * Endpoint for filtering parameters.
    */
   const FILTER = 'filter';
+<<<<<<< HEAD
 
   /**
    * Endpoint for installing libraries from the Content Type Hub
    */
   const GET_HUB_CONTENT = 'get-hub-content';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 
@@ -71,12 +77,20 @@ class H5PEditorAjax {
   public $core;
 
   /**
+<<<<<<< HEAD
    * @var H5peditor
+=======
+   * @var \H5peditor
+>>>>>>> forked/LAE_400_PACKAGE
    */
   public $editor;
 
   /**
+<<<<<<< HEAD
    * @var H5peditorStorage
+=======
+   * @var \H5peditorStorage
+>>>>>>> forked/LAE_400_PACKAGE
    */
   public $storage;
 
@@ -118,6 +132,7 @@ class H5PEditorAjax {
         H5PCore::ajaxSuccess($this->getContentTypeCache(!$this->isContentTypeCacheUpdated()), TRUE);
         break;
 
+<<<<<<< HEAD
       case H5PEditorEndpoints::CONTENT_HUB_METADATA_CACHE:
         if (!$this->isHubOn()) return;
         header('Cache-Control: no-cache');
@@ -125,6 +140,8 @@ class H5PEditorAjax {
         print '{"success":true,"data":' . $this->core->getUpdatedContentHubMetadataCache(func_get_arg(1)) . '}';
         break;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       case H5PEditorEndpoints::LIBRARY_INSTALL:
         if (!$this->isPostRequest()) return;
 
@@ -163,6 +180,7 @@ class H5PEditorAjax {
         if (!$this->isValidEditorToken($token)) return;
         $this->filter(func_get_arg(2));
         break;
+<<<<<<< HEAD
 
       case H5PEditorEndpoints::GET_HUB_CONTENT:
         if (!$this->isPostRequest() || !$this->isValidEditorToken(func_get_arg(1))) {
@@ -170,6 +188,8 @@ class H5PEditorAjax {
         }
         $this->getHubContent(func_get_arg(2), func_get_arg(3));
         break;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
   }
 
@@ -215,6 +235,7 @@ class H5PEditorAjax {
     $file = $this->saveFileTemporarily($uploadFilePath, TRUE);
     if (!$file) return;
 
+<<<<<<< HEAD
     $this->processContent($contentId);
   }
 
@@ -231,6 +252,12 @@ class H5PEditorAjax {
 
     // Install any required dependencies (libraries) from the package
     // (if permission allows it, of course)
+=======
+    // These has to be set instead of sending parameteres to the validation function.
+    if (!$this->isValidPackage()) return;
+
+    // Install any required dependencies
+>>>>>>> forked/LAE_400_PACKAGE
     $storage = new H5PStorage($this->core->h5pF, $this->core);
     $storage->savePackage(NULL, NULL, TRUE);
 
@@ -342,6 +369,7 @@ class H5PEditorAjax {
   }
 
   /**
+<<<<<<< HEAD
    * Download and use content from the HUB
    *
    * @param integer $hubId The Hub Content ID
@@ -357,6 +385,8 @@ class H5PEditorAjax {
   }
 
   /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
    * Validates the package. Sets error messages if validation fails.
    *
    * @param bool $skipContent Will not validate cotent if set to TRUE

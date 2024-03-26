@@ -54,10 +54,13 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
 
         if (!empty($CFG->smtpauthtype)) {
             $this->AuthType = $CFG->smtpauthtype;
+<<<<<<< HEAD
 
             if ($this->AuthType == 'XOAUTH2') {
                 $this->process_oauth();
             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Some MTAs may do double conversion of LF if CRLF used, CRLF is required line ending in RFC 822bis.
@@ -69,7 +72,11 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
     }
 
     /**
+<<<<<<< HEAD
      * Extended AddCustomHeader function in order to stop duplicate
+=======
+     * Extended AddCustomHeader function in order to stop duplicate 
+>>>>>>> forked/LAE_400_PACKAGE
      * message-ids
      * http://tracker.moodle.org/browse/MDL-3681
      */
@@ -87,7 +94,11 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
 
     /**
      * Use internal moodles own core_text to encode mimeheaders.
+<<<<<<< HEAD
      * Fall back to phpmailers inbuilt functions if not
+=======
+     * Fall back to phpmailers inbuilt functions if not 
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function encodeHeader($str, $position = 'text') {
         $encoded = core_text::encode_mimeheader($str, $this->CharSet);
@@ -146,6 +157,7 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
             return parent::postSend();
         }
     }
+<<<<<<< HEAD
 
     /**
      * Config the PHPMailer to use OAUTH if necessary.
@@ -174,4 +186,6 @@ class moodle_phpmailer extends \PHPMailer\PHPMailer\PHPMailer {
             }
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

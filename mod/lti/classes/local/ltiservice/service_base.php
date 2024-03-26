@@ -256,6 +256,7 @@ abstract class service_base {
     }
 
     /**
+<<<<<<< HEAD
      * Called when the launch data is created, offering a possibility to alter the
      * target link URI.
      *
@@ -273,6 +274,8 @@ abstract class service_base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Called when a new LTI Instance is deleted.
      *
      * @param int $id LTI Instance.

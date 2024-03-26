@@ -5,7 +5,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\Financial\CashFlow\Variable;
 use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class NonPeriodic
 {
@@ -13,8 +16,11 @@ class NonPeriodic
 
     const FINANCIAL_PRECISION = 1.0e-08;
 
+<<<<<<< HEAD
     const DEFAULT_GUESS = 0.1;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * XIRR.
      *
@@ -28,11 +34,19 @@ class NonPeriodic
      * @param mixed[] $dates      A series of payment dates
      *                                The first payment date indicates the beginning of the schedule of payments
      *                                All other dates must be later than this date, but they may occur in any order
+<<<<<<< HEAD
      * @param mixed $guess        An optional guess at the expected answer
      *
      * @return float|string
      */
     public static function rate($values, $dates, $guess = self::DEFAULT_GUESS)
+=======
+     * @param float $guess        An optional guess at the expected answer
+     *
+     * @return float|string
+     */
+    public static function rate($values, $dates, $guess = 0.1)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $rslt = self::xirrPart1($values, $dates);
         if ($rslt !== '') {
@@ -40,6 +54,7 @@ class NonPeriodic
         }
 
         // create an initial range, with a root somewhere between 0 and guess
+<<<<<<< HEAD
         $guess = Functions::flattenSingleValue($guess) ?? self::DEFAULT_GUESS;
         if (!is_numeric($guess)) {
             return ExcelError::VALUE();
@@ -47,6 +62,11 @@ class NonPeriodic
         $guess = ($guess + 0.0) ?: self::DEFAULT_GUESS;
         $x1 = 0.0;
         $x2 = $guess + 0.0;
+=======
+        $guess = Functions::flattenSingleValue($guess);
+        $x1 = 0.0;
+        $x2 = $guess ?: 0.1;
+>>>>>>> forked/LAE_400_PACKAGE
         $f1 = self::xnpvOrdered($x1, $values, $dates, false);
         $f2 = self::xnpvOrdered($x2, $values, $dates, false);
         $found = false;
@@ -61,6 +81,7 @@ class NonPeriodic
 
                 break;
             } elseif (abs($f1) < abs($f2)) {
+<<<<<<< HEAD
                 $x1 += 1.6 * ($x1 - $x2);
                 $f1 = self::xnpvOrdered($x1, $values, $dates, false);
             } else {
@@ -70,6 +91,15 @@ class NonPeriodic
         }
         if (!$found) {
             return ExcelError::NAN();
+=======
+                $f1 = self::xnpvOrdered($x1 += 1.6 * ($x1 - $x2), $values, $dates, false);
+            } else {
+                $f2 = self::xnpvOrdered($x2 += 1.6 * ($x2 - $x1), $values, $dates, false);
+            }
+        }
+        if (!$found) {
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return self::xirrPart3($values, $dates, $x1, $x2);
@@ -113,6 +143,7 @@ class NonPeriodic
      */
     private static function xirrPart1(&$values, &$dates): string
     {
+<<<<<<< HEAD
         $values = Functions::flattenArray($values);
         $dates = Functions::flattenArray($dates);
         $valuesIsArray = count($values) > 1;
@@ -122,6 +153,15 @@ class NonPeriodic
         }
         if (count($values) != count($dates)) {
             return ExcelError::NAN();
+=======
+        if (!is_array($values) && !is_array($dates)) {
+            return Functions::NA();
+        }
+        $values = Functions::flattenArray($values);
+        $dates = Functions::flattenArray($dates);
+        if (count($values) != count($dates)) {
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $datesCount = count($dates);
@@ -144,7 +184,11 @@ class NonPeriodic
         for ($i = 0; $i < $valCount; ++$i) {
             $fld = $values[$i];
             if (!is_numeric($fld)) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             } elseif ($fld > 0) {
                 $foundpos = true;
             } elseif ($fld < 0) {
@@ -152,7 +196,11 @@ class NonPeriodic
             }
         }
         if (!self::bothNegAndPos($foundneg, $foundpos)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return '';
@@ -172,7 +220,11 @@ class NonPeriodic
             $dx = $x1 - $x2;
         }
 
+<<<<<<< HEAD
         $rslt = ExcelError::VALUE();
+=======
+        $rslt = Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         for ($i = 0; $i < self::FINANCIAL_MAX_ITERATIONS; ++$i) {
             $dx *= 0.5;
             $x_mid = $rtb + $dx;
@@ -214,7 +266,11 @@ class NonPeriodic
         $xnpv = 0.0;
         for ($i = 0; $i < $valCount; ++$i) {
             if (!is_numeric($values[$i])) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             try {
@@ -223,13 +279,18 @@ class NonPeriodic
                 return $e->getMessage();
             }
             if ($date0 > $datei) {
+<<<<<<< HEAD
                 $dif = $ordered ? ExcelError::NAN() : -((int) DateTimeExcel\Difference::interval($datei, $date0, 'd'));
+=======
+                $dif = $ordered ? Functions::NAN() : -((int) DateTimeExcel\Difference::interval($datei, $date0, 'd'));
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 $dif = DateTimeExcel\Difference::interval($date0, $datei, 'd');
             }
             if (!is_numeric($dif)) {
                 return $dif;
             }
+<<<<<<< HEAD
             if ($rate <= -1.0) {
                 $xnpv += -abs($values[$i]) / (-1 - $rate) ** ($dif / 365);
             } else {
@@ -238,6 +299,12 @@ class NonPeriodic
         }
 
         return is_finite($xnpv) ? $xnpv : ExcelError::VALUE();
+=======
+            $xnpv += $values[$i] / (1 + $rate) ** ($dif / 365);
+        }
+
+        return is_finite($xnpv) ? $xnpv : Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -246,6 +313,7 @@ class NonPeriodic
     private static function validateXnpv($rate, array $values, array $dates): void
     {
         if (!is_numeric($rate)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::VALUE());
         }
         $valCount = count($values);
@@ -254,6 +322,16 @@ class NonPeriodic
         }
         if ($valCount > 1 && ((min($values) > 0) || (max($values) < 0))) {
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::VALUE());
+        }
+        $valCount = count($values);
+        if ($valCount != count($dates)) {
+            throw new Exception(Functions::NAN());
+        }
+        if ($valCount > 1 && ((min($values) > 0) || (max($values) < 0))) {
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 }

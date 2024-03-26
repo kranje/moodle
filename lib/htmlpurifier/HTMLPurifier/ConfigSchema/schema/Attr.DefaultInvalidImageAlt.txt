@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Attr.DefaultInvalidImageAlt
 TYPE: string
 DEFAULT: 'Invalid image'
@@ -6,3 +7,13 @@ This is the content of the alt tag of an invalid image if the user had not
 previously specified an alt attribute.  It has no effect when the image is
 valid but there was no alt attribute present.
 --# vim: et sw=4 sts=4
+=======
+Attr.DefaultInvalidImageAlt
+TYPE: string
+DEFAULT: 'Invalid image'
+--DESCRIPTION--
+This is the content of the alt tag of an invalid image if the user had not
+previously specified an alt attribute.  It has no effect when the image is
+valid but there was no alt attribute present.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

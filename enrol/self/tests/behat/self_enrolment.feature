@@ -140,6 +140,7 @@ Feature: Users can auto-enrol themself in courses where self enrolment is allowe
     And I navigate to "Unenrol me from C1" in current page administration
     And I click on "Continue" "button" in the "Confirm" "dialogue"
     Then I should see "You are unenrolled from the course \"Course 1\""
+<<<<<<< HEAD
 
   @javascript
   Scenario: Self-enrolment enabled with simultaneous guest access
@@ -156,3 +157,5 @@ Feature: Users can auto-enrol themself in courses where self enrolment is allowe
     And I navigate to "Enrol me in this course" in current page administration
     And I click on "Enrol me" "button"
     Then I should see "Topic 1"
+=======
+>>>>>>> forked/LAE_400_PACKAGE

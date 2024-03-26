@@ -84,7 +84,10 @@ class RowIterator implements IteratorInterface
      *
      * @return void
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         $this->rewindAndSkipBom();
@@ -115,7 +118,10 @@ class RowIterator implements IteratorInterface
      *
      * @return bool
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return ($this->filePointer && !$this->hasReachedEndOfFile);
@@ -128,7 +134,10 @@ class RowIterator implements IteratorInterface
      * @throws \Box\Spout\Common\Exception\EncodingConversionException If unable to convert data to UTF-8
      * @return void
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         $this->hasReachedEndOfFile = $this->globalFunctionsHelper->feof($this->filePointer);
@@ -227,7 +236,10 @@ class RowIterator implements IteratorInterface
      *
      * @return Row|null
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->rowBuffer;
@@ -239,7 +251,10 @@ class RowIterator implements IteratorInterface
      *
      * @return int
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return $this->numReadRows;

@@ -83,12 +83,16 @@ if ($deleteselected && ($confirm = optional_param('confirm', '', PARAM_ALPHANUM)
             foreach ($questionlist as $questionid) {
                 $questionid = (int)$questionid;
                 question_require_capability_on($questionid, 'edit');
+<<<<<<< HEAD
                 if (questions_in_use(array($questionid))) {
                     $DB->set_field('question_versions', 'status',
                         \core_question\local\bank\question_version_status::QUESTION_STATUS_HIDDEN, ['questionid' => $questionid]);
                 } else {
                     question_delete_question($questionid);
                 }
+=======
+                question_delete_question($questionid);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         redirect($returnurl);

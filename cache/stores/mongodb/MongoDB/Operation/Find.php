@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,14 +34,22 @@ use MongoDB\Driver\Server;
 use MongoDB\Driver\Session;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnsupportedException;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_array;
 use function is_bool;
 use function is_integer;
 use function is_object;
 use function is_string;
+<<<<<<< HEAD
 use function trigger_error;
 
+=======
+use function MongoDB\server_supports_feature;
+use function trigger_error;
+>>>>>>> forked/LAE_400_PACKAGE
 use const E_USER_DEPRECATED;
 
 /**
@@ -41,6 +57,7 @@ use const E_USER_DEPRECATED;
  *
  * @api
  * @see \MongoDB\Collection::find()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/tutorial/query-documents/
  * @see https://mongodb.com/docs/manual/reference/operator/query-modifier/
  */
@@ -49,6 +66,25 @@ class Find implements Executable, Explainable
     public const NON_TAILABLE = 1;
     public const TAILABLE = 2;
     public const TAILABLE_AWAIT = 3;
+=======
+ * @see http://docs.mongodb.org/manual/tutorial/query-documents/
+ * @see http://docs.mongodb.org/manual/reference/operator/query-modifier/
+ */
+class Find implements Executable, Explainable
+{
+    const NON_TAILABLE = 1;
+    const TAILABLE = 2;
+    const TAILABLE_AWAIT = 3;
+
+    /** @var integer */
+    private static $wireVersionForCollation = 5;
+
+    /** @var integer */
+    private static $wireVersionForReadConcern = 4;
+
+    /** @var integer */
+    private static $wireVersionForAllowDiskUseServerSideError = 4;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var string */
     private $databaseName;
@@ -69,7 +105,11 @@ class Find implements Executable, Explainable
      *
      *  * allowDiskUse (boolean): Enables writing to temporary files. When set
      *    to true, queries can write data to the _tmp sub-directory in the
+<<<<<<< HEAD
      *    dbPath directory.
+=======
+     *    dbPath directory. The default is false.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * allowPartialResults (boolean): Get partial results from a mongos if
      *    some shards are inaccessible (instead of throwing an error).
@@ -78,9 +118,17 @@ class Find implements Executable, Explainable
      *
      *  * collation (document): Collation specification.
      *
+<<<<<<< HEAD
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    Only string values are supported for server versions < 4.4.
+=======
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+     *
+     *  * comment (string): Attaches a comment to the query. If "$comment" also
+     *    exists in the modifiers document, this option will take precedence.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * cursorType (enum): Indicates the type of cursor to use. Must be either
      *    NON_TAILABLE, TAILABLE, or TAILABLE_AWAIT. The default is
@@ -124,6 +172,12 @@ class Find implements Executable, Explainable
      *
      *  * readConcern (MongoDB\Driver\ReadConcern): Read concern.
      *
+<<<<<<< HEAD
+=======
+     *    This is not supported for server versions < 3.2 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * readPreference (MongoDB\Driver\ReadPreference): Read preference.
      *
      *  * returnKey (boolean): If true, returns only the index keys in the
@@ -131,6 +185,11 @@ class Find implements Executable, Explainable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * showRecordId (boolean): Determines whether to return the record
      *    identifier for each document. If true, adds a field $recordId to the
      *    returned documents.
@@ -146,11 +205,14 @@ class Find implements Executable, Explainable
      *    "$orderby" also exists in the modifiers document, this option will
      *    take precedence.
      *
+<<<<<<< HEAD
      *  * let (document): Map of parameter names and values. Values must be
      *    constant or closed expressions that do not reference document fields.
      *    Parameters can then be accessed as variables in an aggregate
      *    expression context (e.g. "$$var").
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *  * typeMap (array): Type map for BSON deserialization. This will be
      *    applied to the returned Cursor (it is not sent to the server).
      *
@@ -160,7 +222,11 @@ class Find implements Executable, Explainable
      * @param array        $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, string $collectionName, $filter, array $options = [])
+=======
+    public function __construct($databaseName, $collectionName, $filter, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_array($filter) && ! is_object($filter)) {
             throw InvalidArgumentException::invalidType('$filter', $filter, 'array or object');
@@ -182,16 +248,29 @@ class Find implements Executable, Explainable
             throw InvalidArgumentException::invalidType('"collation" option', $options['collation'], 'array or object');
         }
 
+<<<<<<< HEAD
+=======
+        if (isset($options['comment']) && ! is_string($options['comment'])) {
+            throw InvalidArgumentException::invalidType('"comment" option', $options['comment'], 'comment');
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['cursorType'])) {
             if (! is_integer($options['cursorType'])) {
                 throw InvalidArgumentException::invalidType('"cursorType" option', $options['cursorType'], 'integer');
             }
 
+<<<<<<< HEAD
             if (
                 $options['cursorType'] !== self::NON_TAILABLE &&
                 $options['cursorType'] !== self::TAILABLE &&
                 $options['cursorType'] !== self::TAILABLE_AWAIT
             ) {
+=======
+            if ($options['cursorType'] !== self::NON_TAILABLE &&
+                $options['cursorType'] !== self::TAILABLE &&
+                $options['cursorType'] !== self::TAILABLE_AWAIT) {
+>>>>>>> forked/LAE_400_PACKAGE
                 throw new InvalidArgumentException('Invalid value for "cursorType" option: ' . $options['cursorType']);
             }
         }
@@ -276,10 +355,13 @@ class Find implements Executable, Explainable
             throw InvalidArgumentException::invalidType('"typeMap" option', $options['typeMap'], 'array');
         }
 
+<<<<<<< HEAD
         if (isset($options['let']) && ! is_array($options['let']) && ! is_object($options['let'])) {
             throw InvalidArgumentException::invalidType('"let" option', $options['let'], 'array or object');
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['readConcern']) && $options['readConcern']->isDefault()) {
             unset($options['readConcern']);
         }
@@ -292,8 +374,13 @@ class Find implements Executable, Explainable
             trigger_error('The "maxScan" option is deprecated and will be removed in a future release', E_USER_DEPRECATED);
         }
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = (string) $collectionName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->filter = $filter;
         $this->options = $options;
     }
@@ -302,12 +389,33 @@ class Find implements Executable, Explainable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return Cursor
      * @throws UnsupportedException if read concern is used and unsupported
+=======
+     * @param Server $server
+     * @return Cursor
+     * @throws UnsupportedException if collation or read concern is used and unsupported
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server)
     {
+<<<<<<< HEAD
+=======
+        if (isset($this->options['collation']) && ! server_supports_feature($server, self::$wireVersionForCollation)) {
+            throw UnsupportedException::collationNotSupported();
+        }
+
+        if (isset($this->options['readConcern']) && ! server_supports_feature($server, self::$wireVersionForReadConcern)) {
+            throw UnsupportedException::readConcernNotSupported();
+        }
+
+        if (isset($this->options['allowDiskUse']) && ! server_supports_feature($server, self::$wireVersionForAllowDiskUseServerSideError)) {
+            throw UnsupportedException::allowDiskUseNotSupported();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $inTransaction = isset($this->options['session']) && $this->options['session']->isInTransaction();
         if ($inTransaction && isset($this->options['readConcern'])) {
             throw UnsupportedException::readConcernNotSupportedInTransaction();
@@ -322,12 +430,15 @@ class Find implements Executable, Explainable
         return $cursor;
     }
 
+<<<<<<< HEAD
     /**
      * Returns the command document for this operation.
      *
      * @see Explainable::getCommandDocument()
      * @return array
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getCommandDocument(Server $server)
     {
         return $this->createCommandDocument();
@@ -336,7 +447,11 @@ class Find implements Executable, Explainable
     /**
      * Construct a command document for Find
      */
+<<<<<<< HEAD
     private function createCommandDocument(): array
+=======
+    private function createCommandDocument()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $cmd = ['find' => $this->collectionName, 'filter' => (object) $this->filter];
 
@@ -368,7 +483,10 @@ class Find implements Executable, Explainable
                 $options[$modifier[0]] = $options['modifiers'][$modifier[1]];
             }
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         unset($options['modifiers']);
 
         return $cmd + $options;
@@ -377,9 +495,16 @@ class Find implements Executable, Explainable
     /**
      * Create options for executing the command.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-server.executequery.php
      */
     private function createExecuteOptions(): array
+=======
+     * @see http://php.net/manual/en/mongodb-driver-server.executequery.php
+     * @return array
+     */
+    private function createExecuteOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 
@@ -399,8 +524,15 @@ class Find implements Executable, Explainable
      *
      * Note that these are separate from the options for executing the command,
      * which are created in createExecuteOptions().
+<<<<<<< HEAD
      */
     private function createQueryOptions(): array
+=======
+     *
+     * @return array
+     */
+    private function createQueryOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 
@@ -408,7 +540,10 @@ class Find implements Executable, Explainable
             if ($this->options['cursorType'] === self::TAILABLE) {
                 $options['tailable'] = true;
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->options['cursorType'] === self::TAILABLE_AWAIT) {
                 $options['tailable'] = true;
                 $options['awaitData'] = true;
@@ -421,7 +556,11 @@ class Find implements Executable, Explainable
             }
         }
 
+<<<<<<< HEAD
         foreach (['collation', 'let', 'max', 'min'] as $option) {
+=======
+        foreach (['collation', 'max', 'min'] as $option) {
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($this->options[$option])) {
                 $options[$option] = (object) $this->options[$option];
             }

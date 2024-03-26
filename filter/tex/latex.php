@@ -16,11 +16,16 @@
          * Other platforms could/should be added
          */
         public function __construct() {
+<<<<<<< HEAD
             global $CFG;
 
             // construct directory structure
             $this->temp_dir = $CFG->tempdir . "/latex";
             make_temp_directory('latex');
+=======
+            // Construct directory structure.
+            $this->temp_dir = make_request_directory();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         /**
@@ -160,6 +165,7 @@
 
             return $img;
         }
+<<<<<<< HEAD
 
         /**
          * Delete files created in temporary area
@@ -183,3 +189,6 @@
 
 
 
+=======
+    }
+>>>>>>> forked/LAE_400_PACKAGE

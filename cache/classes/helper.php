@@ -382,7 +382,10 @@ class cache_helper {
                         'misses' => 0,
                         'sets' => 0,
                         'iobytes' => cache_store::IO_BYTES_NOT_SUPPORTED,
+<<<<<<< HEAD
                         'locks' => 0,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                     )
                 )
             );
@@ -393,7 +396,10 @@ class cache_helper {
                 'misses' => 0,
                 'sets' => 0,
                 'iobytes' => cache_store::IO_BYTES_NOT_SUPPORTED,
+<<<<<<< HEAD
                 'locks' => 0,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             );
         }
     }
@@ -634,7 +640,11 @@ class cache_helper {
      */
     public static function hash_key($key, cache_definition $definition) {
         if ($definition->uses_simple_keys()) {
+<<<<<<< HEAD
             if (debugging() && preg_match('#[^a-zA-Z0-9_]#', $key ?? '')) {
+=======
+            if (debugging() && preg_match('#[^a-zA-Z0-9_]#', $key)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 throw new coding_exception('Cache definition '.$definition->get_id().' requires simple keys. Invalid key provided.', $key);
             }
             // We put the key first so that we can be sure the start of the key changes.
@@ -860,4 +870,19 @@ class cache_helper {
         }
         return $warnings;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * A helper to determine whether a result was found.
+     *
+     * This has been deemed required after people have been confused by the fact that [] == false.
+     *
+     * @param mixed $value
+     * @return bool
+     */
+    public static function result_found($value): bool {
+        return $value !== false;
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

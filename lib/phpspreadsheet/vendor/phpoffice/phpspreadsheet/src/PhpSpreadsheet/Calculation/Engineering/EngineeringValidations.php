@@ -3,7 +3,11 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 
 class EngineeringValidations
 {
@@ -13,7 +17,11 @@ class EngineeringValidations
     public static function validateFloat($value): float
     {
         if (!is_numeric($value)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::VALUE());
+=======
+            throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (float) $value;
@@ -25,7 +33,11 @@ class EngineeringValidations
     public static function validateInt($value): int
     {
         if (!is_numeric($value)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::VALUE());
+=======
+            throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (int) floor((float) $value);

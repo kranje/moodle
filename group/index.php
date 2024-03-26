@@ -70,7 +70,11 @@ if (!$singlegroup) {
         case 'showgroupsettingsform':
         case 'showaddmembersform':
         case 'updatemembers':
+<<<<<<< HEAD
             throw new \moodle_exception('errorselectone', 'group', $returnurl);
+=======
+            print_error('errorselectone', 'group', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -95,7 +99,11 @@ switch ($action) {
 
             foreach($groupmemberroles as $roleid=>$roledata) {
                 $shortroledata = new stdClass();
+<<<<<<< HEAD
                 $shortroledata->name = $roledata->name;
+=======
+                $shortroledata->name = html_entity_decode($roledata->name, ENT_QUOTES, 'UTF-8');
+>>>>>>> forked/LAE_400_PACKAGE
                 $shortroledata->users = array();
                 foreach($roledata->users as $member) {
                     $shortmember = new stdClass();
@@ -120,7 +128,11 @@ switch ($action) {
 
     case 'deletegroup':
         if (count($groupids) == 0) {
+<<<<<<< HEAD
             throw new \moodle_exception('errorselectsome', 'group', $returnurl);
+=======
+            print_error('errorselectsome','group',$returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $groupidlist = implode(',', $groupids);
         redirect(new moodle_url('/group/delete.php', array('courseid'=>$courseid, 'groups'=>$groupidlist)));
@@ -156,7 +168,11 @@ switch ($action) {
         break;
 
     default: //ERROR.
+<<<<<<< HEAD
         throw new \moodle_exception('unknowaction', '', $returnurl);
+=======
+        print_error('unknowaction', '', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
         break;
 }
 
@@ -183,7 +199,11 @@ if ($groups) {
     foreach ($groups as $group) {
         $selected = false;
         $usercount = $DB->count_records('groups_members', array('groupid' => $group->id));
+<<<<<<< HEAD
         $groupname = format_string($group->name) . ' (' . $usercount . ')';
+=======
+        $groupname = format_string($group->name, true, ['context' => $context, 'escape' => false]) . ' (' . $usercount . ')';
+>>>>>>> forked/LAE_400_PACKAGE
         if (in_array($group->id, $groupids)) {
             $selected = true;
             if ($singlegroup) {
@@ -234,8 +254,14 @@ if ($singlegroup) {
 
                 $users[] = $shortmember;
             }
+<<<<<<< HEAD
             $members[] = (object)[
                 'role' => s($roledata->name),
+=======
+
+            $members[] = (object)[
+                'role' => html_entity_decode($roledata->name, ENT_QUOTES, 'UTF-8'),
+>>>>>>> forked/LAE_400_PACKAGE
                 'rolemembers' => $users
             ];
         }
@@ -278,7 +304,11 @@ function groups_param_action($prefix = 'act_') {
     }
     if ($action && !preg_match('/^\w+$/', $action)) {
         $action = false;
+<<<<<<< HEAD
         throw new \moodle_exception('unknowaction');
+=======
+        print_error('unknowaction');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     ///if (debugging()) echo 'Debug: '.$action;
     return $action;

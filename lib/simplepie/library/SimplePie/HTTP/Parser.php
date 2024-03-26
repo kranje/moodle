@@ -507,6 +507,7 @@ class SimplePie_HTTP_Parser
 	{
 		$data = explode("\r\n\r\n", $headers, $count);
 		$data = array_pop($data);
+<<<<<<< HEAD
 		if (false !== stripos($data, "HTTP/1.0 200 Connection established\r\n")) {
 			$exploded = explode("\r\n\r\n", $data, 2);
 			$data = end($exploded);
@@ -514,9 +515,19 @@ class SimplePie_HTTP_Parser
 		if (false !== stripos($data, "HTTP/1.1 200 Connection established\r\n")) {
 			$exploded = explode("\r\n\r\n", $data, 2);
 			$data = end($exploded);
+=======
+		if (false !== stripos($data, "HTTP/1.0 200 Connection established\r\n\r\n")) {
+			$data = str_ireplace("HTTP/1.0 200 Connection established\r\n\r\n", '', $data);
+		}
+		if (false !== stripos($data, "HTTP/1.1 200 Connection established\r\n\r\n")) {
+			$data = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $data);
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 		return $data;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_HTTP_Parser', 'SimplePie\HTTP\Parser', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

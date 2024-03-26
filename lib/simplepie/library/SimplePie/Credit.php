@@ -146,5 +146,8 @@ class SimplePie_Credit
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Credit', 'SimplePie\Credit', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

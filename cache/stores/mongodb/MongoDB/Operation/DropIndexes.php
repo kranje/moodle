@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,20 +32,37 @@ use MongoDB\Driver\Session;
 use MongoDB\Driver\WriteConcern;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnsupportedException;
+<<<<<<< HEAD
 
 use function current;
 use function is_array;
 use function is_integer;
+=======
+use function current;
+use function is_array;
+use function is_integer;
+use function MongoDB\server_supports_feature;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Operation for the dropIndexes command.
  *
  * @api
  * @see \MongoDB\Collection::dropIndexes()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/dropIndexes/
  */
 class DropIndexes implements Executable
 {
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/dropIndexes/
+ */
+class DropIndexes implements Executable
+{
+    /** @var integer */
+    private static $wireVersionForWriteConcern = 5;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var string */
     private $databaseName;
 
@@ -55,29 +80,49 @@ class DropIndexes implements Executable
      *
      * Supported options:
      *
+<<<<<<< HEAD
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    This is not supported for servers versions < 4.4.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *  * maxTimeMS (integer): The maximum amount of time to allow the query to
      *    run.
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * typeMap (array): Type map for BSON deserialization. This will be used
      *    for the returned command result document.
      *
      *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern.
      *
+<<<<<<< HEAD
+=======
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $databaseName   Database name
      * @param string $collectionName Collection name
      * @param string $indexName      Index name (use "*" to drop all indexes)
      * @param array  $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, string $collectionName, string $indexName, array $options = [])
     {
         $indexName = $indexName;
+=======
+    public function __construct($databaseName, $collectionName, $indexName, array $options = [])
+    {
+        $indexName = (string) $indexName;
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($indexName === '') {
             throw new InvalidArgumentException('$indexName cannot be empty');
@@ -103,8 +148,13 @@ class DropIndexes implements Executable
             unset($options['writeConcern']);
         }
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = (string) $collectionName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->indexName = $indexName;
         $this->options = $options;
     }
@@ -113,12 +163,25 @@ class DropIndexes implements Executable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return array|object Command result document
      * @throws UnsupportedException if write concern is used and unsupported
+=======
+     * @param Server $server
+     * @return array|object Command result document
+     * @throws UnsupportedException if writeConcern is used and unsupported
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server)
     {
+<<<<<<< HEAD
+=======
+        if (isset($this->options['writeConcern']) && ! server_supports_feature($server, self::$wireVersionForWriteConcern)) {
+            throw UnsupportedException::writeConcernNotSupported();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $inTransaction = isset($this->options['session']) && $this->options['session']->isInTransaction();
         if ($inTransaction && isset($this->options['writeConcern'])) {
             throw UnsupportedException::writeConcernNotSupportedInTransaction();
@@ -135,18 +198,30 @@ class DropIndexes implements Executable
 
     /**
      * Create the dropIndexes command.
+<<<<<<< HEAD
      */
     private function createCommand(): Command
+=======
+     *
+     * @return Command
+     */
+    private function createCommand()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $cmd = [
             'dropIndexes' => $this->collectionName,
             'index' => $this->indexName,
         ];
 
+<<<<<<< HEAD
         foreach (['comment', 'maxTimeMS'] as $option) {
             if (isset($this->options[$option])) {
                 $cmd[$option] = $this->options[$option];
             }
+=======
+        if (isset($this->options['maxTimeMS'])) {
+            $cmd['maxTimeMS'] = $this->options['maxTimeMS'];
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return new Command($cmd);
@@ -155,9 +230,16 @@ class DropIndexes implements Executable
     /**
      * Create options for executing the command.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-server.executewritecommand.php
      */
     private function createOptions(): array
+=======
+     * @see http://php.net/manual/en/mongodb-driver-server.executewritecommand.php
+     * @return array
+     */
+    private function createOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 

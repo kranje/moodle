@@ -145,7 +145,10 @@ class externallib_test extends externallib_advanced_testcase {
         $forum1->istracked = true;
         $forum1->unreadpostscount = 0;
         $forum1->introfiles = [];
+<<<<<<< HEAD
         $forum1->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $record = new \stdClass();
         $record->course = $course2->id;
@@ -158,7 +161,10 @@ class externallib_test extends externallib_advanced_testcase {
         // Default limited role, no create discussion capability enabled.
         $forum2->cancreatediscussions = false;
         $forum2->istracked = false;
+<<<<<<< HEAD
         $forum2->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Check the forum was correctly created.
         $this->assertEquals(2, $DB->count_records_select('forum', 'id = :forum1 OR id = :forum2',

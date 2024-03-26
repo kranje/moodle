@@ -49,7 +49,11 @@ class profile_field_text extends profile_field_base {
 
             // Create the link.
             $data = '<a href="'.str_replace('$$', urlencode($data),
+<<<<<<< HEAD
                      $this->field->param4).'" '.$target.'>'.htmlspecialchars($data, ENT_COMPAT).'</a>';
+=======
+                     $this->field->param4).'" '.$target.'>'.htmlspecialchars($data).'</a>';
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $data;

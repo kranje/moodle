@@ -538,7 +538,11 @@ class question_type {
         $result = $this->save_question_options($form);
 
         if (!empty($result->error)) {
+<<<<<<< HEAD
             throw new \moodle_exception($result->error);
+=======
+            print_error($result->error);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (!empty($result->notice)) {

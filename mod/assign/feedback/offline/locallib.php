@@ -119,7 +119,11 @@ class assign_feedback_offline extends assign_feedback_plugin {
                                                                      'plugin'=>'offline',
                                                                      'pluginaction'=>'uploadgrades',
                                                                      'id' => $this->assignment->get_course_module()->id));
+<<<<<<< HEAD
             throw new \moodle_exception('invalidgradeimport', 'assignfeedback_offline', $thisurl);
+=======
+            print_error('invalidgradeimport', 'assignfeedback_offline', $thisurl);
+>>>>>>> forked/LAE_400_PACKAGE
             return;
         }
         // Does this assignment use a scale?

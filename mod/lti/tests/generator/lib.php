@@ -45,6 +45,12 @@ class mod_lti_generator extends testing_module_generator {
 
         if (!isset($record->toolurl)) {
             $record->toolurl = '';
+<<<<<<< HEAD
+=======
+        } else {
+            $toolurl = new moodle_url($record->toolurl);
+            $record->toolurl = $toolurl->out(false);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if (!isset($record->resourcekey)) {
             $record->resourcekey = '12345';

@@ -34,6 +34,31 @@ function xmldb_scorm_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
+<<<<<<< HEAD
+=======
+    // Automatically generated Moodle v3.6.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    if ($oldversion < 2018123100) {
+
+        // Remove un-used/large index on element field.
+        $table = new xmldb_table('scorm_scoes_track');
+        $index = new xmldb_index('element', XMLDB_INDEX_UNIQUE, ['element']);
+        if ($dbman->index_exists($table, $index)) {
+            $dbman->drop_index($table, $index);
+        }
+
+        // Scorm savepoint reached.
+        upgrade_mod_savepoint(true, 2018123100, 'scorm');
+    }
+
+    // Automatically generated Moodle v3.7.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.8.0 release upgrade line.
+    // Put any upgrade step following this.
+
+>>>>>>> forked/LAE_400_PACKAGE
     // Automatically generated Moodle v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
@@ -49,8 +74,11 @@ function xmldb_scorm_upgrade($oldversion) {
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     return true;
 }

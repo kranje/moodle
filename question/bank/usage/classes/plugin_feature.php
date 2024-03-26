@@ -16,8 +16,11 @@
 
 namespace qbank_usage;
 
+<<<<<<< HEAD
 use core_question\local\bank\view;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Class plugin_feature is the entrypoint for the columns.
  *
@@ -28,6 +31,7 @@ use core_question\local\bank\view;
  */
 class plugin_feature extends \core_question\local\bank\plugin_features_base {
 
+<<<<<<< HEAD
     public function get_question_columns(view $qbank): array {
         return [
             new question_usage_column($qbank),
@@ -35,4 +39,11 @@ class plugin_feature extends \core_question\local\bank\plugin_features_base {
         ];
     }
 
+=======
+    public function get_question_columns($qbank): array {
+        return [
+            new question_usage_column($qbank)
+        ];
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

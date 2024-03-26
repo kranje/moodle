@@ -58,7 +58,11 @@ require_once($CFG->libdir.'/cronlib.php');
 // check if execution allowed
 if (!empty($CFG->cronclionly)) {
     // This script can only be run via the cli.
+<<<<<<< HEAD
     throw new \moodle_exception('cronerrorclionly', 'admin');
+=======
+    print_error('cronerrorclionly', 'admin');
+>>>>>>> forked/LAE_400_PACKAGE
     exit;
 }
 // This script is being called via the web, so check the password if there is one.
@@ -66,7 +70,11 @@ if (!empty($CFG->cronremotepassword)) {
     $pass = optional_param('password', '', PARAM_RAW);
     if ($pass != $CFG->cronremotepassword) {
         // wrong password.
+<<<<<<< HEAD
         throw new \moodle_exception('cronerrorpassword', 'admin');
+=======
+        print_error('cronerrorpassword', 'admin');
+>>>>>>> forked/LAE_400_PACKAGE
         exit;
     }
 }

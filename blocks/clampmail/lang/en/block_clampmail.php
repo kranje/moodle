@@ -26,7 +26,11 @@ $string['actions'] = 'Actions';
 $string['add_all'] = 'Add all';
 $string['add_button'] = 'Add';
 $string['all_groups'] = 'All groups';
+<<<<<<< HEAD
 $string['allowstudents'] = 'Allow students to use CLAMPMail';
+=======
+$string['allowstudents'] = 'Allow students to use Quickmail';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['alternate_activated'] = 'Alternate email {$a->address} can now be used in {$a->course}.';
 $string['alternate_activation_status'] = 'Activation status';
 $string['alternate_approved'] = 'Approved';
@@ -54,7 +58,11 @@ Thank you.
 ';
 $string['alternate_delete_confirm'] = 'Are you sure you want to delete {$a->address}? This action cannot be undone.';
 $string['alternate_failure'] = 'An email could not be sent to {$a->address}. Please verify that {$a->address} exists, and try again.';
+<<<<<<< HEAD
 $string['alternate_from'] = 'Moodle: CLAMPMail';
+=======
+$string['alternate_from'] = 'Moodle: Quickmail';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['alternate_invalid'] = 'Activation link is no longer valid for {$a->address}. Continue to resend activation link.';
 $string['alternate_new'] = 'Add alternate address';
 $string['alternate_saved'] = 'Alternate address {$a->address} has been saved.';
@@ -64,11 +72,19 @@ $string['alternate_waiting'] = 'Waiting';
 $string['alternate'] = 'Alternate emails';
 $string['are_you_sure'] = 'Are you sure you want to delete {$a->title}? This action cannot be reversed.';
 $string['attachment'] = 'Attachment(s)';
+<<<<<<< HEAD
 $string['clampmail:addinstance'] = 'Add a new CLAMPMail block';
 $string['clampmail:allowalternate'] = 'Allows users to add an alternate email for courses.';
 $string['clampmail:canconfig'] = 'Allows users to configure CLAMPMail instance.';
 $string['clampmail:canimpersonate'] = 'Allows users to log in as other users and view history.';
 $string['clampmail:cansend'] = 'Allows users to send email through CLAMPMail';
+=======
+$string['clampmail:addinstance'] = 'Add a new Quickmail block';
+$string['clampmail:allowalternate'] = 'Allows users to add an alternate email for courses.';
+$string['clampmail:canconfig'] = 'Allows users to configure Quickmail instance.';
+$string['clampmail:canimpersonate'] = 'Allows users to log in as other users and view history.';
+$string['clampmail:cansend'] = 'Allows users to send email through Quickmail';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['clampmail:cansendtoall'] = 'Allows users to email all users in a course regardless of group settings';
 $string['composenew'] = 'Compose new email';
 $string['config'] = 'Configuration';
@@ -89,7 +105,10 @@ $string['manage_signatures'] = 'Manage signatures';
 $string['maximumupload'] = 'Maximum attachment size';
 $string['maximumupload_desc'] = 'Maximum attachment size for an individual email.';
 $string['message'] = 'Message';
+<<<<<<< HEAD
 $string['missing_recipient'] = 'The recipient with the id {$a} is no longer enrolled in this course.';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['newsignature'] = 'New signature';
 $string['no_alternates'] = 'No alternate emails found for {$a->fullname}. Continue to make one.';
 $string['no_course'] = 'Invalid course with id of {$a}';
@@ -98,7 +117,11 @@ $string['no_email'] = 'Could not email {$a->firstname} {$a->lastname}.';
 $string['no_filter'] = 'No filter';
 $string['no_group'] = 'Not in a group';
 $string['no_log'] = 'You have no email history yet.';
+<<<<<<< HEAD
 $string['no_permission'] = 'You do not have permission to send emails with CLAMPMail.';
+=======
+$string['no_permission'] = 'You do not have permission to send emails with Quickmail.';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['no_recipient_emails'] = 'There are no email recipients. Either you forgot to supply one, or you selected addresses you are not allowed to send to.';
 $string['no_selected'] = 'You must select some users for emailing.';
 $string['no_subject'] = 'You must have a subject';
@@ -109,7 +132,11 @@ $string['not_valid_typeid'] = 'You must provide a valid email for {$a}';
 $string['not_valid_user'] = 'You can not view other email history.';
 $string['not_valid'] = 'This is not a valid email log viewer type: {$a}';
 $string['open_email'] = 'Open email';
+<<<<<<< HEAD
 $string['pluginname'] = 'CLAMPMail';
+=======
+$string['pluginname'] = 'Quickmail';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['potential_groups'] = 'Potential groups';
 $string['potential_users'] = 'Potential recipients';
 $string['prepend_class_desc'] = 'Prepend the course shortname to the subject of the email.';
@@ -141,6 +168,9 @@ $string['selected'] = 'Selected recipients';
 $string['send_email'] = 'Send email';
 $string['sig'] = 'Signature';
 $string['signature'] = 'Signatures';
+<<<<<<< HEAD
 $string['signature_text'] = 'Signature text';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['subject'] = 'Subject';
 $string['title'] = 'Title';

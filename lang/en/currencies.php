@@ -180,5 +180,9 @@ $string['XOF'] = 'CFA Franc BCEAO';
 $string['XPF'] = 'CFP Franc';
 $string['YER'] = 'Yemeni Rial';
 $string['ZAR'] = 'South African Rand';
+<<<<<<< HEAD
 $string['ZMK'] = 'Zambian Kwacha';
+=======
+$string['ZMW'] = 'Zambian Kwacha';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['ZWL'] = 'Zimbabwe Dollar';

@@ -25,7 +25,11 @@
 
 use core_reportbuilder\system_report_factory;
 use core_reportbuilder\local\filters\text;
+<<<<<<< HEAD
 use report_configlog\reportbuilder\local\systemreports\config_changes;
+=======
+use report_configlog\local\systemreports\config_changes;
+>>>>>>> forked/LAE_400_PACKAGE
 
 require(__DIR__.'/../../config.php');
 require_once($CFG->libdir.'/adminlib.php');

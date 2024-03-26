@@ -34,17 +34,29 @@ Feature: As a teacher I need to see an accurate list of subscribed users
     And the following "grouping groups" exist:
       | grouping | group |
       | GG1      | G1    |
+<<<<<<< HEAD
+=======
+    And the following "activities" exist:
+      | activity | course | idnumber | type    | name           | forcesubscribe |
+      | forum    | C1     | 1        | general | Forced Forum 1 | 1              |
+      | forum    | C1     | 0001     | general | Forced Forum 2 |                |
+      | forum    | C1     | 0002     | general | Forced Forum 3 | 2              |
+>>>>>>> forked/LAE_400_PACKAGE
     And I log in as "teacher"
     And I am on "Course 1" course homepage with editing mode on
 
   @javascript
   Scenario: A forced forum lists all subscribers
+<<<<<<< HEAD
     When I add a "Forum" to section "1" and I fill the form with:
       | Forum name        | Forced Forum 1 |
       | Forum type        | Standard forum for general use |
       | Description       | Test forum description |
       | Subscription mode | Forced subscription |
     And I am on the "Forced Forum 1" "forum activity" page
+=======
+    When I am on the "Forced Forum 1" "forum activity" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Subscriptions" in current page administration
     Then I should see "Student 1"
     And I should see "Teacher Teacher"
@@ -63,6 +75,7 @@ Feature: As a teacher I need to see an accurate list of subscribed users
     And I should not see "Student 3"
 
   Scenario: A forced forum does not allow to edit the subscribers
+<<<<<<< HEAD
     Given the following "activity" exists:
       | activity    | forum                          |
       | name        | Forced Forum 2                 |
@@ -73,6 +86,9 @@ Feature: As a teacher I need to see an accurate list of subscribed users
       | section     | 1                              |
     And I am on the "Forced Forum 2" "forum activity" page
     And I navigate to "Settings" in current page administration
+=======
+    Given I am on the "Forced Forum 2" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I set the following fields to these values:
       | Subscription mode | Forced subscription |
       | Availability      | Show on course page |
@@ -85,6 +101,7 @@ Feature: As a teacher I need to see an accurate list of subscribed users
     And I should see "Student 3"
 
   Scenario: A forced and hidden forum lists only teachers
+<<<<<<< HEAD
     Given the following "activity" exists:
       | activity    | forum                          |
       | name        | Forced Forum 2                 |
@@ -95,6 +112,9 @@ Feature: As a teacher I need to see an accurate list of subscribed users
       | section     | 1                              |
     And I am on "Course 1" course homepage
     And I am on the "Forced Forum 2" "forum activity editing" page
+=======
+    Given I am on the "Forced Forum 2" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I set the following fields to these values:
       | Subscription mode | Forced subscription |
       | Availability      | Hide on course page |
@@ -108,19 +128,27 @@ Feature: As a teacher I need to see an accurate list of subscribed users
 
   @javascript
   Scenario: An automatic forum lists all subscribers
+<<<<<<< HEAD
     When I add a "Forum" to section "1" and I fill the form with:
       | Forum name        | Forced Forum 1 |
       | Forum type        | Standard forum for general use |
       | Description       | Test forum description |
       | Subscription mode | Auto subscription |
     And I am on the "Forced Forum 1" "forum activity" page
+=======
+    When I am on the "Forced Forum 3" "forum activity" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Subscriptions" in current page administration
     Then I should see "Student 1"
     And I should see "Teacher Teacher"
     And I should see "Student 2"
     And I should see "Student 3"
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I am on the "Forced Forum 1" "forum activity editing" page
+=======
+    And I am on the "Forced Forum 3" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Grouping" "button" in the "Add restriction..." "dialogue"

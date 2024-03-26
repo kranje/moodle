@@ -39,6 +39,7 @@ $url = new moodle_url('/mod/data/export.php', array('d' => $d));
 $PAGE->set_url($url);
 
 if (! $data = $DB->get_record('data', array('id'=>$d))) {
+<<<<<<< HEAD
     throw new \moodle_exception('wrongdataid', 'data');
 }
 
@@ -48,6 +49,17 @@ if (! $cm = get_coursemodule_from_instance('data', $data->id, $data->course)) {
 
 if(! $course = $DB->get_record('course', array('id'=>$cm->course))) {
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('wrongdataid', 'data');
+}
+
+if (! $cm = get_coursemodule_from_instance('data', $data->id, $data->course)) {
+    print_error('invalidcoursemodule');
+}
+
+if(! $course = $DB->get_record('course', array('id'=>$cm->course))) {
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // fill in missing properties needed for updating of instance
@@ -67,7 +79,11 @@ if(empty($fieldrecords)) {
     if (has_capability('mod/data:managetemplates', $context)) {
         redirect($CFG->wwwroot.'/mod/data/field.php?d='.$data->id);
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('nofieldindatabase', 'data');
+=======
+        print_error('nofieldindatabase', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -112,7 +128,10 @@ if ($mform->is_cancelled()) {
 }
 
 // Build header to match the rest of the UI.
+<<<<<<< HEAD
 $PAGE->add_body_class('mediumwidth');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $PAGE->set_title($data->name);
 $PAGE->set_heading($course->fullname);
 $PAGE->force_settings_menu(true);

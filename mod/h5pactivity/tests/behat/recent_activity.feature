@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @mod @mod_h5pactivity @core_h5p @_file_upload @_switch_iframe @javascript
+=======
+@mod @mod_h5pactivity @core_h5p @_file_upload @_switch_iframe
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: Users can see the H5P recent activity from the recent activity block
   In order to quickly see the updates from H5P activity in my course
   As a user
@@ -24,6 +28,7 @@ Feature: Users can see the H5P recent activity from the recent activity block
     And the following "activity" exists:
       | activity        | h5pactivity                                |
       | course          | C1                                         |
+<<<<<<< HEAD
       | name            | Awesome H5P package                        |
       | packagefilepath | h5p/tests/fixtures/multiple-choice-2-6.h5p |
     And I log in as "teacher1"
@@ -32,21 +37,40 @@ Feature: Users can see the H5P recent activity from the recent activity block
     And I log out
     And I am on the "Awesome H5P package" "h5pactivity activity" page logged in as student1
     # The H5P content needs some time to be displayed (so better to wait for 1 second to avoid random errors).
+=======
+      | section         | 1                                          |
+      | name            | Awesome H5P package                        |
+      | intro           | Description                                |
+      | packagefilepath | h5p/tests/fixtures/multiple-choice-2-6.h5p |
+    And the following "blocks" exist:
+      | blockname       | contextlevel | reference | pagetypepattern | defaultregion |
+      | recent_activity | Course       | C1        | course-view-*   | side-pre      |
+    And I am on the "Awesome H5P package" "h5pactivity activity" page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And I click on "Wrong one" "text" in the ".h5p-question-content" "css_element"
     And I click on "Check" "button" in the ".h5p-question-buttons" "css_element"
     And I switch to the main frame
+<<<<<<< HEAD
     And I log out
     And I am on the "Awesome H5P package" "h5pactivity activity" page logged in as student2
     # The H5P content needs some time to be displayed (so better to wait for 1 second to avoid random errors).
+=======
+    And I am on the "Awesome H5P package" "h5pactivity activity" page logged in as student2
+>>>>>>> forked/LAE_400_PACKAGE
     And I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And I click on "Correct one" "text" in the ".h5p-question-content" "css_element"
     And I click on "Check" "button" in the ".h5p-question-buttons" "css_element"
     And I switch to the main frame
+<<<<<<< HEAD
     And I log out
 
+=======
+
+  @javascript
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Student see only his own activity
     Given I am on the "Course 1" course page logged in as student1
     And I should see "H5P submitted:" in the "Recent activity" "block"
@@ -59,6 +83,10 @@ Feature: Users can see the H5P recent activity from the recent activity block
     And I should not see "Grade:"
     And I should not see "Student 2 - "
 
+<<<<<<< HEAD
+=======
+  @javascript
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Teacher see each student activity
     Given I am on the "Course 1" course page logged in as teacher1
     And I should see "H5P submitted:" in the "Recent activity" "block"

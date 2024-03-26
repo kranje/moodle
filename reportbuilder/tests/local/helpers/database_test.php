@@ -33,6 +33,7 @@ use core_user;
 class database_test extends advanced_testcase {
 
     /**
+<<<<<<< HEAD
      * Test generating alias
      */
     public function test_generate_alias(): void {
@@ -74,12 +75,44 @@ class database_test extends advanced_testcase {
         $this->assertNotEquals($paramone, $paramtwo);
         $this->assertNotEquals($paramone, $paramthree);
         $this->assertNotEquals($paramtwo, $paramthree);
+=======
+     * Test generating table alias and parameter names
+     */
+    public function test_generate_alias_params(): void {
+        global $DB;
+
+        $admin = core_user::get_user_by_username('admin');
+
+        $usertablealias = database::generate_alias();
+        $usertablealiasjoin = database::generate_alias();
+        $useridalias = database::generate_alias();
+
+        $paramuserid = database::generate_param_name();
+        $paramuserdeleted = database::generate_param_name();
+
+        // Ensure they are different.
+        $this->assertNotEquals($usertablealias, $usertablealiasjoin);
+        $this->assertNotEquals($paramuserid, $paramuserdeleted);
+
+        $sql = "SELECT {$usertablealias}.id AS {$useridalias}
+                  FROM {user} {$usertablealias}
+                  JOIN {user} {$usertablealiasjoin} ON {$usertablealiasjoin}.id = {$usertablealias}.id
+                 WHERE {$usertablealias}.id = :{$paramuserid} AND {$usertablealias}.deleted = :{$paramuserdeleted}";
+        $params = [$paramuserid => $admin->id, $paramuserdeleted => 0];
+
+        $validated = database::validate_params($params);
+        $this->assertTrue($validated);
+
+        $record = $DB->get_record_sql($sql, $params);
+        $this->assertEquals($admin->id, $record->{$useridalias});
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Test parameter validation
      */
     public function test_validate_params(): void {
+<<<<<<< HEAD
         [$paramone, $paramtwo] = database::generate_param_names(2);
 
         $params = [
@@ -94,6 +127,8 @@ class database_test extends advanced_testcase {
      * Test parameter validation for invalid parameters
      */
     public function test_validate_params_invalid(): void {
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $params = [
             database::generate_param_name() => 1,
             'invalidfoo' => 2,
@@ -106,6 +141,7 @@ class database_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Generate aliases and parameters and confirm they can be used within a query
      */
     public function test_generated_data_in_query(): void {
@@ -138,5 +174,31 @@ class database_test extends advanced_testcase {
 
         $record = $DB->get_record_sql($sql, $params);
         $this->assertEquals($admin->id, $record->{$userfieldalias});
+=======
+     * Test replacement of parameter names within SQL statements
+     */
+    public function test_sql_replace_parameter_names(): void {
+        global $DB;
+
+        // Predefine parameter names, to ensure they don't overwrite each other.
+        [$param0, $param1, $param10] = ['rbparam0', 'rbparam1', 'rbparam10'];
+
+        $sql = "SELECT :{$param0} AS field0, :{$param1} AS field1, :{$param10} AS field10" . $DB->sql_null_from_clause();
+        $sql = database::sql_replace_parameter_names($sql, [$param0, $param1, $param10], static function(string $param): string {
+            return "prefix_{$param}";
+        });
+
+        $record = $DB->get_record_sql($sql, [
+            "prefix_{$param0}" => 'Zero',
+            "prefix_{$param1}" => 'One',
+            "prefix_{$param10}" => 'Ten',
+        ]);
+
+        $this->assertEquals((object) [
+            'field0' => 'Zero',
+            'field1' => 'One',
+            'field10' => 'Ten',
+        ], $record);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

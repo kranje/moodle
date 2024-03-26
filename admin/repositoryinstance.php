@@ -104,7 +104,11 @@ if (!empty($edit) || !empty($new)) {
             core_plugin_manager::reset_caches();
             redirect($parenturl);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('instancenotsaved', 'repository', $parenturl);
+=======
+            print_error('instancenotsaved', 'repository', $parenturl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
     } else {
@@ -134,7 +138,11 @@ if (!empty($edit) || !empty($new)) {
             core_plugin_manager::reset_caches();
             redirect($parenturl, $deletedstr, 3);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('instancenotdeleted', 'repository', $parenturl);
+=======
+            print_error('instancenotdeleted', 'repository', $parenturl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
     }

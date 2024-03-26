@@ -48,6 +48,10 @@
  */
 class SimplePie_Exception extends Exception
 {
+<<<<<<< HEAD
 }
 
 class_alias('SimplePie_Exception', 'SimplePie\Exception', false);
+=======
+}
+>>>>>>> forked/LAE_400_PACKAGE

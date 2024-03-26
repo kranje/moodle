@@ -10,10 +10,15 @@ use SimpleXMLElement;
 
 class ColumnAndRowAttributes extends BaseParserClass
 {
+<<<<<<< HEAD
     /** @var Worksheet */
     private $worksheet;
 
     /** @var ?SimpleXMLElement */
+=======
+    private $worksheet;
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $worksheetXml;
 
     public function __construct(Worksheet $workSheet, ?SimpleXMLElement $worksheetXml = null)
@@ -122,7 +127,11 @@ class ColumnAndRowAttributes extends BaseParserClass
         }
     }
 
+<<<<<<< HEAD
     private function isFilteredColumn(IReadFilter $readFilter, string $columnCoordinate, array $rowsAttributes): bool
+=======
+    private function isFilteredColumn(IReadFilter $readFilter, $columnCoordinate, array $rowsAttributes)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         foreach ($rowsAttributes as $rowCoordinate => $rowAttributes) {
             if (!$readFilter->readCell($columnCoordinate, $rowCoordinate, $this->worksheet->getTitle())) {
@@ -133,7 +142,11 @@ class ColumnAndRowAttributes extends BaseParserClass
         return false;
     }
 
+<<<<<<< HEAD
     private function readColumnAttributes(SimpleXMLElement $worksheetCols, bool $readDataOnly): array
+=======
+    private function readColumnAttributes(SimpleXMLElement $worksheetCols, $readDataOnly)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $columnAttributes = [];
 
@@ -153,7 +166,11 @@ class ColumnAndRowAttributes extends BaseParserClass
         return $columnAttributes;
     }
 
+<<<<<<< HEAD
     private function readColumnRangeAttributes(SimpleXMLElement $column, bool $readDataOnly): array
+=======
+    private function readColumnRangeAttributes(SimpleXMLElement $column, $readDataOnly)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $columnAttributes = [];
 
@@ -174,7 +191,11 @@ class ColumnAndRowAttributes extends BaseParserClass
         return $columnAttributes;
     }
 
+<<<<<<< HEAD
     private function isFilteredRow(IReadFilter $readFilter, int $rowCoordinate, array $columnsAttributes): bool
+=======
+    private function isFilteredRow(IReadFilter $readFilter, $rowCoordinate, array $columnsAttributes)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         foreach ($columnsAttributes as $columnCoordinate => $columnAttributes) {
             if (!$readFilter->readCell($columnCoordinate, $rowCoordinate, $this->worksheet->getTitle())) {
@@ -185,7 +206,11 @@ class ColumnAndRowAttributes extends BaseParserClass
         return false;
     }
 
+<<<<<<< HEAD
     private function readRowAttributes(SimpleXMLElement $worksheetRow, bool $readDataOnly): array
+=======
+    private function readRowAttributes(SimpleXMLElement $worksheetRow, $readDataOnly)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $rowAttributes = [];
 

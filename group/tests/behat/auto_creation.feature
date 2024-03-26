@@ -164,11 +164,17 @@ Feature: Automatic creation of groups
 
   Scenario: Do not display 'Include only active enrolments' if user does not have the 'moodle/course:viewsuspendedusers' capability
     Given I log out
+<<<<<<< HEAD
     And I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability | permission |
       | moodle/course:viewsuspendedusers | Prevent |
     And I log out
+=======
+    And the following "role capability" exists:
+      | role                             | editingteacher |
+      | moodle/course:viewsuspendedusers | prevent        |
+>>>>>>> forked/LAE_400_PACKAGE
     And I log in as "teacher1"
     And I am on the "Course 1" "groups" page
     When I press "Auto-create groups"

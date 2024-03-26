@@ -39,11 +39,17 @@ Feature: Rename roles in a course
     And I should not see "Learner (Student)" in the "Student 1" "table_row"
 
   Scenario: Ability to rename roles can be prevented
+<<<<<<< HEAD
     Given I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability         | permission |
       | moodle/course:renameroles | Inherit |
     And I follow "Log out"
+=======
+    Given the following "role capability" exists:
+      | role                      | editingteacher |
+      | moodle/course:renameroles | inherit        |
+>>>>>>> forked/LAE_400_PACKAGE
     When I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Settings" in current page administration

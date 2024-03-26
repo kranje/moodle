@@ -84,9 +84,12 @@ abstract class base {
     /** @var string $downloadfilename Name of the downloaded file */
     private $downloadfilename = '';
 
+<<<<<<< HEAD
     /** @var int Default paging size */
     private $defaultperpage = self::DEFAULT_PAGESIZE;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Base report constructor
      *
@@ -273,6 +276,7 @@ abstract class base {
     }
 
     /**
+<<<<<<< HEAD
      * Returns the list of all the entities added to the report
      *
      * @return entity_base[]
@@ -282,6 +286,8 @@ abstract class base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Define a new entity for the report
      *
      * @param string $name
@@ -726,6 +732,7 @@ abstract class base {
     public function get_context(): context {
         return $this->report->get_context();
     }
+<<<<<<< HEAD
 
     /**
      * Set the default 'per page' size
@@ -744,4 +751,6 @@ abstract class base {
     public function get_default_per_page(): int {
         return $this->defaultperpage;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

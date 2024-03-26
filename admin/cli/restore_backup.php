@@ -69,6 +69,7 @@ if ($options['showdebugging']) {
 }
 
 if (!$admin = get_admin()) {
+<<<<<<< HEAD
     throw new \moodle_exception('noadmins');
 }
 
@@ -78,6 +79,17 @@ if (!file_exists($options['file'])) {
 
 if (!$category = $DB->get_record('course_categories', ['id' => $options['categoryid']], 'id')) {
     throw new \moodle_exception('invalidcategoryid');
+=======
+    print_error('noadmins');
+}
+
+if (!file_exists($options['file'])) {
+    print_error('filenotfound');
+}
+
+if (!$category = $DB->get_record('course_categories', ['id' => $options['categoryid']], 'id')) {
+    print_error('invalidcategoryid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $backupdir = "restore_" . uniqid();
@@ -102,7 +114,11 @@ try {
 } catch (Exception $e) {
     cli_heading(get_string('cleaningtempdata'));
     fulldelete($path);
+<<<<<<< HEAD
     throw new \moodle_exception('generalexceptionmessage', 'error', '', $e->getMessage());
+=======
+    print_error('generalexceptionmessage', 'error', '', $e->getMessage());
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 cli_heading(get_string('restoredcourseid', 'backup', $courseid));

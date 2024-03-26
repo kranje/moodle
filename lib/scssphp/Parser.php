@@ -27,7 +27,10 @@ use ScssPhp\ScssPhp\Block\WhileBlock;
 use ScssPhp\ScssPhp\Exception\ParserException;
 use ScssPhp\ScssPhp\Logger\LoggerInterface;
 use ScssPhp\ScssPhp\Logger\QuietLogger;
+<<<<<<< HEAD
 use ScssPhp\ScssPhp\Node\Number;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Parser
@@ -87,6 +90,13 @@ class Parser
      */
     private $sourcePositions;
     /**
+<<<<<<< HEAD
+=======
+     * @var array|null
+     */
+    private $charset;
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * The current offset in the buffer
      *
      * @var int
@@ -144,9 +154,17 @@ class Parser
     {
         $this->sourceName       = $sourceName ?: '(stdin)';
         $this->sourceIndex      = $sourceIndex;
+<<<<<<< HEAD
         $this->utf8             = ! $encoding || strtolower($encoding) === 'utf-8';
         $this->patternModifiers = $this->utf8 ? 'Aisu' : 'Ais';
         $this->commentsSeen     = [];
+=======
+        $this->charset          = null;
+        $this->utf8             = ! $encoding || strtolower($encoding) === 'utf-8';
+        $this->patternModifiers = $this->utf8 ? 'Aisu' : 'Ais';
+        $this->commentsSeen     = [];
+        $this->commentsSeen     = [];
+>>>>>>> forked/LAE_400_PACKAGE
         $this->allowVars        = true;
         $this->cssOnly          = $cssOnly;
         $this->logger = $logger ?: new QuietLogger();
@@ -250,6 +268,10 @@ class Parser
         if ($this->cache) {
             $cacheKey = $this->sourceName . ':' . md5($buffer);
             $parseOptions = [
+<<<<<<< HEAD
+=======
+                'charset' => $this->charset,
+>>>>>>> forked/LAE_400_PACKAGE
                 'utf8' => $this->utf8,
             ];
             $v = $this->cache->getCache('parse', $cacheKey, $parseOptions);
@@ -290,8 +312,16 @@ class Parser
             throw $this->parseError('unclosed block');
         }
 
+<<<<<<< HEAD
         $this->restoreEncoding();
         assert($this->env !== null);
+=======
+        if ($this->charset) {
+            array_unshift($this->env->children, $this->charset);
+        }
+
+        $this->restoreEncoding();
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($this->cache) {
             $this->cache->setCache('parse', $cacheKey, $this->env, $parseOptions);
@@ -371,8 +401,13 @@ class Parser
      *
      * @api
      *
+<<<<<<< HEAD
      * @param string $buffer
      * @param array  $out
+=======
+     * @param string       $buffer
+     * @param string|array $out
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return bool
      */
@@ -818,6 +853,21 @@ class Parser
                 $this->valueList($charset) &&
                 $this->end()
             ) {
+<<<<<<< HEAD
+=======
+                if (! isset($this->charset)) {
+                    $statement = [Type::T_CHARSET, $charset];
+
+                    list($line, $column) = $this->getSourcePosition($s);
+
+                    $statement[static::SOURCE_LINE]   = $line;
+                    $statement[static::SOURCE_COLUMN] = $column;
+                    $statement[static::SOURCE_INDEX]  = $this->sourceIndex;
+
+                    $this->charset = $statement;
+                }
+
+>>>>>>> forked/LAE_400_PACKAGE
                 return true;
             }
 
@@ -1053,8 +1103,11 @@ class Parser
             $block = $this->popBlock();
 
             if (! isset($block->type) || $block->type !== Type::T_IF) {
+<<<<<<< HEAD
                 assert($this->env !== null);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 if ($this->env->parent) {
                     $this->append(null); // collect comments before next statement if needed
                 }
@@ -1074,7 +1127,10 @@ class Parser
             // collect comments just after the block closing if needed
             if ($this->eatWhiteDefault) {
                 $this->whitespace();
+<<<<<<< HEAD
                 assert($this->env !== null);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
                 if ($this->env->comments) {
                     $this->append(null);
@@ -1143,7 +1199,10 @@ class Parser
         // collect comments at the beginning of a block if needed
         if ($this->eatWhiteDefault) {
             $this->whitespace();
+<<<<<<< HEAD
             assert($this->env !== null);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
             if ($this->env->comments) {
                 $this->append(null);
@@ -1178,7 +1237,10 @@ class Parser
      */
     protected function popBlock()
     {
+<<<<<<< HEAD
         assert($this->env !== null);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // collect comments ending just before of a block closing
         if ($this->env->comments) {
@@ -1229,8 +1291,11 @@ class Parser
      * Seek to position in input stream (or return current position in input stream)
      *
      * @param int $where
+<<<<<<< HEAD
      *
      * @return void
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function seek($where)
     {
@@ -1243,8 +1308,11 @@ class Parser
      * @param array|false $parsed
      * @param int         $startPos
      *
+<<<<<<< HEAD
      * @return array
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws ParserException
      */
     protected function assertPlainCssValid($parsed, $startPos = null)
@@ -1276,7 +1344,11 @@ class Parser
      * @param array $parsed
      * @param bool  $allowExpression
      *
+<<<<<<< HEAD
      * @return array|false
+=======
+     * @return bool|array
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function isPlainCssValidElement($parsed, $allowExpression = false)
     {
@@ -1456,8 +1528,11 @@ class Parser
      * @param string $delim Delimiter
      *
      * @return bool True if match; false otherwise
+<<<<<<< HEAD
      *
      * @phpstan-impure
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function matchString(&$m, $delim)
     {
@@ -1498,8 +1573,11 @@ class Parser
      * @param bool   $eatWhitespace
      *
      * @return bool
+<<<<<<< HEAD
      *
      * @phpstan-impure
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function match($regex, &$out, $eatWhitespace = null)
     {
@@ -1529,8 +1607,11 @@ class Parser
      * @param bool   $eatWhitespace
      *
      * @return bool
+<<<<<<< HEAD
      *
      * @phpstan-impure
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function matchChar($char, $eatWhitespace = null)
     {
@@ -1559,8 +1640,11 @@ class Parser
      * @param bool   $eatWhitespace
      *
      * @return bool
+<<<<<<< HEAD
      *
      * @phpstan-impure
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function literal($what, $len, $eatWhitespace = null)
     {
@@ -1585,8 +1669,11 @@ class Parser
      * Match some whitespace
      *
      * @return bool
+<<<<<<< HEAD
      *
      * @phpstan-impure
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function whitespace()
     {
@@ -1638,11 +1725,16 @@ class Parser
 
                 if (! $comment) {
                     // single part static comment
+<<<<<<< HEAD
                     $commentStatement = [Type::T_COMMENT, $c];
+=======
+                    $this->appendComment([Type::T_COMMENT, $c]);
+>>>>>>> forked/LAE_400_PACKAGE
                 } else {
                     $comment[] = $c;
                     $staticComment = substr($this->buffer, $startCommentCount, $endCommentCount - $startCommentCount);
                     $commentStatement = [Type::T_COMMENT, $staticComment, [Type::T_STRING, '', $comment]];
+<<<<<<< HEAD
                 }
 
                 list($line, $column) = $this->getSourcePosition($startCommentCount);
@@ -1652,6 +1744,17 @@ class Parser
 
                 $this->appendComment($commentStatement);
 
+=======
+
+                    list($line, $column) = $this->getSourcePosition($startCommentCount);
+                    $commentStatement[self::SOURCE_LINE] = $line;
+                    $commentStatement[self::SOURCE_COLUMN] = $column;
+                    $commentStatement[self::SOURCE_INDEX] = $this->sourceIndex;
+
+                    $this->appendComment($commentStatement);
+                }
+
+>>>>>>> forked/LAE_400_PACKAGE
                 $this->commentsSeen[$startCommentCount] = true;
                 $this->count = $endCommentCount;
             } else {
@@ -1673,6 +1776,7 @@ class Parser
      * Append comment to current block
      *
      * @param array $comment
+<<<<<<< HEAD
      *
      * @return void
      */
@@ -1680,6 +1784,11 @@ class Parser
     {
         assert($this->env !== null);
 
+=======
+     */
+    protected function appendComment($comment)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         if (! $this->discardComments) {
             $this->env->comments[] = $comment;
         }
@@ -1690,6 +1799,7 @@ class Parser
      *
      * @param array|null $statement
      * @param int        $pos
+<<<<<<< HEAD
      *
      * @return void
      */
@@ -1697,6 +1807,11 @@ class Parser
     {
         assert($this->env !== null);
 
+=======
+     */
+    protected function append($statement, $pos = null)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         if (! \is_null($statement)) {
             ! $this->cssOnly || ($statement = $this->assertPlainCssValid($statement, $pos));
 
@@ -1726,15 +1841,21 @@ class Parser
      */
     protected function last()
     {
+<<<<<<< HEAD
         assert($this->env !== null);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $i = \count($this->env->children) - 1;
 
         if (isset($this->env->children[$i])) {
             return $this->env->children[$i];
         }
+<<<<<<< HEAD
 
         return null;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -2079,12 +2200,19 @@ class Parser
     /**
      * Parse directive value list that considers $vars as keyword
      *
+<<<<<<< HEAD
      * @param array        $out
      * @param string|false $endChar
      *
      * @return bool
      *
      * @phpstan-impure
+=======
+     * @param array       $out
+     * @param bool|string $endChar
+     *
+     * @return bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function directiveValue(&$out, $endChar = false)
     {
@@ -2223,7 +2351,10 @@ class Parser
     {
         $s     = $this->count;
         $items = [];
+<<<<<<< HEAD
         /** @var array|Number|null $value */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $value = null;
 
         while ($this->$parseItem($value)) {
@@ -2237,12 +2368,18 @@ class Parser
 
                 $trailing_delim = true;
             } else {
+<<<<<<< HEAD
                 assert(\is_array($value) || $value instanceof Number);
                 // if no delim watch that a keyword didn't eat the single/double quote
                 // from the following starting string
                 if ($value[0] === Type::T_KEYWORD) {
                     assert(\is_array($value));
                     /** @var string $word */
+=======
+                // if no delim watch that a keyword didn't eat the single/double quote
+                // from the following starting string
+                if ($value[0] === Type::T_KEYWORD) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $word = $value[1];
 
                     $last_char = substr($word, -1);
@@ -2267,10 +2404,15 @@ class Parser
                             $this->count--;
                         }
 
+<<<<<<< HEAD
                         /** @var array|Number|null $nextValue */
                         $nextValue = null;
                         if ($this->$parseItem($nextValue)) {
                             assert(\is_array($nextValue) || $nextValue instanceof Number);
+=======
+                        $nextValue = null;
+                        if ($this->$parseItem($nextValue)) {
+>>>>>>> forked/LAE_400_PACKAGE
                             if ($nextValue[0] === Type::T_KEYWORD && $nextValue[1] === $last_char) {
                                 // bad try, forget it
                                 $this->seek($currentCount);
@@ -2324,8 +2466,11 @@ class Parser
      * @param bool  $lookForExp
      *
      * @return bool
+<<<<<<< HEAD
      *
      * @phpstan-impure
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function expression(&$out, $listOnly = false, $lookForExp = true)
     {
@@ -2386,6 +2531,7 @@ class Parser
     /**
      * Parse expression specifically checking for lists in parenthesis or brackets
      *
+<<<<<<< HEAD
      * @param array    $out
      * @param int      $s
      * @param string   $closingParen
@@ -2394,6 +2540,14 @@ class Parser
      * @return bool
      *
      * @phpstan-param array<Type::*> $allowedTypes
+=======
+     * @param array   $out
+     * @param int     $s
+     * @param string  $closingParen
+     * @param array   $allowedTypes
+     *
+     * @return bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function enclosedExpression(&$out, $s, $closingParen = ')', $allowedTypes = [Type::T_LIST, Type::T_MAP])
     {
@@ -2461,7 +2615,11 @@ class Parser
         $whiteBefore = isset($this->buffer[$this->count - 1]) &&
             ctype_space($this->buffer[$this->count - 1]);
 
+<<<<<<< HEAD
         while ($this->match($operators, $m, false) && static::$precedence[strtolower($m[1])] >= $minP) {
+=======
+        while ($this->match($operators, $m, false) && static::$precedence[$m[1]] >= $minP) {
+>>>>>>> forked/LAE_400_PACKAGE
             $whiteAfter = isset($this->buffer[$this->count]) &&
                 ctype_space($this->buffer[$this->count]);
             $varAfter = isset($this->buffer[$this->count]) &&
@@ -2485,7 +2643,11 @@ class Parser
             }
 
             // consume higher-precedence operators on the right-hand side
+<<<<<<< HEAD
             $rhs = $this->expHelper($rhs, static::$precedence[strtolower($op)] + 1);
+=======
+            $rhs = $this->expHelper($rhs, static::$precedence[$op] + 1);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $lhs = [Type::T_EXPRESSION, $op, $lhs, $rhs, $this->inParens, $whiteBefore, $whiteAfter];
 
@@ -2804,10 +2966,13 @@ class Parser
                     $this->argValues($args) &&
                     $this->matchChar(')')
                 ) {
+<<<<<<< HEAD
                     if (strtolower($name) === 'var' && \count($args) === 2 && $args[1][0] === Type::T_NULL) {
                         $args[1] = [null, [Type::T_STRING, '', [' ']], false];
                     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                     $func = [Type::T_FUNCTION_CALL, $name, $args];
 
                     return true;
@@ -4042,7 +4207,11 @@ class Parser
      *
      * @param array $value
      *
+<<<<<<< HEAD
      * @return string[]
+=======
+     * @return array
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function stripAssignmentFlags(&$value)
     {
@@ -4069,7 +4238,11 @@ class Parser
      *
      * @param array $selectors
      *
+<<<<<<< HEAD
      * @return bool
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     protected function stripOptionalFlag(&$selectors)
     {
@@ -4118,8 +4291,11 @@ class Parser
      * Extract line numbers from buffer
      *
      * @param string $buffer
+<<<<<<< HEAD
      *
      * @return void
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private function extractLineNumbers($buffer)
     {
@@ -4144,7 +4320,10 @@ class Parser
      * @param int $pos
      *
      * @return array
+<<<<<<< HEAD
      * @phpstan-return array{int, int}
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private function getSourcePosition($pos)
     {

@@ -24,12 +24,17 @@
 import ModalForm from 'core_form/modalform';
 import Notification from 'core/notification';
 import {get_string as getString} from 'core/str';
+<<<<<<< HEAD
+=======
+import {add as addToast} from 'core/toast';
+>>>>>>> forked/LAE_400_PACKAGE
 
 const selectors = {
     saveAsPresetButton: '[data-action="saveaspreset"]',
 };
 
 /**
+<<<<<<< HEAD
  * Initialize module.
  */
 export const init = () => {
@@ -42,12 +47,26 @@ export const init = () => {
         }
 
         event.preventDefault();
+=======
+ * Initialize module
+ */
+export const init = () => {
+    const saveAsPresetButton = document.querySelector(selectors.saveAsPresetButton);
+
+    saveAsPresetButton.addEventListener('click', event => {
+        event.preventDefault();
+
+>>>>>>> forked/LAE_400_PACKAGE
         const modalForm = new ModalForm({
             modalConfig: {
                 title: getString('savedataaspreset', 'mod_data'),
             },
             formClass: 'mod_data\\form\\save_as_preset',
+<<<<<<< HEAD
             args: {d: saveAsPresetButton.dataset.dataid},
+=======
+            args: {d: saveAsPresetButton.getAttribute('data-dataid')},
+>>>>>>> forked/LAE_400_PACKAGE
             saveButtonText: getString('save'),
             returnFocus: saveAsPresetButton,
         });
@@ -55,7 +74,11 @@ export const init = () => {
         // Show a toast notification when the form is submitted.
         modalForm.addEventListener(modalForm.events.FORM_SUBMITTED, event => {
             if (event.detail.result) {
+<<<<<<< HEAD
                 window.location.reload();
+=======
+                getString('savesuccess', 'data').then(addToast).catch();
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 Notification.addNotification({
                     type: 'error',

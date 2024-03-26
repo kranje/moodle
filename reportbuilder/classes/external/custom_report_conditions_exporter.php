@@ -20,8 +20,13 @@ namespace core_reportbuilder\external;
 
 use renderer_base;
 use core\external\exporter;
+<<<<<<< HEAD
 use core_reportbuilder\datasource;
 use core_reportbuilder\form\condition;
+=======
+use core_reportbuilder\form\condition;
+use core_reportbuilder\local\report\base;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\models\filter;
 
 /**
@@ -40,7 +45,11 @@ class custom_report_conditions_exporter extends exporter {
      */
     protected static function define_related(): array {
         return [
+<<<<<<< HEAD
             'report' => datasource::class,
+=======
+            'report' => base::class,
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -53,6 +62,10 @@ class custom_report_conditions_exporter extends exporter {
         return [
             'hasavailableconditions' => [
                 'type' => PARAM_BOOL,
+<<<<<<< HEAD
+=======
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
             'availableconditions' => [
                 'type' => [
@@ -70,6 +83,7 @@ class custom_report_conditions_exporter extends exporter {
                     ],
                 ],
                 'multiple' => true,
+<<<<<<< HEAD
             ],
             'hasactiveconditions' => [
                 'type' => PARAM_BOOL,
@@ -79,6 +93,21 @@ class custom_report_conditions_exporter extends exporter {
             ],
             'helpicon' => [
                 'type' => PARAM_RAW,
+=======
+                'optional' => true
+            ],
+            'hasactiveconditions' => [
+                'type' => PARAM_BOOL,
+                'optional' => true,
+            ],
+            'activeconditionsform' => [
+                'type' => PARAM_RAW,
+                'optional' => true,
+            ],
+            'helpicon' => [
+                'type' => PARAM_RAW,
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
             'javascript' => [
                 'type' => PARAM_RAW,
@@ -94,7 +123,11 @@ class custom_report_conditions_exporter extends exporter {
      * @return array
      */
     protected function get_other_values(renderer_base $output): array {
+<<<<<<< HEAD
         /** @var datasource $report */
+=======
+        /** @var base $report */
+>>>>>>> forked/LAE_400_PACKAGE
         $report = $this->related['report'];
         $reportid = $report->get_report_persistent()->get('id');
 

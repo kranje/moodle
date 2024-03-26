@@ -54,6 +54,7 @@ class Layout
     private $height;
 
     /**
+<<<<<<< HEAD
      * Position - t=top.
      *
      * @var string
@@ -71,6 +72,12 @@ class Layout
      * Specifies that legend keys should be shown in data labels.
      *
      * @var ?bool
+=======
+     * show legend key
+     * Specifies that legend keys should be shown in data labels.
+     *
+     * @var bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $showLegendKey;
 
@@ -78,7 +85,11 @@ class Layout
      * show value
      * Specifies that the value should be shown in a data label.
      *
+<<<<<<< HEAD
      * @var ?bool
+=======
+     * @var bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $showVal;
 
@@ -86,7 +97,11 @@ class Layout
      * show category name
      * Specifies that the category name should be shown in the data label.
      *
+<<<<<<< HEAD
      * @var ?bool
+=======
+     * @var bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $showCatName;
 
@@ -94,7 +109,11 @@ class Layout
      * show data series name
      * Specifies that the series name should be shown in the data label.
      *
+<<<<<<< HEAD
      * @var ?bool
+=======
+     * @var bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $showSerName;
 
@@ -102,14 +121,22 @@ class Layout
      * show percentage
      * Specifies that the percentage should be shown in the data label.
      *
+<<<<<<< HEAD
      * @var ?bool
+=======
+     * @var bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $showPercent;
 
     /**
      * show bubble size.
      *
+<<<<<<< HEAD
      * @var ?bool
+=======
+     * @var bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $showBubbleSize;
 
@@ -117,6 +144,7 @@ class Layout
      * show leader lines
      * Specifies that leader lines should be shown for the data label.
      *
+<<<<<<< HEAD
      * @var ?bool
      */
     private $showLeaderLines;
@@ -130,6 +158,12 @@ class Layout
     /** @var ?ChartColor */
     private $labelFontColor;
 
+=======
+     * @var bool
+     */
+    private $showLeaderLines;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Create a new Layout.
      */
@@ -156,6 +190,7 @@ class Layout
         if (isset($layout['h'])) {
             $this->height = (float) $layout['h'];
         }
+<<<<<<< HEAD
         if (isset($layout['dLblPos'])) {
             $this->dLblPos = (string) $layout['dLblPos'];
         }
@@ -187,6 +222,8 @@ class Layout
         if (isset($layout[$name]) && $layout[$name] instanceof ChartColor) {
             $this->$name = $layout[$name];
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -357,7 +394,16 @@ class Layout
         return $this;
     }
 
+<<<<<<< HEAD
     public function getShowLegendKey(): ?bool
+=======
+    /**
+     * Get show legend key.
+     *
+     * @return bool
+     */
+    public function getShowLegendKey()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->showLegendKey;
     }
@@ -365,15 +411,33 @@ class Layout
     /**
      * Set show legend key
      * Specifies that legend keys should be shown in data labels.
+<<<<<<< HEAD
      */
     public function setShowLegendKey(?bool $showLegendKey): self
+=======
+     *
+     * @param bool $showLegendKey Show legend key
+     *
+     * @return $this
+     */
+    public function setShowLegendKey($showLegendKey)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->showLegendKey = $showLegendKey;
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getShowVal(): ?bool
+=======
+    /**
+     * Get show value.
+     *
+     * @return bool
+     */
+    public function getShowVal()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->showVal;
     }
@@ -381,15 +445,33 @@ class Layout
     /**
      * Set show val
      * Specifies that the value should be shown in data labels.
+<<<<<<< HEAD
      */
     public function setShowVal(?bool $showDataLabelValues): self
+=======
+     *
+     * @param bool $showDataLabelValues Show val
+     *
+     * @return $this
+     */
+    public function setShowVal($showDataLabelValues)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->showVal = $showDataLabelValues;
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getShowCatName(): ?bool
+=======
+    /**
+     * Get show category name.
+     *
+     * @return bool
+     */
+    public function getShowCatName()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->showCatName;
     }
@@ -397,77 +479,167 @@ class Layout
     /**
      * Set show cat name
      * Specifies that the category name should be shown in data labels.
+<<<<<<< HEAD
      */
     public function setShowCatName(?bool $showCategoryName): self
+=======
+     *
+     * @param bool $showCategoryName Show cat name
+     *
+     * @return $this
+     */
+    public function setShowCatName($showCategoryName)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->showCatName = $showCategoryName;
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getShowSerName(): ?bool
+=======
+    /**
+     * Get show data series name.
+     *
+     * @return bool
+     */
+    public function getShowSerName()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->showSerName;
     }
 
     /**
+<<<<<<< HEAD
      * Set show data series name.
      * Specifies that the series name should be shown in data labels.
      */
     public function setShowSerName(?bool $showSeriesName): self
+=======
+     * Set show ser name
+     * Specifies that the series name should be shown in data labels.
+     *
+     * @param bool $showSeriesName Show series name
+     *
+     * @return $this
+     */
+    public function setShowSerName($showSeriesName)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->showSerName = $showSeriesName;
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getShowPercent(): ?bool
+=======
+    /**
+     * Get show percentage.
+     *
+     * @return bool
+     */
+    public function getShowPercent()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->showPercent;
     }
 
     /**
+<<<<<<< HEAD
      * Set show percentage.
      * Specifies that the percentage should be shown in data labels.
      */
     public function setShowPercent(?bool $showPercentage): self
+=======
+     * Set show percentage
+     * Specifies that the percentage should be shown in data labels.
+     *
+     * @param bool $showPercentage Show percentage
+     *
+     * @return $this
+     */
+    public function setShowPercent($showPercentage)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->showPercent = $showPercentage;
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getShowBubbleSize(): ?bool
+=======
+    /**
+     * Get show bubble size.
+     *
+     * @return bool
+     */
+    public function getShowBubbleSize()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->showBubbleSize;
     }
 
     /**
+<<<<<<< HEAD
      * Set show bubble size.
      * Specifies that the bubble size should be shown in data labels.
      */
     public function setShowBubbleSize(?bool $showBubbleSize): self
+=======
+     * Set show bubble size
+     * Specifies that the bubble size should be shown in data labels.
+     *
+     * @param bool $showBubbleSize Show bubble size
+     *
+     * @return $this
+     */
+    public function setShowBubbleSize($showBubbleSize)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->showBubbleSize = $showBubbleSize;
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getShowLeaderLines(): ?bool
+=======
+    /**
+     * Get show leader lines.
+     *
+     * @return bool
+     */
+    public function getShowLeaderLines()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->showLeaderLines;
     }
 
     /**
+<<<<<<< HEAD
      * Set show leader lines.
      * Specifies that leader lines should be shown in data labels.
      */
     public function setShowLeaderLines(?bool $showLeaderLines): self
+=======
+     * Set show leader lines
+     * Specifies that leader lines should be shown in data labels.
+     *
+     * @param bool $showLeaderLines Show leader lines
+     *
+     * @return $this
+     */
+    public function setShowLeaderLines($showLeaderLines)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->showLeaderLines = $showLeaderLines;
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function getLabelFillColor(): ?ChartColor
     {
@@ -540,4 +712,6 @@ class Layout
 
         return $this;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

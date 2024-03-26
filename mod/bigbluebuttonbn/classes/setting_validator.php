@@ -239,6 +239,20 @@ class setting_validator {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Validate if lockonjoin section will be shown.
+     *
+     * @return bool
+     */
+    public static function section_lockonjoin_shown() {
+        global $CFG;
+        return (!isset($CFG->bigbluebuttonbn['lockonjoin_default']) ||
+            !isset($CFG->bigbluebuttonbn['lockonjoin_editable']));
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Validate that session lock settings is shown or not
      * @return bool
      */
@@ -249,6 +263,11 @@ class setting_validator {
                 self::section_disableprivatechat_shown() ||
                 self::section_disablepublicchat_shown() ||
                 self::section_disablenote_shown() ||
+<<<<<<< HEAD
                 self::section_hideuserlist_shown();
+=======
+                self::section_hideuserlist_shown() ||
+                self::section_lockonjoin_shown();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

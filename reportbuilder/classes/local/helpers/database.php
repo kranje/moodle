@@ -46,6 +46,7 @@ class database {
 
         return static::GENERATE_ALIAS_PREFIX . ($aliascount++);
     }
+<<<<<<< HEAD
 
     /**
      * Generate multiple unique table/column aliases, see {@see generate_alias} for info
@@ -59,6 +60,8 @@ class database {
         ], array_fill(0, $count, null));
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Generates unique parameter name that must be used in generated SQL
      *
@@ -71,6 +74,7 @@ class database {
     }
 
     /**
+<<<<<<< HEAD
      * Generate multiple unique parameter names, see {@see generate_param_name} for info
      *
      * @param int $count
@@ -83,6 +87,8 @@ class database {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Validate that parameter names were generated using {@see generate_param_name}.
      *
      * @param array $params
@@ -102,6 +108,32 @@ class database {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Replace parameter names within given SQL expression, allowing caller to specify callback to handle their replacement
+     * primarily to ensure uniqueness when the expression is to be used as part of a larger query
+     *
+     * @param string $sql
+     * @param array $params
+     * @param callable $callback Method that takes a single string parameter, and returns another string
+     * @return string
+     */
+    public static function sql_replace_parameter_names(string $sql, array $params, callable $callback): string {
+        foreach ($params as $param) {
+
+            // Pattern to look for param within the SQL.
+            $pattern = '/:(?<param>' . preg_quote($param) . ')\b/';
+
+            $sql = preg_replace_callback($pattern, function(array $matches) use ($callback): string {
+                return ':' . $callback($matches['param']);
+            }, $sql);
+        }
+
+        return $sql;
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Generate SQL expression for sorting group concatenated fields
      *
      * @param string $field The original field or SQL expression
@@ -134,7 +166,11 @@ class database {
             }
 
             // Cast sort, stick the direction on the end.
+<<<<<<< HEAD
             $fieldsort = $DB->sql_cast_to_char($fieldsort) . ' ' . $fieldsortdirection;
+=======
+            $fieldsort = "CAST({$fieldsort} AS VARCHAR) {$fieldsortdirection}";
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $fieldsort;

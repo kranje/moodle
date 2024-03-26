@@ -24,6 +24,11 @@
 
 namespace tool_langimport;
 
+<<<<<<< HEAD
+=======
+use moodle_url;
+
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir.'/filelib.php');
 require_once($CFG->libdir.'/componentlib.class.php');
@@ -60,6 +65,28 @@ class controller {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Redirect to the specified url, outputting any required messages.
+     *
+     * @param moodle_url $url
+     */
+    public function redirect(moodle_url $url): void {
+        if ($this->info) {
+            $info = implode('<br />', $this->info);
+            \core\notification::success($info);
+        }
+
+        if ($this->errors) {
+            $info = implode('<br />', $this->errors);
+            \core\notification::error($info);
+        }
+
+        redirect($url);
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Install language packs provided
      *
      * @param string|array $langs array of langcodes or individual langcodes
@@ -112,6 +139,21 @@ class controller {
     public function uninstall_language($lang) {
         global $CFG;
 
+<<<<<<< HEAD
+=======
+        $lang = clean_param($lang, PARAM_LANG);
+        if ($lang === '') {
+            // Do not allow uninstallation of invalid languages.
+            // Note: PARAM_LANG returns an empty string for invalid validation.
+            return false;
+        }
+
+        if ($lang === 'en') {
+            // Never allow removal of the default langauge.
+            return false;
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $dest1 = $CFG->dataroot.'/lang/'.$lang;
         $dest2 = $CFG->dirroot.'/lang/'.$lang;
         $rm1 = false;

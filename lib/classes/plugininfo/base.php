@@ -285,8 +285,12 @@ abstract class base {
         }
 
         if (isset($plugin->incompatible) && $plugin->incompatible !== null) {
+<<<<<<< HEAD
             if (((is_string($plugin->incompatible) && ctype_digit($plugin->incompatible)) || is_int($plugin->incompatible))
                     && (int) $plugin->incompatible > 0) {
+=======
+            if ((ctype_digit($plugin->incompatible) || is_int($plugin->incompatible)) && (int) $plugin->incompatible > 0) {
+>>>>>>> forked/LAE_400_PACKAGE
                 $this->pluginincompatible = intval($plugin->incompatible);
             } else {
                 throw new coding_exception('Incorrect syntax in plugin incompatible declaration in '."$this->name");
@@ -598,10 +602,13 @@ abstract class base {
     public function get_dir() {
         global $CFG;
 
+<<<<<<< HEAD
         if (!isset($pluginfo->rootdir)) {
             return '';
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return substr($this->rootdir, strlen($CFG->dirroot));
     }
 

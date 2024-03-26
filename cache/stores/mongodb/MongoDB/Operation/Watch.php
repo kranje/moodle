@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2017-present MongoDB, Inc.
+=======
+ * Copyright 2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,6 +40,7 @@ use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnexpectedValueException;
 use MongoDB\Exception\UnsupportedException;
 use MongoDB\Model\ChangeStreamIterator;
+<<<<<<< HEAD
 
 use function array_intersect_key;
 use function array_key_exists;
@@ -40,6 +49,12 @@ use function assert;
 use function count;
 use function is_array;
 use function is_bool;
+=======
+use function array_intersect_key;
+use function array_unshift;
+use function count;
+use function is_array;
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_object;
 use function is_string;
 use function MongoDB\Driver\Monitoring\addSubscriber;
@@ -55,6 +70,7 @@ use function MongoDB\server_supports_feature;
  *
  * @api
  * @see \MongoDB\Collection::watch()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/changeStreams/
  */
 class Watch implements Executable, /* @internal */ CommandSubscriber
@@ -67,6 +83,14 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
     public const FULL_DOCUMENT_BEFORE_CHANGE_OFF = 'off';
     public const FULL_DOCUMENT_BEFORE_CHANGE_WHEN_AVAILABLE = 'whenAvailable';
     public const FULL_DOCUMENT_BEFORE_CHANGE_REQUIRED = 'required';
+=======
+ * @see https://docs.mongodb.com/manual/changeStreams/
+ */
+class Watch implements Executable, /* @internal */ CommandSubscriber
+{
+    const FULL_DOCUMENT_DEFAULT = 'default';
+    const FULL_DOCUMENT_UPDATE_LOOKUP = 'updateLookup';
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var integer */
     private static $wireVersionForStartAtOperationTime = 7;
@@ -86,7 +110,11 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
     /** @var string */
     private $databaseName;
 
+<<<<<<< HEAD
     /** @var integer */
+=======
+    /** @var integer|null */
+>>>>>>> forked/LAE_400_PACKAGE
     private $firstBatchSize;
 
     /** @var boolean */
@@ -113,6 +141,7 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      *
      *  * collation (document): Specifies a collation.
      *
+<<<<<<< HEAD
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    Only string values are supported for server versions < 4.4.
@@ -144,6 +173,17 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      *    "whenAvailable" to return the pre-image if available or a null value
      *    if not. Specify "required" to return the pre-image if available or
      *    raise an error if not.
+=======
+     *  * fullDocument (string): Determines whether the "fullDocument" field
+     *    will be populated for update operations. By default, change streams
+     *    only return the delta of fields during the update operation (via the
+     *    "updateDescription" field). To additionally return the most current
+     *    majority-committed version of the updated document, specify
+     *    "updateLookup" for this option. Defaults to "default".
+     *
+     *    Insert and replace operations always include the "fullDocument" field
+     *    and delete operations omit the field as the document no longer exists.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * maxAwaitTimeMS (integer): The maximum amount of time for the server to
      *    wait on new documents to satisfy a change stream query.
@@ -163,10 +203,14 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
      *  * showExpandedEvents (boolean): Enables the server to send the expanded
      *    list of change stream events.
      *
      *    This option is not supported for server versions < 6.0.
+=======
+     *    Sessions are not supported for server versions < 3.6.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * startAfter (document): Specifies the logical starting point for the
      *    new change stream. Unlike "resumeAfter", this option can be used with
@@ -202,13 +246,18 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      * @param array       $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(Manager $manager, ?string $databaseName, ?string $collectionName, array $pipeline, array $options = [])
+=======
+    public function __construct(Manager $manager, $databaseName, $collectionName, array $pipeline, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (isset($collectionName) && ! isset($databaseName)) {
             throw new InvalidArgumentException('$collectionName should also be null if $databaseName is null');
         }
 
         $options += [
+<<<<<<< HEAD
             'readPreference' => new ReadPreference(ReadPreference::RP_PRIMARY),
         ];
 
@@ -220,6 +269,16 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
             throw InvalidArgumentException::invalidType('"fullDocumentBeforeChange" option', $options['fullDocumentBeforeChange'], 'string');
         }
 
+=======
+            'fullDocument' => self::FULL_DOCUMENT_DEFAULT,
+            'readPreference' => new ReadPreference(ReadPreference::RP_PRIMARY),
+        ];
+
+        if (! is_string($options['fullDocument'])) {
+            throw InvalidArgumentException::invalidType('"fullDocument" option', $options['fullDocument'], 'string');
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         if (! $options['readPreference'] instanceof ReadPreference) {
             throw InvalidArgumentException::invalidType('"readPreference" option', $options['readPreference'], ReadPreference::class);
         }
@@ -236,10 +295,13 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
             throw InvalidArgumentException::invalidType('"startAtOperationTime" option', $options['startAtOperationTime'], TimestampInterface::class);
         }
 
+<<<<<<< HEAD
         if (isset($options['showExpandedEvents']) && ! is_bool($options['showExpandedEvents'])) {
             throw InvalidArgumentException::invalidType('"showExpandedEvents" option', $options['showExpandedEvents'], 'bool');
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         /* In the absence of an explicit session, create one to ensure that the
          * initial aggregation and any resume attempts can use the same session
          * ("implicit from the user's perspective" per PHPLIB-342). Since this
@@ -254,8 +316,13 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
             }
         }
 
+<<<<<<< HEAD
         $this->aggregateOptions = array_intersect_key($options, ['batchSize' => 1, 'collation' => 1, 'comment' => 1, 'maxAwaitTimeMS' => 1, 'readConcern' => 1, 'readPreference' => 1, 'session' => 1, 'typeMap' => 1]);
         $this->changeStreamOptions = array_intersect_key($options, ['fullDocument' => 1, 'fullDocumentBeforeChange' => 1, 'resumeAfter' => 1, 'showExpandedEvents' => 1, 'startAfter' => 1, 'startAtOperationTime' => 1]);
+=======
+        $this->aggregateOptions = array_intersect_key($options, ['batchSize' => 1, 'collation' => 1, 'maxAwaitTimeMS' => 1, 'readConcern' => 1, 'readPreference' => 1, 'session' => 1, 'typeMap' => 1]);
+        $this->changeStreamOptions = array_intersect_key($options, ['fullDocument' => 1, 'resumeAfter' => 1, 'startAfter' => 1, 'startAtOperationTime' => 1]);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Null database name implies a cluster-wide change stream
         if ($databaseName === null) {
@@ -264,31 +331,52 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
         }
 
         $this->manager = $manager;
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = isset($collectionName) ? (string) $collectionName : null;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->pipeline = $pipeline;
 
         $this->aggregate = $this->createAggregate();
     }
 
     /** @internal */
+<<<<<<< HEAD
     final public function commandFailed(CommandFailedEvent $event): void
+=======
+    final public function commandFailed(CommandFailedEvent $event)
+>>>>>>> forked/LAE_400_PACKAGE
     {
     }
 
     /** @internal */
+<<<<<<< HEAD
     final public function commandStarted(CommandStartedEvent $event): void
+=======
+    final public function commandStarted(CommandStartedEvent $event)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($event->getCommandName() !== 'aggregate') {
             return;
         }
 
+<<<<<<< HEAD
         $this->firstBatchSize = 0;
+=======
+        $this->firstBatchSize = null;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->postBatchResumeToken = null;
     }
 
     /** @internal */
+<<<<<<< HEAD
     final public function commandSucceeded(CommandSucceededEvent $event): void
+=======
+    final public function commandSucceeded(CommandSucceededEvent $event)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($event->getCommandName() !== 'aggregate') {
             return;
@@ -306,10 +394,15 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
             $this->postBatchResumeToken = $reply->cursor->postBatchResumeToken;
         }
 
+<<<<<<< HEAD
         if (
             $this->shouldCaptureOperationTime($event->getServer()) &&
             isset($reply->operationTime) && $reply->operationTime instanceof TimestampInterface
         ) {
+=======
+        if ($this->shouldCaptureOperationTime($event->getServer()) &&
+            isset($reply->operationTime) && $reply->operationTime instanceof TimestampInterface) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->operationTime = $reply->operationTime;
         }
     }
@@ -318,6 +411,10 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
+=======
+     * @param Server $server
+>>>>>>> forked/LAE_400_PACKAGE
      * @return ChangeStream
      * @throws UnsupportedException if collation or read concern is used and unsupported
      * @throws RuntimeException for other driver errors (e.g. connection errors)
@@ -326,7 +423,11 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
     {
         return new ChangeStream(
             $this->createChangeStreamIterator($server),
+<<<<<<< HEAD
             function ($resumeToken, $hasAdvanced): ChangeStreamIterator {
+=======
+            function ($resumeToken, $hasAdvanced) {
+>>>>>>> forked/LAE_400_PACKAGE
                 return $this->resume($resumeToken, $hasAdvanced);
             }
         );
@@ -336,8 +437,15 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      * Create the aggregate command for a change stream.
      *
      * This method is also used to recreate the aggregate command when resuming.
+<<<<<<< HEAD
      */
     private function createAggregate(): Aggregate
+=======
+     *
+     * @return Aggregate
+     */
+    private function createAggregate()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $pipeline = $this->pipeline;
         array_unshift($pipeline, ['$changeStream' => (object) $this->changeStreamOptions]);
@@ -347,8 +455,16 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
 
     /**
      * Create a ChangeStreamIterator by executing the aggregate command.
+<<<<<<< HEAD
      */
     private function createChangeStreamIterator(Server $server): ChangeStreamIterator
+=======
+     *
+     * @param Server $server
+     * @return ChangeStreamIterator
+     */
+    private function createChangeStreamIterator(Server $server)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return new ChangeStreamIterator(
             $this->executeAggregate($server),
@@ -363,16 +479,28 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      *
      * The command will be executed using APM so that we can capture data from
      * its response (e.g. firstBatch size, postBatchResumeToken).
+<<<<<<< HEAD
      */
     private function executeAggregate(Server $server): Cursor
+=======
+     *
+     * @param Server $server
+     * @return Cursor
+     */
+    private function executeAggregate(Server $server)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         addSubscriber($this);
 
         try {
+<<<<<<< HEAD
             $cursor = $this->aggregate->execute($server);
             assert($cursor instanceof Cursor);
 
             return $cursor;
+=======
+            return $this->aggregate->execute($server);
+>>>>>>> forked/LAE_400_PACKAGE
         } finally {
             removeSubscriber($this);
         }
@@ -406,9 +534,17 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      *
      * @see https://github.com/mongodb/specifications/blob/master/source/change-streams/change-streams.rst#resume-process
      * @param array|object|null $resumeToken
+<<<<<<< HEAD
      * @throws InvalidArgumentException
      */
     private function resume($resumeToken = null, bool $hasAdvanced = false): ChangeStreamIterator
+=======
+     * @param bool              $hasAdvanced
+     * @return ChangeStreamIterator
+     * @throws InvalidArgumentException
+     */
+    private function resume($resumeToken = null, $hasAdvanced = false)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (isset($resumeToken) && ! is_array($resumeToken) && ! is_object($resumeToken)) {
             throw InvalidArgumentException::invalidType('$resumeToken', $resumeToken, 'array or object');
@@ -446,18 +582,31 @@ class Watch implements Executable, /* @internal */ CommandSubscriber
      * Determine whether to capture operation time from an aggregate response.
      *
      * @see https://github.com/mongodb/specifications/blob/master/source/change-streams/change-streams.rst#startatoperationtime
+<<<<<<< HEAD
      */
     private function shouldCaptureOperationTime(Server $server): bool
+=======
+     * @param Server $server
+     * @return boolean
+     */
+    private function shouldCaptureOperationTime(Server $server)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($this->hasResumed) {
             return false;
         }
 
+<<<<<<< HEAD
         if (
             isset($this->changeStreamOptions['resumeAfter']) ||
             isset($this->changeStreamOptions['startAfter']) ||
             isset($this->changeStreamOptions['startAtOperationTime'])
         ) {
+=======
+        if (isset($this->changeStreamOptions['resumeAfter']) ||
+            isset($this->changeStreamOptions['startAfter']) ||
+            isset($this->changeStreamOptions['startAtOperationTime'])) {
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 

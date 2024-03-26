@@ -32,7 +32,11 @@ $action = optional_param('action', null, PARAM_ALPHA);
 
 require_login();
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('noguest');
+=======
+    print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $context = context_system::instance();
 

@@ -152,7 +152,11 @@ if (($action == 'edit') || ($action == 'new')) {
             core_plugin_manager::reset_caches();
             redirect($baseurl);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('instancenotsaved', 'repository', $baseurl);
+=======
+            print_error('instancenotsaved', 'repository', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
     } else {
@@ -183,14 +187,22 @@ if (($action == 'edit') || ($action == 'new')) {
     }
 } else if ($action == 'show') {
     if (!confirm_sesskey()) {
+<<<<<<< HEAD
         throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+=======
+        print_error('confirmsesskeybad', '', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $class = \core_plugin_manager::resolve_plugininfo_class('repository');
     $class::enable_plugin($repository, 1);
     $return = true;
 } else if ($action == 'hide') {
     if (!confirm_sesskey()) {
+<<<<<<< HEAD
         throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+=======
+        print_error('confirmsesskeybad', '', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $class = \core_plugin_manager::resolve_plugininfo_class('repository');
     $class::enable_plugin($repository, 0);
@@ -200,7 +212,11 @@ if (($action == 'edit') || ($action == 'new')) {
     if ($sure) {
         $PAGE->set_pagetype('admin-repository-' . $repository);
         if (!confirm_sesskey()) {
+<<<<<<< HEAD
             throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+=======
+            print_error('confirmsesskeybad', '', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($repositorytype->delete($downloadcontents)) {
@@ -209,7 +225,11 @@ if (($action == 'edit') || ($action == 'new')) {
             core_plugin_manager::reset_caches();
             redirect($baseurl);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('instancenotdeleted', 'repository', $baseurl);
+=======
+            print_error('instancenotdeleted', 'repository', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
     } else {

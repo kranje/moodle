@@ -34,6 +34,7 @@ class data_field_date extends data_field_base {
     var $month = 0;
     var $year  = 0;
 
+<<<<<<< HEAD
     public function supports_preview(): bool {
         return true;
     }
@@ -51,6 +52,8 @@ class data_field_date extends data_field_base {
         ];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     function display_add_field($recordid = 0, $formdata = null) {
         global $DB, $OUTPUT;
 
@@ -189,11 +192,19 @@ class data_field_date extends data_field_base {
     }
 
     function display_browse_field($recordid, $template) {
+<<<<<<< HEAD
         $content = $this->get_data_content($recordid);
         if (!$content || empty($content->content)) {
             return '';
         }
         return userdate($content->content, get_string('strftimedate'), 0);
+=======
+        global $CFG, $DB;
+
+        if ($content = $DB->get_field('data_content', 'content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
+            return userdate($content, get_string('strftimedate'), 0);
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     function get_sort_sql($fieldname) {

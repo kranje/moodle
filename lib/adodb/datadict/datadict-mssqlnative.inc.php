@@ -71,6 +71,7 @@ class ADODB2_mssqlnative extends ADODB_DataDict {
 			$fieldobj = $t;
 			$t = $fieldobj->type;
 		}
+<<<<<<< HEAD
 		
 	
 		$t = strtoupper($t);
@@ -78,6 +79,9 @@ class ADODB2_mssqlnative extends ADODB_DataDict {
 		if (array_key_exists($t,$this->connection->customActualTypes))
 			return  $this->connection->customActualTypes[$t];
 		
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
 		$_typeConversion = array(
 			-155 => 'D',
 			  93 => 'D',
@@ -121,6 +125,7 @@ class ADODB2_mssqlnative extends ADODB_DataDict {
 	function ActualType($meta)
 	{
 		$DATE_TYPE = 'DATETIME';
+<<<<<<< HEAD
 		$meta = strtoupper($meta);
 		
 		/*
@@ -130,6 +135,9 @@ class ADODB2_mssqlnative extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
 		switch(strtoupper($meta)) {
 
 		case 'C': return 'VARCHAR';

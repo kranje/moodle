@@ -270,3 +270,12 @@ $string['headingthree'] = 'Accessible file formats';
 $string['headingfour'] = 'Focus effort';
 $string['headingfive'] = 'HTML fixes';
 $string['headingsix'] = 'Performance support';
+<<<<<<< HEAD
+=======
+$string['icon:analytics-custom'] = 'Analytics icon';
+$string['icon:tools-custom'] = 'Tools icon';
+$string['icon:file-edit-custom'] = 'Edit file icon';
+$string['icon:search-plus-custom'] = 'Search icon';
+$string['icon:wand-magic-custom'] = 'Magic wand icon';
+$string['icon:hands-helping-custom'] = 'Helping hands icon';
+>>>>>>> forked/LAE_400_PACKAGE

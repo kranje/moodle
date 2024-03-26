@@ -119,6 +119,7 @@ class restore_gradebook_structure_step extends restore_structure_step {
             return false;
         }
 
+<<<<<<< HEAD
         // Identify the backup we're dealing with.
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
         $backupbuild = 0;
@@ -126,11 +127,20 @@ class restore_gradebook_structure_step extends restore_structure_step {
         if (!empty($matches[1])) {
             $backupbuild = (int) $matches[1]; // The date of Moodle build at the time of the backup.
         }
+=======
+        $restoretask = $this->get_task();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // On older versions the freeze value has to be converted.
         // We do this from here as it is happening right before the file is read.
         // This only targets the backup files that can contain the legacy freeze.
+<<<<<<< HEAD
         if ($backupbuild > 20150618 && (version_compare($backuprelease, '3.0', '<') || $backupbuild < 20160527)) {
+=======
+        if ($restoretask->backup_version_compare(20150618, '>')
+                && $restoretask->backup_release_compare('3.0', '<')
+                || $restoretask->backup_version_compare(20160527, '<')) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->rewrite_step_backup_file_for_legacy_freeze($fullpath);
         }
 
@@ -505,24 +515,42 @@ class restore_gradebook_structure_step extends restore_structure_step {
     protected function gradebook_calculation_freeze() {
         global $CFG;
         $gradebookcalculationsfreeze = get_config('core', 'gradebook_calculations_freeze_' . $this->get_courseid());
+<<<<<<< HEAD
         preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
         $backupbuild = (int)$matches[1];
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
 
         // Extra credits need adjustments only for backups made between 2.8 release (20141110) and the fix release (20150619).
         if (!$gradebookcalculationsfreeze && $backupbuild >= 20141110 && $backupbuild < 20150619) {
+=======
+        $restoretask = $this->get_task();
+
+        // Extra credits need adjustments only for backups made between 2.8 release (20141110) and the fix release (20150619).
+        if (!$gradebookcalculationsfreeze && $restoretask->backup_version_compare(20141110, '>=')
+                && $restoretask->backup_version_compare(20150619, '<')) {
+>>>>>>> forked/LAE_400_PACKAGE
             require_once($CFG->libdir . '/db/upgradelib.php');
             upgrade_extra_credit_weightoverride($this->get_courseid());
         }
         // Calculated grade items need recalculating for backups made between 2.8 release (20141110) and the fix release (20150627).
+<<<<<<< HEAD
         if (!$gradebookcalculationsfreeze && $backupbuild >= 20141110 && $backupbuild < 20150627) {
+=======
+        if (!$gradebookcalculationsfreeze && $restoretask->backup_version_compare(20141110, '>=')
+                && $restoretask->backup_version_compare(20150627, '<')) {
+>>>>>>> forked/LAE_400_PACKAGE
             require_once($CFG->libdir . '/db/upgradelib.php');
             upgrade_calculated_grade_items($this->get_courseid());
         }
         // Courses from before 3.1 (20160518) may have a letter boundary problem and should be checked for this issue.
         // Backups from before and including 2.9 could have a build number that is greater than 20160518 and should
         // be checked for this problem.
+<<<<<<< HEAD
         if (!$gradebookcalculationsfreeze && ($backupbuild < 20160518 || version_compare($backuprelease, '2.9', '<='))) {
+=======
+        if (!$gradebookcalculationsfreeze
+                && ($restoretask->backup_version_compare(20160518, '<') || $restoretask->backup_release_compare('2.9', '<='))) {
+>>>>>>> forked/LAE_400_PACKAGE
             require_once($CFG->libdir . '/db/upgradelib.php');
             upgrade_course_letter_boundary($this->get_courseid());
         }
@@ -3749,7 +3777,10 @@ class restore_activity_competencies_structure_step extends restore_structure_ste
             // Sortorder is ignored by precaution, anyway we should walk through the records in the right order.
             $record = (object) $params;
             $record->ruleoutcome = $data->ruleoutcome;
+<<<<<<< HEAD
             $record->overridegrade = $data->overridegrade;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $coursemodulecompetency = new \core_competency\course_module_competency(0, $record);
             $coursemodulecompetency->create();
         }
@@ -4343,7 +4374,17 @@ class restore_block_instance_structure_step extends restore_structure_step {
         // Let's look for anything within configdata neededing processing
         // (nulls and uses of legacy file.php)
         if ($attrstotransform = $this->task->get_configdata_encoded_attributes()) {
+<<<<<<< HEAD
             $configdata = (array) unserialize_object(base64_decode($data->configdata));
+=======
+            $configdata = array_filter(
+                (array) unserialize_object(base64_decode($data->configdata)),
+                static function($value): bool {
+                    return !($value instanceof __PHP_Incomplete_Class);
+                }
+            );
+
+>>>>>>> forked/LAE_400_PACKAGE
             foreach ($configdata as $attribute => $value) {
                 if (in_array($attribute, $attrstotransform)) {
                     $configdata[$attribute] = $this->contentprocessor->process_cdata($value);
@@ -4510,10 +4551,13 @@ class restore_module_structure_step extends restore_structure_step {
             $data->availability = upgrade_group_members_only($data->groupingid, $data->availability);
         }
 
+<<<<<<< HEAD
         if (!has_capability('moodle/course:setforcedlanguage', context_course::instance($data->course))) {
             unset($data->lang);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // course_module record ready, insert it
         $newitemid = $DB->insert_record('course_modules', $data);
         // save mapping
@@ -4692,12 +4736,17 @@ class restore_userscompletion_structure_step extends restore_structure_step {
 
         $paths = array();
 
+<<<<<<< HEAD
         // Restore completion.
         $paths[] = new restore_path_element('completion', '/completions/completion');
 
         // Restore completion view.
         $paths[] = new restore_path_element('completionview', '/completions/completionviews/completionview');
 
+=======
+        $paths[] = new restore_path_element('completion', '/completions/completion');
+
+>>>>>>> forked/LAE_400_PACKAGE
         return $paths;
     }
 
@@ -4726,6 +4775,7 @@ class restore_userscompletion_structure_step extends restore_structure_step {
             // Normal entry where it doesn't exist already
             $DB->insert_record('course_modules_completion', $data);
         }
+<<<<<<< HEAD
 
         // Add viewed to course_modules_viewed.
         if (isset($data->viewed) && $data->viewed) {
@@ -4749,6 +4799,8 @@ class restore_userscompletion_structure_step extends restore_structure_step {
         $data->userid = $this->get_mappingid('user', $data->userid);
 
         $DB->insert_record('course_modules_viewed', $data);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -4810,6 +4862,7 @@ class restore_create_categories_and_questions extends restore_structure_step {
     protected function define_structure() {
 
         // Check if the backup is a pre 4.0 one.
+<<<<<<< HEAD
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
         preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
         $backupbuild = (int)$matches[1];
@@ -4817,6 +4870,10 @@ class restore_create_categories_and_questions extends restore_structure_step {
         if (version_compare($backuprelease, '4.0', '<') || $backupbuild < 20220202) {
             $before40 = true;
         }
+=======
+        $restoretask = $this->get_task();
+        $before40 = $restoretask->backup_release_compare('4.0', '<') || $restoretask->backup_version_compare(20220202, '<');
+>>>>>>> forked/LAE_400_PACKAGE
         // Start creating the path, category should be the first one.
         $paths = [];
         $paths [] = new restore_path_element('question_category', '/question_categories/question_category');
@@ -4898,6 +4955,7 @@ class restore_create_categories_and_questions extends restore_structure_step {
 
         // Before 3.5, question categories could be created at top level.
         // From 3.5 onwards, all question categories should be a child of a special category called the "top" category.
+<<<<<<< HEAD
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
         preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
         $backupbuild = (int)$matches[1];
@@ -4905,6 +4963,10 @@ class restore_create_categories_and_questions extends restore_structure_step {
         if (version_compare($backuprelease, '3.5', '<') || $backupbuild < 20180205) {
             $before35 = true;
         }
+=======
+        $restoretask = $this->get_task();
+        $before35 = $restoretask->backup_release_compare('3.5', '<') || $restoretask->backup_version_compare(20180205, '<');
+>>>>>>> forked/LAE_400_PACKAGE
         if (empty($mapping->info->parent) && $before35) {
             $top = question_get_top_category($data->contextid, true);
             $data->parent = $top->id;
@@ -5052,6 +5114,7 @@ class restore_create_categories_and_questions extends restore_structure_step {
         $oldid = $data->id;
 
         // Check if the backup is a pre 4.0 one.
+<<<<<<< HEAD
         $backuprelease = $this->get_task()->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
         preg_match('/(\d{8})/', $this->get_task()->get_info()->moodle_release, $matches);
         $backupbuild = (int)$matches[1];
@@ -5060,6 +5123,10 @@ class restore_create_categories_and_questions extends restore_structure_step {
             $before40 = true;
         }
         if ($before40) {
+=======
+        $restoretask = $this->get_task();
+        if ($restoretask->backup_release_compare('4.0', '<') || $restoretask->backup_version_compare(20220202, '<')) {
+>>>>>>> forked/LAE_400_PACKAGE
             // Check we have one mapping for this question.
             if (!$questionmapping = $this->get_mapping('question', $oldid)) {
                 return; // No mapping = this question doesn't need to be created/mapped.
@@ -5284,6 +5351,7 @@ class restore_move_module_questions_categories extends restore_execution_step {
     protected function define_execution() {
         global $DB;
 
+<<<<<<< HEAD
         $backuprelease = $this->task->get_info()->backup_release; // The major version: 2.9, 3.0, 3.10...
         preg_match('/(\d{8})/', $this->task->get_info()->moodle_release, $matches);
         $backupbuild = (int)$matches[1];
@@ -5291,6 +5359,9 @@ class restore_move_module_questions_categories extends restore_execution_step {
         if (version_compare($backuprelease, '3.5', '>=') && $backupbuild > 20180205) {
             $after35 = true;
         }
+=======
+        $after35 = $this->task->backup_release_compare('3.5', '>=') && $this->task->backup_version_compare(20180205, '>');
+>>>>>>> forked/LAE_400_PACKAGE
 
         $contexts = restore_dbops::restore_get_question_banks($this->get_restoreid(), CONTEXT_MODULE);
         foreach ($contexts as $contextid => $contextlevel) {

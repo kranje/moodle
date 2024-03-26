@@ -41,7 +41,11 @@ abstract class LtiAbstractService
         return $this->serviceConnector->makeServiceRequest(
             $this->registration,
             $this->getScope(),
+<<<<<<< HEAD
             $request,
+=======
+            $request
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 

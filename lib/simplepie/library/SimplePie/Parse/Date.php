@@ -1023,5 +1023,8 @@ class SimplePie_Parse_Date
 		return $strtotime;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Parse_Date', 'SimplePie\Parse\Date', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

@@ -23,10 +23,17 @@ Feature: Email signatures
   Scenario: Add and remove signatures
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
     And I follow "Manage signatures"
     And I set the following fields to these values:
       | Signature text | Doom At 11 |
+=======
+    And I navigate to "Quickmail" in current page administration
+    And I follow "Manage signatures"
+    And I set the following fields to these values:
+      | Signature | Doom At 11 |
+>>>>>>> forked/LAE_400_PACKAGE
       | default_flag | 1 |
     And I press "Save changes"
     And I set the following fields to these values:
@@ -38,26 +45,45 @@ Feature: Email signatures
     Then I should see "New signature"
     When I set the following fields to these values:
       | title | Secondary signature |
+<<<<<<< HEAD
       | Signature text | Doom At 12 |
+=======
+      | Signature | Doom At 12 |
+>>>>>>> forked/LAE_400_PACKAGE
     When I press "Save changes"
     Then I should see "Changes saved"
     When I set the following fields to these values:
       | id | Primary signature (Default) |
+<<<<<<< HEAD
     Then the field "Signature text" matches value "Doom At 11"
     When I set the following fields to these values:
       | id | Secondary signature |
     Then the field "Signature text" matches value "Doom At 12"
+=======
+    Then I should see "Doom At 11"
+    When I set the following fields to these values:
+      | id | Secondary signature |
+    Then I should see "Doom At 12"
+>>>>>>> forked/LAE_400_PACKAGE
     When I set the following fields to these values:
       | default_flag | 1 |
     And I press "Save changes"
     Then I should see "Changes saved"
     When I set the following fields to these values:
       | id | Secondary signature (Default) |
+<<<<<<< HEAD
     Then the field "Signature text" matches value "Doom At 12"
     When I press "Delete"
     Then I should see "Are you sure you want to delete Secondary signature?"
     When I press "Cancel"
     Then the field "Signature text" matches value "Doom At 12"
+=======
+    Then I should see "Doom At 12"
+    When I press "Delete"
+    Then I should see "Are you sure you want to delete Secondary signature?"
+    When I press "Cancel"
+    Then I should see "Doom At 12"
+>>>>>>> forked/LAE_400_PACKAGE
     When I press "delete"
     Then I should see "Are you sure you want to delete Secondary signature?"
     When I press "Continue"

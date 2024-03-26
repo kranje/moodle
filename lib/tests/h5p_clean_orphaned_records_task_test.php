@@ -39,13 +39,21 @@ class h5p_clean_orphaned_records_task_test extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
         $params = [
             'course' => $course->id,
+<<<<<<< HEAD
             'packagefilepath' => $CFG->dirroot.'/h5p/tests/fixtures/greeting-card-887.h5p',
+=======
+            'packagefilepath' => $CFG->dirroot.'/h5p/tests/fixtures/greeting-card.h5p',
+>>>>>>> forked/LAE_400_PACKAGE
             'introformat' => 1
         ];
 
         // Create h5pactivity.
         $activity = $this->getDataGenerator()->create_module('h5pactivity', $params);
+<<<<<<< HEAD
         $activity->filename = 'greeting-card-887.h5p';
+=======
+        $activity->filename = 'greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
         $context = context_module::instance($activity->cmid);
 
         // Create a fake deploy H5P file.
@@ -70,7 +78,11 @@ class h5p_clean_orphaned_records_task_test extends advanced_testcase {
                                 AND filearea = 'content'
                                 AND component = 'core_h5p'";
         $orphanedfiles = $DB->get_records_sql($orphanedfilessql, ['h5pid' => $h5pid]);
+<<<<<<< HEAD
         $this->assertEquals(3, count($orphanedfiles));
+=======
+        $this->assertEquals(2, count($orphanedfiles));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Execute task.
         $task = new \core\task\h5p_clean_orphaned_records_task();

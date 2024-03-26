@@ -49,12 +49,20 @@ H5PEditor.language.core = {
   selectFiletoUpload: 'Velg fil som skal lastes opp',
   or: 'eller',
   enterAudioUrl: 'Skriv inn nettadresse til lydkilde',
+<<<<<<< HEAD
   enterVideoUrl: 'Skriv inn nettadresse til video',
+=======
+  enterVideoUrl: 'Skriv inn nettadresse til videokilde eller YouTube-lenke',
+>>>>>>> forked/LAE_400_PACKAGE
   enterAudioTitle: 'Lim inn link eller annen lydkilde URL',
   enterVideoTitle: 'Lim inn YouTube lenke eller annen videokilde URL',
   uploadAudioTitle: 'Last opp lydfil',
   uploadVideoTitle: 'Last opp videofil',
+<<<<<<< HEAD
   addVideoDescription: 'H5P støtter alle eksterne videokilder på formatene mp4, webm eller ogv, slik som Vimeo Pro, og har støtte for YouTube-lenker og Panopto-lenker.',
+=======
+  addVideoDescription: 'H5P støtter alle eksterne videokilder på formatene mp4, webm eller ogv, slik som Vimeo Pro, og har støtte for YouTube-lenker.',
+>>>>>>> forked/LAE_400_PACKAGE
   insert: 'Sett inn',
   cancel: 'Avbryt',
   height: 'Høyde',
@@ -213,6 +221,7 @@ H5PEditor.language.core = {
   unknownLibrary: 'Dessverre var ikke den valgte \'%lib\'-innholdstypen installert på dette systemet.',
   proceedButtonLabel: 'Proceed to save',
   enterFullscreenButtonLabel: 'Enter fullscreen',
+<<<<<<< HEAD
   exitFullscreenButtonLabel: 'Exit fullscreen',
   noContentHeader: 'No Fitting Content?',
   noContentSuggestion: 'Create one yourself!',
@@ -290,4 +299,7 @@ H5PEditor.language.core = {
   a11yTitleShowLabel: 'Show label for AT',
   a11yTitleHideLabel: 'Hide label for AT',
   reuseSuccess: ':title was successfully imported from the H5P Hub.',
+=======
+  exitFullscreenButtonLabel: 'Exit fullscreen'
+>>>>>>> forked/LAE_400_PACKAGE
 };

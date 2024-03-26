@@ -25,8 +25,16 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 $plugin->version  = 2022112800;
 $plugin->requires = 2022111800;  // Requires this Moodle version.
 $plugin->component= 'filter_data';
 
 $plugin->dependencies = array('mod_data' => 2022111800);
+=======
+$plugin->version  = 2022041900;
+$plugin->requires = 2022041200;  // Requires this Moodle version.
+$plugin->component= 'filter_data';
+
+$plugin->dependencies = array('mod_data' => 2022041200);
+>>>>>>> forked/LAE_400_PACKAGE

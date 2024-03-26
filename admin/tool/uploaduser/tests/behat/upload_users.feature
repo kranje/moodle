@@ -14,7 +14,11 @@ Feature: Upload users
       | Section 1 | math102 | S1 |
       | Section 3 | math102 | S3 |
     And I log in as "admin"
+<<<<<<< HEAD
     And I navigate to "Users > Accounts > Upload users" in site administration
+=======
+    And I navigate to "Users > Accounts >Upload users" in site administration
+>>>>>>> forked/LAE_400_PACKAGE
     When I upload "lib/tests/fixtures/upload_users.csv" file to "File" filemanager
     And I press "Upload users"
     Then I should see "Upload users preview"
@@ -180,6 +184,7 @@ Feature: Upload users
     And I should see "12 January 2020" in the "Enrolment ends" "table_row"
     And I click on "Close" "button" in the "Enrolment details" "dialogue"
     And I log out
+<<<<<<< HEAD
 
   @javascript
   Scenario: Upload users enrolling them on courses and assign category roles
@@ -296,3 +301,5 @@ Feature: Upload users
     And I navigate to "Users > Accounts > Browse list of users" in site administration
     And I should see "Bilbo Baggins"
     And I should not see "Frodo Baggins"
+=======
+>>>>>>> forked/LAE_400_PACKAGE

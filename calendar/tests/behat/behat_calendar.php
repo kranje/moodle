@@ -118,7 +118,13 @@ class behat_calendar extends behat_base {
      * @Given /^I hover over today in the mini-calendar block$/
      */
     public function i_hover_over_today_in_mini_calendar_block(): void {
+<<<<<<< HEAD
         $todaysday = date('j');
+=======
+        // For window's compatibility, using %d and not %e.
+        $todaysday = trim(strftime('%d'));
+        $todaysday = ltrim($todaysday, '0');
+>>>>>>> forked/LAE_400_PACKAGE
         $this->i_hover_over_day_of_this_month_in_mini_calendar_block($todaysday);
     }
 
@@ -128,7 +134,13 @@ class behat_calendar extends behat_base {
      * @Given /^I hover over today in the calendar$/
      */
     public function i_hover_over_today_in_the_calendar() {
+<<<<<<< HEAD
         $todaysday = date('j');
+=======
+        // For window's compatibility, using %d and not %e.
+        $todaysday = trim(strftime('%d'));
+        $todaysday = ltrim($todaysday, '0');
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->i_hover_over_day_of_this_month_in_calendar($todaysday);
     }
 

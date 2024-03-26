@@ -303,7 +303,11 @@ class core_files_renderer extends plugin_renderer_base {
         } else {
             $maxsize = get_string('maxfilesize', 'moodle', $maxbytes);
         }
+<<<<<<< HEAD
 
+=======
+        // TODO MDL-32020 also should say about 'File types accepted'
+>>>>>>> forked/LAE_400_PACKAGE
         return '<span>'. $maxsize . '</span>';
     }
 

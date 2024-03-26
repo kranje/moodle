@@ -55,7 +55,11 @@ $out = get_backpack_settings($userid);
 
 // If we didn't find any badges then print an error.
 if (is_null($out)) {
+<<<<<<< HEAD
     throw new \moodle_exception('error:externalbadgedoesntexist', 'badges');
+=======
+    print_error('error:externalbadgedoesntexist', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $badges = $out->badges;
@@ -73,7 +77,11 @@ foreach ($badges as $b) {
 
 // If we didn't find the badge a user might be trying to replace the userid parameter.
 if (empty($badge)) {
+<<<<<<< HEAD
     throw new \moodle_exception('error:externalbadgedoesntexist', 'badges');
+=======
+    print_error('error:externalbadgedoesntexist', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $output = $PAGE->get_renderer('core', 'badges');

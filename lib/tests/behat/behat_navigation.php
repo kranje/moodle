@@ -620,8 +620,13 @@ class behat_navigation extends behat_base {
         $dividercount = substr_count($page, ' > ');
         if ($dividercount === 0) {
             return ['core', $page];
+<<<<<<< HEAD
         } else if ($dividercount === 1) {
             list($component, $name) = explode(' > ', $page);
+=======
+        } else if ($dividercount >= 1) {
+            [$component, $name] = explode(' > ', $page, 2);
+>>>>>>> forked/LAE_400_PACKAGE
             if ($component === 'core') {
                 throw new coding_exception('Do not specify the component "core > ..." for core pages.');
             }
@@ -736,7 +741,11 @@ class behat_navigation extends behat_base {
      * Recognised page names are:
      * | Page type                  | Identifier meaning        | description                          |
      * | Category                   | category idnumber         | List of courses in that category.    |
+<<<<<<< HEAD
      * | Course                     | course shortname          | Main course home pag                 |
+=======
+     * | Course                     | course shortname          | Main course home page                |
+>>>>>>> forked/LAE_400_PACKAGE
      * | Course editing             | course shortname          | Edit settings page for the course    |
      * | Activity                   | activity idnumber         | Start page for that activity         |
      * | Activity editing           | activity idnumber         | Edit settings page for that activity |
@@ -941,6 +950,7 @@ class behat_navigation extends behat_base {
      * @param string $onoroff Whehter to switch editing on, or off.
      */
     public function i_am_on_course_homepage_with_editing_mode_set_to(string $coursefullname, string $onoroff): void {
+<<<<<<< HEAD
         $courseid = $this->get_course_id($coursefullname);
         $url = new moodle_url('/course/view.php', ['id' => $courseid]);
 
@@ -957,6 +967,22 @@ class behat_navigation extends behat_base {
             default:
                 throw new \coding_exception("Unknown editing mode '{$onoroff}'. Accepted values are 'on' and 'off'");
         }
+=======
+        if ($onoroff !== 'on' && $onoroff !== 'off') {
+            throw new coding_exception("Unknown editing mode '{$onoroff}'. Accepted values are 'on' and 'off'");
+        }
+
+        $courseid = $this->get_course_id($coursefullname);
+        $context = context_course::instance($courseid);
+        $courseurl = new moodle_url('/course/view.php', ['id' => $courseid]);
+
+        $editmodeurl = new moodle_url('/editmode.php', [
+            'context' => $context->id,
+            'pageurl' => $courseurl->out(true),
+            'setmode' => ($onoroff === 'on' ? 1 : 0),
+        ]);
+        $this->execute('behat_general::i_visit', [$editmodeurl]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

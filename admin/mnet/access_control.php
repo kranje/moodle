@@ -6,7 +6,11 @@ require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 include_once($CFG->dirroot.'/mnet/lib.php');
 
+<<<<<<< HEAD
 $sort         = optional_param('sort', 'username', PARAM_ALPHA);
+=======
+$sort         = optional_param('sort', 'username', PARAM_ALPHAEXT);
+>>>>>>> forked/LAE_400_PACKAGE
 $dir          = optional_param('dir', 'ASC', PARAM_ALPHA);
 $page         = optional_param('page', 0, PARAM_INT);
 $perpage      = optional_param('perpage', 30, PARAM_INT);
@@ -15,7 +19,11 @@ $action       = trim(strtolower(optional_param('action', '', PARAM_ALPHA)));
 admin_externalpage_setup('ssoaccesscontrol');
 
 if (!extension_loaded('openssl')) {
+<<<<<<< HEAD
     throw new \moodle_exception('requiresopenssl', 'mnet');
+=======
+    print_error('requiresopenssl', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $sitecontext = context_system::instance();
@@ -35,13 +43,21 @@ if (!empty($action) and confirm_sesskey()) {
 
     // boot if insufficient permission
     if (!has_capability('moodle/user:delete', $sitecontext)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nomodifyacl', 'mnet');
+=======
+        print_error('nomodifyacl','mnet');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // fetch the record in question
     $id = required_param('id', PARAM_INT);
     if (!$idrec = $DB->get_record('mnet_sso_access_control', array('id'=>$id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('recordnoexists', 'mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+=======
+        print_error('recordnoexists','mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     switch ($action) {
@@ -56,7 +72,11 @@ if (!empty($action) and confirm_sesskey()) {
             // require the access parameter, and it must be 'allow' or 'deny'
             $accessctrl = trim(strtolower(required_param('accessctrl', PARAM_ALPHA)));
             if ($accessctrl != 'allow' and $accessctrl != 'deny') {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidaccessparam', 'mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+=======
+                print_error('invalidaccessparam', 'mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             if (mnet_update_sso_access_control($idrec->username, $idrec->mnet_host_id, $accessctrl)) {
@@ -71,7 +91,11 @@ if (!empty($action) and confirm_sesskey()) {
             break;
 
         default:
+<<<<<<< HEAD
             throw new \moodle_exception('invalidactionparam', 'mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+=======
+            print_error('invalidactionparam', 'mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -82,7 +106,11 @@ if ($form = data_submitted() and confirm_sesskey()) {
 
     // check permissions and verify form input
     if (!has_capability('moodle/user:delete', $sitecontext)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nomodifyacl', 'mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+=======
+        print_error('nomodifyacl','mnet', "$CFG->wwwroot/$CFG->admin/mnet/access_control.php");
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if (empty($form->username)) {
         $formerror['username'] = get_string('enterausername','mnet');
@@ -117,6 +145,10 @@ if ($form = data_submitted() and confirm_sesskey()) {
 }
 
 echo $OUTPUT->header();
+<<<<<<< HEAD
+=======
+echo $OUTPUT->render(mnet_get_deprecation_notice());
+>>>>>>> forked/LAE_400_PACKAGE
 
 // Explain
 echo $OUTPUT->box(get_string('ssoacldescr','mnet'));
@@ -153,7 +185,19 @@ foreach ($columns as $column) {
     $headings[$column] = "<a href=\"?sort=$column&amp;dir=$columndir&amp;\">".$string[$column]."</a>$columnicon";
 }
 $headings['delete'] = '';
+<<<<<<< HEAD
 $acl = $DB->get_records('mnet_sso_access_control', null, "$sort $dir", '*'); //, $page * $perpage, $perpage);
+=======
+
+$sortorder = get_safe_orderby([
+    'username' => 'username',
+    'mnet_host_id' => 'mnet_host_id',
+    'access' => 'accessctrl',
+    'default' => 'username',
+], $sort, $dir, false);
+
+$acl = $DB->get_records('mnet_sso_access_control', null, $sortorder);
+>>>>>>> forked/LAE_400_PACKAGE
 $aclcount = $DB->count_records('mnet_sso_access_control');
 
 if (!$acl) {

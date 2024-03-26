@@ -34,7 +34,11 @@ function report_stats_mode_menu($course, $mode, $time, $url) {
     $reportoptions = stats_get_report_options($course->id, $mode);
     $timeoptions = report_stats_timeoptions($mode);
     if (empty($timeoptions)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
+=======
+        print_error('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     */
 
@@ -119,7 +123,11 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
     $reportoptions = stats_get_report_options($course->id, $mode);
     $timeoptions = report_stats_timeoptions($mode);
     if (empty($timeoptions)) {
+<<<<<<< HEAD
         throw new \moodle_exception('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
+=======
+        print_error('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $users = array();
@@ -148,7 +156,11 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
         $sql .= " ORDER BY {$sort}";
 
         if (!$us = $DB->get_records_sql($sql, array_merge($param->params, $moreparams))) {
+<<<<<<< HEAD
             throw new \moodle_exception('nousers');
+=======
+            print_error('nousers');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         foreach ($us as $u) {
             $users[$u->id] = fullname($u, true);
@@ -188,7 +200,11 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
     //  - If the mode is not detailed OR a valid user has been selected.
     if (!empty($report) && !empty($time) && ($mode !== STATS_MODE_DETAILED || !empty($userid))) {
         if ($report == STATS_REPORT_LOGINS && $course->id != SITEID) {
+<<<<<<< HEAD
             throw new \moodle_exception('reportnotavailable');
+=======
+            print_error('reportnotavailable');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $param = stats_get_parameters($time, $report, $course->id, $mode, $roleid);

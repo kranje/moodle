@@ -131,7 +131,11 @@ return (() => {
 EOF;
 
         for ($i = 0; $i < self::get_extended_timeout() * 10; $i++) {
+<<<<<<< HEAD
             $results = json_decode($this->evaluate_script($getresults) ?? '');
+=======
+            $results = json_decode($this->evaluate_script($getresults));
+>>>>>>> forked/LAE_400_PACKAGE
             if ($results) {
                 break;
             }

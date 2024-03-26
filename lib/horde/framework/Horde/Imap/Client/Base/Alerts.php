@@ -73,7 +73,10 @@ implements SplSubject
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function attach(SplObserver $observer)
     {
         $this->detach($observer);
@@ -82,7 +85,10 @@ implements SplSubject
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function detach(SplObserver $observer)
     {
         if (($key = array_search($observer, $this->_observers, true)) !== false) {
@@ -94,7 +100,10 @@ implements SplSubject
      * Notification is triggered internally whenever the object's internal
      * data storage is altered.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function notify()
     {
         foreach ($this->_observers as $val) {

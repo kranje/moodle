@@ -83,7 +83,11 @@ function glossary_add_instance($glossary) {
     //Check displayformat is a valid one
     $formats = get_list_of_plugins('mod/glossary/formats','TEMPLATE');
     if (!in_array($glossary->displayformat, $formats)) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknowformat', '', '', $glossary->displayformat);
+=======
+        print_error('unknowformat', '', '', $glossary->displayformat);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $returnid = $DB->insert_record("glossary", $glossary);
@@ -130,7 +134,11 @@ function glossary_update_instance($glossary) {
     //Check displayformat is a valid one
     $formats = get_list_of_plugins('mod/glossary/formats','TEMPLATE');
     if (!in_array($glossary->displayformat, $formats)) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknowformat', '', '', $glossary->displayformat);
+=======
+        print_error('unknowformat', '', '', $glossary->displayformat);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $DB->update_record("glossary", $glossary);
@@ -2194,6 +2202,7 @@ function glossary_print_dynaentry($courseid, $entries, $displayformat = -1) {
     if ( $entries ) {
         foreach ( $entries as $entry ) {
             if (! $glossary = $DB->get_record('glossary', array('id'=>$entry->glossaryid))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidid', 'glossary');
             }
             if (! $course = $DB->get_record('course', array('id'=>$glossary->course))) {
@@ -2201,6 +2210,15 @@ function glossary_print_dynaentry($courseid, $entries, $displayformat = -1) {
             }
             if (!$cm = get_coursemodule_from_instance('glossary', $entry->glossaryid, $glossary->course) ) {
                 throw new \moodle_exception('invalidid', 'glossary');
+=======
+                print_error('invalidid', 'glossary');
+            }
+            if (! $course = $DB->get_record('course', array('id'=>$glossary->course))) {
+                print_error('coursemisconf');
+            }
+            if (!$cm = get_coursemodule_from_instance('glossary', $entry->glossaryid, $glossary->course) ) {
+                print_error('invalidid', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             //If displayformat is present, override glossary->displayformat
@@ -4374,7 +4392,11 @@ function mod_glossary_delete_entry($entry, $glossary, $cm, $context, $course, $h
     // If it is an imported entry, just delete the relation.
     if ($entry->sourceglossaryid) {
         if (!$newcm = get_coursemodule_from_instance('glossary', $entry->sourceglossaryid)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidcoursemodule');
+=======
+            print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $newcontext = context_module::instance($newcm->id);
 

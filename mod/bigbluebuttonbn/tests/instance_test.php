@@ -542,6 +542,7 @@ class instance_test extends advanced_testcase {
         ];
     }
 
+<<<<<<< HEAD
 
     /**
      * Test get user id (guest or current user)
@@ -602,4 +603,6 @@ class instance_test extends advanced_testcase {
         $this->assertNotEmpty($instance->get_guest_access_password());
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

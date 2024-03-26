@@ -24,7 +24,11 @@
         "ext-maxminddb": "<1.10.1,>=2.0.0"
     },
     "require-dev": {
+<<<<<<< HEAD
         "friendsofphp/php-cs-fixer": "3.*",
+=======
+        "friendsofphp/php-cs-fixer": "*",
+>>>>>>> forked/LAE_400_PACKAGE
         "phpunit/phpunit": ">=8.0.0,<10.0.0",
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpcov": ">=6.0.0",

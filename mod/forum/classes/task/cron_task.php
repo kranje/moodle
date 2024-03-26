@@ -221,7 +221,11 @@ class cron_task extends \core\task\scheduled_task {
         global $DB;
 
         if (empty($discussionids)) {
+<<<<<<< HEAD
             $this->discussion = [];
+=======
+            $this->discussions = [];
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
 
             $requiredfields = [

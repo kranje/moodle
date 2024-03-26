@@ -28,14 +28,29 @@ require_once(dirname(__FILE__) . '/locallib.php');
 
 if ($ADMIN->fulltree) {
 
+<<<<<<< HEAD
     $filterfiles = block_filtered_course_list_lib::get_filter_files();
     if (count($filterfiles) > 0) {
         foreach ($filterfiles as $file) {
+=======
+    $dir = new RecursiveDirectoryIterator($CFG->dirroot);
+    $itr = new RecursiveIteratorIterator($dir);
+    foreach ($itr as $file) {
+        if (preg_match('/.*fcl_filter\.php$/', $file)) {
+>>>>>>> forked/LAE_400_PACKAGE
             require_once($file);
         }
     }
 
+<<<<<<< HEAD
     $exfilters = block_filtered_course_list_lib::get_filter_classes();
+=======
+    $exfilters = array_filter(get_declared_classes(), function($class) {
+        return preg_match('/.*fcl_filter/', $class);
+    });
+
+    $options = array();
+>>>>>>> forked/LAE_400_PACKAGE
 
     foreach ($exfilters as $classname) {
         $shortname = $classname::getshortname();

@@ -22,6 +22,16 @@
  * @copyright  2013 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
+=======
+
+defined('MOODLE_INTERNAL') || die();
+
+
+/**
+ * Class core_component_testcase.
+ */
+>>>>>>> forked/LAE_400_PACKAGE
 class component_test extends advanced_testcase {
 
     /**
@@ -210,6 +220,7 @@ class component_test extends advanced_testcase {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Test that the get_plugin_list_with_file() function returns the correct list of plugins.
      *
@@ -262,6 +273,35 @@ class component_test extends advanced_testcase {
             [['tool', null], false],
             [['tool', ''], false],
         ];
+=======
+    public function test_is_valid_plugin_name() {
+        $this->assertTrue(core_component::is_valid_plugin_name('mod', 'example1'));
+        $this->assertTrue(core_component::is_valid_plugin_name('mod', 'feedback360'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'feedback_360'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', '2feedback'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', '1example'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example.xx'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', '.example'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', '_example'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example_'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example_x1'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example-x1'));
+        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'role'));
+
+        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'example1'));
+        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'example_x1'));
+        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'example_x1_xxx'));
+        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'feedback360'));
+        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'feed_back360'));
+        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'role'));
+        $this->assertFalse(core_component::is_valid_plugin_name('tool', '1example'));
+        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example.xx'));
+        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example-xx'));
+        $this->assertFalse(core_component::is_valid_plugin_name('tool', '.example'));
+        $this->assertFalse(core_component::is_valid_plugin_name('tool', '_example'));
+        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example_'));
+        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example__x1'));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_normalize_componentname() {
@@ -780,7 +820,11 @@ class component_test extends advanced_testcase {
               'separators' => ['\\'],
               'result' => $CFG->dirroot . "/test/src/Multiple/Namespaces.php",
           ],
+<<<<<<< HEAD
           'Getting a file with multiple namespaces' => [
+=======
+          'Getting a file with multiple namespaces (non-existent)' => [
+>>>>>>> forked/LAE_400_PACKAGE
               'classname' => 'Nonexistant\\Namespace\\Test',
               'prefix' => "Test",
               'path' => 'test/src',
@@ -861,4 +905,22 @@ class component_test extends advanced_testcase {
         $this->assertContains('tool_usertours', $componentnames);
         $this->assertContains('core_favourites', $componentnames);
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Test for monologo icons check in plugins.
+     *
+     * @covers core_component::has_monologo_icon
+     * @return void
+     */
+    public function test_has_monologo_icon(): void {
+        // The Forum activity plugin has monologo icons.
+        $this->assertTrue(core_component::has_monologo_icon('mod', 'forum'));
+        // The core H5P subsystem doesn't have monologo icons.
+        $this->assertFalse(core_component::has_monologo_icon('core', 'h5p'));
+        // The function will return false for a non-existent component.
+        $this->assertFalse(core_component::has_monologo_icon('randomcomponent', 'h5p'));
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

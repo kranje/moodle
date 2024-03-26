@@ -18,6 +18,10 @@ $thin-scroll-bg-hover: $gray-700 !default;
 $font-size-xs: ($font-size-base * .75) !default;
 
 #region-main {
+<<<<<<< HEAD
+=======
+    overflow-x: auto;
+>>>>>>> forked/LAE_400_PACKAGE
     overflow-y: visible;
     background-color: $body-bg;
 }
@@ -2170,6 +2174,7 @@ h3.sectionname .inplaceeditable.inplaceeditingon .editinstructions {
 
 /** Chart area. */
 .chart-area {
+<<<<<<< HEAD
     @include media-breakpoint-up(lg) {
         .chart-image {
             position: relative;
@@ -2178,6 +2183,8 @@ h3.sectionname .inplaceeditable.inplaceeditingon .editinstructions {
             width: 46vw;
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     .chart-table-data {
         display: none;
@@ -2199,12 +2206,15 @@ h3.sectionname .inplaceeditable.inplaceeditingon .editinstructions {
     }
 }
 
+<<<<<<< HEAD
 // Reset for ul.
 ul {
     padding-left: 1rem;
     -webkit-margin-start: 0.2rem;  /* stylelint-disable-line */
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /* YUI 2 Tree View */
 /*rtl:raw:
 .ygtvtn,
@@ -2326,10 +2336,13 @@ $footer-link-color: $bg-inverse-link-color !default;
     @include box-shadow($popover-box-shadow);
 }
 
+<<<<<<< HEAD
 .hasstickyfooter .btn-footer-popover {
     bottom: calc(2rem + #{$navbar-height});
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .popover.footer {
     .popover-body {
         padding: 0;
@@ -2348,10 +2361,13 @@ $footer-link-color: $bg-inverse-link-color !default;
     }
 }
 
+<<<<<<< HEAD
 .footer-support-link {
     padding-bottom: 5px;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 @include media-breakpoint-up(sm) {
     .jsenabled #page-footer .footer-content-popover {
         display: none;
@@ -2383,7 +2399,10 @@ $footer-link-color: $bg-inverse-link-color !default;
         width: 100%;
         color: $body-color;
     }
+<<<<<<< HEAD
     &.active,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     &:active,
     &:hover,
     &:focus,
@@ -2395,14 +2414,22 @@ $footer-link-color: $bg-inverse-link-color !default;
             color: $dropdown-link-active-color;
         }
     }
+<<<<<<< HEAD
     &[aria-current="true"],
     &[aria-selected="true"] {
+=======
+    &[aria-current="true"] {
+>>>>>>> forked/LAE_400_PACKAGE
         position: relative;
         display: flex;
         align-items: center;
         &:before {
             @include fa-icon();
+<<<<<<< HEAD
             content: $fa-var-check;
+=======
+            content: $fa-var-circle;
+>>>>>>> forked/LAE_400_PACKAGE
             position: absolute;
             left: 0.4rem;
             font-size: 0.7rem;
@@ -2981,6 +3008,7 @@ body.dragging {
     content: $fa-var-chevron-up;
 }
 
+<<<<<<< HEAD
 .select-menu {
     li:first-child {
         ul[role="group"] {
@@ -3010,6 +3038,8 @@ body.dragging {
     }
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .initialbargroups ul {
     -webkit-margin-start: 0; /* stylelint-disable-line */
     margin-right: -1px;
@@ -3064,5 +3094,8 @@ blockquote {
         overflow-wrap: anywhere;
         white-space: normal;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -88,6 +88,7 @@ class data_connector extends DataConnector {
         global $DB;
 
         $id = $consumer->getRecordId();
+<<<<<<< HEAD
         $key = $consumer->getKey();
         $result = false;
 
@@ -95,11 +96,22 @@ class data_connector extends DataConnector {
             $result = $DB->get_record($this->consumertable, ['id' => $id]);
         } else if (!empty($key)) {
             $key256 = DataConnector::getConsumerKey($key);
+=======
+
+        if (!empty($id)) {
+            $result = $DB->get_record($this->consumertable, ['id' => $id]);
+        } else {
+            $key256 = DataConnector::getConsumerKey($consumer->getKey());
+>>>>>>> forked/LAE_400_PACKAGE
             $result = $DB->get_record($this->consumertable, ['consumerkey256' => $key256]);
         }
 
         if ($result) {
+<<<<<<< HEAD
             if (empty($key256) || empty($result->consumerkey) || ($key === $result->consumerkey)) {
+=======
+            if (empty($key256) || empty($result->consumerkey) || ($consumer->getKey() === $result->consumerkey)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 $this->build_tool_consumer_object($result, $consumer);
                 return true;
             }
@@ -999,7 +1011,11 @@ class data_connector extends DataConnector {
         $consumer->consumerName = $record->consumername;
         $consumer->consumerVersion = $record->consumerversion;
         $consumer->consumerGuid = $record->consumerguid;
+<<<<<<< HEAD
         $consumer->profile = json_decode($record->profile ?? '');
+=======
+        $consumer->profile = json_decode($record->profile);
+>>>>>>> forked/LAE_400_PACKAGE
         $consumer->toolProxy = $record->toolproxy;
         $settings = unserialize($record->settings);
         if (!is_array($settings)) {

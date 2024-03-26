@@ -27,7 +27,11 @@
 
 
     if (empty($currenttab) or empty($data) or empty($course)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotcallscript');
+=======
+        print_error('cannotcallscript');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $context = context_module::instance($cm->id);

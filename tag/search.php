@@ -26,7 +26,11 @@ require_once('../config.php');
 require_login();
 
 if (empty($CFG->usetags)) {
+<<<<<<< HEAD
     throw new \moodle_exception('tagsaredisabled', 'tag');
+=======
+    print_error('tagsaredisabled', 'tag');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $query     = optional_param('query', '', PARAM_RAW);

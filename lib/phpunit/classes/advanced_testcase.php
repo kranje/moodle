@@ -733,7 +733,11 @@ abstract class advanced_testcase extends base_testcase {
             }
 
             cron_prepare_core_renderer();
+<<<<<<< HEAD
             $this->setUser($user);
+=======
+            cron_setup_user($user);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $task->execute();
             \core\task\manager::adhoc_task_complete($task);

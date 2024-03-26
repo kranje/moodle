@@ -30,6 +30,7 @@ class ADODB2_access extends ADODB_DataDict {
 
  	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		$meta = strtoupper($meta);
 		
 		/*
@@ -39,6 +40,8 @@ class ADODB2_access extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		switch($meta) {
 		case 'C': return 'TEXT';
 		case 'XL':
@@ -50,19 +53,32 @@ class ADODB2_access extends ADODB_DataDict {
 		case 'B': return 'BINARY';
 
 		case 'TS':
+<<<<<<< HEAD
 		case 'D': 
 		return 'DATETIME';
 		case 'T': return 'DATETIME';
 
 		case 'L':  return 'BYTE';
 		case 'I':  return 'INTEGER';
+=======
+		case 'D': return 'DATETIME';
+		case 'T': return 'DATETIME';
+
+		case 'L': return 'BYTE';
+		case 'I': return 'INTEGER';
+>>>>>>> forked/LAE_400_PACKAGE
 		case 'I1': return 'BYTE';
 		case 'I2': return 'SMALLINT';
 		case 'I4': return 'INTEGER';
 		case 'I8': return 'INTEGER';
 
+<<<<<<< HEAD
 		case 'F':  return 'DOUBLE';
 		case 'N':  return 'NUMERIC';
+=======
+		case 'F': return 'DOUBLE';
+		case 'N': return 'NUMERIC';
+>>>>>>> forked/LAE_400_PACKAGE
 		default:
 			return $meta;
 		}

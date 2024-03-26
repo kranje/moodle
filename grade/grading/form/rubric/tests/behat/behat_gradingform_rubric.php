@@ -27,9 +27,15 @@
 
 require_once(__DIR__ . '/../../../../../../lib/behat/behat_base.php');
 
+<<<<<<< HEAD
 use Behat\Gherkin\Node\TableNode as TableNode,
     Behat\Mink\Exception\ElementNotFoundException as ElementNotFoundException,
     Behat\Mink\Exception\ExpectationException as ExpectationException;
+=======
+use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\ExpectationException;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Steps definitions to help with rubrics.
@@ -66,7 +72,10 @@ class behat_gradingform_rubric extends behat_base {
      * @param TableNode $rubric
      */
     public function i_define_the_following_rubric(TableNode $rubric) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Being a smart method is nothing good when we talk about step definitions, in
         // this case we didn't have any other options as there are no labels no elements
         // id we can point to without having to "calculate" them.
@@ -80,7 +89,10 @@ class behat_gradingform_rubric extends behat_base {
         // Cleaning the current ones.
         $deletebuttons = $this->find_all('css', "input[value='" . get_string('criteriondelete', 'gradingform_rubric') . "']");
         if ($deletebuttons) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             // We should reverse the deletebuttons because otherwise once we delete
             // the first one the DOM will change and the [X] one will not exist anymore.
             $deletebuttons = array_reverse($deletebuttons, true);
@@ -132,7 +144,14 @@ class behat_gradingform_rubric extends behat_base {
                 }
 
                 // Add new criterion.
+<<<<<<< HEAD
                 $addcriterionbutton->click();
+=======
+                $this->execute('behat_general::i_click_on', [
+                    $addcriterionbutton,
+                    'NodeElement',
+                ]);
+>>>>>>> forked/LAE_400_PACKAGE
 
                 $criterionroot = 'rubric[criteria][NEWID' . ($criterionit + 1) . ']';
 
@@ -158,12 +177,22 @@ class behat_gradingform_rubric extends behat_base {
                         if ($this->running_javascript()) {
                             $deletelevel = $this->find_button($criterionroot . '[levels][NEWID' . $i . '][delete]');
                             $this->click_and_confirm($deletelevel);
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                         } else {
                             // Only if the level exists.
                             $buttonname = $criterionroot . '[levels][NEWID' . $i . '][delete]';
                             if ($deletelevel = $this->getSession()->getPage()->findButton($buttonname)) {
+<<<<<<< HEAD
                                 $deletelevel->click();
+=======
+                                $this->execute('behat_general::i_click_on', [
+                                    $deletelevel,
+                                    'NodeElement',
+                                ]);
+>>>>>>> forked/LAE_400_PACKAGE
                             }
                         }
                     }
@@ -171,7 +200,14 @@ class behat_gradingform_rubric extends behat_base {
                     // Adding levels if we don't have enough.
                     $addlevel = $this->find_button($criterionroot . '[levels][addlevel]');
                     for ($i = ($defaultnumberoflevels + 1); $i <= $nlevels; $i++) {
+<<<<<<< HEAD
                         $addlevel->click();
+=======
+                        $this->execute('behat_general::i_click_on', [
+                            $addlevel,
+                            'NodeElement',
+                        ]);
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                 }
 
@@ -226,7 +262,10 @@ class behat_gradingform_rubric extends behat_base {
      * @param string $criterionname
      */
     public function i_replace_rubric_level_with($currentvalue, $value, $criterionname) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $currentvalueliteral = behat_context_helper::escape($currentvalue);
         $criterionliteral = behat_context_helper::escape($criterionname);
 
@@ -247,14 +286,24 @@ class behat_gradingform_rubric extends behat_base {
             "/descendant::textarea[text()=$currentvalueliteral]";
 
         if ($this->running_javascript()) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $spansufix = "/ancestor::div[@class='level-wrapper']" .
                 "/descendant::div[@class='definition']" .
                 "/descendant::span[@class='textvalue']";
 
             // Expanding the level input boxes.
+<<<<<<< HEAD
             $spannode = $this->find('xpath', $inputxpath . $spansufix . '|' . $textareaxpath . $spansufix);
             $spannode->click();
+=======
+            $this->execute('behat_general::i_click_on', [
+                $inputxpath . $spansufix . '|' . $textareaxpath . $spansufix,
+                'xpath',
+            ]);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $inputfield = $this->find('xpath', $inputxpath . '|' . $textareaxpath);
             $inputfield->setValue($value);
@@ -263,7 +312,10 @@ class behat_gradingform_rubric extends behat_base {
             $fieldnode = $this->find('xpath', $inputxpath . '|' . $textareaxpath);
             $this->set_rubric_field_value($fieldnode->getAttribute('name'), $value);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -275,7 +327,10 @@ class behat_gradingform_rubric extends behat_base {
      * @param TableNode $rubric
      */
     public function i_grade_by_filling_the_rubric_with(TableNode $rubric) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $criteria = $rubric->getRowsHash();
 
         $stepusage = '"I grade by filling the rubric with:" step needs you to provide a table where each row is a criterion' .
@@ -288,7 +343,10 @@ class behat_gradingform_rubric extends behat_base {
 
         // First element -> name, second -> points, third -> Remark.
         foreach ($criteria as $name => $criterion) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             // We only expect the points and the remark, as the criterion name is $name.
             if (count($criterion) !== 2) {
                 throw new ExpectationException($stepusage, $this->getSession());
@@ -349,7 +407,10 @@ class behat_gradingform_rubric extends behat_base {
      * @return void
      */
     public function the_level_with_points_was_previously_selected_for_the_rubric_criterion($points, $criterionname) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $levelxpath = $this->get_criterion_xpath($criterionname) .
             $this->get_level_xpath($points) .
             "[contains(concat(' ', normalize-space(@class), ' '), ' currentchecked ')]";
@@ -378,7 +439,10 @@ class behat_gradingform_rubric extends behat_base {
      * @return void
      */
     public function the_level_with_points_is_selected_for_the_rubric_criterion($points, $criterionname) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $levelxpath = $this->get_criterion_xpath($criterionname) .
             $this->get_level_xpath($points);
 
@@ -409,7 +473,10 @@ class behat_gradingform_rubric extends behat_base {
      * @return void
      */
     public function the_level_with_points_is_not_selected_for_the_rubric_criterion($points, $criterionname) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $levelxpath = $this->get_criterion_xpath($criterionname) .
             $this->get_level_xpath($points);
 
@@ -437,12 +504,22 @@ class behat_gradingform_rubric extends behat_base {
      * @return void
      */
     protected function set_rubric_field_value($name, $value, $visible = false) {
+<<<<<<< HEAD
 
         // Fields are hidden by default.
         if ($this->running_javascript() == true && $visible === false) {
             $xpath = "//*[@name='$name']/following-sibling::*[contains(concat(' ', normalize-space(@class), ' '), ' plainvalue ')]";
             $textnode = $this->find('xpath', $xpath);
             $textnode->click();
+=======
+        // Fields are hidden by default.
+        if ($this->running_javascript() == true && $visible === false) {
+            $xpath = "//*[@name='$name']/following-sibling::*[contains(concat(' ', normalize-space(@class), ' '), ' plainvalue ')]";
+            $this->execute('behat_general::i_click_on', [
+                $xpath,
+                'xpath',
+            ]);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Set the value now.
@@ -457,6 +534,7 @@ class behat_gradingform_rubric extends behat_base {
      * @return void
      */
     protected function click_and_confirm($node) {
+<<<<<<< HEAD
 
         // Clicks to perform the action.
         $node->click();
@@ -470,6 +548,22 @@ class behat_gradingform_rubric extends behat_base {
                 get_string('confirmation', 'admin')
             );
             $confirmbutton->click();
+=======
+        // Clicks to perform the action.
+        $this->execute('behat_general::i_click_on', [
+            $node,
+            'NodeElement',
+        ]);
+
+        // Confirms the delete.
+        if ($this->running_javascript()) {
+            $this->execute('behat_general::i_click_on_in_the', [
+                get_string('yes'),
+                'button',
+                get_string('confirmation', 'admin'),
+                'dialogue',
+            ]);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 

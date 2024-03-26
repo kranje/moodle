@@ -42,15 +42,29 @@
 defined('MOODLE_INTERNAL') || die();
 
 function xmldb_feedback_upgrade($oldversion) {
+<<<<<<< HEAD
     global $CFG, $DB;
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
+=======
+    global $CFG;
+
+    // Automatically generated Moodle v3.6.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.7.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.8.0 release upgrade line.
+    // Put any upgrade step following this.
+>>>>>>> forked/LAE_400_PACKAGE
 
     // Automatically generated Moodle v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
     if ($oldversion < 2022053000) {
         // Define key courseid (foreign) to be added to feedback_completed.
          $table = new xmldb_table('feedback_completed');
@@ -65,6 +79,8 @@ function xmldb_feedback_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     return true;
 }

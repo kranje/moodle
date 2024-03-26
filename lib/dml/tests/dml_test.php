@@ -3876,6 +3876,7 @@ EOD;
         $this->assertEquals(666, $DB->get_field_sql($sql));
     }
 
+<<<<<<< HEAD
     /**
      * Test DML libraries sql_cast_to_char method
      *
@@ -3914,6 +3915,8 @@ EOD;
         $this->assertEquals(['uno'], $fieldset);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function test_cast_char2int() {
         $DB = $this->tdb;
         $dbman = $DB->get_manager();
@@ -4621,6 +4624,7 @@ EOD;
         $this->assertEquals(2, $last->id);
     }
 
+<<<<<<< HEAD
     /**
      * Test DML libraries sql_order_by_null method
      */
@@ -4656,6 +4660,8 @@ EOD;
         $this->assertEquals(null, array_shift($records)->name);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function test_sql_substring() {
         $DB = $this->tdb;
         $dbman = $DB->get_manager();

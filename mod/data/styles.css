@@ -116,12 +116,17 @@
     text-align: right;
 }
 
+<<<<<<< HEAD
 #page-mod-data-view .notapproved {
     background-color: #fff3cd;
     color: #856404;
     border-radius: 0.5em;
     padding: 0.5em 1em;
     gap: 1em;
+=======
+.mod-data-default-template.notapproved {
+    background-color: #fcc;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 #page-mod-data-templates td.save_template,
@@ -145,6 +150,7 @@
     text-align: left;
 }
 
+<<<<<<< HEAD
 #page-mod-data-edit .datatagcontrol {
     padding-left: 10px;
 }
@@ -205,3 +211,12 @@
     border-color: var(--primary);
     color: var(--primary);
 }
+=======
+#page-mod-data-edit .mod-data-input {
+    margin-left: 10px;
+}
+
+#page-mod-data-edit .datatagcontrol {
+    padding-left: 10px;
+}
+>>>>>>> forked/LAE_400_PACKAGE

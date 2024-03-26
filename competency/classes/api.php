@@ -1582,11 +1582,17 @@ class api {
      *
      * @param int|course_module_competency $coursemodulecompetencyorid The course_module_competency, or its ID.
      * @param int $ruleoutcome The value of ruleoutcome.
+<<<<<<< HEAD
      * @param bool $overridegrade If true, will override existing grades in related competencies.
      * @return bool True on success.
      */
     public static function set_course_module_competency_ruleoutcome($coursemodulecompetencyorid, $ruleoutcome,
         $overridegrade = false) {
+=======
+     * @return bool True on success.
+     */
+    public static function set_course_module_competency_ruleoutcome($coursemodulecompetencyorid, $ruleoutcome) {
+>>>>>>> forked/LAE_400_PACKAGE
         static::require_enabled();
         $coursemodulecompetency = $coursemodulecompetencyorid;
         if (!is_object($coursemodulecompetency)) {
@@ -1601,8 +1607,11 @@ class api {
         require_capability('moodle/competency:coursecompetencymanage', $context);
 
         $coursemodulecompetency->set('ruleoutcome', $ruleoutcome);
+<<<<<<< HEAD
         $coursemodulecompetency->set('overridegrade', $overridegrade);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $coursemodulecompetency->update();
     }
 
@@ -4283,7 +4292,11 @@ class api {
      */
     public static function add_evidence($userid, $competencyorid, $contextorid, $action, $descidentifier, $desccomponent,
                                         $desca = null, $recommend = false, $url = null, $grade = null, $actionuserid = null,
+<<<<<<< HEAD
                                         $note = null, $overridegrade = false) {
+=======
+                                        $note = null) {
+>>>>>>> forked/LAE_400_PACKAGE
         global $DB;
         static::require_enabled();
 
@@ -4354,8 +4367,13 @@ class api {
                         $usercompetencycourse = user_competency_course::create_relation($userid, $competencyid, $courseid);
                         $usercompetencycourse->create();
                     }
+<<<<<<< HEAD
                     // Only update the grade and proficiency if there is not already a grade or the override option is enabled.
                     if ($usercompetencycourse->get('grade') === null || $overridegrade) {
+=======
+                    // Only update the grade and proficiency if there is not already a grade.
+                    if ($usercompetencycourse->get('grade') === null) {
+>>>>>>> forked/LAE_400_PACKAGE
                         // Set grade.
                         $usercompetencycourse->set('grade', $grade);
                         // Set proficiency.
@@ -4367,8 +4385,13 @@ class api {
                     $setucgrade = $coursesettings->get('pushratingstouserplans');
 
                     if ($setucgrade) {
+<<<<<<< HEAD
                         // Only push to user plans if there is not already a grade or the override option is enabled.
                         if ($usercompetency->get('grade') !== null && !$overridegrade) {
+=======
+                        // Only push to user plans if there is not already a grade.
+                        if ($usercompetency->get('grade') !== null) {
+>>>>>>> forked/LAE_400_PACKAGE
                             $setucgrade = false;
                         } else {
                             $ucgrade = $grade;
@@ -4378,9 +4401,14 @@ class api {
                 } else {
 
                     // When completing the competency we fetch the default grade from the competency. But we only mark
+<<<<<<< HEAD
                     // the user competency when a grade has not been set yet or if override option is enabled.
                     // Complete is an action to use with automated systems.
                     if ($usercompetency->get('grade') === null || $overridegrade) {
+=======
+                    // the user competency when a grade has not been set yet. Complete is an action to use with automated systems.
+                    if ($usercompetency->get('grade') === null) {
+>>>>>>> forked/LAE_400_PACKAGE
                         $setucgrade = true;
                         $ucgrade = $grade;
                         $ucproficiency = $proficiency;
@@ -4503,7 +4531,11 @@ class api {
 
         // The competency was marked as completed, apply the rules.
         if ($wascompleted) {
+<<<<<<< HEAD
             self::apply_competency_rules_from_usercompetency($usercompetency, $competency, $overridegrade);
+=======
+            self::apply_competency_rules_from_usercompetency($usercompetency, $competency);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $evidence;
@@ -4562,7 +4594,11 @@ class api {
      * @return void
      */
     protected static function apply_competency_rules_from_usercompetency(user_competency $usercompetency,
+<<<<<<< HEAD
                                                                          competency $competency = null, $overridegrade = false) {
+=======
+                                                                         competency $competency = null) {
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Perform some basic checks.
         if (!$usercompetency->get('proficiency')) {
@@ -4629,12 +4665,16 @@ class api {
             'evidence_competencyrule',
             'core_competency',
             null,
+<<<<<<< HEAD
             $recommend,
             null,
             null,
             null,
             null,
             $overridegrade
+=======
+            $recommend
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 
@@ -4669,7 +4709,10 @@ class api {
                 $action = null;
                 $recommend = false;
                 $strdesc = 'evidence_coursemodulecompleted';
+<<<<<<< HEAD
                 $overridegrade = $coursemodulecompetency->get('overridegrade');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
                 if ($outcome == course_module_competency::OUTCOME_NONE) {
                     continue;
@@ -4697,11 +4740,15 @@ class api {
                     'core_competency',
                     $cmname,
                     $recommend,
+<<<<<<< HEAD
                     $url,
                     null,
                     null,
                     null,
                     $overridegrade
+=======
+                    $url
+>>>>>>> forked/LAE_400_PACKAGE
                 );
             }
         }

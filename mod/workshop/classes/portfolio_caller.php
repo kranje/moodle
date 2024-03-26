@@ -342,7 +342,11 @@ class mod_workshop_portfolio_caller extends portfolio_module_caller_base {
         }
 
         if ($this->workshop->overallfeedbackmode) {
+<<<<<<< HEAD
             if ($assessment->feedbackauthorattachment || trim($assessment->feedbackauthor ?? '') !== '') {
+=======
+            if ($assessment->feedbackauthorattachment or trim($assessment->feedbackauthor) !== '') {
+>>>>>>> forked/LAE_400_PACKAGE
                 $output .= html_writer::tag('h3', get_string('overallfeedback', 'mod_workshop'));
                 $content = $this->format_exported_text($assessment->feedbackauthor, $assessment->feedbackauthorformat);
                 $content = portfolio_rewrite_pluginfile_urls($content, $this->workshop->context->id, 'mod_workshop',

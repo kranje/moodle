@@ -1292,6 +1292,7 @@ class moodle_content_writer_test extends advanced_testcase {
      */
     public function rewrite_pluginfile_urls_provider() {
         return [
+<<<<<<< HEAD
             'nullcontent' => [
                 'intro',
                 0,
@@ -1304,6 +1305,8 @@ class moodle_content_writer_test extends advanced_testcase {
                 '',
                 '',
             ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'zeroitemid' => [
                 'intro',
                 0,

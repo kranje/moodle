@@ -121,7 +121,10 @@ abstract class contextlist_base implements
      *
      * @return  \context
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         // It is possible that this context has been deleted and we now have subsequent calls being made with this
         // contextlist. Exceptions here will stop the further processing of this component and that is why we are
@@ -138,7 +141,11 @@ abstract class contextlist_base implements
                 $context = $this->current();
             } else {
                 // There are no more context ids left.
+<<<<<<< HEAD
                 return null;
+=======
+                return;
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         return $context;
@@ -149,7 +156,10 @@ abstract class contextlist_base implements
      *
      * @return  mixed
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->iteratorposition;
     }
@@ -157,7 +167,11 @@ abstract class contextlist_base implements
     /**
      * Move to the next context in the list.
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         ++$this->iteratorposition;
     }
 
@@ -166,7 +180,11 @@ abstract class contextlist_base implements
      *
      * @return  bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return isset($this->contextids[$this->iteratorposition]);
     }
 
@@ -176,14 +194,22 @@ abstract class contextlist_base implements
      * The list of contexts is uniqued during the rewind.
      * The rewind is called at the start of most iterations.
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->iteratorposition = 0;
     }
 
     /**
      * Return the number of contexts.
      */
+<<<<<<< HEAD
     public function count(): int {
+=======
+    public function count() {
+>>>>>>> forked/LAE_400_PACKAGE
         return count($this->contextids);
     }
 }

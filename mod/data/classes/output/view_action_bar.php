@@ -16,10 +16,14 @@
 
 namespace mod_data\output;
 
+<<<<<<< HEAD
 use data_portfolio_caller;
 use mod_data\manager;
 use moodle_url;
 use portfolio_add_button;
+=======
+use moodle_url;
+>>>>>>> forked/LAE_400_PACKAGE
 use templatable;
 use renderable;
 
@@ -41,15 +45,19 @@ class view_action_bar implements templatable, renderable {
     /** @var bool $hasentries Whether entries exist. */
     private $hasentries;
 
+<<<<<<< HEAD
     /** @var bool $mode The current view mode (list, view...). */
     private $mode;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * The class constructor.
      *
      * @param int $id The database module id.
      * @param \url_select $urlselect The URL selector object.
      * @param bool $hasentries Whether entries exist.
+<<<<<<< HEAD
      * @param string $mode The current view mode (list, view...).
      */
     public function __construct(int $id, \url_select $urlselect, bool $hasentries, string $mode) {
@@ -57,6 +65,13 @@ class view_action_bar implements templatable, renderable {
         $this->urlselect = $urlselect;
         $this->hasentries = $hasentries;
         $this->mode = $mode;
+=======
+     */
+    public function __construct(int $id, \url_select $urlselect, bool $hasentries) {
+        $this->id = $id;
+        $this->urlselect = $urlselect;
+        $this->hasentries = $hasentries;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -66,12 +81,17 @@ class view_action_bar implements templatable, renderable {
      * @return array
      */
     public function export_for_template(\renderer_base $output): array {
+<<<<<<< HEAD
         global $PAGE, $DB, $CFG;
+=======
+        global $PAGE, $DB;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $data = [
             'urlselect' => $this->urlselect->export_for_template($output),
         ];
 
+<<<<<<< HEAD
         $activity = $DB->get_record('data', ['id' => $this->id], '*', MUST_EXIST);
         $manager = manager::create_from_instance($activity);
 
@@ -141,6 +161,33 @@ class view_action_bar implements templatable, renderable {
 
         if ($actionsselect) {
             $data['actionsselect'] = $actionsselect->export_for_template($output);
+=======
+        $database = $DB->get_record('data', ['id' => $this->id]);
+        $cm = get_coursemodule_from_instance('data', $this->id);
+        $currentgroup = groups_get_activity_group($cm);
+        $groupmode = groups_get_activity_groupmode($cm);
+
+        if (data_user_can_add_entry($database, $currentgroup, $groupmode, $PAGE->context)) {
+            $addentrylink = new moodle_url('/mod/data/edit.php', ['d' => $this->id, 'backto' => $PAGE->url->out(false)]);
+            $addentrybutton = new \single_button($addentrylink, get_string('add', 'mod_data'), 'get', true);
+            $data['addentrybutton'] = $addentrybutton->export_for_template($output);
+        }
+
+        if (has_capability('mod/data:manageentries', $PAGE->context)) {
+            $importentrieslink = new moodle_url('/mod/data/import.php',
+                ['d' => $this->id, 'backto' => $PAGE->url->out(false)]);
+            $importentriesbutton = new \single_button($importentrieslink,
+                get_string('importentries', 'mod_data'), 'get', false);
+            $data['importentriesbutton'] = $importentriesbutton->export_for_template($output);
+        }
+
+        if (has_capability(DATA_CAP_EXPORT, $PAGE->context) && $this->hasentries) {
+            $exportentrieslink = new moodle_url('/mod/data/export.php',
+                ['d' => $this->id, 'backto' => $PAGE->url->out(false)]);
+            $exportentriesbutton = new \single_button($exportentrieslink, get_string('exportentries', 'mod_data'),
+                'get', false);
+            $data['exportentriesbutton'] = $exportentriesbutton->export_for_template($output);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $data;

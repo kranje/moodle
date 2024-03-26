@@ -18,10 +18,17 @@ declare(strict_types=1);
 
 namespace core_reportbuilder\external;
 
+<<<<<<< HEAD
 use renderer_base;
 use core\external\exporter;
 use core_reportbuilder\datasource;
 use core_reportbuilder\form\card_view;
+=======
+use core_reportbuilder\form\card_view;
+use renderer_base;
+use core\external\exporter;
+use core_reportbuilder\local\report\base;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Custom report card view exporter class
@@ -39,7 +46,11 @@ class custom_report_card_view_exporter extends exporter {
      */
     protected static function define_related(): array {
         return [
+<<<<<<< HEAD
             'report' => datasource::class,
+=======
+            'report' => base::class,
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -52,9 +63,17 @@ class custom_report_card_view_exporter extends exporter {
         return [
             'form' => [
                 'type' => PARAM_RAW,
+<<<<<<< HEAD
             ],
             'helpicon' => [
                 'type' => PARAM_RAW,
+=======
+                'optional' => true,
+            ],
+            'helpicon' => [
+                'type' => PARAM_RAW,
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
         ];
     }
@@ -66,7 +85,11 @@ class custom_report_card_view_exporter extends exporter {
      * @return array
      */
     protected function get_other_values(renderer_base $output): array {
+<<<<<<< HEAD
         /** @var datasource $report */
+=======
+        /** @var base $report */
+>>>>>>> forked/LAE_400_PACKAGE
         $report = $this->related['report'];
 
         $reportid = $report->get_report_persistent()->get('id');

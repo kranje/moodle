@@ -25,6 +25,10 @@
 namespace core\hub;
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
+=======
+use webservice_xmlrpc_client;
+>>>>>>> forked/LAE_400_PACKAGE
 use moodle_exception;
 use curl;
 use stdClass;
@@ -369,4 +373,8 @@ class api {
     public static function upload_course_backup($hubcourseid, \stored_file $backupfile) {
         debugging("This function has been deprecated as part of the Moodle.net sunsetting process.");
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> forked/LAE_400_PACKAGE

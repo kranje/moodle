@@ -42,7 +42,11 @@ class chart_pie extends chart_base {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function jsonSerialize(): array {
+=======
+    public function jsonSerialize() {
+>>>>>>> forked/LAE_400_PACKAGE
         $data = parent::jsonSerialize();
         $data['doughnut'] = $this->get_doughnut();
         return $data;

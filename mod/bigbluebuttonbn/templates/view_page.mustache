@@ -35,10 +35,15 @@
                     "title": "Upgrade now"
                 }
             ]
+<<<<<<< HEAD
         },
         "pollinterval": 5
     }
 
+=======
+        }
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }}
 {{{groupselector}}}
 
@@ -51,19 +56,26 @@
 {{/sitenotification}}
 
 <h3>{{meetingname}}</h3>
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 <h5>{{{meetingdescription}}}</h5>
 
 {{#room}}
     {{>mod_bigbluebuttonbn/room_view}}
 {{/room}}
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 {{#recordings}}
     {{>mod_bigbluebuttonbn/recordings_session}}
 {{/recordings}}
 
+<<<<<<< HEAD
 {{#js}}
 require(['mod_bigbluebuttonbn/rooms'], function(rooms) {
     // Register action on all buttons.
@@ -72,4 +84,17 @@ require(['mod_bigbluebuttonbn/rooms'], function(rooms) {
         {{pollinterval}}
         );
     });
+=======
+{{#recordingwarning}}
+  {{>core/notification}}
+{{/recordingwarning}}
+
+{{#js}}
+require(['mod_bigbluebuttonbn/rooms'], function(rooms) {
+    // Register action on all buttons.
+    rooms.init({
+        bigbluebuttonbnid: {{{instanceid}}},
+    });
+});
+>>>>>>> forked/LAE_400_PACKAGE
 {{/js}}

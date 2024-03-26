@@ -314,7 +314,11 @@ EOF;
             return get_string('allparticipants');
         }
 
+<<<<<<< HEAD
         return groups_get_group_name($groupid);
+=======
+        return format_string(groups_get_group_name($groupid), true, ['context' => $this->get_context()]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -536,6 +540,10 @@ EOF;
      */
     public function get_user(): stdClass {
         global $USER;
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
         return $USER;
     }
 
@@ -546,7 +554,12 @@ EOF;
      */
     public function get_user_id(): int {
         $user = $this->get_user();
+<<<<<<< HEAD
         return $user->id ?? 0;
+=======
+
+        return $user->id;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -556,6 +569,10 @@ EOF;
      */
     public function get_user_fullname(): string {
         $user = $this->get_user();
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
         return fullname($user);
     }
 
@@ -761,6 +778,7 @@ EOF;
     }
 
     /**
+<<<<<<< HEAD
      * Moderator approval required ?
      *
      * By default we leave it as false as "ALWAYS_ACCEPT" is the default value for
@@ -771,6 +789,8 @@ EOF;
         return $this->get_instance_var('mustapproveuser') ?? false;
     }
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Whether this instance can import recordings from another instance.
      *
      * @return bool
@@ -1034,8 +1054,11 @@ EOF;
         return new moodle_url('/mod/bigbluebuttonbn/bbb_view.php', [
             'action' => 'logout',
             'id' => $this->cm->id,
+<<<<<<< HEAD
             'courseid' => $this->cm->course // Used to find the course if ever the activity is deleted
             // while the meeting is running.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ]);
     }
 
@@ -1177,6 +1200,7 @@ EOF;
         }
         return true;
     }
+<<<<<<< HEAD
 
     /**
      * Get current guest link url
@@ -1227,4 +1251,6 @@ EOF;
             \mod_bigbluebuttonbn\plugin::generate_guest_meeting_credentials();
         $DB->update_record('bigbluebuttonbn', $this->instancedata);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

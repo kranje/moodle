@@ -2,19 +2,26 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Trig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Helpers;
 
 class Sine
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * SIN.
      *
      * Returns the result of builtin function sin after validating args.
      *
+<<<<<<< HEAD
      * @param mixed $angle Should be numeric, or can be an array of numbers
      *
      * @return array|float|string sine
@@ -27,6 +34,14 @@ class Sine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);
         }
 
+=======
+     * @param mixed $angle Should be numeric
+     *
+     * @return float|string sine
+     */
+    public static function sin($angle)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $angle = Helpers::validateNumericNullBool($angle);
         } catch (Exception $e) {
@@ -41,6 +56,7 @@ class Sine
      *
      * Returns the result of builtin function sinh after validating args.
      *
+<<<<<<< HEAD
      * @param mixed $angle Should be numeric, or can be an array of numbers
      *
      * @return array|float|string hyperbolic sine
@@ -53,6 +69,14 @@ class Sine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);
         }
 
+=======
+     * @param mixed $angle Should be numeric
+     *
+     * @return float|string hyperbolic sine
+     */
+    public static function sinh($angle)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $angle = Helpers::validateNumericNullBool($angle);
         } catch (Exception $e) {
@@ -67,6 +91,7 @@ class Sine
      *
      * Returns the arcsine of a number.
      *
+<<<<<<< HEAD
      * @param array|float $number Number, or can be an array of numbers
      *
      * @return array|float|string The arcsine of the number
@@ -79,6 +104,14 @@ class Sine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number
+     *
+     * @return float|string The arcsine of the number
+     */
+    public static function asin($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {
@@ -93,6 +126,7 @@ class Sine
      *
      * Returns the inverse hyperbolic sine of a number.
      *
+<<<<<<< HEAD
      * @param array|float $number Number, or can be an array of numbers
      *
      * @return array|float|string The inverse hyperbolic sine of the number
@@ -105,6 +139,14 @@ class Sine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number
+     *
+     * @return float|string The inverse hyperbolic sine of the number
+     */
+    public static function asinh($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {

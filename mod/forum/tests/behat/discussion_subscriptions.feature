@@ -14,7 +14,10 @@ Feature: A user can control their own subscription preferences for a discussion
     And the following "course enrolments" exist:
       | user | course | role |
       | student1 | C1 | student |
+<<<<<<< HEAD
     And I log in as "admin"
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario: An optional forum can have discussions subscribed to
@@ -23,6 +26,7 @@ Feature: A user can control their own subscription preferences for a discussion
       | course         | C1                     |
       | idnumber       | forum1                 |
       | name           | Test forum name        |
+<<<<<<< HEAD
       | intro          | Test forum description |
       | type           | general                |
       | forcesubscribe | 0                      |
@@ -34,6 +38,14 @@ Feature: A user can control their own subscription preferences for a discussion
       | Subject | Test post subject two |
       | Message | Test post message two |
     And I log out
+=======
+      | type           | general                |
+      | forcesubscribe | 0                      |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+      | admin | forum1 | Test post subject two | Test post message two |
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Test forum name" "forum activity" page logged in as student1
     Then I can subscribe to this forum
     And "Subscribe to this discussion" "checkbox" should exist in the "Test post subject one" "table_row"
@@ -68,6 +80,7 @@ Feature: A user can control their own subscription preferences for a discussion
       | course         | C1                     |
       | idnumber       | forum1                 |
       | name           | Test forum name        |
+<<<<<<< HEAD
       | intro          | Test forum description |
       | type           | general                |
       | forcesubscribe | 2                      |
@@ -79,6 +92,14 @@ Feature: A user can control their own subscription preferences for a discussion
       | Subject | Test post subject two |
       | Message | Test post message two |
     And I log out
+=======
+      | type           | general                |
+      | forcesubscribe | 2                      |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+      | admin | forum1 | Test post subject two | Test post message two |
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Test forum name" "forum activity" page logged in as student1
     Then I can unsubscribe from this forum
     And "Unsubscribe from this discussion" "checkbox" should exist in the "Test post subject one" "table_row"
@@ -113,6 +134,7 @@ Feature: A user can control their own subscription preferences for a discussion
       | course         | C1                     |
       | idnumber       | forum1                 |
       | name           | Test forum name        |
+<<<<<<< HEAD
       | intro          | Test forum description |
       | type           | general                |
       | forcesubscribe | 0                      |
@@ -124,6 +146,14 @@ Feature: A user can control their own subscription preferences for a discussion
       | Subject | Test post subject two |
       | Message | Test post message two |
     And I log out
+=======
+      | type           | general                |
+      | forcesubscribe | 0                      |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+      | admin | forum1 | Test post subject two | Test post message two |
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student1
     And I can subscribe to this forum
     And "Subscribe to this discussion" "checkbox" should exist in the "Test post subject one" "table_row"
@@ -132,6 +162,7 @@ Feature: A user can control their own subscription preferences for a discussion
     And I can subscribe to this forum
     And "Unsubscribe from this discussion" "checkbox" should exist in the "Test post subject one" "table_row"
     And "Subscribe to this discussion" "checkbox" should exist in the "Test post subject two" "table_row"
+<<<<<<< HEAD
     And I log out
     And I am on the "Test forum name" "forum activity" page logged in as admin
     And I navigate to "Settings" in current page administration
@@ -139,6 +170,12 @@ Feature: A user can control their own subscription preferences for a discussion
       | Subscription mode | Auto subscription |
     And I press "Save and return to course"
     And I log out
+=======
+    And I am on the "Test forum name" "forum activity editing" page logged in as admin
+    And I set the following fields to these values:
+      | Subscription mode | Auto subscription |
+    And I press "Save and return to course"
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student1
     And I can unsubscribe from this forum
     And "Unsubscribe from this discussion" "checkbox" should exist in the "Test post subject one" "table_row"
@@ -155,6 +192,7 @@ Feature: A user can control their own subscription preferences for a discussion
       | course         | C1                     |
       | idnumber       | forum1                 |
       | name           | Test forum name        |
+<<<<<<< HEAD
       | intro          | Test forum description |
       | type           | general                |
       | forcesubscribe | 0                      |
@@ -166,6 +204,14 @@ Feature: A user can control their own subscription preferences for a discussion
       | Subject | Test post subject two |
       | Message | Test post message two |
     And I log out
+=======
+      | type           | general                |
+      | forcesubscribe | 0                      |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+      | admin | forum1 | Test post subject two | Test post message two |
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Test forum name" "forum activity" page logged in as student1
     And I should see "Subscribe to forum"
     And I reply "Test post subject one" post from "Test forum name" forum with:
@@ -193,6 +239,7 @@ Feature: A user can control their own subscription preferences for a discussion
       | course         | C1                     |
       | idnumber       | forum1                 |
       | name           | Test forum name        |
+<<<<<<< HEAD
       | intro          | Test forum description |
       | type           | general                |
       | forcesubscribe | 2                      |
@@ -203,6 +250,14 @@ Feature: A user can control their own subscription preferences for a discussion
     And I add a new discussion to "Test forum name" forum with:
       | Subject | Test post subject two |
       | Message | Test post message two |
+=======
+      | type           | general                |
+      | forcesubscribe | 2                      |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+      | admin | forum1 | Test post subject two | Test post message two |
+>>>>>>> forked/LAE_400_PACKAGE
     # added for this scenario
     And the following "users" exist:
       | username | firstname | lastname | email                   |
@@ -210,7 +265,10 @@ Feature: A user can control their own subscription preferences for a discussion
     And the following "course enrolments" exist:
       | user     | course | role    |
       | student2 | C1     | student |
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Test forum name" "forum activity" page logged in as student2
     And I should see "Unsubscribe from forum"
     And I reply "Test post subject one" post from "Test forum name" forum with:
@@ -234,6 +292,7 @@ Feature: A user can control their own subscription preferences for a discussion
 
   Scenario: A guest should not be able to subscribe to a discussion
     Given the following "activities" exist:
+<<<<<<< HEAD
       | activity    | name            | intro                  | course               | section | idnumber  | type    |
       | forum       | Test forum name | Test forum description | Acceptance test site | 1       | forum1    | general |
     And I am on site homepage
@@ -244,6 +303,14 @@ Feature: A user can control their own subscription preferences for a discussion
     And I log out
     When I log in as "guest"
     And I follow "Test forum name"
+=======
+      | activity    | name            | course               | section | idnumber  | type    |
+      | forum       | Test forum name | Acceptance test site | 1       | forum1    | general |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+    When I am on the "Test forum name" "forum activity" page logged in as guest
+>>>>>>> forked/LAE_400_PACKAGE
     Then "Subscribe to this discussion" "checkbox" should not exist in the "Test post subject one" "table_row"
     And "Unsubscribe from this discussion" "checkbox" should not exist in the "Test post subject one" "table_row"
     And I follow "Test post subject one"
@@ -252,6 +319,7 @@ Feature: A user can control their own subscription preferences for a discussion
 
   Scenario: A user who is not logged in should not be able to subscribe to a discussion
     Given the following "activities" exist:
+<<<<<<< HEAD
       | activity    | name            | intro                  | course               | section | idnumber  | type    |
       | forum       | Test forum name | Test forum description | Acceptance test site | 1       | forum1    | general |
     And I am on site homepage
@@ -261,6 +329,15 @@ Feature: A user can control their own subscription preferences for a discussion
       | Message | Test post message one |
     And I log out
     When I follow "Test forum name"
+=======
+      | activity    | name            | course               | section | idnumber  | type    |
+      | forum       | Test forum name | Acceptance test site | 1       | forum1    | general |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+    When I am on site homepage
+    And I follow "Test forum name"
+>>>>>>> forked/LAE_400_PACKAGE
     Then "Subscribe to this discussion" "checkbox" should not exist in the "Test post subject one" "table_row"
     And "Unsubscribe from this discussion" "checkbox" should not exist in the "Test post subject one" "table_row"
     And I follow "Test post subject one"
@@ -273,6 +350,7 @@ Feature: A user can control their own subscription preferences for a discussion
       | course         | C1                     |
       | idnumber       | forum1                 |
       | name           | Test forum name        |
+<<<<<<< HEAD
       | intro          | Test forum description |
       | type           | general                |
       | forcesubscribe | 0                      |
@@ -281,6 +359,13 @@ Feature: A user can control their own subscription preferences for a discussion
       | Subject | Test post subject one |
       | Message | Test post message one |
     And I log out
+=======
+      | type           | general                |
+      | forcesubscribe | 0                      |
+    And the following "mod_forum > discussions" exist:
+      | user  | forum  | name                  | message               |
+      | admin | forum1 | Test post subject one | Test post message one |
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Test forum name" "forum activity" page logged in as student1
     Then "Subscribe to forum" "link" should exist
     And I follow "Test post subject one"

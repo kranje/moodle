@@ -233,11 +233,17 @@ Feature: We can set the grade to pass value
 
   Scenario: Set an invalid grade to pass for forum activity
     Given the following "activities" exist:
+<<<<<<< HEAD
       | activity    | name         | intro       | course | section | idnumber  |
       | forum       | Test Forum 1 | Test        | C1     | 1       | forum1    |
     And I am on "Course 1" course homepage with editing mode on
     And I am on the "Test Forum 1" "forum activity" page
     And I navigate to "Settings" in current page administration
+=======
+      | activity    | name         | course | idnumber  |
+      | forum       | Test Forum 1 | C1     | forum1    |
+    And I am on the "Test Forum 1" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I set the following fields to these values:
       | Ratings > Aggregate type        | Average of ratings |
@@ -249,11 +255,18 @@ Feature: We can set the grade to pass value
 
   Scenario: Set a valid grade to pass for forum activity
     Given the following "activities" exist:
+<<<<<<< HEAD
       | activity    | name         | intro | course | section | idnumber  |
       | forum       | Test Forum 1 | Test  | C1     | 1       | forum1    |
     And I am on "Course 1" course homepage with editing mode on
     And I am on the "Test Forum 1" "forum activity" page
     And I navigate to "Settings" in current page administration
+=======
+      | activity    | name         | course | idnumber  |
+      | forum       | Test Forum 1 | C1     | forum1    |
+    And I am on "Course 1" course homepage with editing mode on
+    And I am on the "Test Forum 1" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I set the following fields to these values:
       | Ratings > Aggregate type | Average of ratings |
@@ -266,9 +279,13 @@ Feature: We can set the grade to pass value
     Then the field "Grade to pass" matches value "90"
     And I set the field "Grade to pass" to "80"
     And I press "Save changes"
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I am on the "Test Forum 1" "forum activity" page
     And I follow "Settings"
+=======
+    And I am on the "Test Forum 1" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And the field "Ratings > Grade to pass" matches value "80"
 
   Scenario: Set a valid grade to pass for glossary activity

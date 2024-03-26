@@ -155,7 +155,11 @@ class core_question_renderer extends plugin_renderer_base {
      * @return HTML fragment.
      */
     protected function number($number) {
+<<<<<<< HEAD
         if (trim($number ?? '') === '') {
+=======
+        if (trim($number) === '') {
+>>>>>>> forked/LAE_400_PACKAGE
             return '';
         }
         if (trim($number) === 'i') {

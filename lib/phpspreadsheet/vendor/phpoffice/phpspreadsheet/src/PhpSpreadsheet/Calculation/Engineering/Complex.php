@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
 use Complex\Complex as ComplexObject;
 use Complex\Exception as ComplexException;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -12,6 +13,13 @@ class Complex
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Complex
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * COMPLEX.
      *
@@ -21,6 +29,7 @@ class Complex
      *        COMPLEX(realNumber,imaginary[,suffix])
      *
      * @param mixed $realNumber the real float coefficient of the complex number
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $imaginary the imaginary float coefficient of the complex number
      *                      Or can be an array of values
@@ -41,6 +50,19 @@ class Complex
         $realNumber = $realNumber ?? 0.0;
         $imaginary = $imaginary ?? 0.0;
         $suffix = $suffix ?? 'i';
+=======
+     * @param mixed $imaginary the imaginary float coefficient of the complex number
+     * @param mixed $suffix The character suffix for the imaginary component of the complex number.
+     *                          If omitted, the suffix is assumed to be "i".
+     *
+     * @return string
+     */
+    public static function COMPLEX($realNumber = 0.0, $imaginary = 0.0, $suffix = 'i')
+    {
+        $realNumber = ($realNumber === null) ? 0.0 : Functions::flattenSingleValue($realNumber);
+        $imaginary = ($imaginary === null) ? 0.0 : Functions::flattenSingleValue($imaginary);
+        $suffix = ($suffix === null) ? 'i' : Functions::flattenSingleValue($suffix);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $realNumber = EngineeringValidations::validateFloat($realNumber);
@@ -55,7 +77,11 @@ class Complex
             return (string) $complex;
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -66,6 +92,7 @@ class Complex
      * Excel Function:
      *        IMAGINARY(complexNumber)
      *
+<<<<<<< HEAD
      * @param array|string $complexNumber the complex number for which you want the imaginary
      *                                         coefficient
      *                      Or can be an array of values
@@ -79,11 +106,25 @@ class Complex
         if (is_array($complexNumber)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $complexNumber);
         }
+=======
+     * @param string $complexNumber the complex number for which you want the imaginary
+     *                                         coefficient
+     *
+     * @return float|string
+     */
+    public static function IMAGINARY($complexNumber)
+    {
+        $complexNumber = Functions::flattenSingleValue($complexNumber);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $complex = new ComplexObject($complexNumber);
         } catch (ComplexException $e) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $complex->getImaginary();
@@ -97,6 +138,7 @@ class Complex
      * Excel Function:
      *        IMREAL(complexNumber)
      *
+<<<<<<< HEAD
      * @param array|string $complexNumber the complex number for which you want the real coefficient
      *                      Or can be an array of values
      *
@@ -109,11 +151,24 @@ class Complex
         if (is_array($complexNumber)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $complexNumber);
         }
+=======
+     * @param string $complexNumber the complex number for which you want the real coefficient
+     *
+     * @return float|string
+     */
+    public static function IMREAL($complexNumber)
+    {
+        $complexNumber = Functions::flattenSingleValue($complexNumber);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $complex = new ComplexObject($complexNumber);
         } catch (ComplexException $e) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $complex->getReal();

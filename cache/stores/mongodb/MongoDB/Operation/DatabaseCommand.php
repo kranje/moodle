@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +31,10 @@ use MongoDB\Driver\ReadPreference;
 use MongoDB\Driver\Server;
 use MongoDB\Driver\Session;
 use MongoDB\Exception\InvalidArgumentException;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_array;
 use function is_object;
 
@@ -38,7 +49,11 @@ class DatabaseCommand implements Executable
     /** @var string */
     private $databaseName;
 
+<<<<<<< HEAD
     /** @var Command */
+=======
+    /** @var array|Command|object */
+>>>>>>> forked/LAE_400_PACKAGE
     private $command;
 
     /** @var array */
@@ -57,6 +72,11 @@ class DatabaseCommand implements Executable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * typeMap (array): Type map for BSON deserialization. This will be
      *    applied to the returned Cursor (it is not sent to the server).
      *
@@ -65,7 +85,11 @@ class DatabaseCommand implements Executable
      * @param array        $options      Options for command execution
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, $command, array $options = [])
+=======
+    public function __construct($databaseName, $command, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_array($command) && ! is_object($command)) {
             throw InvalidArgumentException::invalidType('$command', $command, 'array or object');
@@ -83,7 +107,11 @@ class DatabaseCommand implements Executable
             throw InvalidArgumentException::invalidType('"typeMap" option', $options['typeMap'], 'array');
         }
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
+=======
+        $this->databaseName = (string) $databaseName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->command = $command instanceof Command ? $command : new Command($command);
         $this->options = $options;
     }
@@ -92,6 +120,10 @@ class DatabaseCommand implements Executable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
+=======
+     * @param Server $server
+>>>>>>> forked/LAE_400_PACKAGE
      * @return Cursor
      */
     public function execute(Server $server)
@@ -108,9 +140,16 @@ class DatabaseCommand implements Executable
     /**
      * Create options for executing the command.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-server.executecommand.php
      */
     private function createOptions(): array
+=======
+     * @see http://php.net/manual/en/mongodb-driver-server.executecommand.php
+     * @return array
+     */
+    private function createOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 

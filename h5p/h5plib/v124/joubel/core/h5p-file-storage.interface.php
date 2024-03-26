@@ -140,7 +140,11 @@ interface H5PFileStorage {
    * Save files uploaded through the editor.
    * The files must be marked as temporary until the content form is saved.
    *
+<<<<<<< HEAD
    * @param H5peditorFile $file
+=======
+   * @param \H5peditorFile $file
+>>>>>>> forked/LAE_400_PACKAGE
    * @param int $contentId
    */
   public function saveFile($file, $contentId);

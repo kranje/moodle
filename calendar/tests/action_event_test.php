@@ -200,7 +200,11 @@ class core_calendar_action_event_test_event_collection implements event_collecti
         return 2;
     }
 
+<<<<<<< HEAD
     public function getIterator(): \Traversable {
+=======
+    public function getIterator() {
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($this->events as $event) {
             yield $event;
         }

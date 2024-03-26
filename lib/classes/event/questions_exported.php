@@ -76,15 +76,25 @@ class questions_exported extends question_base {
      * @return \moodle_url
      */
     public function get_url() {
+<<<<<<< HEAD
         if ($this->courseid) {
             $cat = $this->other['categoryid'] . ',' . $this->contextid;
+=======
+        $cat = $this->other['categoryid'] . ',' . $this->contextid;
+        if ($this->courseid) {
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->contextlevel == CONTEXT_MODULE) {
                 return new \moodle_url('/question/edit.php', ['cmid' => $this->contextinstanceid, 'cat' => $cat]);
             }
             return new \moodle_url('/question/edit.php', ['courseid' => $this->courseid, 'cat' => $cat]);
         }
+<<<<<<< HEAD
         return new \moodle_url('/question/bank/managecategories/category.php',
                                 ['courseid' => SITEID, 'edit' => $this->other['categoryid']]);
+=======
+        return new \moodle_url('/question/edit.php',
+                                ['courseid' => SITEID, 'cat' => $cat]);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

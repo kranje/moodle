@@ -43,22 +43,38 @@ if ($delete) {
 
 if ($id) {
     if (!$group = $DB->get_record('groups', array('id'=>$id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidgroupid');
+=======
+        print_error('invalidgroupid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if (empty($courseid)) {
         $courseid = $group->courseid;
 
     } else if ($courseid != $group->courseid) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
     }
 
     if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('invalidcourseid');
+    }
+
+    if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else {
     if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $group = new stdClass();
     $group->courseid = $course->id;

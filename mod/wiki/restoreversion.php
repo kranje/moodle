@@ -41,6 +41,7 @@ $versionid = required_param('versionid', PARAM_INT);
 $confirm = optional_param('confirm', 0, PARAM_BOOL);
 
 if (!$page = wiki_get_page($pageid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectpageid', 'wiki');
 }
 
@@ -54,6 +55,21 @@ if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
 
 if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('incorrectpageid', 'wiki');
+}
+
+if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
+    print_error('incorrectsubwikiid', 'wiki');
+}
+
+if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+    print_error('incorrectwikiid', 'wiki');
+}
+
+if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
@@ -61,12 +77,20 @@ $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST)
 require_login($course, true, $cm);
 
 if (!wiki_user_can_view($subwiki)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotviewpage', 'wiki');
+=======
+    print_error('cannotviewpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($confirm) {
     if (!confirm_sesskey()) {
+<<<<<<< HEAD
         throw new \moodle_exception(get_string('invalidsesskey', 'wiki'));
+=======
+        print_error(get_string('invalidsesskey', 'wiki'));
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $wikipage = new page_wiki_confirmrestore($wiki, $subwiki, $cm);
     $wikipage->set_page($page);

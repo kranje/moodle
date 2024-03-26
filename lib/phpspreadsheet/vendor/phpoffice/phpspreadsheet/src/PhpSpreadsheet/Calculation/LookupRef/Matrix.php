@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -27,6 +28,13 @@ class Matrix
             (count($values, COUNT_NORMAL) === 1 || count($values, COUNT_RECURSIVE) === count($values, COUNT_NORMAL));
     }
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Matrix
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * TRANSPOSE.
      *
@@ -65,14 +73,20 @@ class Matrix
      * @param mixed $matrix A range of cells or an array constant
      * @param mixed $rowNum The row in the array or range from which to return a value.
      *                          If row_num is omitted, column_num is required.
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $columnNum The column in the array or range from which to return a value.
      *                          If column_num is omitted, row_num is required.
      *                      Or can be an array of values
+=======
+     * @param mixed $columnNum The column in the array or range from which to return a value.
+     *                          If column_num is omitted, row_num is required.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * TODO Provide support for area_num, currently not supported
      *
      * @return mixed the value of a specified cell or array of cells
+<<<<<<< HEAD
      *         If an array of values is passed as the $rowNum and/or $columnNum arguments, then the returned result
      *            will also be an array with the same dimensions
      */
@@ -84,6 +98,13 @@ class Matrix
 
         $rowNum = $rowNum ?? 0;
         $columnNum = $columnNum ?? 0;
+=======
+     */
+    public static function index($matrix, $rowNum = 0, $columnNum = 0)
+    {
+        $rowNum = ($rowNum === null) ? 0 : Functions::flattenSingleValue($rowNum);
+        $columnNum = ($columnNum === null) ? 0 : Functions::flattenSingleValue($columnNum);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $rowNum = LookupRefValidations::validatePositiveInt($rowNum);
@@ -93,14 +114,22 @@ class Matrix
         }
 
         if (!is_array($matrix) || ($rowNum > count($matrix))) {
+<<<<<<< HEAD
             return ExcelError::REF();
+=======
+            return Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $rowKeys = array_keys($matrix);
         $columnKeys = @array_keys($matrix[$rowKeys[0]]);
 
         if ($columnNum > count($columnKeys)) {
+<<<<<<< HEAD
             return ExcelError::REF();
+=======
+            return Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($columnNum === 0) {

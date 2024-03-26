@@ -238,7 +238,11 @@ class lesson_page_type_multichoice extends lesson_page {
             }
             $result->answerid = $data->answerid;
             if (!$answer = $DB->get_record("lesson_answers", array("id" => $result->answerid))) {
+<<<<<<< HEAD
                 throw new \moodle_exception("Continue: answer record not found");
+=======
+                print_error("Continue: answer record not found");
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $answer = parent::rewrite_answers_urls($answer);
             if ($this->lesson->jumpto_is_correct($this->properties->id, $answer->jumpto)) {

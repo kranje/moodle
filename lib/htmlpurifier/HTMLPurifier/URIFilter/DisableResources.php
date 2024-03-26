@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 class HTMLPurifier_URIFilter_DisableResources extends HTMLPurifier_URIFilter
@@ -20,3 +21,27 @@ class HTMLPurifier_URIFilter_DisableResources extends HTMLPurifier_URIFilter
 }
 
 // vim: et sw=4 sts=4
+=======
+<?php
+
+class HTMLPurifier_URIFilter_DisableResources extends HTMLPurifier_URIFilter
+{
+    /**
+     * @type string
+     */
+    public $name = 'DisableResources';
+
+    /**
+     * @param HTMLPurifier_URI $uri
+     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Context $context
+     * @return bool
+     */
+    public function filter(&$uri, $config, $context)
+    {
+        return !$context->get('EmbeddedURI', true);
+    }
+}
+
+// vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

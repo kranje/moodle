@@ -41,10 +41,18 @@ const commentEvent = (questionId, courseID, contextId) => {
         questionid: questionId,
         courseid: courseID
     };
+<<<<<<< HEAD
     ModalFactory.create({
         type: ModalFactory.types.SAVE_CANCEL,
         title: Str.get_string('commentheader', 'qbank_comment'),
         body: Fragment.loadFragment('qbank_comment', 'question_comment', contextId, args),
+=======
+    let commentFragment = Fragment.loadFragment('qbank_comment', 'question_comment', contextId, args);
+    ModalFactory.create({
+        type: ModalFactory.types.SAVE_CANCEL,
+        title: Str.get_string('commentheader', 'qbank_comment'),
+        body: commentFragment,
+>>>>>>> forked/LAE_400_PACKAGE
         large: true,
     }).then((modal) => {
         let root = modal.getRoot();
@@ -55,12 +63,15 @@ const commentEvent = (questionId, courseID, contextId) => {
             submitlink.style.display = 'none';
         });
 
+<<<<<<< HEAD
         // Version selection event.
         root.on('change', '#question_comment_version_dropdown', function(e) {
             args.questionid = e.target.value;
             modal.setBody(Fragment.loadFragment('qbank_comment', 'question_comment', contextId, args));
         });
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Get the required strings and updated the modal button text labels.
         Str.get_strings([
             {key: 'addcomment', component: 'qbank_comment'},

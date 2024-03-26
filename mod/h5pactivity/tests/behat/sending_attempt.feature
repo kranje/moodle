@@ -41,7 +41,10 @@ Feature: Do a H5P attempt
     And I click on "Correct one" "text" in the ".h5p-question-content" "css_element"
     And I click on "Check" "button" in the ".h5p-question-buttons" "css_element"
     And I switch to the main frame
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Course 1" course page logged in as teacher1
     And I navigate to course participants
     And I follow "Student 1"
@@ -83,9 +86,14 @@ Feature: Do a H5P attempt
     And "2" row "Score" column of "table" table should contain "1"
     And "3" row "Score" column of "table" table should contain "0"
     And "4" row "Score" column of "table" table should contain "1"
+<<<<<<< HEAD
     And I am on the "Course 1" course page logged in as teacher1
     And I navigate to "View > User report" in the course gradebook
     And I click on "Student 1" in the "user" search widget
+=======
+    And I am on the "Course 1" "grades > User report > View" page logged in as "teacher1"
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Percentage  |
       | Awesome H5P package | 50.00 | 50.00 %     |

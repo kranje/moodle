@@ -463,7 +463,11 @@ class file_system_filedir extends file_system {
 
         $contenthash = file_storage::hash_from_string($content);
         // Binary length.
+<<<<<<< HEAD
         $filesize = strlen($content ?? '');
+=======
+        $filesize = strlen($content);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $hashpath = $this->get_fulldir_from_hash($contenthash);
         $hashfile = $this->get_local_path_from_hash($contenthash, false);

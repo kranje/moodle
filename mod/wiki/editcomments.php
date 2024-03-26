@@ -40,6 +40,7 @@ $action = optional_param('action', '', PARAM_ALPHANUMEXT);
 $commentid = optional_param('commentid', 0, PARAM_INT);
 
 if (!$page = wiki_get_page($pageid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectpageid', 'wiki');
 }
 if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
@@ -51,18 +52,42 @@ if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
 $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
     throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+    print_error('incorrectpageid', 'wiki');
+}
+if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
+    print_error('incorrectsubwikiid', 'wiki');
+}
+if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
+    print_error('invalidcoursemodule');
+}
+$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+    print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 require_login($course, true, $cm);
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotviewpage', 'wiki');
+=======
+    print_error('cannotviewpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $editcomments = new page_wiki_editcomment($wiki, $subwiki, $cm, 'modulepage');
 $comment = new stdClass();
 if ($action == 'edit') {
     if (!$comment = $DB->get_record('comments', array('id' => $commentid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcomment');
+=======
+        print_error('invalidcomment');
+    }
+    if ($USER->id != $comment->userid) {
+        throw new \moodle_exception('cannotviewpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

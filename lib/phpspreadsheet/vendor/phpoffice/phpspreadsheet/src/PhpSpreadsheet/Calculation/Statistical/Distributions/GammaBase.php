@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 abstract class GammaBase
 {
@@ -66,7 +69,11 @@ abstract class GammaBase
         }
 
         if ($i === self::MAX_ITERATIONS) {
+<<<<<<< HEAD
             return ExcelError::NA();
+=======
+            return Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $x;

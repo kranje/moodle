@@ -78,7 +78,11 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Create what we expect to be returned when querying the two courses.
         $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'timemodified',
+<<<<<<< HEAD
                                 'section', 'visible', 'groupmode', 'groupingid', 'lang');
+=======
+                                'section', 'visible', 'groupmode', 'groupingid');
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Add expected coursemodule and data.
         $label1->coursemodule = $label1->cmid;
@@ -88,7 +92,10 @@ class externallib_test extends externallib_advanced_testcase {
         $label1->groupmode = 0;
         $label1->groupingid = 0;
         $label1->introfiles = [];
+<<<<<<< HEAD
         $label1->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $label2->coursemodule = $label2->cmid;
         $label2->introformat = 1;
@@ -97,7 +104,10 @@ class externallib_test extends externallib_advanced_testcase {
         $label2->groupmode = 0;
         $label2->groupingid = 0;
         $label2->introfiles = [];
+<<<<<<< HEAD
         $label2->lang = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($expectedfields as $field) {
             $expected1[$field] = $label1->{$field};

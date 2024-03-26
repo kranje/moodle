@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Attr.AllowedRel
 TYPE: lookup
 VERSION: 1.6.0
@@ -7,3 +8,14 @@ List of allowed forward document relationships in the rel attribute. Common
 values may be nofollow or print. By default, this is empty, meaning that no
 document relationships are allowed.
 --# vim: et sw=4 sts=4
+=======
+Attr.AllowedRel
+TYPE: lookup
+VERSION: 1.6.0
+DEFAULT: array()
+--DESCRIPTION--
+List of allowed forward document relationships in the rel attribute. Common
+values may be nofollow or print. By default, this is empty, meaning that no
+document relationships are allowed.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

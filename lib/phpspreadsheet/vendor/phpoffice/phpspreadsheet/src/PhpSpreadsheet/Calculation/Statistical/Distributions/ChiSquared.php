@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -11,6 +12,13 @@ class ChiSquared
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class ChiSquared
+{
+>>>>>>> forked/LAE_400_PACKAGE
     private const MAX_ITERATIONS = 256;
 
     private const EPS = 2.22e-16;
@@ -21,6 +29,7 @@ class ChiSquared
      * Returns the one-tailed probability of the chi-squared distribution.
      *
      * @param mixed $value Float value for which we want the probability
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $degrees Integer degrees of freedom
      *                      Or can be an array of values
@@ -34,6 +43,16 @@ class ChiSquared
         if (is_array($value) || is_array($degrees)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $degrees);
         }
+=======
+     * @param mixed $degrees Integer degrees of freedom
+     *
+     * @return float|string
+     */
+    public static function distributionRightTail($value, $degrees)
+    {
+        $value = Functions::flattenSingleValue($value);
+        $degrees = Functions::flattenSingleValue($degrees);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $value = DistributionValidations::validateFloat($value);
@@ -43,14 +62,22 @@ class ChiSquared
         }
 
         if ($degrees < 1) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($value < 0) {
             if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC) {
                 return 1;
             }
 
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return 1 - (Gamma::incompleteGamma($degrees / 2, $value / 2) / Gamma::gammaValue($degrees / 2));
@@ -62,6 +89,7 @@ class ChiSquared
      * Returns the one-tailed probability of the chi-squared distribution.
      *
      * @param mixed $value Float value for which we want the probability
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $degrees Integer degrees of freedom
      *                      Or can be an array of values
@@ -77,6 +105,18 @@ class ChiSquared
         if (is_array($value) || is_array($degrees) || is_array($cumulative)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $degrees, $cumulative);
         }
+=======
+     * @param mixed $degrees Integer degrees of freedom
+     * @param mixed $cumulative Boolean value indicating if we want the cdf (true) or the pdf (false)
+     *
+     * @return float|string
+     */
+    public static function distributionLeftTail($value, $degrees, $cumulative)
+    {
+        $value = Functions::flattenSingleValue($value);
+        $degrees = Functions::flattenSingleValue($degrees);
+        $cumulative = Functions::flattenSingleValue($cumulative);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $value = DistributionValidations::validateFloat($value);
@@ -87,21 +127,33 @@ class ChiSquared
         }
 
         if ($degrees < 1) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($value < 0) {
             if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC) {
                 return 1;
             }
 
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($cumulative === true) {
             return 1 - self::distributionRightTail($value, $degrees);
         }
 
+<<<<<<< HEAD
         return ($value ** (($degrees / 2) - 1) * exp(-$value / 2)) /
+=======
+        return (($value ** (($degrees / 2) - 1) * exp(-$value / 2))) /
+>>>>>>> forked/LAE_400_PACKAGE
             ((2 ** ($degrees / 2)) * Gamma::gammaValue($degrees / 2));
     }
 
@@ -111,6 +163,7 @@ class ChiSquared
      * Returns the inverse of the right-tailed probability of the chi-squared distribution.
      *
      * @param mixed $probability Float probability at which you want to evaluate the distribution
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $degrees Integer degrees of freedom
      *                      Or can be an array of values
@@ -124,6 +177,16 @@ class ChiSquared
         if (is_array($probability) || is_array($degrees)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $probability, $degrees);
         }
+=======
+     * @param mixed $degrees Integer degrees of freedom
+     *
+     * @return float|string
+     */
+    public static function inverseRightTail($probability, $degrees)
+    {
+        $probability = Functions::flattenSingleValue($probability);
+        $degrees = Functions::flattenSingleValue($degrees);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $probability = DistributionValidations::validateProbability($probability);
@@ -133,7 +196,11 @@ class ChiSquared
         }
 
         if ($degrees < 1) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $callback = function ($value) use ($degrees) {
@@ -152,6 +219,7 @@ class ChiSquared
      * Returns the inverse of the left-tailed probability of the chi-squared distribution.
      *
      * @param mixed $probability Float probability at which you want to evaluate the distribution
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $degrees Integer degrees of freedom
      *                      Or can be an array of values
@@ -165,6 +233,16 @@ class ChiSquared
         if (is_array($probability) || is_array($degrees)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $probability, $degrees);
         }
+=======
+     * @param mixed $degrees Integer degrees of freedom
+     *
+     * @return float|string
+     */
+    public static function inverseLeftTail($probability, $degrees)
+    {
+        $probability = Functions::flattenSingleValue($probability);
+        $degrees = Functions::flattenSingleValue($degrees);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $probability = DistributionValidations::validateProbability($probability);
@@ -174,7 +252,11 @@ class ChiSquared
         }
 
         if ($degrees < 1) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return self::inverseLeftTailCalculation($probability, $degrees);
@@ -202,22 +284,36 @@ class ChiSquared
         $countActuals = count($actual);
         $countExpected = count($expected);
         if ($countActuals !== $countExpected || $countActuals === 1) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $result = 0.0;
         for ($i = 0; $i < $countActuals; ++$i) {
             if ($expected[$i] == 0.0) {
+<<<<<<< HEAD
                 return ExcelError::DIV0();
             } elseif ($expected[$i] < 0.0) {
                 return ExcelError::NAN();
+=======
+                return Functions::DIV0();
+            } elseif ($expected[$i] < 0.0) {
+                return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $result += (($actual[$i] - $expected[$i]) ** 2) / $expected[$i];
         }
 
         $degrees = self::degrees($rows, $columns);
 
+<<<<<<< HEAD
         $result = Functions::scalar(self::distributionRightTail($result, $degrees));
+=======
+        $result = self::distributionRightTail($result, $degrees);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $result;
     }
@@ -281,7 +377,10 @@ class ChiSquared
     // Relative error controlled by the eps parameter
     private static function gser($n, $x)
     {
+<<<<<<< HEAD
         /** @var float */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $gln = Gamma::ln($n / 2);
         $a = 0.5 * $n;
         $ap = $a;
@@ -305,7 +404,10 @@ class ChiSquared
     // Relative error controlled by the eps parameter
     private static function gcf($n, $x)
     {
+<<<<<<< HEAD
         /** @var float */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $gln = Gamma::ln($n / 2);
         $a = 0.5 * $n;
         $b = $x + 1 - $a;

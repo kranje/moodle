@@ -20,6 +20,18 @@ Feature: New discussions and discussions with recently added replies are display
       | course   | C1                   |
       | activity | forum                |
       | name     | Course general forum |
+<<<<<<< HEAD
+=======
+      | idnumber | forum1               |
+    #
+    # Add three posts into the blog.
+    #
+    And the following "mod_forum > discussions" exist:
+      | user     | forum  | name         | message                 | timemodified      |
+      | student1 | forum1 | Forum post 1 | This is the first post  | ##now +1 second## |
+      | student1 | forum1 | Forum post 2 | This is the second post | ##now +2 second## |
+      | student1 | forum1 | Forum post 3 | This is the third post  | ##now +3 second## |
+>>>>>>> forked/LAE_400_PACKAGE
 
   #
   # We need javascript/wait to prevent creation of the posts in the same second. The threads
@@ -30,6 +42,7 @@ Feature: New discussions and discussions with recently added replies are display
   Scenario: Replying to a forum post or editing it puts the discussion to the front
     Given I am on the "Course general forum" "forum activity" page logged in as student1
     #
+<<<<<<< HEAD
     # Add three posts into the forum.
     #
     When I add a new discussion to "Course general forum" forum with:
@@ -42,6 +55,8 @@ Feature: New discussions and discussions with recently added replies are display
       | Subject | Forum post 3            |
       | Message | This is the third post  |
     #
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # Edit one of the forum posts.
     #
     And I follow "Forum post 2"
@@ -50,13 +65,20 @@ Feature: New discussions and discussions with recently added replies are display
       | Subject | Edited forum post 2     |
     And I press "Save changes"
     And I wait to be redirected
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     #
     # Reply to another forum post.
     #
     And I am on the "Course general forum" "forum activity" page logged in as teacher1
     And I follow "Forum post 1"
+<<<<<<< HEAD
     And I reply "Forum post 1" post from "Course general forum" forum with:
+=======
+    When I reply "Forum post 1" post from "Course general forum" forum with:
+>>>>>>> forked/LAE_400_PACKAGE
       | Message | Reply to the first post |
     And I am on the "Course general forum" "forum activity" page
     #

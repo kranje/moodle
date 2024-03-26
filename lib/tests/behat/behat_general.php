@@ -148,7 +148,11 @@ class behat_general extends behat_base {
 
         } else if (!empty($url)) {
             // We redirect directly as we can not wait for an automatic redirection.
+<<<<<<< HEAD
             $this->getSession()->getDriver()->getClient()->request('get', $url);
+=======
+            $this->getSession()->getDriver()->getClient()->request('GET', $url);
+>>>>>>> forked/LAE_400_PACKAGE
 
         } else {
             // Reload the page if no URL was provided.
@@ -189,6 +193,25 @@ class behat_general extends behat_base {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Switches to a second window.
+     *
+     * @Given /^I switch to a second window$/
+     * @throws DriverException If there aren't exactly 2 windows open.
+     */
+    public function switch_to_second_window() {
+        $names = $this->getSession()->getWindowNames();
+
+        if (count($names) !== 2) {
+            throw new DriverException('Expected to see 2 windows open, found ' . count($names));
+        }
+
+        $this->getSession()->switchToWindow($names[1]);
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Switches to the main Moodle frame.
      *
      * @Given /^I switch to the main frame$/
@@ -214,6 +237,7 @@ class behat_general extends behat_base {
     }
 
     /**
+<<<<<<< HEAD
      * Switches to a second window.
      *
      * @Given /^I switch to a second window$/
@@ -230,6 +254,8 @@ class behat_general extends behat_base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Switches to the main Moodle window. Useful when you finish interacting with popup windows.
      *
      * @Given /^I switch to the main window$/
@@ -1102,7 +1128,11 @@ EOF;
      * the Behat result look ugly.
      *
      * Note: Most of the code relating to running a task is based on
+<<<<<<< HEAD
      * admin/cli/scheduled_task.php.
+=======
+     * admin/tool/task/cli/schedule_task.php.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @Given /^I run the scheduled task "(?P<task_name>[^"]+)"$/
      * @param string $taskname Name of task e.g. 'mod_whatever\task\do_something'
@@ -2280,4 +2310,39 @@ EOF;
         }
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Check that the page title contains a given string.
+     *
+     * @Given the page title should contain ":title"
+     * @param string $title The string that should be present on the page title.
+     */
+    public function the_page_title_should_contain(string $title): void {
+        $session = $this->getSession();
+        if ($this->running_javascript()) {
+            // When running on JS, the page title can be changed via JS, so it's more reliable to get the actual page title via JS.
+            $actualtitle = $session->evaluateScript("return document.title");
+        } else {
+            $titleelement = $session->getPage()->find('css', 'head title');
+            if ($titleelement === null) {
+                // Throw an exception if a page title is not present on the page.
+                throw new ElementNotFoundException(
+                    $this->getSession(),
+                    '<title> element',
+                    'css',
+                    'head title'
+                );
+            }
+            $actualtitle = $titleelement->getText();
+        }
+
+        if (strpos($actualtitle, $title) === false) {
+            throw new ExpectationException(
+                "'$title' was not found from the current page title '$actualtitle'",
+                $session
+            );
+        }
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

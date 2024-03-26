@@ -35,7 +35,11 @@ if ($verbosescales !== 1) {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id' => $id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);
@@ -47,7 +51,11 @@ $separatemode = (groups_get_course_groupmode($COURSE) == SEPARATEGROUPS and
         !has_capability('moodle/site:accessallgroups', $context));
 $currentgroup = groups_get_course_group($course);
 
+<<<<<<< HEAD
 $actionbar = new \core_grades\output\import_action_bar($context, null, 'direct');
+=======
+$actionbar = new \core_grades\output\import_action_bar($context, $PAGE->url, 'direct');
+>>>>>>> forked/LAE_400_PACKAGE
 print_grade_page_head($course->id, 'import', 'direct', get_string('pluginname', 'gradeimport_direct'), false, false, true,
     'userdata', 'gradeimport_direct', null, $actionbar);
 

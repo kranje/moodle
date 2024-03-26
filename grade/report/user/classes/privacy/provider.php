@@ -59,7 +59,11 @@ class provider implements
     /**
      * Store all user preferences for the plugin.
      *
+<<<<<<< HEAD
      * @param int $userid The userid of the user whose data is to be exported.
+=======
+     * @param   int         $userid The userid of the user whose data is to be exported.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function export_user_preferences(int $userid) {
         $prefvalue = get_user_preferences('gradereport_user_view_user', null, $userid);

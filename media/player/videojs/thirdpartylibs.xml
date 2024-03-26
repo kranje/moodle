@@ -3,6 +3,7 @@
     <library>
         <location>amd/src/video-lazy.js</location>
         <name>VideoJS</name>
+<<<<<<< HEAD
         <description>JavaScript library that makes it easier to work with and build on HTML5 video.</description>
         <version>7.20.3</version>
         <license>Apache</license>
@@ -23,10 +24,23 @@
         <copyrights>
           <copyright>2014-2015 Benoit Tremblay &lt;trembl.ben@gmail.com&gt;</copyright>
         </copyrights>
+=======
+        <license>Apache</license>
+        <version>7.17.0</version>
+        <licenseversion>2.0</licenseversion>
+    </library>
+    <library>
+        <location>amd/src/Youtube-lazy.js</location>
+        <name>YouTube Playback Technology for Video.js</name>
+        <license>MIT</license>
+        <version>2.6.1</version>
+        <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
     </library>
     <library>
         <location>videojs</location>
         <name>VideoJS support files</name>
+<<<<<<< HEAD
         <description>JavaScript library that makes it easier to work with and build on HTML5 video</description>
         <version>7.20.3</version>
         <license>Apache</license>
@@ -36,10 +50,16 @@
             <copyright>Brightcove, Inc</copyright>
         </copyrights>
         <customised/>
+=======
+        <license>Apache</license>
+        <version>7.17.0</version>
+        <licenseversion>2.0</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
     </library>
     <library>
         <location>amd/src/local/ogv/ogv.js</location>
         <name>ogv.js</name>
+<<<<<<< HEAD
         <description>Javascript media decoder and player for Ogg Vorbis/Opus/Theora and WebM VP8/VP9/AV1 video.</description>
         <version>1.8.4</version>
         <license>MIT</license>
@@ -47,10 +67,16 @@
         <copyrights>
             <copyright>Brion Vibber</copyright>
         </copyrights>
+=======
+        <license>MIT</license>
+        <version>1.8.4</version>
+        <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
     </library>
     <library>
         <location>ogvjs</location>
         <name>ogv.js support files</name>
+<<<<<<< HEAD
         <description>JavaScript media decoder and player for Ogg Vorbis/Opus/Theora and WebM VP8/VP9/AV1 video.</description>
         <license>MIT</license>
         <version>1.8.4</version>
@@ -58,10 +84,15 @@
         <copyrights>
             <copyright>Brion Vibber</copyright>
         </copyrights>
+=======
+        <license>MIT</license>
+        <version>1.8.4</version>
+>>>>>>> forked/LAE_400_PACKAGE
     </library>
     <library>
         <location>amd/src/videojs-ogvjs-lazy.js</location>
         <name>ogv.js Tech plugin for Video.JS</name>
+<<<<<<< HEAD
         <description>The ogv.js tech plugin for VideoJS</description>
         <version>0.1.2</version>
         <license>MIT</license>
@@ -69,5 +100,10 @@
         <copyrights>
             <copyright>2021 Huong Nguyen huongnv13@gmail.com</copyright>
         </copyrights>
+=======
+        <license>MIT</license>
+        <version>0.1.2</version>
+        <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
     </library>
 </libraries>

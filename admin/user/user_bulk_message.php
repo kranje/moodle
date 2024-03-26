@@ -17,7 +17,11 @@ if (empty($SESSION->bulk_users)) {
 }
 
 if (empty($CFG->messaging)) {
+<<<<<<< HEAD
     throw new \moodle_exception('messagingdisable', 'error');
+=======
+    print_error('messagingdisable', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->set_primary_active_tab('siteadminnode');

@@ -32,18 +32,32 @@ Feature: I can grade a students by group with separate groups
       | student1 | G3 |
       | student2 | G3 |
       | student3 | G3 |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I turn editing mode on
     And I add a "Forum" to section "1"
+=======
+    And the following "activity" exists:
+      | activity | forum        |
+      | course   | C1           |
+      | name     | Test Forum 1 |
+    And I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+    And I am on the "Test Forum 1" "forum activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I set the following fields to these values:
       | Forum name | Test Forum 1 |
       | Description | Test |
     And I set the field "Whole forum grading > Type" to "Point"
     And I set the field "Common module settings > Group mode" to "Separate groups"
+<<<<<<< HEAD
     And I press "Save and return to course"
     And I am on the "Test Forum 1" "forum activity" page
+=======
+    And I press "Save and display"
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario: Grade users by group A
@@ -85,7 +99,10 @@ Feature: I can grade a students by group with separate groups
       | user | group |
       | teacher2 | G2 |
       | teacher2 | G3 |
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Test Forum 1" "forum activity" page logged in as student1
     And I select "Group A" from the "Separate groups" singleselect
     And I click on "Add discussion topic" "link"
@@ -99,7 +116,10 @@ Feature: I can grade a students by group with separate groups
       | Subject  | Discussion subject C |
       | Message | Discussion message C |
     And I press "Post to forum"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     Then I am on the "Test Forum 1" "forum activity" page logged in as teacher2
     And I select "Group C" from the "Separate groups" singleselect
     And I click on "Grade users" "button"

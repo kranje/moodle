@@ -41,6 +41,7 @@ $paging = optional_param('page', 0, PARAM_INT);
 $allversion = optional_param('allversion', 0, PARAM_INT);
 
 if (!$page = wiki_get_page($pageid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectpageid', 'wiki');
 }
 
@@ -54,6 +55,21 @@ if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
 
 if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('incorrectpageid', 'wiki');
+}
+
+if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
+    print_error('incorrectsubwikiid', 'wiki');
+}
+
+if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+    print_error('incorrectwikiid', 'wiki');
+}
+
+if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
@@ -61,7 +77,11 @@ $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST)
 require_course_login($course, true, $cm);
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotviewpage', 'wiki');
+=======
+    print_error('cannotviewpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Trigger history viewed event.

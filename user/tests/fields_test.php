@@ -22,6 +22,10 @@ namespace core_user;
  * @package core
  * @copyright 2014 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
+=======
+ * @covers \core_user\fields
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class fields_test extends \advanced_testcase {
 
@@ -154,6 +158,30 @@ class fields_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Test getting identity fields, when one of them refers to a non-existing custom profile field
+     */
+    public function test_get_identity_fields_invalid(): void {
+        $this->resetAfterTest();
+
+        $this->getDataGenerator()->create_custom_profile_field([
+            'datatype' => 'text',
+            'shortname' => 'real',
+            'name' => 'I\'m real',
+        ]);
+
+        // The "fake" profile field does not exist.
+        set_config('showuseridentity', 'email,profile_field_real,profile_field_fake');
+
+        $this->assertEquals([
+            'email',
+            'profile_field_real',
+        ], fields::get_identity_fields(null));
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Tests the get_required_fields function.
      *
      * This function composes the results of get_identity/name/picture_fields, so we are not going

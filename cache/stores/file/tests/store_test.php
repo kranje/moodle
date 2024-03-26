@@ -33,7 +33,10 @@ require_once($CFG->dirroot.'/cache/stores/file/lib.php');
  * @package    cachestore_file
  * @copyright  2013 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
  * @covers \cachestore_file
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class store_test extends \cachestore_tests {
     /**
@@ -100,6 +103,7 @@ class store_test extends \cachestore_tests {
         ]);
         $this->assertEquals(21, $store->get_last_io_bytes());
     }
+<<<<<<< HEAD
 
     public function test_lock() {
         $store = new \cachestore_file('Test');
@@ -111,4 +115,6 @@ class store_test extends \cachestore_tests {
         $this->assertFalse($store->release_lock('lock', '321'));
         $this->assertTrue($store->release_lock('lock', '123'));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

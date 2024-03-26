@@ -480,7 +480,11 @@ class gradeimport_csv_load_data {
                     $maperrors[$j] = true;
                 } else {
                     // Collision.
+<<<<<<< HEAD
                     throw new \moodle_exception('cannotmapfield', '', '', $j);
+=======
+                    print_error('cannotmapfield', '', '', $j);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         }

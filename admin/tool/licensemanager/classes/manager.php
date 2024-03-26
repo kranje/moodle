@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * License manager.
  *
@@ -22,14 +23,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 namespace tool_licensemanager;
 
 use tool_licensemanager\form\edit_license;
 use license_manager;
 use stdClass;
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die();
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * License manager, main controller for tool_licensemanager.
  *
@@ -95,6 +101,7 @@ class manager {
         }
 
         $viewmanager = true;
+<<<<<<< HEAD
 
         switch ($action) {
             case self::ACTION_DISABLE:
@@ -107,6 +114,27 @@ class manager {
 
             case self::ACTION_DELETE:
                 license_manager::delete($license);
+=======
+        $redirect = helper::get_licensemanager_url();
+
+        switch ($action) {
+            case self::ACTION_DISABLE:
+                require_sesskey();
+                license_manager::disable($license);
+                redirect($redirect);
+                break;
+
+            case self::ACTION_ENABLE:
+                require_sesskey();
+                license_manager::enable($license);
+                redirect($redirect);
+                break;
+
+            case self::ACTION_DELETE:
+                require_sesskey();
+                license_manager::delete($license);
+                redirect($redirect);
+>>>>>>> forked/LAE_400_PACKAGE
                 break;
 
             case self::ACTION_CREATE:
@@ -116,7 +144,13 @@ class manager {
 
             case self::ACTION_MOVE_UP:
             case self::ACTION_MOVE_DOWN:
+<<<<<<< HEAD
                 $this->change_license_order($action, $license);
+=======
+                require_sesskey();
+                $this->change_license_order($action, $license);
+                redirect($redirect);
+>>>>>>> forked/LAE_400_PACKAGE
                 break;
 
             case self::ACTION_VIEW_LICENSE_MANAGER:
@@ -152,14 +186,22 @@ class manager {
             if ($action == self::ACTION_CREATE) {
                 // Check that license shortname isn't already in use.
                 if (!empty(license_manager::get_license_by_shortname($data->shortname))) {
+<<<<<<< HEAD
                     throw new \moodle_exception('duplicatelicenseshortname', 'tool_licensemanager',
+=======
+                    print_error('duplicatelicenseshortname', 'tool_licensemanager',
+>>>>>>> forked/LAE_400_PACKAGE
                         helper::get_licensemanager_url(),
                         $data->shortname);
                 }
                 $license->shortname = $data->shortname;
             } else {
                 if (empty(license_manager::get_license_by_shortname($licenseshortname))) {
+<<<<<<< HEAD
                     throw new \moodle_exception('licensenotfoundshortname', 'license',
+=======
+                    print_error('licensenotfoundshortname', 'license',
+>>>>>>> forked/LAE_400_PACKAGE
                         helper::get_licensemanager_url(),
                         $licenseshortname);
                 }

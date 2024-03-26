@@ -2,16 +2,24 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 use PhpOffice\PhpSpreadsheet\Shared\IntOrFloat;
 
 class Permutations
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * PERMUT.
      *
@@ -22,6 +30,7 @@ class Permutations
      *        for lottery-style probability calculations.
      *
      * @param mixed $numObjs Integer number of different objects
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $numInSet Integer number of objects in each permutation
      *                      Or can be an array of values
@@ -35,6 +44,16 @@ class Permutations
         if (is_array($numObjs) || is_array($numInSet)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $numObjs, $numInSet);
         }
+=======
+     * @param mixed $numInSet Integer number of objects in each permutation
+     *
+     * @return float|int|string Number of permutations, or a string containing an error
+     */
+    public static function PERMUT($numObjs, $numInSet)
+    {
+        $numObjs = Functions::flattenSingleValue($numObjs);
+        $numInSet = Functions::flattenSingleValue($numInSet);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $numObjs = StatisticalValidations::validateInt($numObjs);
@@ -44,7 +63,11 @@ class Permutations
         }
 
         if ($numObjs < $numInSet) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $result = round(MathTrig\Factorial::fact($numObjs) / MathTrig\Factorial::fact($numObjs - $numInSet));
 
@@ -58,6 +81,7 @@ class Permutations
      *     that can be selected from the total objects.
      *
      * @param mixed $numObjs Integer number of different objects
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $numInSet Integer number of objects in each permutation
      *                      Or can be an array of values
@@ -71,6 +95,16 @@ class Permutations
         if (is_array($numObjs) || is_array($numInSet)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $numObjs, $numInSet);
         }
+=======
+     * @param mixed $numInSet Integer number of objects in each permutation
+     *
+     * @return float|int|string Number of permutations, or a string containing an error
+     */
+    public static function PERMUTATIONA($numObjs, $numInSet)
+    {
+        $numObjs = Functions::flattenSingleValue($numObjs);
+        $numInSet = Functions::flattenSingleValue($numInSet);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $numObjs = StatisticalValidations::validateInt($numObjs);
@@ -80,7 +114,11 @@ class Permutations
         }
 
         if ($numObjs < 0 || $numInSet < 0) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $result = $numObjs ** $numInSet;

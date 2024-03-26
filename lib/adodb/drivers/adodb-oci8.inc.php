@@ -791,11 +791,14 @@ END;
 					$nrows += $offset;
 				}
 				$sql = "select * from (".$sql.") where rownum <= :adodb_offset";
+<<<<<<< HEAD
 
 				// If non-bound statement, $inputarr is false
 				if (!$inputarr) {
 					$inputarr = array();
 				}
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 				$inputarr['adodb_offset'] = $nrows;
 				$nrows = -1;
 			}
@@ -978,12 +981,18 @@ END;
 	/**
 	 * Execute SQL
 	 *
+<<<<<<< HEAD
 	 * @param string|array $sql     SQL statement to execute, or possibly an array holding
 	 *                              prepared statement ($sql[0] will hold sql text).
 	 * @param array|false $inputarr holds the input data to bind to.
 	 *                              Null elements will be set to null.
 	 *
 	 * @return ADORecordSet|false
+=======
+	 * @param sql		SQL statement to execute, or possibly an array holding prepared statement ($sql[0] will hold sql text)
+	 * @param [inputarr]	holds the input data to bind to. Null elements will be set to null.
+	 * @return 		RecordSet or false
+>>>>>>> forked/LAE_400_PACKAGE
 	 */
 	function Execute($sql,$inputarr=false)
 	{
@@ -1102,6 +1111,7 @@ END;
 		return array($sql,$stmt,0,$BINDNUM);
 	}
 
+<<<<<<< HEAD
 	function releaseStatement(&$stmt)
 	{
 		if (is_array($stmt)
@@ -1118,6 +1128,8 @@ END;
 		return false;
 	}
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	/*
 		Call an oracle stored procedure and returns a cursor variable as a recordset.
 		Concept by Robert Tuttle robert@ud.com
@@ -1265,12 +1277,21 @@ END;
 	 *    $db->Parameter($stmt,$group,'group');
 	 *    $db->Execute($stmt);
 	 *
+<<<<<<< HEAD
 	 * @param $stmt Statement returned by {@see Prepare()} or {@see PrepareSP()}.
 	 * @param $var PHP variable to bind to
 	 * @param $name Name of stored procedure variable name to bind to.
 	 * @param bool $isOutput Indicates direction of parameter 0/false=IN  1=OUT  2= IN/OUT. This is ignored in oci8.
 	 * @param int $maxLen Holds an maximum length of the variable.
 	 * @param mixed $type The data type of $var. Legal values depend on driver.
+=======
+	 * @param $stmt Statement returned by Prepare() or PrepareSP().
+	 * @param $var PHP variable to bind to
+	 * @param $name Name of stored procedure variable name to bind to.
+	 * @param [$isOutput] Indicates direction of parameter 0/false=IN  1=OUT  2= IN/OUT. This is ignored in oci8.
+	 * @param [$maxLen] Holds an maximum length of the variable.
+	 * @param [$type] The data type of $var. Legal values depend on driver.
+>>>>>>> forked/LAE_400_PACKAGE
 	 *
 	 * @link http://php.net/oci_bind_by_name
 	*/
@@ -1508,6 +1529,7 @@ SELECT /*+ RULE */ distinct b.column_name
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns a list of Foreign Keys associated with a specific table.
 	 *
 	 * @param string $table
@@ -1519,6 +1541,18 @@ SELECT /*+ RULE */ distinct b.column_name
 	 *                        false if no foreign keys could be found.
 	 */
 	public function metaForeignKeys($table, $owner = '', $upper = false, $associative = false)
+=======
+	 * returns assoc array where keys are tables, and values are foreign keys
+	 *
+	 * @param	str		$table
+	 * @param	str		$owner	[optional][default=NULL]
+	 * @param	bool	$upper	[optional][discarded]
+	 * @return	mixed[]			Array of foreign key information
+	 *
+	 * @link http://gis.mit.edu/classes/11.521/sqlnotes/referential_integrity.html
+	 */
+	function MetaForeignKeys($table, $owner=false, $upper=false)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 		global $ADODB_FETCH_MODE;
 
@@ -1835,12 +1869,16 @@ class ADORecordset_oci8 extends ADORecordSet {
 			$len = $fieldobj->max_length;
 		}
 
+<<<<<<< HEAD
 		$t = strtoupper($t);
 
 		if (array_key_exists($t,$this->connection->customActualTypes))
 			return  $this->connection->customActualTypes[$t];
 
 		switch ($t) {
+=======
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 		case 'VARCHAR':
 		case 'VARCHAR2':
 		case 'CHAR':

@@ -4,7 +4,11 @@
  *
  * @package   php-markdown
  * @author    Michel Fortin <michel.fortin@michelf.com>
+<<<<<<< HEAD
  * @copyright 2004-2022 Michel Fortin <https://michelf.com/projects/php-markdown/>
+=======
+ * @copyright 2004-2019 Michel Fortin <https://michelf.com/projects/php-markdown/>
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright (Original Markdown) 2004-2006 John Gruber <https://daringfireball.net/projects/markdown/>
  */
 
@@ -18,7 +22,11 @@ class Markdown implements MarkdownInterface {
 	 * Define the package version
 	 * @var string
 	 */
+<<<<<<< HEAD
 	const MARKDOWNLIB_VERSION = "2.0.0";
+=======
+	const MARKDOWNLIB_VERSION = "1.9.0";
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Simple function interface - Initialize the parser and return the result
@@ -29,9 +37,15 @@ class Markdown implements MarkdownInterface {
 	 * @param  string $text
 	 * @return string
 	 */
+<<<<<<< HEAD
 	public static function defaultTransform(string $text): string {
 		// Take parser class on which this function was called.
 		$parser_class = static::class;
+=======
+	public static function defaultTransform($text) {
+		// Take parser class on which this function was called.
+		$parser_class = \get_called_class();
+>>>>>>> forked/LAE_400_PACKAGE
 
 		// Try to take parser from the static parser list
 		static $parser_list;
@@ -49,6 +63,7 @@ class Markdown implements MarkdownInterface {
 	/**
 	 * Configuration variables
 	 */
+<<<<<<< HEAD
 	/**
 	 * Change to ">" for HTML output.
 	 */
@@ -64,12 +79,34 @@ class Markdown implements MarkdownInterface {
 	 */
 	public bool $no_markup   = false;
 	public bool $no_entities = false;
+=======
+
+	/**
+	 * Change to ">" for HTML output.
+	 * @var string
+	 */
+	public $empty_element_suffix = " />";
+
+	/**
+	 * The width of indentation of the output markup
+	 * @var int
+	 */
+	public $tab_width = 4;
+
+	/**
+	 * Change to `true` to disallow markup or entities.
+	 * @var boolean
+	 */
+	public $no_markup   = false;
+	public $no_entities = false;
+>>>>>>> forked/LAE_400_PACKAGE
 
 
 	/**
 	 * Change to `true` to enable line breaks on \n without two trailling spaces
 	 * @var boolean
 	 */
+<<<<<<< HEAD
 	public bool $hard_wrap = false;
 
 	/**
@@ -77,6 +114,16 @@ class Markdown implements MarkdownInterface {
 	 */
 	public array $predef_urls   = array();
 	public array $predef_titles = array();
+=======
+	public $hard_wrap = false;
+
+	/**
+	 * Predefined URLs and titles for reference links and images.
+	 * @var array
+	 */
+	public $predef_urls   = array();
+	public $predef_titles = array();
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Optional filter function for URLs
@@ -116,12 +163,20 @@ class Markdown implements MarkdownInterface {
 	 * <li>List item two</li>
 	 * <li>List item three</li>
 	 * </ol>
+<<<<<<< HEAD
 	 */
 	public bool $enhanced_ordered_list = false;
+=======
+	 *
+	 * @var bool
+	 */
+	public $enhanced_ordered_list = false;
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Parser implementation
 	 */
+<<<<<<< HEAD
 	/**
 	 * Regex to match balanced [brackets].
 	 * Needed to insert a maximum bracked depth while converting to PHP.
@@ -137,6 +192,26 @@ class Markdown implements MarkdownInterface {
 	 */
 	protected string $escape_chars = '\`*_{}[]()>#+-.!';
 	protected string $escape_chars_re;
+=======
+
+	/**
+	 * Regex to match balanced [brackets].
+	 * Needed to insert a maximum bracked depth while converting to PHP.
+	 * @var int
+	 */
+	protected $nested_brackets_depth = 6;
+	protected $nested_brackets_re;
+
+	protected $nested_url_parenthesis_depth = 4;
+	protected $nested_url_parenthesis_re;
+
+	/**
+	 * Table of hash values for escaped characters:
+	 * @var string
+	 */
+	protected $escape_chars = '\`*_{}[]()>#+-.!';
+	protected $escape_chars_re;
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Constructor function. Initialize appropriate member variables.
@@ -165,6 +240,7 @@ class Markdown implements MarkdownInterface {
 
 	/**
 	 * Internal hashes used during transformation.
+<<<<<<< HEAD
 	 */
 	protected array $urls        = array();
 	protected array $titles      = array();
@@ -179,6 +255,25 @@ class Markdown implements MarkdownInterface {
 	 * Status flag to avoid invalid nesting.
 	 */
 	protected bool $in_emphasis_processing = false;
+=======
+	 * @var array
+	 */
+	protected $urls        = array();
+	protected $titles      = array();
+	protected $html_hashes = array();
+
+	/**
+	 * Status flag to avoid invalid nesting.
+	 * @var boolean
+	 */
+	protected $in_anchor = false;
+
+	/**
+	 * Status flag to avoid invalid nesting.
+	 * @var boolean
+	 */
+	protected $in_emphasis_processing = false;
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Called before the transformation process starts to setup parser states.
@@ -213,7 +308,11 @@ class Markdown implements MarkdownInterface {
 	 * @param  string $text
 	 * @return string
 	 */
+<<<<<<< HEAD
 	public function transform(string $text): string {
+=======
+	public function transform($text) {
+>>>>>>> forked/LAE_400_PACKAGE
 		$this->setup();
 
 		# Remove UTF-8 BOM and marker character in input, if present.
@@ -250,8 +349,14 @@ class Markdown implements MarkdownInterface {
 
 	/**
 	 * Define the document gamut
+<<<<<<< HEAD
 	 */
 	protected array $document_gamut = array(
+=======
+	 * @var array
+	 */
+	protected $document_gamut = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		// Strip link definitions, store in hashes.
 		"stripLinkDefinitions" => 20,
 		"runBasicBlockGamut"   => 30,
@@ -340,7 +445,11 @@ class Markdown implements MarkdownInterface {
 		$block_tags_b_re = 'p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|address|'.
 						   'script|noscript|style|form|fieldset|iframe|math|svg|'.
 						   'article|section|nav|aside|hgroup|header|footer|'.
+<<<<<<< HEAD
 						   'figure|details|summary';
+=======
+						   'figure';
+>>>>>>> forked/LAE_400_PACKAGE
 
 		// Regular expression for the content of a block tag.
 		$nested_tags_level = 4;
@@ -511,8 +620,14 @@ class Markdown implements MarkdownInterface {
 	/**
 	 * Define the block gamut - these are all the transformations that form
 	 * block-level tags like paragraphs, headers, and list items.
+<<<<<<< HEAD
 	 */
 	protected array $block_gamut = array(
+=======
+	 * @var array
+	 */
+	protected $block_gamut = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		"doHeaders"         => 10,
 		"doHorizontalRules" => 20,
 		"doLists"           => 40,
@@ -582,8 +697,14 @@ class Markdown implements MarkdownInterface {
 	/**
 	 * These are all the transformations that occur *within* block-level
 	 * tags like paragraphs, headers, and list items.
+<<<<<<< HEAD
 	 */
 	protected array $span_gamut = array(
+=======
+	 * @var array
+	 */
+	protected $span_gamut = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		// Process character escapes, code spans, and inline HTML
 		// in one shot.
 		"parseSpan"           => -30,
@@ -708,7 +829,11 @@ class Markdown implements MarkdownInterface {
 
 	/**
 	 * Callback method to parse referenced anchors
+<<<<<<< HEAD
 	 * @param  array $matches
+=======
+	 * @param  string $matches
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return string
 	 */
 	protected function _doAnchors_reference_callback($matches) {
@@ -747,7 +872,11 @@ class Markdown implements MarkdownInterface {
 
 	/**
 	 * Callback method to parse inline anchors
+<<<<<<< HEAD
 	 * @param  array $matches
+=======
+	 * @param  string $matches
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return string
 	 */
 	protected function _doAnchors_inline_callback($matches) {
@@ -765,7 +894,11 @@ class Markdown implements MarkdownInterface {
 		$url = $this->encodeURLAttribute($url);
 
 		$result = "<a href=\"$url\"";
+<<<<<<< HEAD
 		if ($title) {
+=======
+		if (isset($title)) {
+>>>>>>> forked/LAE_400_PACKAGE
 			$title = $this->encodeAttribute($title);
 			$result .=  " title=\"$title\"";
 		}
@@ -1089,8 +1222,14 @@ class Markdown implements MarkdownInterface {
 
 	/**
 	 * Nesting tracker for list levels
+<<<<<<< HEAD
 	 */
 	protected int $list_level = 0;
+=======
+	 * @var integer
+	 */
+	protected $list_level = 0;
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Process the contents of a single ordered or unordered list, splitting it
@@ -1231,7 +1370,11 @@ class Markdown implements MarkdownInterface {
 	 * Define the emphasis operators with their regex matches
 	 * @var array
 	 */
+<<<<<<< HEAD
 	protected array $em_relist = array(
+=======
+	protected $em_relist = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		''  => '(?:(?<!\*)\*(?!\*)|(?<!_)_(?!_))(?![\.,:;]?\s)',
 		'*' => '(?<![\s*])\*(?!\*)',
 		'_' => '(?<![\s_])_(?!_)',
@@ -1241,7 +1384,11 @@ class Markdown implements MarkdownInterface {
 	 * Define the strong operators with their regex matches
 	 * @var array
 	 */
+<<<<<<< HEAD
 	protected array $strong_relist = array(
+=======
+	protected $strong_relist = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		''   => '(?:(?<!\*)\*\*(?!\*)|(?<!_)__(?!_))(?![\.,:;]?\s)',
 		'**' => '(?<![\s*])\*\*(?!\*)',
 		'__' => '(?<![\s_])__(?!_)',
@@ -1251,7 +1398,11 @@ class Markdown implements MarkdownInterface {
 	 * Define the emphasis + strong operators with their regex matches
 	 * @var array
 	 */
+<<<<<<< HEAD
 	protected array $em_strong_relist = array(
+=======
+	protected $em_strong_relist = array(
+>>>>>>> forked/LAE_400_PACKAGE
 		''    => '(?:(?<!\*)\*\*\*(?!\*)|(?<!_)___(?!_))(?![\.,:;]?\s)',
 		'***' => '(?<![\s*])\*\*\*(?!\*)',
 		'___' => '(?<![\s_])___(?!_)',
@@ -1259,8 +1410,14 @@ class Markdown implements MarkdownInterface {
 
 	/**
 	 * Container for prepared regular expressions
+<<<<<<< HEAD
 	 */
 	protected ?array $em_strong_prepared_relist = null;
+=======
+	 * @var array
+	 */
+	protected $em_strong_prepared_relist;
+>>>>>>> forked/LAE_400_PACKAGE
 
 	/**
 	 * Prepare regular expressions for searching emphasis tokens in any
@@ -1808,7 +1965,11 @@ class Markdown implements MarkdownInterface {
 	/**
 	 * String length function for detab. `_initDetab` will create a function to
 	 * handle UTF-8 if the default function does not exist.
+<<<<<<< HEAD
 	 * can be a string or function
+=======
+	 * @var string
+>>>>>>> forked/LAE_400_PACKAGE
 	 */
 	protected $utf8_strlen = 'mb_strlen';
 
@@ -1865,7 +2026,13 @@ class Markdown implements MarkdownInterface {
 			return;
 		}
 
+<<<<<<< HEAD
 		$this->utf8_strlen = fn($text) => preg_match_all('/[\x00-\xBF]|[\xC0-\xFF][\x80-\xBF]*/', $text, $m);
+=======
+		$this->utf8_strlen = function($text) {
+			return preg_match_all('/[\x00-\xBF]|[\xC0-\xFF][\x80-\xBF]*/', $text, $m);
+		};
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**

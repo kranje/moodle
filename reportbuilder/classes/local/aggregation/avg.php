@@ -67,6 +67,7 @@ class avg extends base {
     /**
      * Return formatted value for column when applying aggregation
      *
+<<<<<<< HEAD
      * For boolean columns we return the average of the values (0..1), numeric columns execute original callbacks if present
      *
      * @param mixed $value
@@ -84,5 +85,17 @@ class avg extends base {
         }
 
         return parent::format_value($value, $values, $callbacks, $columntype);
+=======
+     * @param mixed $value
+     * @param array $values
+     * @param array $callbacks
+     * @return mixed
+     */
+    public static function format_value($value, array $values, array $callbacks) {
+        if (reset($values) === null) {
+            return null;
+        }
+        return format_float((float) reset($values), 1);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

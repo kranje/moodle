@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <XMLDB PATH="admin/tool/dataprivacy/db" VERSION="20220530" COMMENT="XMLDB file for Moodle tool/dataprivacy"
+=======
+<XMLDB PATH="admin/tool/dataprivacy/db" VERSION="20191217" COMMENT="XMLDB file for Moodle tool/dataprivacy"
+>>>>>>> forked/LAE_400_PACKAGE
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
@@ -130,7 +134,10 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="purposepurposeid" TYPE="foreign" FIELDS="purposeid" REFTABLE="tool_dataprivacy_purpose" REFFIELDS="id"/>
         <KEY NAME="puproseroleid" TYPE="foreign" FIELDS="roleid" REFTABLE="role" REFFIELDS="id"/>
+<<<<<<< HEAD
         <KEY NAME="usermodified" TYPE="foreign" FIELDS="usermodified" REFTABLE="user" REFFIELDS="id"/>
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       </KEYS>
       <INDEXES>
         <INDEX NAME="purposerole" UNIQUE="true" FIELDS="purposeid, roleid"/>

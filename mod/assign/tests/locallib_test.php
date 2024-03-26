@@ -4539,6 +4539,7 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
 
         return array($assign, $instance, $student);
     }
+<<<<<<< HEAD
 
     /**
      * Test user filtering by First name, Last name and Submission status.
@@ -4606,4 +4607,6 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
         $this->AssertTrue($assign->is_userid_filtered($student1->id));
         $this->AssertTrue($assign->is_userid_filtered($student2->id));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

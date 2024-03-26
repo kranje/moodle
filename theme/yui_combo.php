@@ -234,8 +234,14 @@ while (count($parts)) {
             continue;
         }
         $revision = (int)array_shift($bits);
+<<<<<<< HEAD
         if ($revision === -1) {
             // Revision -1 says please don't cache the JS
+=======
+        if (!min_is_revision_valid_and_current($revision)) {
+            // A non-current revision means please don't cache the JS
+            $revision = -1;
+>>>>>>> forked/LAE_400_PACKAGE
             $cache = false;
         }
         $frankenstyle = array_shift($bits);
@@ -281,8 +287,14 @@ while (count($parts)) {
             continue;
         }
         $revision = (int)array_shift($bits);
+<<<<<<< HEAD
         if ($revision === -1) {
             // Revision -1 says please don't cache the JS
+=======
+        if (!min_is_revision_valid_and_current($revision)) {
+            // A non-current revision means please don't cache the JS
+            $revision = -1;
+>>>>>>> forked/LAE_400_PACKAGE
             $cache = false;
         }
         $contentfile = "$CFG->libdir/yuilib/gallery/" . join('/', $bits);

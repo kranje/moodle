@@ -104,6 +104,7 @@ enablePopovers();
 // Enable all tooltips.
 enableTooltips();
 
+<<<<<<< HEAD
 // Disables flipping the dropdowns up or dynamically repositioning them along the Y-axis (based on the viewport)
 // to prevent the dropdowns getting hidden behind the navbar or them covering the trigger element.
 $.fn.dropdown.Constructor.Default.popperConfig = {
@@ -131,6 +132,10 @@ $.fn.dropdown.Constructor.Default.popperConfig = {
         }
     },
 };
+=======
+// Disables flipping the dropdowns up and getting hidden behind the navbar.
+$.fn.dropdown.Constructor.Default.flip = false;
+>>>>>>> forked/LAE_400_PACKAGE
 
 pendingPromise.resolve();
 

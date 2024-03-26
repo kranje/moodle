@@ -41,9 +41,15 @@ class LookupRef
      * @param bool $referenceStyle A logical value that specifies the A1 or R1C1 reference style.
      *                                TRUE or omitted      CELL_ADDRESS returns an A1-style reference
      *                                FALSE                CELL_ADDRESS returns an R1C1-style reference
+<<<<<<< HEAD
      * @param array|string $sheetText Optional Name of worksheet to use
      *
      * @return array|string
+=======
+     * @param string $sheetText Optional Name of worksheet to use
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function cellAddress($row, $column, $relativity = 1, $referenceStyle = true, $sheetText = '')
     {
@@ -277,7 +283,11 @@ class LookupRef
      * @param mixed $matchType The number -1, 0, or 1. -1 means above, 0 means exact match, 1 means below.
      *                         If match_type is 1 or -1, the list has to be ordered.
      *
+<<<<<<< HEAD
      * @return array|int|string The relative position of the found item
+=======
+     * @return int|string The relative position of the found item
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function MATCH($lookupValue, $lookupArray, $matchType = 1)
     {

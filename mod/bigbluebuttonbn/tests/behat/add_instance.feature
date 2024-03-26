@@ -6,7 +6,11 @@ Feature: bigbluebuttonbn instance
 
   Background:  Make sure that a course is created
     Given a BigBlueButton mock server is configured
+<<<<<<< HEAD
     And I enable "bigbluebuttonbn" "mod" plugin
+=======
+    And I accept dpa and enable bigbluebuttonbn plugin
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "courses" exist:
       | fullname    | shortname   | category |
       | Test course | Test course | 0        |

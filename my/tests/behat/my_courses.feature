@@ -111,6 +111,7 @@ Feature: Run tests over my courses.
     And "Move Course overview block" "menuitem" should not exist in the "Course overview" "block"
     And I click on "Actions menu" "icon" in the "Course overview" "block"
     And I should not see "Delete Course overview block"
+<<<<<<< HEAD
 
   @javascript
   Scenario: User with creating a course permission can't see the Request course link
@@ -139,3 +140,5 @@ Feature: Run tests over my courses.
   Scenario: User without creating nor course request permission shouldn't see any Request course link
     Given I am on the "My courses" page logged in as "user1"
     Then "Course management options" "link" should not exist
+=======
+>>>>>>> forked/LAE_400_PACKAGE

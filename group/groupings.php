@@ -31,7 +31,11 @@ $courseid = required_param('id', PARAM_INT);
 $PAGE->set_url('/group/groupings.php', array('id'=>$courseid));
 
 if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);

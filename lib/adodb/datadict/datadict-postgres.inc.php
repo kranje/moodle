@@ -34,7 +34,11 @@ class ADODB2_postgres extends ADODB_DataDict
 
 	public $blobAllowsDefaultValue = true;
 	public $blobAllowsNotNull = true;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> forked/LAE_400_PACKAGE
 	function metaType($t, $len=-1, $fieldobj=false)
 	{
 		if (is_object($t)) {
@@ -42,6 +46,7 @@ class ADODB2_postgres extends ADODB_DataDict
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 
 		$t = strtoupper($t);
 
@@ -53,12 +58,22 @@ class ADODB2_postgres extends ADODB_DataDict
 
 		switch ($t) {
 
+=======
+		$is_serial = is_object($fieldobj) && !empty($fieldobj->primary_key) && !empty($fieldobj->unique) &&
+			!empty($fieldobj->has_default) && substr($fieldobj->default_value,0,8) == 'nextval(';
+
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 			case 'INTERVAL':
 			case 'CHAR':
 			case 'CHARACTER':
 			case 'VARCHAR':
 			case 'NAME':
+<<<<<<< HEAD
 			case 'BPCHAR':
+=======
+	   		case 'BPCHAR':
+>>>>>>> forked/LAE_400_PACKAGE
 				if ($len <= $this->blobSize) return 'C';
 
 			case 'TEXT':
@@ -101,6 +116,7 @@ class ADODB2_postgres extends ADODB_DataDict
 			case 'REAL':
 				return 'F';
 
+<<<<<<< HEAD
 			default:
 				return ADODB_DEFAULT_METATYPE;
 		}
@@ -117,6 +133,15 @@ class ADODB2_postgres extends ADODB_DataDict
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 
+=======
+			 default:
+			 	return ADODB_DEFAULT_METATYPE;
+		}
+	}
+
+ 	function actualType($meta)
+	{
+>>>>>>> forked/LAE_400_PACKAGE
 		switch ($meta) {
 		case 'C': return 'VARCHAR';
 		case 'XL':
@@ -168,7 +193,11 @@ class ADODB2_postgres extends ADODB_DataDict
 			if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
 				list(,$colname,$default) = $matches;
 				$sql[] = $alter . str_replace('DEFAULT '.$default,'',$v);
+<<<<<<< HEAD
 				$sql[] = 'UPDATE '.$tabname.' SET '.$colname.'='.$default.' WHERE '.$colname.' IS NULL ';
+=======
+				$sql[] = 'UPDATE '.$tabname.' SET '.$colname.'='.$default;
+>>>>>>> forked/LAE_400_PACKAGE
 				$sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET DEFAULT ' . $default;
 			} else {
 				$sql[] = $alter . $v;
@@ -184,12 +213,17 @@ class ADODB2_postgres extends ADODB_DataDict
 
 	function dropIndexSQL($idxname, $tabname = NULL)
 	{
+<<<<<<< HEAD
 		return array(sprintf($this->dropIndex, $this->tableName($idxname), $this->tableName($tabname)));
+=======
+	   return array(sprintf($this->dropIndex, $this->tableName($idxname), $this->tableName($tabname)));
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**
 	 * Change the definition of one column
 	 *
+<<<<<<< HEAD
 	 * Postgres can't do that on its own, you need to supply the complete
 	 * definition of the new table, to allow recreating the table and copying
 	 * the content over to the new table.
@@ -199,6 +233,14 @@ class ADODB2_postgres extends ADODB_DataDict
 	 * @param string $tableflds    complete definition of the new table, e.g. for postgres, default ''
 	 * @param array  $tableoptions options for the new table {@see CreateTableSQL()}, default ''
 	 *
+=======
+	 * Postgres can't do that on it's own, you need to supply the complete definition of the new table,
+	 * to allow, recreating the table and copying the content over to the new table
+	 * @param string $tabname table-name
+	 * @param string $flds column-name and type for the changed column
+	 * @param string $tableflds complete definition of the new table, eg. for postgres, default ''
+	 * @param array/ $tableoptions options for the new table see CreateTableSQL, default ''
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array with SQL strings
 	 */
 	function alterColumnSQL($tabname, $flds, $tableflds='', $tableoptions='')
@@ -216,9 +258,15 @@ class ADODB2_postgres extends ADODB_DataDict
 				if ($not_null = preg_match('/NOT NULL/i',$v)) {
 					$v = preg_replace('/NOT NULL/i','',$v);
 				}
+<<<<<<< HEAD
 				// this next block doesn't work - there is no way that I can see to
 				// explicitly ask a column to be null using $flds
 				elseif ($set_null = preg_match('/NULL/i',$v)) {
+=======
+				 // this next block doesn't work - there is no way that I can see to
+				 // explicitly ask a column to be null using $flds
+				else if ($set_null = preg_match('/NULL/i',$v)) {
+>>>>>>> forked/LAE_400_PACKAGE
 					// if they didn't specify not null, see if they explicitly asked for null
 					// Lookbehind pattern covers the case 'fieldname NULL datatype DEFAULT NULL'
 					// only the first NULL should be removed, not the one specifying
@@ -297,7 +345,11 @@ class ADODB2_postgres extends ADODB_DataDict
 	 * @param string $tabname table-name
 	 * @param string $flds column-name and type for the changed column
 	 * @param string $tableflds complete definition of the new table, eg. for postgres, default ''
+<<<<<<< HEAD
 	 * @param array  $tableoptions options for the new table {@see CreateTableSQL}, default []
+=======
+	 * @param array/ $tableoptions options for the new table see CreateTableSQL, default ''
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array with SQL strings
 	 */
 	function dropColumnSQL($tabname, $flds, $tableflds='', $tableoptions='')
@@ -324,7 +376,11 @@ class ADODB2_postgres extends ADODB_DataDict
 	 * @param string $tabname table-name
 	 * @param string $dropflds column-names to drop
 	 * @param string $tableflds complete definition of the new table, eg. for postgres
+<<<<<<< HEAD
 	 * @param array|string $tableoptions options for the new table see CreateTableSQL, default ''
+=======
+	 * @param array/string $tableoptions options for the new table see CreateTableSQL, default ''
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array with SQL strings
 	 */
 	function _recreate_copy_table($tabname, $dropflds, $tableflds, $tableoptions='')
@@ -496,11 +552,19 @@ CREATE [ UNIQUE ] INDEX index_name ON table
 		if (isset($idxoptions['HASH'])) {
 			$s .= 'USING HASH ';
 		}
+<<<<<<< HEAD
 
 		if (isset($idxoptions[$this->upperName])) {
 			$s .= $idxoptions[$this->upperName];
 		}
 
+=======
+		
+		if (isset($idxoptions[$this->upperName])) {
+			$s .= $idxoptions[$this->upperName];
+		}
+		
+>>>>>>> forked/LAE_400_PACKAGE
 		if (is_array($flds)) {
 			$flds = implode(', ', $flds);
 		}
@@ -533,7 +597,11 @@ CREATE [ UNIQUE ] INDEX index_name ON table
 		}
 		return $ftype;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> forked/LAE_400_PACKAGE
 	function changeTableSQL($tablename, $flds, $tableoptions = false, $dropOldFlds=false)
 	{
 		global $ADODB_FETCH_MODE;
@@ -543,18 +611,30 @@ CREATE [ UNIQUE ] INDEX index_name ON table
 		if ($this->connection->fetchMode !== false) {
 			$savem = $this->connection->setFetchMode(false);
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> forked/LAE_400_PACKAGE
 		// check table exists
 		$save_handler = $this->connection->raiseErrorFn;
 		$this->connection->raiseErrorFn = '';
 		$cols = $this->metaColumns($tablename);
 		$this->connection->raiseErrorFn = $save_handler;
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> forked/LAE_400_PACKAGE
 		if (isset($savem)) {
 			$this->connection->setFetchMode($savem);
 		}
 		$ADODB_FETCH_MODE = $save;
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> forked/LAE_400_PACKAGE
 		$sqlResult=array();
 		if ( empty($cols)) {
 			$sqlResult=$this->createTableSQL($tablename, $flds, $tableoptions);
@@ -562,7 +642,11 @@ CREATE [ UNIQUE ] INDEX index_name ON table
 			$sqlResultAdd = $this->addColumnSQL($tablename, $flds);
 			$sqlResultAlter = $this->alterColumnSQL($tablename, $flds, '', $tableoptions);
 			$sqlResult = array_merge((array)$sqlResultAdd, (array)$sqlResultAlter);
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> forked/LAE_400_PACKAGE
 			if ($dropOldFlds) {
 				// already exists, alter table instead
 				list($lines,$pkey,$idxs) = $this->_genFields($flds);
@@ -577,7 +661,11 @@ CREATE [ UNIQUE ] INDEX index_name ON table
 					}
 				}
 			}
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 		return $sqlResult;
 	}

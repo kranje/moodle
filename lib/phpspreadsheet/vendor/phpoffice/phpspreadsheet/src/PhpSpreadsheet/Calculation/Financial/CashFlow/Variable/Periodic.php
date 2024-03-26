@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Financial\CashFlow\Variable;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Periodic
 {
@@ -34,7 +37,11 @@ class Periodic
     public static function rate($values, $guess = 0.1)
     {
         if (!is_array($values)) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $values = Functions::flattenArray($values);
         $guess = Functions::flattenSingleValue($guess);
@@ -55,7 +62,11 @@ class Periodic
             }
         }
         if (($f1 * $f2) > 0.0) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $f = self::presentValue($x1, $values);
@@ -79,7 +90,11 @@ class Periodic
             }
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -102,7 +117,11 @@ class Periodic
     public static function modifiedRate($values, $financeRate, $reinvestmentRate)
     {
         if (!is_array($values)) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $values = Functions::flattenArray($values);
         $financeRate = Functions::flattenSingleValue($financeRate);
@@ -122,13 +141,21 @@ class Periodic
         }
 
         if (($npvNeg === 0.0) || ($npvPos === 0.0) || ($reinvestmentRate <= -1.0)) {
+<<<<<<< HEAD
             return ExcelError::VALUE();
+=======
+            return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $mirr = ((-$npvPos * $rr ** $n)
                 / ($npvNeg * ($rr))) ** (1.0 / ($n - 1)) - 1.0;
 
+<<<<<<< HEAD
         return is_finite($mirr) ? $mirr : ExcelError::VALUE();
+=======
+        return is_finite($mirr) ? $mirr : Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

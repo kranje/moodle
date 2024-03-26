@@ -755,6 +755,7 @@ class behat_forms extends behat_base {
         $node = $this->get_node_in_container('xpath_element', $xpathtarget, 'form_row', $field);
         $this->ensure_node_is_visible($node);
     }
+<<<<<<< HEAD
 
     /**
      * Checks whether the select menu contains an option with specified text or not.
@@ -796,4 +797,6 @@ class behat_forms extends behat_base {
             );
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

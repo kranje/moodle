@@ -2636,6 +2636,10 @@ class mod_assign_external extends \mod_assign\external\external_api {
         global $DB, $CFG;
         require_once($CFG->dirroot . "/mod/assign/locallib.php");
         require_once($CFG->dirroot . "/user/lib.php");
+<<<<<<< HEAD
+=======
+        require_once($CFG->libdir . '/grouplib.php');
+>>>>>>> forked/LAE_400_PACKAGE
 
         $params = self::validate_parameters(self::list_participants_parameters(),
                                             array(
@@ -2657,8 +2661,15 @@ class mod_assign_external extends \mod_assign\external\external_api {
         $assign->require_view_grades();
 
         $participants = array();
+<<<<<<< HEAD
         if (groups_group_visible($params['groupid'], $course, $cm)) {
             $participants = $assign->list_participants_with_filter_status_and_group($params['groupid'], $params['tablesort']);
+=======
+        $coursegroups = [];
+        if (groups_group_visible($params['groupid'], $course, $cm)) {
+            $participants = $assign->list_participants_with_filter_status_and_group($params['groupid'], $params['tablesort']);
+            $coursegroups = groups_get_all_groups($course->id);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $userfields = user_get_default_fields();
@@ -2709,9 +2720,18 @@ class mod_assign_external extends \mod_assign\external\external_api {
                 $userdetails['submissionstatus'] = $record->submissionstatus;
                 if (!empty($record->groupid)) {
                     $userdetails['groupid'] = $record->groupid;
+<<<<<<< HEAD
                 }
                 if (!empty($record->groupname)) {
                     $userdetails['groupname'] = $record->groupname;
+=======
+
+                    if (!empty($coursegroups[$record->groupid])) {
+                        // Format properly the group name.
+                        $group = $coursegroups[$record->groupid];
+                        $userdetails['groupname'] = format_string($group->name);
+                    }
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 // Unique id is required for blind marking.
                 $userdetails['recordid'] = -1;
@@ -2826,6 +2846,10 @@ class mod_assign_external extends \mod_assign\external\external_api {
         global $DB, $CFG;
         require_once($CFG->dirroot . "/mod/assign/locallib.php");
         require_once($CFG->dirroot . "/user/lib.php");
+<<<<<<< HEAD
+=======
+        require_once($CFG->libdir . '/grouplib.php');
+>>>>>>> forked/LAE_400_PACKAGE
 
         $params = self::validate_parameters(self::get_participant_parameters(), array(
             'assignid' => $assignid,
@@ -2846,12 +2870,15 @@ class mod_assign_external extends \mod_assign\external\external_api {
             throw new moodle_exception('usernotincourse');
         }
 
+<<<<<<< HEAD
         $filtered = $assign->is_userid_filtered($userid);
         if (!$filtered) {
             // User is filtered out by user filters or table preferences.
             throw new moodle_exception('userisfilteredout');
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $return = array(
             'id' => $participant->id,
             'fullname' => $participant->fullname,
@@ -2868,9 +2895,17 @@ class mod_assign_external extends \mod_assign\external\external_api {
 
         if (!empty($participant->groupid)) {
             $return['groupid'] = $participant->groupid;
+<<<<<<< HEAD
         }
         if (!empty($participant->groupname)) {
             $return['groupname'] = $participant->groupname;
+=======
+
+            if ($group = groups_get_group($participant->groupid)) {
+                // Format properly the group name.
+                $return['groupname'] = format_string($group->name);
+            }
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Skip the expensive lookup of user detail if we're blind marking or the caller

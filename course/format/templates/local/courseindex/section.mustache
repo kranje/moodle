@@ -57,7 +57,11 @@
 }}
 <div
     class="courseindex-section {{#current}}current{{/current}}"
+<<<<<<< HEAD
     id="{{uniqid}}-course-index-section-{{id}}"
+=======
+    id="course-index-section-{{id}}"
+>>>>>>> forked/LAE_400_PACKAGE
     data-for="section"
     data-id="{{id}}"
     data-number="{{number}}"
@@ -119,6 +123,10 @@
 </div>
 {{#js}}
 require(['core_courseformat/local/courseindex/section'], function(component) {
+<<<<<<< HEAD
     component.init('{{uniqid}}-course-index-section-{{id}}');
+=======
+    component.init('course-index-section-{{id}}');
+>>>>>>> forked/LAE_400_PACKAGE
 });
 {{/js}}

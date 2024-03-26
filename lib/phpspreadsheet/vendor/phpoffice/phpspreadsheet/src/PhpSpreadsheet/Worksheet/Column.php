@@ -9,7 +9,11 @@ class Column
      *
      * @var Worksheet
      */
+<<<<<<< HEAD
     private $worksheet;
+=======
+    private $parent;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Column index.
@@ -23,10 +27,17 @@ class Column
      *
      * @param string $columnIndex
      */
+<<<<<<< HEAD
     public function __construct(Worksheet $worksheet, $columnIndex = 'A')
     {
         // Set parent and column index
         $this->worksheet = $worksheet;
+=======
+    public function __construct(?Worksheet $parent = null, $columnIndex = 'A')
+    {
+        // Set parent and column index
+        $this->parent = $parent;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->columnIndex = $columnIndex;
     }
 
@@ -36,7 +47,11 @@ class Column
     public function __destruct()
     {
         // @phpstan-ignore-next-line
+<<<<<<< HEAD
         $this->worksheet = null;
+=======
+        $this->parent = null;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -57,6 +72,7 @@ class Column
      */
     public function getCellIterator($startRow = 1, $endRow = null)
     {
+<<<<<<< HEAD
         return new ColumnCellIterator($this->worksheet, $this->columnIndex, $startRow, $endRow);
     }
 
@@ -105,5 +121,8 @@ class Column
     public function getWorksheet(): Worksheet
     {
         return $this->worksheet;
+=======
+        return new ColumnCellIterator($this->parent, $this->columnIndex, $startRow, $endRow);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

@@ -126,7 +126,13 @@ class progress_test extends \advanced_testcase {
      * @covers \core_completion\progress::get_course_progress_percentage.
      */
     public function test_course_progress_percentage_completion_state() {
+<<<<<<< HEAD
         global $DB;
+=======
+        global $DB, $CFG;
+
+        require_once("{$CFG->dirroot}/completion/criteria/completion_criteria_activity.php");
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Add a course that supports completion.
         $course = $this->getDataGenerator()->create_course(['enablecompletion' => 1]);

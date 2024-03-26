@@ -618,6 +618,7 @@ class Horde_Imap_Client_Data_Fetch
 
                 case Horde_Imap_Client::FETCH_HEADERTEXT:
                 case Horde_Imap_Client::FETCH_MIMEHEADER:
+<<<<<<< HEAD
                     return Horde_Mime_Headers::parseHeaders($this->_data[$key][$id]);
                 }
             } else {
@@ -626,6 +627,16 @@ class Horde_Imap_Client_Data_Fetch
                 fclose($hdrs);
                 return $parsed;
             }
+=======
+                    $hdrs = $this->_data[$key][$id];
+                    break;
+                }
+            } else {
+                $hdrs = $this->_getHeaders($id, self::HEADER_STREAM, $key);
+            }
+
+            return Horde_Mime_Headers::parseHeaders($hdrs);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (!isset($this->_data[$key][$id])) {

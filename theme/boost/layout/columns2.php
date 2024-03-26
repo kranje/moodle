@@ -24,6 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
+=======
+user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
+>>>>>>> forked/LAE_400_PACKAGE
 require_once($CFG->libdir . '/behat/lib.php');
 
 // Add block button in editing mode.

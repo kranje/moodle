@@ -20,6 +20,7 @@ Feature: Using the forum activities which support point scale
       | course      | C1                     |
       | activity    | forum                  |
       | name        | Test forum name        |
+<<<<<<< HEAD
       | description | Test forum description |
       | idnumber    | forum1                 |
 
@@ -31,6 +32,16 @@ Feature: Using the forum activities which support point scale
       | Message | Test post in forum 1 |
     And I log out
     And I am on the "Test forum name" "forum activity editing" page logged in as teacher1
+=======
+      | idnumber    | forum1                 |
+    And the following "mod_forum > discussions" exist:
+      | user     | forum  | name               | message              |
+      | student1 | forum1 | Discussion subject | Test post in forum 1 |
+
+  @javascript
+  Scenario: Forum rescale grade should not be possible when users are graded
+    Given I am on the "Test forum name" "forum activity editing" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I set the field "Ratings > Aggregate type" to "Count of ratings"
     And I set the field "Ratings > Type" to "Point"

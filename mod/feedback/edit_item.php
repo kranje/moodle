@@ -65,7 +65,11 @@ if (!$item->id && $typ === 'pagebreak') {
 //get the existing item or create it
 // $formdata->itemid = isset($formdata->itemid) ? $formdata->itemid : NULL;
 if (!$typ || !file_exists($CFG->dirroot.'/mod/feedback/item/'.$typ.'/lib.php')) {
+<<<<<<< HEAD
     throw new \moodle_exception('typemissing', 'feedback', $editurl->out(false));
+=======
+    print_error('typemissing', 'feedback', $editurl->out(false));
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_once($CFG->dirroot.'/mod/feedback/item/'.$typ.'/lib.php');

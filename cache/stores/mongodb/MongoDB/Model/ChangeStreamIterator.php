@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2019-present MongoDB, Inc.
+=======
+ * Copyright 2019 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,11 +36,17 @@ use MongoDB\Driver\Server;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\ResumeTokenException;
 use MongoDB\Exception\UnexpectedValueException;
+<<<<<<< HEAD
 use ReturnTypeWillChange;
 
 use function assert;
 use function count;
 use function is_array;
+=======
+use function count;
+use function is_array;
+use function is_integer;
+>>>>>>> forked/LAE_400_PACKAGE
 use function is_object;
 use function MongoDB\Driver\Monitoring\addSubscriber;
 use function MongoDB\Driver\Monitoring\removeSubscriber;
@@ -71,14 +85,35 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
 
     /**
      * @internal
+<<<<<<< HEAD
      * @param array|object|null $initialResumeToken
      */
     public function __construct(Cursor $cursor, int $firstBatchSize, $initialResumeToken, ?object $postBatchResumeToken)
     {
+=======
+     * @param Cursor            $cursor
+     * @param integer           $firstBatchSize
+     * @param array|object|null $initialResumeToken
+     * @param object|null       $postBatchResumeToken
+     */
+    public function __construct(Cursor $cursor, $firstBatchSize, $initialResumeToken, $postBatchResumeToken)
+    {
+        if (! is_integer($firstBatchSize)) {
+            throw InvalidArgumentException::invalidType('$firstBatchSize', $firstBatchSize, 'integer');
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($initialResumeToken) && ! is_array($initialResumeToken) && ! is_object($initialResumeToken)) {
             throw InvalidArgumentException::invalidType('$initialResumeToken', $initialResumeToken, 'array or object');
         }
 
+<<<<<<< HEAD
+=======
+        if (isset($postBatchResumeToken) && ! is_object($postBatchResumeToken)) {
+            throw InvalidArgumentException::invalidType('$postBatchResumeToken', $postBatchResumeToken, 'object');
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         parent::__construct($cursor);
 
         $this->batchSize = $firstBatchSize;
@@ -89,24 +124,40 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
     }
 
     /** @internal */
+<<<<<<< HEAD
     final public function commandFailed(CommandFailedEvent $event): void
+=======
+    final public function commandFailed(CommandFailedEvent $event)
+>>>>>>> forked/LAE_400_PACKAGE
     {
     }
 
     /** @internal */
+<<<<<<< HEAD
     final public function commandStarted(CommandStartedEvent $event): void
+=======
+    final public function commandStarted(CommandStartedEvent $event)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($event->getCommandName() !== 'getMore') {
             return;
         }
 
         $this->batchPosition = 0;
+<<<<<<< HEAD
         $this->batchSize = 0;
+=======
+        $this->batchSize = null;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->postBatchResumeToken = null;
     }
 
     /** @internal */
+<<<<<<< HEAD
     final public function commandSucceeded(CommandSucceededEvent $event): void
+=======
+    final public function commandSucceeded(CommandSucceededEvent $event)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($event->getCommandName() !== 'getMore') {
             return;
@@ -129,13 +180,17 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
      * @see https://php.net/iteratoriterator.current
      * @return mixed
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->isValid ? parent::current() : null;
     }
 
     /**
+<<<<<<< HEAD
      * Necessary to let psalm know that we're always expecting a cursor as inner
      * iterator. This could be side-stepped due to the class not being final,
      * but it's very much an invalid use-case. This method can be dropped in 2.0
@@ -150,6 +205,8 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns the resume token for the iterator's current position.
      *
      * Null may be returned if no change documents have been iterated and the
@@ -166,7 +223,11 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
     /**
      * Returns the server the cursor is running on.
      */
+<<<<<<< HEAD
     public function getServer(): Server
+=======
+    public function getServer() : Server
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->server;
     }
@@ -175,7 +236,10 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
      * @see https://php.net/iteratoriterator.key
      * @return mixed
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return $this->isValid ? parent::key() : null;
@@ -183,8 +247,14 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
 
     /**
      * @see https://php.net/iteratoriterator.rewind
+<<<<<<< HEAD
      */
     public function next(): void
+=======
+     * @return void
+     */
+    public function next()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         /* Determine if advancing the iterator will execute a getMore command
          * (i.e. we are already positioned at the end of the current batch). If
@@ -209,8 +279,14 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
 
     /**
      * @see https://php.net/iteratoriterator.rewind
+<<<<<<< HEAD
      */
     public function rewind(): void
+=======
+     * @return void
+     */
+    public function rewind()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($this->isRewindNop) {
             return;
@@ -222,8 +298,14 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
 
     /**
      * @see https://php.net/iteratoriterator.valid
+<<<<<<< HEAD
      */
     public function valid(): bool
+=======
+     * @return boolean
+     */
+    public function valid()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->isValid;
     }
@@ -252,13 +334,19 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
 
         if (! isset($resumeToken)) {
             $this->isValid = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             throw ResumeTokenException::notFound();
         }
 
         if (! is_array($resumeToken) && ! is_object($resumeToken)) {
             $this->isValid = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             throw ResumeTokenException::invalidType($resumeToken);
         }
 
@@ -267,8 +355,15 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
 
     /**
      * Return whether the iterator is positioned at the end of the batch.
+<<<<<<< HEAD
      */
     private function isAtEndOfBatch(): bool
+=======
+     *
+     * @return boolean
+     */
+    private function isAtEndOfBatch()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->batchPosition + 1 >= $this->batchSize;
     }
@@ -277,8 +372,14 @@ class ChangeStreamIterator extends IteratorIterator implements CommandSubscriber
      * Perform housekeeping after an iteration event.
      *
      * @see https://github.com/mongodb/specifications/blob/master/source/change-streams/change-streams.rst#updating-the-cached-resume-token
+<<<<<<< HEAD
      */
     private function onIteration(bool $incrementBatchPosition): void
+=======
+     * @param boolean $incrementBatchPosition
+     */
+    private function onIteration($incrementBatchPosition)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->isValid = parent::valid();
 

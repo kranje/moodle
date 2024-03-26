@@ -315,6 +315,7 @@ class restore_stepslib_date_test extends \restore_date_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Checking that the user completion of an activity relating to the view field does not change
      * when doing a course restore.
      * @covers ::backup_and_restore
@@ -350,6 +351,8 @@ class restore_stepslib_date_test extends \restore_date_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Ensuring that the timemodified field of the question attempt steps table does not change when
      * a course restore is done.
      */

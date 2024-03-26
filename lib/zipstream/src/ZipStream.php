@@ -312,9 +312,18 @@ class ZipStream
      *
      * Examples:
      *
+<<<<<<< HEAD
      *   $stream = $response->getBody();
      *   // add a file named 'streamfile.txt' from the content of the stream
      *   $x->addFileFromPsr7Stream('streamfile.txt', $stream);
+=======
+     *   // create a temporary file stream and write text to it
+     *   $fp = tmpfile();
+     *   fwrite($fp, 'The quick brown fox jumped over the lazy dog.');
+     *
+     *   // add a file named 'streamfile.txt' from the content of the stream
+     *   $x->addFileFromPsr7Stream('streamfile.txt', $fp);
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @return void
      */
@@ -456,6 +465,7 @@ class ZipStream
         }
         $this->need_headers = false;
 
+<<<<<<< HEAD
         $outputStream = $this->opt->getOutputStream();
 
         if ($outputStream instanceof StreamInterface) {
@@ -463,6 +473,9 @@ class ZipStream
         } else {
             fwrite($outputStream, $str);
         }
+=======
+        fwrite($this->opt->getOutputStream(), $str);
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($this->opt->isFlushOutput()) {
             // flush output buffer if it is on and flushable

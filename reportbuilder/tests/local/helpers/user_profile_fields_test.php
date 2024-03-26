@@ -25,6 +25,10 @@ use core_reportbuilder\local\filters\boolean_select;
 use core_reportbuilder\local\filters\date;
 use core_reportbuilder\local\filters\select;
 use core_reportbuilder\local\filters\text;
+<<<<<<< HEAD
+=======
+use core_reportbuilder\local\helpers\user_filter_manager;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\report\column;
 use core_reportbuilder\local\report\filter;
 use core_user\reportbuilder\datasource\users;
@@ -81,38 +85,78 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
     public function test_get_columns(): void {
         $this->resetAfterTest();
 
+<<<<<<< HEAD
         $userprofilefields = $this->generate_userprofilefields();
         $columns = $userprofilefields->get_columns();
 
         $this->assertCount(6, $columns);
+=======
+        $userentity = new user();
+        $useralias = $userentity->get_table_alias('user');
+
+        // Get pre-existing user profile fields.
+        $initialuserprofilefields = new user_profile_fields("$useralias.id", $userentity->get_entity_name());
+        $initialcolumns = $initialuserprofilefields->get_columns();
+        $initialcolumntitles = array_map(static function(column $column): string {
+            return $column->get_title();
+        }, $initialcolumns);
+        $initialcolumntypes = array_map(static function(column $column): int {
+            return $column->get_type();
+        }, $initialcolumns);
+
+        // Add new custom profile fields.
+        $userprofilefields = $this->generate_userprofilefields();
+        $columns = $userprofilefields->get_columns();
+
+        // Columns count should be equal to start + 6.
+        $this->assertCount(count($initialcolumns) + 6, $columns);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertContainsOnlyInstancesOf(column::class, $columns);
 
         // Assert column titles.
         $columntitles = array_map(static function(column $column): string {
             return $column->get_title();
         }, $columns);
+<<<<<<< HEAD
         $this->assertEquals([
+=======
+        $expectedcolumntitles = array_merge($initialcolumntitles, [
+>>>>>>> forked/LAE_400_PACKAGE
             'Checkbox field',
             'Date field',
             'Menu field',
             'MSN ID',
             'Text field',
             'Textarea field',
+<<<<<<< HEAD
         ], $columntitles);
+=======
+        ]);
+        $this->assertEquals($expectedcolumntitles, $columntitles);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Assert column types.
         $columntypes = array_map(static function(column $column): int {
             return $column->get_type();
         }, $columns);
+<<<<<<< HEAD
         $this->assertEquals([
+=======
+        $expectedcolumntypes = array_merge($initialcolumntypes, [
+>>>>>>> forked/LAE_400_PACKAGE
             column::TYPE_BOOLEAN,
             column::TYPE_TIMESTAMP,
             column::TYPE_TEXT,
             column::TYPE_TEXT,
             column::TYPE_TEXT,
             column::TYPE_LONGTEXT,
+<<<<<<< HEAD
         ], $columntypes);
 
+=======
+        ]);
+        $this->assertEquals($expectedcolumntypes, $columntypes);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -151,24 +195,52 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
     public function test_get_filters(): void {
         $this->resetAfterTest();
 
+<<<<<<< HEAD
         $userprofilefields = $this->generate_userprofilefields();
         $filters = $userprofilefields->get_filters();
 
         $this->assertCount(6, $filters);
+=======
+        $userentity = new user();
+        $useralias = $userentity->get_table_alias('user');
+
+        // Get pre-existing user profile fields.
+        $initialuserprofilefields = new user_profile_fields("$useralias.id", $userentity->get_entity_name());
+        $initialfilters = $initialuserprofilefields->get_filters();
+        $initialfilterheaders = array_map(static function(filter $filter): string {
+            return $filter->get_header();
+        }, $initialfilters);
+
+        // Add new custom profile fields.
+        $userprofilefields = $this->generate_userprofilefields();
+        $filters = $userprofilefields->get_filters();
+
+        // Filters count should be equal to start + 6.
+        $this->assertCount(count($initialfilters) + 6, $filters);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertContainsOnlyInstancesOf(filter::class, $filters);
 
         // Assert filter headers.
         $filterheaders = array_map(static function(filter $filter): string {
             return $filter->get_header();
         }, $filters);
+<<<<<<< HEAD
         $this->assertEquals([
+=======
+        $expectedfilterheaders = array_merge($initialfilterheaders, [
+>>>>>>> forked/LAE_400_PACKAGE
             'Checkbox field',
             'Date field',
             'Menu field',
             'MSN ID',
             'Text field',
             'Textarea field',
+<<<<<<< HEAD
         ], $filterheaders);
+=======
+        ]);
+        $this->assertEquals($expectedfilterheaders, $filterheaders);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -199,7 +271,11 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_checkbox']);
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_datetime']);
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_menu']);
+<<<<<<< HEAD
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_social']);
+=======
+        $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_Social']);
+>>>>>>> forked/LAE_400_PACKAGE
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_text']);
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_textarea']);
 
@@ -249,14 +325,22 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             ], 'testuser'],
             'Filter by checkbox profile field (empty)' => ['user:profilefield_checkbox', [
                 'user:profilefield_checkbox_operator' => boolean_select::NOT_CHECKED,
+<<<<<<< HEAD
             ], 'admin'],
+=======
+            ], 'anonymous_user', 2],
+>>>>>>> forked/LAE_400_PACKAGE
             'Filter by datetime profile field' => ['user:profilefield_datetime', [
                 'user:profilefield_datetime_operator' => date::DATE_RANGE,
                 'user:profilefield_datetime_from' => 1622502000,
             ], 'testuser'],
             'Filter by datetime profile field (empty)' => ['user:profilefield_datetime', [
                 'user:profilefield_datetime_operator' => date::DATE_EMPTY,
+<<<<<<< HEAD
             ], 'admin'],
+=======
+            ], 'anonymous_user', 2],
+>>>>>>> forked/LAE_400_PACKAGE
             'Filter by menu profile field' => ['user:profilefield_menu', [
                 'user:profilefield_menu_operator' => select::EQUAL_TO,
                 'user:profilefield_menu_value' => 'Dog',
@@ -264,6 +348,7 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by menu profile field (empty)' => ['user:profilefield_menu', [
                 'user:profilefield_menu_operator' => select::NOT_EQUAL_TO,
                 'user:profilefield_menu_value' => 'Dog',
+<<<<<<< HEAD
             ], 'admin'],
             'Filter by social profile field' => ['user:profilefield_social', [
                 'user:profilefield_social_operator' => text::IS_EQUAL_TO,
@@ -272,6 +357,16 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by social profile field (empty)' => ['user:profilefield_social', [
                 'user:profilefield_social_operator' => text::IS_EMPTY,
             ], 'admin'],
+=======
+            ], 'anonymous_user', 2],
+            'Filter by social profile field' => ['user:profilefield_Social', [
+                'user:profilefield_Social_operator' => text::IS_EQUAL_TO,
+                'user:profilefield_Social_value' => '12345',
+            ], 'testuser'],
+            'Filter by social profile field (empty)' => ['user:profilefield_Social', [
+                'user:profilefield_Social_operator' => text::IS_EMPTY,
+            ], 'anonymous_user', 2],
+>>>>>>> forked/LAE_400_PACKAGE
             'Filter by text profile field' => ['user:profilefield_text', [
                 'user:profilefield_text_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_text_value' => 'Hello',
@@ -279,7 +374,11 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by text profile field (empty)' => ['user:profilefield_text', [
                 'user:profilefield_text_operator' => text::IS_NOT_EQUAL_TO,
                 'user:profilefield_text_value' => 'Hello',
+<<<<<<< HEAD
             ], 'admin'],
+=======
+            ], 'anonymous_user', 2],
+>>>>>>> forked/LAE_400_PACKAGE
             'Filter by textarea profile field' => ['user:profilefield_textarea', [
                 'user:profilefield_textarea_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_textarea_value' => 'Goodbye',
@@ -287,7 +386,11 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by textarea profile field (empty)' => ['user:profilefield_textarea', [
                 'user:profilefield_textarea_operator' => text::DOES_NOT_CONTAIN,
                 'user:profilefield_textarea_value' => 'Goodbye',
+<<<<<<< HEAD
             ], 'admin'],
+=======
+            ], 'anonymous_user', 2],
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -297,10 +400,18 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
      * @param string $filtername
      * @param array $filtervalues
      * @param string $expectmatchuser
+<<<<<<< HEAD
      *
      * @dataProvider custom_report_filter_provider
      */
     public function test_custom_report_filter(string $filtername, array $filtervalues, string $expectmatchuser): void {
+=======
+     * @param int $expectmatchnumber
+     *
+     * @dataProvider custom_report_filter_provider
+     */
+    public function test_custom_report_filter(string $filtername, array $filtervalues, string $expectmatchuser, int $expectmatchnumber = 1): void {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->resetAfterTest();
 
         $userprofilefields = $this->generate_userprofilefields();
@@ -325,9 +436,21 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
 
         // Add filter, set it's values.
         $generator->create_filter(['reportid' => $report->get('id'), 'uniqueidentifier' => $filtername]);
+<<<<<<< HEAD
         $content = $this->get_custom_report_content($report->get('id'), 0, $filtervalues);
 
         $this->assertCount(1, $content);
+=======
+        user_filter_manager::set($report->get('id'), $filtervalues);
+
+        $content = $this->get_custom_report_content($report->get('id'));
+
+        // Normalize output.
+        $usernames = array_column($content, 'c0_username');
+        array_multisort($usernames, SORT_DESC, $content);
+
+        $this->assertCount($expectmatchnumber, $content);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals($expectmatchuser, reset($content[0]));
     }
 }

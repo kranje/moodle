@@ -2,18 +2,25 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 
 class Text
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * LEN.
      *
      * @param mixed $value String Value
+<<<<<<< HEAD
      *                         Or can be an array of values
      *
      * @return array|int
@@ -26,6 +33,11 @@ class Text
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $value);
         }
 
+=======
+     */
+    public static function length($value = ''): int
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $value = Helpers::extractString($value);
 
         return mb_strlen($value ?? '', 'UTF-8');
@@ -37,6 +49,7 @@ class Text
      * Use EXACT to test text being entered into a document.
      *
      * @param mixed $value1 String Value
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $value2 String Value
      *                         Or can be an array of values
@@ -51,6 +64,12 @@ class Text
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value1, $value2);
         }
 
+=======
+     * @param mixed $value2 String Value
+     */
+    public static function exact($value1, $value2): bool
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $value1 = Helpers::extractString($value1);
         $value2 = Helpers::extractString($value2);
 
@@ -61,6 +80,7 @@ class Text
      * RETURNSTRING.
      *
      * @param mixed $testValue Value to check
+<<<<<<< HEAD
      *                         Or can be an array of values
      *
      * @return null|array|string
@@ -72,6 +92,14 @@ class Text
         if (is_array($testValue)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $testValue);
         }
+=======
+     *
+     * @return null|string
+     */
+    public static function test($testValue = '')
+    {
+        $testValue = Functions::flattenSingleValue($testValue);
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (is_string($testValue)) {
             return $testValue;
@@ -79,6 +107,7 @@ class Text
 
         return null;
     }
+<<<<<<< HEAD
 
     /**
      * TEXTSPLIT.
@@ -251,4 +280,6 @@ class Text
 
         return (string) $cellValue;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

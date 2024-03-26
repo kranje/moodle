@@ -16,8 +16,14 @@
 
 namespace core_courseformat;
 
+<<<<<<< HEAD
 use core_courseformat\stateupdates;
 use core\event\course_module_updated;
+=======
+use core\event\course_module_updated;
+use core_courseformat\base as course_format;
+use core_courseformat\stateupdates;
+>>>>>>> forked/LAE_400_PACKAGE
 use cm_info;
 use section_info;
 use stdClass;
@@ -25,6 +31,10 @@ use course_modinfo;
 use moodle_exception;
 use context_module;
 use context_course;
+<<<<<<< HEAD
+=======
+use cache;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Contains the core course state actions.
@@ -258,6 +268,7 @@ class stateactions {
     }
 
     /**
+<<<<<<< HEAD
      * Hide course sections.
      *
      * @param stateupdates $updates the affected course elements track
@@ -267,12 +278,24 @@ class stateactions {
      * @param int $targetcmid not used
      */
     public function section_hide(
+=======
+     * Move course cms to the right. Indent = 1.
+     *
+     * @param stateupdates $updates the affected course elements track
+     * @param stdClass $course the course object
+     * @param int[] $ids cm ids
+     * @param int $targetsectionid not used
+     * @param int $targetcmid not used
+     */
+    public function cm_moveright(
+>>>>>>> forked/LAE_400_PACKAGE
         stateupdates $updates,
         stdClass $course,
         array $ids = [],
         ?int $targetsectionid = null,
         ?int $targetcmid = null
     ): void {
+<<<<<<< HEAD
         $this->set_section_visibility($updates, $course, $ids, 0);
     }
 
@@ -286,12 +309,28 @@ class stateactions {
      * @param int $targetcmid not used
      */
     public function section_show(
+=======
+        $this->set_cm_indentation($updates, $course, $ids, 1);
+    }
+
+    /**
+     * Move course cms to the left. Indent = 0.
+     *
+     * @param stateupdates $updates the affected course elements track
+     * @param stdClass $course the course object
+     * @param int[] $ids cm ids
+     * @param int $targetsectionid not used
+     * @param int $targetcmid not used
+     */
+    public function cm_moveleft(
+>>>>>>> forked/LAE_400_PACKAGE
         stateupdates $updates,
         stdClass $course,
         array $ids = [],
         ?int $targetsectionid = null,
         ?int $targetcmid = null
     ): void {
+<<<<<<< HEAD
         $this->set_section_visibility($updates, $course, $ids, 1);
     }
 
@@ -396,12 +435,33 @@ class stateactions {
         int $coursevisible
     ): void {
         global $CFG;
+=======
+        $this->set_cm_indentation($updates, $course, $ids, 0);
+    }
+
+    /**
+     * Internal method to define the cm indentation level.
+     *
+     * @param stateupdates $updates the affected course elements track
+     * @param stdClass $course the course object
+     * @param int[] $ids cm ids
+     * @param int $indent new value for indentation
+     */
+    protected function set_cm_indentation(
+        stateupdates $updates,
+        stdClass $course,
+        array $ids,
+        int $indent
+    ): void {
+        global $DB;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->validate_cms($course, $ids, __FUNCTION__);
 
         // Check capabilities on every activity context.
         foreach ($ids as $cmid) {
             $modcontext = context_module::instance($cmid);
+<<<<<<< HEAD
             require_all_capabilities(['moodle/course:manageactivities', 'moodle/course:activityvisibility'], $modcontext);
         }
 
@@ -417,6 +477,17 @@ class stateactions {
                 $coursevisible = ($allowstealth) ? 0 : 1;
             }
             set_coursemodule_visible($cm->id, $visible, $coursevisible);
+=======
+            require_capability('moodle/course:manageactivities', $modcontext);
+        }
+        $modinfo = get_fast_modinfo($course);
+        $cms = $this->get_cm_info($modinfo, $ids);
+        list($insql, $inparams) = $DB->get_in_or_equal(array_keys($cms), SQL_PARAMS_NAMED);
+        $DB->set_field_select('course_modules', 'indent', $indent, "id $insql", $inparams);
+        rebuild_course_cache($course->id, false, true);
+        foreach ($cms as $cm) {
+            $modcontext = context_module::instance($cm->id);
+>>>>>>> forked/LAE_400_PACKAGE
             course_module_updated::create_from_cm($cm, $modcontext)->trigger();
             $updates->add_cm_put($cm->id);
         }

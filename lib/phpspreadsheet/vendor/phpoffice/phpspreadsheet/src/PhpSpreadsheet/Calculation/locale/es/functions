@@ -245,7 +245,10 @@ ROWS = FILAS
 RTD = RDTR
 TRANSPOSE = TRANSPONER
 VLOOKUP = BUSCARV
+<<<<<<< HEAD
 *RC = FC
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Funciones matemáticas y trigonométricas (Math & Trig Functions)

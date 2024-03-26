@@ -124,6 +124,7 @@ class participants extends \table_sql implements dynamic_table {
         $headers = [];
         $columns = [];
 
+<<<<<<< HEAD
         // At the very least, the user viewing this table will be able to use bulk actions to export it, so add 'select' column.
         $mastercheckbox = new \core\output\checkbox_toggleall('participants-table', true, [
             'id' => 'select-all-participants',
@@ -135,6 +136,21 @@ class participants extends \table_sql implements dynamic_table {
         ]);
         $headers[] = $OUTPUT->render($mastercheckbox);
         $columns[] = 'select';
+=======
+        $bulkoperations = has_capability('moodle/course:bulkmessaging', $this->context);
+        if ($bulkoperations) {
+            $mastercheckbox = new \core\output\checkbox_toggleall('participants-table', true, [
+                'id' => 'select-all-participants',
+                'name' => 'select-all-participants',
+                'label' => get_string('selectall'),
+                'labelclasses' => 'sr-only',
+                'classes' => 'm-1',
+                'checked' => false,
+            ]);
+            $headers[] = $OUTPUT->render($mastercheckbox);
+            $columns[] = 'select';
+        }
+>>>>>>> forked/LAE_400_PACKAGE
 
         $headers[] = get_string('fullname');
         $columns[] = 'fullname';

@@ -132,6 +132,7 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
     }
 
     /**
+<<<<<<< HEAD
      * Get whether events are present for the given select clause.
      * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
      *
@@ -155,6 +156,8 @@ class store implements \tool_log\log\store, \core\log\sql_reader {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Fetch records using given criteria returning a Traversable object.
      * @deprecated since Moodle 3.6 MDL-52953 - Please use supported log stores such as "standard" or "external" instead.
      * @todo MDL-52805 This will be removed in Moodle 3.10

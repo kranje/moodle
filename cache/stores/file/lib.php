@@ -37,8 +37,12 @@
  * @copyright  2012 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class cachestore_file extends cache_store implements cache_is_key_aware, cache_is_configurable, cache_is_searchable,
         cache_is_lockable {
+=======
+class cachestore_file extends cache_store implements cache_is_key_aware, cache_is_configurable, cache_is_searchable  {
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * The name of the store.
@@ -129,6 +133,7 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
      */
     private $cfg = null;
 
+<<<<<<< HEAD
     /** @var int Maximum number of seconds to wait for a lock before giving up. */
     protected $lockwait = 60;
 
@@ -146,6 +151,8 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
      */
     protected $locks = [];
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Constructs the store instance.
      *
@@ -211,6 +218,7 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
         } else {
             $this->asyncpurge = false;
         }
+<<<<<<< HEAD
 
         // Leverage cachelock_file to provide native locking, to avoid duplicating logic.
         // This will store locks alongside the cache, so local cache uses local locks.
@@ -226,6 +234,8 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
             // File locking is disabled in config, fall back to default lock factory.
             $this->lockfactory = \core\lock\lock_config::get_lock_factory('cachestore_file');
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -708,9 +718,12 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
         if (isset($data->asyncpurge)) {
             $config['asyncpurge'] = $data->asyncpurge;
         }
+<<<<<<< HEAD
         if (isset($data->lockwait)) {
             $config['lockwait'] = $data->lockwait;
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $config;
     }
@@ -738,9 +751,12 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
         if (isset($config['asyncpurge'])) {
             $data['asyncpurge'] = (bool)$config['asyncpurge'];
         }
+<<<<<<< HEAD
         if (isset($config['lockwait'])) {
             $data['lockwait'] = (int)$config['lockwait'];
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $editform->set_data($data);
     }
 
@@ -963,6 +979,7 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
         $result->sd = sqrt($squarediff);
         return $result;
     }
+<<<<<<< HEAD
 
     /**
      * Use lock factory to determine the lock state.
@@ -1029,4 +1046,6 @@ class cachestore_file extends cache_store implements cache_is_key_aware, cache_i
         }
         return $unlocked;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

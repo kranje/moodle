@@ -2,15 +2,21 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class DateParts
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * DAYOFMONTH.
      *
@@ -22,6 +28,7 @@ class DateParts
      *
      * @param mixed $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      *
      * @return array|int|string Day of the month
@@ -34,6 +41,13 @@ class DateParts
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $dateValue);
         }
 
+=======
+     *
+     * @return int|string Day of the month
+     */
+    public static function day($dateValue)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $weirdResult = self::weirdCondition($dateValue);
         if ($weirdResult >= 0) {
             return $weirdResult;
@@ -62,6 +76,7 @@ class DateParts
      *
      * @param mixed $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      *
      * @return array|int|string Month of the year
@@ -74,6 +89,13 @@ class DateParts
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $dateValue);
         }
 
+=======
+     *
+     * @return int|string Month of the year
+     */
+    public static function month($dateValue)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $dateValue = Helpers::getDateValue($dateValue);
         } catch (Exception $e) {
@@ -100,6 +122,7 @@ class DateParts
      *
      * @param mixed $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      *
      * @return array|int|string Year
@@ -112,6 +135,13 @@ class DateParts
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $dateValue);
         }
 
+=======
+     *
+     * @return int|string Year
+     */
+    public static function year($dateValue)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $dateValue = Helpers::getDateValue($dateValue);
         } catch (Exception $e) {

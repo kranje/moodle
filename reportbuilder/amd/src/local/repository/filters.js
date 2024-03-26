@@ -41,6 +41,7 @@ export const resetFilters = (reportId, reportParameters) => {
 };
 
 /**
+<<<<<<< HEAD
  * Set filter values for given report
  *
  * @method
@@ -59,6 +60,8 @@ export const setFilters = (reportId, reportParameters, filterValues) => {
 };
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * Add a filter to the given report
  *
  * @param {Number} reportId

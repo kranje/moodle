@@ -253,7 +253,11 @@ class Horde_Imap_Client_Exception extends Horde_Exception_Wrapped
      * Constructor.
      *
      * @param string $message  Error message (non-translated).
+<<<<<<< HEAD
      * @param int $code        Error code.
+=======
+     * @param code $code       Error code.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function __construct($message = null, $code = null)
     {

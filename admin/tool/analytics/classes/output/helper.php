@@ -45,7 +45,11 @@ class helper {
         // Form field is PARAM_ALPHANUMEXT and we are sending fully qualified class names
         // as option names, but replacing the backslash for a string that is really unlikely
         // to ever be part of a class name.
+<<<<<<< HEAD
         return str_replace('\\', '__', $class ?? '');
+=======
+        return str_replace('\\', '__', $class);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

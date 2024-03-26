@@ -4,7 +4,10 @@ namespace PhpOffice\PhpSpreadsheet\Helper;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Writer\IWriter;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -85,8 +88,13 @@ class Sample
         foreach ($regex as $file) {
             $file = str_replace(str_replace('\\', '/', $baseDir) . '/', '', str_replace('\\', '/', $file[0]));
             $info = pathinfo($file);
+<<<<<<< HEAD
             $category = str_replace('_', ' ', $info['dirname'] ?? '');
             $name = str_replace('_', ' ', (string) preg_replace('/(|\.php)/', '', $info['filename']));
+=======
+            $category = str_replace('_', ' ', $info['dirname']);
+            $name = str_replace('_', ' ', preg_replace('/(|\.php)/', '', $info['filename']));
+>>>>>>> forked/LAE_400_PACKAGE
             if (!in_array($category, ['.', 'boostrap', 'templates'])) {
                 if (!isset($files[$category])) {
                     $files[$category] = [];
@@ -183,6 +191,7 @@ class Sample
         echo date('H:i:s ') . $message . $eol;
     }
 
+<<<<<<< HEAD
     public function titles(string $category, string $functionName, ?string $description = null): void
     {
         $this->log(sprintf('%s Functions:', $category));
@@ -210,6 +219,8 @@ class Sample
         $this->log(sprintf('%s() Result is ', $functionName) . $worksheet->getCell($formulaCell)->getCalculatedValue());
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Log ending notes.
      */

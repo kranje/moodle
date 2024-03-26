@@ -1,6 +1,10 @@
 @block @block_clampmail
 Feature: Navigate with block
+<<<<<<< HEAD
   In order to use CLAMPMail
+=======
+  In order to use Quickmail
+>>>>>>> forked/LAE_400_PACKAGE
   In a course with blocks
   I need the ability to navigate from the block
 
@@ -28,7 +32,11 @@ Feature: Navigate with block
   Scenario: Add the block
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage with editing mode on
+<<<<<<< HEAD
     And I add the "CLAMPMail" block
+=======
+    And I add the "Quickmail" block
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "Compose new email"
     And I should see "View history"
     And I should see "View drafts"

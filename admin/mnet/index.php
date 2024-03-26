@@ -17,13 +17,21 @@
     if (!extension_loaded('openssl')) {
         echo $OUTPUT->header();
         set_config('mnet_dispatcher_mode', 'off');
+<<<<<<< HEAD
         throw new \moodle_exception('requiresopenssl', 'mnet');
+=======
+        print_error('requiresopenssl', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!function_exists('curl_init') ) {
         echo $OUTPUT->header();
         set_config('mnet_dispatcher_mode', 'off');
+<<<<<<< HEAD
         throw new \moodle_exception('nocurl', 'mnet');
+=======
+        print_error('nocurl', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!isset($CFG->mnet_dispatcher_mode)) {
@@ -37,7 +45,11 @@
                 if (set_config('mnet_dispatcher_mode', $form->mode)) {
                     redirect('index.php', get_string('changessaved'));
                 } else {
+<<<<<<< HEAD
                     throw new \moodle_exception('invalidaction', '', 'index.php');
+=======
+                    print_error('invalidaction', '', 'index.php');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         } elseif (!empty($form->submit) && $form->submit == get_string('delete')) {
@@ -85,7 +97,11 @@
 
             if ($key != md5(sha1($mnet->keypair['keypair_PEM']))) {
                 // fail - you're being attacked?
+<<<<<<< HEAD
                 throw new \moodle_exception ('deletewrongkeyvalue', 'mnet', 'index.php');
+=======
+                print_error ('deletewrongkeyvalue', 'mnet', 'index.php');
+>>>>>>> forked/LAE_400_PACKAGE
                 exit;
             }
 
@@ -96,6 +112,10 @@
     $hosts = $DB->get_records_select('mnet_host', "id <> ? AND deleted = 0", array($CFG->mnet_localhost_id), 'wwwroot ASC');
 
     echo $OUTPUT->header();
+<<<<<<< HEAD
+=======
+    echo $OUTPUT->render(mnet_get_deprecation_notice());
+>>>>>>> forked/LAE_400_PACKAGE
 ?>
 <form method="post" action="index.php">
     <table align="center" width="635" class="generaltable" border="0" cellpadding="5" cellspacing="0">

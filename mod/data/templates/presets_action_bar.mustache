@@ -17,6 +17,7 @@
     Actions bar at the top of the presets page in the database activity.
 
     Context variables required for this template:
+<<<<<<< HEAD
     * actionsselect - The presets actions selector.
     * id - The database course module id (cmid).
 
@@ -56,10 +57,18 @@
             }
         },
         "id" : 1
+=======
+    * importpreseturl - The url to the import preset page.
+
+    Example context (json):
+    {
+        "importpreseturl": "http://www.example.com"
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }}
 <div class="container-fluid tertiary-navigation">
     <div class="row">
+<<<<<<< HEAD
         <div class="col">
             <h2>{{#str}}presets, mod_data{{/str}}</h2>
         </div>
@@ -79,3 +88,10 @@
         importPresets.init();
     });
 {{/js}}
+=======
+        <div class="navitem">
+            <a href="{{importpreseturl}}" class="btn btn-secondary">{{#str}}import, core{{/str}}</a>
+        </div>
+    </div>
+</div>
+>>>>>>> forked/LAE_400_PACKAGE

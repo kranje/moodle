@@ -43,24 +43,39 @@ Feature: We can change what we are viewing on the grader report
     And I click on "Hide" "link" in the "Test assignment name 2" activity
     And I am on "Course 1" course homepage with editing mode off
     And I navigate to "View > Grader report" in the course gradebook
+<<<<<<< HEAD
     And I should see "Test assignment name 1"
     And I should see "Test assignment name 2"
+=======
+    And I should see "Test assignment name 1" in the "user-grades" "table"
+    And I should see "Test assignment name 2" in the "user-grades" "table"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Manual grade"
     And I should see "Course total"
     And the following should exist in the "user-grades" table:
       | -1-                | -4-       | -5-       | -6-       | -7-       |
       | Student 1          | 80        | 90        | 30        | 170       |
     And I click on "Change to aggregates only" "link"
+<<<<<<< HEAD
     And I should not see "Test assignment name 1"
     And I should not see "Test assignment name 2"
+=======
+    And I should not see "Test assignment name 1" in the "user-grades" "table"
+    And I should not see "Test assignment name 2" in the "user-grades" "table"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should not see "Manual grade"
     And I should see "Course total"
     And the following should exist in the "user-grades" table:
       | -1-                | -4-       |
       | Student 1          | 170       |
     And I click on "Change to grades only" "link"
+<<<<<<< HEAD
     And I should see "Test assignment name 1"
     And I should see "Test assignment name 2"
+=======
+    And I should see "Test assignment name 1" in the "user-grades" "table"
+    And I should see "Test assignment name 2" in the "user-grades" "table"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Manual grade"
     And I should not see "Course total"
     And the following should exist in the "user-grades" table:
@@ -68,6 +83,7 @@ Feature: We can change what we are viewing on the grader report
       | Student 1          | 80        | 90        | 30        |
 
   @javascript @skip_chrome_zerosize
+<<<<<<< HEAD
   Scenario: View and minimise the grader report containing hidden activities without the 'moodle/grade:viewhidden' capability
     When I am on "Course 1" course homepage with editing mode on
     And I open "Test assignment name 2" actions menu
@@ -83,22 +99,44 @@ Feature: We can change what we are viewing on the grader report
     And I navigate to "View > Grader report" in the course gradebook
     And I should see "Test assignment name 1"
     And I should see "Test assignment name 2"
+=======
+  Scenario: Minimise the grader report containing hidden activities without the 'moodle/grade:viewhidden' capability
+    Given I am on "Course 1" course homepage with editing mode on
+    And I open "Test assignment name 2" actions menu
+    And I click on "Hide" "link" in the "Test assignment name 2" activity
+    And the following "role capability" exists:
+      | role                    | editingteacher |
+      | moodle/grade:viewhidden | prevent        |
+    And I am on the "Course 1" "grades > Grader report > View" page logged in as "teacher1"
+    Then I should see "Test assignment name 1" in the "user-grades" "table"
+    And I should see "Test assignment name 2" in the "user-grades" "table"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Manual grade"
     And I should see "Course total"
     And the following should exist in the "user-grades" table:
       | -1-                | -4-       | -5-       | -6-       | -7-       |
       | Student 1          | 80        | -         | 30        | 105.71    |
     And I click on "Change to aggregates only" "link"
+<<<<<<< HEAD
     And I should not see "Test assignment name 1"
     And I should not see "Test assignment name 2"
+=======
+    And I should not see "Test assignment name 1" in the "user-grades" "table"
+    And I should not see "Test assignment name 2" in the "user-grades" "table"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should not see "Manual grade"
     And I should see "Course total"
     And the following should exist in the "user-grades" table:
       | -1-                | -4-       |
       | Student 1          | 105.71    |
     And I click on "Change to grades only" "link"
+<<<<<<< HEAD
     And I should see "Test assignment name 1"
     And I should see "Test assignment name 2"
+=======
+    And I should see "Test assignment name 1" in the "user-grades" "table"
+    And I should see "Test assignment name 2" in the "user-grades" "table"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Manual grade"
     And I should not see "Course total"
     And the following should exist in the "user-grades" table:

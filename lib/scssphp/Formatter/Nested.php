@@ -68,9 +68,13 @@ class Nested extends Formatter
 
         foreach ($block->lines as $index => $line) {
             if (substr($line, 0, 2) === '/*') {
+<<<<<<< HEAD
                 $replacedLine = preg_replace('/\r\n?|\n|\f/', $this->break, $line);
                 assert($replacedLine !== null);
                 $block->lines[$index] = $replacedLine;
+=======
+                $block->lines[$index] = preg_replace('/\r\n?|\n|\f/', $this->break, $line);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 

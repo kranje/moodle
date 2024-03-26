@@ -61,7 +61,11 @@ if ($courseid AND $courseid != SITEID) {
 }
 
 if (!$feedbackcompletion->can_complete()) {
+<<<<<<< HEAD
     throw new \moodle_exception('error');
+=======
+    print_error('error');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->navbar->add(get_string('feedback:complete', 'feedback'));

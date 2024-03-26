@@ -36,5 +36,9 @@ interface be_disabled {
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function is_disabled(): bool;
+=======
+    public function is_disabled();
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -555,6 +555,11 @@ class behat_mod_quiz extends behat_question_base {
 
     /**
      * Check the add or remove page-break link after a particular question contains the given parameters in its url.
+<<<<<<< HEAD
+=======
+     *
+     * @When /^the "(Add|Remove)" page break link after question "(?P<question_name>(?:[^"]|\\")*) should contain:$/
+>>>>>>> forked/LAE_400_PACKAGE
      * @When /^the "(Add|Remove)" page break link after question "(?P<question_name>(?:[^"]|\\")*) should contain:"$/
      * @param string $addorremoves 'Add' or 'Remove'.
      * @param string $questionname the name of the question before the icon to click.

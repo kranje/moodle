@@ -364,7 +364,11 @@ class zip_archive extends file_archive {
      *
      * @return int number of files
      */
+<<<<<<< HEAD
     public function count(): int {
+=======
+    public function count() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!isset($this->za)) {
             return false;
         }
@@ -460,7 +464,11 @@ class zip_archive extends file_archive {
             $this->close();
             $res = $this->open($this->archivepathname, file_archive::OPEN, $this->encoding);
             if ($res !== true) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotopenzip');
+=======
+                print_error('cannotopenzip');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         $this->usedmem += strlen($contents);
@@ -509,7 +517,10 @@ class zip_archive extends file_archive {
      *
      * @return stdClass
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         if (!isset($this->za)) {
             return false;
@@ -523,7 +534,10 @@ class zip_archive extends file_archive {
      *
      * @return int current file index
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->pos;
     }
@@ -531,14 +545,22 @@ class zip_archive extends file_archive {
     /**
      * Moves forward to next file.
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->pos++;
     }
 
     /**
      * Rewinds back to the first file.
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->pos = 0;
     }
 
@@ -547,7 +569,11 @@ class zip_archive extends file_archive {
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!isset($this->za)) {
             return false;
         }

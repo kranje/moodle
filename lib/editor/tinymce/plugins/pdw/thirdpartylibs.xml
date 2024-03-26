@@ -3,6 +3,7 @@
   <library>
     <location>tinymce</location>
     <name>PDW Toolbar Toggle</name>
+<<<<<<< HEAD
     <description>A plugin for the TinyMCE WYSIWYG editor. The plugin shows and hides the toolbars just like the Kitchen Sink plugin in Wordpress.</description>
     <version>1.2</version>
     <license>MIT</license>
@@ -10,5 +11,10 @@
     <copyrights>
       <copyright>Guido Neele (www.neele.name)</copyright>
     </copyrights>
+=======
+    <license>MIT</license>
+    <version>1.2</version>
+    <licenseversion></licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
 </libraries>

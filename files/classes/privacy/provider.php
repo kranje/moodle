@@ -73,12 +73,15 @@ class provider implements
             'timemodified' => 'privacy:metadata:files:timemodified',
         ], 'privacy:metadata:files');
 
+<<<<<<< HEAD
         // Regarding this block, we are unable to export or purge this data, as
         // it would damage the file conversion data across the whole site.
         $collection->add_database_table('file_conversion', [
             'usermodified' => 'privacy:metadata:file_conversion:usermodified',
         ], 'privacy:metadata:file_conversions');
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $collection->add_subsystem_link('core_userkey', [], 'privacy:metadata:core_userkey');
 
         return $collection;

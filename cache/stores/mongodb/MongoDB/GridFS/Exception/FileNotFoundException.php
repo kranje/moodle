@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2016-present MongoDB, Inc.
+=======
+ * Copyright 2016-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,7 +26,10 @@
 namespace MongoDB\GridFS\Exception;
 
 use MongoDB\Exception\RuntimeException;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function MongoDB\BSON\fromPHP;
 use function MongoDB\BSON\toJSON;
 use function sprintf;
@@ -33,7 +44,11 @@ class FileNotFoundException extends RuntimeException
      * @param string  $namespace Namespace for the files collection
      * @return self
      */
+<<<<<<< HEAD
     public static function byFilenameAndRevision(string $filename, int $revision, string $namespace)
+=======
+    public static function byFilenameAndRevision($filename, $revision, $namespace)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return new static(sprintf('File with name "%s" and revision "%d" not found in "%s"', $filename, $revision, $namespace));
     }
@@ -45,7 +60,11 @@ class FileNotFoundException extends RuntimeException
      * @param string $namespace Namespace for the files collection
      * @return self
      */
+<<<<<<< HEAD
     public static function byId($id, string $namespace)
+=======
+    public static function byId($id, $namespace)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $json = toJSON(fromPHP(['_id' => $id]));
 

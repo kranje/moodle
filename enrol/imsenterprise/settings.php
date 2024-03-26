@@ -111,6 +111,7 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('enrol_imsenterprise/imsunenrol',
         get_string('allowunenrol', 'enrol_imsenterprise'), get_string('allowunenrol_desc', 'enrol_imsenterprise'), 0));
 
+<<<<<<< HEAD
     /* Action to take when a request to remove a user enrolment record is detected in the IMS file */
     $options = [
         ENROL_EXT_REMOVED_KEEP => get_string('noaction', 'enrol_imsenterprise'),
@@ -126,6 +127,8 @@ if ($ADMIN->fulltree) {
             ENROL_EXT_REMOVED_UNENROL, $options)
     );
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if (!during_initial_install()) {
         $imscourses = new imsenterprise_courses();
         foreach ($imscourses->get_courseattrs() as $courseattr) {

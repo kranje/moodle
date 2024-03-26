@@ -132,5 +132,8 @@ class SimplePie_Cache
 		return $params;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Cache', 'SimplePie\Cache', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

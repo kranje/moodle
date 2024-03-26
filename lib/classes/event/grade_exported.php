@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * Grade report viewed event.
  *
@@ -28,6 +29,12 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Grade report viewed event class.
+=======
+namespace core\event;
+
+/**
+ * Abstract grade report exported event class.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * @package    core
  * @since      Moodle 3.2
@@ -55,7 +62,11 @@ abstract class grade_exported extends base {
     public static function get_export_type() {
         $classname = explode('\\', get_called_class());
         $exporttype = explode('_', $classname[0]);
+<<<<<<< HEAD
         return $exporttype[1];
+=======
+        return $exporttype[1] ?? '';
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -64,7 +75,17 @@ abstract class grade_exported extends base {
      * @return string
      */
     public static function get_name() {
+<<<<<<< HEAD
         return get_string('eventgradeexported', 'gradeexport_'. self::get_export_type());
+=======
+        $component = 'gradeexport_' . self::get_export_type();
+        if (get_string_manager()->string_exists('eventgradeexported', $component)) {
+            return get_string('eventgradeexported', $component);
+        }
+
+        // Fallback to generic name.
+        return get_string('eventgradeexported', 'core_grades');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

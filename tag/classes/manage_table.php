@@ -14,7 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 use core\output\checkbox_toggleall;
+=======
+/**
+ * Contains class core_tag_manage_table
+ *
+ * @package   core_tag
+ * @copyright 2015 Marina Glancy
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+>>>>>>> forked/LAE_400_PACKAGE
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -23,7 +33,11 @@ require_once($CFG->libdir . '/tablelib.php');
 /**
  * Class core_tag_manage_table
  *
+<<<<<<< HEAD
  * @package   core_tag
+=======
+ * @package   core
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright 2015 Marina Glancy
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -41,8 +55,12 @@ class core_tag_manage_table extends table_sql {
      * @param int $tagcollid
      */
     public function __construct($tagcollid) {
+<<<<<<< HEAD
         global $USER, $PAGE, $OUTPUT;
 
+=======
+        global $USER, $CFG, $PAGE;
+>>>>>>> forked/LAE_400_PACKAGE
         parent::__construct('tag-management-list-'.$USER->id);
 
         $this->tagcollid = $tagcollid;
@@ -53,6 +71,7 @@ class core_tag_manage_table extends table_sql {
         $baseurl = new moodle_url('/tag/manage.php', array('tc' => $tagcollid,
             'perpage' => $perpage, 'page' => $page, 'filter' => $filter));
 
+<<<<<<< HEAD
         $checkboxall = new checkbox_toggleall('tags-manage', true, [
             'id' => 'select-all-tags',
             'name' => 'select-all-tags',
@@ -63,6 +82,10 @@ class core_tag_manage_table extends table_sql {
 
         $tablecolumns = array('select', 'name', 'fullname', 'count', 'flag', 'timemodified', 'isstandard', 'controls');
         $tableheaders = array($OUTPUT->render($checkboxall),
+=======
+        $tablecolumns = array('select', 'name', 'fullname', 'count', 'flag', 'timemodified', 'isstandard', 'controls');
+        $tableheaders = array(get_string('select', 'tag'),
+>>>>>>> forked/LAE_400_PACKAGE
                               get_string('name', 'tag'),
                               get_string('owner', 'tag'),
                               get_string('count', 'tag'),
@@ -180,6 +203,7 @@ class core_tag_manage_table extends table_sql {
     }
 
     /**
+<<<<<<< HEAD
      * Override the table show_hide_link to not show for select column.
      *
      * @param string $column the column name, index into various names
@@ -194,6 +218,8 @@ class core_tag_manage_table extends table_sql {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get any extra classes names to add to this row in the HTML
      *
      * @param stdClass $row array the data for this row.
@@ -269,6 +295,7 @@ class core_tag_manage_table extends table_sql {
      * @return string
      */
     public function col_select($tag) {
+<<<<<<< HEAD
         global $OUTPUT;
 
         $checkbox = new checkbox_toggleall('tags-manage', false, [
@@ -281,6 +308,13 @@ class core_tag_manage_table extends table_sql {
         ]);
 
         return $OUTPUT->render($checkbox);
+=======
+        $id = "tagselect" . $tag->id;
+        return html_writer::label(get_string('selecttag', 'tag', $tag->rawname), $id,
+                false, array('class' => 'accesshide')).
+                html_writer::empty_tag('input', array('type' => 'checkbox',
+                'name' => 'tagschecked[]', 'value' => $tag->id, 'id' => $id));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

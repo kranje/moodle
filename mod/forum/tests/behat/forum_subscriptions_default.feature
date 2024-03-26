@@ -17,36 +17,56 @@ Feature: A user can control their default discussion subscription settings
       | student1 | C1 | student |
       | student2 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro                  | course | idnumber | type    | section |
       | forum      | Test forum name        | Test forum description | C1     | forump1  | general | 1       |
+=======
+      | activity   | name                   | course | idnumber | type    |
+      | forum      | Test forum name        | C1     | forump1  | general |
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity editing" page logged in as admin
     And I set the following fields to these values:
       | Subscription mode | Optional subscription |
     And I press "Save and return to course"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Creating a new discussion in an optional forum follows user preferences
     Given I am on the "Test forum name" "forum activity" page logged in as student1
     When I click on "Add discussion topic" "link"
     And I click on "Advanced" "button"
     Then "input[name=discussionsubscribe][checked=checked]" "css_element" should exist
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student2
     And I click on "Add discussion topic" "link"
     And I click on "Advanced" "button"
     And "input[name=discussionsubscribe]:not([checked=checked])" "css_element" should exist
 
   Scenario: Replying to an existing discussion in an optional forum follows user preferences
+<<<<<<< HEAD
     Given I am on the "Test forum name" "forum activity" page logged in as admin
     And I add a new discussion to "Test forum name" forum with:
       | Subject | Test post subject |
       | Message | Test post message |
     And I log out
+=======
+    Given the following forum discussions exist in course "Course 1":
+      | user  | forum           | name              | message           |
+      | admin | Test forum name | Test post subject | Test post message |
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student1
     And I follow "Test post subject"
     When I follow "Reply"
     Then "input[name=discussionsubscribe][checked=checked]" "css_element" should exist
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student2
     And I follow "Test post subject"
     And I follow "Reply"
@@ -57,18 +77,25 @@ Feature: A user can control their default discussion subscription settings
     And I set the following fields to these values:
       | Subscription mode | Auto subscription |
     And I press "Save and return to course"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student1
     When I click on "Add discussion topic" "link"
     And I click on "Advanced" "button"
     Then "input[name=discussionsubscribe][checked=checked]" "css_element" should exist
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student2
     And I click on "Add discussion topic" "link"
     And I click on "Advanced" "button"
     And "input[name=discussionsubscribe][checked=checked]" "css_element" should exist
 
   Scenario: Replying to an existing discussion in an automatic forum follows forum subscription
+<<<<<<< HEAD
     Given I am on the "Test forum name" "forum activity editing" page logged in as admin
     And I set the following fields to these values:
       | Subscription mode | Optional subscription |
@@ -77,11 +104,23 @@ Feature: A user can control their default discussion subscription settings
       | Subject | Test post subject |
       | Message | Test post message |
     And I log out
+=======
+    Given the following forum discussions exist in course "Course 1":
+      | user  | forum           | name              | message           |
+      | admin | Test forum name | Test post subject | Test post message |
+    And I am on the "Test forum name" "forum activity editing" page logged in as admin
+    And I set the following fields to these values:
+      | Subscription mode | Optional subscription |
+    And I press "Save and return to course"
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student1
     And I follow "Test post subject"
     When I follow "Reply"
     Then "input[name=discussionsubscribe][checked=checked]" "css_element" should exist
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student2
     And I follow "Test post subject"
     And I follow "Reply"
@@ -89,6 +128,7 @@ Feature: A user can control their default discussion subscription settings
 
   @javascript
   Scenario: Replying to an existing discussion in an automatic forum which has been unsubscribed from follows user preferences
+<<<<<<< HEAD
     Given I am on the "Test forum name" "forum activity editing" page logged in as admin
     And I set the following fields to these values:
       | Subscription mode | Auto subscription |
@@ -97,13 +137,25 @@ Feature: A user can control their default discussion subscription settings
       | Subject | Test post subject |
       | Message | Test post message |
     And I log out
+=======
+    Given the following forum discussions exist in course "Course 1":
+      | user  | forum           | name              | message           |
+      | admin | Test forum name | Test post subject | Test post message |
+    And I am on the "Test forum name" "forum activity editing" page logged in as admin
+    And I set the following fields to these values:
+      | Subscription mode | Auto subscription |
+    And I press "Save and return to course"
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student1
     And I click on "input[id^=subscription-toggle]" "css_element" in the "Test post subject" "table_row"
     And I follow "Test post subject"
     When I follow "Reply"
     And I click on "Advanced" "button"
     And "input[name=discussionsubscribe][checked]" "css_element" should exist
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Test forum name" "forum activity" page logged in as student2
     And I click on "input[id^=subscription-toggle]" "css_element" in the "Test post subject" "table_row"
     And I follow "Test post subject"

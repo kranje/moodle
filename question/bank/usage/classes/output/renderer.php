@@ -17,7 +17,11 @@
 namespace qbank_usage\output;
 
 /**
+<<<<<<< HEAD
  * Renderer for usage plugin.
+=======
+ * Class renderer
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * @package    qbank_usage
  * @copyright  2021 Catalyst IT Australia Pty Ltd
@@ -36,6 +40,7 @@ class renderer extends \plugin_renderer_base {
         return $this->render_from_template('qbank_usage/usage_modal', $displaydata);
     }
 
+<<<<<<< HEAD
     /**
      * Render the question usage column.
      *
@@ -46,4 +51,6 @@ class renderer extends \plugin_renderer_base {
         return $this->render_from_template('qbank_usage/last_used', $displaydata);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

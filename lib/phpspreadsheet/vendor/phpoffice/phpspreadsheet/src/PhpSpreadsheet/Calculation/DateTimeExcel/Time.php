@@ -3,16 +3,24 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
 use DateTime;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class Time
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * TIME.
      *
@@ -24,6 +32,7 @@ class Time
      * Excel Function:
      *        TIME(hour,minute,second)
      *
+<<<<<<< HEAD
      * @param array|int $hour A number from 0 (zero) to 32767 representing the hour.
      *                                    Any value greater than 23 will be divided by 24 and the remainder
      *                                    will be treated as the hour value. For example, TIME(27,0,0) =
@@ -49,6 +58,25 @@ class Time
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $hour, $minute, $second);
         }
 
+=======
+     * @param mixed $hour A number from 0 (zero) to 32767 representing the hour.
+     *                                    Any value greater than 23 will be divided by 24 and the remainder
+     *                                    will be treated as the hour value. For example, TIME(27,0,0) =
+     *                                    TIME(3,0,0) = .125 or 3:00 AM.
+     * @param mixed $minute A number from 0 to 32767 representing the minute.
+     *                                    Any value greater than 59 will be converted to hours and minutes.
+     *                                    For example, TIME(0,750,0) = TIME(12,30,0) = .520833 or 12:30 PM.
+     * @param mixed $second A number from 0 to 32767 representing the second.
+     *                                    Any value greater than 59 will be converted to hours, minutes,
+     *                                    and seconds. For example, TIME(0,0,2000) = TIME(0,33,22) = .023148
+     *                                    or 12:33:20 AM
+     *
+     * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+     *                        depending on the value of the ReturnDateType flag
+     */
+    public static function fromHMS($hour, $minute, $second)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $hour = self::toIntWithNullBool($hour);
             $minute = self::toIntWithNullBool($minute);
@@ -63,7 +91,11 @@ class Time
         if ($hour > 23) {
             $hour = $hour % 24;
         } elseif ($hour < 0) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Execute function
@@ -117,12 +149,20 @@ class Time
      */
     private static function toIntWithNullBool($value): int
     {
+<<<<<<< HEAD
+=======
+        $value = Functions::flattenSingleValue($value);
+>>>>>>> forked/LAE_400_PACKAGE
         $value = $value ?? 0;
         if (is_bool($value)) {
             $value = (int) $value;
         }
         if (!is_numeric($value)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::VALUE());
+=======
+            throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (int) $value;

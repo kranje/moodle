@@ -66,7 +66,11 @@ $params['context'] = $coursecontext;
 $params['currentcontext'] = $PAGE->context;
 $params['userid']   = $USER->id;
 if (!$instances = repository::get_instances($params)) {
+<<<<<<< HEAD
     throw new \moodle_exception('noinstances', 'repository', $CFG->wwwroot . '/user/view.php');
+=======
+    print_error('noinstances', 'repository', $CFG->wwwroot . '/user/view.php');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $table = new html_table();

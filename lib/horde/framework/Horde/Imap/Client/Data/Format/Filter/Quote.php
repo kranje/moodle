@@ -31,7 +31,10 @@ class Horde_Imap_Client_Data_Format_Filter_Quote extends php_user_filter
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function onCreate()
     {
         $this->_prepend = false;
@@ -40,7 +43,10 @@ class Horde_Imap_Client_Data_Format_Filter_Quote extends php_user_filter
     /**
      * @see stream_filter_register()
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function filter($in, $out, &$consumed, $closing)
     {
         if (!$this->_prepend) {

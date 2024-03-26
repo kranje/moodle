@@ -8,7 +8,10 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Row;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Worksheet\RowCellIterator;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
@@ -120,6 +123,7 @@ class Content extends WriterPart
     {
         $spreadsheet = $this->getParentWriter()->getSpreadsheet(); /** @var Spreadsheet $spreadsheet */
         $sheetCount = $spreadsheet->getSheetCount();
+<<<<<<< HEAD
         for ($sheetIndex = 0; $sheetIndex < $sheetCount; ++$sheetIndex) {
             $objWriter->startElement('table:table');
             $objWriter->writeAttribute('table:name', $spreadsheet->getSheet($sheetIndex)->getTitle());
@@ -136,6 +140,16 @@ class Content extends WriterPart
                 $objWriter->endElement();
             }
             $this->writeRows($objWriter, $spreadsheet->getSheet($sheetIndex), $sheetIndex);
+=======
+        for ($i = 0; $i < $sheetCount; ++$i) {
+            $objWriter->startElement('table:table');
+            $objWriter->writeAttribute('table:name', $spreadsheet->getSheet($i)->getTitle());
+            $objWriter->writeElement('office:forms');
+            $objWriter->startElement('table:table-column');
+            $objWriter->writeAttribute('table:number-columns-repeated', self::NUMBER_COLS_REPEATED_MAX);
+            $objWriter->endElement();
+            $this->writeRows($objWriter, $spreadsheet->getSheet($i));
+>>>>>>> forked/LAE_400_PACKAGE
             $objWriter->endElement();
         }
     }
@@ -143,21 +157,35 @@ class Content extends WriterPart
     /**
      * Write rows of the specified sheet.
      */
+<<<<<<< HEAD
     private function writeRows(XMLWriter $objWriter, Worksheet $sheet, int $sheetIndex): void
+=======
+    private function writeRows(XMLWriter $objWriter, Worksheet $sheet): void
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $numberRowsRepeated = self::NUMBER_ROWS_REPEATED_MAX;
         $span_row = 0;
         $rows = $sheet->getRowIterator();
+<<<<<<< HEAD
         foreach ($rows as $row) {
             $cellIterator = $row->getCellIterator();
             --$numberRowsRepeated;
             if ($cellIterator->valid()) {
                 $objWriter->startElement('table:table-row');
                 if ($span_row) {
+=======
+        while ($rows->valid()) {
+            --$numberRowsRepeated;
+            $row = $rows->current();
+            if ($row->getCellIterator()->valid()) {
+                if ($span_row) {
+                    $objWriter->startElement('table:table-row');
+>>>>>>> forked/LAE_400_PACKAGE
                     if ($span_row > 1) {
                         $objWriter->writeAttribute('table:number-rows-repeated', $span_row);
                     }
                     $objWriter->startElement('table:table-cell');
+<<<<<<< HEAD
                     $objWriter->writeAttribute('table:number-columns-repeated', (string) self::NUMBER_COLS_REPEATED_MAX);
                     $objWriter->endElement();
                     $span_row = 0;
@@ -170,22 +198,46 @@ class Content extends WriterPart
                     }
                     $this->writeCells($objWriter, $cellIterator);
                 }
+=======
+                    $objWriter->writeAttribute('table:number-columns-repeated', self::NUMBER_COLS_REPEATED_MAX);
+                    $objWriter->endElement();
+                    $objWriter->endElement();
+                    $span_row = 0;
+                }
+                $objWriter->startElement('table:table-row');
+                $this->writeCells($objWriter, $row);
+>>>>>>> forked/LAE_400_PACKAGE
                 $objWriter->endElement();
             } else {
                 ++$span_row;
             }
+<<<<<<< HEAD
+=======
+            $rows->next();
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
     /**
      * Write cells of the specified row.
      */
+<<<<<<< HEAD
     private function writeCells(XMLWriter $objWriter, RowCellIterator $cells): void
     {
         $numberColsRepeated = self::NUMBER_COLS_REPEATED_MAX;
         $prevColumn = -1;
         foreach ($cells as $cell) {
             /** @var \PhpOffice\PhpSpreadsheet\Cell\Cell $cell */
+=======
+    private function writeCells(XMLWriter $objWriter, Row $row): void
+    {
+        $numberColsRepeated = self::NUMBER_COLS_REPEATED_MAX;
+        $prevColumn = -1;
+        $cells = $row->getCellIterator();
+        while ($cells->valid()) {
+            /** @var \PhpOffice\PhpSpreadsheet\Cell\Cell $cell */
+            $cell = $cells->current();
+>>>>>>> forked/LAE_400_PACKAGE
             $column = Coordinate::columnIndexFromString($cell->getColumn()) - 1;
 
             $this->writeCellSpan($objWriter, $column, $prevColumn);
@@ -248,8 +300,13 @@ class Content extends WriterPart
             Comment::write($objWriter, $cell);
             $objWriter->endElement();
             $prevColumn = $column;
+<<<<<<< HEAD
         }
 
+=======
+            $cells->next();
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         $numberColsRepeated = $numberColsRepeated - $prevColumn - 1;
         if ($numberColsRepeated > 0) {
             if ($numberColsRepeated > 1) {
@@ -286,6 +343,7 @@ class Content extends WriterPart
     private function writeXfStyles(XMLWriter $writer, Spreadsheet $spreadsheet): void
     {
         $styleWriter = new Style($writer);
+<<<<<<< HEAD
 
         $sheetCount = $spreadsheet->getSheetCount();
         for ($i = 0; $i < $sheetCount; ++$i) {
@@ -308,6 +366,8 @@ class Content extends WriterPart
             }
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($spreadsheet->getCellXfCollection() as $style) {
             $styleWriter->write($style);
         }
@@ -329,7 +389,12 @@ class Content extends WriterPart
         $columnSpan = Coordinate::columnIndexFromString($end[0]) - Coordinate::columnIndexFromString($start[0]) + 1;
         $rowSpan = ((int) $end[1]) - ((int) $start[1]) + 1;
 
+<<<<<<< HEAD
         $objWriter->writeAttribute('table:number-columns-spanned', (string) $columnSpan);
         $objWriter->writeAttribute('table:number-rows-spanned', (string) $rowSpan);
+=======
+        $objWriter->writeAttribute('table:number-columns-spanned', $columnSpan);
+        $objWriter->writeAttribute('table:number-rows-spanned', $rowSpan);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

@@ -415,7 +415,11 @@ class EigenvalueDecomposition
         $norm = 0.0;
 
         for ($i = 0; $i < $nn; ++$i) {
+<<<<<<< HEAD
             if ($i > $high) {
+=======
+            if (($i < $low) || ($i > $high)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 $this->d[$i] = $this->H[$i][$i];
                 $this->e[$i] = 0.0;
             }
@@ -495,7 +499,11 @@ class EigenvalueDecomposition
                         $this->V[$i][$n - 1] = $q * $z + $p * $this->V[$i][$n];
                         $this->V[$i][$n] = $q * $this->V[$i][$n] - $p * $z;
                     }
+<<<<<<< HEAD
                 // Complex pair
+=======
+                    // Complex pair
+>>>>>>> forked/LAE_400_PACKAGE
                 } else {
                     $this->d[$n - 1] = $x + $p;
                     $this->d[$n] = $x + $p;
@@ -671,7 +679,11 @@ class EigenvalueDecomposition
                             } else {
                                 $this->H[$i][$n] = -$r / ($eps * $norm);
                             }
+<<<<<<< HEAD
                         // Solve real equations
+=======
+                            // Solve real equations
+>>>>>>> forked/LAE_400_PACKAGE
                         } else {
                             $x = $this->H[$i][$i + 1];
                             $y = $this->H[$i + 1][$i];
@@ -693,7 +705,11 @@ class EigenvalueDecomposition
                         }
                     }
                 }
+<<<<<<< HEAD
             // Complex vector
+=======
+                // Complex vector
+>>>>>>> forked/LAE_400_PACKAGE
             } elseif ($q < 0) {
                 $l = $n - 1;
                 // Last vector component imaginary so matrix is triangular
@@ -762,7 +778,11 @@ class EigenvalueDecomposition
 
         // Vectors of isolated roots
         for ($i = 0; $i < $nn; ++$i) {
+<<<<<<< HEAD
             if ($i > $high) {
+=======
+            if ($i < $low | $i > $high) {
+>>>>>>> forked/LAE_400_PACKAGE
                 for ($j = $i; $j < $nn; ++$j) {
                     $this->V[$i][$j] = $this->H[$i][$j];
                 }

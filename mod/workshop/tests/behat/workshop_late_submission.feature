@@ -23,7 +23,11 @@ Feature: Workshop 'Late submissions are allowed' task
       | workshop | TestWorkshop1 | c1     | workshop1 | 1               | 1514904308       | 1893369600    |
     # Teacher sets up assessment form and changes the phase to submission.
     And I am on the "TestWorkshop1" "workshop activity" page logged in as teacher1
+<<<<<<< HEAD
     And I edit assessment form in workshop "TestWorkshop1" as:"
+=======
+    And I edit assessment form in workshop "TestWorkshop1" as:
+>>>>>>> forked/LAE_400_PACKAGE
       | id_description__idx_0_editor | Aspect1 |
       | id_description__idx_1_editor | Aspect2 |
       | id_description__idx_2_editor | Aspect3 |
@@ -35,7 +39,11 @@ Feature: Workshop 'Late submissions are allowed' task
     When I am on the "TestWorkshop1" "workshop activity" page logged in as student1
     Then I should see "Submissions deadline:"
     And I should not see "Late submissions are allowed"
+<<<<<<< HEAD
     And I add a submission in workshop "TestWorkshop1" as:"
+=======
+    And I add a submission in workshop "TestWorkshop1" as:
+>>>>>>> forked/LAE_400_PACKAGE
       | Title              | Submission from s1  |
       | Submission content | Some content from student1 |
 

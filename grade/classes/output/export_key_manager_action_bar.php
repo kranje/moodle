@@ -48,7 +48,12 @@ class export_key_manager_action_bar extends action_bar {
         }
         $courseid = $this->context->instanceid;
         // Get the data used to output the general navigation selector and exports navigation selector.
+<<<<<<< HEAD
         $exportnavselectors = new export_action_bar($this->context, null, 'keymanager');
+=======
+        $exportnavselectors = new export_action_bar($this->context,
+            new moodle_url('/grade/export/keymanager.php', ['id' => $courseid]), 'keymanager');
+>>>>>>> forked/LAE_400_PACKAGE
         $data = $exportnavselectors->export_for_template($output);
 
         // Add a button to the action bar with a link to the 'add user key' page.

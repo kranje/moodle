@@ -48,15 +48,27 @@ use tool_policy\policy_version;
  */
 class page_viewalldoc implements renderable, templatable {
 
+<<<<<<< HEAD
     /** @var string Return url */
     private $returnurl;
+=======
+    /** @var ?moodle_url Return url */
+    private $returnurl = null;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * Prepare the page for rendering.
      *
      */
     public function __construct($returnurl) {
+<<<<<<< HEAD
         $this->returnurl = $returnurl;
+=======
+        if (!empty($returnurl)) {
+            $this->returnurl = new moodle_url($returnurl);
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $this->prepare_global_page_access();
         $this->prepare_policies();
     }

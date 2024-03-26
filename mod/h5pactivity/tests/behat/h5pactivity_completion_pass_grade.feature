@@ -17,7 +17,12 @@ Feature: Pass grade activity completion information in the h5p activity
       | student2 | C1     | student        |
       | student3 | C1     | student        |
       | teacher1 | C1     | editingteacher |
+<<<<<<< HEAD
     And I am on the "Course 1" "Course" page logged in as "admin"
+=======
+    And I log in as "admin"
+    And I am on "Course 1" course homepage
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Settings" in current page administration
     And I expand all fieldsets
     And I set the following fields to these values:
@@ -27,6 +32,10 @@ Feature: Pass grade activity completion information in the h5p activity
     And the following "activity" exists:
       | activity            | h5pactivity                          |
       | course              | C1                                   |
+<<<<<<< HEAD
+=======
+      | section             | 1                                    |
+>>>>>>> forked/LAE_400_PACKAGE
       | name                | Music history                        |
       | completion          | 2                                    |
       | completionview      | 1                                    |
@@ -39,16 +48,32 @@ Feature: Pass grade activity completion information in the h5p activity
   Scenario: View automatic completion items
     # Teacher view.
     Given I am on the "Music history" "h5pactivity activity" page logged in as teacher1
+<<<<<<< HEAD
+=======
+#    Given I log in as "teacher1"
+#    And I am on "Course 1" course homepage
+#    And I follow "Music history"
+>>>>>>> forked/LAE_400_PACKAGE
     And "Music history" should have the "View" completion condition
     And "Music history" should have the "Receive a grade" completion condition
     And "Music history" should have the "Receive a passing grade" completion condition
     And I log out
     # Student view.
     When I am on the "Music history" "h5pactivity activity" page logged in as student1
+<<<<<<< HEAD
+=======
+#    When I log in as "student1"
+#    And I am on "Course 1" course homepage
+#    And I follow "Music history"
+>>>>>>> forked/LAE_400_PACKAGE
     And I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And I click on "Check" "button" in the ".h5p-question-buttons" "css_element"
     And I reload the page
+<<<<<<< HEAD
+=======
+    And I log out
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on the "Music history" "h5pactivity activity" page logged in as student2
     And I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe

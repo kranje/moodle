@@ -81,9 +81,12 @@ $rb-right-sidebar-width: 350px;
 .reportbuilder-report-container {
     @extend .flex-fill;
     min-width: 0;
+<<<<<<< HEAD
     button[data-action="toggle-edit-preview"] .loading-icon {
         margin-left: .5rem;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 // Allow horizontal scroll in editor table.
 .reportbuilder-editor-table-container {

@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2016-present MongoDB, Inc.
+=======
+ * Copyright 2016-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,9 +40,14 @@ use MongoDB\GridFS\Exception\StreamException;
 use MongoDB\Model\BSONArray;
 use MongoDB\Model\BSONDocument;
 use MongoDB\Operation\Find;
+<<<<<<< HEAD
 
 use function array_intersect_key;
 use function assert;
+=======
+use stdClass;
+use function array_intersect_key;
+>>>>>>> forked/LAE_400_PACKAGE
 use function fopen;
 use function get_resource_type;
 use function in_array;
@@ -137,7 +150,11 @@ class Bucket
      * @param array   $options      Bucket options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(Manager $manager, string $databaseName, array $options = [])
+=======
+    public function __construct(Manager $manager, $databaseName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options += [
             'bucketName' => self::$defaultBucketName,
@@ -178,7 +195,11 @@ class Bucket
         }
 
         $this->manager = $manager;
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
+=======
+        $this->databaseName = (string) $databaseName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->bucketName = $options['bucketName'];
         $this->chunkSizeBytes = $options['chunkSizeBytes'];
         $this->disableMD5 = $options['disableMD5'];
@@ -196,7 +217,11 @@ class Bucket
     /**
      * Return internal properties for debugging purposes.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
+=======
+     * @see http://php.net/manual/en/language.oop5.magic.php#language.oop5.magic.debuginfo
+>>>>>>> forked/LAE_400_PACKAGE
      * @return array
      */
     public function __debugInfo()
@@ -282,7 +307,11 @@ class Bucket
      * @throws StreamException if the file could not be uploaded
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function downloadToStreamByName(string $filename, $destination, array $options = [])
+=======
+    public function downloadToStreamByName($filename, $destination, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_resource($destination) || get_resource_type($destination) != "stream") {
             throw InvalidArgumentException::invalidType('$destination', $destination, 'resource');
@@ -413,7 +442,10 @@ class Bucket
          */
         $typeMap = ['root' => 'stdClass'] + $this->typeMap;
         $file = apply_type_map_to_document($file, $typeMap);
+<<<<<<< HEAD
         assert(is_object($file));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (! isset($file->_id) && ! property_exists($file, '_id')) {
             throw new CorruptFileException('file._id does not exist');
@@ -435,7 +467,11 @@ class Bucket
     /**
      * Return the read concern for this GridFS bucket.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-readconcern.isdefault.php
+=======
+     * @see http://php.net/manual/en/mongodb-driver-readconcern.isdefault.php
+>>>>>>> forked/LAE_400_PACKAGE
      * @return ReadConcern
      */
     public function getReadConcern()
@@ -466,7 +502,11 @@ class Bucket
     /**
      * Return the write concern for this GridFS bucket.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-writeconcern.isdefault.php
+=======
+     * @see http://php.net/manual/en/mongodb-driver-writeconcern.isdefault.php
+>>>>>>> forked/LAE_400_PACKAGE
      * @return WriteConcern
      */
     public function getWriteConcern()
@@ -518,7 +558,11 @@ class Bucket
      * @throws FileNotFoundException if no file could be selected
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function openDownloadStreamByName(string $filename, array $options = [])
+=======
+    public function openDownloadStreamByName($filename, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options += ['revision' => -1];
 
@@ -551,7 +595,11 @@ class Bucket
      * @param array  $options  Upload options
      * @return resource
      */
+<<<<<<< HEAD
     public function openUploadStream(string $filename, array $options = [])
+=======
+    public function openUploadStream($filename, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options += ['chunkSizeBytes' => $this->chunkSizeBytes];
 
@@ -575,7 +623,11 @@ class Bucket
      * @throws FileNotFoundException if no file could be selected
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function rename($id, string $newFilename)
+=======
+    public function rename($id, $newFilename)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $updateResult = $this->collectionWrapper->updateFilenameForId($id, $newFilename);
 
@@ -621,7 +673,11 @@ class Bucket
      * @throws StreamException if the file could not be uploaded
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
+<<<<<<< HEAD
     public function uploadFromStream(string $filename, $source, array $options = [])
+=======
+    public function uploadFromStream($filename, $source, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_resource($source) || get_resource_type($source) != "stream") {
             throw InvalidArgumentException::invalidType('$source', $source, 'resource');
@@ -631,7 +687,10 @@ class Bucket
 
         if (@stream_copy_to_stream($source, $destination) === false) {
             $destinationUri = $this->createPathForFile($this->getRawFileDocumentForStream($destination));
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             throw StreamException::uploadFailed($filename, $source, $destinationUri);
         }
 
@@ -641,6 +700,7 @@ class Bucket
     /**
      * Creates a path for an existing GridFS file.
      *
+<<<<<<< HEAD
      * @param object $file GridFS file document
      */
     private function createPathForFile(object $file): string
@@ -649,6 +709,17 @@ class Bucket
             $id = toJSON(fromPHP(['_id' => $file->_id]));
         } else {
             $id = (string) $file->_id;
+=======
+     * @param stdClass $file GridFS file document
+     * @return string
+     */
+    private function createPathForFile(stdClass $file)
+    {
+        if (! is_object($file->_id) || method_exists($file->_id, '__toString')) {
+            $id = (string) $file->_id;
+        } else {
+            $id = toJSON(fromPHP(['_id' => $file->_id]));
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return sprintf(
@@ -662,8 +733,15 @@ class Bucket
 
     /**
      * Creates a path for a new GridFS file, which does not yet have an ID.
+<<<<<<< HEAD
      */
     private function createPathForUpload(): string
+=======
+     *
+     * @return string
+     */
+    private function createPathForUpload()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return sprintf(
             '%s://%s/%s.files',
@@ -675,8 +753,15 @@ class Bucket
 
     /**
      * Returns the names of the files collection.
+<<<<<<< HEAD
      */
     private function getFilesNamespace(): string
+=======
+     *
+     * @return string
+     */
+    private function getFilesNamespace()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return sprintf('%s.%s.files', $this->databaseName, $this->bucketName);
     }
@@ -688,9 +773,16 @@ class Bucket
      * respect the Bucket's type map.
      *
      * @param resource $stream GridFS stream
+<<<<<<< HEAD
      * @throws InvalidArgumentException
      */
     private function getRawFileDocumentForStream($stream): object
+=======
+     * @return stdClass
+     * @throws InvalidArgumentException
+     */
+    private function getRawFileDocumentForStream($stream)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_resource($stream) || get_resource_type($stream) != "stream") {
             throw InvalidArgumentException::invalidType('$stream', $stream, 'resource');
@@ -708,10 +800,17 @@ class Bucket
     /**
      * Opens a readable stream for the GridFS file.
      *
+<<<<<<< HEAD
      * @param object $file GridFS file document
      * @return resource
      */
     private function openDownloadStreamByFile(object $file)
+=======
+     * @param stdClass $file GridFS file document
+     * @return resource
+     */
+    private function openDownloadStreamByFile(stdClass $file)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $path = $this->createPathForFile($file);
         $context = stream_context_create([
@@ -727,7 +826,11 @@ class Bucket
     /**
      * Registers the GridFS stream wrapper if it is not already registered.
      */
+<<<<<<< HEAD
     private function registerStreamWrapper(): void
+=======
+    private function registerStreamWrapper()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (in_array(self::$streamWrapperProtocol, stream_get_wrappers())) {
             return;

@@ -21,7 +21,11 @@ Feature: Provide example submission
       | workshop | TestWorkshop | c1     | workshop1 | 1           |
     # As a teacher, define the assessment form to be used in the workshop.
     When I am on the "Course1" course page logged in as teacher1
+<<<<<<< HEAD
     And I edit assessment form in workshop "TestWorkshop" as:"
+=======
+    And I edit assessment form in workshop "TestWorkshop" as:
+>>>>>>> forked/LAE_400_PACKAGE
       | id_description__idx_0_editor | Aspect1 |
       | id_description__idx_1_editor | Aspect2 |
       | id_description__idx_2_editor |         |

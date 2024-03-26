@@ -176,7 +176,11 @@ class mysqli_native_moodle_database extends moodle_database {
         $sql = "SELECT engine
                   FROM INFORMATION_SCHEMA.TABLES
                  WHERE table_schema = DATABASE() AND table_name = '{$this->prefix}config'";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
         if ($rec = $result->fetch_assoc()) {
@@ -194,7 +198,11 @@ class mysqli_native_moodle_database extends moodle_database {
 
         // Get the default database engine.
         $sql = "SELECT @@default_storage_engine engine";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
         if ($rec = $result->fetch_assoc()) {
@@ -205,7 +213,11 @@ class mysqli_native_moodle_database extends moodle_database {
         if ($engine === 'MyISAM') {
             // we really do not want MyISAM for Moodle, InnoDB or XtraDB is a reasonable defaults if supported
             $sql = "SHOW STORAGE ENGINES";
+<<<<<<< HEAD
             $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+            $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
             $result = $this->mysqli->query($sql);
             $this->query_end($result);
             $engines = array();
@@ -349,7 +361,11 @@ class mysqli_native_moodle_database extends moodle_database {
 
             $sql = "SHOW VARIABLES LIKE 'innodb_file_format'";
         }
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
         if ($rec = $result->fetch_assoc()) {
@@ -541,8 +557,13 @@ class mysqli_native_moodle_database extends moodle_database {
 
         $this->store_settings($dbhost, $dbuser, $dbpass, $dbname, $prefix, $dboptions);
 
+<<<<<<< HEAD
         // The dbsocket option is used ONLY if host is null or 'localhost'.
         // You can not disable it because it is always tried if dbhost is 'localhost'.
+=======
+        // dbsocket is used ONLY if host is NULL or 'localhost',
+        // you can not disable it because it is always tried if dbhost is 'localhost'
+>>>>>>> forked/LAE_400_PACKAGE
         if (!empty($this->dboptions['dbsocket'])
                 and (strpos($this->dboptions['dbsocket'], '/') !== false or strpos($this->dboptions['dbsocket'], '\\') !== false)) {
             $dbsocket = $this->dboptions['dbsocket'];
@@ -561,11 +582,14 @@ class mysqli_native_moodle_database extends moodle_database {
         if ($dbhost and !empty($this->dboptions['dbpersist'])) {
             $dbhost = "p:$dbhost";
         }
+<<<<<<< HEAD
 
         // We want to keep exceptions out from the native driver.
         // TODO: See MDL-75761 for future improvements.
         mysqli_report(MYSQLI_REPORT_OFF); // Disable reporting (default before PHP 8.1).
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->mysqli = mysqli_init();
         if (!empty($this->dboptions['connecttimeout'])) {
             $this->mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, $this->dboptions['connecttimeout']);
@@ -701,7 +725,11 @@ class mysqli_native_moodle_database extends moodle_database {
         $this->tables = array();
         $prefix = str_replace('_', '\\_', $this->prefix);
         $sql = "SHOW TABLES LIKE '$prefix%'";
+<<<<<<< HEAD
         $this->query_start($sql, null, $usecache ? SQL_QUERY_AUX_READONLY : SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, null, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
         $len = strlen($this->prefix);
@@ -728,7 +756,11 @@ class mysqli_native_moodle_database extends moodle_database {
         $indexes = array();
         $fixedtable = $this->fix_table_name($table);
         $sql = "SHOW INDEXES FROM $fixedtable";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX_READONLY);
+=======
+        $this->query_start($sql, null, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         try {
             $this->query_end($result);
@@ -765,7 +797,11 @@ class mysqli_native_moodle_database extends moodle_database {
                  WHERE table_name = '" . $this->prefix.$table . "'
                        AND table_schema = '" . $this->dbname . "'
               ORDER BY ordinal_position";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX_READONLY);
+=======
+        $this->query_start($sql, null, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end(true); // Don't want to throw anything here ever. MDL-30147
 
@@ -788,7 +824,11 @@ class mysqli_native_moodle_database extends moodle_database {
             $result->close();
             $fixedtable = $this->fix_table_name($table);
             $sql = "SHOW COLUMNS FROM $fixedtable";
+<<<<<<< HEAD
             $this->query_start($sql, null, SQL_QUERY_AUX_READONLY);
+=======
+            $this->query_start($sql, null, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
             $result = $this->mysqli->query($sql);
             $this->query_end(true);
             if ($result === false) {
@@ -1070,7 +1110,11 @@ class mysqli_native_moodle_database extends moodle_database {
         $charset = reset($collationinfo);
 
         $sql = "SHOW COLLATION WHERE Collation ='$collation' AND Charset = '$charset'";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX_READONLY);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
         if ($result->fetch_assoc()) {
@@ -1409,10 +1453,35 @@ class mysqli_native_moodle_database extends moodle_database {
     }
 
     /**
+<<<<<<< HEAD
      * Get chunk size for multiple records insert
      * @return int
      */
     private function insert_chunk_size(): int {
+=======
+     * Insert multiple records into database as fast as possible.
+     *
+     * Order of inserts is maintained, but the operation is not atomic,
+     * use transactions if necessary.
+     *
+     * This method is intended for inserting of large number of small objects,
+     * do not use for huge objects with text or binary fields.
+     *
+     * @since Moodle 2.7
+     *
+     * @param string $table  The database table to be inserted into
+     * @param array|Traversable $dataobjects list of objects to be inserted, must be compatible with foreach
+     * @return void does not return new record ids
+     *
+     * @throws coding_exception if data objects have different structure
+     * @throws dml_exception A DML specific exception is thrown for any errors.
+     */
+    public function insert_records($table, $dataobjects) {
+        if (!is_array($dataobjects) and !$dataobjects instanceof Traversable) {
+            throw new coding_exception('insert_records() passed non-traversable object');
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         // MySQL has a relatively small query length limit by default,
         // make sure 'max_allowed_packet' in my.cnf is high enough
         // if you change the following default...
@@ -1443,6 +1512,7 @@ class mysqli_native_moodle_database extends moodle_database {
                 }
             }
         }
+<<<<<<< HEAD
         return $chunksize;
     }
 
@@ -1470,6 +1540,9 @@ class mysqli_native_moodle_database extends moodle_database {
         }
 
         $chunksize = $this->insert_chunk_size();
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
         $columns = $this->get_columns($table, true);
         $fields = null;
         $count = 0;
@@ -2068,12 +2141,20 @@ class mysqli_native_moodle_database extends moodle_database {
         }
 
         $sql = "SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
 
         $sql = "START TRANSACTION";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
     }
@@ -2089,7 +2170,11 @@ class mysqli_native_moodle_database extends moodle_database {
         }
 
         $sql = "COMMIT";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
     }
@@ -2105,7 +2190,11 @@ class mysqli_native_moodle_database extends moodle_database {
         }
 
         $sql = "ROLLBACK";
+<<<<<<< HEAD
         $this->query_start($sql, null, SQL_QUERY_AUX);
+=======
+        $this->query_start($sql, NULL, SQL_QUERY_AUX);
+>>>>>>> forked/LAE_400_PACKAGE
         $result = $this->mysqli->query($sql);
         $this->query_end($result);
 

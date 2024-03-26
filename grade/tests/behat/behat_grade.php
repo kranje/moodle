@@ -107,7 +107,11 @@ class behat_grade extends behat_base {
         $gradeitem = behat_context_helper::escape($gradeitem);
 
         if ($this->running_javascript()) {
+<<<<<<< HEAD
             $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]//a[contains(@class,'dropdown-toggle')]";
+=======
+            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]//a[contains(@class,'toggle-display')]";
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $this->execute("behat_general::i_click_on", array($this->escape($xpath), "xpath_element"));
             }
@@ -130,7 +134,11 @@ class behat_grade extends behat_base {
         $gradeitem = behat_context_helper::escape($gradeitem);
 
         if ($this->running_javascript()) {
+<<<<<<< HEAD
             $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]//a[contains(@class,'dropdown-toggle')]";
+=======
+            $xpath = "//tr[contains(.,$gradeitem)]//*[contains(@class,'moodle-actionmenu')]//a[contains(@class,'toggle-display')]";
+>>>>>>> forked/LAE_400_PACKAGE
             if ($this->getSession()->getPage()->findAll('xpath', $xpath)) {
                 $this->execute("behat_general::i_click_on", array($this->escape($xpath), "xpath_element"));
             }
@@ -279,12 +287,20 @@ class behat_grade extends behat_base {
     /**
      * Select the tab in the gradebook. We must be on one of the gradebook pages already.
      *
+<<<<<<< HEAD
      * @deprecated since 4.0 - use behat_forms::i_set_the_field_to() instead.
+=======
+     * @deprecated since 4.0 - use select_in_gradebook_navigation_selector() instead.
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $gradepath examples: "View > User report", "Letters > View", "Scales"
      */
     protected function select_in_gradebook_tabs($gradepath) {
         debugging('The function select_in_gradebook_tabs() is deprecated, please use ' .
+<<<<<<< HEAD
             'behat_forms::i_set_the_field_to() instead.', DEBUG_DEVELOPER);
+=======
+            'select_in_gradebook_navigation_selector() instead.', DEBUG_DEVELOPER);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $gradepath = preg_split('/\s*>\s*/', trim($gradepath));
         if (count($gradepath) > 2) {
@@ -334,7 +350,11 @@ class behat_grade extends behat_base {
             $this->execute('behat_navigation::i_select_from_secondary_navigation', get_string('grades'));
         }
 
+<<<<<<< HEAD
         $this->execute('behat_forms::i_set_the_field_to', [get_string('gradebooknavigationmenu', 'grades'), $gradepath]);
+=======
+        $this->select_in_gradebook_navigation_selector($gradepath, 'gradesactionselect');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -349,7 +369,11 @@ class behat_grade extends behat_base {
      */
     public function i_navigate_to_import_page_in_the_course_gradebook($gradeimportoption) {
         $this->i_navigate_to_in_the_course_gradebook("More > Import");
+<<<<<<< HEAD
         $this->execute('behat_forms::i_set_the_field_to', [get_string('importas', 'grades'), $gradeimportoption]);
+=======
+        $this->select_in_gradebook_navigation_selector($gradeimportoption, 'gradesimportactionselect');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -364,14 +388,22 @@ class behat_grade extends behat_base {
      */
     public function i_navigate_to_export_page_in_the_course_gradebook($gradeexportoption) {
         $this->i_navigate_to_in_the_course_gradebook("More > Export");
+<<<<<<< HEAD
         $this->execute('behat_forms::i_set_the_field_to', [get_string('exportas', 'grades'), $gradeexportoption]);
+=======
+        $this->wait_for_pending_js();
+        $this->select_in_gradebook_navigation_selector($gradeexportoption, 'gradesexportactionselect');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Select a given option from a navigation URL selector in the gradebook. We must be on one of the gradebook pages
      * already.
      *
+<<<<<<< HEAD
      * @deprecated since 4.1 - use behat_forms::i_set_the_field_to() instead.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $path The string path that is used to identify an item within the navigation selector. If the path
      *                     has two items (ex. "More > Grade letters"), the first item ("More") will be used to identify
      *                     an option group in the navigation selector, while the second ("Grade letters") will be used to
@@ -380,9 +412,12 @@ class behat_grade extends behat_base {
      * @param string $formid The ID of the form element which contains the navigation URL selector element.
      */
     protected function select_in_gradebook_navigation_selector(string $path, string $formid) {
+<<<<<<< HEAD
         debugging('The function select_in_gradebook_navigation_selector() is deprecated, please use ' .
             'behat_forms::i_set_the_field_to() instead.', DEBUG_DEVELOPER);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Split the path string by ">".
         $path = preg_split('/\s*>\s*/', trim($path));
 
@@ -421,6 +456,7 @@ class behat_grade extends behat_base {
                 "#{$formid}", 'css_element']);
         }
     }
+<<<<<<< HEAD
 
     /**
      * Confirm if a value is within the search widget within the gradebook.
@@ -496,4 +532,6 @@ class behat_grade extends behat_base {
         $this->execute('behat_general::i_click_on_in_the',
             [$needle, "link", "{$triggercssselector} .dropdown-menu", "css_element"]);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

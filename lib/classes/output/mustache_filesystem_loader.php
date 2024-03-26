@@ -53,6 +53,7 @@ class mustache_filesystem_loader extends \Mustache_Loader_FilesystemLoader {
         // Call the Moodle template finder.
         return mustache_template_finder::get_template_filepath($name);
     }
+<<<<<<< HEAD
 
     /**
      * Only check if baseDir is a directory and requested templates are files if
@@ -65,4 +66,6 @@ class mustache_filesystem_loader extends \Mustache_Loader_FilesystemLoader {
     protected function shouldCheckPath() {
         return true;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

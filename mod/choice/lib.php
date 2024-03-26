@@ -330,12 +330,20 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
     $continueurl = new moodle_url('/mod/choice/view.php', array('id' => $cm->id));
 
     if (empty($formanswer)) {
+<<<<<<< HEAD
         throw new \moodle_exception('atleastoneoption', 'choice', $continueurl);
+=======
+        print_error('atleastoneoption', 'choice', $continueurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (is_array($formanswer)) {
         if (!$choice->allowmultiple) {
+<<<<<<< HEAD
             throw new \moodle_exception('multiplenotallowederror', 'choice', $continueurl);
+=======
+            print_error('multiplenotallowederror', 'choice', $continueurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $formanswers = $formanswer;
     } else {
@@ -345,7 +353,11 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
     $options = $DB->get_records('choice_options', array('choiceid' => $choice->id), '', 'id');
     foreach ($formanswers as $key => $val) {
         if (!isset($options[$val])) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotsubmit', 'choice', $continueurl);
+=======
+            print_error('cannotsubmit', 'choice', $continueurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
     // Start lock to prevent synchronous access to the same data
@@ -360,7 +372,11 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
         // Opening the lock.
         $choicelock = $lockfactory->get_lock($resouce, $timeout, MINSECS);
         if (!$choicelock) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotsubmit', 'choice', $continueurl);
+=======
+            print_error('cannotsubmit', 'choice', $continueurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -476,7 +492,11 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
     } else {
         // This is a choice with limited options, and one of the options selected has just run over its limit.
         $choicelock->release();
+<<<<<<< HEAD
         throw new \moodle_exception('choicefull', 'choice', $continueurl);
+=======
+        print_error('choicefull', 'choice', $continueurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Release lock.

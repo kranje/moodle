@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 namespace block_filtered_course_list;
 
 use advanced_testcase;
@@ -33,6 +34,8 @@ use DOMDocument;
 use DOMElement;
 use completion_completion;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -49,7 +52,11 @@ require_once(dirname(__FILE__) . '/../renderer.php');
  * @copyright  2016 CLAMP
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class block_test extends advanced_testcase {
+=======
+class block_filtered_course_list_block_testcase extends advanced_testcase {
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var int The admin user's id number */
     private $adminid;
@@ -71,6 +78,7 @@ class block_test extends advanced_testcase {
         unset ( $CFG->maxcategorydepth );
         $this->resetAfterTest(true);
         $this->_setupusers();
+<<<<<<< HEAD
         $this->_setupfilter();
     }
 
@@ -92,6 +100,9 @@ class block_test extends advanced_testcase {
         $classes = block_filtered_course_list_lib::get_filter_classes();
         $this->assertCount(1, $classes);
         $this->assertEquals('test_fcl_filter', reset($classes));
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -147,7 +158,11 @@ class block_test extends advanced_testcase {
      */
     public function test_single_category_site_with_no_enrollments() {
 
+<<<<<<< HEAD
         // Create 8 courses in the default category: Category 1.
+=======
+        // Create 8 courses in the default category: Miscellaneous.
+>>>>>>> forked/LAE_400_PACKAGE
         $this->_create_misc_courses( 1, 8 );
 
         // Everyone should see all courses.
@@ -165,7 +180,11 @@ class block_test extends advanced_testcase {
      */
     public function test_small_single_category_site_with_enrollments() {
 
+<<<<<<< HEAD
         // Create 8 courses in the default category: Category 1.
+=======
+        // Create 8 courses in the default category: Miscellaneous.
+>>>>>>> forked/LAE_400_PACKAGE
         $this->_create_misc_courses( 1, 8 );
 
         // Enroll user1 as a teacher in course 1 and a student in courses 3 and 5.
@@ -203,7 +222,11 @@ class block_test extends advanced_testcase {
      */
     public function test_larger_single_category_site_with_enrollments() {
 
+<<<<<<< HEAD
         // Create 12 courses in the default category: Category 1.
+=======
+        // Create 12 courses in the default category: Miscellaneous.
+>>>>>>> forked/LAE_400_PACKAGE
         $this->_create_misc_courses( 1, 12 );
 
         // Enroll user1 as a teacher in course 1 and a student in courses 3 and 5.
@@ -220,9 +243,15 @@ class block_test extends advanced_testcase {
 
         // The block should offer a category link to anonymous, guest, and admin.
         $this->_courselistincludes ( array (
+<<<<<<< HEAD
             'none'  => array ( 'Category 1' ),
             'guest' => array ( 'Category 1' ),
             'admin' => array ( 'Category 1' )
+=======
+            'none'  => array ( 'Miscellaneous' ),
+            'guest' => array ( 'Miscellaneous' ),
+            'admin' => array ( 'Miscellaneous' )
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         // User1 should still see courses 1, 3 and 5.
@@ -256,10 +285,17 @@ class block_test extends advanced_testcase {
 
         // The block should offer top-level category links to anonymous, guest, admin or an unenrolled user.
         $this->_courselistincludes ( array (
+<<<<<<< HEAD
             'none'  => array ( 'Category 1', 'Sibling' ),
             'guest' => array ( 'Category 1', 'Sibling' ),
             'admin' => array ( 'Category 1', 'Sibling' ),
             'user3' => array ( 'Category 1', 'Sibling' ),
+=======
+            'none'  => array ( 'Miscellaneous', 'Sibling' ),
+            'guest' => array ( 'Miscellaneous', 'Sibling' ),
+            'admin' => array ( 'Miscellaneous', 'Sibling' ),
+            'user3' => array ( 'Miscellaneous', 'Sibling' ),
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         // Regular users should see links to visible courses in visible categories under 'Other courses'.
@@ -317,10 +353,17 @@ EOF;
         // The block should offer top-level category links to anonymous, guest, and admin.
         // A user not enrolled in any visible courses should see the same.
         $this->_courselistincludes ( array (
+<<<<<<< HEAD
             'none'  => array ( 'Category 1', 'Sibling' ),
             'guest' => array ( 'Category 1', 'Sibling' ),
             'admin' => array ( 'Category 1', 'Sibling' ),
             'user3' => array ( 'Category 1', 'Sibling' ),
+=======
+            'none'  => array ( 'Miscellaneous', 'Sibling' ),
+            'guest' => array ( 'Miscellaneous', 'Sibling' ),
+            'admin' => array ( 'Miscellaneous', 'Sibling' ),
+            'user3' => array ( 'Miscellaneous', 'Sibling' ),
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         // Regular users should see links to visible courses under corresponding visible categories.
@@ -336,7 +379,11 @@ EOF;
 
         $this->_courseunderrubric( array(
             'user1' => array(
+<<<<<<< HEAD
                 'c_1'   => 'Category 1',
+=======
+                'c_1'   => 'Miscellaneous',
+>>>>>>> forked/LAE_400_PACKAGE
                 'cc1_2' => 'Child category 1',
                 'gc1_1' => 'Grandchild category 1',
                 'sc_2'  => 'Sibling category',
@@ -344,7 +391,11 @@ EOF;
                 'hcc_2' => 'Other courses',
             ),
             'user2' => array(
+<<<<<<< HEAD
                 'c_1'   => 'Category 1',
+=======
+                'c_1'   => 'Miscellaneous',
+>>>>>>> forked/LAE_400_PACKAGE
                 'cc1_3' => 'Child category 1',
                 'gc1_1' => 'Grandchild category 1',
                 'hc_1'  => 'Other courses',
@@ -359,7 +410,11 @@ EOF;
 
         // Courses should appear only under immediate parents.
         $this->_courseunderrubric ( array (
+<<<<<<< HEAD
             'user1' => array ( 'gc1_1' => 'Category 1' ),
+=======
+            'user1' => array ( 'gc1_1' => 'Miscellaneous' ),
+>>>>>>> forked/LAE_400_PACKAGE
             'user2' => array ( 'gc1_1' => 'Child category 1' )
         ) , 'not' );
 
@@ -376,12 +431,21 @@ category | collapsed | $cc2id
 EOF;
         set_config('filters', $filterconfig, 'block_filtered_course_list');
 
+<<<<<<< HEAD
         // There should be no rubric for Category 1.
         $this->_courselistexcludes( array (
             'user1' => array ( 'Category 1' )
         ));
 
         // Courses directly under Category 1 should continue to appear in 'Other courses'.
+=======
+        // There should be no rubric for Miscellaneous.
+        $this->_courselistexcludes( array (
+            'user1' => array ( 'Miscellaneous' )
+        ));
+
+        // Courses directly under Miscellaneous should continue to appear in 'Other courses'.
+>>>>>>> forked/LAE_400_PACKAGE
         $this->_courseunderrubric( array(
             'user1' => array(
                 'c_1'   => 'Other courses',
@@ -401,7 +465,11 @@ EOF;
 
         $this->_courseunderrubric( array(
             'user1' => array(
+<<<<<<< HEAD
                 'c_1'   => 'Category 1',
+=======
+                'c_1'   => 'Miscellaneous',
+>>>>>>> forked/LAE_400_PACKAGE
                 'cc1_2' => 'Other courses',
                 'gc1_1' => 'Other courses',
                 'sc_2'  => 'Sibling category',
@@ -409,7 +477,11 @@ EOF;
         ));
 
         $this->_sectionexpanded ( array(
+<<<<<<< HEAD
             'Category 1'    => 'collapsed',
+=======
+            'Miscellaneous'    => 'collapsed',
+>>>>>>> forked/LAE_400_PACKAGE
             'Sibling category' => 'collapsed',
         ));
 
@@ -555,9 +627,15 @@ EOF;
 
         // The block should offer top-level category links to anonymous, guest, and admin.
         $this->_courselistincludes ( array (
+<<<<<<< HEAD
             'none'  => array ( 'Category 1', 'Sibling' ),
             'guest' => array ( 'Category 1', 'Sibling' ),
             'admin' => array ( 'Category 1', 'Sibling' )
+=======
+            'none'  => array ( 'Miscellaneous', 'Sibling' ),
+            'guest' => array ( 'Miscellaneous', 'Sibling' ),
+            'admin' => array ( 'Miscellaneous', 'Sibling' )
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         // The block should list'Current', 'Future', and 'Other courses'.
@@ -831,7 +909,11 @@ EOF;
             'Future courses'        => 'collapsed',
             'Child courses'         => 'collapsed',
             'Unnumbered categories' => 'collapsed',
+<<<<<<< HEAD
             'Category 1'         => 'collapsed',
+=======
+            'Miscellaneous'         => 'collapsed',
+>>>>>>> forked/LAE_400_PACKAGE
             'Child category'        => 'collapsed',
         ));
 
@@ -851,7 +933,11 @@ EOF;
             'Future courses'        => 'collapsed',
             'Child courses'         => 'collapsed',
             'Unnumbered categories' => 'expanded',
+<<<<<<< HEAD
             'Category 1'         => 'expanded',
+=======
+            'Miscellaneous'         => 'expanded',
+>>>>>>> forked/LAE_400_PACKAGE
             'Child category'        => 'expanded',
         ));
 
@@ -906,7 +992,11 @@ EOF;
 
         // The block should offer top-level category links to anonymous, guest, and admin.
         $this->_courselistincludes ( array (
+<<<<<<< HEAD
             'admin' => array ( 'Category 1', 'Sibling' )
+=======
+            'admin' => array ( 'Miscellaneous', 'Sibling' )
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         // Change the managerview setting to 'own'.
@@ -918,7 +1008,11 @@ EOF;
         ));
 
         $this->_courselistincludes ( array (
+<<<<<<< HEAD
             'admin' => array ( 'Category 1', 'Sibling' )
+=======
+            'admin' => array ( 'Miscellaneous', 'Sibling' )
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         // Put the admin in a course.
@@ -926,7 +1020,11 @@ EOF;
 
         // Admin should see the course listing as a regular user would.
         $this->_courselistexcludes ( array (
+<<<<<<< HEAD
             'admin' => array ( 'Category 1', 'Sibling' )
+=======
+            'admin' => array ( 'Miscellaneous', 'Sibling' )
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         $this->_courseunderrubric ( array (
@@ -945,11 +1043,19 @@ EOF;
         set_config('catseparator', ' :: ', 'block_filtered_course_list');
 
         // Any tags should be stripped.
+<<<<<<< HEAD
         $longrubric = 'Grandchild category 1 - gc1 - Child category 2 - Category 1 :: Child category 2 :: Grandchild category 1';
         $htmlentities = '&uuml;&amp;: HTML Entities (&uuml;&amp;shortname) : &uuml;&amp;IDNUMBER &lt; Sibling category';
         $this->_courselistincludes ( array (
             'user1' => array( 'Non-ascii matching (øthér) : ØTHÉR &lt; Sibling category',
                 'Category 1 -  - Top - Category 1',
+=======
+        $longrubric = 'Grandchild category 1 - gc1 - Child category 2 - Miscellaneous :: Child category 2 :: Grandchild category 1';
+        $htmlentities = '&uuml;&amp;: HTML Entities (&uuml;&amp;shortname) : &uuml;&amp;IDNUMBER &lt; Sibling category';
+        $this->_courselistincludes ( array (
+            'user1' => array( 'Non-ascii matching (øthér) : ØTHÉR &lt; Sibling category',
+                'Miscellaneous -  - Top - Miscellaneous',
+>>>>>>> forked/LAE_400_PACKAGE
                 $longrubric,
                 $htmlentities,
              ),
@@ -972,7 +1078,11 @@ EOF;
 
         // Enrolled users, like guests, should see a generic list of categories.
         $this->_courselistincludes ( array (
+<<<<<<< HEAD
             'user1' => array ( 'Category 1', 'Sibling' )
+=======
+            'user1' => array ( 'Miscellaneous', 'Sibling' )
+>>>>>>> forked/LAE_400_PACKAGE
         ));
 
         // Enrolled users, like guests, should not see subcategories or specific courses.
@@ -1128,6 +1238,7 @@ EOF;
     }
 
     /**
+<<<<<<< HEAD
      * Copy the test filter so that settings will detect it.
      */
     private function _setupfilter() {
@@ -1140,6 +1251,9 @@ EOF;
 
     /**
      * Generate some courses in the Category 1 category
+=======
+     * Generate some courses in the Miscellaneous category
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param int $start A first value to apply incrementally to several courses
      * @param int $end The value at which to stop generating courses
@@ -1159,7 +1273,11 @@ EOF;
      * Build a more complicated site for more intresting testing
      * Use the following structure
      *
+<<<<<<< HEAD
      * Category 1
+=======
+     * Miscellaneous
+>>>>>>> forked/LAE_400_PACKAGE
      *   Course 1, c_1
      *   ...
      *   Course 12, c_12
@@ -1196,7 +1314,11 @@ EOF;
     private function _create_rich_site() {
         global $DB;
 
+<<<<<<< HEAD
         // Add some courses under Category 1.
+=======
+        // Add some courses under Miscellaneous.
+>>>>>>> forked/LAE_400_PACKAGE
         $this->_create_misc_courses ( 1, 3 );
 
         // Create categories.
@@ -1242,7 +1364,11 @@ EOF;
         // Create three courses in each category, the third of which is hidden.
         foreach ($this->categories as $id => $category) {
             for ($i = 1; $i <= 3; $i++) {
+<<<<<<< HEAD
                 $shortname = "{$id}_$i";
+=======
+                $shortname = "${id}_$i";
+>>>>>>> forked/LAE_400_PACKAGE
                 $params = array (
                     'fullname'  => "Course $i in $category->name",
                     'shortname' => $shortname,
@@ -1321,7 +1447,11 @@ EOF;
      */
     public function test_get_rubrics() {
 
+<<<<<<< HEAD
         // Create 8 courses in the default category: Category 1.
+=======
+        // Create 8 courses in the default category: Miscellaneous.
+>>>>>>> forked/LAE_400_PACKAGE
         $this->_create_misc_courses( 1, 8 );
         $page = new moodle_page;
         $this->_switchuser( 'admin' );

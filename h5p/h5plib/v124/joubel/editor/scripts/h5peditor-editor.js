@@ -6,7 +6,11 @@ window.ns = window.H5PEditor = window.H5PEditor || {};
  *
  * @class H5PEditor.Editor
  * @param {string} library
+<<<<<<< HEAD
  * @param {string} defaultParams
+=======
+ * @param {Object} defaultParams
+>>>>>>> forked/LAE_400_PACKAGE
  * @param {Element} replace
  * @param {Function} iframeLoaded
  */
@@ -16,6 +20,7 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
   // Library may return "0", make sure this doesn't return true in checks
   library = library && library != 0 ? library : '';
 
+<<<<<<< HEAD
   let parsedParams = {};
   try {
     parsedParams = JSON.parse(defaultParams);
@@ -24,6 +29,8 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
     // Ignore failed parses, this should be handled elsewhere
   }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   // Define iframe DOM Element through jQuery
   var $iframe = ns.$('<iframe/>', {
     'css': {
@@ -40,6 +47,7 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
     'allowfullscreen': 'allowfullscreen',
     'allow': "fullscreen"
   });
+<<<<<<< HEAD
   const metadata = parsedParams.metadata;
   let title = ''
   if (metadata) {
@@ -52,6 +60,8 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
   }
   $iframe.attr('title', title);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   // The DOM element is often used directly
   var iframe = $iframe.get(0);
@@ -65,11 +75,17 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
     if (!iframe.contentDocument) {
       return; // Not possible, iframe 'load' hasn't been triggered yet
     }
+<<<<<<< HEAD
     const language = metadata && metadata.defaultLanguage
       ? metadata.defaultLanguage : ns.contentLanguage;
     iframe.contentDocument.open();
     iframe.contentDocument.write(
       '<!doctype html><html lang="' + language + '">' +
+=======
+    iframe.contentDocument.open();
+    iframe.contentDocument.write(
+      '<!doctype html><html>' +
+>>>>>>> forked/LAE_400_PACKAGE
       '<head>' +
       ns.wrap('<link rel="stylesheet" href="', ns.assets.css, '">') +
       ns.wrap('<script src="', ns.assets.js, '"></script>') +
@@ -97,6 +113,7 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
   };
 
   /**
+<<<<<<< HEAD
    * Object for keeping the scrollHeight + clientHeight used when the previous resize occurred
    * This is used to skip handling resize when nothing actually is resized.
    */
@@ -127,14 +144,31 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
         iframe.clientHeight === iframe.contentDocument.body.scrollHeight &&
         Math.abs(iframe.contentDocument.body.scrollHeight - iframe.contentWindow.document.body.clientHeight) <= 1
     ))) {
+=======
+   * Checks if iframe needs resizing, and then resize it.
+   *
+   * @private
+   */
+  var resize = function () {
+    if (!iframe.contentDocument.body || self.preventResize) {
+      return; // Prevent crashing when iframe is unloaded
+    }
+    if (iframe.clientHeight === iframe.contentDocument.body.scrollHeight &&
+      (iframe.contentDocument.body.scrollHeight === iframe.contentWindow.document.body.clientHeight ||
+       iframe.contentDocument.body.scrollHeight - 1 === iframe.contentWindow.document.body.clientHeight ||
+       iframe.contentDocument.body.scrollHeight === iframe.contentWindow.document.body.clientHeight - 1)) {
+>>>>>>> forked/LAE_400_PACKAGE
       return; // Do not resize unless page and scrolling differs
       // Note: ScrollHeight may be 1px larger in some cases(Edge) where the actual height is a fraction.
     }
 
+<<<<<<< HEAD
     // Save the current scrollHeight/clientHeight
     previousHeight.scroll = iframe.contentDocument.body.scrollHeight;
     previousHeight.client = iframe.contentWindow.document.body.clientHeight;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     // Retain parent size to avoid jumping/scrolling
     var parentHeight = iframe.parentElement.style.height;
     iframe.parentElement.style.height = iframe.parentElement.clientHeight + 'px';
@@ -178,8 +212,12 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
      * Trigger semi-fullscreen for $element.
      *
      * @param {jQuery} $element Element to put in semi-fullscreen
+<<<<<<< HEAD
      * @param {function} before Callback that runs after entering
      *   semi-fullscreen
+=======
+     * @param {function} before Callback that runs after entering semi-fullscreen
+>>>>>>> forked/LAE_400_PACKAGE
      * @param {function} done Callback that runs after exiting semi-fullscreen
      * @return {function} Exit trigger
      */
@@ -205,7 +243,11 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
       self.selector.appendTo($container.html(''));
 
       // Resize iframe when selector resizes
+<<<<<<< HEAD
       self.selector.on('resize', self.resize.bind(self));
+=======
+      self.selector.on('resize', resize);
+>>>>>>> forked/LAE_400_PACKAGE
 
       /**
        * Event handler for exposing events
@@ -232,7 +274,11 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
       var limitedResize = function () {
         if (!running) {
           running = setTimeout(function () {
+<<<<<<< HEAD
             self.resize();
+=======
+            resize();
+>>>>>>> forked/LAE_400_PACKAGE
             running = null;
           }, 40); // 25 fps cap
         }
@@ -248,12 +294,20 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
       });
 
       H5P.$window.resize(limitedResize);
+<<<<<<< HEAD
       self.resize();
+=======
+      resize();
+>>>>>>> forked/LAE_400_PACKAGE
     }
     else {
       // Use an interval for resizing the iframe
       (function resizeInterval() {
+<<<<<<< HEAD
         self.resize();
+=======
+        resize();
+>>>>>>> forked/LAE_400_PACKAGE
         setTimeout(resizeInterval, 40); // No more than 25 times per second
       })();
     }
@@ -275,7 +329,11 @@ ns.Editor = function (library, defaultParams, replace, iframeLoaded) {
 
   // Need to put this after the above replaceAll(), since that one makes Safari
   // 11 trigger a load event for the iframe
+<<<<<<< HEAD
   $iframe.on('load', load);
+=======
+  $iframe.load(load);
+>>>>>>> forked/LAE_400_PACKAGE
 
   // Populate iframe with the H5P Editor
   // (should not really be done until 'load', but might be here in case the iframe is reloaded?)
@@ -369,6 +427,14 @@ ns.Editor.prototype.getContent = function (submit, error) {
     return;
   }
 
+<<<<<<< HEAD
+=======
+  // Convert title to preserve html entities
+  const tmp = document.createElement('div');
+  tmp.innerHTML = content.title;
+  content.title = tmp.textContent; // WARNING: This is text, do NOT insert as HTML.
+
+>>>>>>> forked/LAE_400_PACKAGE
   library = new iframeEditor.ContentType(content.library);
   const upgradeLibrary = iframeEditor.ContentType.getPossibleUpgrade(library, this.selector.libraries.libraries !== undefined ? this.selector.libraries.libraries : this.selector.libraries);
   if (upgradeLibrary) {
@@ -511,8 +577,11 @@ ns.Editor.prototype.semiFullscreen = function ($iframe, $element, done) {
 
     iframeWindow.document.body.removeEventListener('keyup', handleKeyup);
     done(); // Callback for UI
+<<<<<<< HEAD
 
     self.resize(true);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   }
 
   return restore;
@@ -608,8 +677,12 @@ ns.language = {};
  * @param {string} library The library name(machineName), or "core".
  * @param {string} key Translation string identifier.
  * @param {Object} [vars] Placeholders and values to replace in the text.
+<<<<<<< HEAD
  * @returns {string} Translated string, or a text if string translation is
  *   missing.
+=======
+ * @returns {string} Translated string, or a text if string translation is missing.
+>>>>>>> forked/LAE_400_PACKAGE
  */
 ns.t = function (library, key, vars) {
   if (ns.language[library] === undefined) {

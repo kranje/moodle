@@ -25,11 +25,14 @@ use core\output\inplace_editable;
 use core_reportbuilder\permission;
 use core_reportbuilder\local\models\report;
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die;
 
 global $CFG;
 require_once("{$CFG->libdir}/external/externallib.php");
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Report name editable component
  *
@@ -43,8 +46,12 @@ class report_name_editable extends inplace_editable {
      * Class constructor
      *
      * @param int $reportid
+<<<<<<< HEAD
      * @param report|null $report The report persistent, note that in addition to id/name properties being present we also
      *      require the following to be correctly set in order to perform permission checks: contextid/type/usercreated
+=======
+     * @param report|null $report
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function __construct(int $reportid, ?report $report = null) {
         if ($report === null) {

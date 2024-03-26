@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @block @block_activity_results @javascript
+=======
+@block @block_activity_results
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: The activity results block displays student in visible groups scores
   In order to be display student scores
   As a user
@@ -42,6 +46,7 @@ Feature: The activity results block displays student in visible groups scores
       | student5 | G3 |
       | student6 | G3 |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity | name             | intro           | course | idnumber | section | assignsubmission_file_enabled |
       | assign   | Test assignment  | Test assignment | C1     | assign1  | 1       | 0                             |
     And I log in as "teacher1"
@@ -53,6 +58,15 @@ Feature: The activity results block displays student in visible groups scores
     And I press "Save and return to course"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+      | activity | name             | course | idnumber | section | assignsubmission_file_enabled |
+      | assign   | Test assignment  | C1     | assign1  | 1       | 0                             |
+    And I am on the "Test assignment" "assign activity editing" page logged in as teacher1
+    And I set the following fields to these values:
+      | Group mode | Visible groups |
+    And I press "Save and return to course"
+    And I am on the "Course 1" "grades > Grader report > view" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     And I give the grade "100.00" to the user "Student 1" for the grade item "Test assignment"
     And I give the grade "90.00" to the user "Student 2" for the grade item "Test assignment"

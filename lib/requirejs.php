@@ -52,6 +52,46 @@ $file = '/' . min_clean_param($file, 'SAFEPATH');
 $jsfiles = array();
 list($unused, $component, $module) = explode('/', $file, 3);
 
+<<<<<<< HEAD
+=======
+/**
+ * Helper function to fix missing module names in JavaScript.
+ *
+ * TODO Remove this function when we find a reliable way to do this in the Grunt task.
+ * @param string $modulename
+ * @param string $js
+ * @return string The modified JavaScript.
+ */
+function requirejs_fix_define(string $modulename, string $js): string {
+    // First check whether there is a possible missing module name. That is:
+    // define (function(Foo) {
+    // instead of:
+    // define('mod_foo/bar', function(Foo) {
+    $missingmodule = preg_match('/define\(\s*(\[|function)/', $js);
+
+    // Now check whether the module name is already defined elsewhere.
+    // This could be a totally unrelated use of the word define.
+    // Note: This code needs to die, in a fire. It is evil and wrong.
+    $missingmodule = $missingmodule && !preg_match("@define\s*\(\s*['\"]{$modulename}['\"]@", $js);
+
+    if ($missingmodule) {
+        // If the JavaScript module has been defined without specifying a name then we'll
+        // add the Moodle module name now.
+        $replace = 'define(\'' . $modulename . '\', ';
+
+        // Replace only the first occurrence.
+        return implode($replace, explode('define(', $js, 2));
+    } else if (!preg_match('/define\s*\(/', $js)) {
+        echo(
+            "// JS module '{$modulename}' cannot be loaded, or does not contain a javascript" .
+            ' module in AMD format. "define()" not found.' . "\n"
+        );
+    }
+
+    return $js;
+}
+
+>>>>>>> forked/LAE_400_PACKAGE
 // Use the caching only for meaningful revision numbers which prevents future cache poisoning.
 if ($rev > 0 and $rev < (time() + 60 * 60)) {
     // This is "production mode".
@@ -104,6 +144,7 @@ if ($rev > 0 and $rev < (time() + 60 * 60)) {
             $js = rtrim($js);
             $js .= "\n";
 
+<<<<<<< HEAD
             if (preg_match('/define\(\s*(\[|function)/', $js)) {
                 // If the JavaScript module has been defined without specifying a name then we'll
                 // add the Moodle module name now.
@@ -112,6 +153,9 @@ if ($rev > 0 and $rev < (time() + 60 * 60)) {
                 // Replace only the first occurrence.
                 $js = implode($replace, explode($search, $js, 2));
             }
+=======
+            $js = requirejs_fix_define($modulename, $js);
+>>>>>>> forked/LAE_400_PACKAGE
 
             $content .= $js;
         }
@@ -128,7 +172,11 @@ if ($rev > 0 and $rev < (time() + 60 * 60)) {
 
 // If we've made it here then we're in "dev mode" where everything is lazy loaded.
 // So all files will be served one at a time.
+<<<<<<< HEAD
 $jsfiles = core_requirejs::find_one_amd_module($component, $module);
+=======
+$jsfiles = core_requirejs::find_one_amd_module($component, $module, false);
+>>>>>>> forked/LAE_400_PACKAGE
 
 if (!empty($jsfiles)) {
     $modulename = array_keys($jsfiles)[0];
@@ -157,6 +205,7 @@ if (!empty($jsfiles)) {
         $js = rtrim($js);
     }
 
+<<<<<<< HEAD
     if (preg_match('/define\(\s*(\[|function)/', $js)) {
         // If the JavaScript module has been defined without specifying a name then we'll
         // add the Moodle module name now.
@@ -168,6 +217,9 @@ if (!empty($jsfiles)) {
         debugging('JS file: ' . $shortfilename . ' cannot be loaded, or does not contain a javascript' .
                   ' module in AMD format. "define()" not found.', DEBUG_DEVELOPER);
     }
+=======
+    $js = requirejs_fix_define($modulename, $js);
+>>>>>>> forked/LAE_400_PACKAGE
 
     js_send_uncached($js, 'requirejs.php');
 } else {

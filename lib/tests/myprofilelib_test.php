@@ -225,6 +225,7 @@ class myprofilelib_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Data provider for {@see test_core_myprofile_navigation_contact_timezone}
      *
      * @return array[]
@@ -276,6 +277,8 @@ class myprofilelib_test extends \advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Tests the core_myprofile_navigation() function as an admin viewing another user's
      * profile ensuring the login activity links are shown.
      */

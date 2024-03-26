@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Shared\Drawing as SharedDrawing;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\BaseDrawing;
@@ -57,10 +60,14 @@ class Drawing extends WriterPart
             // Loop through charts and write the chart position
             if ($chartCount > 0) {
                 for ($c = 0; $c < $chartCount; ++$c) {
+<<<<<<< HEAD
                     $chart = $worksheet->getChartByIndex((string) $c);
                     if ($chart !== false) {
                         $this->writeChart($objWriter, $chart, $c + $i);
                     }
+=======
+                    $this->writeChart($objWriter, $worksheet->getChartByIndex($c), $c + $i);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         }
@@ -89,6 +96,7 @@ class Drawing extends WriterPart
         $tl = $chart->getTopLeftPosition();
         $tlColRow = Coordinate::indexesFromString($tl['cell']);
         $br = $chart->getBottomRightPosition();
+<<<<<<< HEAD
 
         $isTwoCellAnchor = $br['cell'] !== '';
         if ($isTwoCellAnchor) {
@@ -132,13 +140,35 @@ class Drawing extends WriterPart
             $objWriter->writeAttribute('cy', self::stringEmu($br['yOffset']));
             $objWriter->endElement();
         }
+=======
+        $brColRow = Coordinate::indexesFromString($br['cell']);
+
+        $objWriter->startElement('xdr:twoCellAnchor');
+
+        $objWriter->startElement('xdr:from');
+        $objWriter->writeElement('xdr:col', $tlColRow[0] - 1);
+        $objWriter->writeElement('xdr:colOff', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($tl['xOffset']));
+        $objWriter->writeElement('xdr:row', $tlColRow[1] - 1);
+        $objWriter->writeElement('xdr:rowOff', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($tl['yOffset']));
+        $objWriter->endElement();
+        $objWriter->startElement('xdr:to');
+        $objWriter->writeElement('xdr:col', $brColRow[0] - 1);
+        $objWriter->writeElement('xdr:colOff', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($br['xOffset']));
+        $objWriter->writeElement('xdr:row', $brColRow[1] - 1);
+        $objWriter->writeElement('xdr:rowOff', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($br['yOffset']));
+        $objWriter->endElement();
+>>>>>>> forked/LAE_400_PACKAGE
 
         $objWriter->startElement('xdr:graphicFrame');
         $objWriter->writeAttribute('macro', '');
         $objWriter->startElement('xdr:nvGraphicFramePr');
         $objWriter->startElement('xdr:cNvPr');
         $objWriter->writeAttribute('name', 'Chart ' . $relationId);
+<<<<<<< HEAD
         $objWriter->writeAttribute('id', (string) (1025 * $relationId));
+=======
+        $objWriter->writeAttribute('id', 1025 * $relationId);
+>>>>>>> forked/LAE_400_PACKAGE
         $objWriter->endElement();
         $objWriter->startElement('xdr:cNvGraphicFramePr');
         $objWriter->startElement('a:graphicFrameLocks');
@@ -184,6 +214,7 @@ class Drawing extends WriterPart
     public function writeDrawing(XMLWriter $objWriter, BaseDrawing $drawing, $relationId = -1, $hlinkClickId = null): void
     {
         if ($relationId >= 0) {
+<<<<<<< HEAD
             $isTwoCellAnchor = $drawing->getCoordinates2() !== '';
             if ($isTwoCellAnchor) {
                 // xdr:twoCellAnchor
@@ -230,6 +261,26 @@ class Drawing extends WriterPart
                 $objWriter->writeAttribute('cy', self::stringEmu($drawing->getHeight()));
                 $objWriter->endElement();
             }
+=======
+            // xdr:oneCellAnchor
+            $objWriter->startElement('xdr:oneCellAnchor');
+            // Image location
+            $aCoordinates = Coordinate::indexesFromString($drawing->getCoordinates());
+
+            // xdr:from
+            $objWriter->startElement('xdr:from');
+            $objWriter->writeElement('xdr:col', $aCoordinates[0] - 1);
+            $objWriter->writeElement('xdr:colOff', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($drawing->getOffsetX()));
+            $objWriter->writeElement('xdr:row', $aCoordinates[1] - 1);
+            $objWriter->writeElement('xdr:rowOff', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($drawing->getOffsetY()));
+            $objWriter->endElement();
+
+            // xdr:ext
+            $objWriter->startElement('xdr:ext');
+            $objWriter->writeAttribute('cx', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($drawing->getWidth()));
+            $objWriter->writeAttribute('cy', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($drawing->getHeight()));
+            $objWriter->endElement();
+>>>>>>> forked/LAE_400_PACKAGE
 
             // xdr:pic
             $objWriter->startElement('xdr:pic');
@@ -239,7 +290,11 @@ class Drawing extends WriterPart
 
             // xdr:cNvPr
             $objWriter->startElement('xdr:cNvPr');
+<<<<<<< HEAD
             $objWriter->writeAttribute('id', (string) $relationId);
+=======
+            $objWriter->writeAttribute('id', $relationId);
+>>>>>>> forked/LAE_400_PACKAGE
             $objWriter->writeAttribute('name', $drawing->getName());
             $objWriter->writeAttribute('descr', $drawing->getDescription());
 
@@ -281,6 +336,7 @@ class Drawing extends WriterPart
 
             // a:xfrm
             $objWriter->startElement('a:xfrm');
+<<<<<<< HEAD
             $objWriter->writeAttribute('rot', (string) SharedDrawing::degreesToAngle($drawing->getRotation()));
             if ($isTwoCellAnchor) {
                 $objWriter->startElement('a:ext');
@@ -288,6 +344,9 @@ class Drawing extends WriterPart
                 $objWriter->writeAttribute('cy', self::stringEmu($drawing->getHeight()));
                 $objWriter->endElement();
             }
+=======
+            $objWriter->writeAttribute('rot', \PhpOffice\PhpSpreadsheet\Shared\Drawing::degreesToAngle($drawing->getRotation()));
+>>>>>>> forked/LAE_400_PACKAGE
             $objWriter->endElement();
 
             // a:prstGeom
@@ -305,9 +364,15 @@ class Drawing extends WriterPart
 
                 // a:outerShdw
                 $objWriter->startElement('a:outerShdw');
+<<<<<<< HEAD
                 $objWriter->writeAttribute('blurRad', self::stringEmu($drawing->getShadow()->getBlurRadius()));
                 $objWriter->writeAttribute('dist', self::stringEmu($drawing->getShadow()->getDistance()));
                 $objWriter->writeAttribute('dir', (string) SharedDrawing::degreesToAngle($drawing->getShadow()->getDirection()));
+=======
+                $objWriter->writeAttribute('blurRad', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($drawing->getShadow()->getBlurRadius()));
+                $objWriter->writeAttribute('dist', \PhpOffice\PhpSpreadsheet\Shared\Drawing::pixelsToEMU($drawing->getShadow()->getDistance()));
+                $objWriter->writeAttribute('dir', \PhpOffice\PhpSpreadsheet\Shared\Drawing::degreesToAngle($drawing->getShadow()->getDirection()));
+>>>>>>> forked/LAE_400_PACKAGE
                 $objWriter->writeAttribute('algn', $drawing->getShadow()->getAlignment());
                 $objWriter->writeAttribute('rotWithShape', '0');
 
@@ -317,7 +382,11 @@ class Drawing extends WriterPart
 
                 // a:alpha
                 $objWriter->startElement('a:alpha');
+<<<<<<< HEAD
                 $objWriter->writeAttribute('val', (string) ($drawing->getShadow()->getAlpha() * 1000));
+=======
+                $objWriter->writeAttribute('val', $drawing->getShadow()->getAlpha() * 1000);
+>>>>>>> forked/LAE_400_PACKAGE
                 $objWriter->endElement();
 
                 $objWriter->endElement();
@@ -562,9 +631,12 @@ class Drawing extends WriterPart
         $objWriter->writeAttribute('r:id', 'rId' . $hlinkClickId);
         $objWriter->endElement();
     }
+<<<<<<< HEAD
 
     private static function stringEmu(int $pixelValue): string
     {
         return (string) SharedDrawing::pixelsToEMU($pixelValue);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

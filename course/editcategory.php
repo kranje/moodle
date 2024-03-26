@@ -117,7 +117,11 @@ if ($mform->is_cancelled()) {
 } else if ($data = $mform->get_data()) {
     if (isset($coursecat)) {
         if ((int)$data->parent !== (int)$coursecat->parent && !$coursecat->can_change_parent($data->parent)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotmovecategory');
+=======
+            print_error('cannotmovecategory');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $coursecat->update($data, $mform->get_description_editor_options());
     } else {

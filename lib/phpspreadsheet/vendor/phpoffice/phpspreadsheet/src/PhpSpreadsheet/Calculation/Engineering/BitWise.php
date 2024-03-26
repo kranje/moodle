@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -11,6 +12,13 @@ class BitWise
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class BitWise
+{
+>>>>>>> forked/LAE_400_PACKAGE
     const SPLIT_DIVISOR = 2 ** 24;
 
     /**
@@ -31,6 +39,7 @@ class BitWise
      * Excel Function:
      *        BITAND(number1, number2)
      *
+<<<<<<< HEAD
      * @param array|int $number1
      *                      Or can be an array of values
      * @param array|int $number2
@@ -46,6 +55,15 @@ class BitWise
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number1, $number2);
         }
 
+=======
+     * @param int $number1
+     * @param int $number2
+     *
+     * @return int|string
+     */
+    public static function BITAND($number1, $number2)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number1 = self::validateBitwiseArgument($number1);
             $number2 = self::validateBitwiseArgument($number2);
@@ -66,6 +84,7 @@ class BitWise
      * Excel Function:
      *        BITOR(number1, number2)
      *
+<<<<<<< HEAD
      * @param array|int $number1
      *                      Or can be an array of values
      * @param array|int $number2
@@ -81,6 +100,15 @@ class BitWise
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number1, $number2);
         }
 
+=======
+     * @param int $number1
+     * @param int $number2
+     *
+     * @return int|string
+     */
+    public static function BITOR($number1, $number2)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number1 = self::validateBitwiseArgument($number1);
             $number2 = self::validateBitwiseArgument($number2);
@@ -102,6 +130,7 @@ class BitWise
      * Excel Function:
      *        BITXOR(number1, number2)
      *
+<<<<<<< HEAD
      * @param array|int $number1
      *                      Or can be an array of values
      * @param array|int $number2
@@ -117,6 +146,15 @@ class BitWise
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number1, $number2);
         }
 
+=======
+     * @param int $number1
+     * @param int $number2
+     *
+     * @return int|string
+     */
+    public static function BITXOR($number1, $number2)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number1 = self::validateBitwiseArgument($number1);
             $number2 = self::validateBitwiseArgument($number2);
@@ -138,6 +176,7 @@ class BitWise
      * Excel Function:
      *        BITLSHIFT(number, shift_amount)
      *
+<<<<<<< HEAD
      * @param array|int $number
      *                      Or can be an array of values
      * @param array|int $shiftAmount
@@ -153,6 +192,15 @@ class BitWise
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $shiftAmount);
         }
 
+=======
+     * @param int $number
+     * @param int $shiftAmount
+     *
+     * @return float|int|string
+     */
+    public static function BITLSHIFT($number, $shiftAmount)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = self::validateBitwiseArgument($number);
             $shiftAmount = self::validateShiftAmount($shiftAmount);
@@ -162,7 +210,11 @@ class BitWise
 
         $result = floor($number * (2 ** $shiftAmount));
         if ($result > 2 ** 48 - 1) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $result;
@@ -176,6 +228,7 @@ class BitWise
      * Excel Function:
      *        BITRSHIFT(number, shift_amount)
      *
+<<<<<<< HEAD
      * @param array|int $number
      *                      Or can be an array of values
      * @param array|int $shiftAmount
@@ -191,6 +244,15 @@ class BitWise
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $shiftAmount);
         }
 
+=======
+     * @param int $number
+     * @param int $shiftAmount
+     *
+     * @return float|int|string
+     */
+    public static function BITRSHIFT($number, $shiftAmount)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = self::validateBitwiseArgument($number);
             $shiftAmount = self::validateShiftAmount($shiftAmount);
@@ -200,7 +262,11 @@ class BitWise
 
         $result = floor($number / (2 ** $shiftAmount));
         if ($result > 2 ** 48 - 1) { // possible because shiftAmount can be negative
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $result;
@@ -211,6 +277,7 @@ class BitWise
      *
      * @param mixed $value
      *
+<<<<<<< HEAD
      * @return float
      */
     private static function validateBitwiseArgument($value)
@@ -222,15 +289,34 @@ class BitWise
             if ($value == floor($value)) {
                 if (($value > 2 ** 48 - 1) || ($value < 0)) {
                     throw new Exception(ExcelError::NAN());
+=======
+     * @return float|int
+     */
+    private static function validateBitwiseArgument($value)
+    {
+        self::nullFalseTrueToNumber($value);
+
+        if (is_numeric($value)) {
+            if ($value == floor($value)) {
+                if (($value > 2 ** 48 - 1) || ($value < 0)) {
+                    throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 return floor($value);
             }
 
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
         }
 
         throw new Exception(ExcelError::VALUE());
+=======
+            throw new Exception(Functions::NAN());
+        }
+
+        throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -242,34 +328,56 @@ class BitWise
      */
     private static function validateShiftAmount($value)
     {
+<<<<<<< HEAD
         $value = self::nullFalseTrueToNumber($value);
 
         if (is_numeric($value)) {
             if (abs($value) > 53) {
                 throw new Exception(ExcelError::NAN());
+=======
+        self::nullFalseTrueToNumber($value);
+
+        if (is_numeric($value)) {
+            if (abs($value) > 53) {
+                throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             return (int) $value;
         }
 
+<<<<<<< HEAD
         throw new Exception(ExcelError::VALUE());
+=======
+        throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Many functions accept null/false/true argument treated as 0/0/1.
      *
      * @param mixed $number
+<<<<<<< HEAD
      *
      * @return mixed
      */
     private static function nullFalseTrueToNumber(&$number)
     {
+=======
+     */
+    public static function nullFalseTrueToNumber(&$number): void
+    {
+        $number = Functions::flattenSingleValue($number);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($number === null) {
             $number = 0;
         } elseif (is_bool($number)) {
             $number = (int) $number;
         }
+<<<<<<< HEAD
 
         return $number;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

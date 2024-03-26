@@ -5,7 +5,13 @@ Feature: Basic use of the Grades report
   I need to use the Grades report
 
   Background:
+<<<<<<< HEAD
     Given the following "custom profile fields" exist:
+=======
+    Given the "multilang" filter is "on"
+    And the "multilang" filter applies to "content and headings"
+    And the following "custom profile fields" exist:
+>>>>>>> forked/LAE_400_PACKAGE
       | datatype | shortname | name  |
       | text     | fruit     | Fruit |
     And the following "users" exist:
@@ -23,12 +29,29 @@ Feature: Basic use of the Grades report
       | student1 | C1     | student        |
       | student2 | C1     | student        |
       | student3 | C1     | student        |
+<<<<<<< HEAD
+=======
+    And the following "groups" exist:
+      | course | idnumber | name    |
+      | C1     | G1       | <span class="multilang" lang="en">English</span><span class="multilang" lang="es">Spanish</span> |
+      | C1     | G2       | Group 2                                                                                          |
+    And the following "group members" exist:
+      | group | user     |
+      | G1    | student1 |
+      | G1    | student2 |
+      | G2    | student3 |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "question categories" exist:
       | contextlevel | reference | name           |
       | Course       | C1        | Test questions |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name   | intro              | course | idnumber |
       | quiz       | Quiz 1 | Quiz 1 description | C1     | quiz1    |
+=======
+      | activity   | name   | intro              | course | idnumber | groupmode |
+      | quiz       | Quiz 1 | Quiz 1 description | C1     | quiz1    | 2         |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "questions" exist:
       | questioncategory | qtype       | name  | questiontext         |
       | Test questions   | description | Intro | Welcome to this quiz |
@@ -48,6 +71,10 @@ Feature: Basic use of the Grades report
       |   2  | True     |
       |   3  | True     |
 
+<<<<<<< HEAD
+=======
+  @javascript
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Using the Grades report
     # Basic check of the Grades report
     When I am on the "Quiz 1" "quiz activity" page logged in as teacher1
@@ -87,6 +114,15 @@ Feature: Basic use of the Grades report
     # Check student2's grade
     And I should see "100.00" in the "S2 Student2" "table_row"
 
+<<<<<<< HEAD
+=======
+    # Verify groups are displayed correctly.
+    And I set the field "Visible groups" to "English"
+    And "Full regrade for group 'English'" "button" should exist
+    And "Dry run a full regrade for group 'English'" "button" should exist
+    And I should see "Number of students in group 'English' achieving grade ranges"
+
+>>>>>>> forked/LAE_400_PACKAGE
   @javascript
   Scenario: View custom user profile fields in the grades report
     Given the following config values are set as admin:

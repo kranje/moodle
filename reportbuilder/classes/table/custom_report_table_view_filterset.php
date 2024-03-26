@@ -18,9 +18,12 @@ declare(strict_types=1);
 
 namespace core_reportbuilder\table;
 
+<<<<<<< HEAD
 use core_table\local\filter\filterset;
 use core_table\local\filter\integer_filter;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Custom report dynamic table filterset class
  *
@@ -28,6 +31,7 @@ use core_table\local\filter\integer_filter;
  * @copyright   2021 Paul Holden <paulh@moodle.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class custom_report_table_view_filterset extends filterset {
 
     /**
@@ -40,4 +44,7 @@ class custom_report_table_view_filterset extends filterset {
             'pagesize' => integer_filter::class,
         ];
     }
+=======
+class custom_report_table_view_filterset extends custom_report_table_filterset {
+>>>>>>> forked/LAE_400_PACKAGE
 }

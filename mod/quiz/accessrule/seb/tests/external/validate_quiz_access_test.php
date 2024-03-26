@@ -147,7 +147,11 @@ class validate_quiz_access_test extends \advanced_testcase {
         $this->setAdminUser();
         $forum = $this->getDataGenerator()->create_module('forum', ['course' => $this->course->id]);
         $this->expectException(\invalid_parameter_exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('Quiz not found matching course module ID: ' . $forum->cmid);
+=======
+        $this->expectExceptionMessage('Quiz not found matching course module id: ' . $forum->cmid);
+>>>>>>> forked/LAE_400_PACKAGE
         validate_quiz_keys::execute($forum->cmid, 'https://www.example.com/moodle', 'configkey');
     }
 

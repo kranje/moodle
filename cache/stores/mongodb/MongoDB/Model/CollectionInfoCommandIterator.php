@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,14 +37,25 @@ use Traversable;
  * @internal
  * @see \MongoDB\Database::listCollections()
  * @see https://github.com/mongodb/specifications/blob/master/source/enumerate-collections.rst
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/listCollections/
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/listCollections/
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class CollectionInfoCommandIterator extends IteratorIterator implements CollectionInfoIterator
 {
     /** @var string|null */
     private $databaseName;
 
+<<<<<<< HEAD
     public function __construct(Traversable $iterator, ?string $databaseName = null)
+=======
+    /**
+     * @param string|null $databaseName
+     */
+    public function __construct(Traversable $iterator, $databaseName = null)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         parent::__construct($iterator);
 
@@ -47,9 +66,16 @@ class CollectionInfoCommandIterator extends IteratorIterator implements Collecti
      * Return the current element as a CollectionInfo instance.
      *
      * @see CollectionInfoIterator::current()
+<<<<<<< HEAD
      * @see https://php.net/iterator.current
      */
     public function current(): CollectionInfo
+=======
+     * @see http://php.net/iterator.current
+     * @return CollectionInfo
+     */
+    public function current()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $info = parent::current();
 

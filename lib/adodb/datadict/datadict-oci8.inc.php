@@ -50,6 +50,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 		
 		$t = strtoupper($t);
 		
@@ -57,6 +58,9 @@ class ADODB2_oci8 extends ADODB_DataDict {
 			return  $this->connection->customActualTypes[$t];
 
 		switch ($t) {
+=======
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 	 	case 'VARCHAR':
 	 	case 'VARCHAR2':
 		case 'CHAR':
@@ -98,6 +102,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 
  	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		$meta = strtoupper($meta);
 		
 		/*
@@ -107,6 +112,8 @@ class ADODB2_oci8 extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		switch($meta) {
 		case 'C': return 'VARCHAR';
 		case 'X': return $this->typeX;

@@ -18,7 +18,12 @@ declare(strict_types=1);
 
 namespace core_cohort\reportbuilder\datasource;
 
+<<<<<<< HEAD
 use core_cohort\reportbuilder\local\entities\{cohort, cohort_member};
+=======
+use core_cohort\local\entities\cohort;
+use core_cohort\local\entities\cohort_member;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\datasource;
 use core_reportbuilder\local\entities\user;
 
@@ -55,15 +60,23 @@ class cohorts extends datasource {
         $cohortmemberentity = new cohort_member();
         $cohortmembertablealias = $cohortmemberentity->get_table_alias('cohort_members');
 
+<<<<<<< HEAD
         $this->add_entity($cohortmemberentity
             ->add_join("LEFT JOIN {cohort_members} {$cohortmembertablealias}
                 ON {$cohortmembertablealias}.cohortid = {$cohorttablealias}.id")
         );
+=======
+        $cohortmemberjoin = "LEFT JOIN {cohort_members} {$cohortmembertablealias}
+                               ON {$cohortmembertablealias}.cohortid = {$cohorttablealias}.id";
+
+        $this->add_entity($cohortmemberentity->add_join($cohortmemberjoin));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Join the user entity to the cohort member entity.
         $userentity = new user();
         $usertablealias = $userentity->get_table_alias('user');
 
+<<<<<<< HEAD
         $this->add_entity($userentity
             ->add_joins($cohortmemberentity->get_joins())
             ->add_join("LEFT JOIN {user} {$usertablealias}
@@ -72,6 +85,27 @@ class cohorts extends datasource {
 
         // Add all columns/filters/conditions from entities to be available in custom reports.
         $this->add_all_from_entities();
+=======
+        $userjoin = "LEFT JOIN {user} {$usertablealias}
+                       ON {$usertablealias}.id = {$cohortmembertablealias}.userid";
+
+        $this->add_entity($userentity->add_joins([$cohortmemberjoin, $userjoin]));
+
+        // Add all columns from entities to be available in custom reports.
+        $this->add_columns_from_entity($cohortentity->get_entity_name());
+        $this->add_columns_from_entity($cohortmemberentity->get_entity_name());
+        $this->add_columns_from_entity($userentity->get_entity_name());
+
+        // Add all filters from entities to be available in custom reports.
+        $this->add_filters_from_entity($cohortentity->get_entity_name());
+        $this->add_filters_from_entity($cohortmemberentity->get_entity_name());
+        $this->add_filters_from_entity($userentity->get_entity_name());
+
+        // Add all conditions from entities to be available in custom reports.
+        $this->add_conditions_from_entity($cohortentity->get_entity_name());
+        $this->add_conditions_from_entity($cohortmemberentity->get_entity_name());
+        $this->add_conditions_from_entity($userentity->get_entity_name());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -81,8 +115,13 @@ class cohorts extends datasource {
      */
     public function get_default_columns(): array {
         return [
+<<<<<<< HEAD
             'cohort:name',
             'cohort:context',
+=======
+            'cohort:context',
+            'cohort:name',
+>>>>>>> forked/LAE_400_PACKAGE
             'cohort:idnumber',
             'cohort:description',
         ];
@@ -105,6 +144,7 @@ class cohorts extends datasource {
     public function get_default_conditions(): array {
         return [];
     }
+<<<<<<< HEAD
 
     /**
      * Return the default sorting that will be added to the report once it is created
@@ -116,4 +156,6 @@ class cohorts extends datasource {
             'cohort:name' => SORT_ASC,
         ];
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

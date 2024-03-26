@@ -29,6 +29,10 @@ use core_reportbuilder\local\entities\user;
 use core_reportbuilder\local\filters\date;
 use core_reportbuilder\local\filters\text;
 use core_reportbuilder\local\helpers\format;
+<<<<<<< HEAD
+=======
+use core_reportbuilder\local\helpers\schedule as helper;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\models\report;
 use core_reportbuilder\local\models\schedule;
 use core_reportbuilder\local\report\action;
@@ -147,6 +151,7 @@ class report_schedules extends system_report {
             $this->get_schedule_entity_name()
         ))
             ->set_type(column::TYPE_TEXT)
+<<<<<<< HEAD
             // We need enough fields to re-create the persistent and pass to the editable component.
             ->add_fields("{$tablealias}.id, {$tablealias}.name, {$tablealias}.reportid")
             ->set_is_sortable(true, ["{$tablealias}.name"])
@@ -154,6 +159,14 @@ class report_schedules extends system_report {
                 global $PAGE;
 
                 $editable = new schedule_name_editable(0, new schedule(0, $schedule));
+=======
+            ->add_fields("{$tablealias}.name, {$tablealias}.id")
+            ->set_is_sortable(true)
+            ->add_callback(function(string $value, stdClass $schedule): string {
+                global $PAGE;
+
+                $editable = new schedule_name_editable((int) $schedule->id);
+>>>>>>> forked/LAE_400_PACKAGE
                 return $editable->render($PAGE->get_renderer('core'));
             })
         );
@@ -198,11 +211,16 @@ class report_schedules extends system_report {
             ->add_fields("{$tablealias}.format")
             ->set_is_sortable(true)
             ->add_callback(static function(string $format): string {
+<<<<<<< HEAD
                 if (get_string_manager()->string_exists('dataformat', 'dataformat_' . $format)) {
                     return get_string('dataformat', 'dataformat_' . $format);
                 } else {
                     return $format;
                 }
+=======
+                $formats = helper::get_format_options();
+                return $formats[$format] ?? '';
+>>>>>>> forked/LAE_400_PACKAGE
             })
         );
 

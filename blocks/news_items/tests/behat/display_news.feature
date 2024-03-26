@@ -9,6 +9,7 @@ Feature: Latest announcements block displays the course latest news
     Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher1@example.com |
+<<<<<<< HEAD
     And I log in as "admin"
     And I create a course with:
       | Course full name | Course 1 |
@@ -30,6 +31,23 @@ Feature: Latest announcements block displays the course latest news
       | Subject | Discussion Three |
       | Message | Not important |
     And I am on "Course 1" course homepage
+=======
+    And the following "courses" exist:
+      | fullname | shortname | category | newsitems |
+      | Course 1 | C1        | 0        | 5         |
+    And the following "course enrolments" exist:
+      | user     | course | role           |
+      | teacher1 | C1     | editingteacher |
+    And the following "blocks" exist:
+      | blockname  | contextlevel | reference | pagetypepattern | defaultregion |
+      | news_items | Course       | C1        | course-view-*   | side-pre      |
+    And the following "mod_forum > discussions" exist:
+      | user     | forum         | name             | message       |
+      | teacher1 | Announcements | Discussion One   | Not important |
+      | teacher1 | Announcements | Discussion Two   | Not important |
+      | teacher1 | Announcements | Discussion Three | Not important |
+    When I am on the "Course 1" Course page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "Discussion One" in the "Latest announcements" "block"
     And I should see "Discussion Two" in the "Latest announcements" "block"
     And I should see "Discussion Three" in the "Latest announcements" "block"

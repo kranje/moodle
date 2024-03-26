@@ -158,7 +158,11 @@ abstract class award_criteria {
         $types = badges_list_criteria(false);
 
         if (!isset($params['criteriatype']) || !isset($types[$params['criteriatype']])) {
+<<<<<<< HEAD
             throw new \moodle_exception('error:invalidcriteriatype', 'badges');
+=======
+            print_error('error:invalidcriteriatype', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $class = 'award_criteria_' . $types[$params['criteriatype']];

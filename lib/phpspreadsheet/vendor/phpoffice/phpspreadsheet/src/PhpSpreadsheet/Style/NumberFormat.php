@@ -10,13 +10,19 @@ class NumberFormat extends Supervisor
     const FORMAT_TEXT = '@';
 
     const FORMAT_NUMBER = '0';
+<<<<<<< HEAD
     const FORMAT_NUMBER_0 = '0.0';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     const FORMAT_NUMBER_00 = '0.00';
     const FORMAT_NUMBER_COMMA_SEPARATED1 = '#,##0.00';
     const FORMAT_NUMBER_COMMA_SEPARATED2 = '#,##0.00_-';
 
     const FORMAT_PERCENTAGE = '0%';
+<<<<<<< HEAD
     const FORMAT_PERCENTAGE_0 = '0.0%';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     const FORMAT_PERCENTAGE_00 = '0.00%';
 
     const FORMAT_DATE_YYYYMMDD2 = 'yyyy-mm-dd';

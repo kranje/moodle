@@ -251,13 +251,27 @@ class Horde_Stream_TempString extends Horde_Stream_Temp
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        if ($this->_string) {
+            $data = array(
+                $this->_string,
+                $this->_params
+            );
+        } else {
+            $data = parent::serialize();
+        }
+
+        return serialize($data);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
     public function unserialize($data)
     {
+<<<<<<< HEAD
         $this->__unserialize(unserialize($data));
     }
 
@@ -282,11 +296,18 @@ class Horde_Stream_TempString extends Horde_Stream_Temp
      */
     public function __unserialize($data)
     {
+=======
+        $data = unserialize($data);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($data[0] instanceof Horde_Stream_String) {
             $this->_string = $data[0];
             $this->_params = $data[1];
         } else {
+<<<<<<< HEAD
             parent::__unserialize($data);
+=======
+            parent::unserialize($data);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 

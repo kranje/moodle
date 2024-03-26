@@ -388,6 +388,7 @@ implements ArrayAccess, IteratorAggregate, Serializable
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
     }
 
@@ -399,12 +400,16 @@ implements ArrayAccess, IteratorAggregate, Serializable
     public function __serialize(): array
     {
         return array(
+=======
+        $data = array(
+>>>>>>> forked/LAE_400_PACKAGE
             // Serialized data ID.
             self::VERSION,
             $this->_headers->getArrayCopy(),
             // TODO: BC
             $this->_eol
         );
+<<<<<<< HEAD
     }
 
     /**
@@ -423,6 +428,10 @@ implements ArrayAccess, IteratorAggregate, Serializable
         $this->_headers = new Horde_Support_CaseInsensitiveArray($data[1]);
         // TODO: BC
         $this->_eol = $data[2];
+=======
+
+        return serialize($data);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -435,10 +444,22 @@ implements ArrayAccess, IteratorAggregate, Serializable
     public function unserialize($data)
     {
         $data = @unserialize($data);
+<<<<<<< HEAD
         if (!is_array($data)) {
             throw new Horde_Mime_Exception('Cache version change');
         }
         $this->__unserialize($data);
+=======
+        if (!is_array($data) ||
+            !isset($data[0]) ||
+            ($data[0] != self::VERSION)) {
+            throw new Horde_Mime_Exception('Cache version change');
+        }
+
+        $this->_headers = new Horde_Support_CaseInsensitiveArray($data[1]);
+        // TODO: BC
+        $this->_eol = $data[2];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /* ArrayAccess methods. */
@@ -452,7 +473,10 @@ implements ArrayAccess, IteratorAggregate, Serializable
      *
      * @return boolean  True if header exists.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return isset($this->_headers[trim($offset)]);
@@ -468,7 +492,10 @@ implements ArrayAccess, IteratorAggregate, Serializable
      * @return Horde_Mime_Headers_Element  Element object, or null if not
      *                                     found.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($offset)
     {
         return $this->_headers[trim($offset)];
@@ -482,7 +509,10 @@ implements ArrayAccess, IteratorAggregate, Serializable
      * @param string $offset                   Not used.
      * @param Horde_Mime_Headers_Element $elt  Header element.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         $this->addHeaderOb($value);
@@ -495,7 +525,10 @@ implements ArrayAccess, IteratorAggregate, Serializable
      *
      * @param string $offset  Header name.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
         unset($this->_headers[trim($offset)]);
@@ -506,7 +539,10 @@ implements ArrayAccess, IteratorAggregate, Serializable
     /**
      * @since 2.5.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_headers);

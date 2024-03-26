@@ -33,13 +33,20 @@ define('OVERVIEW_GROUPING_NO_GROUP', -2); // The fake grouping for users with no
 $courseid   = required_param('id', PARAM_INT);
 $groupid    = optional_param('group', 0, PARAM_INT);
 $groupingid = optional_param('grouping', 0, PARAM_INT);
+<<<<<<< HEAD
 $dataformat = optional_param('dataformat', '', PARAM_ALPHA);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 $returnurl = $CFG->wwwroot.'/group/index.php?id='.$courseid;
 $rooturl   = $CFG->wwwroot.'/group/overview.php?id='.$courseid;
 
 if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourse');
+=======
+    print_error('invalidcourse');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $url = new moodle_url('/group/overview.php', array('id'=>$courseid));
@@ -177,8 +184,12 @@ if ($groupid <= 0 && $groupingid <= 0) {
                    WHERE g.courseid = :courseid
                    ) grouped ON grouped.userid = u.id
                   $userfieldsjoin
+<<<<<<< HEAD
              WHERE grouped.userid IS NULL
              ORDER BY $sort";
+=======
+             WHERE grouped.userid IS NULL";
+>>>>>>> forked/LAE_400_PACKAGE
     $params['courseid'] = $courseid;
 
     $nogroupusers = $DB->get_records_sql($sql, array_merge($params, $userfieldsparams));
@@ -188,6 +199,7 @@ if ($groupid <= 0 && $groupingid <= 0) {
     }
 }
 
+<<<<<<< HEAD
 // Export groups if requested.
 if ($dataformat !== '') {
     $columnnames = array(
@@ -266,6 +278,8 @@ if ($dataformat !== '') {
 }
 
 // Main page content.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 navigation_node::override_active_url(new moodle_url('/group/index.php', array('id'=>$courseid)));
 $PAGE->navbar->add(get_string('overview', 'group'));
 
@@ -368,6 +382,7 @@ foreach ($members as $gpgid=>$groupdata) {
     $printed = true;
 }
 
+<<<<<<< HEAD
 // Add buttons for exporting groups/groupings.
 echo $OUTPUT->download_dataformat_selector(get_string('exportgroupsgroupings', 'group'), 'overview.php', 'dataformat', [
     'id' => $courseid,
@@ -375,4 +390,6 @@ echo $OUTPUT->download_dataformat_selector(get_string('exportgroupsgroupings', '
     'grouping' => $groupingid,
 ]);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 echo $OUTPUT->footer();

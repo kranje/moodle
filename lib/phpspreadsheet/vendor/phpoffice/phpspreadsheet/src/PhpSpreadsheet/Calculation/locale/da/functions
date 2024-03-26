@@ -245,7 +245,10 @@ ROWS = RÆKKER
 RTD = RTD
 TRANSPOSE = TRANSPONER
 VLOOKUP = LOPSLAG
+<<<<<<< HEAD
 *RC = RK
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Matematiske og trigonometriske funktioner (Math & Trig Functions)

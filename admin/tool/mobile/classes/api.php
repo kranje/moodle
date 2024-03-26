@@ -167,9 +167,12 @@ class api {
         // We need this to make work the format text functions.
         $PAGE->set_context($context);
 
+<<<<<<< HEAD
         // Check if contacting site support is available to all visitors.
         $sitesupportavailable = (isset($CFG->supportavailability) && $CFG->supportavailability == CONTACT_SUPPORT_ANYONE);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         list($authinstructions, $notusedformat) = external_format_text($CFG->auth_instructions, FORMAT_MOODLE, $context->id);
         list($maintenancemessage, $notusedformat) = external_format_text($CFG->maintenance_message, FORMAT_MOODLE, $context->id);
         $settings = array(
@@ -201,8 +204,12 @@ class api {
             'tool_mobile_androidappid' => get_config('tool_mobile', 'androidappid'),
             'tool_mobile_setuplink' => clean_param(get_config('tool_mobile', 'setuplink'), PARAM_URL),
             'tool_mobile_qrcodetype' => clean_param(get_config('tool_mobile', 'qrcodetype'), PARAM_INT),
+<<<<<<< HEAD
             'supportpage' => $sitesupportavailable ? clean_param($CFG->supportpage, PARAM_URL) : '',
             'supportavailability' => clean_param($CFG->supportavailability, PARAM_INT),
+=======
+            'supportpage' => clean_param($CFG->supportpage, PARAM_URL),
+>>>>>>> forked/LAE_400_PACKAGE
         );
 
         $typeoflogin = get_config('tool_mobile', 'typeoflogin');
@@ -240,8 +247,13 @@ class api {
             }
         }
 
+<<<<<<< HEAD
         // If age is verified or support is available to all visitors, also return the admin contact details.
         if ($settings['agedigitalconsentverification'] || $sitesupportavailable) {
+=======
+        // If age is verified, return also the admin contact details.
+        if ($settings['agedigitalconsentverification']) {
+>>>>>>> forked/LAE_400_PACKAGE
             $settings['supportname'] = clean_param($CFG->supportname, PARAM_NOTAGS);
             $settings['supportemail'] = clean_param($CFG->supportemail, PARAM_EMAIL);
         }
@@ -334,6 +346,7 @@ class api {
         }
 
         if (empty($section) or $section == 'supportcontact') {
+<<<<<<< HEAD
             $settings->supportavailability = $CFG->supportavailability;
 
             if ($CFG->supportavailability == CONTACT_SUPPORT_DISABLED) {
@@ -345,6 +358,11 @@ class api {
                 $settings->supportemail = $CFG->supportemail ?? null;
                 $settings->supportpage = $CFG->supportpage;
             }
+=======
+            $settings->supportname = $CFG->supportname;
+            $settings->supportemail = $CFG->supportemail ?? null;
+            $settings->supportpage = $CFG->supportpage;
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (empty($section) || $section === 'graceperiodsettings') {
@@ -356,10 +374,13 @@ class api {
             $settings->enabledashboard = $CFG->enabledashboard;
         }
 
+<<<<<<< HEAD
         if (empty($section) || $section === 'themesettings') {
             $settings->customusermenuitems = $CFG->customusermenuitems;
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $settings;
     }
 
@@ -418,7 +439,11 @@ class api {
         delete_user_key('tool_mobile', $USER->id);
 
         // Create a new key.
+<<<<<<< HEAD
         $iprestriction = !empty($mobilesettings->qrsameipcheck) ? getremoteaddr(null) : null;
+=======
+        $iprestriction = getremoteaddr(null);
+>>>>>>> forked/LAE_400_PACKAGE
         $qrkeyttl = !empty($mobilesettings->qrkeyttl) ? $mobilesettings->qrkeyttl : self::LOGIN_QR_KEY_TTL;
         $validuntil = time() + $qrkeyttl;
         return create_user_key('tool_mobile', $USER->id, null, $iprestriction, $validuntil);
@@ -521,7 +546,10 @@ class api {
                 'NoDelegate_DarkMode' => new lang_string('darkmode', 'tool_mobile'),
                 'CoreFilterDelegate' => new lang_string('type_filter_plural', 'plugin'),
                 'CoreReportBuilderDelegate' => new lang_string('reportbuilder', 'core_reportbuilder'),
+<<<<<<< HEAD
                 'NoDelegate_CoreUserSupport' => new lang_string('contactsitesupport', 'admin'),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             ),
             "$mainmenu" => array(
                 '$mmSideMenuDelegate_mmaFrontpage' => new lang_string('sitehome'),

@@ -100,7 +100,10 @@ class Horde_Imap_Client_Data_Acl extends Horde_Imap_Client_Data_AclCommon implem
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return $this[$offset];
@@ -108,7 +111,10 @@ class Horde_Imap_Client_Data_Acl extends Horde_Imap_Client_Data_AclCommon implem
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($offset)
     {
         return in_array($offset, $this->_rights);
@@ -116,7 +122,10 @@ class Horde_Imap_Client_Data_Acl extends Horde_Imap_Client_Data_AclCommon implem
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         if ($value) {
@@ -136,7 +145,10 @@ class Horde_Imap_Client_Data_Acl extends Horde_Imap_Client_Data_AclCommon implem
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
         $this->_rights = array_values(array_diff($this->_rights, array($offset)));
@@ -144,7 +156,10 @@ class Horde_Imap_Client_Data_Acl extends Horde_Imap_Client_Data_AclCommon implem
 
     /* IteratorAggregate method. */
 
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_rights);
@@ -156,13 +171,18 @@ class Horde_Imap_Client_Data_Acl extends Horde_Imap_Client_Data_AclCommon implem
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        return json_encode($this->_rights);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
     public function unserialize($data)
     {
+<<<<<<< HEAD
         $data = @unserialize($data);
         if (!is_array($data)) {
             throw new Exception('Cache version changed.');
@@ -183,6 +203,9 @@ class Horde_Imap_Client_Data_Acl extends Horde_Imap_Client_Data_AclCommon implem
     public function __unserialize(array $data)
     {
         $this->_rights = $data['rights'];
+=======
+        $this->_rights = json_decode($data);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 }

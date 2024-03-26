@@ -23,27 +23,47 @@ $noteid = required_param('id', PARAM_INT);
 $PAGE->set_url('/notes/delete.php', array('id' => $noteid));
 
 if (!$note = note_load($noteid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidid');
 }
 
 if (!$course = $DB->get_record('course', array('id' => $note->courseid))) {
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidid');
+}
+
+if (!$course = $DB->get_record('course', array('id' => $note->courseid))) {
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);
 
 if (empty($CFG->enablenotes)) {
+<<<<<<< HEAD
     throw new \moodle_exception('notesdisabled', 'notes');
 }
 
 if (!$user = $DB->get_record('user', array('id' => $note->userid))) {
     throw new \moodle_exception('invaliduserid');
+=======
+    print_error('notesdisabled', 'notes');
+}
+
+if (!$user = $DB->get_record('user', array('id' => $note->userid))) {
+    print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context = context_course::instance($course->id);
 
 if (!has_capability('moodle/notes:manage', $context)) {
+<<<<<<< HEAD
     throw new \moodle_exception('nopermissiontodelete', 'notes');
+=======
+    print_error('nopermissiontodelete', 'notes');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if (data_submitted() && confirm_sesskey()) {

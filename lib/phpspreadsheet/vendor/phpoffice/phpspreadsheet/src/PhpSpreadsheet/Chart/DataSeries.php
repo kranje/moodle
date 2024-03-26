@@ -94,7 +94,11 @@ class DataSeries
     private $plotCategory = [];
 
     /**
+<<<<<<< HEAD
      * Smooth Line. Must be specified for both DataSeries and DataSeriesValues.
+=======
+     * Smooth Line.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @var bool
      */
@@ -108,6 +112,7 @@ class DataSeries
     private $plotValues = [];
 
     /**
+<<<<<<< HEAD
      * Plot Bubble Sizes.
      *
      * @var DataSeriesValues[]
@@ -115,6 +120,8 @@ class DataSeries
     private $plotBubbleSizes = [];
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Create a new DataSeries.
      *
      * @param null|mixed $plotType
@@ -134,12 +141,20 @@ class DataSeries
         $this->plotOrder = $plotOrder;
         $keys = array_keys($plotValues);
         $this->plotValues = $plotValues;
+<<<<<<< HEAD
         if (!isset($plotLabel[$keys[0]])) {
+=======
+        if ((count($plotLabel) == 0) || ($plotLabel[$keys[0]] === null)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $plotLabel[$keys[0]] = new DataSeriesValues();
         }
         $this->plotLabel = $plotLabel;
 
+<<<<<<< HEAD
         if (!isset($plotCategory[$keys[0]])) {
+=======
+        if ((count($plotCategory) == 0) || ($plotCategory[$keys[0]] === null)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $plotCategory[$keys[0]] = new DataSeriesValues();
         }
         $this->plotCategory = $plotCategory;
@@ -257,6 +272,11 @@ class DataSeries
         $keys = array_keys($this->plotLabel);
         if (in_array($index, $keys)) {
             return $this->plotLabel[$index];
+<<<<<<< HEAD
+=======
+        } elseif (isset($keys[$index])) {
+            return $this->plotLabel[$keys[$index]];
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return false;
@@ -337,12 +357,18 @@ class DataSeries
         $keys = array_keys($this->plotValues);
         if (in_array($index, $keys)) {
             return $this->plotValues[$index];
+<<<<<<< HEAD
+=======
+        } elseif (isset($keys[$index])) {
+            return $this->plotValues[$keys[$index]];
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return false;
     }
 
     /**
+<<<<<<< HEAD
      * Get Plot Bubble Sizes.
      *
      * @return DataSeriesValues[]
@@ -365,6 +391,8 @@ class DataSeries
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get Number of Plot Series.
      *
      * @return int

@@ -35,7 +35,10 @@ $tokenid = required_param('id', PARAM_INT);
 $PAGE->set_context($usercontext);
 $PAGE->set_url('/user/wsdoc.php');
 $PAGE->set_title(get_string('wsdocumentation', 'webservice'));
+<<<<<<< HEAD
 $PAGE->set_heading(get_string('wsdocumentation', 'webservice'));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $PAGE->set_pagelayout('standard');
 
 // nav bar
@@ -68,8 +71,11 @@ foreach ($functions as $function) {
     $functiondescs[$function->name] = external_api::external_function_info($function);
 }
 
+<<<<<<< HEAD
 // TODO: MDL-76078 - Incorrect inter-communication, core cannot have plugin dependencies like this.
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 // get activated protocol
 $activatedprotocol = array();
 $activatedprotocol['rest'] = webservice_protocol_is_enabled('rest');

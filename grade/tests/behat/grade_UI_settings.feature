@@ -17,9 +17,13 @@ Feature: Site settings can be used to hide parts of the gradebook UI
     And the following "activities" exist:
       | activity | course | idnumber | name | intro |
       | assign | C1 | assign1 | Assignment1 | Assignment 1 intro |
+<<<<<<< HEAD
     And I log in as "admin"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > Grader report > View" page logged in as "admin"
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
 
   @javascript
@@ -29,8 +33,12 @@ Feature: Site settings can be used to hide parts of the gradebook UI
     Then I navigate to "Grades > General settings" in site administration
     And I set the field "Show minimum grade" to "0"
     And I press "Save changes"
+<<<<<<< HEAD
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > Grader report > View" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Edit  assign Assignment1" "link"
     And I should not see "Minimum grade"
 
@@ -46,6 +54,7 @@ Feature: Site settings can be used to hide parts of the gradebook UI
 
   @javascript
   Scenario: Disable category overriding
+<<<<<<< HEAD
     And "tr .course input[type='text']" "css_element" should exist
     Then I navigate to "Grades > Grade category settings" in site administration
     And I set the field "Allow category grades to be manually overridden" to "0"
@@ -53,3 +62,11 @@ Feature: Site settings can be used to hide parts of the gradebook UI
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
     And "tr .course input[type='text']" "css_element" should not exist
+=======
+    Given "Student 1 Course total" "field" should exist
+    And I navigate to "Grades > Grade category settings" in site administration
+    And I set the field "Allow category grades to be manually overridden" to "0"
+    And I press "Save changes"
+    When I am on the "Course 1" "grades > Grader report > View" page
+    Then "Student 1 Course total" "field" should not exist
+>>>>>>> forked/LAE_400_PACKAGE

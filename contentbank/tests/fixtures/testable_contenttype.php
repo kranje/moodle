@@ -100,6 +100,7 @@ class contenttype extends \core_contentbank\contenttype {
 
         return true;
     }
+<<<<<<< HEAD
 
     /**
      * This implements custom file serving.
@@ -116,4 +117,6 @@ class contenttype extends \core_contentbank\contenttype {
     public static function pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []): void {
         return;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

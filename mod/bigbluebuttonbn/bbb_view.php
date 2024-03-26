@@ -56,9 +56,13 @@ if ($id) {
 }
 
 if (!$instance) {
+<<<<<<< HEAD
     $courseid = optional_param('courseid', 1, PARAM_INT);
     \core\notification::error(get_string('general_error_not_found', 'mod_bigbluebuttonbn', $id));
     redirect(new moodle_url('/course/view.php', ['id' => $courseid]));
+=======
+    throw new moodle_exception('view_error_url_missing_parameters', plugin::COMPONENT);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $cm = $instance->get_cm();

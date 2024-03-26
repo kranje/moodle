@@ -34,7 +34,11 @@ $PAGE->set_url('/user/emailupdate.php', array('id' => $id, 'key' => $key));
 $PAGE->set_context(context_system::instance());
 
 if (!$user = $DB->get_record('user', array('id' => $id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invaliduserid');
+=======
+    print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $preferences = get_user_preferences(null, null, $user->id);

@@ -30,7 +30,11 @@ defined('MOODLE_INTERNAL') || die();
 /// This file to be included so we can assume config.php has already been included.
 global $DB;
 if (empty($lesson)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotcallscript');
+=======
+    print_error('cannotcallscript');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 if (!isset($currenttab)) {
     $currenttab = '';

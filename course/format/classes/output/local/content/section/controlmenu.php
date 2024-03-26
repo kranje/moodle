@@ -159,9 +159,14 @@ class controlmenu implements named_templatable, renderable {
             $url = clone($baseurl);
             if (!$isstealth) {
                 if (has_capability('moodle/course:sectionvisibility', $coursecontext, $user)) {
+<<<<<<< HEAD
                     $strhidefromothers = get_string('hidefromothers', 'format_' . $course->format);
                     $strshowfromothers = get_string('showfromothers', 'format_' . $course->format);
                     if ($section->visible) { // Show the hide/show eye.
+=======
+                    if ($section->visible) { // Show the hide/show eye.
+                        $strhidefromothers = get_string('hidefromothers', 'format_'.$course->format);
+>>>>>>> forked/LAE_400_PACKAGE
                         $url->param('hide', $section->section);
                         $controls['visiblity'] = [
                             'url' => $url,
@@ -171,6 +176,7 @@ class controlmenu implements named_templatable, renderable {
                             'attr' => [
                                 'class' => 'icon editing_showhide',
                                 'data-sectionreturn' => $sectionreturn,
+<<<<<<< HEAD
                                 'data-action' => ($usecomponents) ? 'sectionHide' : 'hide',
                                 'data-id' => $section->id,
                                 'data-swapname' => $strshowfromothers,
@@ -178,6 +184,13 @@ class controlmenu implements named_templatable, renderable {
                             ],
                         ];
                     } else {
+=======
+                                'data-action' => 'hide',
+                            ],
+                        ];
+                    } else {
+                        $strshowfromothers = get_string('showfromothers', 'format_'.$course->format);
+>>>>>>> forked/LAE_400_PACKAGE
                         $url->param('show',  $section->section);
                         $controls['visiblity'] = [
                             'url' => $url,
@@ -187,10 +200,14 @@ class controlmenu implements named_templatable, renderable {
                             'attr' => [
                                 'class' => 'icon editing_showhide',
                                 'data-sectionreturn' => $sectionreturn,
+<<<<<<< HEAD
                                 'data-action' => ($usecomponents) ? 'sectionShow' : 'show',
                                 'data-id' => $section->id,
                                 'data-swapname' => $strhidefromothers,
                                 'data-swapicon' => 'i/hide',
+=======
+                                'data-action' => 'show',
+>>>>>>> forked/LAE_400_PACKAGE
                             ],
                         ];
                     }

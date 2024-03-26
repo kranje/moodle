@@ -79,6 +79,13 @@ trait eventtype {
             $mform->addElement('hidden', 'eventtype');
             $mform->setType('eventtype', PARAM_TEXT);
             $mform->setDefault('eventtype', 'user');
+<<<<<<< HEAD
+=======
+
+            // Render a static element to tell the user what type of event will
+            // be created.
+            $mform->addElement('static', 'staticeventtype', get_string('eventkind', 'calendar'), $options['user']);
+>>>>>>> forked/LAE_400_PACKAGE
             return;
         } else {
             $mform->addElement('select', 'eventtype', get_string('eventkind', 'calendar'), $options);

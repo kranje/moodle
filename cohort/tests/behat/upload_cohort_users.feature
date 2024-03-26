@@ -27,11 +27,19 @@ Feature: Upload users to a cohort
     And I press "Upload users"
     And I press "Continue"
     And I navigate to "Users > Accounts > Cohorts" in site administration
+<<<<<<< HEAD
     And I press "Assign" action in the "Cohort 1" report row
     Then the "Current users" select box should contain "Tom Jones (tomjones@example.com)"
     And the "Current users" select box should contain "Bob Jones (bobjones@example.com)"
     And I press "Back to cohorts"
     And I press "Assign" action in the "Cohort 2" report row
+=======
+    And I click on "Assign" "link" in the "Cohort 1" "table_row"
+    Then the "Current users" select box should contain "Tom Jones (tomjones@example.com)"
+    And the "Current users" select box should contain "Bob Jones (bobjones@example.com)"
+    And I press "Back to cohorts"
+    And I click on "Assign" "link" in the "Cohort 2" "table_row"
+>>>>>>> forked/LAE_400_PACKAGE
     And the "Current users" select box should contain "Mary Smith (marysmith@example.com)"
     And the "Current users" select box should contain "Alice Smith (alicesmith@example.com)"
     And I am on the "Course 1" "enrolled users" page

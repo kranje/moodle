@@ -34,6 +34,7 @@
  */
 class backup_null_iterator implements iterator {
 
+<<<<<<< HEAD
     public function rewind(): void {
     }
 
@@ -49,6 +50,21 @@ class backup_null_iterator implements iterator {
     }
 
     public function valid(): bool {
+=======
+    public function rewind() {
+    }
+
+    public function current() {
+    }
+
+    public function key() {
+    }
+
+    public function next() {
+    }
+
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return false;
     }
 

@@ -12,10 +12,13 @@ abstract class H5PMetadata {
       'type' => 'text',
       'maxLength' => 255
     ),
+<<<<<<< HEAD
     'a11yTitle' => array(
       'type' => 'text',
       'maxLength' => 255,
     ),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     'authors' => array(
       'type' => 'json'
     ),
@@ -64,7 +67,10 @@ abstract class H5PMetadata {
     // Note: deliberatly creating JSON string "manually" to improve performance
     return
       '{"title":' . (isset($content->title) ? json_encode($content->title) : 'null') .
+<<<<<<< HEAD
       ',"a11yTitle":' . (isset($content->a11y_title) ? $content->a11y_title : 'null') .
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       ',"authors":' . (isset($content->authors) ? $content->authors : 'null') .
       ',"source":' . (isset($content->source) ? '"' . $content->source . '"' : 'null') .
       ',"license":' . (isset($content->license) ? '"' . $content->license . '"' : 'null') .

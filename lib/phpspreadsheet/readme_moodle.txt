@@ -71,7 +71,11 @@ STEPS:
  * Update lib/thirdpartylibs.xml
  * Apply the modifications described in the CHANGES section
  * Create another commit with the previous two steps of changes
+<<<<<<< HEAD
  * Go to http://<your moodle root>/lib/tests/other/spreadsheettestpage.php and test the generated files
+=======
+ * Go to http://localhost/lib/tests/other/spreadsheettestpage.php and test the generated files
+>>>>>>> forked/LAE_400_PACKAGE
 
 
 CHANGES:

@@ -545,6 +545,7 @@ class ADORecordSet_ado extends ADORecordSet {
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 		
 		$t = strtoupper($t);
 		
@@ -553,6 +554,10 @@ class ADORecordSet_ado extends ADORecordSet {
 
 		if (!is_numeric($t)) 
 			return $t;
+=======
+
+		if (!is_numeric($t)) return $t;
+>>>>>>> forked/LAE_400_PACKAGE
 
 		switch ($t) {
 		case 0:

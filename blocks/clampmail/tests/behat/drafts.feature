@@ -23,7 +23,11 @@ Feature: Email drafts
   Scenario: View and delete drafts
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "View drafts"
     Then I should see "You have no email drafts"
     When I press "Continue"
@@ -39,8 +43,13 @@ Feature: Email drafts
     When I follow "View drafts"
     Then I should see "Hello World"
     When I follow "Open email"
+<<<<<<< HEAD
     Then the field "Subject" matches value "Hello World"
     And the field "Message" matches value "Salvation at noon"
+=======
+    Then I should see "Selected recipients"
+    And I should see "Salvation at noon"
+>>>>>>> forked/LAE_400_PACKAGE
     When I set the following fields to these values:
       | Subject | Goodbye World |
     And I press "Save draft"

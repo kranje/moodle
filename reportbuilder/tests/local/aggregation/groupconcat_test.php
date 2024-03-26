@@ -18,8 +18,11 @@ declare(strict_types=1);
 
 namespace core_reportbuilder\local\aggregation;
 
+<<<<<<< HEAD
 use core_badges_generator;
 use core_badges\reportbuilder\datasource\badges;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder_testcase;
 use core_reportbuilder_generator;
 use core_user\reportbuilder\datasource\users;
@@ -84,6 +87,7 @@ class groupconcat_test extends core_reportbuilder_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test aggregation when applied to column with multiple fields
      */
     public function test_column_aggregation_multiple_fields(): void {
@@ -112,6 +116,8 @@ class groupconcat_test extends core_reportbuilder_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test aggregation when applied to column with callback
      */
     public function test_column_aggregation_with_callback(): void {
@@ -153,6 +159,7 @@ class groupconcat_test extends core_reportbuilder_testcase {
             ],
         ], $content);
     }
+<<<<<<< HEAD
 
     /**
      * Test aggregation when applied to column with callback that expects/handles null values
@@ -202,4 +209,6 @@ class groupconcat_test extends core_reportbuilder_testcase {
             ],
         ], $content);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

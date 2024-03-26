@@ -2,14 +2,20 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 
 class NetworkDays
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * NETWORKDAYS.
      *
@@ -23,6 +29,7 @@ class NetworkDays
      *
      * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
      *                                            PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      * @param mixed $endDate Excel date serial value (float), PHP date timestamp (integer),
      *                                            PHP DateTime object, or a standard date string
@@ -45,6 +52,16 @@ class NetworkDays
             );
         }
 
+=======
+     * @param mixed $endDate Excel date serial value (float), PHP date timestamp (integer),
+     *                                            PHP DateTime object, or a standard date string
+     * @param mixed $dateArgs
+     *
+     * @return int|string Interval between the dates
+     */
+    public static function count($startDate, $endDate, ...$dateArgs)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             //    Retrieve the mandatory start and end date that are referenced in the function definition
             $sDate = Helpers::getDateValue($startDate);

@@ -600,13 +600,23 @@ class Horde_Stream implements Serializable
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        $this->_params['_pos'] = $this->pos();
+
+        return json_encode(array(
+            strval($this),
+            $this->_params
+        ));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
     public function unserialize($data)
     {
+<<<<<<< HEAD
         $data = @unserialize($data, true);
         if ($data == null || !is_array($data)) {
             throw new Exception('Cache version change.');
@@ -634,6 +644,11 @@ class Horde_Stream implements Serializable
     public function __unserialize($data)
     {
         $this->_init();
+=======
+        $this->_init();
+
+        $data = json_decode($data, true);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->add($data[0]);
         $this->seek($data[1]['_pos'], false);
         unset($data[1]['_pos']);

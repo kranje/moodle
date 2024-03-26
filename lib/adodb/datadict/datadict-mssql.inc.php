@@ -68,6 +68,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 		
 		$t = strtoupper($t);
 		
@@ -76,6 +77,11 @@ class ADODB2_mssql extends ADODB_DataDict {
 
 		$len = -1; // mysql max_length is not accurate
 		switch ($t) {
+=======
+
+		$len = -1; // mysql max_length is not accurate
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 		case 'R':
 		case 'INT':
 		case 'INTEGER': return  'I';
@@ -92,6 +98,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 
 	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		
 		$meta = strtoupper($meta);
 		
@@ -102,6 +109,8 @@ class ADODB2_mssql extends ADODB_DataDict {
 		if (isset($this->connection->customMetaTypes[$meta]))
 			return $this->connection->customMetaTypes[$meta]['actual'];
 		
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		switch(strtoupper($meta)) {
 
 		case 'C': return 'VARCHAR';

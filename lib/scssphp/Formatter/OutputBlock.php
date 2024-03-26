@@ -22,7 +22,11 @@ namespace ScssPhp\ScssPhp\Formatter;
 class OutputBlock
 {
     /**
+<<<<<<< HEAD
      * @var string|null
+=======
+     * @var string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public $type;
 

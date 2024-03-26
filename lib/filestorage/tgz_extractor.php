@@ -493,7 +493,11 @@ class tgz_extractor {
                 unlink($this->currentfile);
             } else {
                 // For index file, get number of files and delete temp file.
+<<<<<<< HEAD
                 $contents = file_get_contents($this->currentfile, false, null, 0, 128);
+=======
+                $contents = file_get_contents($this->currentfile, null, null, null, 128);
+>>>>>>> forked/LAE_400_PACKAGE
                 $matches = array();
                 if (preg_match('~^' . preg_quote(tgz_packer::ARCHIVE_INDEX_COUNT_PREFIX) .
                         '([0-9]+)~', $contents, $matches)) {

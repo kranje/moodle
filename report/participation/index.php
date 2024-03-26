@@ -58,11 +58,19 @@ if ($action != 'view' and $action != 'post') {
 }
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourse');
 }
 
 if ($roleid != 0 and !$role = $DB->get_record('role', array('id'=>$roleid))) {
     throw new \moodle_exception('invalidrole');
+=======
+    print_error('invalidcourse');
+}
+
+if ($roleid != 0 and !$role = $DB->get_record('role', array('id'=>$roleid))) {
+    print_error('invalidrole');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);

@@ -8,9 +8,15 @@ Feature: Add the network servers block when main feature is disabled
     Given I log in as "admin"
     And I navigate to "Plugins > Authentication > Manage authentication" in site administration
     And I click on "Enable" "icon" in the "MNet authentication" "table_row"
+<<<<<<< HEAD
     And I am on site homepage
     And I turn editing mode on
     And I add the "Network servers" block
+=======
+    And the following "blocks" exist:
+      | blockname  | contextlevel | reference | pagetypepattern | defaultregion |
+      | mnet_hosts | System       | 1         | site-index      | side-pre      |
+>>>>>>> forked/LAE_400_PACKAGE
     When I navigate to "Plugins > Authentication > Manage authentication" in site administration
     And I click on "Disable" "icon" in the "MNet authentication" "table_row"
     And I am on site homepage
@@ -21,10 +27,18 @@ Feature: Add the network servers block when main feature is disabled
     Given I log in as "admin"
     And I navigate to "Plugins > Authentication > Manage authentication" in site administration
     And I click on "Enable" "icon" in the "MNet authentication" "table_row"
+<<<<<<< HEAD
     And I am on site homepage
     And I turn editing mode on
     And I add the "Network servers" block
     And I turn editing mode on
+=======
+    And the following "blocks" exist:
+      | blockname  | contextlevel | reference | pagetypepattern | defaultregion |
+      | mnet_hosts | System       | 1         | site-index      | side-pre      |
+    And I am on site homepage
+    And I turn editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
     And I open the "Network servers" blocks action menu
     And I click on "Delete Network servers block" "link" in the "Network servers" "block"
     And "Delete block?" "dialogue" should exist

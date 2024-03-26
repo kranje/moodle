@@ -20,8 +20,11 @@ namespace core_reportbuilder\local\aggregation;
 
 use core_reportbuilder_testcase;
 use core_reportbuilder_generator;
+<<<<<<< HEAD
 use core_reportbuilder\manager;
 use core_reportbuilder\local\report\column;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use core_user\reportbuilder\datasource\users;
 
 defined('MOODLE_INTERNAL') || die();
@@ -78,6 +81,7 @@ class sum_test extends core_reportbuilder_testcase {
             ],
         ], $content);
     }
+<<<<<<< HEAD
 
     /**
      * Test aggregation when applied to column with callback
@@ -125,4 +129,6 @@ class sum_test extends core_reportbuilder_testcase {
             ],
         ], $content);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

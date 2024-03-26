@@ -84,6 +84,7 @@ switch ($mode) {
         require_sesskey();
 
         if (empty($attempt)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfindattempt', 'lesson');
         }
         if (empty($user)) {
@@ -91,6 +92,15 @@ switch ($mode) {
         }
         if (empty($answer)) {
             throw new \moodle_exception('cannotfindanswer', 'lesson');
+=======
+            print_error('cannotfindattempt', 'lesson');
+        }
+        if (empty($user)) {
+            print_error('cannotfinduser', 'lesson');
+        }
+        if (empty($answer)) {
+            print_error('cannotfindanswer', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         break;
 
@@ -98,10 +108,17 @@ switch ($mode) {
         require_sesskey();
 
         if (empty($attempt)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfindattempt', 'lesson');
         }
         if (empty($user)) {
             throw new \moodle_exception('cannotfinduser', 'lesson');
+=======
+            print_error('cannotfindattempt', 'lesson');
+        }
+        if (empty($user)) {
+            print_error('cannotfinduser', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $editoroptions = array('noclean' => true, 'maxfiles' => EDITOR_UNLIMITED_FILES,
@@ -116,7 +133,11 @@ switch ($mode) {
         }
         if ($form = $mform->get_data()) {
             if (!$grades = $DB->get_records('lesson_grades', array("lessonid"=>$lesson->id, "userid"=>$attempt->userid), 'completed', '*', $attempt->retry, 1)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotfindgrade', 'lesson');
+=======
+                print_error('cannotfindgrade', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $essayinfo->graded = 1;
@@ -167,7 +188,11 @@ switch ($mode) {
 
             redirect(new moodle_url('/mod/lesson/essay.php', array('id'=>$cm->id)));
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidformdata');
+=======
+            print_error('invalidformdata');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         break;
     case 'email':
@@ -178,7 +203,11 @@ switch ($mode) {
         if ($userid = optional_param('userid', 0, PARAM_INT)) {
             $queryadd = " AND userid = ?";
             if (! $users = $DB->get_records('user', array('id' => $userid))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotfinduser', 'lesson');
+=======
+                print_error('cannotfinduser', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         } else {
             $queryadd = '';
@@ -199,7 +228,11 @@ switch ($mode) {
                        ) ui ON u.id = ui.userid
                   JOIN ($esql) ue ON ue.id = u.id
                   ORDER BY $sort", $params)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotfinduser', 'lesson');
+=======
+                print_error('cannotfinduser', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -216,13 +249,21 @@ switch ($mode) {
             $params[] = $userid;
         }
         if (!$attempts = $DB->get_records_select('lesson_attempts', "pageid $usql".$queryadd, $params)) {
+<<<<<<< HEAD
             throw new \moodle_exception('nooneansweredthisquestion', 'lesson');
+=======
+            print_error('nooneansweredthisquestion', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         // Get the answers
         list($answerUsql, $parameters) = $DB->get_in_or_equal(array_keys($pages));
         array_unshift($parameters, $lesson->id);
         if (!$answers = $DB->get_records_select('lesson_answers', "lessonid = ? AND pageid $answerUsql", $parameters, '', 'pageid, score')) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfindanswer', 'lesson');
+=======
+            print_error('cannotfindanswer', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $userpicture = new user_picture($USER);

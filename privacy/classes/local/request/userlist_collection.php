@@ -114,7 +114,10 @@ class userlist_collection implements \Iterator, \Countable {
      *
      * @return  \user
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         $key = $this->get_key_from_position();
         return $this->userlists[$key];
@@ -125,7 +128,10 @@ class userlist_collection implements \Iterator, \Countable {
      *
      * @return  mixed
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->get_key_from_position();
     }
@@ -133,7 +139,11 @@ class userlist_collection implements \Iterator, \Countable {
     /**
      * Move to the next user in the list.
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         ++$this->iteratorposition;
     }
 
@@ -142,7 +152,11 @@ class userlist_collection implements \Iterator, \Countable {
      *
      * @return  bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return ($this->iteratorposition < count($this->userlists));
     }
 
@@ -152,7 +166,11 @@ class userlist_collection implements \Iterator, \Countable {
      * The list of users is uniqued during the rewind.
      * The rewind is called at the start of most iterations.
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->iteratorposition = 0;
     }
 
@@ -173,7 +191,11 @@ class userlist_collection implements \Iterator, \Countable {
     /**
      * Return the number of users.
      */
+<<<<<<< HEAD
     public function count(): int {
+=======
+    public function count() {
+>>>>>>> forked/LAE_400_PACKAGE
         return count($this->userlists);
     }
 }

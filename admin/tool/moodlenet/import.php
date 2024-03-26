@@ -38,7 +38,11 @@ require_once(__DIR__ . '/../../../config.php');
 
 // The integration must be enabled for this import endpoint to be active.
 if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
+<<<<<<< HEAD
     throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
+=======
+    print_error('moodlenetnotenabled', 'tool_moodlenet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $resourceurl = required_param('resourceurl', PARAM_URL);
@@ -82,4 +86,8 @@ if (!empty($_POST)) {
 }
 
 // Invalid or missing POST data. Show an error to the user.
+<<<<<<< HEAD
 throw new \moodle_exception('missinginvalidpostdata', 'tool_moodlenet');
+=======
+print_error('missinginvalidpostdata', 'tool_moodlenet');
+>>>>>>> forked/LAE_400_PACKAGE

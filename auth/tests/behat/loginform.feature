@@ -18,6 +18,7 @@ Feature: Test if the login form provides the correct feedback
 
   Scenario: Test login language selector
     Given remote langimport tests are enabled
+<<<<<<< HEAD
     And I log in as "admin"
     And I navigate to "Language > Language packs" in site administration
     And I set the field "Available language packs" to "nl,es"
@@ -29,6 +30,18 @@ Feature: Test if the login form provides the correct feedback
     And I open the action menu in "region-main" "region"
     # The line below contains the unicode character U+200E before and after the brackets, please be very careful editing this line.
     And I choose "Nederlands ‎(nl)‎" in the open action menu
+=======
+    And the following "language packs" exist:
+      | language |
+      | nl       |
+      | es       |
+    And the following config values are set as admin:
+      | langmenu | 1 |
+    And I follow "Log in"
+    And I open the action menu in "region-main" "region"
+    # The line below contains the unicode character U+200E before and after the brackets, please be very careful editing this line.
+    When I choose "Nederlands ‎(nl)‎" in the open action menu
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should see "Gebruikersnaam"
 
   @_file_upload

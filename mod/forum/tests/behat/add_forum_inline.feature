@@ -13,6 +13,7 @@ Feature: Add forum activities and discussions utilizing the inline add discussio
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
     And I add a "Forum" to section "1" and I fill the form with:
@@ -27,6 +28,23 @@ Feature: Add forum activities and discussions utilizing the inline add discussio
   Scenario: Student can add a discussion via the inline form
     Given I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    And the following "activity" exists:
+      | activity    | forum                  |
+      | course      | C1                     |
+      | idnumber    | 0001                   |
+      | name        | Test forum name        |
+      | type        | general                |
+    And the following "mod_forum > discussion" exists:
+      | forum   | 0001             |
+      | course  | C1               |
+      | user    | teacher1         |
+      | name    | Forum post 1     |
+      | message | This is the body |
+
+  Scenario: Student can add a discussion via the inline form
+    Given I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     Then I add a new discussion to "Test forum name" forum inline with:
       | Subject | Post with attachment |
       | Message | This is the body     |

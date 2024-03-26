@@ -18,18 +18,27 @@ if ($hook !== 'ALL') {
 $PAGE->set_url($url);
 
 if (!$entry = $DB->get_record('glossary_entries', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidentry');
+=======
+    print_error('invalidentry');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($entry->sourceglossaryid) {
     //already exported
     if (!$cm = get_coursemodule_from_id('glossary', $entry->sourceglossaryid)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     redirect('view.php?id='.$cm->id.'&amp;mode=entry&amp;hook='.$entry->id);
 }
 
 if (!$cm = get_coursemodule_from_instance('glossary', $entry->glossaryid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
 }
 
@@ -39,6 +48,17 @@ if (!$glossary = $DB->get_record('glossary', array('id'=>$cm->instance))) {
 
 if (!$course = $DB->get_record('course', array('id'=>$cm->course))) {
     throw new \moodle_exception('coursemisconf');
+=======
+    print_error('invalidcoursemodule');
+}
+
+if (!$glossary = $DB->get_record('glossary', array('id'=>$cm->instance))) {
+    print_error('invalidid', 'glossary');
+}
+
+if (!$course = $DB->get_record('course', array('id'=>$cm->course))) {
+    print_error('coursemisconf');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_course_login($course->id, true, $cm);
@@ -53,14 +73,22 @@ if (!$mainglossary = $DB->get_record('glossary', array('course'=>$cm->course, 'm
 }
 
 if (!$maincm = get_coursemodule_from_instance('glossary', $mainglossary->id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context     = context_module::instance($cm->id);
 $maincontext = context_module::instance($maincm->id);
 
 if (!$course = $DB->get_record('course', array('id'=>$cm->course))) {
+<<<<<<< HEAD
     throw new \moodle_exception('coursemisconf');
+=======
+    print_error('coursemisconf');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 

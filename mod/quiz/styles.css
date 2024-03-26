@@ -394,6 +394,10 @@ table.quizreviewsummary td.cell {
 
 #page-mod-quiz-comment .mform fieldset {
     margin: 0;
+<<<<<<< HEAD
+=======
+    border-bottom: none;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 #page-mod-quiz-comment .que {
@@ -887,8 +891,12 @@ table.quizreviewsummary td.cell {
 }
 
 #categoryquestions td.modifiername,
+<<<<<<< HEAD
 #categoryquestions td.creatorname,
 #categoryquestions td.questionlastused {
+=======
+#categoryquestions td.creatorname {
+>>>>>>> forked/LAE_400_PACKAGE
     line-height: 1em;
 }
 

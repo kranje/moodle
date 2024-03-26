@@ -63,6 +63,7 @@ abstract class task_base {
     private $pid = null;
 
     /**
+<<<<<<< HEAD
      * Get a descriptive name for the task (shown to admins)
      *
      * @return string
@@ -70,6 +71,8 @@ abstract class task_base {
     abstract public function get_name();
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Set the current lock for this task.
      * @param \core\lock\lock $lock
      */

@@ -51,6 +51,7 @@ if (!empty($newcontent) && is_array($newcontent)) {
 }
 
 if (!$page = wiki_get_page($pageid)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectpageid', 'wiki');
 }
 
@@ -64,12 +65,31 @@ if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
 
 if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('incorrectpageid', 'wiki');
+}
+
+if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
+    print_error('incorrectsubwikiid', 'wiki');
+}
+
+if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
+    print_error('incorrectwikiid', 'wiki');
+}
+
+if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 
 if (!empty($section) && !$sectioncontent = wiki_get_section_page($page, $section)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidsection', 'wiki');
+=======
+    print_error('invalidsection', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course, true, $cm);
@@ -77,12 +97,20 @@ require_login($course, true, $cm);
 $context = context_module::instance($cm->id);
 
 if (!wiki_user_can_edit($subwiki)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannoteditpage', 'wiki');
+=======
+    print_error('cannoteditpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($option == get_string('save', 'wiki')) {
     if (!confirm_sesskey()) {
+<<<<<<< HEAD
         throw new \moodle_exception(get_string('invalidsesskey', 'wiki'));
+=======
+        print_error(get_string('invalidsesskey', 'wiki'));
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $wikipage = new page_wiki_save($wiki, $subwiki, $cm);
     $wikipage->set_page($page);
@@ -91,7 +119,11 @@ if ($option == get_string('save', 'wiki')) {
 } else {
     if ($option == get_string('preview')) {
         if (!confirm_sesskey()) {
+<<<<<<< HEAD
             throw new \moodle_exception(get_string('invalidsesskey', 'wiki'));
+=======
+            print_error(get_string('invalidsesskey', 'wiki'));
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $wikipage = new page_wiki_preview($wiki, $subwiki, $cm, 'modulepage');
         $wikipage->set_page($page);

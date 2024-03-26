@@ -191,6 +191,13 @@ if (!$PAGE->has_secondary_navigation()) {
 }
 
 // It is possible that the following fields have been provided in the URL.
+<<<<<<< HEAD
+=======
+$userids = array_filter($userids, static function(int $userid) use ($course, $cm): bool {
+    $user = core_user::get_user($userid, '*', MUST_EXIST);
+    return $cm->effectivegroupmode != SEPARATEGROUPS || user_can_view_profile($user, $course);
+});
+>>>>>>> forked/LAE_400_PACKAGE
 $form->set_data(['useridsselected' => $userids, 'discussionids' => $discussionids, 'from' => $from, 'to' => $to]);
 
 $form->display();

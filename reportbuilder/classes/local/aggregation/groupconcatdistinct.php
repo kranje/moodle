@@ -40,7 +40,11 @@ class groupconcatdistinct extends groupconcat {
     }
 
     /**
+<<<<<<< HEAD
      * This aggregation can be performed on all non-timestamp columns in MySQL, Postgres and Oracle only
+=======
+     * This aggregation can be performed on all non-timestamp columns in MySQL and Postgres only
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param int $columntype
      * @return bool
@@ -51,7 +55,10 @@ class groupconcatdistinct extends groupconcat {
         $dbsupportedtype = in_array($DB->get_dbfamily(), [
             'mysql',
             'postgres',
+<<<<<<< HEAD
             'oracle',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ]);
 
         return $dbsupportedtype && parent::compatible($columntype);
@@ -67,17 +74,27 @@ class groupconcatdistinct extends groupconcat {
     public static function get_field_sql(string $field, int $columntype): string {
         global $DB;
 
+<<<<<<< HEAD
         $fieldsort = database::sql_group_concat_sort($field);
 
         // Postgres handles group concatenation differently in that it requires the expression to be cast to char, so we can't
         // simply pass "DISTINCT {$field}" to the {@see \moodle_database::sql_group_concat} method in all cases.
         if ($DB->get_dbfamily() === 'postgres') {
             $field = $DB->sql_cast_to_char($field);
+=======
+        // DB limitations mean we only support MySQL and Postgres, and each handle it differently.
+        $fieldsort = database::sql_group_concat_sort($field);
+        if ($DB->get_dbfamily() === 'postgres') {
+>>>>>>> forked/LAE_400_PACKAGE
             if ($fieldsort !== '') {
                 $fieldsort = "ORDER BY {$fieldsort}";
             }
 
+<<<<<<< HEAD
             return "STRING_AGG(DISTINCT {$field}, '" . self::FIELD_VALUE_DELIMETER . "' {$fieldsort})";
+=======
+            return "STRING_AGG(DISTINCT CAST({$field} AS VARCHAR), '" . self::FIELD_VALUE_DELIMETER . "' {$fieldsort})";
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             return $DB->sql_group_concat("DISTINCT {$field}", self::FIELD_VALUE_DELIMETER, $fieldsort);
         }

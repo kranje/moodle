@@ -313,7 +313,11 @@ ns.Group.prototype.setSummary = function (summary) {
   // Parse html
   var summaryTextNode = ns.$.parseHTML(summary);
 
+<<<<<<< HEAD
   if (summaryTextNode !== null && summaryTextNode.length) {
+=======
+  if (summaryTextNode !== null) {
+>>>>>>> forked/LAE_400_PACKAGE
     summaryText = summaryTextNode[0].nodeValue;
   }
 

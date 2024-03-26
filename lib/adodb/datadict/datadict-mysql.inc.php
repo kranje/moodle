@@ -33,7 +33,11 @@ class ADODB2_mysql extends ADODB_DataDict {
 
 	public $blobAllowsNotNull = true;
 	
+<<<<<<< HEAD
 	function metaType($t,$len=-1,$fieldobj=false)
+=======
+	function MetaType($t,$len=-1,$fieldobj=false)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 		
 		if (is_object($t)) {
@@ -44,6 +48,7 @@ class ADODB2_mysql extends ADODB_DataDict {
 		$is_serial = is_object($fieldobj) && $fieldobj->primary_key && $fieldobj->auto_increment;
 
 		$len = -1; // mysql max_length is not accurate
+<<<<<<< HEAD
 			
 		$t = strtoupper($t);
 		
@@ -52,6 +57,9 @@ class ADODB2_mysql extends ADODB_DataDict {
 		
 		switch ($t) {
 			
+=======
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 		case 'STRING':
 		case 'CHAR':
 		case 'VARCHAR':
@@ -91,14 +99,19 @@ class ADODB2_mysql extends ADODB_DataDict {
 		case 'SMALLINT': return $is_serial ? 'R' : 'I2';
 		case 'MEDIUMINT': return $is_serial ? 'R' : 'I4';
 		case 'BIGINT':  return $is_serial ? 'R' : 'I8';
+<<<<<<< HEAD
 		default: 
 			
 			return ADODB_DEFAULT_METATYPE;
+=======
+		default: return ADODB_DEFAULT_METATYPE;
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 	}
 
 	function ActualType($meta)
 	{
+<<<<<<< HEAD
 		
 		$meta = strtoupper($meta);
 		
@@ -112,6 +125,9 @@ class ADODB2_mysql extends ADODB_DataDict {
 		switch($meta) 
 		{
 		
+=======
+		switch(strtoupper($meta)) {
+>>>>>>> forked/LAE_400_PACKAGE
 		case 'C': return 'VARCHAR';
 		case 'XL':return 'LONGTEXT';
 		case 'X': return 'TEXT';
@@ -135,9 +151,13 @@ class ADODB2_mysql extends ADODB_DataDict {
 
 		case 'F': return 'DOUBLE';
 		case 'N': return 'NUMERIC';
+<<<<<<< HEAD
 			
 		default:
 			
+=======
+		default:
+>>>>>>> forked/LAE_400_PACKAGE
 			return $meta;
 		}
 	}

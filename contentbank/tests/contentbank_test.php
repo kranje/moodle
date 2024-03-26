@@ -28,9 +28,18 @@ namespace core_contentbank;
 defined('MOODLE_INTERNAL') || die();
 
 use advanced_testcase;
+<<<<<<< HEAD
 use context_course;
 use context_coursecat;
 use context_system;
+=======
+use context_block;
+use context_course;
+use context_coursecat;
+use context_module;
+use context_system;
+use context_user;
+>>>>>>> forked/LAE_400_PACKAGE
 use Exception;
 
 global $CFG;
@@ -364,7 +373,11 @@ class contentbank_test extends advanced_testcase {
         $this->resetAfterTest();
         $this->setAdminUser();
         $systemcontext = \context_system::instance();
+<<<<<<< HEAD
         $name = 'greeting-card-887.h5p';
+=======
+        $name = 'greeting-card.h5p';
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Create a dummy H5P file.
         $dummyh5p = array(
@@ -637,6 +650,7 @@ class contentbank_test extends advanced_testcase {
     /**
      * Test the behaviour of is_context_allowed().
      *
+<<<<<<< HEAD
      * @dataProvider context_provider
      * @param  \Closure $getcontext Get the context to check.
      * @param  bool $expectedresult Expected result.
@@ -704,5 +718,37 @@ class contentbank_test extends advanced_testcase {
                 false,
             ],
         ];
+=======
+     * @covers ::is_context_allowed
+     */
+    public function test_is_context_allowed(): void {
+        $this->resetAfterTest();
+
+        $cb = new contentbank();
+
+        // System context.
+        $this->assertTrue($cb->is_context_allowed(context_system::instance()));
+
+        // User context.
+        $user = $this->getDataGenerator()->create_user();
+        $this->assertFalse($cb->is_context_allowed(context_user::instance($user->id)));
+
+        // Category context.
+        $category = $this->getDataGenerator()->create_category();
+        $this->assertTrue($cb->is_context_allowed(context_coursecat::instance($category->id)));
+
+        // Course context.
+        $course = $this->getDataGenerator()->create_course(['category' => $category->id]);
+        $coursecontext = context_course::instance($course->id);
+        $this->assertTrue($cb->is_context_allowed($coursecontext));
+
+        // Module context.
+        $module = $this->getDataGenerator()->create_module('page', ['course' => $course->id]);
+        $this->assertFalse($cb->is_context_allowed(context_module::instance($module->cmid)));
+
+        // Block context.
+        $block = $this->getDataGenerator()->create_block('online_users', ['parentcontextid' => $coursecontext->id]);
+        $this->assertFalse($cb->is_context_allowed(context_block::instance($block->id)));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

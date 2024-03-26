@@ -18,7 +18,12 @@
 
     Context variables required for this template:
     * urlselect - The data object containing the required properties to render core/url_select.
+<<<<<<< HEAD
     * actionsselect - The presets actions selector.
+=======
+    * importentriesbutton - The data object containing the required properties to render core/single_button.
+    * exportentriesbutton - The data object containing the required properties to render core/single_button.
+>>>>>>> forked/LAE_400_PACKAGE
 
     Example context (json):
     {
@@ -33,6 +38,7 @@
             "showbutton": null,
             "options": [
                 {
+<<<<<<< HEAD
                     "name": "List view",
                     "value": "/mod/data/someurl.php",
                     "selected": false
@@ -41,11 +47,17 @@
                     "name": "Single view",
                     "value": "/mod/data/someurl.php",
                     "selected": true
+=======
+                    "name": "Some name",
+                    "value": "/mod/data/someurl.php",
+                    "selected": false
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             ],
             "disabled": false,
             "title": null
         },
+<<<<<<< HEAD
         "actionsselect": {
             "classes": "moodle-actionmenu",
             "instance": "1",
@@ -107,3 +119,53 @@
     </div>
 </div>
 <hr/>
+=======
+        "importentriesbutton": {
+            "id": "single_button_test_1",
+            "method" : "post",
+            "formid": "single_button_form_1",
+            "url" : "http://example.com/post",
+            "primary" : false,
+            "tooltip" : null,
+            "label" : "Label",
+            "attributes": []
+        },
+        "exportentriesbutton": {
+            "id": "single_button_test_2",
+            "method" : "post",
+            "formid": "single_button_form_2",
+            "url" : "http://example.com/post",
+            "primary" : false,
+            "tooltip" : null,
+            "label" : "Label",
+            "attributes": []
+        }
+    }
+}}
+<div class="container-fluid tertiary-navigation">
+    <div class="row">
+        {{#urlselect}}
+            <div class="navitem">
+                {{>core/url_select}}
+            </div>
+        {{/urlselect}}
+        {{#addentrybutton}}
+            <div class="navitem">
+                {{>core/single_button}}
+            </div>
+        {{/addentrybutton}}
+        <div class="ml-sm-auto d-flex">
+            {{#importentriesbutton}}
+                <div class="navitem">
+                    {{>core/single_button}}
+                </div>
+            {{/importentriesbutton}}
+            {{#exportentriesbutton}}
+                <div class="navitem">
+                    {{>core/single_button}}
+                </div>
+            {{/exportentriesbutton}}
+        </div>
+    </div>
+</div>
+>>>>>>> forked/LAE_400_PACKAGE

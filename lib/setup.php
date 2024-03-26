@@ -201,7 +201,11 @@ $CFG->libdir = $CFG->dirroot .'/lib';
 
 // Allow overriding of tempdir but be backwards compatible
 if (!isset($CFG->tempdir)) {
+<<<<<<< HEAD
     $CFG->tempdir = $CFG->dataroot . DIRECTORY_SEPARATOR . "temp";
+=======
+    $CFG->tempdir = "$CFG->dataroot/temp";
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Allow overriding of backuptempdir but be backwards compatible
@@ -569,7 +573,11 @@ init_performance_info();
 // Put $OUTPUT in place, so errors can be displayed.
 $OUTPUT = new bootstrap_renderer();
 
+<<<<<<< HEAD
 // Set handler for uncaught exceptions - equivalent to throw new \moodle_exception() call.
+=======
+// set handler for uncaught exceptions - equivalent to print_error() call
+>>>>>>> forked/LAE_400_PACKAGE
 if (!PHPUNIT_TEST or PHPUNIT_UTIL) {
     set_exception_handler('default_exception_handler');
     set_error_handler('default_error_handler', E_ALL | E_STRICT);
@@ -722,7 +730,11 @@ if (!defined('NO_UPGRADE_CHECK') and isset($CFG->upgraderunning)) {
     if ($CFG->upgraderunning < time()) {
         unset_config('upgraderunning');
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('upgraderunning');
+=======
+        print_error('upgraderunning');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -734,7 +746,11 @@ if (function_exists('gc_enable')) {
 
 // detect unsupported upgrade jump as soon as possible - do not change anything, do not use system functions
 if (!empty($CFG->version) and $CFG->version < 2007101509) {
+<<<<<<< HEAD
     throw new \moodle_exception('upgraderequires19', 'error');
+=======
+    print_error('upgraderequires19', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
     die;
 }
 
@@ -826,6 +842,7 @@ if (empty($CFG->sessiontimeout)) {
 if (empty($CFG->sessiontimeoutwarning)) {
     $CFG->sessiontimeoutwarning = 20 * 60;
 }
+<<<<<<< HEAD
 
 // Allow plugins to callback just before the session is started.
 $pluginswithfunction = get_plugins_with_function('before_session_start', 'lib.php');
@@ -869,6 +886,11 @@ if (!empty($CFG->proxylogunsafe) || !empty($CFG->proxyfixunsafe)) {
     }
 
 }
+=======
+\core\session\manager::start();
+// Prevent ignoresesskey hack from getting carried over to a next page.
+unset($USER->ignoresesskey);
+>>>>>>> forked/LAE_400_PACKAGE
 
 // Set default content type and encoding, developers are still required to use
 // echo $OUTPUT->header() everywhere, anything that gets set later should override these headers.

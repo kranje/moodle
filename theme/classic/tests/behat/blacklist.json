@@ -11,7 +11,12 @@
         "course/format/tests/behat/courseindex_keyboardnav.feature",
         "course/format/tests/behat/courseindex_completion.feature",
         "course/format/tests/behat/courseindex_language.feature",
+<<<<<<< HEAD
         "badges/tests/behat/badge_navigation.feature"
+=======
+        "badges/tests/behat/badge_navigation.feature",
+        "mod/lesson/tests/behat/lesson_report_detailed_statistics.feature"
+>>>>>>> forked/LAE_400_PACKAGE
     ],
     "tags": [
         "addablocklink"

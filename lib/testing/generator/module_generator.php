@@ -268,6 +268,7 @@ abstract class testing_module_generator extends component_generator_base {
             debugging('Did you forget to enable completion tracking for the course before generating module with completion tracking?', DEBUG_DEVELOPER);
         }
 
+<<<<<<< HEAD
         if (!empty($record->lang) && !has_capability('moodle/course:setforcedlanguage', context_course::instance($course->id))) {
             throw new coding_exception('Attempt to generate an activity when the current user does not have ' .
                     'permission moodle/course:setforcedlanguage. This does not work.');
@@ -275,6 +276,10 @@ abstract class testing_module_generator extends component_generator_base {
 
         // Add the module to the course.
         $moduleinfo = add_moduleinfo($record, $course);
+=======
+        // Add the module to the course.
+        $moduleinfo = add_moduleinfo($record, $course, $mform = null);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Prepare object to return with additional field cmid.
         $instance = $DB->get_record($this->get_modulename(), array('id' => $moduleinfo->instance), '*', MUST_EXIST);

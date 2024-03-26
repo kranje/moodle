@@ -63,7 +63,11 @@ $accessmanager->setup_attempt_page($PAGE);
 $output = $PAGE->get_renderer('mod_quiz');
 $messages = $accessmanager->prevent_access();
 if (!$attemptobj->is_preview_user() && $messages) {
+<<<<<<< HEAD
     throw new \moodle_exception('attempterror', 'quiz', $attemptobj->view_url(),
+=======
+    print_error('attempterror', 'quiz', $attemptobj->view_url(),
+>>>>>>> forked/LAE_400_PACKAGE
             $output->access_messages($messages));
 }
 if ($accessmanager->is_preflight_check_required($attemptobj->get_attemptid())) {

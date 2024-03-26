@@ -41,7 +41,11 @@ $path = get_file_argument();
 // path inside the plugin tinymce folder.
 $matches = array();
 if (!preg_match('~^/([a-z0-9_]+)/((?:[0-9.]+)|-1)(/.*)$~', $path, $matches)) {
+<<<<<<< HEAD
     throw new \moodle_exception('filenotfound');
+=======
+    print_error('filenotfound');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 list($junk, $tinymceplugin, $version, $innerpath) = $matches;
 
@@ -52,7 +56,11 @@ list($junk, $tinymceplugin, $version, $innerpath) = $matches;
 $pluginfolder = $CFG->dirroot . '/lib/editor/tinymce/plugins/' . $tinymceplugin;
 $file = $pluginfolder . '/tinymce' .$innerpath;
 if (!file_exists($file)) {
+<<<<<<< HEAD
     throw new \moodle_exception('filenotfound');
+=======
+    print_error('filenotfound');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // We don't actually care what the version number is but there is a special

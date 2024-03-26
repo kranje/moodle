@@ -27,9 +27,12 @@ namespace tool_uploaduser;
 defined('MOODLE_INTERNAL') || die();
 
 use context_system;
+<<<<<<< HEAD
 use context_coursecat;
 use core_course_category;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use tool_uploaduser\local\field_value_validators;
 
 require_once($CFG->dirroot.'/user/profile/lib.php');
@@ -126,7 +129,10 @@ class process {
         $today = make_timestamp(date('Y', $today), date('m', $today), date('d', $today), 0, 0, 0);
         $this->today = $today;
 
+<<<<<<< HEAD
         $this->rolecache      = uu_allowed_roles_cache(); // Course roles lookup cache.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->sysrolecache   = uu_allowed_sysroles_cache(); // System roles lookup cache.
         $this->supportedauths = uu_supported_auths(); // Officially supported plugins that are enabled.
 
@@ -229,6 +235,7 @@ class process {
     }
 
     /**
+<<<<<<< HEAD
      * Setting to allow matching user accounts on email
      * @return bool
      */
@@ -238,6 +245,8 @@ class process {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Setting to allow deletes
      * @return bool
      */
@@ -423,7 +432,11 @@ class process {
         }
 
         // Make sure we really have username.
+<<<<<<< HEAD
         if (empty($user->username) && !$this->get_match_on_email()) {
+=======
+        if (empty($user->username)) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->upt->track('status', get_string('missingfield', 'error', 'username'), 'error');
             $this->upt->track('username', get_string('error'), 'error');
             $this->userserrors++;
@@ -462,6 +475,7 @@ class process {
             return;
         }
 
+<<<<<<< HEAD
         $matchparam = $this->get_match_on_email() ? ['email' => $user->email] : ['username' => $user->username];
         if ($existinguser = $DB->get_records('user', $matchparam + ['mnethostid' => $user->mnethostid])) {
             if (is_array($existinguser) && count($existinguser) !== 1) {
@@ -472,6 +486,9 @@ class process {
             }
 
             $existinguser = is_array($existinguser) ? array_values($existinguser)[0] : $existinguser;
+=======
+        if ($existinguser = $DB->get_record('user', ['username' => $user->username, 'mnethostid' => $user->mnethostid])) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->upt->track('id', $existinguser->id, 'normal', false);
         }
 
@@ -600,12 +617,15 @@ class process {
         // We do not need the deleted flag anymore.
         unset($user->deleted);
 
+<<<<<<< HEAD
         $matchonemailallowrename = $this->get_match_on_email() && $this->get_allow_renames();
         if ($matchonemailallowrename && $user->username && ($user->username !== $existinguser->username)) {
             $user->oldusername = $existinguser->username;
             $existinguser = false;
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Renaming requested?
         if (!empty($user->oldusername) ) {
             if (!$this->get_allow_renames()) {
@@ -1134,6 +1154,7 @@ class process {
 
                 continue;
             }
+<<<<<<< HEAD
 
             if (preg_match('/^categoryrole(?<roleid>\d+)$/', $column, $rolematches)) {
                 $categoryrolecache = [];
@@ -1176,6 +1197,8 @@ class process {
                 }
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if (!preg_match('/^course\d+$/', $column)) {
                 continue;
             }
@@ -1209,14 +1232,26 @@ class process {
                 }
             }
 
+<<<<<<< HEAD
+=======
+            if (!array_key_exists($courseid, $this->rolecache)) {
+                $this->rolecache[$courseid] = uu_allowed_roles_cache(null, (int)$courseid);
+            }
+
+>>>>>>> forked/LAE_400_PACKAGE
             if ($courseid == SITEID) {
                 // Technically frontpage does not have enrolments, but only role assignments,
                 // let's not invent new lang strings here for this rarely used feature.
 
                 if (!empty($user->{'role'.$i})) {
                     $rolename = $user->{'role'.$i};
+<<<<<<< HEAD
                     if (array_key_exists($rolename, $this->rolecache)) {
                         $roleid = $this->rolecache[$rolename]->id;
+=======
+                    if (array_key_exists($rolename, $this->rolecache[$courseid]) ) {
+                        $roleid = $this->rolecache[$courseid][$rolename]->id;
+>>>>>>> forked/LAE_400_PACKAGE
                     } else {
                         $this->upt->track('enrolments', get_string('unknownrole', 'error', s($rolename)), 'error');
                         continue;
@@ -1226,7 +1261,11 @@ class process {
 
                     $a = new \stdClass();
                     $a->course = $shortname;
+<<<<<<< HEAD
                     $a->role   = $this->rolecache[$roleid]->name;
+=======
+                    $a->role = $this->rolecache[$courseid][$roleid]->name;
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->upt->track('enrolments', get_string('enrolledincourserole', 'enrol_manual', $a), 'info');
                 }
 
@@ -1236,8 +1275,13 @@ class process {
                 $roleid = false;
                 if (!empty($user->{'role'.$i})) {
                     $rolename = $user->{'role'.$i};
+<<<<<<< HEAD
                     if (array_key_exists($rolename, $this->rolecache)) {
                         $roleid = $this->rolecache[$rolename]->id;
+=======
+                    if (array_key_exists($rolename, $this->rolecache[$courseid])) {
+                        $roleid = $this->rolecache[$courseid][$rolename]->id;
+>>>>>>> forked/LAE_400_PACKAGE
                     } else {
                         $this->upt->track('enrolments', get_string('unknownrole', 'error', s($rolename)), 'error');
                         continue;
@@ -1256,7 +1300,19 @@ class process {
                     }
                 } else {
                     // No role specified, use the default from manual enrol plugin.
+<<<<<<< HEAD
                     $roleid = $this->manualcache[$courseid]->roleid;
+=======
+                    $defaultenrolroleid = (int)$this->manualcache[$courseid]->roleid;
+                    // Validate the current user can assign this role.
+                    if (array_key_exists($defaultenrolroleid, $this->rolecache[$courseid]) ) {
+                        $roleid = $defaultenrolroleid;
+                    } else {
+                        $role = $DB->get_record('role', ['id' => $defaultenrolroleid]);
+                        $this->upt->track('enrolments', get_string('unknownrole', 'error', s($role->shortname)), 'error');
+                        continue;
+                    }
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 if ($roleid) {
@@ -1299,7 +1355,11 @@ class process {
 
                     $a = new \stdClass();
                     $a->course = $shortname;
+<<<<<<< HEAD
                     $a->role   = $this->rolecache[$roleid]->name;
+=======
+                    $a->role = $this->rolecache[$courseid][$roleid]->name;
+>>>>>>> forked/LAE_400_PACKAGE
                     $this->upt->track('enrolments', get_string('enrolledincourserole', 'enrol_manual', $a), 'info');
                 }
             }

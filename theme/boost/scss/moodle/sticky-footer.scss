@@ -7,6 +7,7 @@ body {
     height: 100%;
 }
 
+<<<<<<< HEAD
 .stickyfooter {
     position: fixed;
     right: 0;
@@ -32,6 +33,8 @@ body {
 
 /* Breakpoints fixes. */
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 @include media-breakpoint-up(sm) {
     #page-wrapper {
         height: 100%;

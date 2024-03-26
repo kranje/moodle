@@ -62,6 +62,7 @@ Feature: View cohort list
     And I should not see "Cohort in category 2"
     And I should not see "Cohort in category 3"
     And I log out
+<<<<<<< HEAD
 
   @javascript
   Scenario: Cohorts list can be filtered
@@ -81,3 +82,5 @@ Feature: View cohort list
       | Cat 2     | Cohort in category 2  |
       | Cat 3     | Cohort in category 3  |
       | System    | System cohort         |
+=======
+>>>>>>> forked/LAE_400_PACKAGE

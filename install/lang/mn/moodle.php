@@ -30,7 +30,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['language'] = 'Хэл';
+<<<<<<< HEAD
 $string['moodlelogo'] = 'Мүүдл лого';
+=======
+$string['moodlelogo'] = 'Moodle лого';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['next'] = 'Дараагийн';
 $string['previous'] = 'Өмнөх';
 $string['reload'] = 'Дахин ачаалах';

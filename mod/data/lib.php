@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -20,9 +24,12 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 use mod_data\manager;
 use mod_data\preset;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die();
 
 // Some constants
@@ -84,9 +91,12 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
     /** priority value for maximum priority */
     const MAX_PRIORITY = 4;
 
+<<<<<<< HEAD
     /** @var bool whether the field is used in preview mode. */
     protected $preview = false;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Constructor function
      *
@@ -100,18 +110,30 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         global $DB;
 
         if (empty($field) && empty($data)) {
+<<<<<<< HEAD
             throw new \moodle_exception('missingfield', 'data');
+=======
+            print_error('missingfield', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (!empty($field)) {
             if (is_object($field)) {
                 $this->field = $field;  // Programmer knows what they are doing, we hope
             } else if (!$this->field = $DB->get_record('data_fields', array('id'=>$field))) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidfieldid', 'data');
             }
             if (empty($data)) {
                 if (!$this->data = $DB->get_record('data', array('id'=>$this->field->dataid))) {
                     throw new \moodle_exception('invalidid', 'data');
+=======
+                print_error('invalidfieldid', 'data');
+            }
+            if (empty($data)) {
+                if (!$this->data = $DB->get_record('data', array('id'=>$this->field->dataid))) {
+                    print_error('invalidid', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         }
@@ -121,10 +143,17 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
                 if (is_object($data)) {
                     $this->data = $data;  // Programmer knows what they are doing, we hope
                 } else if (!$this->data = $DB->get_record('data', array('id'=>$data))) {
+<<<<<<< HEAD
                     throw new \moodle_exception('invalidid', 'data');
                 }
             } else {                      // No way to define it!
                 throw new \moodle_exception('missingdata', 'data');
+=======
+                    print_error('invalidid', 'data');
+                }
+            } else {                      // No way to define it!
+                print_error('missingdata', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -141,6 +170,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         $this->context = context_module::instance($this->cm->id);
     }
 
+<<<<<<< HEAD
     /**
      * Return the field type name.
      *
@@ -202,6 +232,8 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         return $this->preview;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * This field just sets up a default field object
@@ -400,21 +432,35 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         if (empty($this->field)) {   // No field has been defined yet, try and make one
             $this->define_default_field();
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Throw an exception if field type doen't exist. Anyway user should never access to edit a field with an unknown fieldtype.
         if ($this->type === 'unknown') {
             throw new \moodle_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         echo $OUTPUT->box_start('generalbox boxaligncenter boxwidthwide');
 
         echo '<form id="editfield" action="'.$CFG->wwwroot.'/mod/data/field.php" method="post">'."\n";
         echo '<input type="hidden" name="d" value="'.$this->data->id.'" />'."\n";
         if (empty($this->field->id)) {
             echo '<input type="hidden" name="mode" value="add" />'."\n";
+<<<<<<< HEAD
         } else {
             echo '<input type="hidden" name="fid" value="'.$this->field->id.'" />'."\n";
             echo '<input type="hidden" name="mode" value="update" />'."\n";
+=======
+            $savebutton = get_string('add');
+        } else {
+            echo '<input type="hidden" name="fid" value="'.$this->field->id.'" />'."\n";
+            echo '<input type="hidden" name="mode" value="update" />'."\n";
+            $savebutton = get_string('savechanges');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         echo '<input type="hidden" name="type" value="'.$this->type.'" />'."\n";
         echo '<input name="sesskey" value="'.sesskey().'" type="hidden" />'."\n";
@@ -429,6 +475,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
             require_once($filepath);
         }
 
+<<<<<<< HEAD
         $actionbuttons = html_writer::start_div();
         $actionbuttons .= html_writer::tag('input', null, [
             'type' => 'submit',
@@ -445,6 +492,14 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
 
         $stickyfooter = new core\output\sticky_footer($actionbuttons);
         echo $OUTPUT->render($stickyfooter);
+=======
+        echo html_writer::start_div('mt-3');
+        echo html_writer::tag('input', null, array('type' => 'submit', 'value' => $savebutton,
+            'class' => 'btn btn-primary'));
+        echo html_writer::tag('input', null, array('type' => 'submit', 'name' => 'cancel',
+            'value' => get_string('cancel'), 'class' => 'btn btn-secondary ml-2'));
+        echo html_writer::end_div();
+>>>>>>> forked/LAE_400_PACKAGE
 
         echo '</form>';
 
@@ -465,6 +520,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
     }
 
     /**
+<<<<<<< HEAD
      * Return the data_content of the field, or generate it if it is in preview mode.
      *
      * @param int $recordid the record id
@@ -482,6 +538,8 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Display the content of the field in browse mode
      *
      * @global object
@@ -491,6 +549,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
      */
     function display_browse_field($recordid, $template) {
         global $DB;
+<<<<<<< HEAD
         $content = $this->get_data_content($recordid);
         if (!$content || !isset($content->content)) {
             return '';
@@ -503,6 +562,25 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         $options->para = false;
         $str = format_text($content->content, $content->content1, $options);
         return $str;
+=======
+
+        if ($content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
+            if (isset($content->content)) {
+                $options = new stdClass();
+                if ($this->field->param1 == '1') {  // We are autolinking this field, so disable linking within us
+                    //$content->content = '<span class="nolink">'.$content->content.'</span>';
+                    //$content->content1 = FORMAT_HTML;
+                    $options->filter=false;
+                }
+                $options->para = false;
+                $str = format_text($content->content, $content->content1, $options);
+            } else {
+                $str = '';
+            }
+            return $str;
+        }
+        return false;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -619,7 +697,16 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
     function image() {
         global $OUTPUT;
 
+<<<<<<< HEAD
         return $OUTPUT->pix_icon('field/' . $this->type, $this->type, 'data');
+=======
+        $params = array('d'=>$this->data->id, 'fid'=>$this->field->id, 'mode'=>'display', 'sesskey'=>sesskey());
+        $link = new moodle_url('/mod/data/field.php', $params);
+        $str = '<a href="'.$link->out().'">';
+        $str .= $OUTPUT->pix_icon('field/' . $this->type, $this->type, 'data');
+        $str .= '</a>';
+        return $str;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -695,6 +782,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
 /**
  * Given a template and a dataid, generate a default case template
  *
+<<<<<<< HEAD
  * @param stdClass $data the mod_data record.
  * @param string $template the template name
  * @param int $recordid the entry record
@@ -740,6 +828,98 @@ function data_generate_default_template(&$data, $template, $recordid = 0, $form 
     }
 
     return $templatecontent;
+=======
+ * @global object
+ * @param object $data
+ * @param string template [addtemplate, singletemplate, listtempalte, rsstemplate]
+ * @param int $recordid
+ * @param bool $form
+ * @param bool $update
+ * @return bool|string
+ */
+function data_generate_default_template(&$data, $template, $recordid=0, $form=false, $update=true) {
+    global $DB;
+
+    if (!$data && !$template) {
+        return false;
+    }
+    if ($template == 'csstemplate' or $template == 'jstemplate' ) {
+        return '';
+    }
+
+    // get all the fields for that database
+    if ($fields = $DB->get_records('data_fields', array('dataid'=>$data->id), 'id')) {
+
+        $table = new html_table();
+        $table->attributes['class'] = 'mod-data-default-template ##approvalstatusclass##';
+        $table->colclasses = array('template-field', 'template-token');
+        $table->data = array();
+        foreach ($fields as $field) {
+            if ($form) {   // Print forms instead of data
+                $fieldobj = data_get_field($field, $data);
+                $token = $fieldobj->display_add_field($recordid, null);
+            } else {           // Just print the tag
+                $token = '[['.$field->name.']]';
+            }
+            $table->data[] = array(
+                $field->name.': ',
+                $token
+            );
+        }
+
+        if (core_tag_tag::is_enabled('mod_data', 'data_records')) {
+            $label = new html_table_cell(get_string('tags') . ':');
+            if ($form) {
+                $cell = data_generate_tag_form();
+            } else {
+                $cell = new html_table_cell('##tags##');
+            }
+            $table->data[] = new html_table_row(array($label, $cell));
+        }
+
+        if ($template == 'listtemplate') {
+            $cell = new html_table_cell('##edit##  ##more##  ##delete##  ##approve##  ##disapprove##  ##export##');
+            $cell->colspan = 2;
+            $cell->attributes['class'] = 'controls';
+            $table->data[] = new html_table_row(array($cell));
+        } else if ($template == 'singletemplate') {
+            $cell = new html_table_cell('##edit##  ##delete##  ##approve##  ##disapprove##  ##export##');
+            $cell->colspan = 2;
+            $cell->attributes['class'] = 'controls';
+            $table->data[] = new html_table_row(array($cell));
+        } else if ($template == 'asearchtemplate') {
+            $row = new html_table_row(array(get_string('authorfirstname', 'data').': ', '##firstname##'));
+            $row->attributes['class'] = 'searchcontrols';
+            $table->data[] = $row;
+            $row = new html_table_row(array(get_string('authorlastname', 'data').': ', '##lastname##'));
+            $row->attributes['class'] = 'searchcontrols';
+            $table->data[] = $row;
+        }
+
+        $str = '';
+        if ($template == 'listtemplate'){
+            $str .= '##delcheck##';
+            $str .= html_writer::empty_tag('br');
+        }
+
+        $str .= html_writer::start_tag('div', array('class' => 'defaulttemplate'));
+        $str .= html_writer::table($table);
+        $str .= html_writer::end_tag('div');
+        if ($template == 'listtemplate'){
+            $str .= html_writer::empty_tag('hr');
+        }
+
+        if ($update) {
+            $newdata = new stdClass();
+            $newdata->id = $data->id;
+            $newdata->{$template} = $str;
+            $DB->update_record('data', $newdata);
+            $data->{$template} = $str;
+        }
+
+        return $str;
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -840,6 +1020,7 @@ function data_replace_field_in_templates($data, $searchfieldname, $newfieldname)
     $newdata = new stdClass();
     $newdata->id = $data->id;
     $newdata->singletemplate = str_ireplace('[['.$searchfieldname.']]',
+<<<<<<< HEAD
             $prestring.$newfieldname.$poststring, $data->singletemplate ?? '');
 
     $newdata->listtemplate = str_ireplace('[['.$searchfieldname.']]',
@@ -853,6 +1034,21 @@ function data_replace_field_in_templates($data, $searchfieldname, $newfieldname)
 
     $newdata->rsstemplate = str_ireplace('[['.$searchfieldname.']]',
             $prestring.$newfieldname.$poststring, $data->rsstemplate ?? '');
+=======
+            $prestring.$newfieldname.$poststring, $data->singletemplate);
+
+    $newdata->listtemplate = str_ireplace('[['.$searchfieldname.']]',
+            $prestring.$newfieldname.$poststring, $data->listtemplate);
+
+    $newdata->addtemplate = str_ireplace('[['.$searchfieldname.']]',
+            $prestring.$newfieldname.$poststring, $data->addtemplate);
+
+    $newdata->addtemplate = str_ireplace('[['.$searchfieldname.'#id]]',
+            $prestring.$newfieldname.$idpart.$poststring, $data->addtemplate);
+
+    $newdata->rsstemplate = str_ireplace('[['.$searchfieldname.']]',
+            $prestring.$newfieldname.$poststring, $data->rsstemplate);
+>>>>>>> forked/LAE_400_PACKAGE
 
     return $DB->update_record('data', $newdata);
 }
@@ -1158,9 +1354,13 @@ function data_update_instance($data) {
     require_once($CFG->dirroot.'/mod/data/locallib.php');
 
     $data->timemodified = time();
+<<<<<<< HEAD
     if (!empty($data->instance)) {
         $data->id = $data->instance;
     }
+=======
+    $data->id           = $data->instance;
+>>>>>>> forked/LAE_400_PACKAGE
 
     if (empty($data->assessed)) {
         $data->assessed = 0;
@@ -1306,6 +1506,7 @@ function data_user_complete($course, $user, $mod, $data) {
             echo $OUTPUT->container(get_string('gradenoun') . ': ' . get_string('hidden', 'grades'));
         }
     }
+<<<<<<< HEAD
     $records = $DB->get_records(
         'data_records',
         ['dataid' => $data->id, 'userid' => $user->id],
@@ -1315,6 +1516,11 @@ function data_user_complete($course, $user, $mod, $data) {
         $manager = manager::create_from_instance($data);
         $parser = $manager->get_template('singletemplate');
         echo $parser->parse_entries($records);
+=======
+
+    if ($records = $DB->get_records('data_records', array('dataid'=>$data->id,'userid'=>$user->id), 'timemodified DESC')) {
+        data_print_template('singletemplate', $records, $data);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -1430,6 +1636,7 @@ function data_grade_item_delete($data) {
  * takes a list of records, the current data, a search string,
  * and mode to display prints the translated template
  *
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75146 - please do not use this function any more.
  * @todo MDL-75189 Final deprecation in Moodle 4.5.
  * @param string $templatename the template name
@@ -1461,6 +1668,241 @@ function data_print_template($templatename, $records, $data, $search='', $page=0
         return $content;
     }
     echo $content;
+=======
+ * @global object
+ * @global object
+ * @param string $template
+ * @param array $records
+ * @param object $data
+ * @param string $search
+ * @param int $page
+ * @param bool $return
+ * @param object $jumpurl a moodle_url by which to jump back to the record list (can be null)
+ * @return mixed
+ */
+function data_print_template($template, $records, $data, $search='', $page=0, $return=false, moodle_url $jumpurl=null) {
+    global $CFG, $DB, $OUTPUT;
+
+    $cm = get_coursemodule_from_instance('data', $data->id);
+    $context = context_module::instance($cm->id);
+
+    static $fields = array();
+    static $dataid = null;
+
+    if (empty($dataid)) {
+        $dataid = $data->id;
+    } else if ($dataid != $data->id) {
+        $fields = array();
+    }
+
+    if (empty($fields)) {
+        $fieldrecords = $DB->get_records('data_fields', array('dataid'=>$data->id));
+        foreach ($fieldrecords as $fieldrecord) {
+            $fields[]= data_get_field($fieldrecord, $data);
+        }
+    }
+
+    if (empty($records)) {
+        return;
+    }
+
+    if (!$jumpurl) {
+        $jumpurl = new moodle_url('/mod/data/view.php', array('d' => $data->id));
+    }
+    $jumpurl = new moodle_url($jumpurl, array('page' => $page, 'sesskey' => sesskey()));
+
+    foreach ($records as $record) {   // Might be just one for the single template
+
+    // Replacing tags
+        $patterns = array();
+        $replacement = array();
+
+    // Then we generate strings to replace for normal tags
+        foreach ($fields as $field) {
+            $patterns[]='[['.$field->field->name.']]';
+            $replacement[] = highlight($search, $field->display_browse_field($record->id, $template));
+        }
+
+        $canmanageentries = has_capability('mod/data:manageentries', $context);
+
+    // Replacing special tags (##Edit##, ##Delete##, ##More##)
+        $patterns[]='##edit##';
+        $patterns[]='##delete##';
+        if (data_user_can_manage_entry($record, $data, $context)) {
+            $backtourlparams = [
+                'd' => $data->id,
+            ];
+            if ($template === 'singletemplate') {
+                $backtourlparams['mode'] = 'single';
+            }
+            $backtourl = new \moodle_url('/mod/data/view.php', $backtourlparams);
+            $replacement[] = '<a href="'.$CFG->wwwroot.'/mod/data/edit.php?d='
+                             .$data->id.'&amp;rid='.$record->id.'&amp;sesskey='.sesskey().'&amp;backto='
+                             . urlencode($backtourl->out(false)) .'">' .
+                             $OUTPUT->pix_icon('t/edit', get_string('edit')) . '</a>';
+            $replacement[] = '<a href="'.$CFG->wwwroot.'/mod/data/view.php?d='
+                             .$data->id.'&amp;delete='.$record->id.'&amp;sesskey='.sesskey().'">' .
+                             $OUTPUT->pix_icon('t/delete', get_string('delete')) . '</a>';
+        } else {
+            $replacement[] = '';
+            $replacement[] = '';
+        }
+
+        $moreurl = $CFG->wwwroot . '/mod/data/view.php?d=' . $data->id . '&amp;rid=' . $record->id;
+        if ($search) {
+            $moreurl .= '&amp;filter=1';
+        }
+        $patterns[]='##more##';
+        $replacement[] = '<a href="'.$moreurl.'">' . $OUTPUT->pix_icon('t/preview', get_string('more', 'data')) . '</a>';
+
+        $patterns[]='##moreurl##';
+        $replacement[] = $moreurl;
+
+        $patterns[]='##delcheck##';
+        if ($canmanageentries) {
+            $checkbox = new \core\output\checkbox_toggleall('listview-entries', false, [
+                'id' => "entry_{$record->id}",
+                'name' => 'delcheck[]',
+                'classes' => 'recordcheckbox',
+                'value' => $record->id,
+            ]);
+            $replacement[] = $OUTPUT->render($checkbox);
+        } else {
+            $replacement[] = '';
+        }
+
+        $patterns[]='##user##';
+        $replacement[] = '<a href="'.$CFG->wwwroot.'/user/view.php?id='.$record->userid.
+                               '&amp;course='.$data->course.'">'.fullname($record).'</a>';
+
+        $patterns[] = '##userpicture##';
+        $ruser = user_picture::unalias($record, null, 'userid');
+        // If the record didn't come with user data, retrieve the user from database.
+        if (!isset($ruser->picture)) {
+            $ruser = core_user::get_user($record->userid);
+        }
+        $replacement[] = $OUTPUT->user_picture($ruser, array('courseid' => $data->course));
+
+        $patterns[]='##export##';
+
+        if (!empty($CFG->enableportfolios) && ($template == 'singletemplate' || $template == 'listtemplate')
+            && ((has_capability('mod/data:exportentry', $context)
+                || (data_isowner($record->id) && has_capability('mod/data:exportownentry', $context))))) {
+            require_once($CFG->libdir . '/portfoliolib.php');
+            $button = new portfolio_add_button();
+            $button->set_callback_options('data_portfolio_caller', array('id' => $cm->id, 'recordid' => $record->id), 'mod_data');
+            list($formats, $files) = data_portfolio_caller::formats($fields, $record);
+            $button->set_formats($formats);
+            $replacement[] = $button->to_html(PORTFOLIO_ADD_ICON_LINK);
+        } else {
+            $replacement[] = '';
+        }
+
+        $patterns[] = '##timeadded##';
+        $replacement[] = userdate($record->timecreated);
+
+        $patterns[] = '##timemodified##';
+        $replacement [] = userdate($record->timemodified);
+
+        $patterns[]='##approve##';
+        if (has_capability('mod/data:approve', $context) && ($data->approval) && (!$record->approved)) {
+            $approveurl = new moodle_url($jumpurl, array('approve' => $record->id));
+            $approveicon = new pix_icon('t/approve', get_string('approve', 'data'), '', array('class' => 'iconsmall'));
+            $replacement[] = html_writer::tag('span', $OUTPUT->action_icon($approveurl, $approveicon),
+                    array('class' => 'approve'));
+        } else {
+            $replacement[] = '';
+        }
+
+        $patterns[]='##disapprove##';
+        if (has_capability('mod/data:approve', $context) && ($data->approval) && ($record->approved)) {
+            $disapproveurl = new moodle_url($jumpurl, array('disapprove' => $record->id));
+            $disapproveicon = new pix_icon('t/block', get_string('disapprove', 'data'), '', array('class' => 'iconsmall'));
+            $replacement[] = html_writer::tag('span', $OUTPUT->action_icon($disapproveurl, $disapproveicon),
+                    array('class' => 'disapprove'));
+        } else {
+            $replacement[] = '';
+        }
+
+        $patterns[] = '##approvalstatus##';
+        $patterns[] = '##approvalstatusclass##';
+        if (!$data->approval) {
+            $replacement[] = '';
+            $replacement[] = '';
+        } else if ($record->approved) {
+            $replacement[] = get_string('approved', 'data');
+            $replacement[] = 'approved';
+        } else {
+            $replacement[] = get_string('notapproved', 'data');
+            $replacement[] = 'notapproved';
+        }
+
+        $patterns[]='##comments##';
+        if (($template == 'listtemplate') && ($data->comments)) {
+
+            if (!empty($CFG->usecomments)) {
+                require_once($CFG->dirroot  . '/comment/lib.php');
+                list($context, $course, $cm) = get_context_info_array($context->id);
+                $cmt = new stdClass();
+                $cmt->context = $context;
+                $cmt->course  = $course;
+                $cmt->cm      = $cm;
+                $cmt->area    = 'database_entry';
+                $cmt->itemid  = $record->id;
+                $cmt->showcount = true;
+                $cmt->component = 'mod_data';
+                $comment = new comment($cmt);
+                $replacement[] = $comment->output(true);
+            }
+        } else {
+            $replacement[] = '';
+        }
+
+        if (core_tag_tag::is_enabled('mod_data', 'data_records')) {
+            $patterns[] = "##tags##";
+            $replacement[] = $OUTPUT->tag_list(
+                core_tag_tag::get_item_tags('mod_data', 'data_records', $record->id), '', 'data-tags');
+        }
+
+        // actual replacement of the tags
+        $newtext = str_ireplace($patterns, $replacement, $data->{$template});
+
+        // no more html formatting and filtering - see MDL-6635
+        if ($return) {
+            return $newtext;
+        } else {
+            echo $newtext;
+
+            // hack alert - return is always false in singletemplate anyway ;-)
+            /**********************************
+             *    Printing Ratings Form       *
+             *********************************/
+            if ($template == 'singletemplate') {    //prints ratings options
+                data_print_ratings($data, $record);
+            }
+
+            /**********************************
+             *    Printing Comments Form       *
+             *********************************/
+            if (($template == 'singletemplate') && ($data->comments)) {
+                if (!empty($CFG->usecomments)) {
+                    require_once($CFG->dirroot . '/comment/lib.php');
+                    list($context, $course, $cm) = get_context_info_array($context->id);
+                    $cmt = new stdClass();
+                    $cmt->context = $context;
+                    $cmt->course  = $course;
+                    $cmt->cm      = $cm;
+                    $cmt->area    = 'database_entry';
+                    $cmt->itemid  = $record->id;
+                    $cmt->showcount = true;
+                    $cmt->component = 'mod_data';
+                    $comment = new comment($cmt);
+                    $comment->output(false);
+                }
+            }
+        }
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -1667,9 +2109,14 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
 
     $cm = get_coursemodule_from_instance('data', $data->id);
     $context = context_module::instance($cm->id);
+<<<<<<< HEAD
     echo '<div class="datapreferences my-5">';
     echo '<form id="options" action="view.php" method="get">';
     echo '<div class="d-flex">';
+=======
+    echo '<div class="datapreferences mb-3">';
+    echo '<form id="options" action="view.php" method="get">';
+>>>>>>> forked/LAE_400_PACKAGE
     echo '<div>';
     echo '<input type="hidden" name="d" value="'.$data->id.'" />';
     if ($mode =='asearch') {
@@ -1749,12 +2196,16 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
     echo '&nbsp;<input type="checkbox" id="advancedcheckbox" name="advanced" value="1" ' . $checked . ' ' .
          'onchange="showHideAdvSearch(this.checked);" class="mx-1" />' .
          '<label for="advancedcheckbox">' . get_string('advancedsearch', 'data') . '</label>';
+<<<<<<< HEAD
     echo '</div>';
     echo '<div id="advsearch-save-sec" class="ml-auto '. $regsearchclass . '">';
     echo '&nbsp;<input type="submit" class="btn btn-secondary" value="' . get_string('savesettings', 'data') . '" />';
     echo '</div>';
     echo '</div>';
     echo '<div>';
+=======
+    echo '&nbsp;<input type="submit" class="btn btn-secondary" value="' . get_string('savesettings', 'data') . '" />';
+>>>>>>> forked/LAE_400_PACKAGE
 
     echo '<br />';
     echo '<div class="' . $advancedsearchclass . '" id="data_adv_form">';
@@ -1766,9 +2217,14 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
 
     // Determine if we are printing all fields for advanced search, or the template for advanced search
     // If a template is not defined, use the deafault template and display all fields.
+<<<<<<< HEAD
     $asearchtemplate = $data->asearchtemplate;
     if (empty($asearchtemplate)) {
         $asearchtemplate = data_generate_default_template($data, 'asearchtemplate', 0, false, false);
+=======
+    if(empty($data->asearchtemplate)) {
+        data_generate_default_template($data, 'asearchtemplate');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     static $fields = array();
@@ -1797,7 +2253,10 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
         $fieldname = preg_quote($fieldname, '/');
         $patterns[] = "/\[\[$fieldname\]\]/i";
         $searchfield = data_get_field_from_id($field->field->id, $data);
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if ($searchfield->type === 'unknown') {
             continue;
         }
@@ -1828,7 +2287,11 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
     $options->para=false;
     $options->noclean=true;
     echo '<tr><td>';
+<<<<<<< HEAD
     echo preg_replace($patterns, $replacement, format_text($asearchtemplate, FORMAT_HTML, $options));
+=======
+    echo preg_replace($patterns, $replacement, format_text($data->asearchtemplate, FORMAT_HTML, $options));
+>>>>>>> forked/LAE_400_PACKAGE
     echo '</td></tr>';
 
     echo '<tr><td colspan="4"><br/>' .
@@ -1837,9 +2300,15 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
          '</td></tr>';
     echo '</table>';
     echo '</div>';
+<<<<<<< HEAD
     echo '</form>';
     echo '</div>';
     echo '<hr/>';
+=======
+    echo '</div>';
+    echo '</form>';
+    echo '</div>';
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -1847,6 +2316,7 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
  * @global object
  * @param object $data
  * @param object $record
+<<<<<<< HEAD
  * @param bool $print if the result must be printed or returner.
  * @return void Output echo'd
  */
@@ -1860,6 +2330,15 @@ function data_print_ratings($data, $record, bool $print = true) {
         return $result;
     }
     echo $result;
+=======
+ * @return void Output echo'd
+ */
+function data_print_ratings($data, $record) {
+    global $OUTPUT;
+    if (!empty($record->rating)){
+        echo $OUTPUT->render($record->rating);
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -2085,6 +2564,7 @@ function data_convert_to_roles($data, $teacherroles=array(), $studentroles=array
  * @param string $shortname
  * @param  string $path
  * @return string
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75148 - please, use the preset::get_name_from_plugin() function instead.
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  * @see preset::get_name_from_plugin()
@@ -2093,12 +2573,26 @@ function data_preset_name($shortname, $path) {
     debugging('data_preset_name() is deprecated. Please use preset::get_name_from_plugin() instead.', DEBUG_DEVELOPER);
 
     return preset::get_name_from_plugin($shortname);
+=======
+ */
+function data_preset_name($shortname, $path) {
+
+    // We are looking inside the preset itself as a first choice, but also in normal data directory
+    $string = get_string('modulename', 'datapreset_'.$shortname);
+
+    if (substr($string, 0, 1) == '[') {
+        return $shortname;
+    } else {
+        return $string;
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
  * Returns an array of all the available presets.
  *
  * @return array
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75148 - please, use the manager::get_available_presets() function instead.
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  * @see manager::get_available_presets()
@@ -2109,6 +2603,37 @@ function data_get_available_presets($context) {
     $cm = get_coursemodule_from_id('', $context->instanceid, 0, false, MUST_EXIST);
     $manager = manager::create_from_coursemodule($cm);
     return $manager->get_available_presets();
+=======
+ */
+function data_get_available_presets($context) {
+    global $CFG, $USER;
+
+    $presets = array();
+
+    // First load the ratings sub plugins that exist within the modules preset dir
+    if ($dirs = core_component::get_plugin_list('datapreset')) {
+        foreach ($dirs as $dir=>$fulldir) {
+            if (is_directory_a_preset($fulldir)) {
+                $preset = new stdClass();
+                $preset->path = $fulldir;
+                $preset->userid = 0;
+                $preset->shortname = $dir;
+                $preset->name = data_preset_name($dir, $fulldir);
+                if (file_exists($fulldir.'/screenshot.jpg')) {
+                    $preset->screenshot = $CFG->wwwroot.'/mod/data/preset/'.$dir.'/screenshot.jpg';
+                } else if (file_exists($fulldir.'/screenshot.png')) {
+                    $preset->screenshot = $CFG->wwwroot.'/mod/data/preset/'.$dir.'/screenshot.png';
+                } else if (file_exists($fulldir.'/screenshot.gif')) {
+                    $preset->screenshot = $CFG->wwwroot.'/mod/data/preset/'.$dir.'/screenshot.gif';
+                }
+                $presets[] = $preset;
+            }
+        }
+    }
+    // Now add to that the site presets that people have saved
+    $presets = data_get_available_site_presets($context, $presets);
+    return $presets;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -2117,6 +2642,7 @@ function data_get_available_presets($context) {
  * @param stdClass $context The context that we are looking from.
  * @param array $presets
  * @return array An array of presets
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75148 - please, use the manager::get_available_saved_presets() function instead.
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  * @see manager::get_available_saved_presets()
@@ -2131,6 +2657,32 @@ function data_get_available_site_presets($context, array $presets=array()) {
     $manager = manager::create_from_coursemodule($cm);
     $savedpresets = $manager->get_available_saved_presets();
     return array_merge($presets, $savedpresets);
+=======
+ */
+function data_get_available_site_presets($context, array $presets=array()) {
+    global $USER;
+
+    $fs = get_file_storage();
+    $files = $fs->get_area_files(DATA_PRESET_CONTEXT, DATA_PRESET_COMPONENT, DATA_PRESET_FILEAREA);
+    $canviewall = has_capability('mod/data:viewalluserpresets', $context);
+    if (empty($files)) {
+        return $presets;
+    }
+    foreach ($files as $file) {
+        if (($file->is_directory() && $file->get_filepath()=='/') || !$file->is_directory() || (!$canviewall && $file->get_userid() != $USER->id)) {
+            continue;
+        }
+        $preset = new stdClass;
+        $preset->path = $file->get_filepath();
+        $preset->name = trim($preset->path, '/');
+        $preset->shortname = $preset->name;
+        $preset->userid = $file->get_userid();
+        $preset->id = $file->get_id();
+        $preset->storedfile = $file;
+        $presets[] = $preset;
+    }
+    return $presets;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -2138,6 +2690,7 @@ function data_get_available_site_presets($context, array $presets=array()) {
  *
  * @param string $name
  * @return bool
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75187 - please, use the preset::delete() function instead.
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  * @see preset::delete()
@@ -2145,6 +2698,10 @@ function data_get_available_site_presets($context, array $presets=array()) {
 function data_delete_site_preset($name) {
     debugging('data_delete_site_preset() is deprecated. Please use preset::delete() instead.', DEBUG_DEVELOPER);
 
+=======
+ */
+function data_delete_site_preset($name) {
+>>>>>>> forked/LAE_400_PACKAGE
     $fs = get_file_storage();
 
     $files = $fs->get_directory_files(DATA_PRESET_CONTEXT, DATA_PRESET_COMPONENT, DATA_PRESET_FILEAREA, 0, '/'.$name.'/');
@@ -2198,12 +2755,16 @@ function data_print_header($course, $cm, $data, $currenttab='', string $actionba
  * @return bool
  */
 function data_user_can_add_entry($data, $currentgroup, $groupmode, $context = null) {
+<<<<<<< HEAD
     global $DB;
 
     // Don't let add entry to a database that has no fields.
     if (!$DB->record_exists('data_fields', ['dataid' => $data->id])) {
         return false;
     }
+=======
+    global $USER;
+>>>>>>> forked/LAE_400_PACKAGE
 
     if (empty($context)) {
         $cm = get_coursemodule_from_instance('data', $data->id, 0, false, MUST_EXIST);
@@ -2294,6 +2855,7 @@ function data_in_readonly_period($data) {
 }
 
 /**
+<<<<<<< HEAD
  * Check if the files in a directory are the expected for a preset.
  *
  * @return bool Wheter the defined $directory has or not all the expected preset files.
@@ -2306,13 +2868,34 @@ function is_directory_a_preset($directory) {
     debugging('is_directory_a_preset() is deprecated. Please use preset::is_directory_a_preset() instead.', DEBUG_DEVELOPER);
 
     return preset::is_directory_a_preset($directory);
+=======
+ * @return bool
+ */
+function is_directory_a_preset($directory) {
+    $directory = rtrim($directory, '/\\') . '/';
+    $status = file_exists($directory.'singletemplate.html') &&
+              file_exists($directory.'listtemplate.html') &&
+              file_exists($directory.'listtemplateheader.html') &&
+              file_exists($directory.'listtemplatefooter.html') &&
+              file_exists($directory.'addtemplate.html') &&
+              file_exists($directory.'rsstemplate.html') &&
+              file_exists($directory.'rsstitletemplate.html') &&
+              file_exists($directory.'csstemplate.css') &&
+              file_exists($directory.'jstemplate.js') &&
+              file_exists($directory.'preset.xml');
+
+    return $status;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
  * Abstract class used for data preset importers
+<<<<<<< HEAD
  *
  * @deprecated since Moodle 4.1 MDL-75140 - please do not use this class any more.
  * @todo MDL-75189 Final deprecation in Moodle 4.5.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 abstract class data_preset_importer {
 
@@ -2330,11 +2913,14 @@ abstract class data_preset_importer {
      * @param string $directory
      */
     public function __construct($course, $cm, $module, $directory) {
+<<<<<<< HEAD
         debugging(
             'data_preset_importer is deprecated. Please use mod\\data\\local\\importer\\preset_importer instead',
             DEBUG_DEVELOPER
         );
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->course = $course;
         $this->cm = $cm;
         $this->module = $module;
@@ -2387,7 +2973,11 @@ abstract class data_preset_importer {
         require_once($CFG->libdir.'/xmlize.php');
 
         $fs = $fileobj = null;
+<<<<<<< HEAD
         if (!preset::is_directory_a_preset($this->directory)) {
+=======
+        if (!is_directory_a_preset($this->directory)) {
+>>>>>>> forked/LAE_400_PACKAGE
             //maybe the user requested a preset stored in the Moodle file storage
 
             $fs = get_file_storage();
@@ -2410,7 +3000,11 @@ abstract class data_preset_importer {
             }
 
             if (empty($fileobj)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidpreset', 'data', '', $this->directory);
+=======
+                print_error('invalidpreset', 'data', '', $this->directory);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -2504,7 +3098,11 @@ abstract class data_preset_importer {
                     continue;
                 }
                 if (array_key_exists($cid, $preservedfields)){
+<<<<<<< HEAD
                     throw new \moodle_exception('notinjectivemap', 'data');
+=======
+                    print_error('notinjectivemap', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 else $preservedfields[$cid] = true;
             }
@@ -2604,19 +3202,25 @@ abstract class data_preset_importer {
 
 /**
  * Data preset importer for uploaded presets
+<<<<<<< HEAD
  *
  * @deprecated since Moodle 4.1 MDL-75140 - please do not use this class any more.
  * @todo MDL-75189 Final deprecation in Moodle 4.5.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class data_preset_upload_importer extends data_preset_importer {
     public function __construct($course, $cm, $module, $filepath) {
         global $USER;
+<<<<<<< HEAD
 
         debugging(
             'data_preset_upload_importer is deprecated. Please use mod\\data\\local\\importer\\preset_upload_importer instead',
             DEBUG_DEVELOPER
         );
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (is_file($filepath)) {
             $fp = get_file_packer();
             if ($fp->extract_to_pathname($filepath, $filepath.'_extracted')) {
@@ -2626,7 +3230,10 @@ class data_preset_upload_importer extends data_preset_importer {
         }
         parent::__construct($course, $cm, $module, $filepath);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function cleanup() {
         return fulldelete($this->directory);
     }
@@ -2634,20 +3241,26 @@ class data_preset_upload_importer extends data_preset_importer {
 
 /**
  * Data preset importer for existing presets
+<<<<<<< HEAD
  *
  * @deprecated since Moodle 4.1 MDL-75140 - please do not use this class any more.
  * @todo MDL-75189 Final deprecation in Moodle 4.5.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class data_preset_existing_importer extends data_preset_importer {
     protected $userid;
     public function __construct($course, $cm, $module, $fullname) {
         global $USER;
+<<<<<<< HEAD
 
         debugging(
             'data_preset_existing_importer is deprecated. Please use mod\\data\\local\\importer\\preset_existing_importer instead',
             DEBUG_DEVELOPER
         );
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         list($userid, $shortname) = explode('/', $fullname, 2);
         $context = context_module::instance($cm->id);
         if ($userid && ($userid != $USER->id) && !has_capability('mod/data:manageuserpresets', $context) && !has_capability('mod/data:viewalluserpresets', $context)) {
@@ -2965,10 +3578,17 @@ function data_import_csv($cm, $data, &$csvdata, $encoding, $fielddelimiter) {
     $readcount = $cir->load_csv_content($csvdata, $encoding, $fielddelimiter);
     $csvdata = null; // Free memory.
     if (empty($readcount)) {
+<<<<<<< HEAD
         throw new \moodle_exception('csvfailed', 'data', "{$CFG->wwwroot}/mod/data/edit.php?d={$data->id}");
     } else {
         if (!$fieldnames = $cir->get_columns()) {
             throw new \moodle_exception('cannotreadtmpfile', 'error');
+=======
+        print_error('csvfailed', 'data', "{$CFG->wwwroot}/mod/data/edit.php?d={$data->id}");
+    } else {
+        if (!$fieldnames = $cir->get_columns()) {
+            print_error('cannotreadtmpfile', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Check the fieldnames are valid.
@@ -3010,7 +3630,11 @@ function data_import_csv($cm, $data, &$csvdata, $encoding, $fielddelimiter) {
         }
 
         if (!empty($errorfield)) {
+<<<<<<< HEAD
             throw new \moodle_exception('fieldnotmatched', 'data',
+=======
+            print_error('fieldnotmatched', 'data',
+>>>>>>> forked/LAE_400_PACKAGE
                 "{$CFG->wwwroot}/mod/data/edit.php?d={$data->id}", $errorfield);
         }
 
@@ -3526,11 +4150,18 @@ function data_extend_settings_navigation(settings_navigation $settings, navigati
             $defaultemplate = 'singletemplate';
         }
 
+<<<<<<< HEAD
         $datanode->add(get_string('presets', 'data'), new moodle_url('/mod/data/preset.php', array('d' => $data->id)));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $datanode->add(get_string('fields', 'data'),
             new moodle_url('/mod/data/field.php', array('d' => $data->id)));
         $datanode->add(get_string('templates', 'data'),
             new moodle_url('/mod/data/templates.php', array('d' => $data->id)));
+<<<<<<< HEAD
+=======
+        $datanode->add(get_string('presets', 'data'), new moodle_url('/mod/data/preset.php', array('d' => $data->id)));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!empty($CFG->enablerssfeeds) && !empty($CFG->data_enablerssfeeds) && $data->rssarticles > 0) {
@@ -3551,6 +4182,7 @@ function data_extend_settings_navigation(settings_navigation $settings, navigati
  * @param stdClass $data The database record
  * @param string $path
  * @return bool
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75142 - please, use the preset::save() function instead.
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  * @see preset::save()
@@ -3561,6 +4193,54 @@ function data_presets_save($course, $cm, $data, $path) {
     $manager = manager::create_from_instance($data);
     $preset = preset::create_from_instance($manager, $path);
     return $preset->save();
+=======
+ */
+function data_presets_save($course, $cm, $data, $path) {
+    global $USER;
+    $fs = get_file_storage();
+    $filerecord = new stdClass;
+    $filerecord->contextid = DATA_PRESET_CONTEXT;
+    $filerecord->component = DATA_PRESET_COMPONENT;
+    $filerecord->filearea = DATA_PRESET_FILEAREA;
+    $filerecord->itemid = 0;
+    $filerecord->filepath = '/'.$path.'/';
+    $filerecord->userid = $USER->id;
+
+    $filerecord->filename = 'preset.xml';
+    $fs->create_file_from_string($filerecord, data_presets_generate_xml($course, $cm, $data));
+
+    $filerecord->filename = 'singletemplate.html';
+    $fs->create_file_from_string($filerecord, $data->singletemplate);
+
+    $filerecord->filename = 'listtemplateheader.html';
+    $fs->create_file_from_string($filerecord, $data->listtemplateheader);
+
+    $filerecord->filename = 'listtemplate.html';
+    $fs->create_file_from_string($filerecord, $data->listtemplate);
+
+    $filerecord->filename = 'listtemplatefooter.html';
+    $fs->create_file_from_string($filerecord, $data->listtemplatefooter);
+
+    $filerecord->filename = 'addtemplate.html';
+    $fs->create_file_from_string($filerecord, $data->addtemplate);
+
+    $filerecord->filename = 'rsstemplate.html';
+    $fs->create_file_from_string($filerecord, $data->rsstemplate);
+
+    $filerecord->filename = 'rsstitletemplate.html';
+    $fs->create_file_from_string($filerecord, $data->rsstitletemplate);
+
+    $filerecord->filename = 'csstemplate.css';
+    $fs->create_file_from_string($filerecord, $data->csstemplate);
+
+    $filerecord->filename = 'jstemplate.js';
+    $fs->create_file_from_string($filerecord, $data->jstemplate);
+
+    $filerecord->filename = 'asearchtemplate.html';
+    $fs->create_file_from_string($filerecord, $data->asearchtemplate);
+
+    return true;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -3571,6 +4251,7 @@ function data_presets_save($course, $cm, $data, $path) {
  * @param stdClass $cm The course module record
  * @param stdClass $data The database record
  * @return string The XML for the preset
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75142 - please, use the protected preset::generate_preset_xml() function instead.
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  * @see preset::generate_preset_xml()
@@ -3607,6 +4288,153 @@ function data_presets_export($course, $cm, $data, $tostorage=false) {
     $manager = manager::create_from_instance($data);
     $preset = preset::create_from_instance($manager, $data->name);
     return $preset->export();
+=======
+ */
+function data_presets_generate_xml($course, $cm, $data) {
+    global $DB;
+
+    // Assemble "preset.xml":
+    $presetxmldata = "<preset>\n\n";
+
+    // Raw settings are not preprocessed during saving of presets
+    $raw_settings = array(
+        'intro',
+        'comments',
+        'requiredentries',
+        'requiredentriestoview',
+        'maxentries',
+        'rssarticles',
+        'approval',
+        'manageapproved',
+        'defaultsortdir'
+    );
+
+    $presetxmldata .= "<settings>\n";
+    // First, settings that do not require any conversion
+    foreach ($raw_settings as $setting) {
+        $presetxmldata .= "<$setting>" . htmlspecialchars($data->$setting) . "</$setting>\n";
+    }
+
+    // Now specific settings
+    if ($data->defaultsort > 0 && $sortfield = data_get_field_from_id($data->defaultsort, $data)) {
+        $presetxmldata .= '<defaultsort>' . htmlspecialchars($sortfield->field->name) . "</defaultsort>\n";
+    } else {
+        $presetxmldata .= "<defaultsort>0</defaultsort>\n";
+    }
+    $presetxmldata .= "</settings>\n\n";
+    // Now for the fields. Grab all that are non-empty
+    $fields = $DB->get_records('data_fields', array('dataid'=>$data->id));
+    ksort($fields);
+    if (!empty($fields)) {
+        foreach ($fields as $field) {
+            $presetxmldata .= "<field>\n";
+            foreach ($field as $key => $value) {
+                if ($value != '' && $key != 'id' && $key != 'dataid') {
+                    $presetxmldata .= "<$key>" . htmlspecialchars($value) . "</$key>\n";
+                }
+            }
+            $presetxmldata .= "</field>\n\n";
+        }
+    }
+    $presetxmldata .= '</preset>';
+    return $presetxmldata;
+}
+
+function data_presets_export($course, $cm, $data, $tostorage=false) {
+    global $CFG, $DB;
+
+    $presetname = clean_filename($data->name) . '-preset-' . gmdate("Ymd_Hi");
+    $exportsubdir = "mod_data/presetexport/$presetname";
+    make_temp_directory($exportsubdir);
+    $exportdir = "$CFG->tempdir/$exportsubdir";
+
+    // Assemble "preset.xml":
+    $presetxmldata = data_presets_generate_xml($course, $cm, $data);
+
+    // After opening a file in write mode, close it asap
+    $presetxmlfile = fopen($exportdir . '/preset.xml', 'w');
+    fwrite($presetxmlfile, $presetxmldata);
+    fclose($presetxmlfile);
+
+    // Now write the template files
+    $singletemplate = fopen($exportdir . '/singletemplate.html', 'w');
+    fwrite($singletemplate, $data->singletemplate);
+    fclose($singletemplate);
+
+    $listtemplateheader = fopen($exportdir . '/listtemplateheader.html', 'w');
+    fwrite($listtemplateheader, $data->listtemplateheader);
+    fclose($listtemplateheader);
+
+    $listtemplate = fopen($exportdir . '/listtemplate.html', 'w');
+    fwrite($listtemplate, $data->listtemplate);
+    fclose($listtemplate);
+
+    $listtemplatefooter = fopen($exportdir . '/listtemplatefooter.html', 'w');
+    fwrite($listtemplatefooter, $data->listtemplatefooter);
+    fclose($listtemplatefooter);
+
+    $addtemplate = fopen($exportdir . '/addtemplate.html', 'w');
+    fwrite($addtemplate, $data->addtemplate);
+    fclose($addtemplate);
+
+    $rsstemplate = fopen($exportdir . '/rsstemplate.html', 'w');
+    fwrite($rsstemplate, $data->rsstemplate);
+    fclose($rsstemplate);
+
+    $rsstitletemplate = fopen($exportdir . '/rsstitletemplate.html', 'w');
+    fwrite($rsstitletemplate, $data->rsstitletemplate);
+    fclose($rsstitletemplate);
+
+    $csstemplate = fopen($exportdir . '/csstemplate.css', 'w');
+    fwrite($csstemplate, $data->csstemplate);
+    fclose($csstemplate);
+
+    $jstemplate = fopen($exportdir . '/jstemplate.js', 'w');
+    fwrite($jstemplate, $data->jstemplate);
+    fclose($jstemplate);
+
+    $asearchtemplate = fopen($exportdir . '/asearchtemplate.html', 'w');
+    fwrite($asearchtemplate, $data->asearchtemplate);
+    fclose($asearchtemplate);
+
+    // Check if all files have been generated
+    if (! is_directory_a_preset($exportdir)) {
+        print_error('generateerror', 'data');
+    }
+
+    $filenames = array(
+        'preset.xml',
+        'singletemplate.html',
+        'listtemplateheader.html',
+        'listtemplate.html',
+        'listtemplatefooter.html',
+        'addtemplate.html',
+        'rsstemplate.html',
+        'rsstitletemplate.html',
+        'csstemplate.css',
+        'jstemplate.js',
+        'asearchtemplate.html'
+    );
+
+    $filelist = array();
+    foreach ($filenames as $filename) {
+        $filelist[$filename] = $exportdir . '/' . $filename;
+    }
+
+    $exportfile = $exportdir.'.zip';
+    file_exists($exportfile) && unlink($exportfile);
+
+    $fp = get_file_packer('application/zip');
+    $fp->archive_to_pathname($filelist, $exportfile);
+
+    foreach ($filelist as $file) {
+        unlink($file);
+    }
+    rmdir($exportdir);
+
+    // Return the full path to the exported preset file:
+    return $exportfile;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -3685,7 +4513,11 @@ function data_comment_validate($comment_param) {
 
     //check if approved
     if ($data->approval and !$record->approved and !data_isowner($record) and !has_capability('mod/data:approve', $context)) {
+<<<<<<< HEAD
         throw new comment_exception('notapprovederror', 'data');
+=======
+        throw new comment_exception('notapproved', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // group access
@@ -3948,13 +4780,17 @@ function data_get_advanced_search_sql($sort, $data, $recordids, $selectdata, $so
  * @param stdClass $context  Context object.
  * @param stdClass $preset  The preset object that we are checking for deletion.
  * @return bool  Returns true if the user can delete, otherwise false.
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75187 - please, use the preset::can_manage() function instead.
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  * @see preset::can_manage()
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 function data_user_can_delete_preset($context, $preset) {
     global $USER;
 
+<<<<<<< HEAD
     debugging('data_user_can_delete_preset() is deprecated. Please use manager::can_manage() instead.', DEBUG_DEVELOPER);
 
     if ($context->contextlevel == CONTEXT_MODULE && isset($preset->name)) {
@@ -3964,12 +4800,18 @@ function data_user_can_delete_preset($context, $preset) {
         return $todelete->can_manage();
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if (has_capability('mod/data:manageuserpresets', $context)) {
         return true;
     } else {
         $candelete = false;
+<<<<<<< HEAD
         $userid = $preset instanceof preset ? $preset->get_userid() : $preset->userid;
         if ($userid == $USER->id) {
+=======
+        if ($preset->userid == $USER->id) {
+>>>>>>> forked/LAE_400_PACKAGE
             $candelete = true;
         }
         return $candelete;
@@ -4242,8 +5084,11 @@ function data_update_completion_state($data, $course, $cm) {
 /**
  * Mark the activity completed (if required) and trigger the course_module_viewed event.
  *
+<<<<<<< HEAD
  * @deprecated since Moodle 4.1 MDL-75146 - please do not use this function any more.
  * @todo MDL-75189 Final deprecation in Moodle 4.5.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * @param  stdClass $data       data object
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
@@ -4252,7 +5097,10 @@ function data_update_completion_state($data, $course, $cm) {
  */
 function data_view($data, $course, $cm, $context) {
     global $CFG;
+<<<<<<< HEAD
     debugging('data_view is deprecated. Use mod_data\\manager::set_module_viewed instead', DEBUG_DEVELOPER);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     require_once($CFG->libdir . '/completionlib.php');
 
     // Trigger course_module_viewed event.

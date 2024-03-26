@@ -70,7 +70,11 @@ require_once($CFG->libdir.'/ddl/database_manager.php');
 
 
 /**
+<<<<<<< HEAD
  * DDL exception class, use instead of throw new \moodle_exception() and "return false;" in ddl code.
+=======
+ * DDL exception class, use instead of print_error() and "return false;" in ddl code.
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class ddl_exception extends moodle_exception {
     /**

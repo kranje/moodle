@@ -150,7 +150,11 @@ abstract class DefinedName
 
             // New title
             $newTitle = $this->name;
+<<<<<<< HEAD
             ReferenceHelper::getInstance()->updateNamedFormulae($this->worksheet->getParent(), $oldTitle, $newTitle);
+=======
+            ReferenceHelper::getInstance()->updateNamedFormulas($this->worksheet->getParent(), $oldTitle, $newTitle);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $this;

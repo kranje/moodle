@@ -2,11 +2,16 @@
 
 namespace PhpOffice\PhpSpreadsheet\Writer\Ods;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Cell\CellAddress;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+=======
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Settings extends WriterPart
 {
@@ -48,9 +53,34 @@ class Settings extends WriterPart
         $objWriter->text('view1');
         $objWriter->endElement(); // ViewId
         $objWriter->startElement('config:config-item-map-named');
+<<<<<<< HEAD
 
         $this->writeAllWorksheetSettings($objWriter, $spreadsheet);
 
+=======
+        $objWriter->writeAttribute('config:name', 'Tables');
+        foreach ($spreadsheet->getWorksheetIterator() as $ws) {
+            $objWriter->startElement('config:config-item-map-entry');
+            $objWriter->writeAttribute('config:name', $ws->getTitle());
+            $selected = $ws->getSelectedCells();
+            if (preg_match('/^([a-z]+)([0-9]+)/i', $selected, $matches) === 1) {
+                $colSel = Coordinate::columnIndexFromString($matches[1]) - 1;
+                $rowSel = (int) $matches[2] - 1;
+                $objWriter->startElement('config:config-item');
+                $objWriter->writeAttribute('config:name', 'CursorPositionX');
+                $objWriter->writeAttribute('config:type', 'int');
+                $objWriter->text($colSel);
+                $objWriter->endElement();
+                $objWriter->startElement('config:config-item');
+                $objWriter->writeAttribute('config:name', 'CursorPositionY');
+                $objWriter->writeAttribute('config:type', 'int');
+                $objWriter->text($rowSel);
+                $objWriter->endElement();
+            }
+            $objWriter->endElement(); // config:config-item-map-entry
+        }
+        $objWriter->endElement(); // config:config-item-map-named
+>>>>>>> forked/LAE_400_PACKAGE
         $wstitle = $spreadsheet->getActiveSheet()->getTitle();
         $objWriter->startElement('config:config-item');
         $objWriter->writeAttribute('config:name', 'ActiveTable');
@@ -69,6 +99,7 @@ class Settings extends WriterPart
 
         return $objWriter->getData();
     }
+<<<<<<< HEAD
 
     private function writeAllWorksheetSettings(XMLWriter $objWriter, Spreadsheet $spreadsheet): void
     {
@@ -149,4 +180,6 @@ class Settings extends WriterPart
 
         $this->writeSplitValue($objWriter, 'ActiveSplitRange', 'short', '3');
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

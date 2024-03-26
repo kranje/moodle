@@ -112,6 +112,7 @@ class manager {
             }
         }
 
+<<<<<<< HEAD
         // XOAUTH2.
         if ($CFG->messageinbound_hostoauth != '') {
             // Get the issuer.
@@ -131,6 +132,8 @@ class manager {
             }
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->client = new \Horde_Imap_Client_Socket($configuration);
 
         try {

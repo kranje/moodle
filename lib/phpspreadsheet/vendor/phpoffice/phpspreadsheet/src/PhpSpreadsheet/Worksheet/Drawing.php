@@ -106,7 +106,11 @@ class Drawing extends BaseDrawing
      */
     public function setPath($path, $verifyFile = true, $zip = null)
     {
+<<<<<<< HEAD
         if ($verifyFile && preg_match('~^data:image/[a-z]+;base64,~', $path) !== 1) {
+=======
+        if ($verifyFile) {
+>>>>>>> forked/LAE_400_PACKAGE
             // Check if a URL has been passed. https://stackoverflow.com/a/2058596/1252979
             if (filter_var($path, FILTER_VALIDATE_URL)) {
                 $this->path = $path;

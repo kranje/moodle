@@ -90,7 +90,10 @@ extends Horde_Mime_Headers_ContentParam
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         if (strcasecmp($offset, 'size') === 0) {

@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace ZipStream\Option;
 
 use DateTime;
+<<<<<<< HEAD
 use DateTimeInterface;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 final class File
 {
@@ -21,7 +24,11 @@ final class File
      */
     private $deflateLevel;
     /**
+<<<<<<< HEAD
      * @var DateTimeInterface
+=======
+     * @var DateTime
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $time;
     /**
@@ -84,17 +91,29 @@ final class File
     }
 
     /**
+<<<<<<< HEAD
      * @return DateTimeInterface
      */
     public function getTime(): DateTimeInterface
+=======
+     * @return DateTime
+     */
+    public function getTime(): DateTime
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->time;
     }
 
     /**
+<<<<<<< HEAD
      * @param DateTimeInterface $time
      */
     public function setTime(DateTimeInterface $time): void
+=======
+     * @param DateTime $time
+     */
+    public function setTime(DateTime $time): void
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->time = $time;
     }

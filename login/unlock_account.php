@@ -37,7 +37,11 @@ $SESSION->wantsurl = "$CFG->wwwroot/";
 // Do not disclose details about existence or status of user accounts here.
 
 if (!$user = $DB->get_record('user', array('id'=>$userid, 'deleted'=>0, 'suspended'=>0))) {
+<<<<<<< HEAD
     throw new \moodle_exception('lockouterrorunlock', 'admin', get_login_url());
+=======
+    print_error('lockouterrorunlock', 'admin', get_login_url());
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $usersecret = get_user_preferences('login_lockout_secret', false, $user);
@@ -51,4 +55,8 @@ if ($secret === $usersecret) {
     }
 }
 
+<<<<<<< HEAD
 throw new \moodle_exception('lockouterrorunlock', 'admin', get_login_url());
+=======
+print_error('lockouterrorunlock', 'admin', get_login_url());
+>>>>>>> forked/LAE_400_PACKAGE

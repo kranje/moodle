@@ -285,6 +285,7 @@ if(empty($serialized)) {
 
 $filename = 'icalexport.ics';
 
+<<<<<<< HEAD
 if (!defined('BEHAT_SITE_RUNNING')) {
     header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
     header('Cache-Control: private, must-revalidate, pre-check=0, post-check=0, max-age=0');
@@ -295,5 +296,15 @@ if (!defined('BEHAT_SITE_RUNNING')) {
     header('Content-length: ' . strlen($serialized));
     header('Content-type: text/calendar; charset=utf-8');
 }
+=======
+header('Last-Modified: '. gmdate('D, d M Y H:i:s', time()) .' GMT');
+header('Cache-Control: private, must-revalidate, pre-check=0, post-check=0, max-age=0');
+header('Expires: '. gmdate('D, d M Y H:i:s', 0) .'GMT');
+header('Pragma: no-cache');
+header('Accept-Ranges: none'); // Comment out if PDFs do not work...
+header('Content-disposition: attachment; filename='.$filename);
+header('Content-length: '.strlen($serialized));
+header('Content-type: text/calendar; charset=utf-8');
+>>>>>>> forked/LAE_400_PACKAGE
 
 echo $serialized;

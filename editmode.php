@@ -28,7 +28,16 @@ $setmode = optional_param('setmode', false, PARAM_BOOL);
 $contextid = required_param('context', PARAM_INT);
 $pageurl = required_param('pageurl', PARAM_LOCALURL);
 
+<<<<<<< HEAD
 require_sesskey();
+=======
+// Behat requires JS to get the session. To allow goutte
+// to enable edit mode sesskey validation is skipped for behat scripts.
+if (!defined('BEHAT_SITE_RUNNING')) {
+    require_sesskey();
+}
+
+>>>>>>> forked/LAE_400_PACKAGE
 require_login();
 
 $context = \context_helper::instance_by_id($contextid);

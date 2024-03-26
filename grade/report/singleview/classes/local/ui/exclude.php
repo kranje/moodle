@@ -35,6 +35,7 @@ use grade_grade;
  * @copyright 2014 Moodle Pty Ltd (http://moodle.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class exclude extends grade_attribute_format implements be_checked, be_disabled, be_readonly {
 
     /**
@@ -47,6 +48,14 @@ class exclude extends grade_attribute_format implements be_checked, be_disabled,
      * Is the checkbox disabled?
      * @var bool $disabled
      */
+=======
+class exclude extends grade_attribute_format implements be_checked, be_disabled {
+
+    /** @var string $name The name of the input */
+    public $name = 'exclude';
+
+    /** @var bool $disabled Is the checkbox disabled? */
+>>>>>>> forked/LAE_400_PACKAGE
     public $disabled = false;
 
     /**
@@ -54,7 +63,11 @@ class exclude extends grade_attribute_format implements be_checked, be_disabled,
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function is_checked(): bool {
+=======
+    public function is_checked() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->grade->is_excluded();
     }
 
@@ -63,11 +76,16 @@ class exclude extends grade_attribute_format implements be_checked, be_disabled,
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function is_disabled(): bool {
+=======
+    public function is_disabled() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->disabled;
     }
 
     /**
+<<<<<<< HEAD
      * Return true if this is read-only.
      *
      * @return bool
@@ -78,17 +96,27 @@ class exclude extends grade_attribute_format implements be_checked, be_disabled,
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Generate the element used to render the UI
      *
      * @return element
      */
+<<<<<<< HEAD
     public function determine_format(): element {
+=======
+    public function determine_format() {
+>>>>>>> forked/LAE_400_PACKAGE
         return new checkbox_attribute(
             $this->get_name(),
             $this->get_label(),
             $this->is_checked(),
+<<<<<<< HEAD
             $this->is_disabled(),
             $this->is_readonly()
+=======
+            $this->is_disabled()
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 
@@ -97,7 +125,11 @@ class exclude extends grade_attribute_format implements be_checked, be_disabled,
      *
      * @return string
      */
+<<<<<<< HEAD
     public function get_label(): string {
+=======
+    public function get_label() {
+>>>>>>> forked/LAE_400_PACKAGE
         if (!isset($this->grade->label)) {
             $this->grade->label = '';
         }
@@ -123,16 +155,27 @@ class exclude extends grade_attribute_format implements be_checked, be_disabled,
                 $this->grade->userid, null, 'singleview', null, FORMAT_MOODLE
             );
 
+<<<<<<< HEAD
             $gradeparams = [
                 'userid' => $this->grade->userid,
                 'itemid' => $this->grade->itemid
             ];
+=======
+            $gradeparams = array(
+                'userid' => $this->grade->userid,
+                'itemid' => $this->grade->itemid
+            );
+>>>>>>> forked/LAE_400_PACKAGE
 
             $this->grade = grade_grade::fetch($gradeparams);
             $this->grade->grade_item = $gradeitem;
         }
 
+<<<<<<< HEAD
         $state = !($value == 0);
+=======
+        $state = $value == 0 ? false : true;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->grade->set_excluded($state);
 

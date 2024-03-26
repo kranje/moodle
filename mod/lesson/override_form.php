@@ -108,7 +108,11 @@ class lesson_override_form extends moodleform {
                 if (empty($groups)) {
                     // Generate an error.
                     $link = new moodle_url('/mod/lesson/overrides.php', array('cmid' => $cm->id));
+<<<<<<< HEAD
                     throw new \moodle_exception('groupsnone', 'lesson', $link);
+=======
+                    print_error('groupsnone', 'lesson', $link);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 $groupchoices = array();
@@ -167,7 +171,11 @@ class lesson_override_form extends moodleform {
                 if (empty($users)) {
                     // Generate an error.
                     $link = new moodle_url('/mod/lesson/overrides.php', array('cmid' => $cm->id));
+<<<<<<< HEAD
                     throw new \moodle_exception('usersnone', 'lesson', $link);
+=======
+                    print_error('usersnone', 'lesson', $link);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 $userchoices = array();

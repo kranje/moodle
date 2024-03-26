@@ -2,15 +2,26 @@
 
 namespace PhpOffice\PhpSpreadsheet\Reader;
 
+<<<<<<< HEAD
+=======
+use DateTime;
+>>>>>>> forked/LAE_400_PACKAGE
 use DOMAttr;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Reader\Ods\AutoFilter;
 use PhpOffice\PhpSpreadsheet\Reader\Ods\DefinedNames;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Reader\Ods\FormulaTranslator;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Reader\Ods\PageSettings;
 use PhpOffice\PhpSpreadsheet\Reader\Ods\Properties as DocumentProperties;
 use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
@@ -20,7 +31,10 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Shared\File;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use Throwable;
 use XMLReader;
 use ZipArchive;
@@ -106,7 +120,11 @@ class Ods extends BaseReader
         $xml->read();
         while ($xml->read()) {
             // Quickly jump through to the office:body node
+<<<<<<< HEAD
             while (self::getXmlName($xml) !== 'office:body') {
+=======
+            while ($xml->name !== 'office:body') {
+>>>>>>> forked/LAE_400_PACKAGE
                 if ($xml->isEmptyElement) {
                     $xml->read();
                 } else {
@@ -115,13 +133,21 @@ class Ods extends BaseReader
             }
             // Now read each node until we find our first table:table node
             while ($xml->read()) {
+<<<<<<< HEAD
                 $xmlName = self::getXmlName($xml);
                 if ($xmlName == 'table:table' && $xml->nodeType == XMLReader::ELEMENT) {
+=======
+                if ($xml->name == 'table:table' && $xml->nodeType == XMLReader::ELEMENT) {
+>>>>>>> forked/LAE_400_PACKAGE
                     // Loop through each table:table node reading the table:name attribute for each worksheet name
                     do {
                         $worksheetNames[] = $xml->getAttribute('table:name');
                         $xml->next();
+<<<<<<< HEAD
                     } while (self::getXmlName($xml) == 'table:table' && $xml->nodeType == XMLReader::ELEMENT);
+=======
+                    } while ($xml->name == 'table:table' && $xml->nodeType == XMLReader::ELEMENT);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         }
@@ -154,7 +180,11 @@ class Ods extends BaseReader
         $xml->read();
         while ($xml->read()) {
             // Quickly jump through to the office:body node
+<<<<<<< HEAD
             while (self::getXmlName($xml) !== 'office:body') {
+=======
+            while ($xml->name !== 'office:body') {
+>>>>>>> forked/LAE_400_PACKAGE
                 if ($xml->isEmptyElement) {
                     $xml->read();
                 } else {
@@ -163,7 +193,11 @@ class Ods extends BaseReader
             }
             // Now read each node until we find our first table:table node
             while ($xml->read()) {
+<<<<<<< HEAD
                 if (self::getXmlName($xml) == 'table:table' && $xml->nodeType == XMLReader::ELEMENT) {
+=======
+                if ($xml->name == 'table:table' && $xml->nodeType == XMLReader::ELEMENT) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $worksheetNames[] = $xml->getAttribute('table:name');
 
                     $tmpInfo = [
@@ -178,7 +212,11 @@ class Ods extends BaseReader
                     $currCells = 0;
                     do {
                         $xml->read();
+<<<<<<< HEAD
                         if (self::getXmlName($xml) == 'table:table-row' && $xml->nodeType == XMLReader::ELEMENT) {
+=======
+                        if ($xml->name == 'table:table-row' && $xml->nodeType == XMLReader::ELEMENT) {
+>>>>>>> forked/LAE_400_PACKAGE
                             $rowspan = $xml->getAttribute('table:number-rows-repeated');
                             $rowspan = empty($rowspan) ? 1 : $rowspan;
                             $tmpInfo['totalRows'] += $rowspan;
@@ -188,22 +226,36 @@ class Ods extends BaseReader
                             $xml->read();
                             do {
                                 $doread = true;
+<<<<<<< HEAD
                                 if (self::getXmlName($xml) == 'table:table-cell' && $xml->nodeType == XMLReader::ELEMENT) {
+=======
+                                if ($xml->name == 'table:table-cell' && $xml->nodeType == XMLReader::ELEMENT) {
+>>>>>>> forked/LAE_400_PACKAGE
                                     if (!$xml->isEmptyElement) {
                                         ++$currCells;
                                         $xml->next();
                                         $doread = false;
                                     }
+<<<<<<< HEAD
                                 } elseif (self::getXmlName($xml) == 'table:covered-table-cell' && $xml->nodeType == XMLReader::ELEMENT) {
+=======
+                                } elseif ($xml->name == 'table:covered-table-cell' && $xml->nodeType == XMLReader::ELEMENT) {
+>>>>>>> forked/LAE_400_PACKAGE
                                     $mergeSize = $xml->getAttribute('table:number-columns-repeated');
                                     $currCells += (int) $mergeSize;
                                 }
                                 if ($doread) {
                                     $xml->read();
                                 }
+<<<<<<< HEAD
                             } while (self::getXmlName($xml) != 'table:table-row');
                         }
                     } while (self::getXmlName($xml) != 'table:table');
+=======
+                            } while ($xml->name != 'table:table-row');
+                        }
+                    } while ($xml->name != 'table:table');
+>>>>>>> forked/LAE_400_PACKAGE
 
                     $tmpInfo['totalColumns'] = max($tmpInfo['totalColumns'], $currCells);
                     $tmpInfo['lastColumnIndex'] = $tmpInfo['totalColumns'] - 1;
@@ -217,6 +269,7 @@ class Ods extends BaseReader
     }
 
     /**
+<<<<<<< HEAD
      * Counteract Phpstan caching.
      *
      * @phpstan-impure
@@ -231,6 +284,16 @@ class Ods extends BaseReader
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
+=======
+     * Loads PhpSpreadsheet from file.
+     *
+     * @return Spreadsheet
+     */
+    public function load(string $filename, int $flags = 0)
+    {
+        $this->processFlags($flags);
+
+>>>>>>> forked/LAE_400_PACKAGE
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
 
@@ -326,7 +389,11 @@ class Ods extends BaseReader
                 }
                 $spreadsheet->setActiveSheetIndex($worksheetID);
 
+<<<<<<< HEAD
                 if ($worksheetName || is_numeric($worksheetName)) {
+=======
+                if ($worksheetName) {
+>>>>>>> forked/LAE_400_PACKAGE
                     // Use false for $updateFormulaCellReferences to prevent adjustment of worksheet references in
                     // formula cells... during the load, all formulae should be correct, and we're simply
                     // bringing the worksheet name in line with the formula, not the reverse
@@ -489,7 +556,25 @@ class Ods extends BaseReader
                                         case 'date':
                                             $type = DataType::TYPE_NUMERIC;
                                             $value = $cellData->getAttributeNS($officeNs, 'date-value');
+<<<<<<< HEAD
                                             $dataValue = Date::convertIsoDate($value);
+=======
+
+                                            $dateObj = new DateTime($value);
+                                            [$year, $month, $day, $hour, $minute, $second] = explode(
+                                                ' ',
+                                                $dateObj->format('Y m d H i s')
+                                            );
+
+                                            $dataValue = Date::formattedPHPToExcel(
+                                                (int) $year,
+                                                (int) $month,
+                                                (int) $day,
+                                                (int) $hour,
+                                                (int) $minute,
+                                                (int) $second
+                                            );
+>>>>>>> forked/LAE_400_PACKAGE
 
                                             if ($dataValue != floor($dataValue)) {
                                                 $formatting = NumberFormat::FORMAT_DATE_XLSX15
@@ -524,7 +609,11 @@ class Ods extends BaseReader
                                 if ($hasCalculatedValue) {
                                     $type = DataType::TYPE_FORMULA;
                                     $cellDataFormula = substr($cellDataFormula, strpos($cellDataFormula, ':=') + 1);
+<<<<<<< HEAD
                                     $cellDataFormula = FormulaTranslator::convertToExcelFormulaValue($cellDataFormula);
+=======
+                                    $cellDataFormula = $this->convertToExcelFormulaValue($cellDataFormula);
+>>>>>>> forked/LAE_400_PACKAGE
                                 }
 
                                 if ($cellData->hasAttributeNS($tableNs, 'number-columns-repeated')) {
@@ -580,7 +669,35 @@ class Ods extends BaseReader
                                 }
 
                                 // Merged cells
+<<<<<<< HEAD
                                 $this->processMergedCells($cellData, $tableNs, $type, $columnID, $rowID, $spreadsheet);
+=======
+                                if (
+                                    $cellData->hasAttributeNS($tableNs, 'number-columns-spanned')
+                                    || $cellData->hasAttributeNS($tableNs, 'number-rows-spanned')
+                                ) {
+                                    if (($type !== DataType::TYPE_NULL) || (!$this->readDataOnly)) {
+                                        $columnTo = $columnID;
+
+                                        if ($cellData->hasAttributeNS($tableNs, 'number-columns-spanned')) {
+                                            $columnIndex = Coordinate::columnIndexFromString($columnID);
+                                            $columnIndex += (int) $cellData->getAttributeNS($tableNs, 'number-columns-spanned');
+                                            $columnIndex -= 2;
+
+                                            $columnTo = Coordinate::stringFromColumnIndex($columnIndex + 1);
+                                        }
+
+                                        $rowTo = $rowID;
+
+                                        if ($cellData->hasAttributeNS($tableNs, 'number-rows-spanned')) {
+                                            $rowTo = $rowTo + (int) $cellData->getAttributeNS($tableNs, 'number-rows-spanned') - 1;
+                                        }
+
+                                        $cellRange = $columnID . $rowID . ':' . $columnTo . $rowTo;
+                                        $spreadsheet->getActiveSheet()->mergeCells($cellRange);
+                                    }
+                                }
+>>>>>>> forked/LAE_400_PACKAGE
 
                                 ++$columnID;
                             }
@@ -589,7 +706,10 @@ class Ods extends BaseReader
                             break;
                     }
                 }
+<<<<<<< HEAD
                 $pageSettings->setVisibilityForWorksheet($spreadsheet->getActiveSheet(), $worksheetStyleName);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $pageSettings->setPrintSettingsForWorksheet($spreadsheet->getActiveSheet(), $worksheetStyleName);
                 ++$worksheetID;
             }
@@ -630,7 +750,11 @@ class Ods extends BaseReader
         foreach ($settings->getElementsByTagNameNS($configNs, 'config-item') as $t) {
             if ($t->getAttributeNs($configNs, 'name') === 'ActiveTable') {
                 try {
+<<<<<<< HEAD
                     $spreadsheet->setActiveSheetIndexByName($t->nodeValue ?? '');
+=======
+                    $spreadsheet->setActiveSheetIndexByName($t->nodeValue);
+>>>>>>> forked/LAE_400_PACKAGE
                 } catch (Throwable $e) {
                     // do nothing
                 }
@@ -657,7 +781,11 @@ class Ods extends BaseReader
                             $setRow = $configItem->nodeValue;
                         }
                     }
+<<<<<<< HEAD
                     $this->setSelected($spreadsheet, $wsname, "$setCol", "$setRow");
+=======
+                    $this->setSelected($spreadsheet, $wsname, $setCol, $setRow);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 break;
@@ -694,7 +822,16 @@ class Ods extends BaseReader
                 // Multiple spaces?
                 /** @var DOMAttr $cAttr */
                 $cAttr = $child->attributes->getNamedItem('c');
+<<<<<<< HEAD
                 $multiplier = self::getMultiplier($cAttr);
+=======
+                if ($cAttr) {
+                    $multiplier = (int) $cAttr->nodeValue;
+                } else {
+                    $multiplier = 1;
+                }
+
+>>>>>>> forked/LAE_400_PACKAGE
                 $str .= str_repeat(' ', $multiplier);
             }
 
@@ -706,6 +843,7 @@ class Ods extends BaseReader
         return $str;
     }
 
+<<<<<<< HEAD
     private static function getMultiplier(?DOMAttr $cAttr): int
     {
         if ($cAttr) {
@@ -717,6 +855,8 @@ class Ods extends BaseReader
         return $multiplier;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * @param string $is
      *
@@ -730,6 +870,7 @@ class Ods extends BaseReader
         return $value;
     }
 
+<<<<<<< HEAD
     private function processMergedCells(
         DOMElement $cellData,
         string $tableNs,
@@ -763,5 +904,33 @@ class Ods extends BaseReader
                 $spreadsheet->getActiveSheet()->mergeCells($cellRange, Worksheet::MERGE_CELL_CONTENT_HIDE);
             }
         }
+=======
+    private function convertToExcelFormulaValue(string $openOfficeFormula): string
+    {
+        $temp = explode('"', $openOfficeFormula);
+        $tKey = false;
+        foreach ($temp as &$value) {
+            // Only replace in alternate array entries (i.e. non-quoted blocks)
+            if ($tKey = !$tKey) {
+                // Cell range reference in another sheet
+                $value = preg_replace('/\[\$?([^\.]+)\.([^\.]+):\.([^\.]+)\]/miu', '$1!$2:$3', $value);
+                // Cell reference in another sheet
+                $value = preg_replace('/\[\$?([^\.]+)\.([^\.]+)\]/miu', '$1!$2', $value ?? '');
+                // Cell range reference
+                $value = preg_replace('/\[\.([^\.]+):\.([^\.]+)\]/miu', '$1:$2', $value ?? '');
+                // Simple cell reference
+                $value = preg_replace('/\[\.([^\.]+)\]/miu', '$1', $value ?? '');
+                // Convert references to defined names/formulae
+                $value = str_replace('$$', '', $value ?? '');
+
+                $value = Calculation::translateSeparator(';', ',', $value, $inBraces);
+            }
+        }
+
+        // Then rebuild the formula string
+        $excelFormula = implode('"', $temp);
+
+        return $excelFormula;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

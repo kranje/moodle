@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2017-present MongoDB, Inc.
+=======
+ * Copyright 2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,22 +30,33 @@ use MongoDB\Driver\CursorId;
 use MongoDB\Driver\Exception\ConnectionException;
 use MongoDB\Driver\Exception\RuntimeException;
 use MongoDB\Driver\Exception\ServerException;
+<<<<<<< HEAD
 use MongoDB\Exception\BadMethodCallException;
 use MongoDB\Exception\ResumeTokenException;
 use MongoDB\Model\ChangeStreamIterator;
 use ReturnTypeWillChange;
 
+=======
+use MongoDB\Exception\ResumeTokenException;
+use MongoDB\Model\ChangeStreamIterator;
+>>>>>>> forked/LAE_400_PACKAGE
 use function call_user_func;
 use function in_array;
 
 /**
  * Iterator for a change stream.
  *
+<<<<<<< HEAD
  * @psalm-type ResumeCallable = callable(array|object|null, bool): ChangeStreamIterator
  *
  * @api
  * @see \MongoDB\Collection::watch()
  * @see https://mongodb.com/docs/manual/reference/method/db.watch/#mongodb-method-db.watch
+=======
+ * @api
+ * @see \MongoDB\Collection::watch()
+ * @see http://docs.mongodb.org/manual/reference/command/changeStream/
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class ChangeStream implements Iterator
 {
@@ -45,7 +64,11 @@ class ChangeStream implements Iterator
      * @deprecated 1.4
      * @todo Remove this in 2.0 (see: PHPLIB-360)
      */
+<<<<<<< HEAD
     public const CURSOR_NOT_FOUND = 43;
+=======
+    const CURSOR_NOT_FOUND = 43;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var int */
     private static $cursorNotFound = 43;
@@ -59,11 +82,19 @@ class ChangeStream implements Iterator
         189, // PrimarySteppedDown
         262, // ExceededTimeLimit
         9001, // SocketException
+<<<<<<< HEAD
         10107, // NotPrimary
         11600, // InterruptedAtShutdown
         11602, // InterruptedDueToReplStateChange
         13435, // NotPrimaryNoSecondaryOk
         13436, // NotPrimaryOrSecondary
+=======
+        10107, // NotMaster
+        11600, // InterruptedAtShutdown
+        11602, // InterruptedDueToReplStateChange
+        13435, // NotMasterNoSlaveOk
+        13436, // NotMasterOrSecondary
+>>>>>>> forked/LAE_400_PACKAGE
         63, // StaleShardVersion
         150, // StaleEpoch
         13388, // StaleConfig
@@ -74,7 +105,11 @@ class ChangeStream implements Iterator
     /** @var int */
     private static $wireVersionForResumableChangeStreamError = 9;
 
+<<<<<<< HEAD
     /** @var ResumeCallable|null */
+=======
+    /** @var callable */
+>>>>>>> forked/LAE_400_PACKAGE
     private $resumeCallable;
 
     /** @var ChangeStreamIterator */
@@ -93,8 +128,13 @@ class ChangeStream implements Iterator
 
     /**
      * @internal
+<<<<<<< HEAD
      *
      * @param ResumeCallable $resumeCallable
+=======
+     * @param ChangeStreamIterator $iterator
+     * @param callable             $resumeCallable
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function __construct(ChangeStreamIterator $iterator, callable $resumeCallable)
     {
@@ -103,10 +143,16 @@ class ChangeStream implements Iterator
     }
 
     /**
+<<<<<<< HEAD
      * @see https://php.net/iterator.current
      * @return mixed
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/iterator.current
+     * @return mixed
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->iterator->current();
@@ -135,10 +181,16 @@ class ChangeStream implements Iterator
     }
 
     /**
+<<<<<<< HEAD
      * @see https://php.net/iterator.key
      * @return mixed
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/iterator.key
+     * @return mixed
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         if ($this->valid()) {
@@ -149,11 +201,18 @@ class ChangeStream implements Iterator
     }
 
     /**
+<<<<<<< HEAD
      * @see https://php.net/iterator.next
      * @return void
      * @throws ResumeTokenException
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/iterator.next
+     * @return void
+     * @throws ResumeTokenException
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         try {
@@ -165,11 +224,18 @@ class ChangeStream implements Iterator
     }
 
     /**
+<<<<<<< HEAD
      * @see https://php.net/iterator.rewind
      * @return void
      * @throws ResumeTokenException
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/iterator.rewind
+     * @return void
+     * @throws ResumeTokenException
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         try {
@@ -184,10 +250,16 @@ class ChangeStream implements Iterator
     }
 
     /**
+<<<<<<< HEAD
      * @see https://php.net/iterator.valid
      * @return boolean
      */
     #[ReturnTypeWillChange]
+=======
+     * @see http://php.net/iterator.valid
+     * @return boolean
+     */
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return $this->iterator->valid();
@@ -197,8 +269,15 @@ class ChangeStream implements Iterator
      * Determines if an exception is a resumable error.
      *
      * @see https://github.com/mongodb/specifications/blob/master/source/change-streams/change-streams.rst#resumable-error
+<<<<<<< HEAD
      */
     private function isResumableError(RuntimeException $exception): bool
+=======
+     * @param RuntimeException $exception
+     * @return boolean
+     */
+    private function isResumableError(RuntimeException $exception)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($exception instanceof ConnectionException) {
             return true;
@@ -225,7 +304,11 @@ class ChangeStream implements Iterator
      * @param boolean $incrementKey Increment $key if there is a current result
      * @throws ResumeTokenException
      */
+<<<<<<< HEAD
     private function onIteration(bool $incrementKey): void
+=======
+    private function onIteration($incrementKey)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         /* If the cursorId is 0, the server has invalidated the cursor and we
          * will never perform another getMore nor need to resume since any
@@ -252,6 +335,7 @@ class ChangeStream implements Iterator
 
     /**
      * Recreates the ChangeStreamIterator after a resumable server error.
+<<<<<<< HEAD
      */
     private function resume(): void
     {
@@ -261,6 +345,14 @@ class ChangeStream implements Iterator
 
         $this->iterator = call_user_func($this->resumeCallable, $this->getResumeToken(), $this->hasAdvanced);
 
+=======
+     *
+     * @return void
+     */
+    private function resume()
+    {
+        $this->iterator = call_user_func($this->resumeCallable, $this->getResumeToken(), $this->hasAdvanced);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->iterator->rewind();
 
         $this->onIteration($this->hasAdvanced);
@@ -269,9 +361,16 @@ class ChangeStream implements Iterator
     /**
      * Either resumes after a resumable error or re-throws the exception.
      *
+<<<<<<< HEAD
      * @throws RuntimeException
      */
     private function resumeOrThrow(RuntimeException $exception): void
+=======
+     * @param RuntimeException $exception
+     * @throws RuntimeException
+     */
+    private function resumeOrThrow(RuntimeException $exception)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if ($this->isResumableError($exception)) {
             $this->resume();

@@ -2,19 +2,26 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Trig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Helpers;
 
 class Secant
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * SEC.
      *
      * Returns the secant of an angle.
      *
+<<<<<<< HEAD
      * @param array|float $angle Number, or can be an array of numbers
      *
      * @return array|float|string The secant of the angle
@@ -27,6 +34,14 @@ class Secant
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);
         }
 
+=======
+     * @param float $angle Number
+     *
+     * @return float|string The secant of the angle
+     */
+    public static function sec($angle)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $angle = Helpers::validateNumericNullBool($angle);
         } catch (Exception $e) {
@@ -41,6 +56,7 @@ class Secant
      *
      * Returns the hyperbolic secant of an angle.
      *
+<<<<<<< HEAD
      * @param array|float $angle Number, or can be an array of numbers
      *
      * @return array|float|string The hyperbolic secant of the angle
@@ -53,6 +69,14 @@ class Secant
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);
         }
 
+=======
+     * @param float $angle Number
+     *
+     * @return float|string The hyperbolic secant of the angle
+     */
+    public static function sech($angle)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $angle = Helpers::validateNumericNullBool($angle);
         } catch (Exception $e) {

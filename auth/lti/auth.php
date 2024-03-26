@@ -199,7 +199,10 @@ class auth_plugin_lti extends \auth_plugin_base {
                 }
             }
             $user = $this->create_new_account($member, $iss);
+<<<<<<< HEAD
             $this->update_user_account($user, $member, $iss);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             return \core_user::get_user($user->id);
         }
     }
@@ -381,7 +384,15 @@ class auth_plugin_lti extends \auth_plugin_base {
             'lastname' => $userdata['family_name'] ?? $iss,
             'email' => $email
         ];
+<<<<<<< HEAD
         user_update_user($update);
+=======
+        $userfieldstocompare = array_intersect_key((array) $user, $update);
+
+        if (!empty(array_diff($update, $userfieldstocompare))) {
+            user_update_user($update); // Only update if there's a change.
+        }
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (!empty($userdata['picture'])) {
             try {

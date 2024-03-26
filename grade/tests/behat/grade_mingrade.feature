@@ -19,6 +19,7 @@ Feature: We can use a minimum grade different than zero
       | student1 | C1 | student |
       | student2 | C1 | student |
     And the following "grade categories" exist:
+<<<<<<< HEAD
       | fullname | course |
       | Sub category 1 | C1 |
       | Sub category 2 | C1 |
@@ -64,6 +65,25 @@ Feature: We can use a minimum grade different than zero
       | Minimum grade | 50 |
       | Grade category | Sub category 2 |
     And I press "Save changes"
+=======
+      | fullname       | course | aggregateonlygraded |
+      | Sub category 1 | C1     | 0                   |
+      | Sub category 2 | C1     | 0                   |
+    And the following "grade items" exist:
+      | itemname      | grademin | course |
+      | Manual item 1 | -100     | C1     |
+      | Manual item 2 | 50       | C1     |
+    And the following "grade items" exist:
+      | itemname      | grademin | grademax | course | gradecategory  |
+      | Manual item 3 | -100     | 50       | C1     | Sub category 1 |
+    And the following "grade items" exist:
+      | itemname      | grademin | course | gradecategory  |
+      | Manual item 4 | -100     | C1     | Sub category 1 |
+      | Manual item 5 | 50       | C1     | Sub category 2 |
+      | Manual item 6 | 50       | C1     | Sub category 2 |
+    And I log in as "admin"
+    And I am on the "Course 1" "grades > gradebook setup" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I navigate to "Setup > Course grade settings" in the course gradebook
     And I set the field "Show weightings" to "Show"
     And I set the field "Show contribution to course total" to "Show"
@@ -71,6 +91,7 @@ Feature: We can use a minimum grade different than zero
 
   @javascript
   Scenario: Natural aggregation with negative and positive grade
+<<<<<<< HEAD
     And I navigate to "Setup > Gradebook setup" in the course gradebook
     And I set the following settings for grade item "Sub category 1":
       | Aggregation          | Natural |
@@ -85,6 +106,13 @@ Feature: We can use a minimum grade different than zero
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    Given I navigate to "Setup > Gradebook setup" in the course gradebook
+    And I set the following settings for grade item "Course 1":
+      | Aggregation          | Natural |
+      | Exclude empty grades | 0       |
+    And I am on the "Course 1" "grades > Grader report > View" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     When I give the grade "-25.00" to the user "Student 1" for the grade item "Manual item 1"
     And I give the grade "50.00" to the user "Student 1" for the grade item "Manual item 2"
@@ -100,7 +128,11 @@ Feature: We can use a minimum grade different than zero
     And I give the grade "0.00" to the user "Student 2" for the grade item "Manual item 6"
     And I press "Save changes"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item    | Calculated weight | Grade  | Contribution to course total |
       | Manual item 1 | 18.18 %           | -25.00 | -4.55 %                      |
@@ -109,7 +141,11 @@ Feature: We can use a minimum grade different than zero
       | Manual item 4 | 66.67 %           | -10.00 | -1.82 %                      |
       | Manual item 5 | 50.00 %           | 50.00  | 9.09 %                       |
       | Manual item 6 | 50.00 %           | 75.00  | 13.64 %                      |
+<<<<<<< HEAD
     And I click on "Student 2" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 2"
+>>>>>>> forked/LAE_400_PACKAGE
     And the following should exist in the "user-grade" table:
       | Grade item    | Calculated weight | Grade  | Contribution to course total |
       | Manual item 1 | 18.18 %           | 0.00   | 0.00 %                       |

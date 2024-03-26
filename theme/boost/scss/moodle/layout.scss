@@ -68,6 +68,7 @@
             }
         }
     }
+<<<<<<< HEAD
     body.mediumwidth {
         #page.drawers {
             .main-inner {
@@ -81,6 +82,8 @@
             }
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     .header-maxwidth {
         max-width: $course-content-maxwidth;
         margin: 0 auto;
@@ -181,6 +184,12 @@
     #page.drawers .main-inner {
         margin-top: 1.5rem;
     }
+<<<<<<< HEAD
+=======
+    #page.drawers .drawer-right-toggle {
+        margin-right: 0.7rem;
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 @include media-breakpoint-up(md) {
@@ -205,6 +214,7 @@
         top: $navbar-height;
         height: calc(100vh - #{$navbar-height});
     }
+<<<<<<< HEAD
     .hasstickyfooter {
         .drawer-left,
         .drawer-right {
@@ -212,6 +222,8 @@
             height: calc(100vh - #{$navbar-height} - #{$navbar-height});
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     #page.drawers {
         position: relative;
@@ -237,9 +249,12 @@
             margin-left: $drawer-left-width;
             margin-right: $drawer-right-width;
         }
+<<<<<<< HEAD
         &.hasstickyfooter {
             height: calc(100vh - #{$navbar-height} - #{$navbar-height});
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

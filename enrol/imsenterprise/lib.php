@@ -584,11 +584,15 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                     $this->log_line("Created user record ('.$id.') for user '$person->username' (ID number $person->idnumber).");
                 }
             } else if ($createnewusers) {
+<<<<<<< HEAD
 
                 $username = $person->username ?? "[unknown username]";
                 $personnumber = $person->idnumber ?? "[unknown ID number]";
 
                 $this->log_line("User record already exists for user '" . $username . "' (ID number " . $personnumber . ").");
+=======
+                $this->log_line("User record already exists for user '$person->username' (ID number $person->idnumber).");
+>>>>>>> forked/LAE_400_PACKAGE
 
                 // It is totally wrong to mess with deleted users flag directly in database!!!
                 // There is no official way to undelete user, sorry..
@@ -687,12 +691,19 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
                     // Decide the "real" role (i.e. the Moodle role) that this user should be assigned to.
                     // Zero means this roletype is supposed to be skipped.
+<<<<<<< HEAD
                     $moodleroleid = (isset($member->roletype) && isset($this->rolemappings[$member->roletype]))
                         ? $this->rolemappings[$member->roletype] : null;
                     if (!$moodleroleid) {
                         $this->log_line("SKIPPING role " .
                             ($member->roletype ?? "[]") . " for $memberstoreobj->userid " .
                             "($member->idnumber) in course $memberstoreobj->course");
+=======
+                    $moodleroleid = $this->rolemappings[$member->roletype];
+                    if (!$moodleroleid) {
+                        $this->log_line("SKIPPING role $member->roletype for $memberstoreobj->userid "
+                            ."($member->idnumber) in course $memberstoreobj->course");
+>>>>>>> forked/LAE_400_PACKAGE
                         continue;
                     }
 
@@ -747,6 +758,7 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
 
                     } else if ($this->get_config('imsunenrol')) {
                         // Unenrol member.
+<<<<<<< HEAD
                         $unenrolsetting = $this->get_config('unenrolaction');
 
                         $einstances = $DB->get_records('enrol',
@@ -811,16 +823,34 @@ class enrol_imsenterprise_plugin extends enrol_plugin {
                         }
 
                         $membersuntally++;
+=======
+
+                        $einstances = $DB->get_records('enrol',
+                            array('enrol' => $memberstoreobj->enrol, 'courseid' => $courseobj->id));
+                        foreach ($einstances as $einstance) {
+                            // Unenrol the user from all imsenterprise enrolment instances.
+                            $this->unenrol_user($einstance, $memberstoreobj->userid);
+                        }
+
+                        $membersuntally++;
+                        $this->log_line("Unenrolled $member->idnumber from role $moodleroleid in course");
+>>>>>>> forked/LAE_400_PACKAGE
                     }
 
                 }
             }
             $this->log_line("Added $memberstally users to course $ship->coursecode");
             if ($membersuntally > 0) {
+<<<<<<< HEAD
                 $this->log_line("Processed $membersuntally unenrol instructions for course $ship->coursecode");
             }
         }
 
+=======
+                $this->log_line("Removed $membersuntally users from course $ship->coursecode");
+            }
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     } // End process_membership_tag().
 
     /**

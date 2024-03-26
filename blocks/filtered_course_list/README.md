@@ -76,6 +76,7 @@ Use Grunt to manage LESS/CSS and Javascript as described in the Moodle dev docum
 
 ## Changelog
 
+<<<<<<< HEAD
 ### [v4.4.5]
 * Code cleanup: compatibility changes for PHP 8.1-8.2
 
@@ -87,6 +88,8 @@ Use Grunt to manage LESS/CSS and Javascript as described in the Moodle dev docum
 * Drop support for Moodles 3.11-3.9
 * Bugfix: prevent external filter functional from traversing hidden directories
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 ### [v4.4.2]
 * Add support for Moodle 3.11
 * Ensure PHPUnit test can access renderer

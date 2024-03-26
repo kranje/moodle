@@ -22,6 +22,7 @@ Feature: Blogs can be set to be only visible by the author.
     And I set the following fields to these values:
       | Blog visibility | Users can only see their own blog |
     And I press "Save changes"
+<<<<<<< HEAD
     And I log out
 
   Scenario: A student can not see another student's blog entries.
@@ -29,6 +30,13 @@ Feature: Blogs can be set to be only visible by the author.
     And I am on "Course 1" course homepage
     And I navigate to course participants
     And I follow "Test2 User2"
+=======
+
+  Scenario: A student can not see another student's blog entries.
+    Given I am on the "Course 1" course page logged in as testuser
+    And I navigate to course participants
+    When I follow "Test2 User2"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Miscellaneous"
     Then I should not see "Blog entries"
     And I follow "Profile" in the user menu

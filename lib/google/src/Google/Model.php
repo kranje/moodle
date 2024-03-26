@@ -246,12 +246,19 @@ class Google_Model implements ArrayAccess
     }
   }
 
+<<<<<<< HEAD
   public function offsetExists($offset): bool
+=======
+  public function offsetExists($offset)
+>>>>>>> forked/LAE_400_PACKAGE
   {
     return isset($this->$offset) || isset($this->modelData[$offset]);
   }
 
+<<<<<<< HEAD
   #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   public function offsetGet($offset)
   {
     return isset($this->$offset) ?
@@ -259,7 +266,11 @@ class Google_Model implements ArrayAccess
         $this->__get($offset);
   }
 
+<<<<<<< HEAD
   public function offsetSet($offset, $value): void
+=======
+  public function offsetSet($offset, $value)
+>>>>>>> forked/LAE_400_PACKAGE
   {
     if (property_exists($this, $offset)) {
       $this->$offset = $value;
@@ -269,7 +280,11 @@ class Google_Model implements ArrayAccess
     }
   }
 
+<<<<<<< HEAD
   public function offsetUnset($offset): void
+=======
+  public function offsetUnset($offset)
+>>>>>>> forked/LAE_400_PACKAGE
   {
     unset($this->modelData[$offset]);
   }

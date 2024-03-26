@@ -22,7 +22,13 @@ Feature: Change grading options in an H5P activity
     And the following "activity" exists:
       | activity        | h5pactivity                                |
       | course          | C1                                         |
+<<<<<<< HEAD
       | name            | Awesome H5P package                        |
+=======
+      | section         | 1                                          |
+      | name            | Awesome H5P package                        |
+      | intro           | Description                                |
+>>>>>>> forked/LAE_400_PACKAGE
       | packagefilepath | h5p/tests/fixtures/multiple-choice-2-6.h5p |
     And the following "mod_h5pactivity > attempts" exist:
       | user     | h5pactivity         | attempt | interactiontype   | rawscore | maxscore | duration | completion | success |
@@ -37,7 +43,11 @@ Feature: Change grading options in an H5P activity
     And the field "Grading method" matches value "Highest grade"
     And I click on "Save and return to course" "button"
     When I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade  | Percentage |
       | Awesome H5P package | 100.00 | 100.00 %   |
@@ -49,7 +59,11 @@ Feature: Change grading options in an H5P activity
       | Grading method | First attempt |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Percentage |
       | Awesome H5P package | 0.00  | 0.00 %     |
@@ -61,7 +75,11 @@ Feature: Change grading options in an H5P activity
       | Grading method | Last attempt |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Percentage |
       | Awesome H5P package | 0.00  | 0.00 %     |
@@ -73,7 +91,11 @@ Feature: Change grading options in an H5P activity
       | Grading method | Average grade |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Percentage  |
       | Awesome H5P package | 33.33 | 33.33 %     |
@@ -85,7 +107,11 @@ Feature: Change grading options in an H5P activity
       | Grading method | Don't calculate a grade |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Percentage |
       | Awesome H5P package | -     | -          |
@@ -97,7 +123,11 @@ Feature: Change grading options in an H5P activity
       | Enable attempt tracking | No |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Percentage |
       | Awesome H5P package | -     | -          |
@@ -110,7 +140,11 @@ Feature: Change grading options in an H5P activity
       | Grading method | Average grade |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Range | Percentage  |
       | Awesome H5P package | 33.33 | 0–100 | 33.33 %     |
@@ -122,7 +156,11 @@ Feature: Change grading options in an H5P activity
       | Maximum grade           | 50  |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Range | Percentage  |
       | Awesome H5P package | 16.67 | 0–50  | 33.33 %     |
@@ -135,7 +173,11 @@ Feature: Change grading options in an H5P activity
       | Grading method | Average grade |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Range | Percentage  |
       | Awesome H5P package | 33.33 | 0–100 | 33.33 %     |
@@ -147,7 +189,11 @@ Feature: Change grading options in an H5P activity
       | Maximum grade           | 50 |
     And I click on "Save and return to course" "button"
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Range | Percentage  |
       | Awesome H5P package | 33.33 | 0–50  | 66.67 %     |

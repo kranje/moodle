@@ -116,13 +116,21 @@ if (($action == 'edit') || ($action == 'new')) {
     $instance = portfolio_instance($portfolio);
     if ($sure) {
         if (!confirm_sesskey()) {
+<<<<<<< HEAD
             throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+=======
+            print_error('confirmsesskeybad', '', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($instance->delete()) {
             $deletedstr = get_string('instancedeleted', 'portfolio');
             redirect($baseurl, $deletedstr, 1);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('instancenotdeleted', 'portfolio', $baseurl);
+=======
+            print_error('instancenotdeleted', 'portfolio', $baseurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
     } else {

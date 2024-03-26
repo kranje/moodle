@@ -81,13 +81,21 @@ if (!isloggedin() or isguestuser()) {
         // User is starting a new discussion in a forum.
         $forumentity = $forumvault->get_from_id($forum);
         if (empty($forumentity)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidforumid', 'forum');
+=======
+            print_error('invalidforumid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     } else if (!empty($reply)) {
         // User is writing a new reply.
         $forumentity = $forumvault->get_from_post_id($reply);
         if (empty($forumentity)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidparentpostid', 'forum');
+=======
+            print_error('invalidparentpostid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -95,7 +103,11 @@ if (!isloggedin() or isguestuser()) {
     $modcontext = $forumentity->get_context();
     $course = $forumentity->get_course_record();
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception("invalidcoursemodule");
+=======
+        print_error("invalidcoursemodule");
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $PAGE->set_cm($cm, $course, $forum);
@@ -118,14 +130,22 @@ if (!empty($forum)) {
     // User is starting a new discussion in a forum.
     $forumentity = $forumvault->get_from_id($forum);
     if (empty($forumentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidforumid', 'forum');
+=======
+        print_error('invalidforumid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
     $forum = $forumdatamapper->to_legacy_object($forumentity);
     $course = $forumentity->get_course_record();
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception("invalidcoursemodule");
+=======
+        print_error("invalidcoursemodule");
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Retrieve the contexts.
@@ -148,7 +168,11 @@ if (!empty($forum)) {
                 }
             }
         }
+<<<<<<< HEAD
         throw new \moodle_exception('nopostforum', 'forum');
+=======
+        print_error('nopostforum', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!$cm->visible and !has_capability('moodle/course:viewhiddenactivities', $modcontext)) {
@@ -182,17 +206,29 @@ if (!empty($forum)) {
 
     $parententity = $postvault->get_from_id($reply);
     if (empty($parententity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidparentpostid', 'forum');
+=======
+        print_error('invalidparentpostid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $discussionentity = $discussionvault->get_from_id($parententity->get_discussion_id());
     if (empty($discussionentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('notpartofdiscussion', 'forum');
+=======
+        print_error('notpartofdiscussion', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidforumid', 'forum');
+=======
+        print_error('invalidforumid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -204,7 +240,11 @@ if (!empty($forum)) {
     $coursecontext = context_course::instance($course->id);
 
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Ensure lang, theme, etc. is set up properly. MDL-6926.
@@ -225,7 +265,11 @@ if (!empty($forum)) {
                 redirect(new moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id)));
             }
         }
+<<<<<<< HEAD
         throw new \moodle_exception('nopostforum', 'forum');
+=======
+        print_error('nopostforum', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Make sure user can post here.
@@ -236,20 +280,35 @@ if (!empty($forum)) {
     }
     if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $modcontext)) {
         if ($discussion->groupid == -1) {
+<<<<<<< HEAD
             throw new \moodle_exception('nopostforum', 'forum');
         } else {
             if (!groups_is_member($discussion->groupid)) {
                 throw new \moodle_exception('nopostforum', 'forum');
+=======
+            print_error('nopostforum', 'forum');
+        } else {
+            if (!groups_is_member($discussion->groupid)) {
+                print_error('nopostforum', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
     }
 
     if (!$cm->visible and !has_capability('moodle/course:viewhiddenactivities', $modcontext)) {
+<<<<<<< HEAD
         throw new \moodle_exception("activityiscurrentlyhidden");
     }
 
     if ($parententity->is_private_reply()) {
         throw new \moodle_exception('cannotreplytoprivatereply', 'forum');
+=======
+        print_error("activityiscurrentlyhidden");
+    }
+
+    if ($parententity->is_private_reply()) {
+        print_error('cannotreplytoprivatereply', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // We always are going to honor the preferred format. We are creating a new post.
@@ -292,7 +351,11 @@ if (!empty($forum)) {
 
     $postentity = $postvault->get_from_id($edit);
     if (empty($postentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidpostid', 'forum');
+=======
+        print_error('invalidpostid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if ($postentity->has_parent()) {
         $parententity = $postvault->get_from_id($postentity->get_parent_id());
@@ -301,12 +364,20 @@ if (!empty($forum)) {
 
     $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
     if (empty($discussionentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('notpartofdiscussion', 'forum');
+=======
+        print_error('notpartofdiscussion', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidforumid', 'forum');
+=======
+        print_error('invalidforumid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -318,7 +389,11 @@ if (!empty($forum)) {
     $coursecontext = context_course::instance($course->id);
 
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $PAGE->set_cm($cm, $course, $forum);
@@ -326,12 +401,20 @@ if (!empty($forum)) {
     if (!($forum->type == 'news' && !$post->parent && $discussion->timestart > time())) {
         if (((time() - $post->created) > $CFG->maxeditingtime) and
             !has_capability('mod/forum:editanypost', $modcontext)) {
+<<<<<<< HEAD
             throw new \moodle_exception('maxtimehaspassed', 'forum', '', format_time($CFG->maxeditingtime));
+=======
+            print_error('maxtimehaspassed', 'forum', '', format_time($CFG->maxeditingtime));
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
     if ((($post->userid <> $USER->id) && ($post->hiddenuserid <> $USER->id)) and
         !has_capability('mod/forum:editanypost', $modcontext)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannoteditposts', 'forum');
+=======
+        print_error('cannoteditposts', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Load up the $post variable.
@@ -356,17 +439,29 @@ if (!empty($forum)) {
 
     $postentity = $postvault->get_from_id($delete);
     if (empty($postentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidpostid', 'forum');
+=======
+        print_error('invalidpostid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
     if (empty($discussionentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('notpartofdiscussion', 'forum');
+=======
+        print_error('notpartofdiscussion', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidforumid', 'forum');
+=======
+        print_error('invalidforumid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -513,17 +608,29 @@ if (!empty($forum)) {
 
     $postentity = $postvault->get_from_id($prune);
     if (empty($postentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidpostid', 'forum');
+=======
+        print_error('invalidpostid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
     if (empty($discussionentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('notpartofdiscussion', 'forum');
+=======
+        print_error('notpartofdiscussion', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidforumid', 'forum');
+=======
+        print_error('invalidforumid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -535,7 +642,11 @@ if (!empty($forum)) {
     $coursecontext = context_course::instance($course->id);
 
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (!$postentity->has_parent()) {
@@ -661,7 +772,11 @@ if (!empty($forum)) {
     echo $OUTPUT->footer();
     die;
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('unknowaction');
+=======
+    print_error('unknowaction');
+>>>>>>> forked/LAE_400_PACKAGE
 
 }
 
@@ -671,7 +786,11 @@ require_login($course, false, $cm);
 
 if (isguestuser()) {
     // Just in case.
+<<<<<<< HEAD
     throw new \moodle_exception('noguest');
+=======
+    print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $thresholdwarning = forum_check_throttling($forum, $cm);
@@ -853,7 +972,11 @@ if ($mformpost->is_cancelled()) {
         $updatepost = $fromform;
         $updatepost->forum = $forum->id;
         if (!forum_update_post($updatepost, $mformpost)) {
+<<<<<<< HEAD
             throw new \moodle_exception("couldnotupdate", "forum", $errordestination);
+=======
+            print_error("couldnotupdate", "forum", $errordestination);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         forum_trigger_post_updated_event($post, $discussion, $modcontext, $forum);
@@ -939,7 +1062,11 @@ if ($mformpost->is_cancelled()) {
             );
 
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception("couldnotadd", "forum", $errordestination);
+=======
+            print_error("couldnotadd", "forum", $errordestination);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         exit;
 
@@ -999,7 +1126,11 @@ if ($mformpost->is_cancelled()) {
 
         foreach ($groupstopostto as $group) {
             if (!$capabilitymanager->can_create_discussions($USER, $group)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotcreatediscussion', 'forum');
+=======
+                print_error('cannotcreatediscussion', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $discussion->groupid = $group;
@@ -1026,7 +1157,11 @@ if ($mformpost->is_cancelled()) {
 
                 $subscribemessage = forum_post_subscription($fromform, $forum, $discussion);
             } else {
+<<<<<<< HEAD
                 throw new \moodle_exception("couldnotadd", "forum", $errordestination);
+=======
+                print_error("couldnotadd", "forum", $errordestination);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -1115,11 +1250,19 @@ if ($edit) {
 
 // Checkup.
 if (!empty($parententity) && !$capabilitymanager->can_view_post($USER, $discussionentity, $parententity)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotreply', 'forum');
 }
 
 if (empty($parententity) && empty($edit) && !$capabilitymanager->can_create_discussions($USER, $groupid)) {
     throw new \moodle_exception('cannotcreatediscussion', 'forum');
+=======
+    print_error('cannotreply', 'forum');
+}
+
+if (empty($parententity) && empty($edit) && !$capabilitymanager->can_create_discussions($USER, $groupid)) {
+    print_error('cannotcreatediscussion', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if (!empty($discussionentity) && 'qanda' == $forumentity->get_type()) {

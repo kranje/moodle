@@ -24,13 +24,23 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 $plugin->version   = 2022112800;
 $plugin->requires  = 2022111800;
+=======
+$plugin->version   = 2022041900;
+$plugin->requires  = 2022041200;
+>>>>>>> forked/LAE_400_PACKAGE
 
 $plugin->component = 'qtype_ddmarker';
 $plugin->maturity  = MATURITY_STABLE;
 
 $plugin->dependencies = array(
+<<<<<<< HEAD
     'qtype_gapselect'     => 2022111800,
     'qtype_ddimageortext' => 2022111800,
+=======
+    'qtype_gapselect'     => 2022041200,
+    'qtype_ddimageortext' => 2022041200,
+>>>>>>> forked/LAE_400_PACKAGE
 );

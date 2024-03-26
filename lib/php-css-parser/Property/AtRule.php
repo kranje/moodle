@@ -2,6 +2,7 @@
 
 namespace Sabberworm\CSS\Property;
 
+<<<<<<< HEAD
 use Sabberworm\CSS\Comment\Commentable;
 use Sabberworm\CSS\Renderable;
 
@@ -32,3 +33,17 @@ interface AtRule extends Renderable, Commentable
      */
     public function atRuleArgs();
 }
+=======
+use Sabberworm\CSS\Renderable;
+use Sabberworm\CSS\Comment\Commentable;
+
+interface AtRule extends Renderable, Commentable {
+	// Since there are more set rules than block rules, we’re whitelisting the block rules and have anything else be treated as a set rule.
+	const BLOCK_RULES = 'media/document/supports/region-style/font-feature-values';
+	// …and more font-specific ones (to be used inside font-feature-values)
+	const SET_RULES = 'font-face/counter-style/page/swash/styleset/annotation';
+	
+	public function atRuleName();
+	public function atRuleArgs();
+}
+>>>>>>> forked/LAE_400_PACKAGE

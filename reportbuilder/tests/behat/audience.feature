@@ -4,6 +4,7 @@ Feature: Configure access to reports based on intended audience
   I want to restrict which users have access to a report
 
   Background:
+<<<<<<< HEAD
     Given the following "custom profile fields" exist:
       | datatype | shortname | name  |
       | text     | fruit     | Fruit |
@@ -12,6 +13,13 @@ Feature: Configure access to reports based on intended audience
       | user1     | User      | 1        | user1@example.com | Apple               |
       | user2     | User      | 2        | user2@example.com | Banana              |
       | user3     | User      | 3        | user3@example.com | Banana              |
+=======
+    Given the following "users" exist:
+      | username  | firstname | lastname |
+      | user1     | User      | 1        |
+      | user2     | User      | 2        |
+      | user3     | User      | 3        |
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "core_reportbuilder > Reports" exist:
       | name      | source                                   | default |
       | My report | core_user\reportbuilder\datasource\users | 1       |
@@ -46,6 +54,7 @@ Feature: Configure access to reports based on intended audience
     And I click on "My report" "link" in the "My report" "table_row"
     And I should see "User 1" in the "reportbuilder-table" "table"
 
+<<<<<<< HEAD
   Scenario: Configure report audience with administrator audience type
     Given I am on the "My report" "reportbuilder > Editor" page logged in as "admin"
     And I click on the "Audience" dynamic tab
@@ -58,6 +67,8 @@ Feature: Configure access to reports based on intended audience
     And I should not see "User 2" in the "reportbuilder-table" "table"
     And I should not see "User 3" in the "reportbuilder-table" "table"
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Configure report audience with has system role audience type
     Given the following "roles" exist:
       | shortname | name      | archetype |
@@ -112,6 +123,7 @@ Feature: Configure access to reports based on intended audience
     Then "Add audience 'All users'" "link" should exist
     # This audience type should be disabled because there are no cohorts available.
     And "Add audience 'Member of cohort'" "link" should not exist
+<<<<<<< HEAD
     And the "title" attribute of "//div[@data-region='sidebar-menu']/descendant::div[normalize-space(.)='Member of cohort']" "xpath_element" should contain "Not available"
 
   Scenario: Configure report audience as user who cannot use specific audience
@@ -128,6 +140,8 @@ Feature: Configure access to reports based on intended audience
     And I am on the "My report" "reportbuilder > Editor" page logged in as "manager1"
     When I click on the "Audience" dynamic tab
     Then I should not see "Member of cohort" in the "[data-region='sidebar-menu']" "css_element"
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Search for and add audience to report
     Given I am on the "My report" "reportbuilder > Editor" page logged in as "admin"
@@ -192,6 +206,7 @@ Feature: Configure access to reports based on intended audience
     And I should see "User 2" in the "reportbuilder-table" "table"
     And I should not see "User 3" in the "reportbuilder-table" "table"
 
+<<<<<<< HEAD
   Scenario: View configured user identity fields on the access tab
     Given the following config values are set as admin:
       | showuseridentity | email,profile_field_fruit |
@@ -222,6 +237,8 @@ Feature: Configure access to reports based on intended audience
     And I should see "User 2" in the "reportbuilder-table" "table"
     And I should not see "User 3" in the "reportbuilder-table" "table"
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: View report as a user with edit capability
     Given the following "roles" exist:
       | shortname       | name      | archetype |

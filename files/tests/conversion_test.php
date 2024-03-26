@@ -77,6 +77,7 @@ class conversion_test extends \advanced_testcase {
 
     /**
      * Ensure that get_conversions_for_file returns an existing conversion
+<<<<<<< HEAD
      * record with matching sourcefileid and targetformat when a file with the same
      * contenthash is uploaded several times.
      *
@@ -124,6 +125,8 @@ class conversion_test extends \advanced_testcase {
 
     /**
      * Ensure that get_conversions_for_file returns an existing conversion
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * record with matching sourcefileid and targetformat when a second
      * conversion to a different format exists.
      */
@@ -186,7 +189,10 @@ class conversion_test extends \advanced_testcase {
 
         $conversion = array_shift($conversions);
 
+<<<<<<< HEAD
         $this->assertEquals($existing->get('id'), $conversion->get('id'));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals($sourcefile->get_id(), $conversion->get_sourcefile()->get_id());
         $this->assertEquals($destfile->get_id(), $conversion->get_destfile()->get_id());
     }

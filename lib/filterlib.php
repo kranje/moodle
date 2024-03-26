@@ -169,11 +169,30 @@ class filter_manager {
      */
     protected function apply_filter_chain($text, $filterchain, array $options = array(),
             array $skipfilters = null) {
+<<<<<<< HEAD
+=======
+        if (!isset($options['stage'])) {
+            $filtermethod = 'filter';
+        } else if (in_array($options['stage'], ['pre_format', 'pre_clean', 'post_clean', 'string'], true)) {
+            $filtermethod = 'filter_stage_' . $options['stage'];
+        } else {
+            $filtermethod = 'filter';
+            debugging('Invalid filter stage specified in options: ' . $options['stage'], DEBUG_DEVELOPER);
+        }
+        if ($text === null || $text === '') {
+            // Nothing to filter.
+            return '';
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($filterchain as $filtername => $filter) {
             if ($skipfilters !== null && in_array($filtername, $skipfilters)) {
                 continue;
             }
+<<<<<<< HEAD
             $text = $filter->filter($text, $options);
+=======
+            $text = $filter->$filtermethod($text, $options);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         return $text;
     }
@@ -216,8 +235,15 @@ class filter_manager {
     public function filter_text($text, $context, array $options = array(),
             array $skipfilters = null) {
         $text = $this->apply_filter_chain($text, $this->get_text_filters($context), $options, $skipfilters);
+<<<<<<< HEAD
         // Remove <nolink> tags for XHTML compatibility.
         $text = str_replace(array('<nolink>', '</nolink>'), '', $text);
+=======
+        if (!isset($options['stage']) || $options['stage'] === 'post_clean') {
+            // Remove <nolink> tags for XHTML compatibility after the last filtering stage.
+            $text = str_replace(array('<nolink>', '</nolink>'), '', $text);
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         return $text;
     }
 
@@ -229,7 +255,11 @@ class filter_manager {
      * @return string resulting string
      */
     public function filter_string($string, $context) {
+<<<<<<< HEAD
         return $this->apply_filter_chain($string, $this->get_string_filters($context));
+=======
+        return $this->apply_filter_chain($string, $this->get_string_filters($context), ['stage' => 'string']);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -368,7 +398,13 @@ class performance_measuring_filter_manager extends filter_manager {
 
     public function filter_text($text, $context, array $options = array(),
             array $skipfilters = null) {
+<<<<<<< HEAD
         $this->textsfiltered++;
+=======
+        if (!isset($options['stage']) || $options['stage'] === 'post_clean') {
+            $this->textsfiltered++;
+        }
+>>>>>>> forked/LAE_400_PACKAGE
         return parent::filter_text($text, $context, $options, $skipfilters);
     }
 
@@ -450,11 +486,75 @@ abstract class moodle_text_filter {
     /**
      * Override this function to actually implement the filtering.
      *
+<<<<<<< HEAD
+=======
+     * Filter developers must make sure that filtering done after text cleaning
+     * does not introduce security vulnerabilities.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $text some HTML content to process.
      * @param array $options options passed to the filters
      * @return string the HTML content after the filtering has been applied.
      */
     public abstract function filter($text, array $options = array());
+<<<<<<< HEAD
+=======
+
+    /**
+     * Filter text before changing format to HTML.
+     *
+     * @param string $text
+     * @param array $options
+     * @return string
+     */
+    public function filter_stage_pre_format(string $text, array $options): string {
+        // NOTE: override if necessary.
+        return $text;
+    }
+
+    /**
+     * Filter HTML text before sanitising text.
+     *
+     * NOTE: this is called even if $options['noclean'] is true and text is not cleaned.
+     *
+     * @param string $text
+     * @param array $options
+     * @return string
+     */
+    public function filter_stage_pre_clean(string $text, array $options): string {
+        // NOTE: override if necessary.
+        return $text;
+    }
+
+    /**
+     * Filter HTML text at the very end after text is sanitised.
+     *
+     * NOTE: this is called even if $options['noclean'] is true and text is not cleaned.
+     *
+     * @param string $text
+     * @param array $options
+     * @return string
+     */
+    public function filter_stage_post_clean(string $text, array $options): string {
+        // NOTE: override if necessary.
+        return $this->filter($text, $options);
+    }
+
+    /**
+     * Filter simple text coming from format_string().
+     *
+     * Note that unless $CFG->formatstringstriptags is disabled
+     * HTML tags are not expected in returned value.
+     *
+     * @param string $text
+     * @param array $options
+     * @return string
+     */
+    public function filter_stage_string(string $text, array $options): string {
+        // NOTE: override if necessary.
+        return $this->filter($text, $options);
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 

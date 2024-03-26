@@ -3,6 +3,7 @@
   <library>
     <location>joubel/core</location>
     <name>h5p-php-library</name>
+<<<<<<< HEAD
     <description>The general H5P library.</description>
     <version>moodle-1.22.4</version>
     <license>GPL</license>
@@ -11,10 +12,15 @@
     <copyrights>
       <copyright>Joubel</copyright>
     </copyrights>
+=======
+    <license>GPL-3.0</license>
+    <version>1.24.3</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
   <library>
     <location>joubel/editor</location>
     <name>h5p-editor-php-library</name>
+<<<<<<< HEAD
     <description>A general library that is supposed to be used in most PHP implementations of H5P.</description>
     <version>moodle-1.22.4</version>
     <license>GPL</license>
@@ -23,5 +29,9 @@
     <copyrights>
       <copyright>Joubel</copyright>
     </copyrights>
+=======
+    <license>GPL-3.0</license>
+    <version>moodle-1.20.2</version>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
 </libraries>

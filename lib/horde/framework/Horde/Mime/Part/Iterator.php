@@ -62,7 +62,10 @@ implements Countable, Iterator
      *
      * @return integer  Number of message parts.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count(iterator_to_array($this));
@@ -72,7 +75,10 @@ implements Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->valid()
@@ -82,7 +88,10 @@ implements Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return ($curr = $this->current())
@@ -92,7 +101,10 @@ implements Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         if (!isset($this->_state)) {
@@ -119,7 +131,10 @@ implements Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         $this->_state = new stdClass;
@@ -134,7 +149,10 @@ implements Countable, Iterator
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return !empty($this->_state);

@@ -28,7 +28,11 @@ Feature: Send email
   Scenario: Internal navigation
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "View drafts"
     Then I should see "You have no email drafts"
     When I press "Continue"
@@ -54,7 +58,11 @@ Feature: Send email
   Scenario: Teacher sends an attachment to everyone
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I press "Add all"
     And I set the following fields to these values:
       | Subject | Doom At 11 |

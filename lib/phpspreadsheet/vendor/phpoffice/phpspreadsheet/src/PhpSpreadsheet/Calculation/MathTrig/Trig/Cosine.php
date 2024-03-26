@@ -2,19 +2,26 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Trig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Helpers;
 
 class Cosine
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * COS.
      *
      * Returns the result of builtin function cos after validating args.
      *
+<<<<<<< HEAD
      * @param mixed $number Should be numeric, or can be an array of numbers
      *
      * @return array|float|string cosine
@@ -27,6 +34,14 @@ class Cosine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param mixed $number Should be numeric
+     *
+     * @return float|string cosine
+     */
+    public static function cos($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {
@@ -41,6 +56,7 @@ class Cosine
      *
      * Returns the result of builtin function cosh after validating args.
      *
+<<<<<<< HEAD
      * @param mixed $number Should be numeric, or can be an array of numbers
      *
      * @return array|float|string hyperbolic cosine
@@ -53,6 +69,14 @@ class Cosine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param mixed $number Should be numeric
+     *
+     * @return float|string hyperbolic cosine
+     */
+    public static function cosh($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {
@@ -67,6 +91,7 @@ class Cosine
      *
      * Returns the arccosine of a number.
      *
+<<<<<<< HEAD
      * @param array|float $number Number, or can be an array of numbers
      *
      * @return array|float|string The arccosine of the number
@@ -79,6 +104,14 @@ class Cosine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number
+     *
+     * @return float|string The arccosine of the number
+     */
+    public static function acos($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {
@@ -93,6 +126,7 @@ class Cosine
      *
      * Returns the arc inverse hyperbolic cosine of a number.
      *
+<<<<<<< HEAD
      * @param array|float $number Number, or can be an array of numbers
      *
      * @return array|float|string The inverse hyperbolic cosine of the number, or an error string
@@ -105,6 +139,14 @@ class Cosine
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number
+     *
+     * @return float|string The inverse hyperbolic cosine of the number, or an error string
+     */
+    public static function acosh($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {

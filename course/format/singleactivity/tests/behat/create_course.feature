@@ -14,6 +14,7 @@ Feature: Courses can be created in Single Activity mode
     And the following "system role assigns" exist:
       | user   | role    | contextlevel |
       | kevin  | creator | System       |
+<<<<<<< HEAD
     And I log in as "admin"
     And I set the following system permissions of "Creator" role:
       | capability | permission |
@@ -27,6 +28,19 @@ Feature: Courses can be created in Single Activity mode
     And I log in as "kevin"
     And I am on site homepage
     When I press "Add a new course"
+=======
+    And the following "role capability" exists:
+      | role                           | creator |
+      | moodle/course:create           | allow   |
+      | moodle/course:update           | allow   |
+      | moodle/course:manageactivities | allow   |
+      | moodle/course:viewparticipants | allow   |
+      | moodle/role:assign             | allow   |
+      | mod/quiz:addinstance           | allow   |
+    When I log in as "kevin"
+    And I am on site homepage
+    And I press "Add a new course"
+>>>>>>> forked/LAE_400_PACKAGE
     And I set the following fields to these values:
       | Course full name  | My first course |
       | Course short name | myfirstcourse |

@@ -52,6 +52,7 @@ Feature: Access to preferences page
     Then I should see "Preferences" in the "region-main" "region"
 
   Scenario: A user with the appropriate permissions can view another user's permissions page.
+<<<<<<< HEAD
     Given I log in as "admin"
     And I am on site homepage
     And I turn editing mode on
@@ -70,6 +71,23 @@ Feature: Access to preferences page
     And I click on "Create this role" "button"
     And I navigate to "Users > Accounts > Browse list of users" in site administration
     And I follow "Student 1"
+=======
+    Given the following "role" exists:
+      | shortname                            | Parent |
+      | name                                 | Parent |
+      | context_user                         | 1      |
+      | moodle/user:editprofile              | allow  |
+      | moodle/user:viewalldetails           | allow  |
+      | moodle/user:viewuseractivitiesreport | allow  |
+      | moodle/user:viewdetails              | allow  |
+    And the following "blocks" exist:
+      | blockname | contextlevel | reference | pagetypepattern | defaultregion |
+      | mentees   | System       | 1         | site-index      | side-pre      |
+    When I log in as "admin"
+    And I am on site homepage
+    And I turn editing mode on
+    And I am on the "student1" "user > profile" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Preferences" "link" in the ".profile_tree" "css_element"
     And I follow "Assign roles relative to this user"
     And I follow "Parent"

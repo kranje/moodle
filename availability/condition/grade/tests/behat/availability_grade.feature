@@ -17,6 +17,7 @@ Feature: availability_grade
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
     # Add an assignment.
+<<<<<<< HEAD
     And the following "activity" exists:
       | activity                            | assign |
       | course                              | C1     |
@@ -37,6 +38,19 @@ Feature: availability_grade
       | Name         | P2 |
       | Description  | x  |
       | Page content | x  |
+=======
+    And the following "activities" exist:
+      | activity | course | name | assignsubmission_onlinetext_enabled |
+      | assign   | C1     | A1   | 1                                   |
+      | page     | C1     | P1   |                                     |
+      | page     | C1     | P2   |                                     |
+      | page     | C1     | P3   |                                     |
+      | page     | C1     | P4   |                                     |
+
+  @javascript
+  Scenario: Test condition
+    Given I am on the "P2" "page activity editing" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Grade" "button" in the "Add restriction..." "dialogue"
@@ -45,11 +59,15 @@ Feature: availability_grade
     And I press "Save and return to course"
 
     # Add a Page with a grade condition for 50%.
+<<<<<<< HEAD
     And I add a "Page" to section "3"
     And I set the following fields to these values:
       | Name         | P3 |
       | Description  | x  |
       | Page content | x  |
+=======
+    And I am on the "P3" "page activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Grade" "button" in the "Add restriction..." "dialogue"
@@ -62,6 +80,7 @@ Feature: availability_grade
     And I press "Save and return to course"
 
     # Check if disabling a part of the restriction is get saved.
+<<<<<<< HEAD
     And I open "P3" actions menu
     And I click on "Edit settings" "link" in the "P3" activity
     And I expand all fieldsets
@@ -70,15 +89,26 @@ Feature: availability_grade
     And I open "P3" actions menu
     And I click on "Edit settings" "link" in the "P3" activity
     And I expand all fieldsets
+=======
+    And I am on the "P3" "page activity editing" page
+    And I expand all fieldsets
+    And I click on "max" "checkbox" in the ".availability-item" "css_element"
+    And I press "Save and return to course"
+    And I am on the "P3" "page activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And the field "Maximum grade percentage (exclusive)" matches value ""
     And I am on "Course 1" course homepage
 
     # Add a Page with a grade condition for 10%.
+<<<<<<< HEAD
     And I add a "Page" to section "4"
     And I set the following fields to these values:
       | Name         | P4 |
       | Description  | x  |
       | Page content | x  |
+=======
+    And I am on the "P4" "page activity editing" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Grade" "button" in the "Add restriction..." "dialogue"
@@ -88,8 +118,11 @@ Feature: availability_grade
     And I set the field "Minimum grade percentage (inclusive)" to "10"
     And I press "Save and return to course"
 
+<<<<<<< HEAD
     And I log out
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     # Log in as student without a grade yet.
     When I am on the "A1" "assign activity" page logged in as student1
 
@@ -104,7 +137,10 @@ Feature: availability_grade
     And I should not see "P3" in the "region-main" "region"
     And I should not see "P4" in the "region-main" "region"
     And I should see "A1" in the "region-main" "region"
+<<<<<<< HEAD
     And I log out
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Log back in as teacher.
     When I am on the "A1" "assign activity" page logged in as teacher1
@@ -143,12 +179,17 @@ Feature: availability_grade
     And the "activitynames" filter applies to "content and headings"
     And I am on the "C1" "Course" page logged in as "teacher1"
     And I turn editing mode on
+<<<<<<< HEAD
     And I add a "Page" to section "1"
     And I expand all fieldsets
     And I set the following fields to these values:
       | Name         | P1 |
       | Description  | x  |
       | Page content | x  |
+=======
+    And I am on the "P1" "page activity editing" page
+    And I expand all fieldsets
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Add restriction..." "button"
     And I click on "Grade" "button" in the "Add restriction..." "dialogue"
     And I set the field "Grade" to "A-One"

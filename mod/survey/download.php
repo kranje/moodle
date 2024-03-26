@@ -33,11 +33,19 @@ $type  = optional_param('type', 'xls', PARAM_ALPHA);
 $group = optional_param('group', 0, PARAM_INT);
 
 if (! $cm = get_coursemodule_from_id('survey', $id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
 }
 
 if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
     throw new \moodle_exception('coursemisconf');
+=======
+    print_error('invalidcoursemodule');
+}
+
+if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+    print_error('coursemisconf');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $context = context_module::instance($cm->id);
@@ -48,7 +56,11 @@ require_login($course, false, $cm);
 require_capability('mod/survey:download', $context) ;
 
 if (! $survey = $DB->get_record("survey", array("id"=>$cm->instance))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidsurveyid', 'survey');
+=======
+    print_error('invalidsurveyid', 'survey');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $params = array(
@@ -135,7 +147,11 @@ unset($allquestions);
 
 // Get and collate all the results in one big array
 if (! $surveyanswers = $DB->get_records("survey_answers", array("survey"=>$survey->id), "time ASC")) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotfindanswer', 'survey');
+=======
+    print_error('cannotfindanswer', 'survey');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $results = array();
@@ -194,7 +210,11 @@ if ($type == "ods") {
         $col = 0;
         $row++;
         if (! $u = $DB->get_record("user", array("id"=>$user))) {
+<<<<<<< HEAD
             throw new \moodle_exception('invaliduserid');
+=======
+            print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($n = $DB->get_record("survey_analysis", array("survey"=>$survey->id, "userid"=>$user))) {
             $notes = $n->notes;
@@ -270,7 +290,11 @@ if ($type == "xls") {
         $col = 0;
         $row++;
         if (! $u = $DB->get_record("user", array("id"=>$user))) {
+<<<<<<< HEAD
             throw new \moodle_exception('invaliduserid');
+=======
+            print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($n = $DB->get_record("survey_analysis", array("survey"=>$survey->id, "userid"=>$user))) {
             $notes = $n->notes;
@@ -336,7 +360,11 @@ echo "\n";
 // Print all the lines of data.
 foreach ($results as $user => $rest) {
     if (! $u = $DB->get_record("user", array("id"=>$user))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invaliduserid');
+=======
+        print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     echo $survey->id."\t";
     echo strip_tags(format_string($survey->name,true))."\t";

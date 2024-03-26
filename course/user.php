@@ -148,7 +148,11 @@ switch ($mode) {
             $coursenode->collapse = true;
             $coursenode->make_inactive();
 
+<<<<<<< HEAD
             if (!preg_match('/^user\d{0,}$/', $activenode->key ?? '')) { // No user name found.
+=======
+            if (!preg_match('/^user\d{0,}$/', $activenode->key)) { // No user name found.
+>>>>>>> forked/LAE_400_PACKAGE
                 $userurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
                 // Add the user name.
                 $usernode = $activenode->add(fullname($user), $userurl, navigation_node::TYPE_SETTING);

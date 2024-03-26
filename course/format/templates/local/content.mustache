@@ -158,7 +158,11 @@
         }
     }
 }}
+<<<<<<< HEAD
 <div id="{{uniqid}}-course-format">
+=======
+<div id="course-format-{{uniqid}}">
+>>>>>>> forked/LAE_400_PACKAGE
     <h2 class="accesshide">{{{title}}}</h2>
     {{{completionhelp}}}
     <ul class="{{format}}" data-for="course_sectionlist">
@@ -202,6 +206,10 @@
 </div>
 {{#js}}
 require(['core_courseformat/local/content'], function(component) {
+<<<<<<< HEAD
     component.init('{{uniqid}}-course-format', {}, {{sectionreturn}});
+=======
+    component.init('course-format-{{uniqid}}', {}, {{sectionreturn}});
+>>>>>>> forked/LAE_400_PACKAGE
 });
 {{/js}}

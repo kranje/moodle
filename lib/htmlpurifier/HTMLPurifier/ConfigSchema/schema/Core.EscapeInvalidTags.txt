@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Core.EscapeInvalidTags
 TYPE: bool
 DEFAULT: false
@@ -5,3 +6,12 @@ DEFAULT: false
 When true, invalid tags will be written back to the document as plain text.
 Otherwise, they are silently dropped.
 --# vim: et sw=4 sts=4
+=======
+Core.EscapeInvalidTags
+TYPE: bool
+DEFAULT: false
+--DESCRIPTION--
+When true, invalid tags will be written back to the document as plain text.
+Otherwise, they are silently dropped.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

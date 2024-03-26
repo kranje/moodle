@@ -41,6 +41,7 @@ if (null !== $return) {
 $PAGE->set_url($url);
 
 if (! $forum = $DB->get_record("forum", array("id" => $f))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidforumid', 'forum');
 }
 
@@ -50,6 +51,17 @@ if (! $course = $DB->get_record("course", array("id" => $forum->course))) {
 
 if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidforumid', 'forum');
+}
+
+if (! $course = $DB->get_record("course", array("id" => $forum->course))) {
+    print_error('invalidcourseid');
+}
+
+if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $user = $USER;
@@ -79,7 +91,11 @@ $info->forum = format_string($forum->name);
 if ($mark == 'read') {
     if (!empty($d)) {
         if (! $discussion = $DB->get_record('forum_discussions', array('id'=> $d, 'forum'=> $forum->id))) {
+<<<<<<< HEAD
             throw new \moodle_exception('invaliddiscussionid', 'forum');
+=======
+            print_error('invaliddiscussionid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         forum_tp_mark_discussion_read($user, $d);

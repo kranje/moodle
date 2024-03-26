@@ -25,8 +25,11 @@
 
 namespace core;
 
+<<<<<<< HEAD
 use moodle_database;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__.'/fixtures/read_slave_moodle_database_mock_mysqli.php');
@@ -47,7 +50,11 @@ class dml_mysqli_read_slave_test extends \base_testcase {
      *
      * @return void
      */
+<<<<<<< HEAD
     public function test_lock(): void {
+=======
+    public function test_lock() : void {
+>>>>>>> forked/LAE_400_PACKAGE
         $DB = new read_slave_moodle_database_mock_mysqli();
 
         $this->assertEquals(0, $DB->perf_get_reads_slave());
@@ -64,11 +71,19 @@ class dml_mysqli_read_slave_test extends \base_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test readonly handle is used for SQL_QUERY_AUX_READONLY queries.
      *
      * @return void
      */
     public function test_aux_readonly(): void {
+=======
+     * Test readonly connection failure with real mysqli connection
+     *
+     * @return void
+     */
+    public function test_real_readslave_connect_fail() : void {
+>>>>>>> forked/LAE_400_PACKAGE
         global $DB;
 
         if ($DB->get_dbfamily() != 'mysql') {
@@ -78,6 +93,7 @@ class dml_mysqli_read_slave_test extends \base_testcase {
         // Open second connection.
         $cfg = $DB->export_dbconfig();
         if (!isset($cfg->dboptions)) {
+<<<<<<< HEAD
             $cfg->dboptions = [];
         }
         $cfg->dboptions['readonly'] = [
@@ -152,13 +168,20 @@ class dml_mysqli_read_slave_test extends \base_testcase {
         $cfg = $DB->export_dbconfig();
         if (!isset($cfg->dboptions)) {
             $cfg->dboptions = [];
+=======
+            $cfg->dboptions = array();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $cfg->dboptions['readonly'] = [
             'instance' => ['host.that.is.not'],
             'connecttimeout' => 1
         ];
 
+<<<<<<< HEAD
         $db2 = moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+=======
+        $db2 = \moodle_database::get_driver_instance($cfg->dbtype, $cfg->dblibrary);
+>>>>>>> forked/LAE_400_PACKAGE
         $db2->connect($cfg->dbhost, $cfg->dbuser, $cfg->dbpass, $cfg->dbname, $cfg->prefix, $cfg->dboptions);
         $this->assertTrue(count($db2->get_records('user')) > 0);
     }

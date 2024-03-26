@@ -22,6 +22,7 @@
  */
 
 import {get_string as getString} from 'core/str';
+<<<<<<< HEAD
 import {prefetchStrings} from 'core/prefetch';
 import {relativeUrl} from 'core/url';
 import {saveCancel} from 'core/notification';
@@ -36,22 +37,30 @@ prefetchStrings('mod_data', [
 prefetchStrings('core', [
     'reset',
 ]);
+=======
+import {confirm as confirmDialogue} from 'core/notification';
+import {relativeUrl} from 'core/url';
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Template editor constants.
  */
 const selectors = {
     toggleTemplateEditor: 'input[name="useeditor"]',
+<<<<<<< HEAD
     resetTemplate: 'input[name="defaultform"]',
     resetAllTemplates: 'input[name="resetall"]',
     resetButton: 'input[name="resetbutton"]',
     resetAllCheck: 'input[name="resetallcheck"]',
     editForm: '#edittemplateform',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**
  * Register event listeners for the module.
  *
+<<<<<<< HEAD
  * @param {Number} instanceId The database ID
  * @param {string} mode The template mode
  */
@@ -107,6 +116,14 @@ const registerEditorToggler = (instanceId, mode) => {
         return;
     }
 
+=======
+ * @param {int} d The database ID
+ * @param {string} mode The template mode
+ */
+const registerEventListeners = (d, mode) => {
+    const toggleTemplateEditor = document.querySelector(selectors.toggleTemplateEditor);
+
+>>>>>>> forked/LAE_400_PACKAGE
     toggleTemplateEditor.addEventListener('click', async(event) => {
         event.preventDefault();
         // Whether the event action attempts to enable or disable the template editor.
@@ -114,6 +131,7 @@ const registerEditorToggler = (instanceId, mode) => {
 
         if (enableTemplateEditor) {
             // Display a confirmation dialog before enabling the template editor.
+<<<<<<< HEAD
             saveCancel(
                 getString('confirmation', 'admin'),
                 getString('enabletemplateeditorcheck', 'mod_data'),
@@ -126,6 +144,19 @@ const registerEditorToggler = (instanceId, mode) => {
             );
         } else {
             window.location = relativeUrl('/mod/data/templates.php', {d: instanceId, mode: mode, useeditor: false});
+=======
+            confirmDialogue(
+                getString('confirmation', 'admin'),
+                getString('enabletemplateeditorcheck', 'mod_data'),
+                getString('yes', 'core'),
+                getString('no', 'core'),
+                () => {
+                    window.location = relativeUrl('/mod/data/templates.php', {d: d, mode: mode, useeditor: true});
+                }
+            );
+        } else {
+            window.location = relativeUrl('/mod/data/templates.php', {d: d, mode: mode, useeditor: false});
+>>>>>>> forked/LAE_400_PACKAGE
         }
     });
 };
@@ -133,9 +164,17 @@ const registerEditorToggler = (instanceId, mode) => {
 /**
  * Initialize the module.
  *
+<<<<<<< HEAD
  * @param {int} instanceId The database ID
  * @param {string} mode The template mode
  */
 export const init = (instanceId, mode) => {
     registerEventListeners(instanceId, mode);
+=======
+ * @param {int} d The database ID
+ * @param {string} mode The template mode
+ */
+export const init = (d, mode) => {
+    registerEventListeners(d, mode);
+>>>>>>> forked/LAE_400_PACKAGE
 };

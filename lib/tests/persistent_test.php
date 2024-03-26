@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 namespace core;
 
 use advanced_testcase;
@@ -31,6 +32,10 @@ use lang_string;
 use xmldb_table;
 
 defined('MOODLE_INTERNAL') || die();
+=======
+defined('MOODLE_INTERNAL') || die();
+global $CFG;
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Persistent testcase.
@@ -38,9 +43,14 @@ defined('MOODLE_INTERNAL') || die();
  * @package    core
  * @copyright  2015 Frédéric Massart - FMCorz.net
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
  * @covers     \core\persistent
  */
 class persistent_test extends advanced_testcase {
+=======
+ */
+class core_persistent_testcase extends advanced_testcase {
+>>>>>>> forked/LAE_400_PACKAGE
 
     public function setUp(): void {
         $this->make_persistent_table();
@@ -173,6 +183,7 @@ class persistent_test extends advanced_testcase {
         $this->assertEquals($expected, core_testable_persistent::properties_definition());
     }
 
+<<<<<<< HEAD
     /**
      * Test creating persistent instance by specifying record ID in constructor
      */
@@ -196,6 +207,8 @@ class persistent_test extends advanced_testcase {
         new core_testable_persistent(42);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function test_to_record() {
         $p = new core_testable_persistent();
         $expected = (object) array(
@@ -578,6 +591,7 @@ class persistent_test extends advanced_testcase {
         $this->assertEquals($json, $record->path);
     }
 
+<<<<<<< HEAD
     /**
      * Test get_record method for creating persistent instance
      */
@@ -611,6 +625,8 @@ class persistent_test extends advanced_testcase {
         core_testable_persistent::get_record(['id' => 42], MUST_EXIST);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function test_record_exists() {
         global $DB;
         $this->assertFalse($DB->record_exists(core_testable_persistent::TABLE, array('idnumber' => 'abc')));
@@ -689,7 +705,11 @@ class persistent_test extends advanced_testcase {
  * @copyright  2015 Frédéric Massart - FMCorz.net
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class core_testable_persistent extends persistent {
+=======
+class core_testable_persistent extends \core\persistent {
+>>>>>>> forked/LAE_400_PACKAGE
 
     const TABLE = 'phpunit_persistent';
 
@@ -790,7 +810,11 @@ class core_testable_persistent extends persistent {
  * @copyright  2021 David Matamoros <davidmc@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class core_testable_second_persistent extends persistent {
+=======
+class core_testable_second_persistent extends \core\persistent {
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** Table name for the persistent. */
     const TABLE = 'phpunit_second_persistent';

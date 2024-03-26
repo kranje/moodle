@@ -34,24 +34,39 @@ $subwikiid = optional_param('subwikiid', 0, PARAM_INT);
 $userid = optional_param('uid', 0, PARAM_INT);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
 }
 if (!$cm = get_coursemodule_from_id('wiki', $cmid)) {
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcourseid');
+}
+if (!$cm = get_coursemodule_from_id('wiki', $cmid)) {
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course, true, $cm);
 
 // Checking wiki instance
 if (!$wiki = wiki_get_wiki($cm->instance)) {
+<<<<<<< HEAD
     throw new \moodle_exception('incorrectwikiid', 'wiki');
+=======
+    print_error('incorrectwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($subwikiid) {
     // Subwiki id is specified.
     $subwiki = wiki_get_subwiki($subwikiid);
     if (!$subwiki || $subwiki->wikiid != $wiki->id) {
+<<<<<<< HEAD
         throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+=======
+        print_error('incorrectsubwikiid', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 } else {
     // Getting current group id
@@ -72,7 +87,11 @@ if ($subwikiid) {
 }
 
 if ($subwiki && !wiki_user_can_view($subwiki, $wiki)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotviewpage', 'wiki');
+=======
+    print_error('cannotviewpage', 'wiki');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $wikipage = new page_wiki_search($wiki, $subwiki, $cm);

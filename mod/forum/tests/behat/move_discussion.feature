@@ -19,6 +19,7 @@ Feature: A teacher can move discussions between forums
 
   Scenario: A teacher can move discussions
     Given the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro             | course | idnumber     | groupmode |
       | forum      | Test forum 1           | Test forum 2      | C1     | forum        | 0         |
       | forum      | Test forum 2           | Test forum 1      | C1     | forum        | 0         |
@@ -32,6 +33,15 @@ Feature: A teacher can move discussions between forums
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I follow "Test forum 1"
+=======
+      | activity | name         | course | idnumber | groupmode |
+      | forum    | Test forum 1 | C1     | forum1   | 0         |
+      | forum    | Test forum 2 | C1     | forum2   | 0         |
+    And the following "mod_forum > discussions" exist:
+      | user     | forum  | name         | message           |
+      | student1 | forum1 | Discussion 1 | Test post message |
+    And I am on the "Test forum 1" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Discussion 1"
     When I set the field "jump" to "Test forum 2"
     And I press "Move"

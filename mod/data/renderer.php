@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -24,11 +25,14 @@
 
 use mod_data\local\importer\preset_existing_importer;
 use mod_data\manager;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 defined('MOODLE_INTERNAL') || die();
 
 class mod_data_renderer extends plugin_renderer_base {
 
+<<<<<<< HEAD
     /**
      * Rendering setting and mapping page to import a preset.
      *
@@ -76,6 +80,38 @@ class mod_data_renderer extends plugin_renderer_base {
         );
 
         if (!empty($newfields)) {
+=======
+    public function import_setting_mappings($datamodule, data_preset_importer $importer) {
+
+        $strblank = get_string('blank', 'data');
+        $strcontinue = get_string('continue');
+        $strwarning = get_string('mappingwarning', 'data');
+        $strfieldmappings = get_string('fieldmappings', 'data');
+        $strnew = get_string('new');
+
+
+        $params = $importer->get_preset_settings();
+        $settings = $params->settings;
+        $newfields = $params->importfields;
+        $currentfields = $params->currentfields;
+
+        $html  = html_writer::start_tag('div', array('class'=>'presetmapping'));
+        $html .= html_writer::start_tag('form', array('method'=>'post', 'action'=>''));
+        $html .= html_writer::start_tag('div');
+        $html .= html_writer::empty_tag('input', array('type'=>'hidden', 'name'=>'action', 'value'=>'finishimport'));
+        $html .= html_writer::empty_tag('input', array('type'=>'hidden', 'name'=>'sesskey', 'value'=>sesskey()));
+        $html .= html_writer::empty_tag('input', array('type'=>'hidden', 'name'=>'d', 'value'=>$datamodule->id));
+
+        if ($importer instanceof data_preset_existing_importer) {
+            $html .= html_writer::empty_tag('input', array('type'=>'hidden', 'name'=>'fullname', 'value'=>$importer->get_userid().'/'.$importer->get_directory()));
+        } else {
+            $html .= html_writer::empty_tag('input', array('type'=>'hidden', 'name'=>'directory', 'value'=>$importer->get_directory()));
+        }
+
+        if (!empty($newfields)) {
+            $html .= $this->output->heading_with_help($strfieldmappings, 'fieldmappings', 'data', '', '', 3);
+
+>>>>>>> forked/LAE_400_PACKAGE
             $table = new html_table();
             $table->data = array();
 
@@ -91,6 +127,7 @@ class mod_data_renderer extends plugin_renderer_base {
                         continue;
                     }
                     if ($currentfield->name == $newfield->name) {
+<<<<<<< HEAD
                         $row[1] .= html_writer::tag(
                             'option',
                             get_string('mapexistingfield', 'data', $currentfield->name),
@@ -103,6 +140,12 @@ class mod_data_renderer extends plugin_renderer_base {
                             get_string('mapexistingfield', 'data', $currentfield->name),
                             ['value' => $cid]
                         );
+=======
+                        $row[1] .= html_writer::tag('option', get_string('mapexistingfield', 'data', $currentfield->name), array('value'=>$cid, 'selected'=>'selected'));
+                        $selected=true;
+                    } else {
+                        $row[1] .= html_writer::tag('option', get_string('mapexistingfield', 'data', $currentfield->name), array('value'=>$cid));
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                 }
 
@@ -122,6 +165,7 @@ class mod_data_renderer extends plugin_renderer_base {
         }
 
         $html .= html_writer::start_tag('div', array('class'=>'overwritesettings'));
+<<<<<<< HEAD
         $attrs = ['type' => 'checkbox', 'name' => 'overwritesettings', 'id' => 'overwritesettings', 'class' => 'mr-2'];
         $html .= html_writer::empty_tag('input', $attrs);
         $html .= html_writer::tag('label', get_string('overwritesettings', 'data'), ['for' => 'overwritesettings']);
@@ -143,6 +187,13 @@ class mod_data_renderer extends plugin_renderer_base {
 
         $stickyfooter = new core\output\sticky_footer($actionbuttons);
         $html .= $this->render($stickyfooter);
+=======
+        $html .= html_writer::tag('label', get_string('overwritesettings', 'data'), array('for' => 'overwritesettings'));
+        $attrs = array('type' => 'checkbox', 'name' => 'overwritesettings', 'id' => 'overwritesettings', 'class' => 'ml-1');
+        $html .= html_writer::empty_tag('input', $attrs);
+        $html .= html_writer::end_tag('div');
+        $html .= html_writer::empty_tag('input', array('type' => 'submit', 'class' => 'btn btn-primary', 'value' => $strcontinue));
+>>>>>>> forked/LAE_400_PACKAGE
 
         $html .= html_writer::end_tag('div');
         $html .= html_writer::end_tag('form');
@@ -159,13 +210,17 @@ class mod_data_renderer extends plugin_renderer_base {
      */
     public function render_fields_action_bar(\mod_data\output\fields_action_bar $actionbar): string {
         $data = $actionbar->export_for_template($this);
+<<<<<<< HEAD
         $data['title'] = get_string('nofields', 'mod_data');
         $data['intro'] = get_string('createfields', 'mod_data');
         $data['noitemsimgurl'] = $this->output->image_url('fields_zero_state', 'mod_data')->out();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->render_from_template('mod_data/fields_action_bar', $data);
     }
 
     /**
+<<<<<<< HEAD
      * Renders the fields page footer.
      *
      * @param manager $manager the instance manager
@@ -180,6 +235,8 @@ class mod_data_renderer extends plugin_renderer_base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Renders the action bar for the view page.
      *
      * @param \mod_data\output\view_action_bar $actionbar
@@ -222,6 +279,7 @@ class mod_data_renderer extends plugin_renderer_base {
         $data = $presets->export_for_template($this);
         return $this->render_from_template('mod_data/presets', $data);
     }
+<<<<<<< HEAD
 
     /**
      * Renders the default template.
@@ -311,4 +369,6 @@ class mod_data_renderer extends plugin_renderer_base {
 
         return $this->render_from_template('mod_data/zero_state', $data);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

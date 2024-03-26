@@ -26,12 +26,21 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_calculatedsimple';
+<<<<<<< HEAD
 $plugin->version   = 2022112800;
 
 $plugin->requires  = 2022111800;
 $plugin->dependencies = array(
     'qtype_numerical'  => 2022111800,
     'qtype_calculated' => 2022111800,
+=======
+$plugin->version   = 2022041900;
+
+$plugin->requires  = 2022041200;
+$plugin->dependencies = array(
+    'qtype_numerical'  => 2022041200,
+    'qtype_calculated' => 2022041200,
+>>>>>>> forked/LAE_400_PACKAGE
 );
 
 $plugin->maturity  = MATURITY_STABLE;

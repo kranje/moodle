@@ -1,7 +1,11 @@
 PHP Markdown
 ============
 
+<<<<<<< HEAD
 ![ci.yml](https://github.com/michelf/php-markdown/actions/workflows/ci.yml/badge.svg)
+=======
+PHP Markdown Lib 1.9.0 - 1 Dec 2019
+>>>>>>> forked/LAE_400_PACKAGE
 
 by Michel Fortin  
 <https://michelf.ca/>
@@ -34,14 +38,24 @@ program by John Gruber.
 Requirement
 -----------
 
+<<<<<<< HEAD
 This library package requires PHP 7.4 or later.
+=======
+This library package requires PHP 5.3 or later.
+>>>>>>> forked/LAE_400_PACKAGE
 
 Note: The older plugin/library hybrid package for PHP Markdown and
 PHP Markdown Extra is no longer maintained but will work with PHP 4.0.5 and
 later.
 
+<<<<<<< HEAD
 You might need to set pcre.backtrack_limit higher than 1 000 000 
 (the default), though the default is usually fine.
+=======
+Before PHP 5.3.7, pcre.backtrack_limit defaults to 100 000, which is too small
+in many situations. You might need to set it to higher values. Later PHP
+releases defaults to 1 000 000, which is usually fine.
+>>>>>>> forked/LAE_400_PACKAGE
 
 
 Usage
@@ -182,6 +196,7 @@ PHP Markdown, please visit [michelf.ca/donate].
 Version History
 ---------------
 
+<<<<<<< HEAD
 PHP Markdown Lib 2.0.0 (26 Sep 2022)
 
 *	Now requiring PHP version 7.4 or later.
@@ -207,6 +222,8 @@ PHP Markdown Lib 1.9.1 (23 Nov 2021)
 	(Thanks to Richie Black for the fix.)
 
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 PHP Markdown Lib 1.9.0 (1 Dec 2019)
 
 *	Added `fn_backlink_label` configuration variable to put some text in the
@@ -423,7 +440,11 @@ Copyright and License
 ---------------------
 
 PHP Markdown Lib
+<<<<<<< HEAD
 Copyright (c) 2004-2022 Michel Fortin
+=======
+Copyright (c) 2004-2019 Michel Fortin
+>>>>>>> forked/LAE_400_PACKAGE
 <https://michelf.ca/>  
 All rights reserved.
 

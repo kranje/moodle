@@ -196,5 +196,8 @@ class SimplePie_Caption
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Caption', 'SimplePie\Caption', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

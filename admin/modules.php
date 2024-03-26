@@ -53,7 +53,11 @@
 /// Get and sort the existing modules
 
     if (!$modules = $DB->get_records('modules', array(), 'name ASC')) {
+<<<<<<< HEAD
         throw new \moodle_exception('moduledoesnotexist', 'error');
+=======
+        print_error('moduledoesnotexist', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 /// Print the table of all modules

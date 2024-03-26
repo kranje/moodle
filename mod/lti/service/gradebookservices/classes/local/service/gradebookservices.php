@@ -31,6 +31,7 @@ use ltiservice_gradebookservices\local\resources\results;
 use ltiservice_gradebookservices\local\resources\scores;
 use mod_lti\local\ltiservice\resource_base;
 use mod_lti\local\ltiservice\service_base;
+<<<<<<< HEAD
 use moodle_url;
 
 defined('MOODLE_INTERNAL') || die();
@@ -38,6 +39,11 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
 
+=======
+
+defined('MOODLE_INTERNAL') || die();
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * A service implementing LTI Gradebook Services.
  *
@@ -148,6 +154,7 @@ class gradebookservices extends service_base {
     }
 
     /**
+<<<<<<< HEAD
      * For submission review, if there is a dedicated URL, use it as the target link.
      *
      * @param string $messagetype message type for this launch
@@ -184,6 +191,8 @@ class gradebookservices extends service_base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Return an array of key/claim mapping allowing LTI 1.1 custom parameters
      * to be transformed to LTI 1.3 claims.
      *
@@ -582,6 +591,7 @@ class gradebookservices extends service_base {
                 $lineitem->resourceLinkId = strval($gbs->ltilinkid);
                 $lineitem->ltiLinkId = strval($gbs->ltilinkid);
             }
+<<<<<<< HEAD
             if (!empty($gbs->subreviewurl)) {
                 $submissionreview = new \stdClass();
                 if ($gbs->subreviewurl != 'DEFAULT') {
@@ -592,6 +602,8 @@ class gradebookservices extends service_base {
                 }
                 $lineitem->submissionReview = $submissionreview;
             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             $lineitem->tag = '';
             if (isset($item->iteminstance)) {
@@ -718,31 +730,47 @@ class gradebookservices extends service_base {
     }
 
     /**
+<<<<<<< HEAD
      * Updates the tag, resourceid and submission review values for a grade item coupled to an lti link instance.
+=======
+     * Updates the tag and resourceid values for a grade item coupled to an lti link instance.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param object $ltiinstance The lti instance to which the grade item is coupled to
      * @param string|null $resourceid The resourceid to apply to the lineitem. If empty string which will be stored as null.
      * @param string|null $tag The tag to apply to the lineitem. If empty string which will be stored as null.
+<<<<<<< HEAD
      * @param moodle_url|null $subreviewurl The submission review target link URL
      * @param string|null $subreviewparams The submission review custom parameters.
      *
      */
     public static function update_coupled_gradebookservices(object $ltiinstance,
             ?string $resourceid, ?string $tag, ?\moodle_url $subreviewurl, ?string $subreviewparams) : void {
+=======
+     *
+     */
+    public static function update_coupled_gradebookservices(object $ltiinstance, ?string $resourceid, ?string $tag) : void {
+>>>>>>> forked/LAE_400_PACKAGE
         global $DB;
 
         if ($ltiinstance && $ltiinstance->typeid) {
             $gradeitem = $DB->get_record('grade_items', array('itemmodule' => 'lti', 'iteminstance' => $ltiinstance->id));
             if ($gradeitem) {
                 $resourceid = (isset($resourceid) && empty(trim($resourceid))) ? null : $resourceid;
+<<<<<<< HEAD
                 $subreviewurlstr = $subreviewurl ? $subreviewurl->out(false) : null;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 $tag = (isset($tag) && empty(trim($tag))) ? null : $tag;
                 $gbs = self::find_ltiservice_gradebookservice_for_lineitem($gradeitem->id);
                 if ($gbs) {
                     $gbs->resourceid = $resourceid;
                     $gbs->tag = $tag;
+<<<<<<< HEAD
                     $gbs->subreviewurl = $subreviewurlstr;
                     $gbs->subreviewparams = $subreviewparams;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                     $DB->update_record('ltiservice_gradebookservices', $gbs);
                 } else {
                     $baseurl = lti_get_type_type_config($ltiinstance->typeid)->lti_toolurl;
@@ -753,9 +781,13 @@ class gradebookservices extends service_base {
                         'baseurl' => $baseurl,
                         'ltilinkid' => $ltiinstance->id,
                         'resourceid' => $resourceid,
+<<<<<<< HEAD
                         'tag' => $tag,
                         'subreviewurl' => $subreviewurlstr,
                         'subreviewparams' => $subreviewparams
+=======
+                        'tag' => $tag
+>>>>>>> forked/LAE_400_PACKAGE
                     ));
                 }
             }
@@ -768,9 +800,13 @@ class gradebookservices extends service_base {
      * @param object $lti LTI Instance.
      */
     public function instance_added(object $lti): void {
+<<<<<<< HEAD
         self::update_coupled_gradebookservices($lti, $lti->lineitemresourceid ?? null, $lti->lineitemtag ?? null,
             isset($lti->lineitemsubreviewurl) ? new moodle_url($lti->lineitemsubreviewurl) : null,
             $lti->lineitemsubreviewparams ?? null);
+=======
+        self::update_coupled_gradebookservices($lti, $lti->lineitemresourceid ?? null, $lti->lineitemtag ?? null);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -779,9 +815,13 @@ class gradebookservices extends service_base {
      * @param object $lti LTI Instance.
      */
     public function instance_updated(object $lti): void {
+<<<<<<< HEAD
         self::update_coupled_gradebookservices($lti, $lti->lineitemresourceid ?? null, $lti->lineitemtag ?? null,
             isset($lti->lineitemsubreviewurl) ? new moodle_url($lti->lineitemsubreviewurl) : null,
             $lti->lineitemsubreviewparams ?? null);
+=======
+        self::update_coupled_gradebookservices($lti, $lti->lineitemresourceid ?? null, $lti->lineitemtag ?? null);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -792,15 +832,21 @@ class gradebookservices extends service_base {
     public function set_instance_form_values(object $defaultvalues): void {
         $defaultvalues->lineitemresourceid = '';
         $defaultvalues->lineitemtag = '';
+<<<<<<< HEAD
         $defaultvalues->subreviewurl = '';
         $defaultvalues->subreviewparams = '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (is_object($defaultvalues) && $defaultvalues->instance) {
             $gbs = self::find_ltiservice_gradebookservice_for_lti($defaultvalues->instance);
             if ($gbs) {
                 $defaultvalues->lineitemresourceid = $gbs->resourceid;
                 $defaultvalues->lineitemtag = $gbs->tag;
+<<<<<<< HEAD
                 $defaultvalues->lineitemsubreviewurl = $gbs->subreviewurl;
                 $defaultvalues->lineitemsubreviewparams = $gbs->subreviewparams;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
     }

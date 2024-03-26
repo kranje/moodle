@@ -398,7 +398,10 @@ class auth extends \auth_plugin_base {
     public function complete_login(client $client, $redirecturl) {
         global $CFG, $SESSION, $PAGE;
 
+<<<<<<< HEAD
         $rawuserinfo = $client->get_raw_userinfo();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $userinfo = $client->get_userinfo();
 
         if (!$userinfo) {
@@ -599,11 +602,15 @@ class auth extends \auth_plugin_base {
         // We used to call authenticate_user - but that won't work if the current user has a different default authentication
         // method. Since we now ALWAYS link a login - if we get to here we can directly allow the user in.
         $user = (object) $userinfo;
+<<<<<<< HEAD
 
         // Add extra loggedin info.
         $this->set_extrauserinfo((array)$rawuserinfo);
 
         complete_user_login($user, $this->get_extrauserinfo());
+=======
+        complete_user_login($user);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->update_picture($user);
         redirect($redirecturl);
     }

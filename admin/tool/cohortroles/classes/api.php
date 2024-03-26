@@ -179,6 +179,10 @@ class api {
                            AND ra.roleid = :roleid
                            AND ra.userid = :userid
                          WHERE cm.cohortid ' . $cohortsql . '
+<<<<<<< HEAD
+=======
+                           AND u.deleted = 0
+>>>>>>> forked/LAE_400_PACKAGE
                            AND ra.id IS NULL';
 
                 $toadd = $DB->get_records_sql($sql, $params);

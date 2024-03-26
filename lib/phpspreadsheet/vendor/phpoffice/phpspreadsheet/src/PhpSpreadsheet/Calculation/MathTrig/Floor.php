@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -11,6 +12,13 @@ class Floor
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Floor
+{
+>>>>>>> forked/LAE_400_PACKAGE
     private static function floorCheck1Arg(): void
     {
         $compatibility = Functions::getCompatibilityMode();
@@ -28,6 +36,7 @@ class Floor
      *        FLOOR(number[,significance])
      *
      * @param mixed $number Expect float. Number to round
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $significance Expect float. Significance
      *                      Or can be an array of values
@@ -42,6 +51,14 @@ class Floor
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance);
         }
 
+=======
+     * @param mixed $significance Expect float. Significance
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function floor($number, $significance = null)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         if ($significance === null) {
             self::floorCheck1Arg();
         }
@@ -65,6 +82,7 @@ class Floor
      *        FLOOR.MATH(number[,significance[,mode]])
      *
      * @param mixed $number Number to round
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $significance Significance
      *                      Or can be an array of values
@@ -81,6 +99,15 @@ class Floor
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance, $mode);
         }
 
+=======
+     * @param mixed $significance Significance
+     * @param mixed $mode direction to round negative numbers
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function math($number, $significance = null, $mode = 0)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
             $significance = Helpers::validateNumericNullSubstitution($significance, ($number < 0) ? -1 : 1);
@@ -100,6 +127,7 @@ class Floor
      * Excel Function:
      *        FLOOR.PRECISE(number[,significance])
      *
+<<<<<<< HEAD
      * @param array|float $number Number to round
      *                      Or can be an array of values
      * @param array|float $significance Significance
@@ -115,6 +143,15 @@ class Floor
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance);
         }
 
+=======
+     * @param float $number Number to round
+     * @param float $significance Significance
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function precise($number, $significance = 1)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
             $significance = Helpers::validateNumericNullSubstitution($significance, null);
@@ -133,7 +170,11 @@ class Floor
     private static function argumentsOkPrecise(float $number, float $significance)
     {
         if ($significance == 0.0) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($number == 0.0) {
             return 0.0;
@@ -150,7 +191,11 @@ class Floor
     private static function argsOk(float $number, float $significance, int $mode)
     {
         if (!$significance) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if (!$number) {
             return 0.0;
@@ -178,7 +223,11 @@ class Floor
     private static function argumentsOk(float $number, float $significance)
     {
         if ($significance == 0.0) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         if ($number == 0.0) {
             return 0.0;
@@ -190,6 +239,10 @@ class Floor
             return floor($number / $significance) * $significance;
         }
 
+<<<<<<< HEAD
         return ExcelError::NAN();
+=======
+        return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

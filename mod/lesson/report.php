@@ -366,7 +366,11 @@ if ($action === 'delete') {
         echo html_writer::table($table);
     }
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('unknowaction');
+=======
+    print_error('unknowaction');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /// Finish the page

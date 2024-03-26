@@ -170,8 +170,13 @@ class backpack_api_mapping {
         $url = str_replace('[SCHEME]', $urlscheme, $url);
         $url = str_replace('[HOST]', $urlhost, $url);
         $url = str_replace('[URL]', $apiurl, $url);
+<<<<<<< HEAD
         $url = str_replace('[PARAM1]', $param1 ?? '', $url);
         $url = str_replace('[PARAM2]', $param2 ?? '', $url);
+=======
+        $url = str_replace('[PARAM1]', $param1, $url);
+        $url = str_replace('[PARAM2]', $param2, $url);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $url;
     }

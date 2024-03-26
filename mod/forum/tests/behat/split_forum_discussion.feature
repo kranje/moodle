@@ -19,6 +19,7 @@ Feature: Forum discussions can be split
       | student1 | C1 | student |
       | student2 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro                              | course | idnumber | type    |
       | forum      | Study discussions      | Forum to discuss your coursework.  | C1     | forump1  | general |
     And I log in as "teacher1"
@@ -47,6 +48,20 @@ Feature: Forum discussions can be split
     Given I log in as "teacher1"
     And I am on "Science 101" course homepage
     And I follow "Study discussions"
+=======
+      | activity   | name                   | course | idnumber | type    |
+      | forum      | Study discussions      | C1     | forump1  | general |
+    And the following "mod_forum > discussions" exist:
+      | forum   | course | user     | name                      | message                                                                  |
+      | forump1 | C1     | teacher1 | Photosynthesis discussion | Lets discuss our learning about Photosynthesis this week in this thread. |
+    And the following "mod_forum > posts" exist:
+      | user     | parentsubject             | subject     | message                                                                   |
+      | student1 | Photosynthesis discussion | Mass number | Can anyone tell me which number is the mass number in the periodic table? |
+      | student2 | Mass number               |             | I would also like to know this                                            |
+
+  Scenario: Split a forum discussion
+    Given I am on the "Study discussions" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Photosynthesis discussion"
     When I follow "Split"
     And  I set the following fields to these values:

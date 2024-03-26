@@ -49,11 +49,19 @@ $info = array($ip);
 $note = array();
 
 if (cleanremoteaddr($ip) === false) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidipformat', 'error');
 }
 
 if (!ip_is_public($ip)) {
     throw new \moodle_exception('iplookupprivate', 'error');
+=======
+    print_error('invalidipformat', 'error');
+}
+
+if (!ip_is_public($ip)) {
+    print_error('iplookupprivate', 'error');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $info = iplookup_find_location($ip);

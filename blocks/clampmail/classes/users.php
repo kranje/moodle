@@ -24,6 +24,11 @@
 
 namespace block_clampmail;
 
+<<<<<<< HEAD
+=======
+defined('MOODLE_INTERNAL') || die();
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * User functions.
  *
@@ -54,10 +59,17 @@ class users {
      */
     public static function get_users($courseid, $groupmode) {
         $context = \context_course::instance($courseid);
+<<<<<<< HEAD
         $users = array();
 
         $fieldsapi = \core_user\fields::for_userpic();
         $fields = $fieldsapi->get_sql('u', false, '', '', false)->selects . ',u.mailformat, u.maildisplay, u.emailstop';
+=======
+        $users   = array();
+
+        $fieldsapi = \core_user\fields::for_userpic();
+        $fields    = $fieldsapi->get_sql('u', false, '', '', false)->selects . ',u.mailformat, u.maildisplay, u.emailstop';
+>>>>>>> forked/LAE_400_PACKAGE
 
         $usersfromdb = get_enrolled_users(
             $context, '', 0, $fields, "", 0, 0, true
@@ -104,7 +116,11 @@ class users {
      * @return array
      */
     private static function get_user_group_ids($courseid, $userid, $groupmode) {
+<<<<<<< HEAD
         // When NOGROUPS is set, we use 0 to indicate "not in a group".
+=======
+        // When NOGROUPS is set, we use 0 to indicate "not in a group."
+>>>>>>> forked/LAE_400_PACKAGE
         if ($groupmode == NOGROUPS) {
             return array(0);
         }

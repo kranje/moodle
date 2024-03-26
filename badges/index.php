@@ -53,11 +53,19 @@ if ($page < 0) {
 require_login();
 
 if (empty($CFG->enablebadges)) {
+<<<<<<< HEAD
     throw new \moodle_exception('badgesdisabled', 'badges');
 }
 
 if (empty($CFG->badges_allowcoursebadges) && ($type == BADGE_TYPE_COURSE)) {
     throw new \moodle_exception('coursebadgesdisabled', 'badges');
+=======
+    print_error('badgesdisabled', 'badges');
+}
+
+if (empty($CFG->badges_allowcoursebadges) && ($type == BADGE_TYPE_COURSE)) {
+    print_error('coursebadgesdisabled', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $err = '';

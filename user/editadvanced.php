@@ -96,11 +96,19 @@ if ($user->id != -1 and is_mnet_remote_user($user)) {
 }
 
 if ($user->id != $USER->id and is_siteadmin($user) and !is_siteadmin($USER)) {  // Only admins may edit other admins.
+<<<<<<< HEAD
     throw new \moodle_exception('useradmineditadmin');
 }
 
 if (isguestuser($user->id)) { // The real guest user can not be edited.
     throw new \moodle_exception('guestnoeditprofileother');
+=======
+    print_error('useradmineditadmin');
+}
+
+if (isguestuser($user->id)) { // The real guest user can not be edited.
+    print_error('guestnoeditprofileother');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if ($user->deleted) {
@@ -218,7 +226,11 @@ if ($userform->is_cancelled()) {
         // Pass a true old $user here.
         if (!$authplugin->user_update($user, $usernew)) {
             // Auth update failed.
+<<<<<<< HEAD
             throw new \moodle_exception('cannotupdateuseronexauth', '', '', $user->auth);
+=======
+            print_error('cannotupdateuseronexauth', '', '', $user->auth);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         user_update_user($usernew, false, false);
 
@@ -226,7 +238,11 @@ if ($userform->is_cancelled()) {
         if (!empty($usernew->newpassword)) {
             if ($authplugin->can_change_password()) {
                 if (!$authplugin->user_update_password($usernew, $usernew->newpassword)) {
+<<<<<<< HEAD
                     throw new \moodle_exception('cannotupdatepasswordonextauth', '', '', $usernew->auth);
+=======
+                    print_error('cannotupdatepasswordonextauth', '', '', $usernew->auth);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 unset_user_preference('create_password', $usernew); // Prevent cron from generating the password.
 

@@ -67,6 +67,7 @@ if ($hassiteconfig) {
             new lang_string('messageinboundhostssl', 'tool_messageinbound'),
             new lang_string('messageinboundhostssl_desc', 'tool_messageinbound'), 'ssl', $options));
 
+<<<<<<< HEAD
     // Get all the issuers.
     $issuers = \core\oauth2\api::get_all_issuers();
     $oauth2services = [
@@ -88,6 +89,8 @@ if ($hassiteconfig) {
         ));
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $settings->add(new admin_setting_configtext('messageinbound_hostuser',
             new lang_string('messageinboundhostuser', 'tool_messageinbound'),
             new lang_string('messageinboundhostuser_desc', 'tool_messageinbound'), '', PARAM_NOTAGS));

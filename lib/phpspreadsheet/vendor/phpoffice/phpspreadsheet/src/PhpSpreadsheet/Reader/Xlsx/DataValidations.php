@@ -8,10 +8,15 @@ use SimpleXMLElement;
 
 class DataValidations
 {
+<<<<<<< HEAD
     /** @var Worksheet */
     private $worksheet;
 
     /** @var SimpleXMLElement */
+=======
+    private $worksheet;
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $worksheetXml;
 
     public function __construct(Worksheet $workSheet, SimpleXMLElement $worksheetXml)
@@ -24,7 +29,11 @@ class DataValidations
     {
         foreach ($this->worksheetXml->dataValidations->dataValidation as $dataValidation) {
             // Uppercase coordinate
+<<<<<<< HEAD
             $range = strtoupper((string) $dataValidation['sqref']);
+=======
+            $range = strtoupper($dataValidation['sqref']);
+>>>>>>> forked/LAE_400_PACKAGE
             $rangeSet = explode(' ', $range);
             foreach ($rangeSet as $range) {
                 $stRange = $this->worksheet->shrinkRangeToFit($range);

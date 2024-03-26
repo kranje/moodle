@@ -43,6 +43,7 @@ class activity extends \core_search\base_activity {
     public function uses_file_indexing() {
         return true;
     }
+<<<<<<< HEAD
 
     /**
      * Return the fileareas that should be indexed.
@@ -52,4 +53,6 @@ class activity extends \core_search\base_activity {
     public function get_search_fileareas() {
         return ['intro', 'content'];
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

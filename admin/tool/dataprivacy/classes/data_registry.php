@@ -47,7 +47,11 @@ class data_registry {
      * @return string[]
      */
     public static function var_names_from_context($classname, $pluginname = '') {
+<<<<<<< HEAD
         $pluginname = trim($pluginname ?? '');
+=======
+        $pluginname = trim($pluginname);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!empty($pluginname)) {
             $categoryvar = $classname . '_' . $pluginname . '_category';
             $purposevar = $classname . '_' . $pluginname . '_purpose';

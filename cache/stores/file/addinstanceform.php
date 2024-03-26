@@ -62,10 +62,13 @@ class cachestore_file_addinstance_form extends cachestore_addinstance_form {
         $form->addElement('checkbox', 'asyncpurge', get_string('asyncpurge', 'cachestore_file'));
         $form->setType('asyncpurge', PARAM_BOOL);
         $form->addHelpButton('asyncpurge', 'asyncpurge', 'cachestore_file');
+<<<<<<< HEAD
 
         $form->addElement('text', 'lockwait', get_string('lockwait', 'cachestore_file'));
         $form->setDefault('lockwait', 60);
         $form->setType('lockwait', PARAM_INT);
         $form->addHelpButton('lockwait', 'lockwait', 'cachestore_file');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

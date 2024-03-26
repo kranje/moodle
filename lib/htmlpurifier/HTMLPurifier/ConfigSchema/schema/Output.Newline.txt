@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Output.Newline
 TYPE: string/null
 VERSION: 2.0.1
@@ -11,3 +12,18 @@ DEFAULT: NULL
     is Mac, and \n is Unix.
 </p>
 --# vim: et sw=4 sts=4
+=======
+Output.Newline
+TYPE: string/null
+VERSION: 2.0.1
+DEFAULT: NULL
+--DESCRIPTION--
+
+<p>
+    Newline string to format final output with. If left null, HTML Purifier
+    will auto-detect the default newline type of the system and use that;
+    you can manually override it here. Remember, \r\n is Windows, \r
+    is Mac, and \n is Unix.
+</p>
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

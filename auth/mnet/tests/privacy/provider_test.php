@@ -111,7 +111,11 @@ class provider_test extends provider_testcase {
         $approvedlist = new approved_contextlist($user, 'auth_mnet', [$usercontext->id]);
         provider::export_user_data($approvedlist);
 
+<<<<<<< HEAD
         $data = (array)$writer->get_data([get_string('pluginname', 'auth_mnet'), $hostrecord->name, $logrecord->coursename]);
+=======
+        $data = $writer->get_data([get_string('pluginname', 'auth_mnet'), $hostrecord->name, $logrecord->coursename]);
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->assertEquals($logrecord->remoteid, reset($data)->remoteid);
         $this->assertEquals(transform::datetime($logrecord->time),  reset($data)->time);

@@ -2,15 +2,23 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Combinations;
 
 class HyperGeometric
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * HYPGEOMDIST.
      *
@@ -18,6 +26,7 @@ class HyperGeometric
      * sample successes, given the sample size, population successes, and population size.
      *
      * @param mixed $sampleSuccesses Integer number of successes in the sample
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $sampleNumber Integer size of the sample
      *                      Or can be an array of values
@@ -44,6 +53,20 @@ class HyperGeometric
                 $populationNumber
             );
         }
+=======
+     * @param mixed $sampleNumber Integer size of the sample
+     * @param mixed $populationSuccesses Integer number of successes in the population
+     * @param mixed $populationNumber Integer population size
+     *
+     * @return float|string
+     */
+    public static function distribution($sampleSuccesses, $sampleNumber, $populationSuccesses, $populationNumber)
+    {
+        $sampleSuccesses = Functions::flattenSingleValue($sampleSuccesses);
+        $sampleNumber = Functions::flattenSingleValue($sampleNumber);
+        $populationSuccesses = Functions::flattenSingleValue($populationSuccesses);
+        $populationNumber = Functions::flattenSingleValue($populationNumber);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $sampleSuccesses = DistributionValidations::validateInt($sampleSuccesses);
@@ -55,6 +78,7 @@ class HyperGeometric
         }
 
         if (($sampleSuccesses < 0) || ($sampleSuccesses > $sampleNumber) || ($sampleSuccesses > $populationSuccesses)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
         }
         if (($sampleNumber <= 0) || ($sampleNumber > $populationNumber)) {
@@ -62,6 +86,15 @@ class HyperGeometric
         }
         if (($populationSuccesses <= 0) || ($populationSuccesses > $populationNumber)) {
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+        }
+        if (($sampleNumber <= 0) || ($sampleNumber > $populationNumber)) {
+            return Functions::NAN();
+        }
+        if (($populationSuccesses <= 0) || ($populationSuccesses > $populationNumber)) {
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $successesPopulationAndSample = (float) Combinations::withoutRepetition($populationSuccesses, $sampleSuccesses);

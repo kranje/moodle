@@ -16,12 +16,19 @@ class DataType
     const TYPE_NULL = 'null';
     const TYPE_INLINE = 'inlineStr';
     const TYPE_ERROR = 'e';
+<<<<<<< HEAD
     const TYPE_ISO_DATE = 'd';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * List of error codes.
      *
+<<<<<<< HEAD
      * @var array<string, int>
+=======
+     * @var array
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private static $errorCodes = [
         '#NULL!' => 0,
@@ -31,6 +38,7 @@ class DataType
         '#NAME?' => 4,
         '#NUM!' => 5,
         '#N/A' => 6,
+<<<<<<< HEAD
         '#CALC!' => 7,
     ];
 
@@ -40,6 +48,14 @@ class DataType
      * Get list of error codes.
      *
      * @return array<string, int>
+=======
+    ];
+
+    /**
+     * Get list of error codes.
+     *
+     * @return array
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function getErrorCodes()
     {
@@ -51,7 +67,11 @@ class DataType
      *
      * @param null|RichText|string $textValue Value to sanitize to an Excel string
      *
+<<<<<<< HEAD
      * @return RichText|string Sanitized value
+=======
+     * @return null|RichText|string Sanitized value
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function checkString($textValue)
     {
@@ -61,7 +81,11 @@ class DataType
         }
 
         // string must never be longer than 32,767 characters, truncate if necessary
+<<<<<<< HEAD
         $textValue = StringHelper::substring((string) $textValue, 0, self::MAX_STRING_LENGTH);
+=======
+        $textValue = StringHelper::substring($textValue, 0, 32767);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // we require that newline is represented as "\n" in core, not as "\r\n" or "\r"
         $textValue = str_replace(["\r\n", "\r"], "\n", $textValue);

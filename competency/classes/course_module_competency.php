@@ -71,10 +71,13 @@ class course_module_competency extends persistent {
                 'default' => self::OUTCOME_EVIDENCE,
                 'type' => PARAM_INT,
             ),
+<<<<<<< HEAD
             'overridegrade' => array(
                 'default' => false,
                 'type' => PARAM_BOOL
             ),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 

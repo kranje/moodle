@@ -255,9 +255,18 @@ class lesson_page_type_numerical extends lesson_page {
                     $total = $stats["total"];
                     unset($stats["total"]);
                     foreach ($stats as $valentered => $ntimes) {
+<<<<<<< HEAD
                         $data = '<input class="form-control" type="text" size="50" ' .
                                 'disabled="disabled" readonly="readonly" value="'.
                                 s(format_float($valentered, strlen($valentered), true, true)).'" />';
+=======
+                        $valformatted = '';
+                        if (!is_null($valentered) && trim($valentered) !== '') {  // Empty response, 0 could be ok.
+                            $valformatted = s(format_float($valentered, strlen($valentered), true, true));
+                        }
+                        $data = '<input class="form-control" type="text" size="50" ' .
+                                'disabled="disabled" readonly="readonly" value="'. $valformatted .'" />';
+>>>>>>> forked/LAE_400_PACKAGE
                         $percent = $ntimes / $total * 100;
                         $percent = round($percent, 2);
                         $percent .= "% ".get_string("enteredthis", "lesson");
@@ -270,9 +279,18 @@ class lesson_page_type_numerical extends lesson_page {
             } else if ($useranswer != null && ($answer->id == $useranswer->answerid || ($answer == end($answers) &&
                     empty($answerdata->answers)))) {
                 // Get in here when the user answered or for the last answer.
+<<<<<<< HEAD
                 $data = '<input class="form-control" type="text" size="50" ' .
                         'disabled="disabled" readonly="readonly" value="'.
                         s(format_float($useranswer->useranswer, strlen($useranswer->useranswer), true, true)).'">';
+=======
+                $valformatted = '';
+                if (!is_null($useranswer->useranswer) && trim($useranswer->useranswer) !== '') {  // Empty response, 0 could be ok.
+                    $valformatted = s(format_float($useranswer->useranswer, strlen($useranswer->useranswer), true, true));
+                }
+                $data = '<input class="form-control" type="text" size="50" ' .
+                        'disabled="disabled" readonly="readonly" value="' . $valformatted .'">';
+>>>>>>> forked/LAE_400_PACKAGE
                 if (isset($pagestats[$this->properties->id][$useranswer->useranswer])) {
                     $percent = $pagestats[$this->properties->id][$useranswer->useranswer] / $pagestats[$this->properties->id]["total"] * 100;
                     $percent = round($percent, 2);
@@ -347,6 +365,24 @@ class lesson_page_type_numerical extends lesson_page {
 
         return $data;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Custom formats the answer to display
+     *
+     * @param string $answer
+     * @param context $context
+     * @param int $answerformat
+     * @param array $options Optional param for additional options.
+     * @return string Returns formatted string
+     */
+    public function format_answer($answer, $context, $answerformat, $options = []) {
+        $answer = helper::lesson_format_numeric_value($answer);
+
+        return parent::format_answer($answer, $context, $answerformat, $options);
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 class lesson_add_page_form_numerical extends lesson_add_page_form_base {

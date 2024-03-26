@@ -493,7 +493,11 @@ class attempt {
      * @return int|null the scaled value
      */
     public function get_scaled(): ?int {
+<<<<<<< HEAD
         return is_null($this->record->scaled) ? $this->record->scaled : (int)$this->record->scaled;
+=======
+        return $this->record->scaled;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

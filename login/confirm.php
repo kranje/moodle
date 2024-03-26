@@ -72,7 +72,11 @@ if (!empty($data) || (!empty($p) && !empty($s))) {
         // The user has confirmed successfully, let's log them in
 
         if (!$user = get_complete_user_data('username', $username)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfinduser', '', '', s($username));
+=======
+            print_error('cannotfinduser', '', '', s($username));
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if (!$user->suspended) {
@@ -101,10 +105,17 @@ if (!empty($data) || (!empty($p) && !empty($s))) {
         echo $OUTPUT->footer();
         exit;
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidconfirmdata');
     }
 } else {
     throw new \moodle_exception("errorwhenconfirming");
+=======
+        print_error('invalidconfirmdata');
+    }
+} else {
+    print_error("errorwhenconfirming");
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 redirect("$CFG->wwwroot/");

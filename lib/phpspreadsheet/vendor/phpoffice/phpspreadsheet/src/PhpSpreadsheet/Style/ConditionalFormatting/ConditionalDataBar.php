@@ -11,10 +11,17 @@ class ConditionalDataBar
 
     /** <dataBar> children */
 
+<<<<<<< HEAD
     /** @var ?ConditionalFormatValueObject */
     private $minimumConditionalFormatValueObject;
 
     /** @var ?ConditionalFormatValueObject */
+=======
+    /** @var ConditionalFormatValueObject */
+    private $minimumConditionalFormatValueObject;
+
+    /** @var ConditionalFormatValueObject */
+>>>>>>> forked/LAE_400_PACKAGE
     private $maximumConditionalFormatValueObject;
 
     /** @var string */
@@ -22,7 +29,11 @@ class ConditionalDataBar
 
     /** <extLst> */
 
+<<<<<<< HEAD
     /** @var ?ConditionalFormattingRuleExtension */
+=======
+    /** @var ConditionalFormattingRuleExtension */
+>>>>>>> forked/LAE_400_PACKAGE
     private $conditionalFormattingRuleExt;
 
     /**
@@ -43,7 +54,14 @@ class ConditionalDataBar
         return $this;
     }
 
+<<<<<<< HEAD
     public function getMinimumConditionalFormatValueObject(): ?ConditionalFormatValueObject
+=======
+    /**
+     * @return ConditionalFormatValueObject
+     */
+    public function getMinimumConditionalFormatValueObject()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->minimumConditionalFormatValueObject;
     }
@@ -55,7 +73,14 @@ class ConditionalDataBar
         return $this;
     }
 
+<<<<<<< HEAD
     public function getMaximumConditionalFormatValueObject(): ?ConditionalFormatValueObject
+=======
+    /**
+     * @return ConditionalFormatValueObject
+     */
+    public function getMaximumConditionalFormatValueObject()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->maximumConditionalFormatValueObject;
     }
@@ -79,7 +104,14 @@ class ConditionalDataBar
         return $this;
     }
 
+<<<<<<< HEAD
     public function getConditionalFormattingRuleExt(): ?ConditionalFormattingRuleExtension
+=======
+    /**
+     * @return ConditionalFormattingRuleExtension
+     */
+    public function getConditionalFormattingRuleExt()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->conditionalFormattingRuleExt;
     }

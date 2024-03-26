@@ -67,8 +67,13 @@ class cohorts_test extends core_reportbuilder_testcase {
 
         $contentrow = array_values(reset($content));
         $this->assertEquals([
+<<<<<<< HEAD
             'Legends', // Name.
             'System', // Context.
+=======
+            'System', // Context.
+            'Legends', // Name.
+>>>>>>> forked/LAE_400_PACKAGE
             'C101', // ID number.
             '<div class="text_to_html">Cohort for the legends</div>', // Description.
             'Lionel Richards', // User.

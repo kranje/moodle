@@ -56,9 +56,15 @@ class sortedcontentqueue extends \SPLPriorityQueue {
      *
      * @param int $key1
      * @param int $key2
+<<<<<<< HEAD
      * @return int
      */
     public function compare($key1 , $key2): int {
+=======
+     * @return bool
+     */
+    public function compare($key1 , $key2) {
+>>>>>>> forked/LAE_400_PACKAGE
         $record1 = $this->contents[$key1];
         $record2 = $this->contents[$key2];
 

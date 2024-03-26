@@ -30,7 +30,11 @@ if ($feedback !== 0) {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);
@@ -48,7 +52,11 @@ raise_memory_limit(MEMORY_EXTRA);
 
 $text = download_file_content($gradesurl);
 if ($text === false) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotreadfile', 'error',
+=======
+    print_error('cannotreadfile', 'error',
+>>>>>>> forked/LAE_400_PACKAGE
             $CFG->wwwroot . '/grade/import/xml/index.php?id=' . $id, $gradesurl);
 }
 
@@ -63,7 +71,11 @@ if ($importcode !== false) {
             echo 'ok';
             die;
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotimportgrade'); // TODO: localize.
+=======
+            print_error('cannotimportgrade'); //TODO: localize
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
     } else {
@@ -76,6 +88,10 @@ if ($importcode !== false) {
     }
 
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('errorduringimport', 'gradeimport_xml',
+=======
+    print_error('errorduringimport', 'gradeimport_xml',
+>>>>>>> forked/LAE_400_PACKAGE
             $CFG->wwwroot . '/grade/import/xml/index.php?id=' . $id, $error);
 }

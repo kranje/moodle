@@ -14,8 +14,11 @@ namespace ScssPhp\ScssPhp\Logger;
 
 /**
  * A logger that prints to a PHP stream (for instance stderr)
+<<<<<<< HEAD
  *
  * @final
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class StreamLogger implements LoggerInterface
 {

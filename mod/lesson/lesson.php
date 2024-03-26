@@ -67,7 +67,11 @@ switch ($action) {
             echo "<p align=\"center\">\n";
             foreach ($answers as $answer) {
                 if (!$title = $DB->get_field("lesson_pages", "title", array("id" => $answer->pageid))) {
+<<<<<<< HEAD
                     throw new \moodle_exception('cannotfindpagetitle', 'lesson');
+=======
+                    print_error('cannotfindpagetitle', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 echo $title."<br />\n";
             }
@@ -85,7 +89,11 @@ switch ($action) {
 
         $params = array ("lessonid" => $lesson->id, "prevpageid" => 0);
         if (!$page = $DB->get_record_select("lesson_pages", "lessonid = :lessonid AND prevpageid = :prevpageid", $params)) {
+<<<<<<< HEAD
             throw new \moodle_exception('cannotfindfirstpage', 'lesson');
+=======
+            print_error('cannotfindfirstpage', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         echo html_writer::start_tag('div', array('class' => 'move-page'));
@@ -109,7 +117,11 @@ switch ($action) {
             }
             if ($page->nextpageid) {
                 if (!$page = $DB->get_record("lesson_pages", array("id" => $page->nextpageid))) {
+<<<<<<< HEAD
                     throw new \moodle_exception('cannotfindnextpage', 'lesson');
+=======
+                    print_error('cannotfindnextpage', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             } else {
                 // last page reached
@@ -135,7 +147,11 @@ switch ($action) {
             redirect(new moodle_url('/mod/lesson/edit.php', array('id' => $cm->id)));
         break;
     default:
+<<<<<<< HEAD
         throw new \moodle_exception('unknowaction');
+=======
+        print_error('unknowaction');
+>>>>>>> forked/LAE_400_PACKAGE
         break;
 }
 

@@ -32,6 +32,7 @@ class data_field_text extends data_field_base {
      */
     protected static $priority = self::MAX_PRIORITY;
 
+<<<<<<< HEAD
     public function supports_preview(): bool {
         return true;
     }
@@ -49,6 +50,8 @@ class data_field_text extends data_field_base {
         ];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     function display_search_field($value = '') {
         return '<label class="accesshide" for="f_' . $this->field->id . '">' . $this->field->name.'</label>' .
                '<input type="text" class="form-control" size="16" id="f_' . $this->field->id . '" ' .
@@ -98,3 +101,8 @@ class data_field_text extends data_field_base {
         return $configs;
     }
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> forked/LAE_400_PACKAGE

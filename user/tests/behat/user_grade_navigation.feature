@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_user @javascript
+=======
+@core @core_user
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: The student can navigate to their grades page and user grade report.
   In order to view my grades and the user grade report
   As a user
@@ -22,6 +26,7 @@ Feature: The student can navigate to their grades page and user grade report.
       | teacher1 | C1 | editingteacher |
       | student1 | C2 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity | course | idnumber | name | intro | grade |
       | assign | C1 | a1 | Test assignment one | Submit something! | 300 |
       | assign | C1 | a2 | Test assignment two | Submit something! | 100 |
@@ -35,6 +40,17 @@ Feature: The student can navigate to their grades page and user grade report.
     And I give the grade "67.00" to the user "Student 1" for the grade item "Test assignment two"
     And I press "Save changes"
     And I log out
+=======
+      | activity | course | idnumber | name                  | grade |
+      | assign   | C1     | a1       | Test assignment one   | 300   |
+      | assign   | C1     | a2       | Test assignment two   | 100   |
+      | assign   | C1     | a3       | Test assignment three | 150   |
+      | assign   | C2     | a4       | Test assignment four  | 150   |
+    And the following "grade grades" exist:
+      | gradeitem           | user     | grade  |
+      | Test assignment one | student1 | 150.00 |
+      | Test assignment two | student1 | 67.00  |
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Navigation to Grades and the user grade report.
     When I log in as "student1"
@@ -55,10 +71,15 @@ Feature: The student can navigate to their grades page and user grade report.
       | grade_mygrades_report  | external             |
       | gradereport_mygradeurl | /badges/mybadges.php |
     And I log in as "student1"
+<<<<<<< HEAD
+=======
+    And I follow "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Grades" in the user menu
     Then I should see "My badges from Acceptance test site web site"
 
   Scenario: Log in as a parent and view a childs grades.
+<<<<<<< HEAD
     When I log in as "admin"
     And I am on site homepage
     And I turn editing mode on
@@ -77,6 +98,21 @@ Feature: The student can navigate to their grades page and user grade report.
     And I click on "Create this role" "button"
     And I navigate to "Users > Accounts > Browse list of users" in site administration
     And I follow "Student 1"
+=======
+    Given the following "role" exists:
+      | shortname                            | Parent |
+      | name                                 | Parent |
+      | context_user                         | 1      |
+      | moodle/user:editprofile              | allow  |
+      | moodle/user:viewalldetails           | allow  |
+      | moodle/user:viewuseractivitiesreport | allow  |
+      | moodle/user:viewdetails              | allow  |
+    And the following "blocks" exist:
+      | blockname | contextlevel | reference | pagetypepattern | defaultregion |
+      | mentees   | System       | 1         | site-index      | side-pre      |
+    When I log in as "admin"
+    And I am on the "student1" "user > profile" page
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Preferences" "link" in the ".profile_tree" "css_element"
     And I follow "Assign roles relative to this user"
     And I follow "Parent"

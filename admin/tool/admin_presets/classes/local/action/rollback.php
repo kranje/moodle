@@ -52,7 +52,11 @@ class rollback extends base {
             );
 
             $context->applications[] = [
+<<<<<<< HEAD
                 'timeapplied' => \core_date::strftime($format, (int)$application->time),
+=======
+                'timeapplied' => strftime($format, $application->time),
+>>>>>>> forked/LAE_400_PACKAGE
                 'user' => fullname($user),
                 'action' => $rollbacklink->out(false),
             ];

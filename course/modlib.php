@@ -70,11 +70,14 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
     if (isset($moduleinfo->downloadcontent)) {
         $newcm->downloadcontent = $moduleinfo->downloadcontent;
     }
+<<<<<<< HEAD
     if (has_capability('moodle/course:setforcedlanguage', context_course::instance($course->id))) {
         $newcm->lang = $moduleinfo->lang ?? null;
     } else {
         $newcm->lang = null;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $newcm->groupmode        = $moduleinfo->groupmode;
     $newcm->groupingid       = $moduleinfo->groupingid;
     $completion = new completion_info($course);
@@ -121,7 +124,11 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
     $transaction = $DB->start_delegated_transaction();
 
     if (!$moduleinfo->coursemodule = add_course_module($newcm)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotaddcoursemodule');
+=======
+        print_error('cannotaddcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (plugin_supports('mod', $moduleinfo->modulename, FEATURE_MOD_INTRO, true) &&
@@ -147,10 +154,16 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
         if ($returnfromfunc instanceof moodle_exception) {
             throw $returnfromfunc;
         } else if (!is_number($returnfromfunc)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidfunction', '', course_get_url($course, $moduleinfo->section));
         } else {
             throw new \moodle_exception('cannotaddnewmodule', '', course_get_url($course, $moduleinfo->section),
                 $moduleinfo->modulename);
+=======
+            print_error('invalidfunction', '', course_get_url($course, $moduleinfo->section));
+        } else {
+            print_error('cannotaddnewmodule', '', course_get_url($course, $moduleinfo->section), $moduleinfo->modulename);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -499,7 +512,11 @@ function can_add_moduleinfo($course, $modulename, $section) {
     $cw = get_fast_modinfo($course)->get_section_info($section);
 
     if (!course_allowed_module($course, $module->name)) {
+<<<<<<< HEAD
         throw new \moodle_exception('moduledisable');
+=======
+        print_error('moduledisable');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     return array($module, $context, $cw);
@@ -557,6 +574,7 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
     $moduleinfo->course = $course->id;
     $moduleinfo = set_moduleinfo_defaults($moduleinfo);
 
+<<<<<<< HEAD
     $modcontext = context_module::instance($moduleinfo->coursemodule);
     if (has_capability('moodle/course:setforcedlanguage', $modcontext)) {
         $cm->lang = $moduleinfo->lang ?? null;
@@ -564,6 +582,8 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
         unset($cm->lang);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if (!empty($course->groupmodeforce) or !isset($moduleinfo->groupmode)) {
         $moduleinfo->groupmode = $cm->groupmode; // Keep original.
     }
@@ -623,6 +643,11 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
 
     $DB->update_record('course_modules', $cm);
 
+<<<<<<< HEAD
+=======
+    $modcontext = context_module::instance($moduleinfo->coursemodule);
+
+>>>>>>> forked/LAE_400_PACKAGE
     // Update embedded links and save files.
     if (plugin_supports('mod', $moduleinfo->modulename, FEATURE_MOD_INTRO, true)) {
         $moduleinfo->intro = file_save_draft_area_files($moduleinfo->introeditor['itemid'], $modcontext->id,
@@ -645,7 +670,11 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
 
     $updateinstancefunction = $moduleinfo->modulename."_update_instance";
     if (!$updateinstancefunction($moduleinfo, $mform)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotupdatemod', '', course_get_url($course, $cm->section), $moduleinfo->modulename);
+=======
+        print_error('cannotupdatemod', '', course_get_url($course, $cm->section), $moduleinfo->modulename);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // This needs to happen AFTER the grademin/grademax have already been updated.
@@ -666,8 +695,12 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
                 $newgradeitem->grademax
             );
             if (!component_callback('mod_' . $moduleinfo->modulename, 'rescale_activity_grades', $params)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotreprocessgrades', '', course_get_url($course, $cm->section),
                     $moduleinfo->modulename);
+=======
+                print_error('cannotreprocessgrades', '', course_get_url($course, $cm->section), $moduleinfo->modulename);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
     }
@@ -755,7 +788,10 @@ function get_moduleinfo_data($cm, $course) {
     $data->completiongradeitemnumber = $cm->completiongradeitemnumber;
     $data->showdescription    = $cm->showdescription;
     $data->downloadcontent    = $cm->downloadcontent;
+<<<<<<< HEAD
     $data->lang               = $cm->lang;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $data->tags               = core_tag_tag::get_item_tags_array('core', 'course_modules', $cm->id);
     if (!empty($CFG->enableavailability)) {
         $data->availabilityconditionsjson = $cm->availability;
@@ -866,7 +902,11 @@ function prepare_new_moduleinfo_data($course, $modulename, $section) {
     if (plugin_supports('mod', $data->modulename, FEATURE_MOD_INTRO, true)) {
         $draftid_editor = file_get_submitted_draft_itemid('introeditor');
         file_prepare_draft_area($draftid_editor, null, null, null, null, array('subdirs'=>true));
+<<<<<<< HEAD
         $data->introeditor = array('text'=>'', 'format'=>FORMAT_HTML, 'itemid'=>$draftid_editor); // TODO: add better default
+=======
+        $data->introeditor = array('text' => '', 'format' => editors_get_preferred_format(), 'itemid' => $draftid_editor);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     if (plugin_supports('mod', $data->modulename, FEATURE_ADVANCED_GRADING, false)

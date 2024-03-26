@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 [![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://supportukrainenow.org/)
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 ![PHPMailer](https://raw.github.com/PHPMailer/PHPMailer/master/examples/images/phpmailer.png)
 
 # PHPMailer – A full-featured email creation and transfer class for PHP
@@ -10,7 +13,10 @@
 [![Total Downloads](https://poser.pugx.org/phpmailer/phpmailer/downloads)](https://packagist.org/packages/phpmailer/phpmailer)
 [![License](https://poser.pugx.org/phpmailer/phpmailer/license.svg)](https://packagist.org/packages/phpmailer/phpmailer)
 [![API Docs](https://github.com/phpmailer/phpmailer/workflows/Docs/badge.svg)](https://phpmailer.github.io/PHPMailer/)
+<<<<<<< HEAD
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/PHPMailer/PHPMailer/badge)](https://api.securityscorecards.dev/projects/github.com/PHPMailer/PHPMailer)
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ## Features
 - Probably the world's most popular code for sending email from PHP!

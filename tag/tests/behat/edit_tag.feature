@@ -23,6 +23,7 @@ Feature: Users can edit tags to add description or rename
 
   @javascript
   Scenario: User with tag editing capability can change tag description
+<<<<<<< HEAD
     Given I log in as "admin"
     And I set the following system permissions of "Tag editor" role:
       | capability                   | permission |
@@ -30,6 +31,13 @@ Feature: Users can edit tags to add description or rename
       | moodle/site:viewparticipants | Allow      |
       | moodle/user:viewdetails      | Allow      |
     And I log out
+=======
+    Given the following "role capability" exists:
+      | role                         | tageditor |
+      | moodle/tag:edit              | allow     |
+      | moodle/site:viewparticipants | allow     |
+      | moodle/user:viewdetails      | allow     |
+>>>>>>> forked/LAE_400_PACKAGE
     When I log in as "editor1"
     And I turn editing mode on
     And the following config values are set as admin:
@@ -225,6 +233,7 @@ Feature: Users can edit tags to add description or rename
     # Even though Turtle was not standard but at least one of combined tags was (Neverusedtag). Now Turtle is also standard.
     And "Remove from standard tags" "link" should exist in the "Turtle" "table_row"
 
+<<<<<<< HEAD
   @javascript
   Scenario: Combining all tags
     When I log in as "manager1"
@@ -240,6 +249,8 @@ Feature: Users can edit tags to add description or rename
     And I should see "Turtle"
     And I should not see "Neverusedtag"
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Filtering tags
     When I log in as "manager1"
     And I navigate to "Appearance > Manage tags" in site administration

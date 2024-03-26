@@ -23,6 +23,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
+=======
+$string['alwayslatest'] = 'Always latest';
+$string['newerversion'] = 'This preview is using an older version of the question. {$a->restartbutton}';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['pluginname'] = 'Preview question';
 $string['privacy:metadata'] = 'The Preview question question bank plugin does not store any personal data.';
 // Tag related errors.
@@ -32,6 +37,10 @@ $string['tagsnotfound'] = 'Tags not found';
 // Form string(s).
 $string['previewoptions'] = 'Preview options';
 $string['questionversion'] = 'Question version';
+<<<<<<< HEAD
+=======
+$string['restartnow'] = 'Use latest version';
+>>>>>>> forked/LAE_400_PACKAGE
 // Preview title.
 $string['versiontitle'] = 'Version {$a}';
 $string['versiontitlelatest'] = 'Version {$a} (latest)';

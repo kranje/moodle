@@ -29,6 +29,7 @@ Example
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+<<<<<<< HEAD
 $key = 'example_key';
 $payload = [
     'iss' => 'http://example.org',
@@ -36,6 +37,15 @@ $payload = [
     'iat' => 1356999524,
     'nbf' => 1357000000
 ];
+=======
+$key = "example_key";
+$payload = array(
+    "iss" => "http://example.org",
+    "aud" => "http://example.com",
+    "iat" => 1356999524,
+    "nbf" => 1357000000
+);
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * IMPORTANT:
@@ -98,12 +108,21 @@ ehde/zUxo6UvS7UrBQIDAQAB
 -----END PUBLIC KEY-----
 EOD;
 
+<<<<<<< HEAD
 $payload = [
     'iss' => 'example.org',
     'aud' => 'example.com',
     'iat' => 1356999524,
     'nbf' => 1357000000
 ];
+=======
+$payload = array(
+    "iss" => "example.org",
+    "aud" => "example.com",
+    "iat" => 1356999524,
+    "nbf" => 1357000000
+);
+>>>>>>> forked/LAE_400_PACKAGE
 
 $jwt = JWT::encode($payload, $privateKey, 'RS256');
 echo "Encode:\n" . print_r($jwt, true) . "\n";
@@ -139,12 +158,21 @@ $privateKey = openssl_pkey_get_private(
     $passphrase
 );
 
+<<<<<<< HEAD
 $payload = [
     'iss' => 'example.org',
     'aud' => 'example.com',
     'iat' => 1356999524,
     'nbf' => 1357000000
 ];
+=======
+$payload = array(
+    "iss" => "example.org",
+    "aud" => "example.com",
+    "iat" => 1356999524,
+    "nbf" => 1357000000
+);
+>>>>>>> forked/LAE_400_PACKAGE
 
 $jwt = JWT::encode($payload, $privateKey, 'RS256');
 echo "Encode:\n" . print_r($jwt, true) . "\n";
@@ -173,12 +201,21 @@ $privateKey = base64_encode(sodium_crypto_sign_secretkey($keyPair));
 
 $publicKey = base64_encode(sodium_crypto_sign_publickey($keyPair));
 
+<<<<<<< HEAD
 $payload = [
     'iss' => 'example.org',
     'aud' => 'example.com',
     'iat' => 1356999524,
     'nbf' => 1357000000
 ];
+=======
+$payload = array(
+    "iss" => "example.org",
+    "aud" => "example.com",
+    "iat" => 1356999524,
+    "nbf" => 1357000000
+);
+>>>>>>> forked/LAE_400_PACKAGE
 
 $jwt = JWT::encode($payload, $privateKey, 'EdDSA');
 echo "Encode:\n" . print_r($jwt, true) . "\n";
@@ -203,6 +240,7 @@ $jwks = ['keys' => []];
 JWT::decode($payload, JWK::parseKeySet($jwks));
 ```
 
+<<<<<<< HEAD
 Using Cached Key Sets
 ---------------------
 
@@ -279,6 +317,14 @@ Changelog
 #### 6.0.0 / 2022-01-24
 
  - **Backwards-Compatibility Breaking Changes**: See the [Release Notes](https://github.com/firebase/php-jwt/releases/tag/v6.0.0) for more information.
+=======
+Changelog
+---------
+
+#### 6.0.0 / 2022-01-24
+
+ - **Backwards-Compatibility Breaking Changes**: See the [Release Notes](https://github.com/firebase/php-jwt/releases/tag/v5.5.1) for more information.
+>>>>>>> forked/LAE_400_PACKAGE
  - New Key object to prevent key/algorithm type confusion (#365)
  - Add JWK support (#273)
  - Add ES256 support (#256)

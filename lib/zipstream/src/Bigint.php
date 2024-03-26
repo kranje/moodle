@@ -108,7 +108,10 @@ class Bigint
     /**
      * Check if is over 32
      *
+<<<<<<< HEAD
      * @psalm-suppress ArgumentTypeCoercion
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * @param bool $force
      * @return bool
      */

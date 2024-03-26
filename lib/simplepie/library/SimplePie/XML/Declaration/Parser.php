@@ -357,5 +357,8 @@ class SimplePie_XML_Declaration_Parser
 		}
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_XML_Declaration_Parser', 'SimplePie\XML\Declaration\Parser', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

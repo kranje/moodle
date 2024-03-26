@@ -41,6 +41,15 @@ class behat_core_question_generator extends behat_generator_base {
                 'required' => ['question', 'tag'],
                 'switchids' => ['question' => 'questionid'],
             ],
+<<<<<<< HEAD
+=======
+            'updated questions' => [
+                'singular' => 'question',
+                'datagenerator' => 'updated_question',
+                'required' => ['question', 'questioncategory'],
+                'switchids' => ['question' => 'id', 'questioncategory' => 'category'],
+            ],
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -58,4 +67,25 @@ class behat_core_question_generator extends behat_generator_base {
         }
         return $id;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Update a question
+     *
+     * This will update a question matching the supplied name with the provided data, creating a new version in the process.
+     *
+     * @param array $data the row of data from the behat script.
+     * @return void
+     */
+    protected function process_updated_question(array $data): void {
+        global $DB;
+        $question = $DB->get_record('question', ['id' => $data['id']], '*', MUST_EXIST);
+        foreach ($data as $key => $value) {
+            $question->{$key} = $value;
+        }
+
+        $this->datagenerator->get_plugin_generator('core_question')->update_question($question);
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }

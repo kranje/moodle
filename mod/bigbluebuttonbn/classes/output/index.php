@@ -59,8 +59,20 @@ class index implements renderable {
     public function get_table(renderer_base $output): html_table {
         // Print the list of instances.
         $table = new html_table();
+<<<<<<< HEAD
         $table->head = [
             get_string('week'),
+=======
+
+        if (course_format_uses_sections($this->course->format)) {
+            $sectionheading = get_string('sectionname', "format_{$this->course->format}");
+        } else {
+            $sectionheading = '';
+        }
+
+        $table->head = [
+            $sectionheading,
+>>>>>>> forked/LAE_400_PACKAGE
             get_string('index_heading_name', plugin::COMPONENT),
             get_string('index_heading_group', plugin::COMPONENT),
             get_string('index_heading_users', plugin::COMPONENT),
@@ -118,6 +130,15 @@ class index implements renderable {
         }
         $meeting = new meeting($instance);
 
+<<<<<<< HEAD
+=======
+        if (course_format_uses_sections($this->course->format)) {
+            $sectionname = get_section_name($this->course, $instance->get_cm()->sectionnum);
+        } else {
+            $sectionname = '';
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $viewurl = $instance->get_view_url();
         if ($groupid = $instance->get_group_id()) {
             $viewurl->param('group', $groupid);
@@ -128,7 +149,11 @@ class index implements renderable {
         // The meeting info was returned.
         if ($meeting->is_running()) {
             return [
+<<<<<<< HEAD
                 $instance->get_cm()->sectionnum,
+=======
+                $sectionname,
+>>>>>>> forked/LAE_400_PACKAGE
                 $joinurl,
                 $instance->get_group_name(),
                 $this->get_room_usercount($meeting),
@@ -139,7 +164,11 @@ class index implements renderable {
             ];
         }
 
+<<<<<<< HEAD
         return [$instance->get_cm()->sectionnum, $joinurl, $instance->get_group_name(), '', '', '', '', ''];
+=======
+        return [$sectionname, $joinurl, $instance->get_group_name(), '', '', '', '', ''];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

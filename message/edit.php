@@ -41,11 +41,19 @@ $PAGE->set_url($url);
 require_login();
 
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('guestnoeditmessage', 'message');
 }
 
 if (!$user = $DB->get_record('user', array('id' => $userid))) {
     throw new \moodle_exception('invaliduserid');
+=======
+    print_error('guestnoeditmessage', 'message');
+}
+
+if (!$user = $DB->get_record('user', array('id' => $userid))) {
+    print_error('invaliduserid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $systemcontext   = context_system::instance();
@@ -64,11 +72,19 @@ if ($user->id == $USER->id) {
     require_capability('moodle/user:editmessageprofile', $personalcontext);
     // no editing of guest user account
     if (isguestuser($user->id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('guestnoeditmessageother', 'message');
     }
     // no editing of admins by non admins!
     if (is_siteadmin($user) and !is_siteadmin($USER)) {
         throw new \moodle_exception('useradmineditadmin');
+=======
+        print_error('guestnoeditmessageother', 'message');
+    }
+    // no editing of admins by non admins!
+    if (is_siteadmin($user) and !is_siteadmin($USER)) {
+        print_error('useradmineditadmin');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $PAGE->navbar->includesettingsbase = true;
     $PAGE->navigation->extend_for_user($user);

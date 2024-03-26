@@ -35,6 +35,7 @@ $mode = optional_param('mode', '', PARAM_ALPHA);
 
 if ($id) {
     if (!$cm = get_coursemodule_from_id('quiz', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     }
     if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
@@ -42,10 +43,20 @@ if ($id) {
     }
     if (!$quiz = $DB->get_record('quiz', array('id' => $cm->instance))) {
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidcoursemodule');
+    }
+    if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
+        print_error('coursemisconf');
+    }
+    if (!$quiz = $DB->get_record('quiz', array('id' => $cm->instance))) {
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else {
     if (!$quiz = $DB->get_record('quiz', array('id' => $q))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidquizid', 'quiz');
     }
     if (!$course = $DB->get_record('course', array('id' => $quiz->course))) {
@@ -53,6 +64,15 @@ if ($id) {
     }
     if (!$cm = get_coursemodule_from_instance("quiz", $quiz->id, $course->id)) {
         throw new \moodle_exception('invalidcoursemodule');
+=======
+        print_error('invalidquizid', 'quiz');
+    }
+    if (!$course = $DB->get_record('course', array('id' => $quiz->course))) {
+        print_error('invalidcourseid');
+    }
+    if (!$cm = get_coursemodule_from_instance("quiz", $quiz->id, $course->id)) {
+        print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -68,7 +88,11 @@ $PAGE->set_pagelayout('report');
 $PAGE->activityheader->disable();
 $reportlist = quiz_report_list($context);
 if (empty($reportlist)) {
+<<<<<<< HEAD
     throw new \moodle_exception('erroraccessingreport', 'quiz');
+=======
+    print_error('erroraccessingreport', 'quiz');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Validate the requested report name.
@@ -77,10 +101,17 @@ if ($mode == '') {
     $url->param('mode', reset($reportlist));
     redirect($url);
 } else if (!in_array($mode, $reportlist)) {
+<<<<<<< HEAD
     throw new \moodle_exception('erroraccessingreport', 'quiz');
 }
 if (!is_readable("report/$mode/report.php")) {
     throw new \moodle_exception('reportnotfound', 'quiz', '', $mode);
+=======
+    print_error('erroraccessingreport', 'quiz');
+}
+if (!is_readable("report/$mode/report.php")) {
+    print_error('reportnotfound', 'quiz', '', $mode);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Open the selected quiz report and display it.
@@ -90,7 +121,11 @@ if (is_readable($file)) {
 }
 $reportclassname = 'quiz_' . $mode . '_report';
 if (!class_exists($reportclassname)) {
+<<<<<<< HEAD
     throw new \moodle_exception('preprocesserror', 'quiz');
+=======
+    print_error('preprocesserror', 'quiz');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $report = new $reportclassname();

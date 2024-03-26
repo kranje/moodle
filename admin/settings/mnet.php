@@ -49,6 +49,11 @@ $ADMIN->add('mnet', new admin_externalpage('trustedhosts', new lang_string('trus
 if (isset($CFG->mnet_dispatcher_mode) and $CFG->mnet_dispatcher_mode !== 'off') {
     $profilefields = new admin_settingpage('mnetprofilefields', new lang_string('profilefields', 'mnet'),
                                                'moodle/site:config');
+<<<<<<< HEAD
+=======
+    $profilefields->add(new admin_setting_heading('mnetprofilefields/xmlrpcmnet', '',
+        $OUTPUT->render(mnet_get_deprecation_notice())));
+>>>>>>> forked/LAE_400_PACKAGE
     $ADMIN->add('mnet', $profilefields);
 
     $fields = mnet_profile_field_options();

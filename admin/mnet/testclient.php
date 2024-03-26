@@ -18,7 +18,11 @@ require_once($CFG->libdir.'/adminlib.php');
 include_once($CFG->dirroot.'/mnet/lib.php');
 
 if ($CFG->mnet_dispatcher_mode === 'off') {
+<<<<<<< HEAD
     throw new \moodle_exception('mnetdisabled', 'mnet');
+=======
+    print_error('mnetdisabled', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 admin_externalpage_setup('mnettestclient');
@@ -27,7 +31,11 @@ error_reporting(DEBUG_ALL);
 
 echo $OUTPUT->header();
 if (!extension_loaded('openssl')) {
+<<<<<<< HEAD
     throw new \moodle_exception('requiresopenssl', 'mnet', '', null, true);
+=======
+    print_error('requiresopenssl', 'mnet', '', NULL, true);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // optional drilling down parameters

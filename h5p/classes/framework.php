@@ -14,13 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
+=======
+/**
+ * \core_h5p\framework class
+ *
+ * @package    core_h5p
+ * @copyright  2019 Mihail Geshoski <mihail@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+>>>>>>> forked/LAE_400_PACKAGE
 namespace core_h5p;
 
 use Moodle\H5PFrameworkInterface;
 use Moodle\H5PCore;
+<<<<<<< HEAD
 
 // phpcs:disable moodle.NamingConventions.ValidFunctionName.LowercaseMethod
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * Moodle's implementation of the H5P framework interface.
  *
@@ -36,7 +50,11 @@ class framework implements H5PFrameworkInterface {
     /** @var string The path to the last uploaded h5p file */
     private $lastuploadedfile;
 
+<<<<<<< HEAD
     /** @var \stored_file The .h5p file */
+=======
+    /** @var stored_file The .h5p file */
+>>>>>>> forked/LAE_400_PACKAGE
     private $file;
 
     /**
@@ -59,6 +77,7 @@ class framework implements H5PFrameworkInterface {
     }
 
     /**
+<<<<<<< HEAD
      * Fetches a file from a remote server using HTTP GET
      * Implements fetchExternalData.
      *
@@ -75,6 +94,18 @@ class framework implements H5PFrameworkInterface {
      */
     public function fetchExternalData($url, $data = null, $blocking = true, $stream = null, $fulldata = false, $headers = [],
             $files = [], $method = 'POST') {
+=======
+     * Fetches a file from a remote server using HTTP GET.
+     * Implements fetchExternalData.
+     *
+     * @param string $url Where you want to get or send data
+     * @param array $data Data to post to the URL
+     * @param bool $blocking Set to 'FALSE' to instantly time out (fire and forget)
+     * @param string $stream Path to where the file should be saved
+     * @return string The content (response body). NULL if something went wrong
+     */
+    public function fetchExternalData($url, $data = null, $blocking = true, $stream = null) {
+>>>>>>> forked/LAE_400_PACKAGE
 
         if ($stream === null) {
             // Download file.
@@ -352,6 +383,7 @@ class framework implements H5PFrameworkInterface {
             'Your PHP version does not support ZipArchive.' => 'noziparchive',
             'Your PHP version is outdated. H5P requires version 5.2 to function properly. Version 5.6 or later is recommended.' => 'oldphpversion',
             'Your server does not have SSL enabled. SSL should be enabled to ensure a secure connection with the H5P hub.' => 'sslnotenabled',
+<<<<<<< HEAD
             'Your site was successfully registered with the H5P Hub.' => 'successfullyregisteredwithhub',
             'Sharing <strong>:title</strong>' => 'mainTitle',
             'Edit info for <strong>:title</strong>' => 'editInfoTitle',
@@ -447,6 +479,9 @@ class framework implements H5PFrameworkInterface {
             'Keywords already exists!' => 'keywordsExits',
             'Some of these keywords already exist' => 'someKeywordsExits',
             'Assistive Technologies label' => 'a11yTitle:label',
+=======
+            'Your site was successfully registered with the H5P Hub.' => 'successfullyregisteredwithhub'
+>>>>>>> forked/LAE_400_PACKAGE
         ];
 
         if (isset($translationsmap[$message])) {
@@ -747,7 +782,11 @@ class framework implements H5PFrameworkInterface {
     /**
      * Get the .h5p file.
      *
+<<<<<<< HEAD
      * @return \stored_file The .h5p file.
+=======
+     * @return stored_file The .h5p file.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function get_file(): \stored_file {
         if (!isset($this->file)) {
@@ -1235,7 +1274,11 @@ class framework implements H5PFrameworkInterface {
      * Delete a library from database and file system.
      * Implements deleteLibrary.
      *
+<<<<<<< HEAD
      * @param \stdClass $library Library object with id, name, major version and minor version
+=======
+     * @param stdClass $library Library object with id, name, major version and minor version
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function deleteLibrary($library) {
         $factory = new \core_h5p\factory();
@@ -1705,7 +1748,11 @@ class framework implements H5PFrameworkInterface {
         }
 
         // Get current language in Moodle.
+<<<<<<< HEAD
         $language = get_html_lang_attribute_value(strtolower(\current_language()));
+=======
+        $language = str_replace('_', '-', strtolower(\current_language()));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Try to map.
         return $map[$language] ?? $language;
@@ -1774,6 +1821,7 @@ class framework implements H5PFrameworkInterface {
 
         return null;
     }
+<<<<<<< HEAD
 
     /**
      * Replace content hub metadata cache
@@ -1824,4 +1872,6 @@ class framework implements H5PFrameworkInterface {
         debugging('The setContentHubMetadataChecked() method is not implemented.', DEBUG_DEVELOPER);
         return false;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

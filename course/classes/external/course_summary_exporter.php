@@ -64,7 +64,11 @@ class course_summary_exporter extends \core\external\exporter {
         if ($progress === 0 || $progress > 0) {
             $hasprogress = true;
         }
+<<<<<<< HEAD
         $progress = floor($progress ?? 0);
+=======
+        $progress = floor($progress);
+>>>>>>> forked/LAE_400_PACKAGE
         $coursecategory = \core_course_category::get($this->data->category, MUST_EXIST, true);
         return array(
             'fullnamedisplay' => get_course_display_name_for_list($this->data),

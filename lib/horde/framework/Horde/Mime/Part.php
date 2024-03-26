@@ -2229,7 +2229,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetExists($offset)
     {
         return ($this[$offset] !== null);
@@ -2237,7 +2240,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($offset)
     {
         $this->_reindex();
@@ -2263,7 +2269,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
 	#[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -2283,7 +2292,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetUnset($offset)
     {
         if ($part = $this[$offset]) {
@@ -2307,7 +2319,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
      *
      * @return integer  Number of message parts.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->_parts);
@@ -2318,7 +2333,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
     /**
      * @since 2.8.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return (($key = $this->key()) === null)
@@ -2329,7 +2347,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
     /**
      * @since 2.8.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return (isset($this->_temp['iterate']) && isset($this->_parts[$this->_temp['iterate']]))
@@ -2340,7 +2361,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
     /**
      * @since 2.8.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next()
     {
         ++$this->_temp['iterate'];
@@ -2349,7 +2373,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
     /**
      * @since 2.8.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function rewind()
     {
         $this->_reindex();
@@ -2360,7 +2387,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
     /**
      * @since 2.8.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function valid()
     {
         return ($this->key() !== null);
@@ -2369,7 +2399,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
     /**
      * @since 2.8.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function hasChildren()
     {
         return (($curr = $this->current()) && count($curr));
@@ -2378,7 +2411,10 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
     /**
      * @since 2.8.0
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getChildren()
     {
         return $this->current();
@@ -2393,11 +2429,14 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
     }
 
     public function __serialize(): array
     {
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $data = array(
             // Serialized data ID.
             self::VERSION,
@@ -2416,12 +2455,31 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
             $data[] = $this->_readStream($this->_contents);
         }
 
+<<<<<<< HEAD
         return $data;
     }
 
     public function __unserialize(array $data): void
     {
         if (!isset($data[0]) || ($data[0] != self::VERSION)) {
+=======
+        return serialize($data);
+    }
+
+    /**
+     * Unserialization.
+     *
+     * @param string $data  Serialized data.
+     *
+     * @throws Exception
+     */
+    public function unserialize($data)
+    {
+        $data = @unserialize($data);
+        if (!is_array($data) ||
+            !isset($data[0]) ||
+            ($data[0] != self::VERSION)) {
+>>>>>>> forked/LAE_400_PACKAGE
             switch ($data[0]) {
             case 1:
                 $convert = new Horde_Mime_Part_Upgrade_V1($data);
@@ -2454,6 +2512,7 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
         }
     }
 
+<<<<<<< HEAD
     /**
      * Unserialization.
      *
@@ -2467,6 +2526,8 @@ implements ArrayAccess, Countable, RecursiveIterator, Serializable
         $this->__unserialize($data);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /* Deprecated elements. */
 
     /**

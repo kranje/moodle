@@ -38,7 +38,11 @@ $mform = null;
 if ($taskname) {
     $task = \core\task\manager::get_scheduled_task($taskname);
     if (!$task) {
+<<<<<<< HEAD
         throw new \moodle_exception('invaliddata');
+=======
+        print_error('invaliddata');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

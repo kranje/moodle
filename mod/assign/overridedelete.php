@@ -32,7 +32,11 @@ $overrideid = required_param('id', PARAM_INT);
 $confirm = optional_param('confirm', false, PARAM_BOOL);
 
 if (! $override = $DB->get_record('assign_overrides', array('id' => $overrideid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidoverrideid', 'assign');
+=======
+    print_error('invalidoverrideid', 'assign');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 list($course, $cm) = get_course_and_cm_from_instance($override->assignid, 'assign');
@@ -46,11 +50,19 @@ require_capability('mod/assign:manageoverrides', $context);
 
 if ($override->groupid) {
     if (!groups_group_visible($override->groupid, $course, $cm)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidoverrideid', 'assign');
     }
 } else {
     if (!groups_user_groups_visible($course, $override->userid, $cm)) {
         throw new \moodle_exception('invalidoverrideid', 'assign');
+=======
+        print_error('invalidoverrideid', 'assign');
+    }
+} else {
+    if (!groups_user_groups_visible($course, $override->userid, $cm)) {
+        print_error('invalidoverrideid', 'assign');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 

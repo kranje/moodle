@@ -85,6 +85,7 @@ class block_myprofile_edit_form extends block_edit_form {
             $mform->setDefault('config_display_address', '0');
         }
 
+<<<<<<< HEAD
         $mform->addElement('selectyesno', 'config_display_idnumber', get_string('display_idnumber', 'block_myprofile'));
         if (isset($this->block->config->display_idnumber)) {
             $mform->setDefault('config_display_idnumber', $this->block->config->display_idnumber);
@@ -92,6 +93,8 @@ class block_myprofile_edit_form extends block_edit_form {
             $mform->setDefault('config_display_idnumber', '0');
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $mform->addElement('selectyesno', 'config_display_firstaccess', get_string('display_firstaccess', 'block_myprofile'));
         if (isset($this->block->config->display_firstaccess)) {
             $mform->setDefault('config_display_firstaccess', $this->block->config->display_firstaccess);
@@ -119,6 +122,7 @@ class block_myprofile_edit_form extends block_edit_form {
         } else {
             $mform->setDefault('config_display_lastip', '0');
         }
+<<<<<<< HEAD
 
         $mform->addElement('selectyesno', 'config_display_lastlogin', get_string('display_lastlogin', 'block_myprofile'));
         if (isset($this->block->config->display_lastlogin)) {
@@ -126,5 +130,7 @@ class block_myprofile_edit_form extends block_edit_form {
         } else {
             $mform->setDefault('config_display_lastlogin', '0');
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

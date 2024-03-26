@@ -38,9 +38,15 @@ class empty_element extends element {
     /**
      * Constructor
      *
+<<<<<<< HEAD
      * @param string|null $msg The text
      */
     public function __construct(?string $msg = null) {
+=======
+     * @param string $msg The text
+     */
+    public function __construct($msg = null) {
+>>>>>>> forked/LAE_400_PACKAGE
         if (is_null($msg)) {
             $this->text = '&nbsp;';
         } else {
@@ -53,7 +59,11 @@ class empty_element extends element {
      *
      * @return string HTML
      */
+<<<<<<< HEAD
     public function html(): string {
+=======
+    public function html() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->text;
     }
 }

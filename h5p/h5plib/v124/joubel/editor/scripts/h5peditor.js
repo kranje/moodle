@@ -56,6 +56,7 @@ ns.isIE = navigator.userAgent.match(/; MSIE \d+.\d+;/) !== null;
  */
 ns.renderableCommonFields = {};
 
+<<<<<<< HEAD
 (() => {
   const loading = {}; // Map of callbacks for each src being loaded
 
@@ -81,12 +82,28 @@ ns.renderableCommonFields = {};
     loading[src] = [done];
 
     // Load using script tag
+=======
+/**
+ * Help load JavaScripts, prevents double loading.
+ *
+ * @param {string} src
+ * @param {Function} done Callback
+ */
+ns.loadJs = function (src, done) {
+  if (H5P.jsLoaded(src)) {
+    // Already loaded
+    done();
+  }
+  else {
+    // Loading using script tag
+>>>>>>> forked/LAE_400_PACKAGE
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.charset = 'UTF-8';
     script.async = false;
     script.onload = function () {
       H5PIntegration.loadedJs.push(src);
+<<<<<<< HEAD
       loading[src].forEach(cb => cb());
     };
     script.onerror = function (err) {
@@ -96,6 +113,17 @@ ns.renderableCommonFields = {};
     document.head.appendChild(script);
   };
 })();
+=======
+      done();
+    };
+    script.onerror = function (err) {
+      done(err);
+    };
+    script.src = src;
+    document.head.appendChild(script);
+  }
+}
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Helper function invoked when a library is requested. Will add CSS and eval JS
@@ -295,7 +323,10 @@ ns.resetLoadedLibraries = function () {
   H5PIntegration.loadedJs = [];
   ns.loadedCallbacks = [];
   ns.libraryLoaded = {};
+<<<<<<< HEAD
   ns.libraryCache = {};
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 };
 
 /**

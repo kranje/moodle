@@ -82,6 +82,10 @@ class ADODB_pdo extends ADOConnection {
 	var $_errormsg = false;
 	var $_errorno = false;
 
+<<<<<<< HEAD
+=======
+	var $dsnType = '';
+>>>>>>> forked/LAE_400_PACKAGE
 	var $stmt = false;
 	var $_driver;
 
@@ -237,6 +241,7 @@ class ADODB_pdo extends ADOConnection {
 		return call_user_func_array('parent::Concat', $args);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Triggers a driver-specific request for a bind parameter
 	 *
@@ -257,6 +262,8 @@ class ADODB_pdo extends ADOConnection {
 		return call_user_func_array('parent::param', $args);
 	}
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	// returns true or false
 	function _pconnect($argDSN, $argUsername, $argPassword, $argDatabasename)
 	{
@@ -313,6 +320,7 @@ class ADODB_pdo extends ADOConnection {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns a list of Foreign Keys associated with a specific table.
 	 *
 	 * @param string   $table
@@ -326,6 +334,20 @@ class ADODB_pdo extends ADOConnection {
 	public function metaForeignKeys($table, $owner = '', $upper = false, $associative = false) {
 		if (method_exists($this->_driver,'metaForeignKeys'))
 			return $this->_driver->metaForeignKeys($table, $owner, $upper, $associative);
+=======
+	 * Returns a list of Foreign Keys for a specified table.
+	 *
+	 * @param string   $table
+	 * @param bool     $owner      (optional) not used in this driver
+	 * @param bool     $upper
+	 * @param bool     $associative
+	 *
+	 * @return string[] where keys are tables, and values are foreign keys
+	 */
+	public function metaForeignKeys($table, $owner=false, $upper=false,$associative=false) {
+		if (method_exists($this->_driver,'metaForeignKeys'))
+			return $this->_driver->metaForeignKeys($table,$owner,$upper,$associative);
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**
@@ -585,7 +607,10 @@ class ADODB_pdo extends ADOConnection {
 				$this->_driver->debug = $this->debug;
 			}
 			if ($inputarr) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 				/*
 				* inputarr must be numeric
 				*/

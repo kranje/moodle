@@ -53,6 +53,10 @@ $string['cutpastemozilla'] = 'Unfortunately, you cannot currently use normal key
 $string['delete'] = 'Delete';
 $string['editors'] = 'Text editors';
 $string['editorsettings'] = 'Manage editors';
+<<<<<<< HEAD
+=======
+$string['editorxformat'] = '{$a} format';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['enterurlfirst'] = 'You have to enter an URL first';
 $string['filebrowser'] = 'File Browser';
 $string['findwhat'] = 'Find';

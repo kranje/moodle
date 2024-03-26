@@ -22,8 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 $string['comment'] = 'Comment';
 $string['comments'] = 'Comments';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['commentsubcontext'] = 'Comments';
 $string['privacy:metadata:comment'] = 'Stores comments of users.';
 $string['privacy:metadata:comment:content'] = 'Stores the text of the comment.';

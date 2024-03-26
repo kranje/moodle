@@ -23,7 +23,10 @@ namespace auth_oauth2;
  * @category   test
  * @copyright  2019 Shamim Rezaie
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
  * @coversDefaultClass \auth_oauth2\auth
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class auth_test extends \advanced_testcase {
 
@@ -39,6 +42,7 @@ class auth_test extends \advanced_testcase {
                 'your password cannot be reset because you are using your account on another site to log in',
                 $info['message']);
     }
+<<<<<<< HEAD
 
     /**
      * Test complete_login for oauth2.
@@ -89,4 +93,6 @@ class auth_test extends \advanced_testcase {
         $extrauserinfo = $event->other['extrauserinfo'];
         $this->assertEquals($info, $extrauserinfo);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -2,11 +2,17 @@
 
 namespace PhpOffice\PhpSpreadsheet\Reader;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
 use PhpOffice\PhpSpreadsheet\Reader\Exception as ReaderException;
 use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
 use PhpOffice\PhpSpreadsheet\Shared\File;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+=======
+use PhpOffice\PhpSpreadsheet\Reader\Exception as ReaderException;
+use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
+use PhpOffice\PhpSpreadsheet\Shared\File;
+>>>>>>> forked/LAE_400_PACKAGE
 
 abstract class BaseReader implements IReader
 {
@@ -146,6 +152,7 @@ abstract class BaseReader implements IReader
         }
     }
 
+<<<<<<< HEAD
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
         throw new PhpSpreadsheetException('Reader classes must implement their own loadSpreadsheetFromFile() method');
@@ -175,16 +182,36 @@ abstract class BaseReader implements IReader
     protected function openFile(string $filename): void
     {
         $fileHandle = false;
+=======
+    /**
+     * Open file for reading.
+     *
+     * @param string $filename
+     */
+    protected function openFile($filename): void
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         if ($filename) {
             File::assertFile($filename);
 
             // Open file
             $fileHandle = fopen($filename, 'rb');
+<<<<<<< HEAD
         }
         if ($fileHandle === false) {
             throw new ReaderException('Could not open file ' . $filename . ' for reading.');
         }
 
         $this->fileHandle = $fileHandle;
+=======
+        } else {
+            $fileHandle = false;
+        }
+        if ($fileHandle !== false) {
+            $this->fileHandle = $fileHandle;
+        } else {
+            throw new ReaderException('Could not open file ' . $filename . ' for reading.');
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

@@ -120,7 +120,11 @@ if ($search) {
 }
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_course_login($course);
@@ -284,12 +288,20 @@ foreach ($posts as $post) {
     // Replace the simple subject with the three items forum name -> thread name -> subject
     // (if all three are appropriate) each as a link.
     if (!isset($discussionsbyid[$post->discussion])) {
+<<<<<<< HEAD
         throw new \moodle_exception('invaliddiscussionid', 'forum');
+=======
+        print_error('invaliddiscussionid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $discussion = $discussionsbyid[$post->discussion];
     if (!isset($forumsbyid[$discussion->get_forum_id()])) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidforumid', 'forum');
+=======
+        print_error('invalidforumid', 'forum');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $forum = $forumsbyid[$discussion->get_forum_id()];

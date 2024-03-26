@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -12,10 +13,17 @@ class Extract
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
+
+class Extract
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * LEFT.
      *
      * @param mixed $value String value from which to extract characters
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $chars The number of characters to extract (as an integer)
      *                         Or can be an array of values
@@ -30,6 +38,12 @@ class Extract
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $chars);
         }
 
+=======
+     * @param mixed $chars The number of characters to extract (as an integer)
+     */
+    public static function left($value, $chars = 1): string
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $value = Helpers::extractString($value);
             $chars = Helpers::extractInt($chars, 0, 1);
@@ -44,6 +58,7 @@ class Extract
      * MID.
      *
      * @param mixed $value String value from which to extract characters
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $start Integer offset of the first character that we want to extract
      *                         Or can be an array of values
@@ -60,6 +75,13 @@ class Extract
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $start, $chars);
         }
 
+=======
+     * @param mixed $start Integer offset of the first character that we want to extract
+     * @param mixed $chars The number of characters to extract (as an integer)
+     */
+    public static function mid($value, $start, $chars): string
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $value = Helpers::extractString($value);
             $start = Helpers::extractInt($start, 1);
@@ -75,6 +97,7 @@ class Extract
      * RIGHT.
      *
      * @param mixed $value String value from which to extract characters
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $chars The number of characters to extract (as an integer)
      *                         Or can be an array of values
@@ -89,6 +112,12 @@ class Extract
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $chars);
         }
 
+=======
+     * @param mixed $chars The number of characters to extract (as an integer)
+     */
+    public static function right($value, $chars = 1): string
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $value = Helpers::extractString($value);
             $chars = Helpers::extractInt($chars, 0, 1);
@@ -98,6 +127,7 @@ class Extract
 
         return mb_substr($value ?? '', mb_strlen($value ?? '', 'UTF-8') - $chars, $chars, 'UTF-8');
     }
+<<<<<<< HEAD
 
     /**
      * TEXTBEFORE.
@@ -277,4 +307,6 @@ class Extract
     {
         return ($matchMode === 0) ? 'mu' : 'miu';
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

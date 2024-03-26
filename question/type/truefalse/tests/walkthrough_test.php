@@ -124,6 +124,7 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         $this->assertEquals(question_state::$gradedright, $newqa->get_state());
         $this->assertEquals(1, $newqa->get_mark());
     }
+<<<<<<< HEAD
 
     /**
      * @covers \qtype_truefalse_renderer::formulation_and_controls
@@ -160,4 +161,6 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         ]);
         $this->assertStringContainsString($standardinstruction, $this->currentoutput);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

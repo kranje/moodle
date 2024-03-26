@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
@@ -11,6 +12,14 @@ class Normal
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Engineering;
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Normal
+{
+>>>>>>> forked/LAE_400_PACKAGE
     public const SQRT2PI = 2.5066282746310005024157652848110452530069867406099;
 
     /**
@@ -21,6 +30,7 @@ class Normal
      * testing.
      *
      * @param mixed $value Float value for which we want the probability
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $mean Mean value as a float
      *                      Or can be an array of values
@@ -38,6 +48,19 @@ class Normal
         if (is_array($value) || is_array($mean) || is_array($stdDev) || is_array($cumulative)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $mean, $stdDev, $cumulative);
         }
+=======
+     * @param mixed $mean Mean value as a float
+     * @param mixed $stdDev Standard Deviation as a float
+     * @param mixed $cumulative Boolean value indicating if we want the cdf (true) or the pdf (false)
+     *
+     * @return float|string The result, or a string containing an error
+     */
+    public static function distribution($value, $mean, $stdDev, $cumulative)
+    {
+        $value = Functions::flattenSingleValue($value);
+        $mean = Functions::flattenSingleValue($mean);
+        $stdDev = Functions::flattenSingleValue($stdDev);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $value = DistributionValidations::validateFloat($value);
@@ -49,7 +72,11 @@ class Normal
         }
 
         if ($stdDev < 0) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($cumulative) {
@@ -65,6 +92,7 @@ class Normal
      * Returns the inverse of the normal cumulative distribution for the specified mean and standard deviation.
      *
      * @param mixed $probability Float probability for which we want the value
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $mean Mean Value as a float
      *                      Or can be an array of values
@@ -80,6 +108,18 @@ class Normal
         if (is_array($probability) || is_array($mean) || is_array($stdDev)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $probability, $mean, $stdDev);
         }
+=======
+     * @param mixed $mean Mean Value as a float
+     * @param mixed $stdDev Standard Deviation as a float
+     *
+     * @return float|string The result, or a string containing an error
+     */
+    public static function inverse($probability, $mean, $stdDev)
+    {
+        $probability = Functions::flattenSingleValue($probability);
+        $mean = Functions::flattenSingleValue($mean);
+        $stdDev = Functions::flattenSingleValue($stdDev);
+>>>>>>> forked/LAE_400_PACKAGE
 
         try {
             $probability = DistributionValidations::validateProbability($probability);
@@ -90,7 +130,11 @@ class Normal
         }
 
         if ($stdDev < 0) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (self::inverseNcdf($probability) * $stdDev) + $mean;

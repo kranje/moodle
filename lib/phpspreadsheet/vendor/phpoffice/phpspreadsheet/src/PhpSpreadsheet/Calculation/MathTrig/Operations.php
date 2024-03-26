@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -11,10 +12,18 @@ class Operations
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Operations
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * MOD.
      *
      * @param mixed $dividend Dividend
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $divisor Divisor
      *                      Or can be an array of values
@@ -29,6 +38,14 @@ class Operations
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $dividend, $divisor);
         }
 
+=======
+     * @param mixed $divisor Divisor
+     *
+     * @return float|int|string Remainder, or a string containing an error
+     */
+    public static function mod($dividend, $divisor)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $dividend = Helpers::validateNumericNullBool($dividend);
             $divisor = Helpers::validateNumericNullBool($divisor);
@@ -52,6 +69,7 @@ class Operations
      *
      * Computes x raised to the power y.
      *
+<<<<<<< HEAD
      * @param array|float|int $x
      *                      Or can be an array of values
      * @param array|float|int $y
@@ -67,6 +85,15 @@ class Operations
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $x, $y);
         }
 
+=======
+     * @param float|int $x
+     * @param float|int $y
+     *
+     * @return float|int|string The result, or a string containing an error
+     */
+    public static function power($x, $y)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $x = Helpers::validateNumericNullBool($x);
             $y = Helpers::validateNumericNullBool($y);
@@ -76,10 +103,17 @@ class Operations
 
         // Validate parameters
         if (!$x && !$y) {
+<<<<<<< HEAD
             return ExcelError::NAN();
         }
         if (!$x && $y < 0.0) {
             return ExcelError::DIV0();
+=======
+            return Functions::NAN();
+        }
+        if (!$x && $y < 0.0) {
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Return
@@ -102,6 +136,7 @@ class Operations
      */
     public static function product(...$args)
     {
+<<<<<<< HEAD
         $args = array_filter(
             Functions::flattenArray($args),
             function ($value) {
@@ -123,6 +158,31 @@ class Operations
         }
 
         return (float) $returnValue;
+=======
+        // Return value
+        $returnValue = null;
+
+        // Loop through arguments
+        foreach (Functions::flattenArray($args) as $arg) {
+            // Is it a numeric value?
+            if (is_numeric($arg)) {
+                if ($returnValue === null) {
+                    $returnValue = $arg;
+                } else {
+                    $returnValue *= $arg;
+                }
+            } else {
+                return Functions::VALUE();
+            }
+        }
+
+        // Return
+        if ($returnValue === null) {
+            return 0;
+        }
+
+        return $returnValue;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -135,6 +195,7 @@ class Operations
      *        QUOTIENT(value1,value2)
      *
      * @param mixed $numerator Expect float|int
+<<<<<<< HEAD
      *                      Or can be an array of values
      * @param mixed $denominator Expect float|int
      *                      Or can be an array of values
@@ -149,6 +210,14 @@ class Operations
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $numerator, $denominator);
         }
 
+=======
+     * @param mixed $denominator Expect float|int
+     *
+     * @return int|string
+     */
+    public static function quotient($numerator, $denominator)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $numerator = Helpers::validateNumericNullSubstitution($numerator, 0);
             $denominator = Helpers::validateNumericNullSubstitution($denominator, 0);

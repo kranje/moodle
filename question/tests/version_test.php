@@ -16,6 +16,10 @@
 
 namespace core_question;
 
+<<<<<<< HEAD
+=======
+use core_question\local\bank\question_version_status;
+>>>>>>> forked/LAE_400_PACKAGE
 use question_bank;
 
 /**
@@ -89,7 +93,11 @@ class version_test extends \advanced_testcase {
         $this->assertEquals($questionversion->questionbankentryid, $questiondefinition->questionbankentryid);
 
         // If a question is updated, a new version should be created.
+<<<<<<< HEAD
         $this->qgenerator->update_question($question, null, ['name' => 'This is a new version']);
+=======
+        $question = $this->qgenerator->update_question($question, null, ['name' => 'This is a new version']);
+>>>>>>> forked/LAE_400_PACKAGE
         $newquestiondefinition = question_bank::load_question($question->id);
         // The version should be 2.
         $this->assertEquals('2', $newquestiondefinition->version);
@@ -112,7 +120,11 @@ class version_test extends \advanced_testcase {
         $questionfirstversionid = $question->id;
 
         // Create a new version and try to remove it.
+<<<<<<< HEAD
         $this->qgenerator->update_question($question, null, ['name' => 'This is a new version']);
+=======
+        $question = $this->qgenerator->update_question($question, null, ['name' => 'This is a new version']);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // The new version and bank entry record should exist.
         $sql = "SELECT q.id, qv.id AS versionid, qv.questionbankentryid
@@ -158,12 +170,21 @@ class version_test extends \advanced_testcase {
      * @covers ::question_delete_question
      */
     public function test_delete_question_in_use() {
+<<<<<<< HEAD
+=======
+        global $DB;
+
+>>>>>>> forked/LAE_400_PACKAGE
         $qcategory = $this->qgenerator->create_question_category(['contextid' => $this->context->id]);
         $question = $this->qgenerator->create_question('shortanswer', null, ['category' => $qcategory->id]);
         $questionfirstversionid = $question->id;
 
         // Create a new version and try to remove it after adding it to a quiz.
+<<<<<<< HEAD
         $this->qgenerator->update_question($question, null, ['name' => 'This is a new version']);
+=======
+        $question = $this->qgenerator->update_question($question, null, ['name' => 'This is a new version']);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Add it to the quiz.
         quiz_add_quiz_question($question->id, $this->quiz);
@@ -173,11 +194,21 @@ class version_test extends \advanced_testcase {
         // Try to delete old version.
         question_delete_question($questionfirstversionid);
 
+<<<<<<< HEAD
         // The questions should exist even after trying to remove it.
         $questionversion1 = question_bank::load_question($question->id);
         $questionversion2 = question_bank::load_question($questionfirstversionid);
         $this->assertEquals($questionversion1->id, $question->id);
         $this->assertEquals($questionversion2->id, $questionfirstversionid);
+=======
+        // The used question version should exist even after trying to remove it, but now hidden.
+        $questionversion2 = question_bank::load_question($question->id);
+        $this->assertEquals($question->id, $questionversion2->id);
+        $this->assertEquals(question_version_status::QUESTION_STATUS_HIDDEN, $questionversion2->status);
+
+        // The unused version should be completely gone.
+        $this->assertFalse($DB->record_exists('question', ['id' => $questionfirstversionid]));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -233,10 +264,17 @@ class version_test extends \advanced_testcase {
         $questionid1 = $question->id;
 
         // Create a new version and try to remove it after adding it to a quiz.
+<<<<<<< HEAD
         $this->qgenerator->update_question($question, null, ['idnumber' => 'id2']);
         $questionid2 = $question->id;
         // Change the id number and get the question object.
         $this->qgenerator->update_question($question, null, ['idnumber' => 'id3']);
+=======
+        $question = $this->qgenerator->update_question($question, null, ['idnumber' => 'id2']);
+        $questionid2 = $question->id;
+        // Change the id number and get the question object.
+        $question = $this->qgenerator->update_question($question, null, ['idnumber' => 'id3']);
+>>>>>>> forked/LAE_400_PACKAGE
         $questionid3 = $question->id;
 
         // The new version and bank entry record should exist.
@@ -254,6 +292,7 @@ class version_test extends \advanced_testcase {
         $this->assertEquals($questionbankentry[$questionid2]->idnumber, 'id3');
         $this->assertEquals($questionbankentry[$questionid3]->idnumber, 'id3');
     }
+<<<<<<< HEAD
 
     /**
      * Test that all the versions are available from the method.
@@ -283,4 +322,6 @@ class version_test extends \advanced_testcase {
         $this->assertEquals(array_slice($questiondefinition, 1, 1)[0]->questionid, $questionid2);
         $this->assertEquals(array_slice($questiondefinition, 2, 1)[0]->questionid, $questionid1);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

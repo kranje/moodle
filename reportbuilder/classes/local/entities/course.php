@@ -58,8 +58,11 @@ class course extends base {
         return [
             'course' => 'c',
             'context' => 'cctx',
+<<<<<<< HEAD
             'tag_instance' => 'cti',
             'tag' => 'ct',
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -117,6 +120,7 @@ class course extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Return syntax for joining on the context table
      *
      * @return string
@@ -131,6 +135,8 @@ class course extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Course fields.
      *
      * @return array
@@ -210,6 +216,7 @@ class course extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Return joins necessary for retrieving tags
      *
      * @return string[]
@@ -230,6 +237,8 @@ class course extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns list of all available columns.
      *
      * These are all the columns available to use in any report that uses this entity.
@@ -272,7 +281,15 @@ class course extends base {
 
             // Join on the context table so that we can use it for formatting these columns later.
             if ($key === 'coursefullnamewithlink') {
+<<<<<<< HEAD
                 $column->add_join($this->get_context_join())
+=======
+                $join = "LEFT JOIN {context} {$contexttablealias}
+                           ON {$contexttablealias}.contextlevel = " . CONTEXT_COURSE . "
+                          AND {$contexttablealias}.instanceid = {$tablealias}.id";
+
+                $column->add_join($join)
+>>>>>>> forked/LAE_400_PACKAGE
                     ->add_fields(context_helper::get_preload_record_columns_sql($contexttablealias));
             }
 
@@ -300,7 +317,15 @@ class course extends base {
 
             // Join on the context table so that we can use it for formatting these columns later.
             if ($coursefield === 'summary' || $coursefield === 'shortname' || $coursefield === 'fullname') {
+<<<<<<< HEAD
                 $column->add_join($this->get_context_join())
+=======
+                $join = "LEFT JOIN {context} {$contexttablealias}
+                           ON {$contexttablealias}.contextlevel = " . CONTEXT_COURSE . "
+                          AND {$contexttablealias}.instanceid = {$tablealias}.id";
+
+                $column->add_join($join)
+>>>>>>> forked/LAE_400_PACKAGE
                     ->add_field("{$tablealias}.id", 'courseid')
                     ->add_fields(context_helper::get_preload_record_columns_sql($contexttablealias));
             }
@@ -324,9 +349,17 @@ class course extends base {
 
         $fields = $this->get_course_fields();
         foreach ($fields as $field => $name) {
+<<<<<<< HEAD
             $filterfieldsql = "{$tablealias}.{$field}";
             if ($this->get_course_field_type($field) === column::TYPE_LONGTEXT) {
                 $filterfieldsql = $DB->sql_cast_to_char($filterfieldsql);
+=======
+            // Filtering isn't supported for LONGTEXT fields on Oracle.
+            if ($this->get_course_field_type($field) === column::TYPE_LONGTEXT &&
+                    $DB->get_dbfamily() === 'oracle') {
+
+                continue;
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $optionscallback = [static::class, 'get_options_for_' . $field];
@@ -345,7 +378,11 @@ class course extends base {
                 $field,
                 $name,
                 $this->get_entity_name(),
+<<<<<<< HEAD
                 $filterfieldsql
+=======
+                "{$tablealias}.$field"
+>>>>>>> forked/LAE_400_PACKAGE
             ))
                 ->add_joins($this->get_joins());
 

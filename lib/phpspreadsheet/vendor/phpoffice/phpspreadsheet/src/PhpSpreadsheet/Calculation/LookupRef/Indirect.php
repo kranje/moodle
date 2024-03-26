@@ -5,9 +5,13 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 use Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+=======
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Indirect
@@ -25,7 +29,11 @@ class Indirect
             return Helpers::CELLADDRESS_USE_A1;
         }
         if (is_string($a1fmt)) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::VALUE());
+=======
+            throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (bool) $a1fmt;
@@ -40,7 +48,11 @@ class Indirect
     {
         $cellAddress = Functions::flattenSingleValue($cellAddress);
         if (!is_string($cellAddress) || !$cellAddress) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::REF());
+=======
+            throw new Exception(Functions::REF());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $cellAddress;
@@ -64,8 +76,11 @@ class Indirect
      */
     public static function INDIRECT($cellAddress, $a1fmt, Cell $cell)
     {
+<<<<<<< HEAD
         [$baseCol, $baseRow] = Coordinate::indexesFromString($cell->getCoordinate());
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $a1 = self::a1Format($a1fmt);
             $cellAddress = self::validateAddress($cellAddress);
@@ -75,6 +90,7 @@ class Indirect
 
         [$cellAddress, $worksheet, $sheetName] = Helpers::extractWorksheet($cellAddress, $cell);
 
+<<<<<<< HEAD
         if (preg_match('/^' . Calculation::CALCULATION_REGEXP_COLUMNRANGE_RELATIVE . '$/miu', $cellAddress, $matches)) {
             $cellAddress = self::handleRowColumnRanges($worksheet, ...explode(':', $cellAddress));
         } elseif (preg_match('/^' . Calculation::CALCULATION_REGEXP_ROWRANGE_RELATIVE . '$/miu', $cellAddress, $matches)) {
@@ -92,6 +108,15 @@ class Indirect
             (($cellAddress2 !== null) && (!preg_match('/^' . Calculation::CALCULATION_REGEXP_CELLREF . '$/miu', $cellAddress2, $matches)))
         ) {
             return ExcelError::REF();
+=======
+        [$cellAddress1, $cellAddress2, $cellAddress] = Helpers::extractCellAddresses($cellAddress, $a1, $cell->getWorkSheet(), $sheetName);
+
+        if (
+            (!preg_match('/^' . Calculation::CALCULATION_REGEXP_CELLREF . '$/i', $cellAddress1, $matches)) ||
+            (($cellAddress2 !== null) && (!preg_match('/^' . Calculation::CALCULATION_REGEXP_CELLREF . '$/i', $cellAddress2, $matches)))
+        ) {
+            return Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return self::extractRequiredCells($worksheet, $cellAddress);
@@ -108,6 +133,7 @@ class Indirect
         return Calculation::getInstance($worksheet !== null ? $worksheet->getParent() : null)
             ->extractCellRange($cellAddress, $worksheet, false);
     }
+<<<<<<< HEAD
 
     private static function handleRowColumnRanges(?Worksheet $worksheet, string $start, string $end): string
     {
@@ -126,4 +152,6 @@ class Indirect
 
         return "{$start}:{$end}";
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

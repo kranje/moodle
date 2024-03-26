@@ -1,4 +1,5 @@
 .secondary-navigation {
+<<<<<<< HEAD
     padding-bottom: 15px;
     .navigation {
         border-bottom: 1px solid $nav-tabs-border-color;
@@ -9,6 +10,18 @@
             border: none;
             max-width: $course-content-maxwidth;
             margin: 0 auto;
+=======
+    max-width: $course-content-maxwidth;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    .navigation {
+        border-top: 1px solid $nav-tabs-border-color;
+        border-bottom: 1px solid $nav-tabs-border-color;
+        height: calc(#{$moremenu-height} + 2px);
+        background-color: $body-bg;
+        .nav-tabs {
+            border: none;
+>>>>>>> forked/LAE_400_PACKAGE
             .nav-link {
                 border-radius: initial;
             }
@@ -17,7 +30,12 @@
 }
 
 @include media-breakpoint-up(md) {
+<<<<<<< HEAD
     .secondary-navigation .navigation {
         padding: 0 calc(0.5rem + 15px);
+=======
+    .secondary-navigation {
+        padding: 0 15px 15px;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

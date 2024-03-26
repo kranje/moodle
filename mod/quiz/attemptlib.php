@@ -27,6 +27,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
+=======
+use core_question\local\bank\question_version_status;
+>>>>>>> forked/LAE_400_PACKAGE
 use mod_quiz\question\bank\qbank_helper;
 
 
@@ -543,6 +547,13 @@ class quiz {
         $qcategories = array();
 
         foreach ($this->get_questions() as $questiondata) {
+<<<<<<< HEAD
+=======
+            if ($questiondata->status == question_version_status::QUESTION_STATUS_DRAFT) {
+                // Skip questions where all versions are draft.
+                continue;
+            }
+>>>>>>> forked/LAE_400_PACKAGE
             if ($questiondata->qtype === 'random' && $includepotential) {
                 if (!isset($qcategories[$questiondata->category])) {
                     $qcategories[$questiondata->category] = false;
@@ -1849,7 +1860,11 @@ class quiz_attempt {
      */
     public function render_question_for_commenting($slot) {
         $options = $this->get_display_options(true);
+<<<<<<< HEAD
         $options->generalfeedback = question_display_options::HIDDEN;
+=======
+        $options->hide_all_feedback();
+>>>>>>> forked/LAE_400_PACKAGE
         $options->manualcomment = question_display_options::EDITABLE;
         return $this->quba->render_question($slot, $options,
                 $this->get_question_number($slot));
@@ -2712,6 +2727,7 @@ class quiz_attempt {
         }
         return false;
     }
+<<<<<<< HEAD
 
     /**
      * Get the total number of unanswered questions in the attempt.
@@ -2728,6 +2744,8 @@ class quiz_attempt {
         }
         return $totalunanswered;
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 

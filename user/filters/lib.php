@@ -330,7 +330,11 @@ class user_filter_type {
      * @return string the filtering condition or null if the filter is disabled
      */
     public function get_sql_filter($data) {
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'get_sql_filter');
+=======
+        print_error('mustbeoveride', 'debug', '', 'get_sql_filter');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -339,7 +343,11 @@ class user_filter_type {
      * @return mixed array filter data or false when filter not set
      */
     public function check_data($formdata) {
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'check_data');
+=======
+        print_error('mustbeoveride', 'debug', '', 'check_data');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -347,7 +355,11 @@ class user_filter_type {
      * @param moodleform $mform a MoodleForm object to setup
      */
     public function setupForm(&$mform) {
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'setupForm');
+=======
+        print_error('mustbeoveride', 'debug', '', 'setupForm');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -356,6 +368,10 @@ class user_filter_type {
      * @return string active filter label
      */
     public function get_label($data) {
+<<<<<<< HEAD
         throw new \moodle_exception('mustbeoveride', 'debug', '', 'get_label');
+=======
+        print_error('mustbeoveride', 'debug', '', 'get_label');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

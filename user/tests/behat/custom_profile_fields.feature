@@ -223,11 +223,17 @@ Feature: Custom profile fields should be visible and editable by those with the 
       | moodle/user:viewalldetails  | Allow      | parent | User         | userwithinformation |
       | moodle/user:viewdetails     | Allow      | parent | User         | userwithinformation |
       | moodle/user:editprofile     | Allow      | parent | User         | userwithinformation |
+<<<<<<< HEAD
     Given I log in as "admin"
     And I am on site homepage
     And I turn editing mode on
     And I add the "Mentees" block
     And I log out
+=======
+    And the following "blocks" exist:
+      | blockname | contextlevel | reference | pagetypepattern | defaultregion |
+      | mentees   | System       | 1         | site-index      | side-pre      |
+>>>>>>> forked/LAE_400_PACKAGE
     And I log in as "parent"
     And I am on site homepage
     When I follow "userwithinformation"

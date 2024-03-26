@@ -18,19 +18,29 @@ declare(strict_types=1);
 
 namespace core_user\reportbuilder\datasource;
 
+<<<<<<< HEAD
 use lang_string;
 use core_reportbuilder\datasource;
 use core_reportbuilder\local\entities\user;
 use core_reportbuilder\local\filters\boolean_select;
 use core_reportbuilder\local\helpers\database;
 use core_tag\reportbuilder\local\entities\tag;
+=======
+use core_reportbuilder\datasource;
+use core_reportbuilder\local\entities\user;
+use core_reportbuilder\local\helpers\database;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\manager;
 use core_reportbuilder\local\helpers\report;
 
 /**
  * Users datasource
  *
+<<<<<<< HEAD
  * @package   core_user
+=======
+ * @package   core_reportbuilder
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright 2021 David Matamoros <davidmc@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -61,6 +71,7 @@ class users extends datasource {
             $userparamguest => $CFG->siteguest,
         ]);
 
+<<<<<<< HEAD
         $this->add_entity($userentity);
 
         // Join the tag entity.
@@ -77,6 +88,15 @@ class users extends datasource {
         $this->add_columns_from_entity($tagentity->get_entity_name(), ['name', 'namewithlink']);
         $this->add_filter($tagentity->get_filter('name'));
         $this->add_condition($tagentity->get_condition('name'));
+=======
+        // Add all columns from entities to be available in custom reports.
+        $this->add_entity($userentity);
+
+        $userentityname = $userentity->get_entity_name();
+        $this->add_columns_from_entity($userentityname);
+        $this->add_filters_from_entity($userentityname);
+        $this->add_conditions_from_entity($userentityname);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -103,6 +123,7 @@ class users extends datasource {
      * @return string[]
      */
     public function get_default_conditions(): array {
+<<<<<<< HEAD
         return [
             'user:fullname',
             'user:username',
@@ -131,5 +152,23 @@ class users extends datasource {
         return [
             'user:fullname' => SORT_ASC,
         ];
+=======
+        return ['user:fullname', 'user:username', 'user:email'];
+    }
+
+    /**
+     * Set default columns and the sortorder
+     */
+    public function add_default_columns(): void {
+        parent::add_default_columns();
+
+        $persistent = $this->get_report_persistent();
+        $report = manager::get_report_from_persistent($persistent);
+        foreach ($report->get_active_columns() as $column) {
+            if ($column->get_unique_identifier() === 'user:fullname') {
+                report::toggle_report_column_sorting($persistent->get('id'), $column->get_persistent()->get('id'), true);
+            }
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

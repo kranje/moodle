@@ -1320,7 +1320,11 @@ class core_plugin_manager {
             return false;
         }
 
+<<<<<<< HEAD
         $ok = get_string('statusok', 'core');
+=======
+        $ok = get_string('ok', 'core');
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Let admins know they can expect more verbose output.
         $silent or $this->mtrace(get_string('packagesdebug', 'core_plugin'), PHP_EOL, DEBUG_NORMAL);
@@ -1651,7 +1655,11 @@ class core_plugin_manager {
         }
 
         // To be able to remove the plugin folder, its parent must be writable, too.
+<<<<<<< HEAD
         if (!isset($pluginfo->rootdir) || !is_writable(dirname($pluginfo->rootdir))) {
+=======
+        if (!is_writable(dirname($pluginfo->rootdir))) {
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 
@@ -1745,7 +1753,11 @@ class core_plugin_manager {
                 'binarius', 'boxxie', 'brick', 'canvas', 'formal_white', 'formfactor', 'fusion', 'leatherbound',
                 'magazine', 'mymobile', 'nimble', 'nonzero', 'overlay', 'serenity', 'sky_high', 'splash',
                 'standard', 'standardold'),
+<<<<<<< HEAD
             'webservice' => array('amf', 'xmlrpc'),
+=======
+            'webservice' => array('amf'),
+>>>>>>> forked/LAE_400_PACKAGE
         );
 
         if (!isset($plugins[$type])) {
@@ -1850,10 +1862,14 @@ class core_plugin_manager {
             ),
 
             'datapreset' => array(
+<<<<<<< HEAD
                 'imagegallery',
                 'journal',
                 'proposals',
                 'resources',
+=======
+                'imagegallery'
+>>>>>>> forked/LAE_400_PACKAGE
             ),
 
             'fileconverter' => array(
@@ -1861,7 +1877,11 @@ class core_plugin_manager {
             ),
 
             'editor' => array(
+<<<<<<< HEAD
                 'atto', 'textarea', 'tiny', 'tinymce'
+=======
+                'atto', 'textarea', 'tinymce'
+>>>>>>> forked/LAE_400_PACKAGE
             ),
 
             'enrol' => array(
@@ -1893,7 +1913,11 @@ class core_plugin_manager {
             ),
 
             'gradereport' => array(
+<<<<<<< HEAD
                 'grader', 'history', 'outcomes', 'overview', 'user', 'singleview', 'summary'
+=======
+                'grader', 'history', 'outcomes', 'overview', 'user', 'singleview'
+>>>>>>> forked/LAE_400_PACKAGE
             ),
 
             'gradingform' => array(
@@ -2028,6 +2052,7 @@ class core_plugin_manager {
                 'objectives'
             ),
 
+<<<<<<< HEAD
             'tiny' => [
                 'accessibilitychecker',
                 'autosave',
@@ -2037,6 +2062,8 @@ class core_plugin_manager {
                 'recordrtc',
             ],
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             'tinymce' => array(
                 'ctrlhelp', 'managefiles', 'moodleemoticon', 'moodleimage',
                 'moodlemedia', 'moodlenolink', 'pdw', 'spellchecker', 'wrap'
@@ -2056,7 +2083,11 @@ class core_plugin_manager {
             ),
 
             'webservice' => array(
+<<<<<<< HEAD
                 'rest', 'soap'
+=======
+                'rest', 'soap', 'xmlrpc'
+>>>>>>> forked/LAE_400_PACKAGE
             ),
 
             'workshopallocation' => array(

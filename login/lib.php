@@ -85,7 +85,11 @@ function core_login_process_password_reset($username, $email) {
     global $CFG, $DB;
 
     if (empty($username) && empty($email)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotmailconfirm');
+=======
+        print_error('cannotmailconfirm');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Next find the user account in the database which the requesting user claims to own.
@@ -135,7 +139,11 @@ function core_login_process_password_reset($username, $email) {
             if (send_password_change_info($user)) {
                 $pwresetstatus = PWRESET_STATUS_OTHEREMAILSENT;
             } else {
+<<<<<<< HEAD
                 throw new \moodle_exception('cannotmailconfirm');
+=======
+                print_error('cannotmailconfirm');
+>>>>>>> forked/LAE_400_PACKAGE
             }
         } else {
             // The account the requesting user claims to be is entitled to change their password.
@@ -170,7 +178,11 @@ function core_login_process_password_reset($username, $email) {
                 if ($sendresult) {
                     $pwresetstatus = PWRESET_STATUS_TOKENSENT;
                 } else {
+<<<<<<< HEAD
                     throw new \moodle_exception('cannotmailconfirm');
+=======
+                    print_error('cannotmailconfirm');
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         }
@@ -253,13 +265,21 @@ function core_login_process_password_set($token) {
     if ($user->auth === 'nologin' or !is_enabled_auth($user->auth)) {
         // Bad luck - user is not able to login, do not let them set password.
         echo $OUTPUT->header();
+<<<<<<< HEAD
         throw new \moodle_exception('forgotteninvalidurl');
+=======
+        print_error('forgotteninvalidurl');
+>>>>>>> forked/LAE_400_PACKAGE
         die; // Never reached.
     }
 
     // Check this isn't guest user.
     if (isguestuser($user)) {
+<<<<<<< HEAD
         throw new \moodle_exception('cannotresetguestpwd');
+=======
+        print_error('cannotresetguestpwd');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // Token is correct, and unexpired.
@@ -284,7 +304,11 @@ function core_login_process_password_set($token) {
         $DB->delete_records('user_password_resets', array('id' => $user->tokenid));
         $userauth = get_auth_plugin($user->auth);
         if (!$userauth->user_update_password($user, $data->password)) {
+<<<<<<< HEAD
             throw new \moodle_exception('errorpasswordupdate', 'auth');
+=======
+            print_error('errorpasswordupdate', 'auth');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         user_add_password_history($user->id, $data->password);
         if (!empty($CFG->passwordchangelogout)) {

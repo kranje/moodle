@@ -146,7 +146,10 @@ abstract class userlist_base implements
      *
      * @return  \user
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         $user = \core_user::get_user($this->userids[$this->iteratorposition]);
 
@@ -161,7 +164,11 @@ abstract class userlist_base implements
                 $user = $this->current();
             } else {
                 // There are no more context ids left.
+<<<<<<< HEAD
                 return null;
+=======
+                return;
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -173,7 +180,10 @@ abstract class userlist_base implements
      *
      * @return  mixed
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return $this->iteratorposition;
     }
@@ -181,7 +191,11 @@ abstract class userlist_base implements
     /**
      * Move to the next user in the list.
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         ++$this->iteratorposition;
     }
 
@@ -190,7 +204,11 @@ abstract class userlist_base implements
      *
      * @return  bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return isset($this->userids[$this->iteratorposition]) && $this->current();
     }
 
@@ -200,14 +218,22 @@ abstract class userlist_base implements
      * The list of users is uniqued during the rewind.
      * The rewind is called at the start of most iterations.
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->iteratorposition = 0;
     }
 
     /**
      * Return the number of users.
      */
+<<<<<<< HEAD
     public function count(): int {
+=======
+    public function count() {
+>>>>>>> forked/LAE_400_PACKAGE
         return count($this->userids);
     }
 

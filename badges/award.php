@@ -36,7 +36,11 @@ $revoke = optional_param('revoke', false, PARAM_BOOL);
 require_login();
 
 if (empty($CFG->enablebadges)) {
+<<<<<<< HEAD
     throw new \moodle_exception('badgesdisabled', 'badges');
+=======
+    print_error('badgesdisabled', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $badge = new badge($badgeid);
@@ -47,7 +51,11 @@ $navurl = new moodle_url('/badges/index.php', array('type' => $badge->type));
 
 if ($badge->type == BADGE_TYPE_COURSE) {
     if (empty($CFG->badges_allowcoursebadges)) {
+<<<<<<< HEAD
         throw new \moodle_exception('coursebadgesdisabled', 'badges');
+=======
+        print_error('coursebadgesdisabled', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     require_login($badge->courseid);
     $course = get_course($badge->courseid);

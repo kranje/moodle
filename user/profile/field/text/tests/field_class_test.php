@@ -70,4 +70,7 @@ class field_class_test extends \advanced_testcase {
         ];
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE

@@ -82,9 +82,15 @@ if (empty($found)) {
                 }
 
                 $line = str_replace($issueid, '<a href="' . $issueurl . '" title="' . s($issuesummary) .
+<<<<<<< HEAD
                         '">' . $issuename . '</a>', htmlspecialchars($line, ENT_COMPAT));
             } else {
                 $line = htmlspecialchars($line, ENT_COMPAT);
+=======
+                        '">' . $issuename . '</a>', htmlspecialchars($line));
+            } else {
+                $line = htmlspecialchars($line);
+>>>>>>> forked/LAE_400_PACKAGE
                 $error = 'No associated tracker issue.';
             }
 

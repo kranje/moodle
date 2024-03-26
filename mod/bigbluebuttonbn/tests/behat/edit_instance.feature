@@ -4,7 +4,11 @@ Feature: I can edit a bigbluebutton instance
 
   Background:  Make sure that a course is created
     Given a BigBlueButton mock server is configured
+<<<<<<< HEAD
     And I enable "bigbluebuttonbn" "mod" plugin
+=======
+    And I accept dpa and enable bigbluebuttonbn plugin
+>>>>>>> forked/LAE_400_PACKAGE
     And the following config values are set as admin:
       | bigbluebuttonbn_voicebridge_editable | 1 |
     And the following "courses" exist:

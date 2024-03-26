@@ -175,7 +175,10 @@ $questionbank->set_quiz_has_attempts($quizhasattempts);
 // End of process commands =====================================================.
 
 $PAGE->set_pagelayout('incourse');
+<<<<<<< HEAD
 $PAGE->add_body_class('limitedwidth');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $PAGE->set_pagetype('mod-quiz-edit');
 
 $output = $PAGE->get_renderer('mod_quiz', 'edit');

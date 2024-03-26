@@ -209,12 +209,15 @@ class cache_definition {
     protected $requirelockingwrite = false;
 
     /**
+<<<<<<< HEAD
      * Gets set to true if this definition requires a lock to be acquired before a write is attempted.
      * @var bool
      */
     protected $requirelockingbeforewrite = false;
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Gets set to true if this definition requires searchable stores.
      * @since Moodle 2.4.4
      * @var bool
@@ -363,7 +366,10 @@ class cache_definition {
         $requiremultipleidentifiers = false;
         $requirelockingread = false;
         $requirelockingwrite = false;
+<<<<<<< HEAD
         $requirelockingbeforewrite = false;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $requiresearchable = ($mode === cache_store::MODE_SESSION) ? true : false;
         $maxsize = null;
         $overrideclass = null;
@@ -402,6 +408,7 @@ class cache_definition {
         if (array_key_exists('requirelockingwrite', $definition)) {
             $requirelockingwrite = (bool)$definition['requirelockingwrite'];
         }
+<<<<<<< HEAD
         if (array_key_exists('requirelockingbeforewrite', $definition)) {
             $requirelockingbeforewrite = (bool)$definition['requirelockingbeforewrite'];
         }
@@ -410,6 +417,9 @@ class cache_definition {
                     in a cache definition, as this will result in conflicting locks.');
         }
         $requirelocking = $requirelockingwrite || $requirelockingbeforewrite || $requirelockingread;
+=======
+        $requirelocking = $requirelockingwrite || $requirelockingread;
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (array_key_exists('requiresearchable', $definition)) {
             $requiresearchable = (bool)$definition['requiresearchable'];
@@ -537,7 +547,10 @@ class cache_definition {
         $cachedefinition->requirelocking = $requirelocking;
         $cachedefinition->requirelockingread = $requirelockingread;
         $cachedefinition->requirelockingwrite = $requirelockingwrite;
+<<<<<<< HEAD
         $cachedefinition->requirelockingbeforewrite = $requirelockingbeforewrite;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $cachedefinition->requiresearchable = $requiresearchable;
         $cachedefinition->maxsize = $maxsize;
         $cachedefinition->overrideclass = $overrideclass;
@@ -757,6 +770,7 @@ class cache_definition {
     }
 
     /**
+<<<<<<< HEAD
      * Returns true if this definition requires a lock to be aquired before a write is attempted.
      * @return bool
      */
@@ -765,6 +779,8 @@ class cache_definition {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns true if this definition allows local storage to be used for caching.
      * @since Moodle 3.1.0
      * @return bool

@@ -13,9 +13,15 @@ Feature: Manage custom report conditions
       | My report | user:fullname    |
       | My report | user:email       |
     And the following "users" exist:
+<<<<<<< HEAD
       | username  | firstname | lastname | email              | interests       |
       | user01    | User      | One      | user01@example.com | lionel, dancing |
       | user02    | User      | Two      | user02@example.com |                 |
+=======
+      | username  | firstname | lastname | email              |
+      | user01    | User      | One      | user01@example.com |
+      | user02    | User      | Two      | user02@example.com |
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Add condition to report
     Given I am on the "My report" "reportbuilder > Editor" page logged in as "admin"
@@ -33,6 +39,7 @@ Feature: Manage custom report conditions
     And I should see "User One" in the "reportbuilder-table" "table"
     And I should not see "User Two" in the "reportbuilder-table" "table"
 
+<<<<<<< HEAD
   Scenario: Add tags condition to report
     Given the following "core_reportbuilder > Condition" exists:
       | report           | My report |
@@ -47,6 +54,8 @@ Feature: Manage custom report conditions
     And I should see "User One" in the "reportbuilder-table" "table"
     And I should not see "User Two" in the "reportbuilder-table" "table"
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Move condition in report
     Given the following "core_reportbuilder > Conditions" exist:
       | report    | uniqueidentifier |

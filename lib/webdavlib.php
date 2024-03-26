@@ -1709,7 +1709,11 @@ EOD;
      */
     private function translate_uri($uri) {
         // remove all html entities...
+<<<<<<< HEAD
         $native_path = html_entity_decode($uri, ENT_COMPAT);
+=======
+        $native_path = html_entity_decode($uri);
+>>>>>>> forked/LAE_400_PACKAGE
         $parts = explode('/', $native_path);
         for ($i = 0; $i < count($parts); $i++) {
             // check if part is allready utf8

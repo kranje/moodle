@@ -3,6 +3,7 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 
 abstract class LookupBase
@@ -30,11 +31,26 @@ abstract class LookupBase
         }
         if ($index_number < 1) {
             throw new Exception(ExcelError::VALUE());
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+abstract class LookupBase
+{
+    protected static function validateIndexLookup($lookup_array, $index_number)
+    {
+        // index_number must be a number greater than or equal to 1
+        if (!is_numeric($index_number) || $index_number < 1) {
+            throw new Exception(Functions::VALUE());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // index_number must be less than or equal to the number of columns in lookup_array
         if ((!is_array($lookup_array)) || (empty($lookup_array))) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::REF());
+=======
+            throw new Exception(Functions::REF());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return (int) $index_number;
@@ -43,7 +59,11 @@ abstract class LookupBase
     protected static function checkMatch(
         bool $bothNumeric,
         bool $bothNotNumeric,
+<<<<<<< HEAD
         bool $notExactMatch,
+=======
+        $notExactMatch,
+>>>>>>> forked/LAE_400_PACKAGE
         int $rowKey,
         string $cellDataLower,
         string $lookupLower,

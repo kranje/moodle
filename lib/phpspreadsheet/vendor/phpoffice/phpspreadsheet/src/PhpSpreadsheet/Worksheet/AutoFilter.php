@@ -7,7 +7,10 @@ use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Internal\WildcardMatch;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Cell\AddressRange;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
@@ -51,6 +54,7 @@ class AutoFilter
 
     /**
      * Create a new AutoFilter.
+<<<<<<< HEAD
      *
      * @param AddressRange|array<int>|string $range
      *            A simple string containing a Cell range like 'A1:E10' is permitted
@@ -63,6 +67,11 @@ class AutoFilter
             [, $range] = Worksheet::extractSheetTitle(Validations::validateCellRange($range), true);
         }
 
+=======
+     */
+    public function __construct(string $range = '', ?Worksheet $worksheet = null)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->range = $range;
         $this->workSheet = $worksheet;
     }
@@ -102,6 +111,7 @@ class AutoFilter
 
     /**
      * Set AutoFilter Cell Range.
+<<<<<<< HEAD
      *
      * @param AddressRange|array<int>|string $range
      *            A simple string containing a Cell range like 'A1:E10' is permitted
@@ -115,6 +125,14 @@ class AutoFilter
         if ($range !== '') {
             [, $range] = Worksheet::extractSheetTitle(Validations::validateCellRange($range), true);
         }
+=======
+     */
+    public function setRange(string $range): self
+    {
+        $this->evaluated = false;
+        // extract coordinate
+        [$worksheet, $range] = Worksheet::extractSheetTitle($range, true);
+>>>>>>> forked/LAE_400_PACKAGE
         if (empty($range)) {
             //    Discard all column rules
             $this->columns = [];
@@ -145,7 +163,11 @@ class AutoFilter
         $this->evaluated = false;
         if ($this->workSheet !== null) {
             $thisrange = $this->range;
+<<<<<<< HEAD
             $range = (string) preg_replace('/\\d+$/', (string) $this->workSheet->getHighestRow(), $thisrange);
+=======
+            $range = preg_replace('/\\d+$/', (string) $this->workSheet->getHighestRow(), $thisrange) ?? '';
+>>>>>>> forked/LAE_400_PACKAGE
             if ($range !== $thisrange) {
                 $this->setRange($range);
             }
@@ -403,7 +425,11 @@ class AutoFilter
             /** @var string */
             $ruleOperator = $rule['operator'];
             /** @var string */
+<<<<<<< HEAD
             $cellValueString = $cellValue ?? '';
+=======
+            $cellValueString = $cellValue;
+>>>>>>> forked/LAE_400_PACKAGE
             $retVal = false;
 
             if (is_numeric($ruleValue)) {
@@ -948,9 +974,12 @@ class AutoFilter
                             $averageFormula = '=AVERAGE(' . $columnID . ($rangeStart[1] + 1) . ':' . $columnID . $rangeEnd[1] . ')';
                             $spreadsheet = ($this->workSheet === null) ? null : $this->workSheet->getParent();
                             $average = Calculation::getInstance($spreadsheet)->calculateFormula($averageFormula, null, $this->workSheet->getCell('A1'));
+<<<<<<< HEAD
                             while (is_array($average)) {
                                 $average = array_pop($average);
                             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                             //    Set above/below rule based on greaterThan or LessTan
                             $operator = ($dynamicRuleType === Rule::AUTOFILTER_RULETYPE_DYNAMIC_ABOVEAVERAGE)
                                 ? Rule::AUTOFILTER_COLUMN_RULE_GREATERTHAN

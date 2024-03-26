@@ -26,7 +26,10 @@ class ADODB_postgres64 extends ADOConnection{
 	var $databaseType = 'postgres64';
 	var $dataProvider = 'postgres';
 	var $hasInsertID = true;
+<<<<<<< HEAD
 	/** @var PgSql\Connection|resource|false */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	var $_resultid = false;
 	var $concat_operator='||';
 	var $metaDatabasesSQL = "select datname from pg_database where datname not in ('template0','template1') order by 1";
@@ -155,7 +158,11 @@ class ADODB_postgres64 extends ADOConnection{
 	 */
 	protected function _insertID($table = '', $column = '')
 	{
+<<<<<<< HEAD
 		if ($this->_resultid === false) return false;
+=======
+		if (!is_resource($this->_resultid) || get_resource_type($this->_resultid) !== 'pgsql result') return false;
+>>>>>>> forked/LAE_400_PACKAGE
 		$oid = pg_last_oid($this->_resultid);
 		// to really return the id, we need the table and column-name, else we can only return the oid != id
 		return empty($table) || empty($column) ? $oid : $this->GetOne("SELECT $column FROM $table WHERE oid=".(int)$oid);
@@ -163,13 +170,21 @@ class ADODB_postgres64 extends ADOConnection{
 
 	function _affectedrows()
 	{
+<<<<<<< HEAD
 		if ($this->_resultid === false) return false;
+=======
+		if (!is_resource($this->_resultid) || get_resource_type($this->_resultid) !== 'pgsql result') return false;
+>>>>>>> forked/LAE_400_PACKAGE
 		return pg_affected_rows($this->_resultid);
 	}
 
 
 	/**
+<<<<<<< HEAD
 	 * @return bool
+=======
+	 * @return true/false
+>>>>>>> forked/LAE_400_PACKAGE
 	 */
 	function BeginTrans()
 	{
@@ -379,7 +394,11 @@ class ADODB_postgres64 extends ADOConnection{
 	function BlobDelete( $blob )
 	{
 		pg_query($this->_connectionID, 'begin');
+<<<<<<< HEAD
 		$result = @pg_lo_unlink($this->_connectionID, $blob);
+=======
+		$result = @pg_lo_unlink($blob);
+>>>>>>> forked/LAE_400_PACKAGE
 		pg_query($this->_connectionID, 'commit');
 		return( $result );
 	}
@@ -809,7 +828,12 @@ class ADODB_postgres64 extends ADOConnection{
 			if ($execp) $exsql = "EXECUTE $plan ($execp)";
 			else $exsql = "EXECUTE $plan";
 
+<<<<<<< HEAD
 			$rez = @pg_query($this->_connectionID, $exsql);
+=======
+
+			$rez = @pg_execute($this->_connectionID,$exsql);
+>>>>>>> forked/LAE_400_PACKAGE
 			if (!$rez) {
 			# Perhaps plan does not exist? Prepare/compile plan.
 				$params = '';
@@ -833,6 +857,7 @@ class ADODB_postgres64 extends ADOConnection{
 				}
 				$s = "PREPARE $plan ($params) AS ".substr($sql,0,strlen($sql)-2);
 				//adodb_pr($s);
+<<<<<<< HEAD
 				$rez = pg_query($this->_connectionID, $s);
 				//echo $this->ErrorMsg();
 			}
@@ -845,6 +870,20 @@ class ADODB_postgres64 extends ADOConnection{
 		// check if no data returned, then no need to create real recordset
 		if ($rez && pg_num_fields($rez) <= 0) {
 			if ($this->_resultid !== false) {
+=======
+				$rez = pg_execute($this->_connectionID,$s);
+				//echo $this->ErrorMsg();
+			}
+			if ($rez)
+				$rez = pg_execute($this->_connectionID,$exsql);
+		} else {
+			//adodb_backtrace();
+			$rez = pg_query($this->_connectionID,$sql);
+		}
+		// check if no data returned, then no need to create real recordset
+		if ($rez && pg_num_fields($rez) <= 0) {
+			if (is_resource($this->_resultid) && get_resource_type($this->_resultid) === 'pgsql result') {
+>>>>>>> forked/LAE_400_PACKAGE
 				pg_free_result($this->_resultid);
 			}
 			$this->_resultid = $rez;
@@ -1020,6 +1059,7 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 		return pg_unescape_bytea($blob);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Fetches and prepares the RecordSet's fields.
 	 *
@@ -1034,6 +1074,10 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 			return;
 		}
 
+=======
+	function _fixblobs()
+	{
+>>>>>>> forked/LAE_400_PACKAGE
 		if ($this->fetchMode == PGSQL_NUM || $this->fetchMode == PGSQL_BOTH) {
 			foreach($this->_blobArr as $k => $v) {
 				$this->fields[$k] = ADORecordSet_postgres64::_decode($this->fields[$k]);
@@ -1052,8 +1096,14 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 		if (!$this->EOF) {
 			$this->_currentRow++;
 			if ($this->_numOfRows < 0 || $this->_numOfRows > $this->_currentRow) {
+<<<<<<< HEAD
 				$this->_prepfields();
 				if ($this->fields !== false) {
+=======
+				$this->fields = @pg_fetch_array($this->_queryID,$this->_currentRow,$this->fetchMode);
+				if (is_array($this->fields) && $this->fields) {
+					if (isset($this->_blobArr)) $this->_fixblobs();
+>>>>>>> forked/LAE_400_PACKAGE
 					return true;
 				}
 			}
@@ -1065,17 +1115,35 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 
 	function _fetch()
 	{
+<<<<<<< HEAD
 		if ($this->_currentRow >= $this->_numOfRows && $this->_numOfRows >= 0) {
 			return false;
 		}
 
 		$this->_prepfields();
 		return $this->fields !== false;
+=======
+
+		if ($this->_currentRow >= $this->_numOfRows && $this->_numOfRows >= 0)
+			return false;
+
+		$this->fields = @pg_fetch_array($this->_queryID,$this->_currentRow,$this->fetchMode);
+
+		if ($this->fields && isset($this->_blobArr)) $this->_fixblobs();
+
+		return (is_array($this->fields));
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	function _close()
 	{
+<<<<<<< HEAD
 		if ($this->_queryID === false) {
+=======
+		if (!is_resource($this->_queryID)
+			|| get_resource_type($this->_queryID) != 'pgsql result'
+		) {
+>>>>>>> forked/LAE_400_PACKAGE
 			return true;
 		}
 		return pg_free_result($this->_queryID);
@@ -1088,6 +1156,7 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
+<<<<<<< HEAD
 
 		$t = strtoupper($t);
 
@@ -1095,6 +1164,9 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 			return  $this->connection->customActualTypes[$t];
 
 		switch ($t) {
+=======
+		switch (strtoupper($t)) {
+>>>>>>> forked/LAE_400_PACKAGE
 				case 'MONEY': // stupid, postgres expects money to be a string
 				case 'INTERVAL':
 				case 'CHAR':
@@ -1106,7 +1178,10 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 				case 'CIDR':
 				case 'INET':
 				case 'MACADDR':
+<<<<<<< HEAD
 				case 'UUID':
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 					if ($len <= $this->blobSize) return 'C';
 
 				case 'TEXT':
@@ -1147,12 +1222,15 @@ class ADORecordSet_postgres64 extends ADORecordSet{
 				case 'SERIAL':
 					return 'R';
 
+<<<<<<< HEAD
 				case 'NUMERIC':
 				case 'DECIMAL':
 				case 'FLOAT4':
 				case 'FLOAT8':
 					return 'N';
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 				default:
 					return ADODB_DEFAULT_METATYPE;
 			}

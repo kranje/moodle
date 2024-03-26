@@ -18,7 +18,10 @@ Feature: Edit activity name in-place
       | course      | C1                     |
       | activity    | forum                  |
       | name        | Test forum name        |
+<<<<<<< HEAD
       | description | Test forum description |
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       | idnumber    | forum1                 |
 
   @javascript

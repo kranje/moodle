@@ -1,13 +1,51 @@
 This files describes API changes in core libraries and APIs,
 information provided here is intended especially for developers.
 
+<<<<<<< HEAD
 === 4.1.2 ===
+=======
+=== 4.0.12 ===
+* In enrollib.php, the method enrol_get_course_users() got an optional 5th parameter $usergroups that
+  defaults to an empty array. Here, user group ids can be provided, to select enrolled users in a course
+  that are also members of these groups.
+
+=== 4.0.11 ===
+* New Behat step \behat_general::the_page_title_should_contain() has been added to allow checking of page titles. You can use this
+  when writing feature files to check that the page title contains the expected string.
+  e.g. `And the page title should contain "Some title"`
+
+=== 4.0.9 ===
+* Added a new parameter in address_in_subnet to give us the ability to check for 0.0.0.0 or not.
+
+=== 4.0.8 ===
+* Added 'extrainfo' in the DB options config. Its extra information for the DB driver, e.g. SQL Server,
+  has additional configuration according to its environment, which the administrator can specify to alter and
+  override any connection options.
+* New \core_component::has_monologo_icon() that determines whether a plugin has monologo icons. This can be used to
+  determine whether to apply CSS filtering to the plugin's icon when rendering it.
+* \cm_info::get_icon_url() resolves the icon's file type and adds a `filtericon` parameter in the URL when rendering the monologo
+  version of the course module icon or when the plugin declares, via its `filtericon` custom data, that the icon needs to be
+  filtered. This additional information can be used by plugins when rendering the module icon to determine whether to apply
+  CSS filtering to the icon.
+* Activity plugins displaying activity module icons using \cm_info::get_icon_url() can declare the `filtericon` custom data in their
+  `get_coursemodule_info()` callback. If set, this will be used by \cm_info::get_icon_url() to set the icon URL's `filtericon`
+  parameter. This information can be used by the plugins when enclosing the icons in `.activityiconcontainer .icon` or
+  `.activityiconcontainer .activityicon` containers to determine whether CSS filtering should be applied to the icon. If the icon
+  needs to be rendered as is and not whitened out, the `.nofilter` CSS class needs to be applied to the icon.
+* New moodle_url::export_params_for_template() returns the params as an array of key => value pairs. You should use this when
+  you want to pass URL params to a template. An example can be found in single button.
+* Course module indentation has been recovered for course format using components via Move right/left feature.
+  Course formats using components will be allowed to use one level indentation only.
+
+=== 4.0.7 ===
+>>>>>>> forked/LAE_400_PACKAGE
 
 * The method `flexible_table::set_columnsattributes` now can be used with 'class' key to add custom classes to the DOM.
 * A new constant COMPLETION_COMPLETE_FAIL_HIDDEN is introduced to mark that user has received a failing grade
   for a hidden grade item. This state returned by internal_get_grade_state() and is only used by get_core_completion_state()
   for processing the passgrade completion data.
 
+<<<<<<< HEAD
 === 4.1.1 ===
 
 * There is a new helper function mtrace_exception to help with reporting exceptions you have caught in scheduled tasks.
@@ -57,10 +95,28 @@ information provided here is intended especially for developers.
 * For plugins that override secondary navigation, the namespace for the custom secondary navigation class has
   changed. It was (for example) mod_mymodule\local\views\secondary but is now
   mod_mymodule\navigation\views\secondary. The old location will continue to work, but is deprecated.
+=======
+=== 4.0.6 ===
+
+* There is a new helper function mtrace_exception to help with reporting exceptions you have caught in scheduled tasks.
+
+=== 4.0.5 ===
+
+* For plugins that override secondary navigation, the namespace for the custom secondary navigation class has
+  changed. It was (for example) mod_mymodule\local\views\secondary but is now
+  mod_mymodule\navigation\views\secondary. The old location will continue to work, but will be deprecated in 4.1.
+* When exporting table content, HTML tags/entities will be removed when the selected dataformat does not support HTML
+* New DML driver methods `$DB->sql_regex_get_word_beginning_boundary_marker` and `$DB->sql_regex_get_word_end_boundary_marker`
+  for managing word boundary markers in a database driver supporting regex syntax when searching.
+
+=== 4.0.2 ===
+* The core renderer `edit_button` method now accepts an optional `$method` argument (get/post) for the button
+>>>>>>> forked/LAE_400_PACKAGE
 * The check for $plugin->incompatible was found to be incorrect. The $plugin->incompatible attribute is meant to define the minimum
   Moodle version the plugin is incompatible with but the implemented logic for the check was the opposite. Plugins declaring this
   attribute may encounter different behaviours between older Moodle versions (<v3.11.8, <v4.0.2) and the later ones. We recommend
   plugin developers to not use this attribute for Moodle versions 4.0 and below in order to avoid this problem.
+<<<<<<< HEAD
 * Added $CFG->proxylogunsafe and proxyfixunsafe to detect code which doesn't honor the proxy config
 * Function admin_externalpage_setup() now has additional option 'nosearch' allowing to remove Site administration search form.
 * The function print_error has been deprecated. Kindly use moodle_exception.
@@ -76,6 +132,8 @@ information provided here is intended especially for developers.
   setup: https://moodledev.io/general/app/development/testing/acceptance-testing#upgrading-tests-from-an-older-version
 * New DML driver methods `$DB->sql_regex_get_word_beginning_boundary_marker` and `$DB->sql_regex_get_word_end_boundary_marker`
   for managing word boundary markers in a database driver supporting regex syntax when searching.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 === 4.0 ===
 
@@ -303,11 +361,14 @@ defined or can't be applied.
 * A new method, force_lock_all_blocks(), has been added to the moodle_page class to allow pages to force the value of
   user_can_edit_blocks() to return false where necessary. This makes it possible to remove block editing on a page
   from ALL users, including admins, where required on pages with multi region layouts exist, such as "My courses".
+<<<<<<< HEAD
 * Add an early $CFG->session_redis_acquire_lock_warn option
 * Removed $CFG->conversionattemptlimit setting from config.php. assignfeedback_editpdf\task\convert_submissions task
   is now replaced with adhoc tasks with standard fail delay approach.
 * With strftime() being deprecated in PHP 8.1, a new function \core_date::strftime() that can be used as a PHP 8.1-compatible
   alternative has been introduced.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 === 3.11.4 ===
 * A new option dontforcesvgdownload has been added to the $options parameter of the send_file() function.
@@ -1277,7 +1338,11 @@ the groupid field.
     - test_get_user_timezone_offset()
 * The google api library has been updated to version 1.1.7. There was some important changes
   on the SSL handling. Now the SSL version will be determined by the underlying library.
+<<<<<<< HEAD
   For more information see https://github.com/googleapis/google-api-php-client/pull/644
+=======
+  For more information see https://github.com/google/google-api-php-client/pull/644
+>>>>>>> forked/LAE_400_PACKAGE
 * The get_role_users() function will now add the $sort fields that are not part
   of the requested fields to the query result and will throw a debugging message
   with the added fields when that happens.

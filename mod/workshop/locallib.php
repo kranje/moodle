@@ -190,11 +190,14 @@ class workshop {
     protected $evaluationinstance = null;
 
     /**
+<<<<<<< HEAD
      * @var array It gets initialised in init_initial_bar, and may have keys 'i_first' and 'i_last' depending on what is selected.
      */
     protected $initialbarprefs = [];
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Initializes the workshop API instance using the data from DB
      *
      * Makes deep copy of all passed records properties.
@@ -453,7 +456,11 @@ class workshop {
         }
 
         if (!is_array($extensions)) {
+<<<<<<< HEAD
             $extensions = preg_split('/[\s,;:"\']+/', $extensions, -1, PREG_SPLIT_NO_EMPTY);
+=======
+            $extensions = preg_split('/[\s,;:"\']+/', $extensions, null, PREG_SPLIT_NO_EMPTY);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         foreach ($extensions as $i => $extension) {
@@ -685,6 +692,7 @@ class workshop {
         global $DB;
 
         list($sql, $params) = $this->get_participants_sql($musthavesubmission, $groupid);
+<<<<<<< HEAD
         list($filteringsql, $filteringparams) = $this->get_users_with_initial_filtering_sql_where();
         $wheresql = "";
 
@@ -692,17 +700,26 @@ class workshop {
             $wheresql .= $filteringsql;
             $params = array_merge($params, $filteringparams);
         }
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
         if (empty($sql)) {
             return array();
         }
 
         list($sort, $sortparams) = users_order_by_sql('tmp');
+<<<<<<< HEAD
         $sql = "SELECT * FROM ($sql) tmp";
 
         if ($wheresql) {
             $sql .= " WHERE $wheresql";
         }
         $sql .= " ORDER BY $sort";
+=======
+        $sql = "SELECT *
+                  FROM ($sql) tmp
+              ORDER BY $sort";
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $DB->get_records_sql($sql, array_merge($params, $sortparams), $limitfrom, $limitnum);
     }
@@ -3053,13 +3070,21 @@ class workshop {
         $canviewallsubmissions = $canviewallsubmissions && $this->check_group_membership($submission->authorid);
 
         if (!$isreviewer and !$isauthor and !($canviewallassessments and $canviewallsubmissions)) {
+<<<<<<< HEAD
             throw new \moodle_exception('nopermissions', 'error', $this->view_url(), 'view this assessment');
+=======
+            print_error('nopermissions', 'error', $this->view_url(), 'view this assessment');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         if ($isauthor and !$isreviewer and !$canviewallassessments and $this->phase != self::PHASE_CLOSED) {
             // Authors can see assessments of their work at the end of workshop only.
+<<<<<<< HEAD
             throw new \moodle_exception('nopermissions', 'error', $this->view_url(),
                 'view assessment of own work before workshop is closed');
+=======
+            print_error('nopermissions', 'error', $this->view_url(), 'view assessment of own work before workshop is closed');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -3232,6 +3257,7 @@ class workshop {
         $DB->update_record('workshop_submissions', $record);
     }
 
+<<<<<<< HEAD
     /**
      * Get the initial first name.
      *
@@ -3292,6 +3318,8 @@ class workshop {
         }
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     ////////////////////////////////////////////////////////////////////////////////
     // Internal methods (implementation details)                                  //
     ////////////////////////////////////////////////////////////////////////////////
@@ -3505,6 +3533,7 @@ class workshop {
     }
 
     /**
+<<<<<<< HEAD
      * Returns SQL to fetch all enrolled users with the first name or last name.
      *
      * @return array
@@ -3527,6 +3556,8 @@ class workshop {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Returns SQL statement that can be used to fetch all actively enrolled participants in the workshop
      *
      * @param bool $musthavesubmission if true, return only users who have already submitted

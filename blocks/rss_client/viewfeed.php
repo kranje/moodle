@@ -27,7 +27,11 @@ require_once($CFG->libdir .'/simplepie/moodle_simplepie.php');
 
 require_login();
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('guestsarenotallowed');
+=======
+    print_error('guestsarenotallowed');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
@@ -62,7 +66,11 @@ $rss = new moodle_simplepie($rssrecord->url);
 
 if ($rss->error()) {
     debugging($rss->error());
+<<<<<<< HEAD
     throw new \moodle_exception('errorfetchingrssfeed');
+=======
+    print_error('errorfetchingrssfeed');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $strviewfeed = get_string('viewfeed', 'block_rss_client');

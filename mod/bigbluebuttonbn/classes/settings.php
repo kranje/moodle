@@ -30,7 +30,10 @@ use cache_helper;
 use lang_string;
 use mod_bigbluebuttonbn\local\config;
 use mod_bigbluebuttonbn\local\helpers\roles;
+<<<<<<< HEAD
 use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * The mod_bigbluebuttonbn settings helper
@@ -201,6 +204,7 @@ class settings {
                 $item,
                 $settingsgeneral
             );
+<<<<<<< HEAD
             $item = new admin_setting_configtext(
                 'bigbluebuttonbn_poll_interval',
                 get_string('config_poll_interval', 'bigbluebuttonbn'),
@@ -213,6 +217,8 @@ class settings {
                 $item,
                 $settingsgeneral
             );
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
         return $settingsgeneral;
     }
@@ -830,6 +836,10 @@ class settings {
             $this->add_lock_setting_from_name('disablepublicchat', $lockingsetting);
             $this->add_lock_setting_from_name('disablenote', $lockingsetting);
             $this->add_lock_setting_from_name('hideuserlist', $lockingsetting);
+<<<<<<< HEAD
+=======
+            $this->add_lock_setting_from_name('lockonjoin', $lockingsetting);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $this->admin->add($this->parent, $lockingsetting);
     }
@@ -936,6 +946,7 @@ class settings {
                 $item,
                 $experimentalfeaturessetting
             );
+<<<<<<< HEAD
             // UI for 'register meeting events' feature.
             $item = new admin_setting_configcheckbox(
                 'bigbluebuttonbn_guestaccess_enabled',
@@ -948,6 +959,8 @@ class settings {
                 $item,
                 $experimentalfeaturessetting
             );
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $this->admin->add($this->parent, $experimentalfeaturessetting);
     }

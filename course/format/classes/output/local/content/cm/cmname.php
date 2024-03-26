@@ -64,13 +64,18 @@ class cmname implements named_templatable, renderable {
      * @param course_format $format the course format
      * @param section_info $section the section info
      * @param cm_info $mod the course module ionfo
+<<<<<<< HEAD
      * @param null $unused This parameter has been deprecated since 4.1 and should not be used anymore.
+=======
+     * @param bool|null $editable if it is editable (not used)
+>>>>>>> forked/LAE_400_PACKAGE
      * @param array $displayoptions optional extra display options
      */
     public function __construct(
         course_format $format,
         section_info $section,
         cm_info $mod,
+<<<<<<< HEAD
         ?bool $unused = null,
         array $displayoptions = []
     ) {
@@ -78,6 +83,11 @@ class cmname implements named_templatable, renderable {
             debugging('Deprecated argument passed to ' . __FUNCTION__, DEBUG_DEVELOPER);
         }
 
+=======
+        ?bool $editable = null,
+        array $displayoptions = []
+    ) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->format = $format;
         $this->section = $section;
         $this->mod = $mod;
@@ -102,9 +112,18 @@ class cmname implements named_templatable, renderable {
             return [];
         }
 
+<<<<<<< HEAD
         $data = [
             'url' => $mod->url,
             'icon' => $mod->get_icon_url(),
+=======
+        $iconurl = $mod->get_icon_url();
+        $iconclass = $iconurl->get_param('filtericon') ? '' : 'nofilter';
+        $data = [
+            'url' => $mod->url,
+            'icon' => $iconurl,
+            'iconclass' => $iconclass,
+>>>>>>> forked/LAE_400_PACKAGE
             'modname' => $mod->modname,
             'textclasses' => $displayoptions['textclasses'] ?? '',
             'purpose' => plugin_supports('mod', $mod->modname, FEATURE_MOD_PURPOSE, MOD_PURPOSE_OTHER),

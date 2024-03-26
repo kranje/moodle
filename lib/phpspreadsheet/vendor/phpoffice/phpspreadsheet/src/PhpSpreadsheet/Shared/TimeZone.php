@@ -21,9 +21,15 @@ class TimeZone
      *
      * @return bool Success or failure
      */
+<<<<<<< HEAD
     private static function validateTimeZone(string $timezoneName): bool
     {
         return in_array($timezoneName, DateTimeZone::listIdentifiers(DateTimeZone::ALL_WITH_BC), true);
+=======
+    private static function validateTimeZone($timezoneName)
+    {
+        return in_array($timezoneName, DateTimeZone::listIdentifiers(DateTimeZone::ALL_WITH_BC));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -33,7 +39,11 @@ class TimeZone
      *
      * @return bool Success or failure
      */
+<<<<<<< HEAD
     public static function setTimeZone(string $timezoneName): bool
+=======
+    public static function setTimeZone($timezoneName)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (self::validateTimezone($timezoneName)) {
             self::$timezone = $timezoneName;
@@ -49,7 +59,11 @@ class TimeZone
      *
      * @return string Timezone (e.g. 'Europe/London')
      */
+<<<<<<< HEAD
     public static function getTimeZone(): string
+=======
+    public static function getTimeZone()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return self::$timezone;
     }
@@ -63,7 +77,11 @@ class TimeZone
      *
      * @return int Number of seconds for timezone adjustment
      */
+<<<<<<< HEAD
     public static function getTimeZoneAdjustment(?string $timezoneName, $timestamp): int
+=======
+    public static function getTimeZoneAdjustment($timezoneName, $timestamp)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $timezoneName = $timezoneName ?? self::$timezone;
         $dtobj = Date::dateTimeFromTimestamp("$timestamp");

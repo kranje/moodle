@@ -201,6 +201,7 @@ class response {
     }
 
     /**
+<<<<<<< HEAD
      * Get the response body.
      *
      * @return string
@@ -210,6 +211,8 @@ class response {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Set the response body.
      *
      * @param string $body Body data

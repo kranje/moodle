@@ -2,22 +2,30 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Financial;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\TextData\Format;
 
 class Dollar
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * DOLLAR.
      *
      * This function converts a number to text using currency format, with the decimals rounded to the specified place.
      * The format used is $#,##0.00_);($#,##0.00)..
      *
+<<<<<<< HEAD
      * @param mixed $number The value to format, or can be an array of numbers
      *                         Or can be an array of values
      * @param mixed $precision The number of digits to display to the right of the decimal point (as an integer).
@@ -30,6 +38,14 @@ class Dollar
      *            will also be an array with matching dimensions
      */
     public static function format($number, $precision = 2)
+=======
+     * @param mixed $number The value to format
+     * @param mixed $precision The number of digits to display to the right of the decimal point (as an integer).
+     *                            If precision is negative, number is rounded to the left of the decimal point.
+     *                            If you omit precision, it is assumed to be 2
+     */
+    public static function format($number, $precision = 2): string
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return Format::DOLLAR($number, $precision);
     }
@@ -45,6 +61,7 @@ class Dollar
      *        DOLLARDE(fractional_dollar,fraction)
      *
      * @param mixed $fractionalDollar Fractional Dollar
+<<<<<<< HEAD
      *              Or can be an array of values
      * @param mixed $fraction Fraction
      *              Or can be an array of values
@@ -76,6 +93,27 @@ class Dollar
 
         $dollars = ($fractionalDollar < 0) ? ceil($fractionalDollar) : floor($fractionalDollar);
         $cents = fmod($fractionalDollar, 1.0);
+=======
+     * @param mixed $fraction Fraction
+     *
+     * @return float|string
+     */
+    public static function decimal($fractionalDollar = null, $fraction = 0)
+    {
+        $fractionalDollar = Functions::flattenSingleValue($fractionalDollar);
+        $fraction = (int) Functions::flattenSingleValue($fraction);
+
+        // Validate parameters
+        if ($fractionalDollar === null || $fraction < 0) {
+            return Functions::NAN();
+        }
+        if ($fraction == 0) {
+            return Functions::DIV0();
+        }
+
+        $dollars = floor($fractionalDollar);
+        $cents = fmod($fractionalDollar, 1);
+>>>>>>> forked/LAE_400_PACKAGE
         $cents /= $fraction;
         $cents *= 10 ** ceil(log10($fraction));
 
@@ -93,6 +131,7 @@ class Dollar
      *        DOLLARFR(decimal_dollar,fraction)
      *
      * @param mixed $decimalDollar Decimal Dollar
+<<<<<<< HEAD
      *              Or can be an array of values
      * @param mixed $fraction Fraction
      *              Or can be an array of values
@@ -123,6 +162,26 @@ class Dollar
         }
 
         $dollars = ($decimalDollar < 0.0) ? ceil($decimalDollar) : floor($decimalDollar);
+=======
+     * @param mixed $fraction Fraction
+     *
+     * @return float|string
+     */
+    public static function fractional($decimalDollar = null, $fraction = 0)
+    {
+        $decimalDollar = Functions::flattenSingleValue($decimalDollar);
+        $fraction = (int) Functions::flattenSingleValue($fraction);
+
+        // Validate parameters
+        if ($decimalDollar === null || $fraction < 0) {
+            return Functions::NAN();
+        }
+        if ($fraction == 0) {
+            return Functions::DIV0();
+        }
+
+        $dollars = floor($decimalDollar);
+>>>>>>> forked/LAE_400_PACKAGE
         $cents = fmod($decimalDollar, 1);
         $cents *= $fraction;
         $cents *= 10 ** (-ceil(log10($fraction)));

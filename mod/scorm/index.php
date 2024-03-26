@@ -23,10 +23,17 @@ $PAGE->set_url('/mod/scorm/index.php', array('id' => $id));
 
 if (!empty($id)) {
     if (!$course = $DB->get_record('course', array('id' => $id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
     }
 } else {
     throw new \moodle_exception('missingparameter');
+=======
+        print_error('invalidcourseid');
+    }
+} else {
+    print_error('missingparameter');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_course_login($course);

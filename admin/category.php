@@ -41,11 +41,19 @@ $adminroot = admin_get_root(); // need all settings
 $settingspage = $adminroot->locate($category, true);
 
 if (empty($settingspage) or !($settingspage instanceof admin_category)) {
+<<<<<<< HEAD
     throw new \moodle_exception('categoryerror', 'error', "$CFG->wwwroot/$CFG->admin/");
 }
 
 if (!($settingspage->check_access())) {
     throw new \moodle_exception('accessdenied', 'admin');
+=======
+    print_error('categoryerror', 'admin', "$CFG->wwwroot/$CFG->admin/");
+}
+
+if (!($settingspage->check_access())) {
+    print_error('accessdenied', 'admin');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $hassiteconfig = has_capability('moodle/site:config', $PAGE->context);

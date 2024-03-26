@@ -35,6 +35,7 @@ defined('MOODLE_INTERNAL') || die;
  */
 abstract class element {
 
+<<<<<<< HEAD
     /**
      * The first bit of the name for this input.
      * @var string $name
@@ -51,6 +52,15 @@ abstract class element {
      * The form label for this input.
      * @var string $label
      */
+=======
+    /** @var string $name The first bit of the name for this input. */
+    public $name;
+
+    /** @var string $value The value for this input. */
+    public $value;
+
+    /** @var string $label The form label for this input. */
+>>>>>>> forked/LAE_400_PACKAGE
     public $label;
 
     /**
@@ -60,7 +70,11 @@ abstract class element {
      * @param string $value The value for this input
      * @param string $label The label for this form field
      */
+<<<<<<< HEAD
     public function __construct(string $name, string $value, string $label) {
+=======
+    public function __construct($name, $value, $label) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->name = $name;
         $this->value = $value;
         $this->label = $label;
@@ -70,7 +84,11 @@ abstract class element {
      * Nasty function used for spreading checkbox logic all around
      * @return bool
      */
+<<<<<<< HEAD
     public function is_checkbox(): bool {
+=======
+    public function is_checkbox() {
+>>>>>>> forked/LAE_400_PACKAGE
         return false;
     }
 
@@ -78,7 +96,11 @@ abstract class element {
      * Nasty function used for spreading textbox logic all around
      * @return bool
      */
+<<<<<<< HEAD
     public function is_textbox(): bool {
+=======
+    public function is_textbox() {
+>>>>>>> forked/LAE_400_PACKAGE
         return false;
     }
 
@@ -86,7 +108,11 @@ abstract class element {
      * Nasty function used for spreading dropdown logic all around
      * @return bool
      */
+<<<<<<< HEAD
     public function is_dropdown(): bool {
+=======
+    public function is_dropdown() {
+>>>>>>> forked/LAE_400_PACKAGE
         return false;
     }
 
@@ -94,5 +120,9 @@ abstract class element {
      * Return the HTML
      * @return string
      */
+<<<<<<< HEAD
     abstract public function html(): string;
+=======
+    abstract public function html();
+>>>>>>> forked/LAE_400_PACKAGE
 }

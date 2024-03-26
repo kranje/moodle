@@ -24,6 +24,7 @@ interface H5PFrameworkInterface {
   /**
    * Fetches a file from a remote server using HTTP GET
    *
+<<<<<<< HEAD
    * @param  string  $url  Where you want to get or send data.
    * @param  array  $data  Data to post to the URL.
    * @param  bool  $blocking  Set to 'FALSE' to instantly time out (fire and forget).
@@ -36,6 +37,15 @@ interface H5PFrameworkInterface {
    * @return string|array The content (response body), or an array with data. NULL if something went wrong
    */
   public function fetchExternalData($url, $data = NULL, $blocking = TRUE, $stream = NULL, $fullData = FALSE, $headers = array(), $files = array(), $method = 'POST');
+=======
+   * @param string $url Where you want to get or send data.
+   * @param array $data Data to post to the URL.
+   * @param bool $blocking Set to 'FALSE' to instantly time out (fire and forget).
+   * @param string $stream Path to where the file should be saved.
+   * @return string The content (response body). NULL if something went wrong
+   */
+  public function fetchExternalData($url, $data = NULL, $blocking = TRUE, $stream = NULL);
+>>>>>>> forked/LAE_400_PACKAGE
 
   /**
    * Set the tutorial URL for a library. All versions of the library is set
@@ -633,6 +643,7 @@ interface H5PFrameworkInterface {
    * @return boolean
    */
   public function libraryHasUpgrade($library);
+<<<<<<< HEAD
 
   /**
    * Replace content hub metadata cache
@@ -671,6 +682,8 @@ interface H5PFrameworkInterface {
    * @return bool True if successful
    */
   public function setContentHubMetadataChecked($time, $lang = 'en');
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -1671,7 +1684,11 @@ class H5PStorage {
     }
 
     // Go through the libraries again to save dependencies.
+<<<<<<< HEAD
     $library_ids = array();
+=======
+    $library_ids = [];
+>>>>>>> forked/LAE_400_PACKAGE
     foreach ($this->h5pC->librariesJsonData as &$library) {
       if (!$library['saveDependencies']) {
         continue;
@@ -2029,6 +2046,7 @@ abstract class H5PDisplayOptionBehaviour {
   const CONTROLLED_BY_PERMISSIONS = 4;
 }
 
+<<<<<<< HEAD
 abstract class H5PContentHubSyncStatus {
   const NOT_SYNCED = 0;
   const SYNCED = 1;
@@ -2051,6 +2069,11 @@ abstract class H5PHubEndpoints {
   const METADATA = 'hub-api.h5p.org/v1/metadata';
   const CONTENT = 'hub-api.h5p.org/v1/contents';
   const REGISTER = 'hub-api.h5p.org/v1/accounts';
+=======
+abstract class H5PHubEndpoints {
+  const CONTENT_TYPES = 'api.h5p.org/v1/content-types/';
+  const SITES = 'api.h5p.org/v1/sites';
+>>>>>>> forked/LAE_400_PACKAGE
 
   public static function createURL($endpoint) {
     $protocol = (extension_loaded('openssl') ? 'https' : 'http');
@@ -2522,11 +2545,19 @@ class H5PCore {
   /**
    * Get the path to the dependency.
    *
+<<<<<<< HEAD
    * @param array $dependency
    * @return string
    */
   protected function getDependencyPath(array $dependency) {
     return 'libraries/' . H5PCore::libraryToString($dependency, TRUE);
+=======
+   * @param stdClass $dependency
+   * @return string
+   */
+  protected function getDependencyPath(array $dependency): string {
+    return H5PCore::libraryToString($dependency, TRUE);
+>>>>>>> forked/LAE_400_PACKAGE
   }
 
   private static function getDependenciesHash(&$dependencies) {
@@ -2894,11 +2925,18 @@ class H5PCore {
    * implementation is responsible for invoking this, eg using cron
    *
    * @param bool $fetchingDisabled
+<<<<<<< HEAD
    * @param bool $onlyRegister Only register site with H5P.org
    *
    * @return bool|object Returns endpoint data if found, otherwise FALSE
    */
   public function fetchLibrariesMetadata($fetchingDisabled = FALSE, $onlyRegister = false) {
+=======
+   *
+   * @return bool|object Returns endpoint data if found, otherwise FALSE
+   */
+  public function fetchLibrariesMetadata($fetchingDisabled = FALSE) {
+>>>>>>> forked/LAE_400_PACKAGE
     // Gather data
     $uuid = $this->h5pF->getOption('site_uuid', '');
     $platform = $this->h5pF->getPlatformInfo();
@@ -2936,17 +2974,23 @@ class H5PCore {
       $this->h5pF->setInfoMessage(
         $this->h5pF->t('Your site was successfully registered with the H5P Hub.')
       );
+<<<<<<< HEAD
       $uuid = $json->uuid;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
       // TODO: Uncomment when key is once again available in H5P Settings
 //      $this->h5pF->setInfoMessage(
 //        $this->h5pF->t('You have been provided a unique key that identifies you with the Hub when receiving new updates. The key is available for viewing in the "H5P Settings" page.')
 //      );
     }
 
+<<<<<<< HEAD
     if ($onlyRegister) {
       return $uuid;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     if ($this->h5pF->getOption('send_usage_statistics', TRUE)) {
       $siteData = array_merge(
         $registrationData,
@@ -3373,6 +3417,7 @@ class H5PCore {
   }
 
   /**
+<<<<<<< HEAD
    * Update content hub metadata cache
    */
   public function updateContentHubMetadataCache($lang = 'en') {
@@ -3439,6 +3484,8 @@ class H5PCore {
   }
 
   /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
    * Check if the current server setup is valid and set error messages
    *
    * @return object Setup object with errors and disable hub properties
@@ -3646,6 +3693,7 @@ class H5PCore {
       'offlineDialogRetryMessage' => $this->h5pF->t('Retrying in :num....'),
       'offlineDialogRetryButtonLabel' => $this->h5pF->t('Retry now'),
       'offlineSuccessfulSubmit' => $this->h5pF->t('Successfully submitted results.'),
+<<<<<<< HEAD
       'mainTitle' => $this->h5pF->t('Sharing <strong>:title</strong>'),
       'editInfoTitle' => $this->h5pF->t('Edit info for <strong>:title</strong>'),
       'cancel' => $this->h5pF->t('Cancel'),
@@ -4113,6 +4161,10 @@ class H5PCore {
 
     return false;
   }
+=======
+    );
+  }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 /**
@@ -4642,6 +4694,23 @@ class H5PContentValidator {
         }
       }
     }
+<<<<<<< HEAD
+=======
+    if (!(isset($semantics->optional) && $semantics->optional)) {
+      if ($group === NULL) {
+        // Error no value. Errors aren't printed...
+        return;
+      }
+      foreach ($semantics->fields as $field) {
+        if (!(isset($field->optional) && $field->optional)) {
+          // Check if field is in group.
+          if (! property_exists($group, $field->name)) {
+            //$this->h5pF->setErrorMessage($this->h5pF->t('No value given for mandatory field ' . $field->name));
+          }
+        }
+      }
+    }
+>>>>>>> forked/LAE_400_PACKAGE
   }
 
   /**
@@ -5132,12 +5201,15 @@ class H5PContentValidator {
         'placeholder' => 'La Gioconda'
       ),
       (object) array(
+<<<<<<< HEAD
         'name' => 'a11yTitle',
         'type' => 'text',
         'label' => $this->h5pF->t('Assistive Technologies label'),
         'optional' => TRUE,
       ),
       (object) array(
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'name' => 'license',
         'type' => 'select',
         'label' => $this->h5pF->t('License'),

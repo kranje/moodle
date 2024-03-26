@@ -7,11 +7,16 @@ use DateTimeInterface;
 use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDate;
+=======
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class Date
@@ -161,6 +166,7 @@ class Date
     }
 
     /**
+<<<<<<< HEAD
      * @param mixed $value
      *
      * @return float|int
@@ -191,6 +197,8 @@ class Date
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Convert a MS serialized datetime value from Excel to a PHP Date/Time object.
      *
      * @param float|int $excelTimestamp MS Excel serialized date/time value
@@ -261,7 +269,11 @@ class Date
      * @param mixed $dateValue PHP DateTime object or a string - Unix timestamp is also permitted, but discouraged;
      *    not Y2038-safe on a 32-bit system, and no timezone info
      *
+<<<<<<< HEAD
      * @return false|float Excel date/time value
+=======
+     * @return bool|float Excel date/time value
+>>>>>>> forked/LAE_400_PACKAGE
      *                                  or boolean FALSE on failure
      */
     public static function PHPToExcel($dateValue)
@@ -487,13 +499,21 @@ class Date
 
         $dateValueNew = DateTimeExcel\DateValue::fromString($dateValue);
 
+<<<<<<< HEAD
         if ($dateValueNew === ExcelError::VALUE()) {
+=======
+        if ($dateValueNew === Functions::VALUE()) {
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 
         if (strpos($dateValue, ':') !== false) {
             $timeValue = DateTimeExcel\TimeValue::fromString($dateValue);
+<<<<<<< HEAD
             if ($timeValue === ExcelError::VALUE()) {
+=======
+            if ($timeValue === Functions::VALUE()) {
+>>>>>>> forked/LAE_400_PACKAGE
                 return false;
             }
             $dateValueNew += $timeValue;

@@ -179,6 +179,10 @@ class moodlelib_test extends \advanced_testcase {
 
         // Invalid utf8 string.
         $this->assertSame('aš', fix_utf8('a'.chr(130).'š'), 'This fails with buggy iconv() when mbstring extenstion is not available as fallback.');
+<<<<<<< HEAD
+=======
+        $this->assertSame('Hello ', fix_utf8('Hello ￿'));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_optional_param() {
@@ -474,40 +478,61 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame(
             '#()*#,9789\'".,<42897></?$(*DSFMO#$*)(SDJ)($*)',
             clean_param('#()*#,9789\'".,<42897></?$(*DSFMO#$*)(SDJ)($*)', PARAM_RAW));
+<<<<<<< HEAD
         $this->assertSame(null, clean_param(null, PARAM_RAW));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_trim() {
         $this->assertSame('Frog toad', clean_param("   Frog toad   \r\n  ", PARAM_RAW_TRIMMED));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_RAW_TRIMMED));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_clean() {
         // PARAM_CLEAN is an ugly hack, do not use in new code (skodak),
         // instead use more specific type, or submit sothing that can be verified properly.
         $this->assertSame('xx', clean_param('xx<script>', PARAM_CLEAN));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_CLEAN));
         $this->assertSame('', clean_param(null, PARAM_CLEANHTML));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_alpha() {
         $this->assertSame('DSFMOSDJ', clean_param('#()*#,9789\'".,<42897></?$(*DSFMO#$*)(SDJ)($*)', PARAM_ALPHA));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_ALPHA));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_alphanum() {
         $this->assertSame('978942897DSFMOSDJ', clean_param('#()*#,9789\'".,<42897></?$(*DSFMO#$*)(SDJ)($*)', PARAM_ALPHANUM));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_ALPHANUM));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_alphaext() {
         $this->assertSame('DSFMOSDJ', clean_param('#()*#,9789\'".,<42897></?$(*DSFMO#$*)(SDJ)($*)', PARAM_ALPHAEXT));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_ALPHAEXT));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_sequence() {
         $this->assertSame(',9789,42897', clean_param('#()*#,9789\'".,<42897></?$(*DSFMO#$*)(SDJ)($*)', PARAM_SEQUENCE));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_SEQUENCE));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_component() {
@@ -536,7 +561,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('', clean_param('_user', PARAM_COMPONENT));
         $this->assertSame('', clean_param('2rating', PARAM_COMPONENT));
         $this->assertSame('', clean_param('user_', PARAM_COMPONENT));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_COMPONENT));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_localisedfloat() {
@@ -553,7 +581,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame(false, clean_param('1X000X5', PARAM_LOCALISEDFLOAT));
         $this->assertSame(false, clean_param('nan', PARAM_LOCALISEDFLOAT));
         $this->assertSame(false, clean_param('10.6blah', PARAM_LOCALISEDFLOAT));
+<<<<<<< HEAD
         $this->assertSame(null, clean_param(null, PARAM_LOCALISEDFLOAT));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Tests with a localised decimal separator.
         $this->define_local_decimal_separator();
@@ -603,7 +634,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('', clean_param('Xx', PARAM_PLUGIN));
         $this->assertSame('', clean_param('_xx', PARAM_PLUGIN));
         $this->assertSame('', clean_param('xx_', PARAM_PLUGIN));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_PLUGIN));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_area() {
@@ -620,7 +654,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('', clean_param('some-thing', PARAM_AREA));
         $this->assertSame('', clean_param('somethííng', PARAM_AREA));
         $this->assertSame('', clean_param('something.x', PARAM_AREA));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_AREA));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_text() {
@@ -642,7 +679,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('<lang lang="en">a>a</lang>', clean_param('<lang lang="en">a>a</lang>', PARAM_TEXT)); // Standard strip_tags() behaviour.
         $this->assertSame('a', clean_param('<lang lang="en">a<a</lang>', PARAM_TEXT));
         $this->assertSame('<lang lang="en">aa</lang>', clean_param('<lang lang="en">a<br>a</lang>', PARAM_TEXT));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_TEXT));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_url() {
@@ -668,7 +708,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('', clean_param('mailto:support@moodle.org', PARAM_URL));
         $this->assertSame('', clean_param('mailto:support@moodle.org?subject=Hello%20Moodle', PARAM_URL));
         $this->assertSame('', clean_param('mailto:support@moodle.org?subject=Hello%20Moodle&cc=feedback@moodle.org', PARAM_URL));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_URL));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_localurl() {
@@ -709,9 +752,12 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('', clean_param('http://www.example.com.evil.net/hack.php', PARAM_LOCALURL));
         $CFG->wwwroot = 'https://www.example.com';
         $this->assertSame('', clean_param('https://www.example.com.evil.net/hack.php', PARAM_LOCALURL));
+<<<<<<< HEAD
 
         $this->assertSame('', clean_param('', PARAM_LOCALURL));
         $this->assertSame('', clean_param(null, PARAM_LOCALURL));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_file() {
@@ -736,7 +782,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame(' . .dontltrim.me', clean_param(' . .dontltrim.me', PARAM_FILE));
         $this->assertSame('here is a tab.txt', clean_param("here is a tab\t.txt", PARAM_FILE));
         $this->assertSame('here is a linebreak.txt', clean_param("here is a line\r\nbreak.txt", PARAM_FILE));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_FILE));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // The following behaviours have been maintained although they seem a little odd.
         $this->assertSame('funnything', clean_param('funny:thing', PARAM_FILE));
@@ -764,6 +813,7 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('/..b../.../myfile.txt', clean_param('/..b../.../myfile.txt', PARAM_PATH));
         $this->assertSame('..b../.../myfile.txt', clean_param('..b../.../myfile.txt', PARAM_PATH));
         $this->assertSame('/super/slashes/', clean_param('/super//slashes///', PARAM_PATH));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_PATH));
     }
 
@@ -771,6 +821,8 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('folder/file', clean_param('folder/file', PARAM_SAFEPATH));
         $this->assertSame('folder//file', clean_param('folder/../file', PARAM_SAFEPATH));
         $this->assertSame('', clean_param(null, PARAM_SAFEPATH));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_username() {
@@ -792,7 +844,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame(clean_param('john#$%&() ', PARAM_USERNAME), 'john');
         $this->assertSame('johnd', clean_param('JOHNdóé ', PARAM_USERNAME));
         $this->assertSame(clean_param('john.,:;-_/|\ñÑ[]A_X-,D {} ~!@#$%^&*()_+ ?><[] ščřžžý ?ýá?ý??doe ', PARAM_USERNAME), 'john.-_a_x-d@_doe');
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_USERNAME));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Test success condition, if extendedusernamechars == ENABLE;.
         $CFG->extendedusernamechars = true;
@@ -822,7 +877,10 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertSame('', clean_param('0numeric', PARAM_STRINGID));
         $this->assertSame('', clean_param('*', PARAM_STRINGID));
         $this->assertSame('', clean_param(' ', PARAM_STRINGID));
+<<<<<<< HEAD
         $this->assertSame('', clean_param(null, PARAM_STRINGID));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_clean_param_timezone() {
@@ -857,10 +915,14 @@ class moodlelib_test extends \advanced_testcase {
             '13.5'                           => '',
             '+13.5'                          => '',
             '-13.5'                          => '',
+<<<<<<< HEAD
             '0.2'                            => '',
             ''                               => '',
             null                             => '',
         );
+=======
+            '0.2'                            => '');
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($testvalues as $testvalue => $expectedvalue) {
             $actualvalue = clean_param($testvalue, PARAM_TIMEZONE);
@@ -868,6 +930,7 @@ class moodlelib_test extends \advanced_testcase {
         }
     }
 
+<<<<<<< HEAD
     public function test_clean_param_null_argument() {
         $this->assertEquals(0, clean_param(null, PARAM_INT));
         $this->assertEquals(0, clean_param(null, PARAM_FLOAT));
@@ -888,6 +951,8 @@ class moodlelib_test extends \advanced_testcase {
         $this->assertEquals('', clean_param(null, PARAM_EMAIL));
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function test_validate_param() {
         try {
             $param = validate_param('11a', PARAM_INT);
@@ -4593,14 +4658,20 @@ EOF;
     public function test_unserialize_array() {
         $a = [1, 2, 3];
         $this->assertEquals($a, unserialize_array(serialize($a)));
+<<<<<<< HEAD
         $this->assertEquals($a, unserialize_array(serialize($a)));
         $a = ['a' => 1, 2 => 2, 'b' => 'cde'];
         $this->assertEquals($a, unserialize_array(serialize($a)));
         $this->assertEquals($a, unserialize_array(serialize($a)));
+=======
+        $a = ['a' => 1, 2 => 2, 'b' => 'cde'];
+        $this->assertEquals($a, unserialize_array(serialize($a)));
+>>>>>>> forked/LAE_400_PACKAGE
         $a = ['a' => 1, 2 => 2, 'b' => 'c"d"e'];
         $this->assertEquals($a, unserialize_array(serialize($a)));
         $a = ['a' => 1, 2 => ['c' => 'd', 'e' => 'f'], 'b' => 'cde'];
         $this->assertEquals($a, unserialize_array(serialize($a)));
+<<<<<<< HEAD
 
         // Can not unserialize if any string contains semicolons.
         $a = ['a' => 1, 2 => 2, 'b' => 'c"d";e'];
@@ -4611,6 +4682,22 @@ EOF;
         $this->assertEquals(false, unserialize_array(serialize($a)));
         $a = ['a' => 1, 2 => 2, 'b' => (object)['a' => 'cde']];
         $this->assertEquals(false, unserialize_array(serialize($a)));
+=======
+        $a = ['a' => 1, 2 => ['c' => 'd', 'e' => ['f' => 'g']], 'b' => 'cde'];
+        $this->assertEquals($a, unserialize_array(serialize($a)));
+        $a = ['a' => 1, 2 => 2, 'b' => 'c"d";e'];
+        $this->assertEquals($a, unserialize_array(serialize($a)));
+
+        // Can not unserialize if there are any objects.
+        $a = (object)['a' => 1, 2 => 2, 'b' => 'cde'];
+        $this->assertFalse(unserialize_array(serialize($a)));
+        $a = ['a' => 1, 2 => 2, 'b' => (object)['a' => 'cde']];
+        $this->assertFalse(unserialize_array(serialize($a)));
+        $a = ['a' => 1, 2 => 2, 'b' => ['c' => (object)['a' => 'cde']]];
+        $this->assertFalse(unserialize_array(serialize($a)));
+        $a = ['a' => 1, 2 => 2, 'b' => ['c' => new lang_string('no')]];
+        $this->assertFalse(unserialize_array(serialize($a)));
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Array used in the grader report.
         $a = array('aggregatesonly' => [51, 34], 'gradesonly' => [21, 45, 78]);
@@ -5413,6 +5500,7 @@ EOF;
     }
 
     /**
+<<<<<<< HEAD
      * Tests the get_performance_info function with regard to locks.
      *
      * @covers ::get_performance_info
@@ -5493,5 +5581,69 @@ EOF;
         $this->assertEquals(true, html_is_blank('<p> </p>'));
         $this->assertEquals(false, html_is_blank('<p>.</p>'));
         $this->assertEquals(false, html_is_blank('<img src="#">'));
+=======
+     * Provider for is_proxybypass
+     *
+     * @return array of test cases.
+     */
+    public function is_proxybypass_provider(): array {
+
+        return [
+            'Proxybypass contains the same IP as the beginning of the URL' => [
+                'http://192.168.5.5-fake-app-7f000101.nip.io',
+                '192.168.5.5, 127.0.0.1',
+                false
+            ],
+            'Proxybypass contains the last part of the URL' => [
+                'http://192.168.5.5-fake-app-7f000101.nip.io',
+                'app-7f000101.nip.io',
+                false
+            ],
+            'Proxybypass contains the last part of the URL 2' => [
+                'http://store.mydomain.com',
+                'mydomain.com',
+                false
+            ],
+            'Proxybypass contains part of the url' => [
+                'http://myweb.com',
+                'store.myweb.com',
+                false
+            ],
+            'Different IPs used in proxybypass' => [
+                'http://192.168.5.5',
+                '192.168.5.3',
+                false
+            ],
+            'Proxybypass and URL matchs' => [
+                'http://store.mydomain.com',
+                'store.mydomain.com',
+                true
+            ],
+            'IP used in proxybypass' => [
+                'http://192.168.5.5',
+                '192.168.5.5',
+                true
+            ],
+        ];
+    }
+
+    /**
+     * Check if $url matches anything in proxybypass list
+     *
+     * Test function {@see is_proxybypass()}.
+     * @dataProvider is_proxybypass_provider
+     * @param string $url url to check
+     * @param string $proxybypass
+     * @param bool $expected Expected value.
+     */
+    public function test_is_proxybypass(string $url, string $proxybypass, bool $expected): void {
+        $this->resetAfterTest();
+
+        global $CFG;
+        $CFG->proxyhost = '192.168.5.5'; // Test with a fake proxy.
+        $CFG->proxybypass = $proxybypass;
+
+        $this->assertEquals($expected, is_proxybypass($url));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

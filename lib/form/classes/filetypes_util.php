@@ -62,13 +62,21 @@ class filetypes_util {
      */
     public function normalize_file_types($types) {
 
+<<<<<<< HEAD
         if ($types === '' || $types === null) {
+=======
+        if ($types === '') {
+>>>>>>> forked/LAE_400_PACKAGE
             return [];
         }
 
         // Turn string into a list.
         if (!is_array($types)) {
+<<<<<<< HEAD
             $types = preg_split('/[\s,;:"\']+/', $types, -1, PREG_SPLIT_NO_EMPTY);
+=======
+            $types = preg_split('/[\s,;:"\']+/', $types, null, PREG_SPLIT_NO_EMPTY);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Fix whitespace and normalize the syntax a bit.

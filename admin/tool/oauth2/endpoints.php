@@ -45,7 +45,11 @@ $mform = null;
 
 $issuer = \core\oauth2\api::get_issuer($issuerid);
 if (!$issuer) {
+<<<<<<< HEAD
     throw new \moodle_exception('invaliddata');
+=======
+    print_error('invaliddata');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $PAGE->navbar->override_active_url(new moodle_url('/admin/tool/oauth2/issuers.php'), true);
 

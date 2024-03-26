@@ -80,7 +80,11 @@ class model_config {
         $exporttmpdir = make_request_directory();
         $jsonfilepath = $exporttmpdir . DIRECTORY_SEPARATOR . 'model-config.json';
         if (!file_put_contents($jsonfilepath, json_encode($modeldata))) {
+<<<<<<< HEAD
             throw new \moodle_exception('errornoexportconfig', 'analytics');
+=======
+            print_error('errornoexportconfig', 'analytics');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $zipfiles[self::CONFIG_FILE_NAME] = $jsonfilepath;
 

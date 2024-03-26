@@ -64,7 +64,11 @@ final class FilesystemSkipPassedListLocator implements SpecificationLocator {
      * @return SpecificationIterator
      */
     public function locateSpecifications(Suite $suite, $locator) {
+<<<<<<< HEAD
         if (!$locator || !is_file($locator) || 'passed' !== pathinfo($locator, PATHINFO_EXTENSION)) {
+=======
+        if (!is_file($locator) || 'passed' !== pathinfo($locator, PATHINFO_EXTENSION)) {
+>>>>>>> forked/LAE_400_PACKAGE
             return new NoSpecificationsIterator($suite);
         }
 

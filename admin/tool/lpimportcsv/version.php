@@ -25,8 +25,15 @@
 defined('MOODLE_INTERNAL') || die();
 
 
+<<<<<<< HEAD
 $plugin->version   = 2022112800; // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2022111800; // Requires this Moodle version.
 $plugin->component = 'tool_lpimportcsv'; // Full name of the plugin (used for diagnostics).
 $plugin->dependencies = array('tool_lp' => 2022111800);
+=======
+$plugin->version   = 2022041900; // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2022041200; // Requires this Moodle version.
+$plugin->component = 'tool_lpimportcsv'; // Full name of the plugin (used for diagnostics).
+$plugin->dependencies = array('tool_lp' => 2022041200);
+>>>>>>> forked/LAE_400_PACKAGE
 

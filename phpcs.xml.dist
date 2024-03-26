@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="MoodleCore">
   <rule ref="moodle"/>
+<<<<<<< HEAD
   <config name="testVersion" value="7.4-8.1"/>
+=======
+  <config name="testVersion" value="7.3-8.0"/>
+>>>>>>> forked/LAE_400_PACKAGE
 </ruleset>

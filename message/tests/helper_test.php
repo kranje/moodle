@@ -29,7 +29,10 @@ require_once($CFG->dirroot . '/message/tests/messagelib_test.php');
  * @category test
  * @copyright 2018 Jake Dallimore <jrhdallimore@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
  * @covers \core_message\helper
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class helper_test extends \advanced_testcase {
 
@@ -118,6 +121,7 @@ class helper_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test search_get_user_details returns the correct profile data we limit the data we wish to be returned.
      */
     public function test_search_get_user_details_limited_data() {
@@ -154,6 +158,8 @@ class helper_test extends \advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test search_get_user_details returns the correct profile data when $CFG->messagingallusers is enabled.
      */
     public function test_search_get_user_details_sitewide_enabled() {

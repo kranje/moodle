@@ -37,13 +37,21 @@ $folder = $DB->get_record('folder', array('id' => $cm->instance), '*', MUST_EXIS
 
 $downloadable = folder_archive_available($folder, $cm);
 if (!$downloadable) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotdownloaddir', 'repository');
+=======
+    print_error('cannotdownloaddir', 'repository');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $fs = get_file_storage();
 $files = $fs->get_area_files($context->id, 'mod_folder', 'content');
 if (empty($files)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotdownloaddir', 'repository');
+=======
+    print_error('cannotdownloaddir', 'repository');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Log zip as downloaded.

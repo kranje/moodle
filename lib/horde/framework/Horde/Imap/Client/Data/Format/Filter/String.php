@@ -33,7 +33,10 @@ class Horde_Imap_Client_Data_Format_Filter_String extends php_user_filter
     /**
      * @see stream_filter_register()
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function onCreate()
     {
         $this->params->binary = false;
@@ -48,7 +51,10 @@ class Horde_Imap_Client_Data_Format_Filter_String extends php_user_filter
     /**
      * @see stream_filter_register()
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function filter($in, $out, &$consumed, $closing)
     {
         $p = $this->params;

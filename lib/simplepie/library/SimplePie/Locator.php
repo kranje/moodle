@@ -64,7 +64,10 @@ class SimplePie_Locator
 	var $max_checked_feeds = 10;
 	var $force_fsockopen = false;
 	var $curl_options = array();
+<<<<<<< HEAD
 	var $dom;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	protected $registry;
 
 	public function __construct(SimplePie_File $file, $timeout = 10, $useragent = null, $max_checked_feeds = 10, $force_fsockopen = false, $curl_options = array())
@@ -76,11 +79,16 @@ class SimplePie_Locator
 		$this->force_fsockopen = $force_fsockopen;
 		$this->curl_options = $curl_options;
 
+<<<<<<< HEAD
 		if (class_exists('DOMDocument') && $this->file->body != '')
+=======
+		if (class_exists('DOMDocument'))
+>>>>>>> forked/LAE_400_PACKAGE
 		{
 			$this->dom = new DOMDocument();
 
 			set_error_handler(array('SimplePie_Misc', 'silence_errors'));
+<<<<<<< HEAD
 			try
 			{
 				$this->dom->loadHTML($this->file->body);
@@ -89,6 +97,9 @@ class SimplePie_Locator
 			{
 				$this->dom = null;
 			}
+=======
+			$this->dom->loadHTML($this->file->body);
+>>>>>>> forked/LAE_400_PACKAGE
 			restore_error_handler();
 		}
 		else
@@ -430,5 +441,8 @@ class SimplePie_Locator
 		return null;
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Locator', 'SimplePie\Locator', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

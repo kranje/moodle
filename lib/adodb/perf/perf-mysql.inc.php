@@ -125,7 +125,11 @@ class perf_mysql extends adodb_perf{
 
 	/**
 	 * Returns a list of table statuses.
+<<<<<<< HEAD
 	 *
+=======
+	 * 
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @param  string  $orderby  Unused (compatibility with parent method)
 	 * @return string A formatted set of recordsets
 	 */
@@ -299,7 +303,11 @@ class perf_mysql extends adodb_perf{
     var $optimizeTableHigh = 'OPTIMIZE TABLE %s';
 
     /**
+<<<<<<< HEAD
      * @see adodb_perf::optimizeTable()
+=======
+     * @see adodb_perf#optimizeTable
+>>>>>>> forked/LAE_400_PACKAGE
      */
      function optimizeTable( $table, $mode = ADODB_OPT_LOW)
      {

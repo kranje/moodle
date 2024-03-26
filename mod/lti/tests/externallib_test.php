@@ -192,7 +192,11 @@ class externallib_test extends mod_lti_testcase {
 
         // Create what we expect to be returned when querying the two courses.
         // First for the student user.
+<<<<<<< HEAD
         $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles', 'lang',
+=======
+        $expectedfields = array('id', 'coursemodule', 'course', 'name', 'intro', 'introformat', 'introfiles',
+>>>>>>> forked/LAE_400_PACKAGE
             'launchcontainer', 'showtitlelaunch', 'showdescriptionlaunch', 'icon', 'secureicon');
 
         // Add expected coursemodule and data.
@@ -203,9 +207,13 @@ class externallib_test extends mod_lti_testcase {
         $lti1->visible = true;
         $lti1->groupmode = 0;
         $lti1->groupingid = 0;
+<<<<<<< HEAD
         $lti1->section = 0;
         $lti1->introfiles = [];
         $lti1->lang = '';
+=======
+        $lti1->introfiles = [];
+>>>>>>> forked/LAE_400_PACKAGE
 
         $lti2->coursemodule = $lti2->cmid;
         $lti2->introformat = 1;
@@ -213,9 +221,13 @@ class externallib_test extends mod_lti_testcase {
         $lti2->visible = true;
         $lti2->groupmode = 0;
         $lti2->groupingid = 0;
+<<<<<<< HEAD
         $lti2->section = 0;
         $lti2->introfiles = [];
         $lti2->lang = '';
+=======
+        $lti2->introfiles = [];
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($expectedfields as $field) {
             $expected1[$field] = $lti1->{$field};
@@ -259,7 +271,11 @@ class externallib_test extends mod_lti_testcase {
         $additionalfields = array('timecreated', 'timemodified', 'typeid', 'toolurl', 'securetoolurl',
             'instructorchoicesendname', 'instructorchoicesendemailaddr', 'instructorchoiceallowroster',
             'instructorchoiceallowsetting', 'instructorcustomparameters', 'instructorchoiceacceptgrades', 'grade',
+<<<<<<< HEAD
             'resourcekey', 'password', 'debuglaunch', 'servicesalt', 'visible', 'groupmode', 'groupingid', 'section', 'lang');
+=======
+            'resourcekey', 'password', 'debuglaunch', 'servicesalt', 'visible', 'groupmode', 'groupingid');
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($additionalfields as $field) {
             $expectedltis[0][$field] = $lti1->{$field};

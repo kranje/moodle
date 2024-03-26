@@ -4,7 +4,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Percentiles
 {
@@ -38,7 +41,11 @@ class Percentiles
         }
 
         if (($entry < 0) || ($entry > 1)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $mArgs = self::percentileFilterValues($aArgs);
@@ -57,7 +64,11 @@ class Percentiles
             return $mArgs[$iBase] + (($mArgs[$iNext] - $mArgs[$iBase]) * $iProportion);
         }
 
+<<<<<<< HEAD
         return ExcelError::NAN();
+=======
+        return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -90,13 +101,21 @@ class Percentiles
         $valueSet = self::rankFilterValues($valueSet);
         $valueCount = count($valueSet);
         if ($valueCount == 0) {
+<<<<<<< HEAD
             return ExcelError::NA();
+=======
+            return Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         sort($valueSet, SORT_NUMERIC);
 
         $valueAdjustor = $valueCount - 1;
         if (($value < $valueSet[0]) || ($value > $valueSet[$valueAdjustor])) {
+<<<<<<< HEAD
             return ExcelError::NA();
+=======
+            return Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $pos = array_search($value, $valueSet);
@@ -139,7 +158,11 @@ class Percentiles
         $entry = floor($entry);
         $entry /= 4;
         if (($entry < 0) || ($entry > 1)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return self::PERCENTILE($aArgs, $entry);
@@ -178,7 +201,11 @@ class Percentiles
 
         $pos = array_search($value, $valueSet);
         if ($pos === false) {
+<<<<<<< HEAD
             return ExcelError::NA();
+=======
+            return Functions::NA();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return ++$pos;

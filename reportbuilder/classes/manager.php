@@ -156,6 +156,7 @@ class manager {
 
         return $sources;
     }
+<<<<<<< HEAD
 
     /**
      * Configured site limit for number of custom reports threshold has been reached
@@ -168,4 +169,6 @@ class manager {
         return (!empty($CFG->customreportslimit) &&
             (int) $CFG->customreportslimit <= report::count_records(['type' => base::TYPE_CUSTOM_REPORT]));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

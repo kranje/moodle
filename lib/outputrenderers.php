@@ -2095,7 +2095,11 @@ class core_renderer extends renderer_base {
         $output .= html_writer::tag('p', $message);
         $output .= $this->box_end();
         $output .= $this->box_start('modal-footer', 'modal-footer');
+<<<<<<< HEAD
         $output .= html_writer::tag('div', $this->render($cancel) . $this->render($continue), ['class' => 'buttons']);
+=======
+        $output .= html_writer::tag('div', $this->render($continue) . $this->render($cancel), array('class' => 'buttons'));
+>>>>>>> forked/LAE_400_PACKAGE
         $output .= $this->box_end();
         $output .= $this->box_end();
         $output .= $this->box_end();
@@ -2909,8 +2913,14 @@ EOD;
     /**
      * Do not call this function directly.
      *
+<<<<<<< HEAD
      * To terminate the current script with a fatal error, throw an exception.
      * Doing this will then call this function to display the error, before terminating the execution.
+=======
+     * To terminate the current script with a fatal error, call the {@link print_error}
+     * function, or throw an exception. Doing either of those things will then call this
+     * function to display the error, before terminating the execution.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param string $message The message to output
      * @param string $moreinfourl URL where more info can be found about the error
@@ -3848,7 +3858,11 @@ EOD;
                 if ($langtype !== $currentlang) {
                     $attributes[] = [
                         'key' => 'lang',
+<<<<<<< HEAD
                         'value' => get_html_lang_attribute_value($langtype),
+=======
+                        'value' => str_replace('_', '-', $langtype),
+>>>>>>> forked/LAE_400_PACKAGE
                     ];
                 }
                 $this->language->add($langname, new moodle_url($this->page->url, ['lang' => $langtype]), null, null, $attributes);
@@ -4199,6 +4213,7 @@ EOD;
     public function supportemail(array $customattribs = []): string {
         global $CFG;
 
+<<<<<<< HEAD
         // Do not provide a link to contact site support if it is unavailable to this user. This would be where the site has
         // disabled support, or limited it to authenticated users and the current user is a guest or not logged in.
         if (!isset($CFG->supportavailability) ||
@@ -4207,6 +4222,8 @@ EOD;
             return '';
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $label = get_string('contactsitesupport', 'admin');
         $icon = $this->pix_icon('t/email', '');
         $content = $icon . $label;
@@ -4281,6 +4298,7 @@ EOD;
      * @return moodle_url The moodle_url for the favicon
      */
     public function favicon() {
+<<<<<<< HEAD
         $logo = null;
         if (!during_initial_install()) {
             $logo = get_config('core_admin', 'favicon');
@@ -4292,6 +4310,9 @@ EOD;
         // Use $CFG->themerev to prevent browser caching when the file changes.
         return moodle_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'favicon', '64x64/',
             theme_get_revision(), $logo);
+=======
+        return $this->image_url('favicon', 'theme');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -5594,7 +5615,11 @@ class core_renderer_maintenance extends core_renderer {
         $output = $this->box_start('generalbox', 'notice');
         $output .= html_writer::tag('h4', get_string('confirm'));
         $output .= html_writer::tag('p', $message);
+<<<<<<< HEAD
         $output .= html_writer::tag('div', $this->render($cancel) . $this->render($continue), ['class' => 'buttons']);
+=======
+        $output .= html_writer::tag('div', $this->render($continue) . $this->render($cancel), array('class' => 'buttons'));
+>>>>>>> forked/LAE_400_PACKAGE
         $output .= $this->box_end();
         return $output;
     }

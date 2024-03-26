@@ -164,6 +164,7 @@ class Drawing
     {
         //    Load the image into a string
         $file = fopen($bmpFilename, 'rb');
+<<<<<<< HEAD
         /** @phpstan-ignore-next-line */
         $read = fread($file, 10);
         // @phpstan-ignore-next-line
@@ -173,6 +174,13 @@ class Drawing
         }
 
         /** @phpstan-ignore-next-line */
+=======
+        $read = fread($file, 10);
+        while (!feof($file) && ($read != '')) {
+            $read .= fread($file, 1024);
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $temp = unpack('H*', $read);
         $hex = $temp[1];
         $header = substr($hex, 0, 108);
@@ -200,8 +208,11 @@ class Drawing
         $y = 1;
 
         //    Create newimage
+<<<<<<< HEAD
 
         /** @phpstan-ignore-next-line */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $image = imagecreatetruecolor($width, $height);
 
         //    Grab the body from the image
@@ -247,10 +258,14 @@ class Drawing
             $b = hexdec($body[$i_pos] . $body[$i_pos + 1]);
 
             // Calculate and draw the pixel
+<<<<<<< HEAD
 
             /** @phpstan-ignore-next-line */
             $color = imagecolorallocate($image, $r, $g, $b);
             // @phpstan-ignore-next-line
+=======
+            $color = imagecolorallocate($image, $r, $g, $b);
+>>>>>>> forked/LAE_400_PACKAGE
             imagesetpixel($image, $x, $height - $y, $color);
 
             // Raise the horizontal position
@@ -261,7 +276,10 @@ class Drawing
         unset($body);
 
         //    Return image-object
+<<<<<<< HEAD
         // @phpstan-ignore-next-line
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $image;
     }
 }

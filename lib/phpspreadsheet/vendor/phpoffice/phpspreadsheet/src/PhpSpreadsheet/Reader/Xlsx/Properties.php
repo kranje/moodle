@@ -99,7 +99,11 @@ class Properties
     }
 
     /**
+<<<<<<< HEAD
      * @param null|array|false $array
+=======
+     * @param array|false $array
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $key
      */
     private static function getArrayItem($array, $key = 0): ?SimpleXMLElement

@@ -36,25 +36,41 @@ $url = new moodle_url('/group/grouping.php');
 if ($id) {
     $url->param('id', $id);
     if (!$grouping = $DB->get_record('groupings', array('id'=>$id))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidgroupid');
+=======
+        print_error('invalidgroupid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $grouping->description = clean_text($grouping->description);
     if (empty($courseid)) {
         $courseid = $grouping->courseid;
     } else if ($courseid != $grouping->courseid) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     } else {
         $url->param('courseid', $courseid);
     }
 
     if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else {
     $url->param('courseid', $courseid);
     if (!$course = $DB->get_record('course', array('id'=>$courseid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcourseid');
+=======
+        print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
     }
     $grouping = new stdClass();
     $grouping->courseid = $course->id;
@@ -76,7 +92,11 @@ $returnurl = $CFG->wwwroot.'/group/groupings.php?id='.$course->id;
 
 if ($id and $delete) {
     if (!empty($grouping->idnumber) && !has_capability('moodle/course:changeidnumber', $context)) {
+<<<<<<< HEAD
         throw new \moodle_exception('groupinghasidnumber', '', '', $grouping->name);
+=======
+        print_error('groupinghasidnumber', '', '', $grouping->name);
+>>>>>>> forked/LAE_400_PACKAGE
     }
     if (!$confirm) {
         $PAGE->set_title(get_string('deletegrouping', 'group'));
@@ -94,7 +114,11 @@ if ($id and $delete) {
         if (groups_delete_grouping($id)) {
             redirect($returnurl);
         } else {
+<<<<<<< HEAD
             throw new \moodle_exception('erroreditgrouping', 'group', $returnurl);
+=======
+            print_error('erroreditgrouping', 'group', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 }

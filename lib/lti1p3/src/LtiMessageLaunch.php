@@ -22,11 +22,16 @@ class LtiMessageLaunch
 
     public const ERR_FETCH_PUBLIC_KEY = 'Failed to fetch public key.';
     public const ERR_NO_PUBLIC_KEY = 'Unable to find public key.';
+<<<<<<< HEAD
     public const ERR_STATE_NOT_FOUND = 'Please make sure you have cookies enabled in this browser and that you are not in private or incognito mode';
+=======
+    public const ERR_STATE_NOT_FOUND = 'State not found. Please make sure you have cookies enabled in this browser.';
+>>>>>>> forked/LAE_400_PACKAGE
     public const ERR_MISSING_ID_TOKEN = 'Missing id_token.';
     public const ERR_INVALID_ID_TOKEN = 'Invalid id_token, JWT must contain 3 parts';
     public const ERR_MISSING_NONCE = 'Missing Nonce.';
     public const ERR_INVALID_NONCE = 'Invalid Nonce.';
+<<<<<<< HEAD
 
     /**
      * :issuerUrl and :clientId are used to substitute the queried issuerUrl
@@ -35,6 +40,9 @@ class LtiMessageLaunch
      */
     public const ERR_MISSING_REGISTRATION = 'LTI 1.3 Registration not found for Issuer :issuerUrl and Client ID :clientId. Please make sure the LMS has provided the right information, and that the LMS has been registered correctly in the tool.';
 
+=======
+    public const ERR_MISSING_REGISTRATION = 'Registration not found. Please have your admin confirm your Issuer URL, client ID, and deployment ID.';
+>>>>>>> forked/LAE_400_PACKAGE
     public const ERR_CLIENT_NOT_REGISTERED = 'Client id not registered for this issuer.';
     public const ERR_NO_KID = 'No KID specified in the JWT Header.';
     public const ERR_INVALID_SIGNATURE = 'Invalid signature on id_token';
@@ -44,8 +52,13 @@ class LtiMessageLaunch
     public const ERR_VALIDATOR_CONFLICT = 'Validator conflict.';
     public const ERR_UNRECOGNIZED_MESSAGE_TYPE = 'Unrecognized message type.';
     public const ERR_INVALID_MESSAGE = 'Message validation failed.';
+<<<<<<< HEAD
     public const ERR_INVALID_ALG = 'Invalid alg was specified in the JWT header.';
     public const ERR_MISMATCHED_ALG_KEY = 'The alg specified in the JWT header is incompatible with the JWK key type.';
+=======
+    public const ERR_INVALID_ALG = 'Invalid alg specified in the JWT header';
+    public const ERR_MISMATCHED_ALG_KEY = 'Alg specified in the JWT header is incompatible with the JWK key type';
+>>>>>>> forked/LAE_400_PACKAGE
 
     private $db;
     private $cache;
@@ -63,7 +76,11 @@ class LtiMessageLaunch
         'RS512' => 'RSA',
         'ES256' => 'EC',
         'ES384' => 'EC',
+<<<<<<< HEAD
         'ES512' => 'EC',
+=======
+        'ES512' => 'EC'
+>>>>>>> forked/LAE_400_PACKAGE
     ];
 
     /**
@@ -97,7 +114,11 @@ class LtiMessageLaunch
         ICache $cache = null,
         ICookie $cookie = null,
         ILtiServiceConnector $serviceConnector = null
+<<<<<<< HEAD
     ) {
+=======
+        ) {
+>>>>>>> forked/LAE_400_PACKAGE
         return new LtiMessageLaunch($database, $cache, $cookie, $serviceConnector);
     }
 
@@ -282,6 +303,7 @@ class LtiMessageLaunch
         return $this->launch_id;
     }
 
+<<<<<<< HEAD
     public static function getMissingRegistrationErrorMsg(string $issuerUrl, ?string $clientId = null): string
     {
         // Guard against client ID being null
@@ -302,6 +324,12 @@ class LtiMessageLaunch
             $this->registration->getKeySetUrl(),
             ServiceRequest::TYPE_GET_KEYSET
         );
+=======
+    private function getPublicKey()
+    {
+        $keySetUrl = $this->registration->getKeySetUrl();
+        $request = new ServiceRequest(LtiServiceConnector::METHOD_GET, $keySetUrl);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Download key set
         try {
@@ -319,7 +347,13 @@ class LtiMessageLaunch
         // Find key used to sign the JWT (matches the KID in the header)
         foreach ($publicKeySet['keys'] as $key) {
             if ($key['kid'] == $this->jwt['header']['kid']) {
+<<<<<<< HEAD
                 $key['alg'] = $this->getKeyAlgorithm($key);
+=======
+                // If alg is omitted from the JWK (valid, see https://datatracker.ietf.org/doc/html/rfc7517#section-4.4),
+                // infer it from the JWT header alg.
+                $key['alg'] = empty($key['alg']) ? $this->inferKeyAlgorithm($key) : $key['alg'];
+>>>>>>> forked/LAE_400_PACKAGE
 
                 try {
                     $keySet = JWK::parseKeySet([
@@ -339,6 +373,7 @@ class LtiMessageLaunch
         throw new LtiException(static::ERR_NO_PUBLIC_KEY);
     }
 
+<<<<<<< HEAD
     /**
      * If alg is omitted from the JWK, infer it from the JWT header alg.
      * See https://datatracker.ietf.org/doc/html/rfc7517#section-4.4.
@@ -363,6 +398,17 @@ class LtiMessageLaunch
 
         return isset(static::$ltiSupportedAlgs[$jwtAlg]) &&
             static::$ltiSupportedAlgs[$jwtAlg] === $key['kty'];
+=======
+    private function inferKeyAlgorithm(array $key): string
+    {
+        // The header alg must match the key type (family) specified in the JWK's kty.
+        if (!isset(static::$ltiSupportedAlgs[$this->jwt['header']['alg']]) ||
+                static::$ltiSupportedAlgs[$this->jwt['header']['alg']] != $key['kty']) {
+            throw new LtiException(static::ERR_MISMATCHED_ALG_KEY);
+        }
+
+        return $this->jwt['header']['alg'];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private function cacheLaunchData()
@@ -422,6 +468,7 @@ class LtiMessageLaunch
     private function validateRegistration()
     {
         // Find registration.
+<<<<<<< HEAD
         $clientId = is_array($this->jwt['body']['aud']) ? $this->jwt['body']['aud'][0] : $this->jwt['body']['aud'];
         $issuerUrl = $this->jwt['body']['iss'];
         $this->registration = $this->db->findRegistrationByIssuer($issuerUrl, $clientId);
@@ -432,6 +479,17 @@ class LtiMessageLaunch
 
         // Check client id.
         if ($clientId !== $this->registration->getClientId()) {
+=======
+        $client_id = is_array($this->jwt['body']['aud']) ? $this->jwt['body']['aud'][0] : $this->jwt['body']['aud'];
+        $this->registration = $this->db->findRegistrationByIssuer($this->jwt['body']['iss'], $client_id);
+
+        if (empty($this->registration)) {
+            throw new LtiException(static::ERR_MISSING_REGISTRATION);
+        }
+
+        // Check client id.
+        if ($client_id !== $this->registration->getClientId()) {
+>>>>>>> forked/LAE_400_PACKAGE
             // Client not registered.
             throw new LtiException(static::ERR_CLIENT_NOT_REGISTERED);
         }
@@ -445,12 +503,23 @@ class LtiMessageLaunch
             throw new LtiException(static::ERR_NO_KID);
         }
 
+<<<<<<< HEAD
+=======
+        if (!in_array($this->jwt['header']['alg'], array_keys(static::$ltiSupportedAlgs))) {
+            throw new LtiException(static::ERR_INVALID_ALG);
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         // Fetch public key.
         $public_key = $this->getPublicKey();
 
         // Validate JWT signature
         try {
+<<<<<<< HEAD
             JWT::decode($this->request['id_token'], $public_key, ['RS256']);
+=======
+            JWT::decode($this->request['id_token'], $public_key);
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (ExpiredException $e) {
             // Error validating signature.
             throw new LtiException(static::ERR_INVALID_SIGNATURE);

@@ -30,13 +30,21 @@ require_once(__DIR__ . '/../../config.php');
 
 // Check access.
 if (!confirm_sesskey()) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidsesskey');
+=======
+    print_error('invalidsesskey');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Get the name of the preference to update, and check it is allowed.
 $name = required_param('pref', PARAM_RAW);
 if (!isset($USER->ajax_updatable_user_prefs[$name])) {
+<<<<<<< HEAD
     throw new \moodle_exception('notallowedtoupdateprefremotely');
+=======
+    print_error('notallowedtoupdateprefremotely');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Get and the value.
@@ -44,7 +52,11 @@ $value = required_param('value', $USER->ajax_updatable_user_prefs[$name]);
 
 // Update
 if (!set_user_preference($name, $value)) {
+<<<<<<< HEAD
     throw new \moodle_exception('errorsettinguserpref');
+=======
+    print_error('errorsettinguserpref');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 echo 'OK';

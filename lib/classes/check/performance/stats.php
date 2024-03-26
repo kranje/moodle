@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * Stats check
  *
@@ -28,13 +29,24 @@ namespace core\check\performance;
 
 defined('MOODLE_INTERNAL') || die();
 
+=======
+namespace core\check\performance;
+
+>>>>>>> forked/LAE_400_PACKAGE
 use core\check\check;
 use core\check\result;
 
 /**
  * Stats check
  *
+<<<<<<< HEAD
  * @copyright  2020 Brendan Heywood <brendan@catalyst-au.net>
+=======
+ * @package    core
+ * @category   check
+ * @copyright  2020 Brendan Heywood <brendan@catalyst-au.net>
+ * @copyright  2008 petr Skoda
+>>>>>>> forked/LAE_400_PACKAGE
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class stats extends check {
@@ -45,13 +57,21 @@ class stats extends check {
      * @return string
      */
     public function get_name(): string {
+<<<<<<< HEAD
         return get_string('check_riskadmin_name', 'report_security');
+=======
+        return get_string('stats');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * A link to a place to action this
      *
+<<<<<<< HEAD
      * @return action_link|null
+=======
+     * @return \action_link|null
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function get_action_link(): ?\action_link {
         return new \action_link(

@@ -99,7 +99,11 @@ class repeat_event_collection implements event_collection_interface {
         );
     }
 
+<<<<<<< HEAD
     public function getIterator(): \Traversable {
+=======
+    public function getIterator() {
+>>>>>>> forked/LAE_400_PACKAGE
         $parentrecord = $this->get_parent_record();
         foreach ($this->load_event_records() as $eventrecords) {
             foreach ($eventrecords as $eventrecord) {

@@ -24,9 +24,12 @@
 // security - hide paths
 if (!defined('ADODB_DIR')) die();
 
+<<<<<<< HEAD
 /**
  * Class ADODB_sqlite3
  */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 class ADODB_sqlite3 extends ADOConnection {
 	var $databaseType = "sqlite3";
 	var $dataProvider = "sqlite";
@@ -37,6 +40,7 @@ class ADODB_sqlite3 extends ADOConnection {
 	var $hasInsertID = true; 		/// supports autoincrement ID?
 	var $hasAffectedRows = true; 	/// supports affected rows for update/delete?
 	var $metaTablesSQL = "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name";
+<<<<<<< HEAD
 	var $sysDate = "DATE('now','localtime')";
 	var $sysTimeStamp = "DATETIME('now','localtime')";
 	var $fmtTimeStamp = "'Y-m-d H:i:s'";
@@ -44,6 +48,12 @@ class ADODB_sqlite3 extends ADOConnection {
 	/** @var SQLite3 */
 	var $_connectionID;
 
+=======
+	var $sysDate = "adodb_date('Y-m-d')";
+	var $sysTimeStamp = "adodb_date('Y-m-d H:i:s')";
+	var $fmtTimeStamp = "'Y-m-d H:i:s'";
+
+>>>>>>> forked/LAE_400_PACKAGE
 	function ServerInfo()
 	{
 		$version = SQLite3::version();
@@ -57,7 +67,11 @@ class ADODB_sqlite3 extends ADOConnection {
 		if ($this->transOff) {
 			return true;
 		}
+<<<<<<< HEAD
 		$this->Execute("BEGIN TRANSACTION");
+=======
+		$ret = $this->Execute("BEGIN TRANSACTION");
+>>>>>>> forked/LAE_400_PACKAGE
 		$this->transCnt += 1;
 		return true;
 	}
@@ -101,9 +115,12 @@ class ADODB_sqlite3 extends ADOConnection {
 
 		$t = strtoupper($t);
 
+<<<<<<< HEAD
 		if (array_key_exists($t,$this->customActualTypes))
 			return  $this->customActualTypes[$t];
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		/*
 		* We are using the Sqlite affinity method here
 		* @link https://www.sqlite.org/datatype3.html
@@ -206,7 +223,11 @@ class ADODB_sqlite3 extends ADOConnection {
 		return $arr;
 	}
 
+<<<<<<< HEAD
 	public function metaForeignKeys($table, $owner = '', $upper =  false, $associative =  false)
+=======
+	function metaForeignKeys( $table, $owner = FALSE, $upper = FALSE, $associative = FALSE )
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 	    global $ADODB_FETCH_MODE;
 		if ($ADODB_FETCH_MODE == ADODB_FETCH_ASSOC
@@ -223,7 +244,11 @@ class ADODB_sqlite3 extends ADOConnection {
 			          )
 				WHERE type != 'meta'
 				  AND sql NOTNULL
+<<<<<<< HEAD
 				  AND LOWER(name) ='" . strtolower($table) . "'";
+=======
+		          AND LOWER(name) ='" . strtolower($table) . "'";
+>>>>>>> forked/LAE_400_PACKAGE
 
 		$tableSql = $this->getOne($sql);
 
@@ -313,7 +338,12 @@ class ADODB_sqlite3 extends ADOConnection {
 		$this->_connectionID->createFunction('adodb_date2', 'adodb_date2', 2);
 	}
 
+<<<<<<< HEAD
 	/** @noinspection PhpUnusedParameterInspection */
+=======
+
+	// returns true or false
+>>>>>>> forked/LAE_400_PACKAGE
 	function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
 	{
 		if (empty($argHostname) && $argDatabasename) {
@@ -325,6 +355,10 @@ class ADODB_sqlite3 extends ADOConnection {
 		return true;
 	}
 
+<<<<<<< HEAD
+=======
+	// returns true or false
+>>>>>>> forked/LAE_400_PACKAGE
 	function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
 	{
 		// There's no permanent connect in SQLite3
@@ -401,7 +435,11 @@ class ADODB_sqlite3 extends ADOConnection {
 		return false;
 	}
 
+<<<<<<< HEAD
 	function createSequence($seqname='adodbseq', $startID=1)
+=======
+	function CreateSequence($seqname='adodbseq',$start=1)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 		if (empty($this->_genSeqSQL)) {
 			return false;
@@ -410,8 +448,13 @@ class ADODB_sqlite3 extends ADOConnection {
 		if (!$ok) {
 			return false;
 		}
+<<<<<<< HEAD
 		$startID -= 1;
 		return $this->Execute("insert into $seqname values($startID)");
+=======
+		$start -= 1;
+		return $this->Execute("insert into $seqname values($start)");
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	var $_dropSeqSQL = 'drop table %s';
@@ -566,6 +609,7 @@ class ADODB_sqlite3 extends ADOConnection {
 	 *
 	 * This uses the more efficient strftime native function to process
 	 *
+<<<<<<< HEAD
 	 * @param string $fld	The name of the field to process
 	 *
 	 * @return string The SQL Statement
@@ -573,6 +617,16 @@ class ADODB_sqlite3 extends ADOConnection {
 	function month($fld)
 	{
 		return "strftime('%m',$fld)";
+=======
+	 * @param 	str		$fld	The name of the field to process
+	 *
+	 * @return	str				The SQL Statement
+	 */
+	function month($fld)
+	{
+		$x = "strftime('%m',$fld)";
+		return $x;
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**
@@ -580,12 +634,22 @@ class ADODB_sqlite3 extends ADOConnection {
 	 *
 	 * This uses the more efficient strftime native function to process
 	 *
+<<<<<<< HEAD
 	 * @param string $fld	The name of the field to process
 	 *
 	 * @return string The SQL Statement
 	 */
 	function day($fld) {
 		return "strftime('%d',$fld)";
+=======
+	 * @param 	str		$fld	The name of the field to process
+	 *
+	 * @return	str				The SQL Statement
+	 */
+	function day($fld) {
+		$x = "strftime('%d',$fld)";
+		return $x;
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	/**
@@ -593,6 +657,7 @@ class ADODB_sqlite3 extends ADOConnection {
 	 *
 	 * This uses the more efficient strftime native function to process
 	 *
+<<<<<<< HEAD
 	 * @param string $fld	The name of the field to process
 	 *
 	 * @return string The SQL Statement
@@ -703,6 +768,16 @@ class ADODB_sqlite3 extends ADOConnection {
 			return false;
 
 		return $this->updateBlob($table, $column, $fileContents, $where, $blobtype);
+=======
+	 * @param 	str		$fld	The name of the field to process
+	 *
+	 * @return	str				The SQL Statement
+	 */
+	function year($fld)
+	{
+		$x = "strftime('%Y',$fld)";
+		return $x;
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 }
@@ -716,12 +791,18 @@ class ADORecordset_sqlite3 extends ADORecordSet {
 	var $databaseType = "sqlite3";
 	var $bind = false;
 
+<<<<<<< HEAD
 	/** @var SQLite3Result */
 	var $_queryID;
 
 	/** @noinspection PhpMissingParentConstructorInspection */
 	function __construct($queryID,$mode=false)
 	{
+=======
+	function __construct($queryID,$mode=false)
+	{
+
+>>>>>>> forked/LAE_400_PACKAGE
 		if ($mode === false) {
 			global $ADODB_FETCH_MODE;
 			$mode = $ADODB_FETCH_MODE;

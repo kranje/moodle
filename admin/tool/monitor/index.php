@@ -46,7 +46,11 @@ if (empty($courseid)) {
             $choose = true;
         } else {
             // return error.
+<<<<<<< HEAD
             throw new \moodle_exception('rulenopermission', 'tool_monitor');
+=======
+            print_error('rulenopermission', 'tool_monitor');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 } else {

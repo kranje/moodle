@@ -279,10 +279,17 @@ class content implements \renderable, \templatable {
     /**
      * Constructor
      *
+<<<<<<< HEAD
      * @param string $instid The instance id of the calling block
      * @param array $rubrics The list of rubrics to display
      */
     public function __construct($instid, $rubrics = array()) {
+=======
+     * @param array $rubrics The list of rubrics to display
+     * @param string $instid The instance id of the calling block
+     */
+    public function __construct($rubrics = array(), $instid) {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->rubrics = $rubrics;
         $this->instid = $instid;
     }

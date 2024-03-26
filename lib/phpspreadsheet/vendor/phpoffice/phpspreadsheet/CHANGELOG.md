@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com)
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+<<<<<<< HEAD
 ## 1.25.2 - 2022-09-25
 
 ### Added
@@ -327,6 +328,8 @@ Note that this will be the last 1.x branch release before the 2.x release. We wi
 - Fix documentation, instantiation example [#2564](https://github.com/PHPOffice/PhpSpreadsheet/issues/2564)
 
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 ## 1.21.0 - 2022-01-06
 
 ### Added

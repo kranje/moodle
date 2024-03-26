@@ -163,7 +163,11 @@ class Logical
      *
      * @param mixed $logical A value or expression that can be evaluated to TRUE or FALSE
      *
+<<<<<<< HEAD
      * @return array|bool|string the boolean inverse of the argument
+=======
+     * @return bool|string the boolean inverse of the argument
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function NOT($logical = false)
     {

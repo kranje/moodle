@@ -242,7 +242,10 @@ ROWS = LINS
 RTD = RTD
 TRANSPOSE = TRANSPOR
 VLOOKUP = PROCV
+<<<<<<< HEAD
 *RC = LC
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Funções matemáticas e trigonométricas (Math & Trig Functions)

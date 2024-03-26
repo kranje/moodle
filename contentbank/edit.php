@@ -35,7 +35,11 @@ $context = context::instance_by_id($contextid, MUST_EXIST);
 
 $cb = new \core_contentbank\contentbank();
 if (!$cb->is_context_allowed($context)) {
+<<<<<<< HEAD
     throw new \moodle_exception('contextnotallowed', 'core_contentbank');
+=======
+    print_error('contextnotallowed', 'core_contentbank');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_capability('moodle/contentbank:access', $context);
@@ -61,7 +65,11 @@ if (!empty($id)) {
 // Check plugin is enabled.
 $plugin = core_plugin_manager::instance()->get_plugin_info($contenttypename);
 if (!$plugin || !$plugin->is_enabled()) {
+<<<<<<< HEAD
     throw new \moodle_exception('unsupported', 'core_contentbank', $returnurl);
+=======
+    print_error('unsupported', 'core_contentbank', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Create content type instance.
@@ -69,12 +77,20 @@ $contenttypeclass = "$contenttypename\\contenttype";
 if (class_exists($contenttypeclass)) {
     $contenttype = new $contenttypeclass($context);
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('unsupported', 'core_contentbank', $returnurl);
+=======
+    print_error('unsupported', 'core_contentbank', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Checks the user can edit this content and content type.
 if (!$contenttype->can_edit($content)) {
+<<<<<<< HEAD
     throw new \moodle_exception('contenttypenoedit', 'core_contentbank', $returnurl);
+=======
+    print_error('contenttypenoedit', 'core_contentbank', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $values = [
@@ -112,7 +128,11 @@ $PAGE->set_secondary_active_tab('contentbank');
 // Instantiate the content type form.
 $editorclass = "$contenttypename\\form\\editor";
 if (!class_exists($editorclass)) {
+<<<<<<< HEAD
     throw new \moodle_exception('noformdesc');
+=======
+    print_error('noformdesc');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $editorform = new $editorclass(null, $values);

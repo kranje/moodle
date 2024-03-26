@@ -1823,11 +1823,15 @@ class question_attempt_step_iterator implements Iterator, ArrayAccess {
     }
 
     /** @return question_attempt_step */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         return $this->offsetGet($this->i);
     }
     /** @return int */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
     public function key() {
         return $this->i;
@@ -1840,10 +1844,24 @@ class question_attempt_step_iterator implements Iterator, ArrayAccess {
     }
     /** @return bool */
     public function valid(): bool {
+=======
+    public function key() {
+        return $this->i;
+    }
+    public function next() {
+        ++$this->i;
+    }
+    public function rewind() {
+        $this->i = 0;
+    }
+    /** @return bool */
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->offsetExists($this->i);
     }
 
     /** @return bool */
+<<<<<<< HEAD
     public function offsetExists($i): bool {
         return $i >= 0 && $i < $this->qa->get_num_steps();
     }
@@ -1856,6 +1874,19 @@ class question_attempt_step_iterator implements Iterator, ArrayAccess {
         throw new coding_exception('You are only allowed read-only access to question_attempt::states through a question_attempt_step_iterator. Cannot set.');
     }
     public function offsetUnset($offset): void {
+=======
+    public function offsetExists($i) {
+        return $i >= 0 && $i < $this->qa->get_num_steps();
+    }
+    /** @return question_attempt_step */
+    public function offsetGet($i) {
+        return $this->qa->get_step($i);
+    }
+    public function offsetSet($offset, $value) {
+        throw new coding_exception('You are only allowed read-only access to question_attempt::states through a question_attempt_step_iterator. Cannot set.');
+    }
+    public function offsetUnset($offset) {
+>>>>>>> forked/LAE_400_PACKAGE
         throw new coding_exception('You are only allowed read-only access to question_attempt::states through a question_attempt_step_iterator. Cannot unset.');
     }
 }
@@ -1869,11 +1900,19 @@ class question_attempt_step_iterator implements Iterator, ArrayAccess {
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class question_attempt_reverse_step_iterator extends question_attempt_step_iterator {
+<<<<<<< HEAD
     public function next(): void {
         --$this->i;
     }
 
     public function rewind(): void {
+=======
+    public function next() {
+        --$this->i;
+    }
+
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->i = $this->qa->get_num_steps() - 1;
     }
 }
@@ -1945,11 +1984,15 @@ class question_attempt_steps_with_submitted_response_iterator extends question_a
     }
 
     /** @return question_attempt_step */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         return $this->offsetGet($this->submittedresponseno);
     }
     /** @return int */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
     public function key() {
         return $this->submittedresponseno;
@@ -1962,6 +2005,19 @@ class question_attempt_steps_with_submitted_response_iterator extends question_a
     }
     /** @return bool */
     public function valid(): bool {
+=======
+    public function key() {
+        return $this->submittedresponseno;
+    }
+    public function next() {
+        ++$this->submittedresponseno;
+    }
+    public function rewind() {
+        $this->submittedresponseno = 1;
+    }
+    /** @return bool */
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->submittedresponseno >= 1 && $this->submittedresponseno <= count($this->stepswithsubmittedresponses);
     }
 
@@ -1969,7 +2025,11 @@ class question_attempt_steps_with_submitted_response_iterator extends question_a
      * @param int $submittedresponseno
      * @return bool
      */
+<<<<<<< HEAD
     public function offsetExists($submittedresponseno): bool {
+=======
+    public function offsetExists($submittedresponseno) {
+>>>>>>> forked/LAE_400_PACKAGE
         return $submittedresponseno >= 1;
     }
 
@@ -1977,7 +2037,10 @@ class question_attempt_steps_with_submitted_response_iterator extends question_a
      * @param int $submittedresponseno
      * @return question_attempt_step
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($submittedresponseno) {
         if ($submittedresponseno > count($this->stepswithsubmittedresponses)) {
             return null;
@@ -1989,7 +2052,11 @@ class question_attempt_steps_with_submitted_response_iterator extends question_a
     /**
      * @return int the count of steps with tries.
      */
+<<<<<<< HEAD
     public function count(): int {
+=======
+    public function count() {
+>>>>>>> forked/LAE_400_PACKAGE
         return count($this->stepswithsubmittedresponses);
     }
 
@@ -2008,11 +2075,19 @@ class question_attempt_steps_with_submitted_response_iterator extends question_a
         }
     }
 
+<<<<<<< HEAD
     public function offsetSet($offset, $value): void {
         throw new coding_exception('You are only allowed read-only access to question_attempt::states '.
                                    'through a question_attempt_step_iterator. Cannot set.');
     }
     public function offsetUnset($offset): void {
+=======
+    public function offsetSet($offset, $value) {
+        throw new coding_exception('You are only allowed read-only access to question_attempt::states '.
+                                   'through a question_attempt_step_iterator. Cannot set.');
+    }
+    public function offsetUnset($offset) {
+>>>>>>> forked/LAE_400_PACKAGE
         throw new coding_exception('You are only allowed read-only access to question_attempt::states '.
                                    'through a question_attempt_step_iterator. Cannot unset.');
     }

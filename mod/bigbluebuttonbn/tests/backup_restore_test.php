@@ -51,7 +51,10 @@ class backup_restore_test extends restore_date_testcase {
      */
     public function setUp(): void {
         parent::setUp();
+<<<<<<< HEAD
         $this->initialise_mock_server();
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -82,6 +85,10 @@ class backup_restore_test extends restore_date_testcase {
                 $DB->get_record('bigbluebuttonbn', ['course' => $newcourseid, 'type' => $type], '*', MUST_EXIST);
             // One record.
             $this->assert_bbb_activities_same($bbactivity[$type], $newbbb);
+<<<<<<< HEAD
+=======
+            $this->assertEquals($bbactivity[$type]->meetingid, $newbbb->meetingid);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -100,6 +107,10 @@ class backup_restore_test extends restore_date_testcase {
     public function test_backup_restore_with_recordings(): void {
         global $DB;
         $this->resetAfterTest();
+<<<<<<< HEAD
+=======
+        $this->initialise_mock_server();
+>>>>>>> forked/LAE_400_PACKAGE
         set_config('bigbluebuttonbn_importrecordings_enabled', 1);
         // This is for imported recording.
         $generator = $this->getDataGenerator();
@@ -180,6 +191,60 @@ class backup_restore_test extends restore_date_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Check duplicating activity does not duplicate meeting id
+     *
+     * @dataProvider bbb_type_provider
+     */
+    public function test_duplicate_module_no_meetingid(int $type) {
+        list($bbactivitycontext, $bbactivitycm, $bbactivity)
+            = $this->create_instance($this->get_course(), ['type' => $type]);
+        $newcm = duplicate_module($this->get_course(), $bbactivitycm);
+        $oldinstance = instance::get_from_cmid($bbactivitycm->id);
+        $newinstance = instance::get_from_cmid($newcm->id);
+
+        $this->assertNotEquals($oldinstance->get_instance_var('meetingid'), $newinstance->get_instance_var('meetingid'));
+    }
+
+    /**
+     * Check that using the recycle bin keeps the meeting id
+     *
+     * @dataProvider bbb_type_provider
+     */
+    public function test_recycle_module_keep_meetingid(int $type) {
+        list($bbactivitycontext, $bbactivitycm, $bbactivity)
+            = $this->create_instance($this->get_course(), ['type' => $type]);
+        // Delete the course module.
+        course_delete_module($bbactivitycm->id);
+        // Now, run the course module deletion adhoc task.
+        \phpunit_util::run_all_adhoc_tasks();
+        $currentinstances = instance::get_all_instances_in_course($this->course->id);
+        $this->assertEmpty($currentinstances);
+        // Try restoring.
+        $recyclebin = new \tool_recyclebin\course_bin($this->course->id);
+        foreach ($recyclebin->get_items() as $item) {
+            $recyclebin->restore_item($item);
+        }
+        $restoredinstance = instance::get_all_instances_in_course($this->course->id);
+        $restoredinstance = end($restoredinstance);
+        $this->assertEquals($restoredinstance->get_instance_var('meetingid'), $bbactivity->meetingid);
+    }
+
+    /**
+     * Return an array of BigBlueButton types
+     * @return array[]
+     */
+    public function bbb_type_provider() {
+        return [
+            'All' => [instance::TYPE_ALL],
+            'Recording Only' => [instance::TYPE_RECORDING_ONLY],
+            'Room Only' => [instance::TYPE_ROOM_ONLY]
+        ];
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Check two bbb activities are the same
      *
      * @param stdClass $bbboriginal
@@ -188,7 +253,11 @@ class backup_restore_test extends restore_date_testcase {
     protected function assert_bbb_activities_same(stdClass $bbboriginal, stdClass $bbbdest) {
         $this->assertNotFalse($bbbdest);
         $filterfunction = function($key) {
+<<<<<<< HEAD
             return !in_array($key, ['course', 'cmid', 'id', 'guestlinkuid', 'guestpassword']);
+=======
+            return !in_array($key, ['course', 'cmid', 'id', 'course']);
+>>>>>>> forked/LAE_400_PACKAGE
         };
         $this->assertEquals(
             array_filter((array) $bbboriginal, $filterfunction, ARRAY_FILTER_USE_KEY),

@@ -72,6 +72,10 @@ Feature: Render H5P content using filters
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I wait until the page is ready
     When I click on "Save and display" "button"
+<<<<<<< HEAD
+=======
+    And I should see "PageName1" in the "page-header" "region"
+>>>>>>> forked/LAE_400_PACKAGE
 #   Switch to iframe created by filter
     And I switch to "h5p-iframe" class iframe
 #   Switch to iframe created by embed.php page
@@ -107,6 +111,10 @@ Feature: Render H5P content using filters
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I wait until the page is ready
     When I click on "Save and display" "button"
+<<<<<<< HEAD
+=======
+    And I should see "PageName1" in the "page-header" "region"
+>>>>>>> forked/LAE_400_PACKAGE
 #   Switch to iframe created by filter
     And I switch to "h5p-iframe" class iframe
     Then I should see "Note that the libraries may exist in the file you uploaded, but you're not allowed to upload new libraries."
@@ -132,6 +140,10 @@ Feature: Render H5P content using filters
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I wait until the page is ready
     And I click on "Save and display" "button"
+<<<<<<< HEAD
+=======
+    And I should see "PageName1" in the "page-header" "region"
+>>>>>>> forked/LAE_400_PACKAGE
 #   Switch to iframe created by filter
     And I switch to "h5p-iframe" class iframe
 #   Libraries don't exist, so an error should be displayed.
@@ -155,6 +167,10 @@ Feature: Render H5P content using filters
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I wait until the page is ready
     And I click on "Save and display" "button"
+<<<<<<< HEAD
+=======
+    And I should see "PageName2" in the "page-header" "region"
+>>>>>>> forked/LAE_400_PACKAGE
 #   Switch to iframe created by filter
     And I switch to "h5p-iframe" class iframe
 #   Switch to iframe created by embed.php page
@@ -194,6 +210,10 @@ Feature: Render H5P content using filters
     And I click on "Select this file" "button"
     And I click on "Insert H5P" "button" in the "Insert H5P" "dialogue"
     And I click on "Save and display" "button"
+<<<<<<< HEAD
+=======
+    And I should see "PageName1" in the "page-header" "region"
+>>>>>>> forked/LAE_400_PACKAGE
     And I switch to "h5p-iframe" class iframe
 #   Library is disabled, so an error should be displayed.
     Then I should see "This file can't be displayed because its content type is disabled."

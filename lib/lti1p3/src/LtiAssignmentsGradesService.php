@@ -42,11 +42,15 @@ class LtiAssignmentsGradesService extends LtiAbstractService
         $pos = strpos($scoreUrl, '?');
         $scoreUrl = $pos === false ? $scoreUrl.'/scores' : substr_replace($scoreUrl, '/scores', $pos, 0);
 
+<<<<<<< HEAD
         $request = new ServiceRequest(
             ServiceRequest::METHOD_POST,
             $scoreUrl,
             ServiceRequest::TYPE_SYNC_GRADE
         );
+=======
+        $request = new ServiceRequest(LtiServiceConnector::METHOD_POST, $scoreUrl);
+>>>>>>> forked/LAE_400_PACKAGE
         $request->setBody($grade);
         $request->setContentType(static::CONTENTTYPE_SCORE);
 
@@ -66,6 +70,7 @@ class LtiAssignmentsGradesService extends LtiAbstractService
         return null;
     }
 
+<<<<<<< HEAD
     public function updateLineitem(LtiLineItem $lineitemToUpdate): LtiLineitem
     {
         $request = new ServiceRequest(
@@ -96,6 +101,17 @@ class LtiAssignmentsGradesService extends LtiAbstractService
         $createdLineItem = $this->makeServiceRequest($request);
 
         return new LtiLineitem($createdLineItem['body']);
+=======
+    public function createLineitem(LtiLineitem $newLineItem): LtiLineitem
+    {
+        $request = new ServiceRequest(LtiServiceConnector::METHOD_POST, $this->getServiceData()['lineitems']);
+        $request->setBody($newLineItem)
+            ->setContentType(static::CONTENTTYPE_LINEITEM)
+            ->setAccept(static::CONTENTTYPE_LINEITEM);
+        $createdLineItems = $this->makeServiceRequest($request);
+
+        return new LtiLineitem($createdLineItems['body']);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function findOrCreateLineitem(LtiLineitem $newLineItem): LtiLineitem
@@ -112,11 +128,15 @@ class LtiAssignmentsGradesService extends LtiAbstractService
         $pos = strpos($resultsUrl, '?');
         $resultsUrl = $pos === false ? $resultsUrl.'/results' : substr_replace($resultsUrl, '/results', $pos, 0);
 
+<<<<<<< HEAD
         $request = new ServiceRequest(
             ServiceRequest::METHOD_GET,
             $resultsUrl,
             ServiceRequest::TYPE_GET_GRADES
         );
+=======
+        $request = new ServiceRequest(LtiServiceConnector::METHOD_GET, $resultsUrl);
+>>>>>>> forked/LAE_400_PACKAGE
         $request->setAccept(static::CONTENTTYPE_RESULTCONTAINER);
         $scores = $this->makeServiceRequest($request);
 
@@ -130,9 +150,14 @@ class LtiAssignmentsGradesService extends LtiAbstractService
         }
 
         $request = new ServiceRequest(
+<<<<<<< HEAD
             ServiceRequest::METHOD_GET,
             $this->getServiceData()['lineitems'],
             ServiceRequest::TYPE_GET_LINEITEMS
+=======
+            LtiServiceConnector::METHOD_GET,
+            $this->getServiceData()['lineitems']
+>>>>>>> forked/LAE_400_PACKAGE
         );
         $request->setAccept(static::CONTENTTYPE_LINEITEMCONTAINER);
 
@@ -152,11 +177,15 @@ class LtiAssignmentsGradesService extends LtiAbstractService
             throw new LtiException('Missing required scope', 1);
         }
 
+<<<<<<< HEAD
         $request = new ServiceRequest(
             ServiceRequest::METHOD_GET,
             $url,
             ServiceRequest::TYPE_GET_LINEITEM
         );
+=======
+        $request = new ServiceRequest(LtiServiceConnector::METHOD_GET, $url);
+>>>>>>> forked/LAE_400_PACKAGE
         $request->setAccept(static::CONTENTTYPE_LINEITEM);
 
         $response = $this->makeServiceRequest($request)['body'];

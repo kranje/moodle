@@ -23,7 +23,11 @@ H5P.$window = H5P.jQuery(window);
 H5P.instances = [];
 
 // Detect if we support fullscreen, and what prefix to use.
+<<<<<<< HEAD
 if (document.documentElement.requestFullscreen) {
+=======
+if (document.documentElement.requestFullScreen) {
+>>>>>>> forked/LAE_400_PACKAGE
   /**
    * Browser prefix to use when entering fullscreen mode.
    * undefined means no fullscreen support.
@@ -377,6 +381,7 @@ H5P.init = function (target) {
 
   // Insert H5Ps that should be in iframes.
   H5P.jQuery('iframe.h5p-iframe:not(.h5p-initialized)', target).each(function () {
+<<<<<<< HEAD
     const iframe = this;
     const $iframe = H5P.jQuery(iframe);
 
@@ -400,6 +405,12 @@ H5P.init = function (target) {
     else {
       writeDocument();
     }
+=======
+    var contentId = H5P.jQuery(this).addClass('h5p-initialized').data('content-id');
+    this.contentDocument.open();
+    this.contentDocument.write('<!doctype html><html class="h5p-iframe"><head>' + H5P.getHeadTags(contentId) + '</head><body><div class="h5p-content" data-content-id="' + contentId + '"/></body></html>');
+    this.contentDocument.close();
+>>>>>>> forked/LAE_400_PACKAGE
   });
 };
 
@@ -676,7 +687,11 @@ H5P.fullScreen = function ($element, instance, exitCallback, body, forceSemiFull
     });
 
     if (H5P.fullScreenBrowserPrefix === '') {
+<<<<<<< HEAD
       $element[0].requestFullscreen();
+=======
+      $element[0].requestFullScreen();
+>>>>>>> forked/LAE_400_PACKAGE
     }
     else {
       var method = (H5P.fullScreenBrowserPrefix === 'ms' ? 'msRequestFullscreen' : H5P.fullScreenBrowserPrefix + 'RequestFullScreen');

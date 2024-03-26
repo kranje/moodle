@@ -42,7 +42,11 @@ $override = null;
 if ($overrideid) {
 
     if (! $override = $DB->get_record('assign_overrides', array('id' => $overrideid))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidoverrideid', 'assign');
+=======
+        print_error('invalidoverrideid', 'assign');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     list($course, $cm) = get_course_and_cm_from_instance($override->assignid, 'assign');
@@ -51,7 +55,11 @@ if ($overrideid) {
     list($course, $cm) = get_course_and_cm_from_cmid($cmid, 'assign');
 
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
+=======
+    print_error('invalidcoursemodule');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $url = new moodle_url('/mod/assign/overrideedit.php');
@@ -83,11 +91,19 @@ if ($overrideid) {
 
     if ($override->groupid) {
         if (!groups_group_visible($override->groupid, $course, $cm)) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidoverrideid', 'assign');
         }
     } else {
         if (!groups_user_groups_visible($course, $override->userid, $cm)) {
             throw new \moodle_exception('invalidoverrideid', 'assign');
+=======
+            print_error('invalidoverrideid', 'assign');
+        }
+    } else {
+        if (!groups_user_groups_visible($course, $override->userid, $cm)) {
+            print_error('invalidoverrideid', 'assign');
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 } else {

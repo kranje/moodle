@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Engine\BranchPruner;
 use PhpOffice\PhpSpreadsheet\Calculation\Engine\CyclicReferenceStack;
 use PhpOffice\PhpSpreadsheet\Calculation\Engine\Logger;
@@ -11,6 +12,13 @@ use PhpOffice\PhpSpreadsheet\Calculation\Token\Stack;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Engine\CyclicReferenceStack;
+use PhpOffice\PhpSpreadsheet\Calculation\Engine\Logger;
+use PhpOffice\PhpSpreadsheet\Calculation\Token\Stack;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\DefinedName;
 use PhpOffice\PhpSpreadsheet\ReferenceHelper;
 use PhpOffice\PhpSpreadsheet\Shared;
@@ -33,17 +41,29 @@ class Calculation
     //    Function (allow for the old @ symbol that could be used to prefix a function, but we'll ignore it)
     const CALCULATION_REGEXP_FUNCTION = '@?(?:_xlfn\.)?([\p{L}][\p{L}\p{N}\.]*)[\s]*\(';
     //    Cell reference (cell or range of cells, with or without a sheet reference)
+<<<<<<< HEAD
     const CALCULATION_REGEXP_CELLREF = '((([^\s,!&%^\/\*\+<>=:`-]*)|(\'(?:[^\']|\'[^!])+?\')|(\"(?:[^\"]|\"[^!])+?\"))!)?\$?\b([a-z]{1,3})\$?(\d{1,7})(?![\w.])';
     //    Cell reference (with or without a sheet reference) ensuring absolute/relative
     const CALCULATION_REGEXP_CELLREF_RELATIVE = '((([^\s\(,!&%^\/\*\+<>=:`-]*)|(\'(?:[^\']|\'[^!])+?\')|(\"(?:[^\"]|\"[^!])+?\"))!)?(\$?\b[a-z]{1,3})(\$?\d{1,7})(?![\w.])';
     const CALCULATION_REGEXP_COLUMN_RANGE = '(((([^\s\(,!&%^\/\*\+<>=:`-]*)|(\'(?:[^\']|\'[^!])+?\')|(\".(?:[^\"]|\"[^!])?\"))!)?(\$?[a-z]{1,3})):(?![.*])';
     const CALCULATION_REGEXP_ROW_RANGE = '(((([^\s\(,!&%^\/\*\+<>=:`-]*)|(\'(?:[^\']|\'[^!])+?\')|(\"(?:[^\"]|\"[^!])+?\"))!)?(\$?[1-9][0-9]{0,6})):(?![.*])';
+=======
+    const CALCULATION_REGEXP_CELLREF = '((([^\s,!&%^\/\*\+<>=-]*)|(\'[^\']*\')|(\"[^\"]*\"))!)?\$?\b([a-z]{1,3})\$?(\d{1,7})(?![\w.])';
+    //    Cell reference (with or without a sheet reference) ensuring absolute/relative
+    const CALCULATION_REGEXP_CELLREF_RELATIVE = '((([^\s\(,!&%^\/\*\+<>=-]*)|(\'[^\']*\')|(\"[^\"]*\"))!)?(\$?\b[a-z]{1,3})(\$?\d{1,7})(?![\w.])';
+    const CALCULATION_REGEXP_COLUMN_RANGE = '(((([^\s\(,!&%^\/\*\+<>=-]*)|(\'[^\']*\')|(\"[^\"]*\"))!)?(\$?[a-z]{1,3})):(?![.*])';
+    const CALCULATION_REGEXP_ROW_RANGE = '(((([^\s\(,!&%^\/\*\+<>=-]*)|(\'[^\']*\')|(\"[^\"]*\"))!)?(\$?[1-9][0-9]{0,6})):(?![.*])';
+>>>>>>> forked/LAE_400_PACKAGE
     //    Cell reference (with or without a sheet reference) ensuring absolute/relative
     //    Cell ranges ensuring absolute/relative
     const CALCULATION_REGEXP_COLUMNRANGE_RELATIVE = '(\$?[a-z]{1,3}):(\$?[a-z]{1,3})';
     const CALCULATION_REGEXP_ROWRANGE_RELATIVE = '(\$?\d{1,7}):(\$?\d{1,7})';
     //    Defined Names: Named Range of cells, or Named Formulae
+<<<<<<< HEAD
     const CALCULATION_REGEXP_DEFINEDNAME = '((([^\s,!&%^\/\*\+<>=-]*)|(\'(?:[^\']|\'[^!])+?\')|(\"(?:[^\"]|\"[^!])+?\"))!)?([_\p{L}][_\p{L}\p{N}\.]*)';
+=======
+    const CALCULATION_REGEXP_DEFINEDNAME = '((([^\s,!&%^\/\*\+<>=-]*)|(\'[^\']*\')|(\"[^\"]*\"))!)?([_\p{L}][_\p{L}\p{N}\.]*)';
+>>>>>>> forked/LAE_400_PACKAGE
     //    Error
     const CALCULATION_REGEXP_ERROR = '\#[A-Z][A-Z0_\/]*[!\?]?';
 
@@ -52,10 +72,15 @@ class Calculation
     const RETURN_ARRAY_AS_VALUE = 'value';
     const RETURN_ARRAY_AS_ARRAY = 'array';
 
+<<<<<<< HEAD
     const FORMULA_OPEN_FUNCTION_BRACE = '(';
     const FORMULA_CLOSE_FUNCTION_BRACE = ')';
     const FORMULA_OPEN_MATRIX_BRACE = '{';
     const FORMULA_CLOSE_MATRIX_BRACE = '}';
+=======
+    const FORMULA_OPEN_FUNCTION_BRACE = '{';
+    const FORMULA_CLOSE_FUNCTION_BRACE = '}';
+>>>>>>> forked/LAE_400_PACKAGE
     const FORMULA_STRING_QUOTE = '"';
 
     private static $returnArrayAsType = self::RETURN_ARRAY_AS_VALUE;
@@ -89,6 +114,7 @@ class Calculation
     private $calculationCacheEnabled = true;
 
     /**
+<<<<<<< HEAD
      * @var BranchPruner
      */
     private $branchPruner;
@@ -96,6 +122,14 @@ class Calculation
     /**
      * @var bool
      */
+=======
+     * Used to generate unique store keys.
+     *
+     * @var int
+     */
+    private $branchStoreKeyCounter = 0;
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $branchPruningEnabled = true;
 
     /**
@@ -108,8 +142,12 @@ class Calculation
         '+' => true, '-' => true, '*' => true, '/' => true,
         '^' => true, '&' => true, '%' => false, '~' => false,
         '>' => true, '<' => true, '=' => true, '>=' => true,
+<<<<<<< HEAD
         '<=' => true, '<>' => true, '∩' => true, '∪' => true,
         ':' => true,
+=======
+        '<=' => true, '<>' => true, '|' => true, ':' => true,
+>>>>>>> forked/LAE_400_PACKAGE
     ];
 
     /**
@@ -121,7 +159,11 @@ class Calculation
         '+' => true, '-' => true, '*' => true, '/' => true,
         '^' => true, '&' => true, '>' => true, '<' => true,
         '=' => true, '>=' => true, '<=' => true, '<>' => true,
+<<<<<<< HEAD
         '∩' => true, '∪' => true, ':' => true,
+=======
+        '|' => true, ':' => true,
+>>>>>>> forked/LAE_400_PACKAGE
     ];
 
     /**
@@ -182,6 +224,16 @@ class Calculation
     public $cyclicFormulaCount = 1;
 
     /**
+<<<<<<< HEAD
+=======
+     * Epsilon Precision used for comparisons in calculations.
+     *
+     * @var float
+     */
+    private $delta = 0.1e-12;
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * The current locale setting.
      *
      * @var string
@@ -224,7 +276,11 @@ class Calculation
      *
      * @var array<string, mixed>
      */
+<<<<<<< HEAD
     public static $excelConstants = [
+=======
+    private static $excelConstants = [
+>>>>>>> forked/LAE_400_PACKAGE
         'TRUE' => true,
         'FALSE' => false,
         'NULL' => null,
@@ -304,8 +360,13 @@ class Calculation
         ],
         'ARRAYTOTEXT' => [
             'category' => Category::CATEGORY_TEXT_AND_DATA,
+<<<<<<< HEAD
             'functionCall' => [TextData\Text::class, 'fromArray'],
             'argumentCount' => '1,2',
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '?',
+>>>>>>> forked/LAE_400_PACKAGE
         ],
         'ASC' => [
             'category' => Category::CATEGORY_TEXT_AND_DATA,
@@ -542,6 +603,7 @@ class Calculation
             'functionCall' => [LookupRef\Selection::class, 'CHOOSE'],
             'argumentCount' => '2+',
         ],
+<<<<<<< HEAD
         'CHOOSECOLS' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
@@ -552,6 +614,8 @@ class Calculation
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '2+',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'CLEAN' => [
             'category' => Category::CATEGORY_TEXT_AND_DATA,
             'functionCall' => [TextData\Trim::class, 'nonPrintable'],
@@ -914,11 +978,14 @@ class Calculation
             'functionCall' => [Database\DProduct::class, 'evaluate'],
             'argumentCount' => '3',
         ],
+<<<<<<< HEAD
         'DROP' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '2-3',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'DSTDEV' => [
             'category' => Category::CATEGORY_DATABASE,
             'functionCall' => [Database\DStDev::class, 'evaluate'],
@@ -996,7 +1063,11 @@ class Calculation
         ],
         'ERROR.TYPE' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\ExcelError::class, 'type'],
+=======
+            'functionCall' => [Functions::class, 'errorType'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'EVEN' => [
@@ -1014,11 +1085,14 @@ class Calculation
             'functionCall' => [MathTrig\Exp::class, 'evaluate'],
             'argumentCount' => '1',
         ],
+<<<<<<< HEAD
         'EXPAND' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '2-4',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'EXPONDIST' => [
             'category' => Category::CATEGORY_STATISTICAL,
             'functionCall' => [Statistical\Distributions\Exponential::class, 'distribution'],
@@ -1061,8 +1135,13 @@ class Calculation
         ],
         'FILTER' => [
             'category' => Category::CATEGORY_LOOKUP_AND_REFERENCE,
+<<<<<<< HEAD
             'functionCall' => [LookupRef\Filter::class, 'filter'],
             'argumentCount' => '2-3',
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '3+',
+>>>>>>> forked/LAE_400_PACKAGE
         ],
         'FILTERXML' => [
             'category' => Category::CATEGORY_WEB,
@@ -1281,11 +1360,14 @@ class Calculation
             'functionCall' => [DateTimeExcel\TimeParts::class, 'hour'],
             'argumentCount' => '1',
         ],
+<<<<<<< HEAD
         'HSTACK' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '1+',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'HYPERLINK' => [
             'category' => Category::CATEGORY_LOOKUP_AND_REFERENCE,
             'functionCall' => [LookupRef\Hyperlink::class, 'set'],
@@ -1490,49 +1572,85 @@ class Calculation
         ],
         'ISBLANK' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isBlank'],
+=======
+            'functionCall' => [Functions::class, 'isBlank'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISERR' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\ErrorValue::class, 'isErr'],
+=======
+            'functionCall' => [Functions::class, 'isErr'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISERROR' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\ErrorValue::class, 'isError'],
+=======
+            'functionCall' => [Functions::class, 'isError'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISEVEN' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isEven'],
+=======
+            'functionCall' => [Functions::class, 'isEven'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISFORMULA' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isFormula'],
+=======
+            'functionCall' => [Functions::class, 'isFormula'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
             'passCellReference' => true,
             'passByReference' => [true],
         ],
         'ISLOGICAL' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isLogical'],
+=======
+            'functionCall' => [Functions::class, 'isLogical'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISNA' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\ErrorValue::class, 'isNa'],
+=======
+            'functionCall' => [Functions::class, 'isNa'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISNONTEXT' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isNonText'],
+=======
+            'functionCall' => [Functions::class, 'isNonText'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISNUMBER' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isNumber'],
+=======
+            'functionCall' => [Functions::class, 'isNumber'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISO.CEILING' => [
@@ -1542,7 +1660,11 @@ class Calculation
         ],
         'ISODD' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isOdd'],
+=======
+            'functionCall' => [Functions::class, 'isOdd'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISOWEEKNUM' => [
@@ -1557,6 +1679,7 @@ class Calculation
         ],
         'ISREF' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'isRef'],
             'argumentCount' => '1',
             'passCellReference' => true,
@@ -1565,6 +1688,14 @@ class Calculation
         'ISTEXT' => [
             'category' => Category::CATEGORY_INFORMATION,
             'functionCall' => [Information\Value::class, 'isText'],
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '1',
+        ],
+        'ISTEXT' => [
+            'category' => Category::CATEGORY_INFORMATION,
+            'functionCall' => [Functions::class, 'isText'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'ISTHAIDIGIT' => [
@@ -1794,12 +1925,20 @@ class Calculation
         ],
         'N' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'asNumber'],
+=======
+            'functionCall' => [Functions::class, 'n'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'NA' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\ExcelError::class, 'NA'],
+=======
+            'functionCall' => [Functions::class, 'NA'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '0',
         ],
         'NEGBINOMDIST' => [
@@ -2106,7 +2245,11 @@ class Calculation
         ],
         'RANDARRAY' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
+<<<<<<< HEAD
             'functionCall' => [MathTrig\Random::class, 'randArray'],
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '0-5',
         ],
         'RANDBETWEEN' => [
@@ -2248,8 +2391,13 @@ class Calculation
         ],
         'SEQUENCE' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
+<<<<<<< HEAD
             'functionCall' => [MathTrig\MatrixFunctions::class, 'sequence'],
             'argumentCount' => '1-4',
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '2',
+>>>>>>> forked/LAE_400_PACKAGE
         ],
         'SERIESSUM' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
@@ -2308,12 +2456,21 @@ class Calculation
         ],
         'SORT' => [
             'category' => Category::CATEGORY_LOOKUP_AND_REFERENCE,
+<<<<<<< HEAD
             'functionCall' => [LookupRef\Sort::class, 'sort'],
             'argumentCount' => '1-4',
         ],
         'SORTBY' => [
             'category' => Category::CATEGORY_LOOKUP_AND_REFERENCE,
             'functionCall' => [LookupRef\Sort::class, 'sortBy'],
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '1+',
+        ],
+        'SORTBY' => [
+            'category' => Category::CATEGORY_LOOKUP_AND_REFERENCE,
+            'functionCall' => [Functions::class, 'DUMMY'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '2+',
         ],
         'SQRT' => [
@@ -2432,11 +2589,14 @@ class Calculation
             'functionCall' => [TextData\Text::class, 'test'],
             'argumentCount' => '1',
         ],
+<<<<<<< HEAD
         'TAKE' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '2-3',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'TAN' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [MathTrig\Trig\Tangent::class, 'tan'],
@@ -2487,6 +2647,7 @@ class Calculation
             'functionCall' => [TextData\Format::class, 'TEXTFORMAT'],
             'argumentCount' => '2',
         ],
+<<<<<<< HEAD
         'TEXTAFTER' => [
             'category' => Category::CATEGORY_TEXT_AND_DATA,
             'functionCall' => [TextData\Extract::class, 'after'],
@@ -2497,16 +2658,21 @@ class Calculation
             'functionCall' => [TextData\Extract::class, 'before'],
             'argumentCount' => '2-6',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'TEXTJOIN' => [
             'category' => Category::CATEGORY_TEXT_AND_DATA,
             'functionCall' => [TextData\Concatenate::class, 'TEXTJOIN'],
             'argumentCount' => '3+',
         ],
+<<<<<<< HEAD
         'TEXTSPLIT' => [
             'category' => Category::CATEGORY_TEXT_AND_DATA,
             'functionCall' => [TextData\Text::class, 'split'],
             'argumentCount' => '2-6',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'THAIDAYOFWEEK' => [
             'category' => Category::CATEGORY_DATE_AND_TIME,
             'functionCall' => [Functions::class, 'DUMMY'],
@@ -2572,6 +2738,7 @@ class Calculation
             'functionCall' => [DateTimeExcel\Current::class, 'today'],
             'argumentCount' => '0',
         ],
+<<<<<<< HEAD
         'TOCOL' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
@@ -2582,6 +2749,8 @@ class Calculation
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '1-3',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'TRANSPOSE' => [
             'category' => Category::CATEGORY_LOOKUP_AND_REFERENCE,
             'functionCall' => [LookupRef\Matrix::class, 'transpose'],
@@ -2624,7 +2793,11 @@ class Calculation
         ],
         'TYPE' => [
             'category' => Category::CATEGORY_INFORMATION,
+<<<<<<< HEAD
             'functionCall' => [Information\Value::class, 'type'],
+=======
+            'functionCall' => [Functions::class, 'TYPE'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1',
         ],
         'UNICHAR' => [
@@ -2639,7 +2812,11 @@ class Calculation
         ],
         'UNIQUE' => [
             'category' => Category::CATEGORY_LOOKUP_AND_REFERENCE,
+<<<<<<< HEAD
             'functionCall' => [LookupRef\Unique::class, 'unique'],
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+>>>>>>> forked/LAE_400_PACKAGE
             'argumentCount' => '1+',
         ],
         'UPPER' => [
@@ -2659,8 +2836,13 @@ class Calculation
         ],
         'VALUETOTEXT' => [
             'category' => Category::CATEGORY_TEXT_AND_DATA,
+<<<<<<< HEAD
             'functionCall' => [TextData\Format::class, 'valueToText'],
             'argumentCount' => '1,2',
+=======
+            'functionCall' => [Functions::class, 'DUMMY'],
+            'argumentCount' => '?',
+>>>>>>> forked/LAE_400_PACKAGE
         ],
         'VAR' => [
             'category' => Category::CATEGORY_STATISTICAL,
@@ -2702,11 +2884,14 @@ class Calculation
             'functionCall' => [LookupRef\VLookup::class, 'lookup'],
             'argumentCount' => '3,4',
         ],
+<<<<<<< HEAD
         'VSTACK' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '1+',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'WEBSERVICE' => [
             'category' => Category::CATEGORY_WEB,
             'functionCall' => [Web\Service::class, 'webService'],
@@ -2742,6 +2927,7 @@ class Calculation
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '2-4',
         ],
+<<<<<<< HEAD
         'WRAPCOLS' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [Functions::class, 'DUMMY'],
@@ -2752,6 +2938,8 @@ class Calculation
             'functionCall' => [Functions::class, 'DUMMY'],
             'argumentCount' => '2-3',
         ],
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         'XIRR' => [
             'category' => Category::CATEGORY_FINANCIAL,
             'functionCall' => [Financial\CashFlow\Variable\NonPeriodic::class, 'rate'],
@@ -2832,10 +3020,18 @@ class Calculation
 
     public function __construct(?Spreadsheet $spreadsheet = null)
     {
+<<<<<<< HEAD
         $this->spreadsheet = $spreadsheet;
         $this->cyclicReferenceStack = new CyclicReferenceStack();
         $this->debugLog = new Logger($this->cyclicReferenceStack);
         $this->branchPruner = new BranchPruner($this->branchPruningEnabled);
+=======
+        $this->delta = 1 * 10 ** (0 - ini_get('precision'));
+
+        $this->spreadsheet = $spreadsheet;
+        $this->cyclicReferenceStack = new CyclicReferenceStack();
+        $this->debugLog = new Logger($this->cyclicReferenceStack);
+>>>>>>> forked/LAE_400_PACKAGE
         self::$referenceHelper = ReferenceHelper::getInstance();
     }
 
@@ -2879,7 +3075,11 @@ class Calculation
     public function flushInstance(): void
     {
         $this->clearCalculationCache();
+<<<<<<< HEAD
         $this->branchPruner->clearBranchStore();
+=======
+        $this->clearBranchStore();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -3031,7 +3231,10 @@ class Calculation
     public function setBranchPruningEnabled($enabled): void
     {
         $this->branchPruningEnabled = $enabled;
+<<<<<<< HEAD
         $this->branchPruner = new BranchPruner($this->branchPruningEnabled);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function enableBranchPruning(): void
@@ -3044,6 +3247,14 @@ class Calculation
         $this->setBranchPruningEnabled(false);
     }
 
+<<<<<<< HEAD
+=======
+    public function clearBranchStore(): void
+    {
+        $this->branchStoreKeyCounter = 0;
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Get the currently defined locale code.
      *
@@ -3088,7 +3299,11 @@ class Calculation
         }
 
         //    Test whether we have any language data for this language (any locale)
+<<<<<<< HEAD
         if (in_array($language, self::$validLocaleLanguages, true)) {
+=======
+        if (in_array($language, self::$validLocaleLanguages)) {
+>>>>>>> forked/LAE_400_PACKAGE
             //    initialise language/locale settings
             self::$localeFunctions = [];
             self::$localeArgumentSeparator = ',';
@@ -3110,7 +3325,11 @@ class Calculation
                     [$localeFunction] = explode('##', $localeFunction); //    Strip out comments
                     if (strpos($localeFunction, '=') !== false) {
                         [$fName, $lfName] = array_map('trim', explode('=', $localeFunction));
+<<<<<<< HEAD
                         if ((substr($fName, 0, 1) === '*' || isset(self::$phpSpreadsheetFunctions[$fName])) && ($lfName != '') && ($fName != $lfName)) {
+=======
+                        if ((isset(self::$phpSpreadsheetFunctions[$fName])) && ($lfName != '') && ($fName != $lfName)) {
+>>>>>>> forked/LAE_400_PACKAGE
                             self::$localeFunctions[$fName] = $lfName;
                         }
                     }
@@ -3157,6 +3376,7 @@ class Calculation
         return false;
     }
 
+<<<<<<< HEAD
     public static function translateSeparator(
         string $fromSeparator,
         string $toSeparator,
@@ -3165,10 +3385,23 @@ class Calculation
         string $openBrace = self::FORMULA_OPEN_FUNCTION_BRACE,
         string $closeBrace = self::FORMULA_CLOSE_FUNCTION_BRACE
     ): string {
+=======
+    /**
+     * @param string $fromSeparator
+     * @param string $toSeparator
+     * @param string $formula
+     * @param bool $inBraces
+     *
+     * @return string
+     */
+    public static function translateSeparator($fromSeparator, $toSeparator, $formula, &$inBraces)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $strlen = mb_strlen($formula);
         for ($i = 0; $i < $strlen; ++$i) {
             $chr = mb_substr($formula, $i, 1);
             switch ($chr) {
+<<<<<<< HEAD
                 case $openBrace:
                     ++$inBracesLevel;
 
@@ -3179,6 +3412,18 @@ class Calculation
                     break;
                 case $fromSeparator:
                     if ($inBracesLevel > 0) {
+=======
+                case self::FORMULA_OPEN_FUNCTION_BRACE:
+                    $inBraces = true;
+
+                    break;
+                case self::FORMULA_CLOSE_FUNCTION_BRACE:
+                    $inBraces = false;
+
+                    break;
+                case $fromSeparator:
+                    if (!$inBraces) {
+>>>>>>> forked/LAE_400_PACKAGE
                         $formula = mb_substr($formula, 0, $i) . $toSeparator . mb_substr($formula, $i + 1);
                     }
             }
@@ -3187,6 +3432,7 @@ class Calculation
         return $formula;
     }
 
+<<<<<<< HEAD
     private static function translateFormulaBlock(
         array $from,
         array $to,
@@ -3229,6 +3475,33 @@ class Calculation
                     $notWithinQuotes = !$notWithinQuotes;
                     if ($notWithinQuotes === true) {
                         $value = self::translateFormulaBlock($from, $to, $value, $inFunctionBracesLevel, $inMatrixBracesLevel, $fromSeparator, $toSeparator);
+=======
+    /**
+     * @param string[] $from
+     * @param string[] $to
+     * @param string $formula
+     * @param string $fromSeparator
+     * @param string $toSeparator
+     *
+     * @return string
+     */
+    private static function translateFormula(array $from, array $to, $formula, $fromSeparator, $toSeparator)
+    {
+        //    Convert any Excel function names to the required language
+        if (self::$localeLanguage !== 'en_us') {
+            $inBraces = false;
+            //    If there is the possibility of braces within a quoted string, then we don't treat those as matrix indicators
+            if (strpos($formula, self::FORMULA_STRING_QUOTE) !== false) {
+                //    So instead we skip replacing in any quoted strings by only replacing in every other array element after we've exploded
+                //        the formula
+                $temp = explode(self::FORMULA_STRING_QUOTE, $formula);
+                $i = false;
+                foreach ($temp as &$value) {
+                    //    Only count/replace in alternating array entries
+                    if ($i = !$i) {
+                        $value = preg_replace($from, $to, $value);
+                        $value = self::translateSeparator($fromSeparator, $toSeparator, $value, $inBraces);
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                 }
                 unset($value);
@@ -3236,7 +3509,12 @@ class Calculation
                 $formula = implode(self::FORMULA_STRING_QUOTE, $temp);
             } else {
                 //    If there's no quoted strings, then we do a simple count/replace
+<<<<<<< HEAD
                 $formula = self::translateFormulaBlock($from, $to, $formula, $inFunctionBracesLevel, $inMatrixBracesLevel, $fromSeparator, $toSeparator);
+=======
+                $formula = preg_replace($from, $to, $formula);
+                $formula = self::translateSeparator($fromSeparator, $toSeparator, $formula, $inBraces);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -3249,6 +3527,7 @@ class Calculation
 
     public function _translateFormulaToLocale($formula)
     {
+<<<<<<< HEAD
         // Build list of function names and constants for translation
         if (self::$functionReplaceFromExcel === null) {
             self::$functionReplaceFromExcel = [];
@@ -3257,6 +3536,15 @@ class Calculation
             }
             foreach (array_keys(self::$localeBoolean) as $excelBoolean) {
                 self::$functionReplaceFromExcel[] = '/(@?[^\w\.])' . preg_quote($excelBoolean, '/') . '([^\w\.])/ui';
+=======
+        if (self::$functionReplaceFromExcel === null) {
+            self::$functionReplaceFromExcel = [];
+            foreach (array_keys(self::$localeFunctions) as $excelFunctionName) {
+                self::$functionReplaceFromExcel[] = '/(@?[^\w\.])' . preg_quote($excelFunctionName, '/') . '([\s]*\()/Ui';
+            }
+            foreach (array_keys(self::$localeBoolean) as $excelBoolean) {
+                self::$functionReplaceFromExcel[] = '/(@?[^\w\.])' . preg_quote($excelBoolean, '/') . '([^\w\.])/Ui';
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -3270,6 +3558,7 @@ class Calculation
             }
         }
 
+<<<<<<< HEAD
         return self::translateFormula(
             self::$functionReplaceFromExcel,
             self::$functionReplaceToLocale,
@@ -3277,6 +3566,9 @@ class Calculation
             ',',
             self::$localeArgumentSeparator
         );
+=======
+        return self::translateFormula(self::$functionReplaceFromExcel, self::$functionReplaceToLocale, $formula, ',', self::$localeArgumentSeparator);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private static $functionReplaceFromLocale;
@@ -3288,17 +3580,27 @@ class Calculation
         if (self::$functionReplaceFromLocale === null) {
             self::$functionReplaceFromLocale = [];
             foreach (self::$localeFunctions as $localeFunctionName) {
+<<<<<<< HEAD
                 self::$functionReplaceFromLocale[] = '/(@?[^\w\.])' . preg_quote($localeFunctionName, '/') . '([\s]*\()/ui';
             }
             foreach (self::$localeBoolean as $excelBoolean) {
                 self::$functionReplaceFromLocale[] = '/(@?[^\w\.])' . preg_quote($excelBoolean, '/') . '([^\w\.])/ui';
+=======
+                self::$functionReplaceFromLocale[] = '/(@?[^\w\.])' . preg_quote($localeFunctionName, '/') . '([\s]*\()/Ui';
+            }
+            foreach (self::$localeBoolean as $excelBoolean) {
+                self::$functionReplaceFromLocale[] = '/(@?[^\w\.])' . preg_quote($excelBoolean, '/') . '([^\w\.])/Ui';
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
         if (self::$functionReplaceToExcel === null) {
             self::$functionReplaceToExcel = [];
             foreach (array_keys(self::$localeFunctions) as $excelFunctionName) {
+<<<<<<< HEAD
                 // @phpstan-ignore-next-line
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 self::$functionReplaceToExcel[] = '$1' . trim($excelFunctionName) . '$2';
             }
             foreach (array_keys(self::$localeBoolean) as $excelBoolean) {
@@ -3345,7 +3647,11 @@ class Calculation
             return self::FORMULA_STRING_QUOTE . $value . self::FORMULA_STRING_QUOTE;
         } elseif ((is_float($value)) && ((is_nan($value)) || (is_infinite($value)))) {
             //    Convert numeric errors to NaN error
+<<<<<<< HEAD
             return Information\ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $value;
@@ -3366,7 +3672,11 @@ class Calculation
             }
             //    Convert numeric errors to NAN error
         } elseif ((is_float($value)) && ((is_nan($value)) || (is_infinite($value)))) {
+<<<<<<< HEAD
             return Information\ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $value;
@@ -3435,7 +3745,11 @@ class Calculation
             self::$returnArrayAsType = $returnArrayAsType;
             $testResult = Functions::flattenArray($result);
             if (self::$returnArrayAsType == self::RETURN_ARRAY_AS_ERROR) {
+<<<<<<< HEAD
                 return Information\ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             }
             //    If there's only a single cell in the array, then we allow it
             if (count($testResult) != 1) {
@@ -3443,13 +3757,21 @@ class Calculation
                 $r = array_keys($result);
                 $r = array_shift($r);
                 if (!is_numeric($r)) {
+<<<<<<< HEAD
                     return Information\ExcelError::VALUE();
+=======
+                    return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 if (is_array($result[$r])) {
                     $c = array_keys($result[$r]);
                     $c = array_shift($c);
                     if (!is_numeric($c)) {
+<<<<<<< HEAD
                         return Information\ExcelError::VALUE();
+=======
+                        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                 }
             }
@@ -3460,7 +3782,11 @@ class Calculation
         if ($result === null && $cell->getWorksheet()->getSheetView()->getShowZeros()) {
             return 0;
         } elseif ((is_float($result)) && ((is_nan($result)) || (is_infinite($result)))) {
+<<<<<<< HEAD
             return Information\ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $result;
@@ -3536,11 +3862,19 @@ class Calculation
      */
     public function getValueFromCache(string $cellReference, &$cellValue): bool
     {
+<<<<<<< HEAD
         $this->debugLog->writeDebugLog('Testing cache value for cell %s', $cellReference);
         // Is calculation cacheing enabled?
         // If so, is the required value present in calculation cache?
         if (($this->calculationCacheEnabled) && (isset($this->calculationCache[$cellReference]))) {
             $this->debugLog->writeDebugLog('Retrieving value for cell %s from cache', $cellReference);
+=======
+        $this->debugLog->writeDebugLog("Testing cache value for cell {$cellReference}");
+        // Is calculation cacheing enabled?
+        // If so, is the required value present in calculation cache?
+        if (($this->calculationCacheEnabled) && (isset($this->calculationCache[$cellReference]))) {
+            $this->debugLog->writeDebugLog("Retrieving value for cell {$cellReference} from cache");
+>>>>>>> forked/LAE_400_PACKAGE
             // Return the cached result
 
             $cellValue = $this->calculationCache[$cellReference];
@@ -3602,7 +3936,11 @@ class Calculation
         if (($cellID !== null) && ($this->getValueFromCache($wsCellReference, $cellValue))) {
             return $cellValue;
         }
+<<<<<<< HEAD
         $this->debugLog->writeDebugLog('Evaluating formula for cell %s', $wsCellReference);
+=======
+        $this->debugLog->writeDebugLog("Evaluating formula for cell {$wsCellReference}");
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (($wsTitle[0] !== "\x00") && ($this->cyclicReferenceStack->onStack($wsCellReference))) {
             if ($this->cyclicFormulaCount <= 0) {
@@ -3624,7 +3962,11 @@ class Calculation
             }
         }
 
+<<<<<<< HEAD
         $this->debugLog->writeDebugLog('Formula for cell %s is %s', $wsCellReference, $formula);
+=======
+        $this->debugLog->writeDebugLog("Formula for cell {$wsCellReference} is {$formula}");
+>>>>>>> forked/LAE_400_PACKAGE
         //    Parse the formula onto the token stack and calculate the value
         $this->cyclicReferenceStack->push($wsCellReference);
 
@@ -3832,8 +4174,11 @@ class Calculation
                 return self::FORMULA_STRING_QUOTE . $value . self::FORMULA_STRING_QUOTE;
             } elseif (is_bool($value)) {
                 return ($value) ? self::$localeBoolean['TRUE'] : self::$localeBoolean['FALSE'];
+<<<<<<< HEAD
             } elseif ($value === null) {
                 return self::$localeBoolean['NULL'];
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -3887,11 +4232,19 @@ class Calculation
      */
     private function convertMatrixReferences($formula)
     {
+<<<<<<< HEAD
         static $matrixReplaceFrom = [self::FORMULA_OPEN_MATRIX_BRACE, ';', self::FORMULA_CLOSE_MATRIX_BRACE];
         static $matrixReplaceTo = ['MKMATRIX(MKMATRIX(', '),MKMATRIX(', '))'];
 
         //    Convert any Excel matrix references to the MKMATRIX() function
         if (strpos($formula, self::FORMULA_OPEN_MATRIX_BRACE) !== false) {
+=======
+        static $matrixReplaceFrom = [self::FORMULA_OPEN_FUNCTION_BRACE, ';', self::FORMULA_CLOSE_FUNCTION_BRACE];
+        static $matrixReplaceTo = ['MKMATRIX(MKMATRIX(', '),MKMATRIX(', '))'];
+
+        //    Convert any Excel matrix references to the MKMATRIX() function
+        if (strpos($formula, self::FORMULA_OPEN_FUNCTION_BRACE) !== false) {
+>>>>>>> forked/LAE_400_PACKAGE
             //    If there is the possibility of braces within a quoted string, then we don't treat those as matrix indicators
             if (strpos($formula, self::FORMULA_STRING_QUOTE) !== false) {
                 //    So instead we skip replacing in any quoted strings by only replacing in every other array element after we've exploded
@@ -3899,6 +4252,7 @@ class Calculation
                 $temp = explode(self::FORMULA_STRING_QUOTE, $formula);
                 //    Open and Closed counts used for trapping mismatched braces in the formula
                 $openCount = $closeCount = 0;
+<<<<<<< HEAD
                 $notWithinQuotes = false;
                 foreach ($temp as &$value) {
                     //    Only count/replace in alternating array entries
@@ -3906,6 +4260,14 @@ class Calculation
                     if ($notWithinQuotes === true) {
                         $openCount += substr_count($value, self::FORMULA_OPEN_MATRIX_BRACE);
                         $closeCount += substr_count($value, self::FORMULA_CLOSE_MATRIX_BRACE);
+=======
+                $i = false;
+                foreach ($temp as &$value) {
+                    //    Only count/replace in alternating array entries
+                    if ($i = !$i) {
+                        $openCount += substr_count($value, self::FORMULA_OPEN_FUNCTION_BRACE);
+                        $closeCount += substr_count($value, self::FORMULA_CLOSE_FUNCTION_BRACE);
+>>>>>>> forked/LAE_400_PACKAGE
                         $value = str_replace($matrixReplaceFrom, $matrixReplaceTo, $value);
                     }
                 }
@@ -3914,8 +4276,13 @@ class Calculation
                 $formula = implode(self::FORMULA_STRING_QUOTE, $temp);
             } else {
                 //    If there's no quoted strings, then we do a simple count/replace
+<<<<<<< HEAD
                 $openCount = substr_count($formula, self::FORMULA_OPEN_MATRIX_BRACE);
                 $closeCount = substr_count($formula, self::FORMULA_CLOSE_MATRIX_BRACE);
+=======
+                $openCount = substr_count($formula, self::FORMULA_OPEN_FUNCTION_BRACE);
+                $closeCount = substr_count($formula, self::FORMULA_CLOSE_FUNCTION_BRACE);
+>>>>>>> forked/LAE_400_PACKAGE
                 $formula = str_replace($matrixReplaceFrom, $matrixReplaceTo, $formula);
             }
             //    Trap for mismatched braces and trigger an appropriate error
@@ -3945,7 +4312,11 @@ class Calculation
         '*' => 0, '/' => 0, //    Multiplication and Division
         '+' => 0, '-' => 0, //    Addition and Subtraction
         '&' => 0, //    Concatenation
+<<<<<<< HEAD
         '∪' => 0, '∩' => 0, ':' => 0, //    Union, Intersect and Range
+=======
+        '|' => 0, ':' => 0, //    Intersect and Range
+>>>>>>> forked/LAE_400_PACKAGE
         '>' => 0, '<' => 0, '=' => 0, '>=' => 0, '<=' => 0, '<>' => 0, //    Comparison
     ];
 
@@ -3957,9 +4328,14 @@ class Calculation
     //    This list includes all valid operators, whether binary (including boolean) or unary (such as %)
     //    Array key is the operator, the value is its precedence
     private static $operatorPrecedence = [
+<<<<<<< HEAD
         ':' => 9, //    Range
         '∩' => 8, //    Intersect
         '∪' => 7, //    Union
+=======
+        ':' => 8, //    Range
+        '|' => 7, //    Intersect
+>>>>>>> forked/LAE_400_PACKAGE
         '~' => 6, //    Negation
         '%' => 5, //    Percentage
         '^' => 4, //    Exponentiation
@@ -3986,12 +4362,21 @@ class Calculation
         //        so we store the parent worksheet so that we can re-attach it when necessary
         $pCellParent = ($cell !== null) ? $cell->getWorksheet() : null;
 
+<<<<<<< HEAD
         $regexpMatchString = '/^(' . self::CALCULATION_REGEXP_STRING .
                                 '|' . self::CALCULATION_REGEXP_FUNCTION .
                                 '|' . self::CALCULATION_REGEXP_CELLREF .
                                 '|' . self::CALCULATION_REGEXP_COLUMN_RANGE .
                                 '|' . self::CALCULATION_REGEXP_ROW_RANGE .
                                 '|' . self::CALCULATION_REGEXP_NUMBER .
+=======
+        $regexpMatchString = '/^(' . self::CALCULATION_REGEXP_FUNCTION .
+                                '|' . self::CALCULATION_REGEXP_CELLREF .
+            '|' . self::CALCULATION_REGEXP_COLUMN_RANGE .
+            '|' . self::CALCULATION_REGEXP_ROW_RANGE .
+                                '|' . self::CALCULATION_REGEXP_NUMBER .
+                                '|' . self::CALCULATION_REGEXP_STRING .
+>>>>>>> forked/LAE_400_PACKAGE
                                 '|' . self::CALCULATION_REGEXP_OPENBRACE .
                                 '|' . self::CALCULATION_REGEXP_DEFINEDNAME .
                                 '|' . self::CALCULATION_REGEXP_ERROR .
@@ -3999,19 +4384,69 @@ class Calculation
 
         //    Start with initialisation
         $index = 0;
+<<<<<<< HEAD
         $stack = new Stack($this->branchPruner);
+=======
+        $stack = new Stack();
+>>>>>>> forked/LAE_400_PACKAGE
         $output = [];
         $expectingOperator = false; //    We use this test in syntax-checking the expression to determine when a
         //        - is a negation or + is a positive operator rather than an operation
         $expectingOperand = false; //    We use this test in syntax-checking the expression to determine whether an operand
         //        should be null in a function call
 
+<<<<<<< HEAD
+=======
+        // IF branch pruning
+        // currently pending storeKey (last item of the storeKeysStack
+        $pendingStoreKey = null;
+        // stores a list of storeKeys (string[])
+        $pendingStoreKeysStack = [];
+        $expectingConditionMap = []; // ['storeKey' => true, ...]
+        $expectingThenMap = []; // ['storeKey' => true, ...]
+        $expectingElseMap = []; // ['storeKey' => true, ...]
+        $parenthesisDepthMap = []; // ['storeKey' => 4, ...]
+
+>>>>>>> forked/LAE_400_PACKAGE
         //    The guts of the lexical parser
         //    Loop through the formula extracting each operator and operand in turn
         while (true) {
             // Branch pruning: we adapt the output item to the context (it will
             // be used to limit its computation)
+<<<<<<< HEAD
             $this->branchPruner->initialiseForLoop();
+=======
+            $currentCondition = null;
+            $currentOnlyIf = null;
+            $currentOnlyIfNot = null;
+            $previousStoreKey = null;
+            $pendingStoreKey = end($pendingStoreKeysStack);
+
+            if ($this->branchPruningEnabled) {
+                // this is a condition ?
+                if (isset($expectingConditionMap[$pendingStoreKey]) && $expectingConditionMap[$pendingStoreKey]) {
+                    $currentCondition = $pendingStoreKey;
+                    $stackDepth = count($pendingStoreKeysStack);
+                    if ($stackDepth > 1) { // nested if
+                        $previousStoreKey = $pendingStoreKeysStack[$stackDepth - 2];
+                    }
+                }
+                if (isset($expectingThenMap[$pendingStoreKey]) && $expectingThenMap[$pendingStoreKey]) {
+                    $currentOnlyIf = $pendingStoreKey;
+                } elseif (isset($previousStoreKey)) {
+                    if (isset($expectingThenMap[$previousStoreKey]) && $expectingThenMap[$previousStoreKey]) {
+                        $currentOnlyIf = $previousStoreKey;
+                    }
+                }
+                if (isset($expectingElseMap[$pendingStoreKey]) && $expectingElseMap[$pendingStoreKey]) {
+                    $currentOnlyIfNot = $pendingStoreKey;
+                } elseif (isset($previousStoreKey)) {
+                    if (isset($expectingElseMap[$previousStoreKey]) && $expectingElseMap[$previousStoreKey]) {
+                        $currentOnlyIfNot = $previousStoreKey;
+                    }
+                }
+            }
+>>>>>>> forked/LAE_400_PACKAGE
 
             $opCharacter = $formula[$index]; //    Get the first character of the value at the current index position
 
@@ -4021,6 +4456,7 @@ class Calculation
             //    Find out if we're currently at the beginning of a number, variable, cell reference, function, parenthesis or operand
             $isOperandOrFunction = (bool) preg_match($regexpMatchString, substr($formula, $index), $match);
 
+<<<<<<< HEAD
             $expectingOperatorCopy = $expectingOperator;
             if ($opCharacter == '-' && !$expectingOperator) {                //    Is it a negation instead of a minus?
                 //    Put a negation on the stack
@@ -4033,6 +4469,19 @@ class Calculation
             } elseif ($opCharacter == '+' && !$expectingOperator) {            //    Positive (unary plus rather than binary operator plus) can be discarded?
                 ++$index; //    Drop the redundant plus symbol
             } elseif ((($opCharacter == '~') || ($opCharacter == '∩') || ($opCharacter == '∪')) && (!$isOperandOrFunction)) {    //    We have to explicitly deny a tilde, union or intersect because they are legal
+=======
+            if ($opCharacter == '-' && !$expectingOperator) {                //    Is it a negation instead of a minus?
+                //    Put a negation on the stack
+                $stack->push('Unary Operator', '~', null, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+                ++$index; //        and drop the negation symbol
+            } elseif ($opCharacter == '%' && $expectingOperator) {
+                //    Put a percentage on the stack
+                $stack->push('Unary Operator', '%', null, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+                ++$index;
+            } elseif ($opCharacter == '+' && !$expectingOperator) {            //    Positive (unary plus rather than binary operator plus) can be discarded?
+                ++$index; //    Drop the redundant plus symbol
+            } elseif ((($opCharacter == '~') || ($opCharacter == '|')) && (!$isOperandOrFunction)) {    //    We have to explicitly deny a tilde or pipe, because they are legal
+>>>>>>> forked/LAE_400_PACKAGE
                 return $this->raiseFormulaError("Formula Error: Illegal character '~'"); //        on the stack but not in the input expression
             } elseif ((isset(self::$operators[$opCharacter]) || $isOperandOrFunction) && $expectingOperator) {    //    Are we putting an operator on the stack?
                 while (
@@ -4045,6 +4494,7 @@ class Calculation
                 }
 
                 //    Finally put our current operator onto the stack
+<<<<<<< HEAD
                 $stack->push('Binary Operator', $opCharacter);
 
                 ++$index;
@@ -4052,6 +4502,15 @@ class Calculation
             } elseif ($opCharacter == ')' && $expectingOperator) { //    Are we expecting to close a parenthesis?
                 $expectingOperand = false;
                 while (($o2 = $stack->pop()) && $o2['value'] !== '(') { //    Pop off the stack back to the last (
+=======
+                $stack->push('Binary Operator', $opCharacter, null, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+
+                ++$index;
+                $expectingOperator = false;
+            } elseif ($opCharacter == ')' && $expectingOperator) {            //    Are we expecting to close a parenthesis?
+                $expectingOperand = false;
+                while (($o2 = $stack->pop()) && $o2['value'] != '(') {        //    Pop off the stack back to the last (
+>>>>>>> forked/LAE_400_PACKAGE
                     if ($o2 === null) {
                         return $this->raiseFormulaError('Formula Error: Unexpected closing brace ")"');
                     }
@@ -4061,6 +4520,7 @@ class Calculation
 
                 // Branch pruning we decrease the depth whether is it a function
                 // call or a parenthesis
+<<<<<<< HEAD
                 $this->branchPruner->decrementDepth();
 
                 if (is_array($d) && preg_match('/^' . self::CALCULATION_REGEXP_FUNCTION . '$/miu', $d['value'], $matches)) {
@@ -4069,11 +4529,35 @@ class Calculation
                         $this->branchPruner->closingBrace($d['value']);
                     } catch (Exception $e) {
                         return $this->raiseFormulaError($e->getMessage());
+=======
+                if (!empty($pendingStoreKey)) {
+                    --$parenthesisDepthMap[$pendingStoreKey];
+                }
+
+                if (is_array($d) && preg_match('/^' . self::CALCULATION_REGEXP_FUNCTION . '$/miu', $d['value'], $matches)) {    //    Did this parenthesis just close a function?
+                    if (!empty($pendingStoreKey) && $parenthesisDepthMap[$pendingStoreKey] == -1) {
+                        // we are closing an IF(
+                        if ($d['value'] != 'IF(') {
+                            return $this->raiseFormulaError('Parser bug we should be in an "IF("');
+                        }
+                        if ($expectingConditionMap[$pendingStoreKey]) {
+                            return $this->raiseFormulaError('We should not be expecting a condition');
+                        }
+                        $expectingThenMap[$pendingStoreKey] = false;
+                        $expectingElseMap[$pendingStoreKey] = false;
+                        --$parenthesisDepthMap[$pendingStoreKey];
+                        array_pop($pendingStoreKeysStack);
+                        unset($pendingStoreKey);
+>>>>>>> forked/LAE_400_PACKAGE
                     }
 
                     $functionName = $matches[1]; //    Get the function name
                     $d = $stack->pop();
+<<<<<<< HEAD
                     $argumentCount = $d['value'] ?? 0; //    See how many arguments there were (argument count is the next value stored on the stack)
+=======
+                    $argumentCount = $d['value']; //    See how many arguments there were (argument count is the next value stored on the stack)
+>>>>>>> forked/LAE_400_PACKAGE
                     $output[] = $d; //    Dump the argument count on the output
                     $output[] = $stack->pop(); //    Pop the function and push onto the output
                     if (isset(self::$controlFunctions[$functionName])) {
@@ -4131,6 +4615,7 @@ class Calculation
                     }
                 }
                 ++$index;
+<<<<<<< HEAD
             } elseif ($opCharacter == ',') { // Is this the separator for function arguments?
                 try {
                     $this->branchPruner->argumentSeparator();
@@ -4139,6 +4624,25 @@ class Calculation
                 }
 
                 while (($o2 = $stack->pop()) && $o2['value'] !== '(') {        //    Pop off the stack back to the last (
+=======
+            } elseif ($opCharacter == ',') {            //    Is this the separator for function arguments?
+                if (
+                    !empty($pendingStoreKey) &&
+                    $parenthesisDepthMap[$pendingStoreKey] == 0
+                ) {
+                    // We must go to the IF next argument
+                    if ($expectingConditionMap[$pendingStoreKey]) {
+                        $expectingConditionMap[$pendingStoreKey] = false;
+                        $expectingThenMap[$pendingStoreKey] = true;
+                    } elseif ($expectingThenMap[$pendingStoreKey]) {
+                        $expectingThenMap[$pendingStoreKey] = false;
+                        $expectingElseMap[$pendingStoreKey] = true;
+                    } elseif ($expectingElseMap[$pendingStoreKey]) {
+                        return $this->raiseFormulaError('Reaching fourth argument of an IF');
+                    }
+                }
+                while (($o2 = $stack->pop()) && $o2['value'] != '(') {        //    Pop off the stack back to the last (
+>>>>>>> forked/LAE_400_PACKAGE
                     if ($o2 === null) {
                         return $this->raiseFormulaError('Formula Error: Unexpected ,');
                     }
@@ -4147,6 +4651,7 @@ class Calculation
                 //    If we've a comma when we're expecting an operand, then what we actually have is a null operand;
                 //        so push a null onto the stack
                 if (($expectingOperand) || (!$expectingOperator)) {
+<<<<<<< HEAD
                     $output[] = ['type' => 'Empty Argument', 'value' => self::$excelConstants['NULL'], 'reference' => 'NULL'];
                 }
                 // make sure there was a function
@@ -4166,22 +4671,50 @@ class Calculation
                 $stack->pushStackItem($d);
                 $stack->push('Brace', '('); // put the ( back on, we'll need to pop back to it again
 
+=======
+                    $output[] = ['type' => 'Empty Argument', 'value' => self::$excelConstants['NULL'], 'reference' => null];
+                }
+                // make sure there was a function
+                $d = $stack->last(2);
+                if (!preg_match('/^' . self::CALCULATION_REGEXP_FUNCTION . '$/miu', $d['value'], $matches)) {
+                    return $this->raiseFormulaError('Formula Error: Unexpected ,');
+                }
+                $d = $stack->pop();
+                $itemStoreKey = $d['storeKey'] ?? null;
+                $itemOnlyIf = $d['onlyIf'] ?? null;
+                $itemOnlyIfNot = $d['onlyIfNot'] ?? null;
+                $stack->push($d['type'], ++$d['value'], $d['reference'], $itemStoreKey, $itemOnlyIf, $itemOnlyIfNot); // increment the argument count
+                $stack->push('Brace', '(', null, $itemStoreKey, $itemOnlyIf, $itemOnlyIfNot); // put the ( back on, we'll need to pop back to it again
+>>>>>>> forked/LAE_400_PACKAGE
                 $expectingOperator = false;
                 $expectingOperand = true;
                 ++$index;
             } elseif ($opCharacter == '(' && !$expectingOperator) {
+<<<<<<< HEAD
                 // Branch pruning: we go deeper
                 $this->branchPruner->incrementDepth();
                 $stack->push('Brace', '(', null);
                 ++$index;
             } elseif ($isOperandOrFunction && !$expectingOperatorCopy) {    // do we now have a function/variable/number?
+=======
+                if (!empty($pendingStoreKey)) { // Branch pruning: we go deeper
+                    ++$parenthesisDepthMap[$pendingStoreKey];
+                }
+                $stack->push('Brace', '(', null, $currentCondition, $currentOnlyIf, $currentOnlyIf);
+                ++$index;
+            } elseif ($isOperandOrFunction && !$expectingOperator) {    // do we now have a function/variable/number?
+>>>>>>> forked/LAE_400_PACKAGE
                 $expectingOperator = true;
                 $expectingOperand = false;
                 $val = $match[1];
                 $length = strlen($val);
 
                 if (preg_match('/^' . self::CALCULATION_REGEXP_FUNCTION . '$/miu', $val, $matches)) {
+<<<<<<< HEAD
                     $val = (string) preg_replace('/\s/u', '', $val);
+=======
+                    $val = preg_replace('/\s/u', '', $val);
+>>>>>>> forked/LAE_400_PACKAGE
                     if (isset(self::$phpSpreadsheetFunctions[strtoupper($matches[1])]) || isset(self::$controlFunctions[strtoupper($matches[1])])) {    // it's a function
                         $valToUpper = strtoupper($val);
                     } else {
@@ -4189,6 +4722,7 @@ class Calculation
                     }
                     // here $matches[1] will contain values like "IF"
                     // and $val "IF("
+<<<<<<< HEAD
 
                     $this->branchPruner->functionCall($valToUpper);
 
@@ -4204,12 +4738,38 @@ class Calculation
                     }
                     $stack->push('Brace', '(');
                 } elseif (preg_match('/^' . self::CALCULATION_REGEXP_CELLREF . '$/miu', $val, $matches)) {
+=======
+                    if ($this->branchPruningEnabled && ($valToUpper == 'IF(')) { // we handle a new if
+                        $pendingStoreKey = $this->getUnusedBranchStoreKey();
+                        $pendingStoreKeysStack[] = $pendingStoreKey;
+                        $expectingConditionMap[$pendingStoreKey] = true;
+                        $parenthesisDepthMap[$pendingStoreKey] = 0;
+                    } else { // this is not an if but we go deeper
+                        if (!empty($pendingStoreKey) && array_key_exists($pendingStoreKey, $parenthesisDepthMap)) {
+                            ++$parenthesisDepthMap[$pendingStoreKey];
+                        }
+                    }
+
+                    $stack->push('Function', $valToUpper, null, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+                    // tests if the function is closed right after opening
+                    $ax = preg_match('/^\s*\)/u', substr($formula, $index + $length));
+                    if ($ax) {
+                        $stack->push('Operand Count for Function ' . $valToUpper . ')', 0, null, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+                        $expectingOperator = true;
+                    } else {
+                        $stack->push('Operand Count for Function ' . $valToUpper . ')', 1, null, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+                        $expectingOperator = false;
+                    }
+                    $stack->push('Brace', '(');
+                } elseif (preg_match('/^' . self::CALCULATION_REGEXP_CELLREF . '$/i', $val, $matches)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     //    Watch for this case-change when modifying to allow cell references in different worksheets...
                     //    Should only be applied to the actual cell column, not the worksheet name
                     //    If the last entry on the stack was a : operator, then we have a cell range reference
                     $testPrevOp = $stack->last(1);
                     if ($testPrevOp !== null && $testPrevOp['value'] === ':') {
                         //    If we have a worksheet reference, then we're playing with a 3D reference
+<<<<<<< HEAD
                         if ($matches[2] === '') {
                             //    Otherwise, we 'inherit' the worksheet reference from the start cell reference
                             //    The start of the cell range reference should be the last entry in $output
@@ -4219,16 +4779,27 @@ class Calculation
                                 $rangeStartCellRef = $output[count($output) - 2]['value'];
                             }
                             preg_match('/^' . self::CALCULATION_REGEXP_CELLREF . '$/miu', $rangeStartCellRef, $rangeStartMatches);
+=======
+                        if ($matches[2] == '') {
+                            //    Otherwise, we 'inherit' the worksheet reference from the start cell reference
+                            //    The start of the cell range reference should be the last entry in $output
+                            $rangeStartCellRef = $output[count($output) - 1]['value'];
+                            preg_match('/^' . self::CALCULATION_REGEXP_CELLREF . '$/i', $rangeStartCellRef, $rangeStartMatches);
+>>>>>>> forked/LAE_400_PACKAGE
                             if ($rangeStartMatches[2] > '') {
                                 $val = $rangeStartMatches[2] . '!' . $val;
                             }
                         } else {
                             $rangeStartCellRef = $output[count($output) - 1]['value'];
+<<<<<<< HEAD
                             if ($rangeStartCellRef === ':') {
                                 // Do we have chained range operators?
                                 $rangeStartCellRef = $output[count($output) - 2]['value'];
                             }
                             preg_match('/^' . self::CALCULATION_REGEXP_CELLREF . '$/miu', $rangeStartCellRef, $rangeStartMatches);
+=======
+                            preg_match('/^' . self::CALCULATION_REGEXP_CELLREF . '$/i', $rangeStartCellRef, $rangeStartMatches);
+>>>>>>> forked/LAE_400_PACKAGE
                             if ($rangeStartMatches[2] !== $matches[2]) {
                                 return $this->raiseFormulaError('3D Range references are not yet supported');
                             }
@@ -4237,12 +4808,20 @@ class Calculation
                         $worksheet = $pCellParent->getTitle();
                         $val = "'{$worksheet}'!{$val}";
                     }
+<<<<<<< HEAD
                     // unescape any apostrophes or double quotes in worksheet name
                     $val = str_replace(["''", '""'], ["'", '"'], $val);
                     $outputItem = $stack->getStackItem('Cell Reference', $val, $val);
 
                     $output[] = $outputItem;
                 } else { // it's a variable, constant, string, number or boolean
+=======
+
+                    $outputItem = $stack->getStackItem('Cell Reference', $val, $val, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+
+                    $output[] = $outputItem;
+                } else {    // it's a variable, constant, string, number or boolean
+>>>>>>> forked/LAE_400_PACKAGE
                     $localeConstant = false;
                     $stackItemType = 'Value';
                     $stackItemReference = null;
@@ -4251,6 +4830,7 @@ class Calculation
                     $testPrevOp = $stack->last(1);
                     if ($testPrevOp !== null && $testPrevOp['value'] === ':') {
                         $stackItemType = 'Cell Reference';
+<<<<<<< HEAD
 
                         if (
                             !is_numeric($val) &&
@@ -4310,6 +4890,41 @@ class Calculation
                             }
                             $stackItemReference = $val;
                         }
+=======
+                        $startRowColRef = $output[count($output) - 1]['value'];
+                        [$rangeWS1, $startRowColRef] = Worksheet::extractSheetTitle($startRowColRef, true);
+                        $rangeSheetRef = $rangeWS1;
+                        if ($rangeWS1 !== '') {
+                            $rangeWS1 .= '!';
+                        }
+                        $rangeSheetRef = trim($rangeSheetRef, "'");
+                        [$rangeWS2, $val] = Worksheet::extractSheetTitle($val, true);
+                        if ($rangeWS2 !== '') {
+                            $rangeWS2 .= '!';
+                        } else {
+                            $rangeWS2 = $rangeWS1;
+                        }
+
+                        $refSheet = $pCellParent;
+                        if ($pCellParent !== null && $rangeSheetRef !== '' && $rangeSheetRef !== $pCellParent->getTitle()) {
+                            $refSheet = $pCellParent->getParent()->getSheetByName($rangeSheetRef);
+                        }
+
+                        if (ctype_digit($val) && $val <= 1048576) {
+                            //    Row range
+                            $stackItemType = 'Row Reference';
+                            /** @var int $valx */
+                            $valx = $val;
+                            $endRowColRef = ($refSheet !== null) ? $refSheet->getHighestDataColumn($valx) : 'XFD'; //    Max 16,384 columns for Excel2007
+                            $val = "{$rangeWS2}{$endRowColRef}{$val}";
+                        } elseif (ctype_alpha($val) && strlen($val) <= 3) {
+                            //    Column range
+                            $stackItemType = 'Column Reference';
+                            $endRowColRef = ($refSheet !== null) ? $refSheet->getHighestDataRow($val) : 1048576; //    Max 1,048,576 rows for Excel2007
+                            $val = "{$rangeWS2}{$val}{$endRowColRef}";
+                        }
+                        $stackItemReference = $val;
+>>>>>>> forked/LAE_400_PACKAGE
                     } elseif ($opCharacter == self::FORMULA_STRING_QUOTE) {
                         //    UnEscape any quotes within the string
                         $val = self::wrapResult(str_replace('""', self::FORMULA_STRING_QUOTE, self::unwrapResult($val)));
@@ -4326,8 +4941,11 @@ class Calculation
                         $val = $rowRangeReference[1];
                         $length = strlen($rowRangeReference[1]);
                         $stackItemType = 'Row Reference';
+<<<<<<< HEAD
                         // unescape any apostrophes or double quotes in worksheet name
                         $val = str_replace(["''", '""'], ["'", '"'], $val);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                         $column = 'A';
                         if (($testPrevOp !== null && $testPrevOp['value'] === ':') && $pCellParent !== null) {
                             $column = $pCellParent->getHighestDataColumn($val);
@@ -4340,8 +4958,11 @@ class Calculation
                         $val = $columnRangeReference[1];
                         $length = strlen($val);
                         $stackItemType = 'Column Reference';
+<<<<<<< HEAD
                         // unescape any apostrophes or double quotes in worksheet name
                         $val = str_replace(["''", '""'], ["'", '"'], $val);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                         $row = '1';
                         if (($testPrevOp !== null && $testPrevOp['value'] === ':') && $pCellParent !== null) {
                             $row = $pCellParent->getHighestDataRow($val);
@@ -4359,18 +4980,30 @@ class Calculation
                         }
                     }
 
+<<<<<<< HEAD
                     $details = $stack->getStackItem($stackItemType, $val, $stackItemReference);
+=======
+                    $details = $stack->getStackItem($stackItemType, $val, $stackItemReference, $currentCondition, $currentOnlyIf, $currentOnlyIfNot);
+>>>>>>> forked/LAE_400_PACKAGE
                     if ($localeConstant) {
                         $details['localeValue'] = $localeConstant;
                     }
                     $output[] = $details;
                 }
                 $index += $length;
+<<<<<<< HEAD
             } elseif ($opCharacter == '$') { // absolute row or column range
                 ++$index;
             } elseif ($opCharacter == ')') { // miscellaneous error checking
                 if ($expectingOperand) {
                     $output[] = ['type' => 'Empty Argument', 'value' => self::$excelConstants['NULL'], 'reference' => 'NULL'];
+=======
+            } elseif ($opCharacter == '$') {    // absolute row or column range
+                ++$index;
+            } elseif ($opCharacter == ')') {    // miscellaneous error checking
+                if ($expectingOperand) {
+                    $output[] = ['type' => 'Empty Argument', 'value' => self::$excelConstants['NULL'], 'reference' => null];
+>>>>>>> forked/LAE_400_PACKAGE
                     $expectingOperand = false;
                     $expectingOperator = true;
                 } else {
@@ -4397,12 +5030,17 @@ class Calculation
             }
 
             if ($formula[$index] == ' ') {
+<<<<<<< HEAD
                 while ($formula[$index] === ' ') {
+=======
+                while ($formula[$index] == ' ') {
+>>>>>>> forked/LAE_400_PACKAGE
                     ++$index;
                 }
 
                 //    If we're expecting an operator, but only have a space between the previous and next operands (and both are
                 //        Cell References) then we have an INTERSECTION operator
+<<<<<<< HEAD
                 $countOutputMinus1 = count($output) - 1;
                 if (
                     ($expectingOperator) &&
@@ -4414,6 +5052,15 @@ class Calculation
                         ($output[$countOutputMinus1]['type'] === 'Cell Reference') ||
                         (preg_match('/^' . self::CALCULATION_REGEXP_DEFINEDNAME . '.*/miu', substr($formula, $index), $match)) &&
                             ($output[$countOutputMinus1]['type'] === 'Defined Name' || $output[$countOutputMinus1]['type'] === 'Value')
+=======
+                if (
+                    ($expectingOperator) &&
+                    (
+                        (preg_match('/^' . self::CALCULATION_REGEXP_CELLREF . '.*/Ui', substr($formula, $index), $match)) &&
+                        ($output[count($output) - 1]['type'] == 'Cell Reference') ||
+                        (preg_match('/^' . self::CALCULATION_REGEXP_DEFINEDNAME . '.*/miu', substr($formula, $index), $match)) &&
+                            ($output[count($output) - 1]['type'] == 'Defined Name' || $output[count($output) - 1]['type'] == 'Value')
+>>>>>>> forked/LAE_400_PACKAGE
                     )
                 ) {
                     while (
@@ -4424,14 +5071,22 @@ class Calculation
                     ) {
                         $output[] = $stack->pop(); //    Swap operands and higher precedence operators from the stack to the output
                     }
+<<<<<<< HEAD
                     $stack->push('Binary Operator', '∩'); //    Put an Intersect Operator on the stack
+=======
+                    $stack->push('Binary Operator', '|'); //    Put an Intersect Operator on the stack
+>>>>>>> forked/LAE_400_PACKAGE
                     $expectingOperator = false;
                 }
             }
         }
 
+<<<<<<< HEAD
         while (($op = $stack->pop()) !== null) {
             // pop everything off the stack and push onto output
+=======
+        while (($op = $stack->pop()) !== null) {    // pop everything off the stack and push onto output
+>>>>>>> forked/LAE_400_PACKAGE
             if ((is_array($op) && $op['value'] == '(') || ($op === '(')) {
                 return $this->raiseFormulaError("Formula Error: Expecting ')'"); // if there are any opening braces on the stack, then braces were unbalanced
             }
@@ -4447,12 +5102,15 @@ class Calculation
         if (($operandData['reference'] === null) && (is_array($operand))) {
             $rKeys = array_keys($operand);
             $rowKey = array_shift($rKeys);
+<<<<<<< HEAD
             if (is_array($operand[$rowKey]) === false) {
                 $operandData['value'] = $operand[$rowKey];
 
                 return $operand[$rowKey];
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $cKeys = array_keys(array_keys($operand[$rowKey]));
             $colKey = array_shift($cKeys);
             if (ctype_upper("$colKey")) {
@@ -4473,7 +5131,11 @@ class Calculation
      */
     private function processTokenStack($tokens, $cellID = null, ?Cell $cell = null)
     {
+<<<<<<< HEAD
         if ($tokens === false) {
+=======
+        if ($tokens == false) {
+>>>>>>> forked/LAE_400_PACKAGE
             return false;
         }
 
@@ -4481,7 +5143,11 @@ class Calculation
         //        so we store the parent cell collection so that we can re-attach it when necessary
         $pCellWorksheet = ($cell !== null) ? $cell->getWorksheet() : null;
         $pCellParent = ($cell !== null) ? $cell->getParent() : null;
+<<<<<<< HEAD
         $stack = new Stack($this->branchPruner);
+=======
+        $stack = new Stack();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Stores branches that have been pruned
         $fakedForBranchPruning = [];
@@ -4490,6 +5156,10 @@ class Calculation
         //    Loop through each token in turn
         foreach ($tokens as $tokenData) {
             $token = $tokenData['value'];
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
             // Branch pruning: skip useless resolutions
             $storeKey = $tokenData['storeKey'] ?? null;
             if ($this->branchPruningEnabled && isset($tokenData['onlyIf'])) {
@@ -4499,12 +5169,25 @@ class Calculation
                     true : (bool) Functions::flattenSingleValue($storeValue);
                 if (is_array($storeValue)) {
                     $wrappedItem = end($storeValue);
+<<<<<<< HEAD
                     $storeValue = is_array($wrappedItem) ? end($wrappedItem) : $wrappedItem;
                 }
 
                 if (
                     (isset($storeValue) || $tokenData['reference'] === 'NULL')
                     && (!$storeValueAsBool || ErrorValue::isError($storeValue) || ($storeValue === 'Pruned branch'))
+=======
+                    $storeValue = end($wrappedItem);
+                }
+
+                if (
+                    isset($storeValue)
+                    && (
+                        !$storeValueAsBool
+                        || Functions::isError($storeValue)
+                        || ($storeValue === 'Pruned branch')
+                    )
+>>>>>>> forked/LAE_400_PACKAGE
                 ) {
                     // If branching value is not true, we don't need to compute
                     if (!isset($fakedForBranchPruning['onlyIf-' . $onlyIfStoreKey])) {
@@ -4531,12 +5214,24 @@ class Calculation
                     true : (bool) Functions::flattenSingleValue($storeValue);
                 if (is_array($storeValue)) {
                     $wrappedItem = end($storeValue);
+<<<<<<< HEAD
                     $storeValue = is_array($wrappedItem) ? end($wrappedItem) : $wrappedItem;
                 }
 
                 if (
                     (isset($storeValue) || $tokenData['reference'] === 'NULL')
                     && ($storeValueAsBool || ErrorValue::isError($storeValue) || ($storeValue === 'Pruned branch'))
+=======
+                    $storeValue = end($wrappedItem);
+                }
+                if (
+                    isset($storeValue)
+                    && (
+                        $storeValueAsBool
+                        || Functions::isError($storeValue)
+                        || ($storeValue === 'Pruned branch')
+                    )
+>>>>>>> forked/LAE_400_PACKAGE
                 ) {
                     // If branching value is true, we don't need to compute
                     if (!isset($fakedForBranchPruning['onlyIfNot-' . $onlyIfNotStoreKey])) {
@@ -4571,13 +5266,20 @@ class Calculation
 
                 //    Log what we're doing
                 if ($token == ':') {
+<<<<<<< HEAD
                     $this->debugLog->writeDebugLog('Evaluating Range %s %s %s', $this->showValue($operand1Data['reference']), $token, $this->showValue($operand2Data['reference']));
                 } else {
                     $this->debugLog->writeDebugLog('Evaluating %s %s %s', $this->showValue($operand1), $token, $this->showValue($operand2));
+=======
+                    $this->debugLog->writeDebugLog('Evaluating Range ', $this->showValue($operand1Data['reference']), ' ', $token, ' ', $this->showValue($operand2Data['reference']));
+                } else {
+                    $this->debugLog->writeDebugLog('Evaluating ', $this->showValue($operand1), ' ', $token, ' ', $this->showValue($operand2));
+>>>>>>> forked/LAE_400_PACKAGE
                 }
 
                 //    Process the operation in the appropriate manner
                 switch ($token) {
+<<<<<<< HEAD
                     // Comparison (Boolean) Operators
                     case '>': // Greater than
                     case '<': // Less than
@@ -4586,11 +5288,22 @@ class Calculation
                     case '=': // Equality
                     case '<>': // Inequality
                         $result = $this->executeBinaryComparisonOperation($operand1, $operand2, (string) $token, $stack);
+=======
+                    //    Comparison (Boolean) Operators
+                    case '>':            //    Greater than
+                    case '<':            //    Less than
+                    case '>=':            //    Greater than or Equal to
+                    case '<=':            //    Less than or Equal to
+                    case '=':            //    Equality
+                    case '<>':            //    Inequality
+                        $result = $this->executeBinaryComparisonOperation($cellID, $operand1, $operand2, $token, $stack);
+>>>>>>> forked/LAE_400_PACKAGE
                         if (isset($storeKey)) {
                             $branchStore[$storeKey] = $result;
                         }
 
                         break;
+<<<<<<< HEAD
                     // Binary Operators
                     case ':': // Range
                         if ($operand1Data['type'] === 'Defined Name') {
@@ -4605,6 +5318,14 @@ class Calculation
                             [$sheet1, $operand1Data['reference']] = Worksheet::extractSheetTitle($operand1Data['reference'], true);
                         } else {
                             $sheet1 = ($pCellWorksheet !== null) ? $pCellWorksheet->getTitle() : '';
+=======
+                    //    Binary Operators
+                    case ':':            //    Range
+                        if (strpos($operand1Data['reference'], '!') !== false) {
+                            [$sheet1, $operand1Data['reference']] = Worksheet::extractSheetTitle($operand1Data['reference'], true);
+                        } else {
+                            $sheet1 = ($pCellParent !== null) ? $pCellWorksheet->getTitle() : '';
+>>>>>>> forked/LAE_400_PACKAGE
                         }
 
                         [$sheet2, $operand2Data['reference']] = Worksheet::extractSheetTitle($operand2Data['reference'], true);
@@ -4613,23 +5334,37 @@ class Calculation
                         }
 
                         if (trim($sheet1, "'") === trim($sheet2, "'")) {
+<<<<<<< HEAD
                             if ($operand1Data['reference'] === null && $cell !== null) {
                                 if (is_array($operand1Data['value'])) {
                                     $operand1Data['reference'] = $cell->getCoordinate();
                                 } elseif ((trim($operand1Data['value']) != '') && (is_numeric($operand1Data['value']))) {
                                     $operand1Data['reference'] = $cell->getColumn() . $operand1Data['value'];
                                 } elseif (trim($operand1Data['value']) == '') {
+=======
+                            if ($operand1Data['reference'] === null) {
+                                if ((trim($operand1Data['value']) != '') && (is_numeric($operand1Data['value']))) {
+                                    $operand1Data['reference'] = $cell->getColumn() . $operand1Data['value'];
+                                } elseif (trim($operand1Data['reference']) == '') {
+>>>>>>> forked/LAE_400_PACKAGE
                                     $operand1Data['reference'] = $cell->getCoordinate();
                                 } else {
                                     $operand1Data['reference'] = $operand1Data['value'] . $cell->getRow();
                                 }
                             }
+<<<<<<< HEAD
                             if ($operand2Data['reference'] === null && $cell !== null) {
                                 if (is_array($operand2Data['value'])) {
                                     $operand2Data['reference'] = $cell->getCoordinate();
                                 } elseif ((trim($operand2Data['value']) != '') && (is_numeric($operand2Data['value']))) {
                                     $operand2Data['reference'] = $cell->getColumn() . $operand2Data['value'];
                                 } elseif (trim($operand2Data['value']) == '') {
+=======
+                            if ($operand2Data['reference'] === null) {
+                                if ((trim($operand2Data['value']) != '') && (is_numeric($operand2Data['value']))) {
+                                    $operand2Data['reference'] = $cell->getColumn() . $operand2Data['value'];
+                                } elseif (trim($operand2Data['reference']) == '') {
+>>>>>>> forked/LAE_400_PACKAGE
                                     $operand2Data['reference'] = $cell->getCoordinate();
                                 } else {
                                     $operand2Data['reference'] = $operand2Data['value'] . $cell->getRow();
@@ -4652,7 +5387,11 @@ class Calculation
 
                             $stack->push('Cell Reference', $cellValue, $cellRef);
                         } else {
+<<<<<<< HEAD
                             $stack->push('Error', Information\ExcelError::REF(), null);
+=======
+                            $stack->push('Error', Functions::REF(), null);
+>>>>>>> forked/LAE_400_PACKAGE
                         }
 
                         break;
@@ -4711,6 +5450,7 @@ class Calculation
                                 //    Perform the required operation against the operand 1 matrix, passing in operand 2
                                 $matrixResult = $matrix->concat($operand2);
                                 $result = $matrixResult->getArray();
+<<<<<<< HEAD
                                 if (isset($result[0][0])) {
                                     $result[0][0] = Shared\StringHelper::substring($result[0][0], 0, DataType::MAX_STRING_LENGTH);
                                 }
@@ -4727,6 +5467,16 @@ class Calculation
                             $result = self::FORMULA_STRING_QUOTE . str_replace('""', self::FORMULA_STRING_QUOTE, self::unwrapResult($operand1) . self::unwrapResult($operand2)) . self::FORMULA_STRING_QUOTE;
                         }
                         $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails($result));
+=======
+                            } catch (\Exception $ex) {
+                                $this->debugLog->writeDebugLog('JAMA Matrix Exception: ', $ex->getMessage());
+                                $result = '#VALUE!';
+                            }
+                        } else {
+                            $result = self::FORMULA_STRING_QUOTE . str_replace('""', self::FORMULA_STRING_QUOTE, self::unwrapResult($operand1) . self::unwrapResult($operand2)) . self::FORMULA_STRING_QUOTE;
+                        }
+                        $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($result));
+>>>>>>> forked/LAE_400_PACKAGE
                         $stack->push('Value', $result);
 
                         if (isset($storeKey)) {
@@ -4734,7 +5484,11 @@ class Calculation
                         }
 
                         break;
+<<<<<<< HEAD
                     case '∩':            //    Intersect
+=======
+                    case '|':            //    Intersect
+>>>>>>> forked/LAE_400_PACKAGE
                         $rowIntersect = array_intersect_key($operand1, $operand2);
                         $cellIntersect = $oCol = $oRow = [];
                         foreach (array_keys($rowIntersect) as $row) {
@@ -4745,28 +5499,49 @@ class Calculation
                             }
                         }
                         if (count(Functions::flattenArray($cellIntersect)) === 0) {
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails($cellIntersect));
+=======
+                            $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($cellIntersect));
+>>>>>>> forked/LAE_400_PACKAGE
                             $stack->push('Error', Functions::null(), null);
                         } else {
                             $cellRef = Coordinate::stringFromColumnIndex(min($oCol) + 1) . min($oRow) . ':' .
                                 Coordinate::stringFromColumnIndex(max($oCol) + 1) . max($oRow);
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails($cellIntersect));
+=======
+                            $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($cellIntersect));
+>>>>>>> forked/LAE_400_PACKAGE
                             $stack->push('Value', $cellIntersect, $cellRef);
                         }
 
                         break;
                 }
+<<<<<<< HEAD
             } elseif (($token === '~') || ($token === '%')) {
                 // if the token is a unary operator, pop one value off the stack, do the operation, and push it back on
+=======
+
+                // if the token is a unary operator, pop one value off the stack, do the operation, and push it back on
+            } elseif (($token === '~') || ($token === '%')) {
+>>>>>>> forked/LAE_400_PACKAGE
                 if (($arg = $stack->pop()) === null) {
                     return $this->raiseFormulaError('Internal error - Operand value missing from stack');
                 }
                 $arg = $arg['value'];
                 if ($token === '~') {
+<<<<<<< HEAD
                     $this->debugLog->writeDebugLog('Evaluating Negation of %s', $this->showValue($arg));
                     $multiplier = -1;
                 } else {
                     $this->debugLog->writeDebugLog('Evaluating Percentile of %s', $this->showValue($arg));
+=======
+                    $this->debugLog->writeDebugLog('Evaluating Negation of ', $this->showValue($arg));
+                    $multiplier = -1;
+                } else {
+                    $this->debugLog->writeDebugLog('Evaluating Percentile of ', $this->showValue($arg));
+>>>>>>> forked/LAE_400_PACKAGE
                     $multiplier = 0.01;
                 }
                 if (is_array($arg)) {
@@ -4777,10 +5552,17 @@ class Calculation
                         $matrixResult = $matrix1->arrayTimesEquals($multiplier);
                         $result = $matrixResult->getArray();
                     } catch (\Exception $ex) {
+<<<<<<< HEAD
                         $this->debugLog->writeDebugLog('JAMA Matrix Exception: %s', $ex->getMessage());
                         $result = '#VALUE!';
                     }
                     $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails($result));
+=======
+                        $this->debugLog->writeDebugLog('JAMA Matrix Exception: ', $ex->getMessage());
+                        $result = '#VALUE!';
+                    }
+                    $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($result));
+>>>>>>> forked/LAE_400_PACKAGE
                     $stack->push('Value', $result);
                     if (isset($storeKey)) {
                         $branchStore[$storeKey] = $result;
@@ -4793,8 +5575,13 @@ class Calculation
 
                 if (isset($matches[8])) {
                     if ($cell === null) {
+<<<<<<< HEAD
                         // We can't access the range, so return a REF error
                         $cellValue = Information\ExcelError::REF();
+=======
+                        //                        We can't access the range, so return a REF error
+                        $cellValue = Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
                     } else {
                         $cellRef = $matches[6] . $matches[7] . ':' . $matches[9] . $matches[10];
                         if ($matches[2] > '') {
@@ -4804,27 +5591,45 @@ class Calculation
                                 return $this->raiseFormulaError('Unable to access External Workbook');
                             }
                             $matches[2] = trim($matches[2], "\"'");
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluating Cell Range %s in worksheet %s', $cellRef, $matches[2]);
+=======
+                            $this->debugLog->writeDebugLog('Evaluating Cell Range ', $cellRef, ' in worksheet ', $matches[2]);
+>>>>>>> forked/LAE_400_PACKAGE
                             if ($pCellParent !== null) {
                                 $cellValue = $this->extractCellRange($cellRef, $this->spreadsheet->getSheetByName($matches[2]), false);
                             } else {
                                 return $this->raiseFormulaError('Unable to access Cell Reference');
                             }
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluation Result for cells %s in worksheet %s is %s', $cellRef, $matches[2], $this->showTypeDetails($cellValue));
                         } else {
                             $this->debugLog->writeDebugLog('Evaluating Cell Range %s in current worksheet', $cellRef);
+=======
+                            $this->debugLog->writeDebugLog('Evaluation Result for cells ', $cellRef, ' in worksheet ', $matches[2], ' is ', $this->showTypeDetails($cellValue));
+                        } else {
+                            $this->debugLog->writeDebugLog('Evaluating Cell Range ', $cellRef, ' in current worksheet');
+>>>>>>> forked/LAE_400_PACKAGE
                             if ($pCellParent !== null) {
                                 $cellValue = $this->extractCellRange($cellRef, $pCellWorksheet, false);
                             } else {
                                 return $this->raiseFormulaError('Unable to access Cell Reference');
                             }
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluation Result for cells %s is %s', $cellRef, $this->showTypeDetails($cellValue));
+=======
+                            $this->debugLog->writeDebugLog('Evaluation Result for cells ', $cellRef, ' is ', $this->showTypeDetails($cellValue));
+>>>>>>> forked/LAE_400_PACKAGE
                         }
                     }
                 } else {
                     if ($cell === null) {
                         // We can't access the cell, so return a REF error
+<<<<<<< HEAD
                         $cellValue = Information\ExcelError::REF();
+=======
+                        $cellValue = Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
                     } else {
                         $cellRef = $matches[6] . $matches[7];
                         if ($matches[2] > '') {
@@ -4833,7 +5638,11 @@ class Calculation
                                 //    It's a Reference to an external spreadsheet (not currently supported)
                                 return $this->raiseFormulaError('Unable to access External Workbook');
                             }
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluating Cell %s in worksheet %s', $cellRef, $matches[2]);
+=======
+                            $this->debugLog->writeDebugLog('Evaluating Cell ', $cellRef, ' in worksheet ', $matches[2]);
+>>>>>>> forked/LAE_400_PACKAGE
                             if ($pCellParent !== null) {
                                 $cellSheet = $this->spreadsheet->getSheetByName($matches[2]);
                                 if ($cellSheet && $cellSheet->cellExists($cellRef)) {
@@ -4841,21 +5650,36 @@ class Calculation
                                     $cell->attach($pCellParent);
                                 } else {
                                     $cellRef = ($cellSheet !== null) ? "'{$matches[2]}'!{$cellRef}" : $cellRef;
+<<<<<<< HEAD
                                     $cellValue = ($cellSheet !== null) ? null : Information\ExcelError::REF();
+=======
+                                    $cellValue = null;
+>>>>>>> forked/LAE_400_PACKAGE
                                 }
                             } else {
                                 return $this->raiseFormulaError('Unable to access Cell Reference');
                             }
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluation Result for cell %s in worksheet %s is %s', $cellRef, $matches[2], $this->showTypeDetails($cellValue));
                         } else {
                             $this->debugLog->writeDebugLog('Evaluating Cell %s in current worksheet', $cellRef);
                             if ($pCellParent !== null && $pCellParent->has($cellRef)) {
+=======
+                            $this->debugLog->writeDebugLog('Evaluation Result for cell ', $cellRef, ' in worksheet ', $matches[2], ' is ', $this->showTypeDetails($cellValue));
+                        } else {
+                            $this->debugLog->writeDebugLog('Evaluating Cell ', $cellRef, ' in current worksheet');
+                            if ($pCellParent->has($cellRef)) {
+>>>>>>> forked/LAE_400_PACKAGE
                                 $cellValue = $this->extractCellRange($cellRef, $pCellWorksheet, false);
                                 $cell->attach($pCellParent);
                             } else {
                                 $cellValue = null;
                             }
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluation Result for cell %s is %s', $cellRef, $this->showTypeDetails($cellValue));
+=======
+                            $this->debugLog->writeDebugLog('Evaluation Result for cell ', $cellRef, ' is ', $this->showTypeDetails($cellValue));
+>>>>>>> forked/LAE_400_PACKAGE
                         }
                     }
                 }
@@ -4864,8 +5688,14 @@ class Calculation
                 if (isset($storeKey)) {
                     $branchStore[$storeKey] = $cellValue;
                 }
+<<<<<<< HEAD
             } elseif (preg_match('/^' . self::CALCULATION_REGEXP_FUNCTION . '$/miu', $token ?? '', $matches)) {
                 // if the token is a function, pop arguments off the stack, hand them to the function, and push the result back on
+=======
+
+                // if the token is a function, pop arguments off the stack, hand them to the function, and push the result back on
+            } elseif (preg_match('/^' . self::CALCULATION_REGEXP_FUNCTION . '$/miu', $token ?? '', $matches)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 if ($pCellParent) {
                     $cell->attach($pCellParent);
                 }
@@ -4874,7 +5704,11 @@ class Calculation
                 $argCount = $stack->pop();
                 $argCount = $argCount['value'];
                 if ($functionName !== 'MKMATRIX') {
+<<<<<<< HEAD
                     $this->debugLog->writeDebugLog('Evaluating Function %s() with %s argument%s', self::localeFunc($functionName), (($argCount == 0) ? 'no' : $argCount), (($argCount == 1) ? '' : 's'));
+=======
+                    $this->debugLog->writeDebugLog('Evaluating Function ', self::localeFunc($functionName), '() with ', (($argCount == 0) ? 'no' : $argCount), ' argument', (($argCount == 1) ? '' : 's'));
+>>>>>>> forked/LAE_400_PACKAGE
                 }
                 if ((isset(self::$phpSpreadsheetFunctions[$functionName])) || (isset(self::$controlFunctions[$functionName]))) {    // function
                     $passByReference = false;
@@ -4937,7 +5771,11 @@ class Calculation
                     if ($functionName !== 'MKMATRIX') {
                         if ($this->debugLog->getWriteDebugLog()) {
                             krsort($argArrayVals);
+<<<<<<< HEAD
                             $this->debugLog->writeDebugLog('Evaluating %s ( %s )', self::localeFunc($functionName), implode(self::$localeArgumentSeparator . ' ', Functions::flattenArray($argArrayVals)));
+=======
+                            $this->debugLog->writeDebugLog('Evaluating ', self::localeFunc($functionName), '( ', implode(self::$localeArgumentSeparator . ' ', Functions::flattenArray($argArrayVals)), ' )');
+>>>>>>> forked/LAE_400_PACKAGE
                         }
                     }
 
@@ -4954,7 +5792,11 @@ class Calculation
                     $result = call_user_func_array($functionCall, $args);
 
                     if ($functionName !== 'MKMATRIX') {
+<<<<<<< HEAD
                         $this->debugLog->writeDebugLog('Evaluation Result for %s() function call is %s', self::localeFunc($functionName), $this->showTypeDetails($result));
+=======
+                        $this->debugLog->writeDebugLog('Evaluation Result for ', self::localeFunc($functionName), '() function call is ', $this->showTypeDetails($result));
+>>>>>>> forked/LAE_400_PACKAGE
                     }
                     $stack->push('Value', self::wrapResult($result));
                     if (isset($storeKey)) {
@@ -4969,20 +5811,33 @@ class Calculation
                     if (isset($storeKey)) {
                         $branchStore[$storeKey] = self::$excelConstants[$excelConstant];
                     }
+<<<<<<< HEAD
                     $this->debugLog->writeDebugLog('Evaluating Constant %s as %s', $excelConstant, $this->showTypeDetails(self::$excelConstants[$excelConstant]));
+=======
+                    $this->debugLog->writeDebugLog('Evaluating Constant ', $excelConstant, ' as ', $this->showTypeDetails(self::$excelConstants[$excelConstant]));
+>>>>>>> forked/LAE_400_PACKAGE
                 } elseif ((is_numeric($token)) || ($token === null) || (is_bool($token)) || ($token == '') || ($token[0] == self::FORMULA_STRING_QUOTE) || ($token[0] == '#')) {
                     $stack->push($tokenData['type'], $token, $tokenData['reference']);
                     if (isset($storeKey)) {
                         $branchStore[$storeKey] = $token;
                     }
+<<<<<<< HEAD
                 } elseif (preg_match('/^' . self::CALCULATION_REGEXP_DEFINEDNAME . '$/miu', $token, $matches)) {
                     // if the token is a named range or formula, evaluate it and push the result onto the stack
+=======
+                    // if the token is a named range or formula, evaluate it and push the result onto the stack
+                } elseif (preg_match('/^' . self::CALCULATION_REGEXP_DEFINEDNAME . '$/miu', $token, $matches)) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $definedName = $matches[6];
                     if ($cell === null || $pCellWorksheet === null) {
                         return $this->raiseFormulaError("undefined name '$token'");
                     }
 
+<<<<<<< HEAD
                     $this->debugLog->writeDebugLog('Evaluating Defined Name %s', $definedName);
+=======
+                    $this->debugLog->writeDebugLog('Evaluating Defined Name ', $definedName);
+>>>>>>> forked/LAE_400_PACKAGE
                     $namedRange = DefinedName::resolveName($definedName, $pCellWorksheet);
                     if ($namedRange === null) {
                         return $this->raiseFormulaError("undefined name '$definedName'");
@@ -5028,13 +5883,21 @@ class Calculation
                 //    If not a numeric, test to see if the value is an Excel error, and so can't be used in normal binary operations
                 if ($operand > '' && $operand[0] == '#') {
                     $stack->push('Value', $operand);
+<<<<<<< HEAD
                     $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails($operand));
+=======
+                    $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($operand));
+>>>>>>> forked/LAE_400_PACKAGE
 
                     return false;
                 } elseif (!Shared\StringHelper::convertToNumberIfFraction($operand)) {
                     //    If not a numeric or a fraction, then it's a text string, and so can't be used in mathematical binary operations
                     $stack->push('Error', '#VALUE!');
+<<<<<<< HEAD
                     $this->debugLog->writeDebugLog('Evaluation Result is a %s', $this->showTypeDetails('#VALUE!'));
+=======
+                    $this->debugLog->writeDebugLog('Evaluation Result is a ', $this->showTypeDetails('#VALUE!'));
+>>>>>>> forked/LAE_400_PACKAGE
 
                     return false;
                 }
@@ -5046,28 +5909,46 @@ class Calculation
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @param null|string $cellID
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $operand1
      * @param mixed $operand2
      * @param string $operation
      *
      * @return array
      */
+<<<<<<< HEAD
     private function executeArrayComparison($operand1, $operand2, $operation, Stack &$stack, bool $recursingArrays)
+=======
+    private function executeArrayComparison($cellID, $operand1, $operand2, $operation, Stack &$stack, bool $recursingArrays)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $result = [];
         if (!is_array($operand2)) {
             // Operand 1 is an array, Operand 2 is a scalar
             foreach ($operand1 as $x => $operandData) {
+<<<<<<< HEAD
                 $this->debugLog->writeDebugLog('Evaluating Comparison %s %s %s', $this->showValue($operandData), $operation, $this->showValue($operand2));
                 $this->executeBinaryComparisonOperation($operandData, $operand2, $operation, $stack);
+=======
+                $this->debugLog->writeDebugLog('Evaluating Comparison ', $this->showValue($operandData), ' ', $operation, ' ', $this->showValue($operand2));
+                $this->executeBinaryComparisonOperation($cellID, $operandData, $operand2, $operation, $stack);
+>>>>>>> forked/LAE_400_PACKAGE
                 $r = $stack->pop();
                 $result[$x] = $r['value'];
             }
         } elseif (!is_array($operand1)) {
             // Operand 1 is a scalar, Operand 2 is an array
             foreach ($operand2 as $x => $operandData) {
+<<<<<<< HEAD
                 $this->debugLog->writeDebugLog('Evaluating Comparison %s %s %s', $this->showValue($operand1), $operation, $this->showValue($operandData));
                 $this->executeBinaryComparisonOperation($operand1, $operandData, $operation, $stack);
+=======
+                $this->debugLog->writeDebugLog('Evaluating Comparison ', $this->showValue($operand1), ' ', $operation, ' ', $this->showValue($operandData));
+                $this->executeBinaryComparisonOperation($cellID, $operand1, $operandData, $operation, $stack);
+>>>>>>> forked/LAE_400_PACKAGE
                 $r = $stack->pop();
                 $result[$x] = $r['value'];
             }
@@ -5077,14 +5958,23 @@ class Calculation
                 self::checkMatrixOperands($operand1, $operand2, 2);
             }
             foreach ($operand1 as $x => $operandData) {
+<<<<<<< HEAD
                 $this->debugLog->writeDebugLog('Evaluating Comparison %s %s %s', $this->showValue($operandData), $operation, $this->showValue($operand2[$x]));
                 $this->executeBinaryComparisonOperation($operandData, $operand2[$x], $operation, $stack, true);
+=======
+                $this->debugLog->writeDebugLog('Evaluating Comparison ', $this->showValue($operandData), ' ', $operation, ' ', $this->showValue($operand2[$x]));
+                $this->executeBinaryComparisonOperation($cellID, $operandData, $operand2[$x], $operation, $stack, true);
+>>>>>>> forked/LAE_400_PACKAGE
                 $r = $stack->pop();
                 $result[$x] = $r['value'];
             }
         }
         //    Log the result details
+<<<<<<< HEAD
         $this->debugLog->writeDebugLog('Comparison Evaluation Result is %s', $this->showTypeDetails($result));
+=======
+        $this->debugLog->writeDebugLog('Comparison Evaluation Result is ', $this->showTypeDetails($result));
+>>>>>>> forked/LAE_400_PACKAGE
         //    And push the result onto the stack
         $stack->push('Array', $result);
 
@@ -5092,6 +5982,10 @@ class Calculation
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @param null|string $cellID
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $operand1
      * @param mixed $operand2
      * @param string $operation
@@ -5099,6 +5993,7 @@ class Calculation
      *
      * @return mixed
      */
+<<<<<<< HEAD
     private function executeBinaryComparisonOperation($operand1, $operand2, $operation, Stack &$stack, $recursingArrays = false)
     {
         //    If we're dealing with matrix operations, we want a matrix result
@@ -5110,6 +6005,102 @@ class Calculation
 
         //    Log the result details
         $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails($result));
+=======
+    private function executeBinaryComparisonOperation($cellID, $operand1, $operand2, $operation, Stack &$stack, $recursingArrays = false)
+    {
+        //    If we're dealing with matrix operations, we want a matrix result
+        if ((is_array($operand1)) || (is_array($operand2))) {
+            return $this->executeArrayComparison($cellID, $operand1, $operand2, $operation, $stack, $recursingArrays);
+        }
+
+        //    Simple validate the two operands if they are string values
+        if (is_string($operand1) && $operand1 > '' && $operand1[0] == self::FORMULA_STRING_QUOTE) {
+            $operand1 = self::unwrapResult($operand1);
+        }
+        if (is_string($operand2) && $operand2 > '' && $operand2[0] == self::FORMULA_STRING_QUOTE) {
+            $operand2 = self::unwrapResult($operand2);
+        }
+
+        // Use case insensitive comparaison if not OpenOffice mode
+        if (Functions::getCompatibilityMode() != Functions::COMPATIBILITY_OPENOFFICE) {
+            if (is_string($operand1)) {
+                $operand1 = Shared\StringHelper::strToUpper($operand1);
+            }
+            if (is_string($operand2)) {
+                $operand2 = Shared\StringHelper::strToUpper($operand2);
+            }
+        }
+
+        $useLowercaseFirstComparison = is_string($operand1) && is_string($operand2) && Functions::getCompatibilityMode() == Functions::COMPATIBILITY_OPENOFFICE;
+
+        //    execute the necessary operation
+        switch ($operation) {
+            //    Greater than
+            case '>':
+                if ($useLowercaseFirstComparison) {
+                    $result = $this->strcmpLowercaseFirst($operand1, $operand2) > 0;
+                } else {
+                    $result = ($operand1 > $operand2);
+                }
+
+                break;
+            //    Less than
+            case '<':
+                if ($useLowercaseFirstComparison) {
+                    $result = $this->strcmpLowercaseFirst($operand1, $operand2) < 0;
+                } else {
+                    $result = ($operand1 < $operand2);
+                }
+
+                break;
+            //    Equality
+            case '=':
+                if (is_numeric($operand1) && is_numeric($operand2)) {
+                    $result = (abs($operand1 - $operand2) < $this->delta);
+                } else {
+                    $result = $this->strcmpAllowNull($operand1, $operand2) == 0;
+                }
+
+                break;
+            //    Greater than or equal
+            case '>=':
+                if (is_numeric($operand1) && is_numeric($operand2)) {
+                    $result = ((abs($operand1 - $operand2) < $this->delta) || ($operand1 > $operand2));
+                } elseif ($useLowercaseFirstComparison) {
+                    $result = $this->strcmpLowercaseFirst($operand1, $operand2) >= 0;
+                } else {
+                    $result = $this->strcmpAllowNull($operand1, $operand2) >= 0;
+                }
+
+                break;
+            //    Less than or equal
+            case '<=':
+                if (is_numeric($operand1) && is_numeric($operand2)) {
+                    $result = ((abs($operand1 - $operand2) < $this->delta) || ($operand1 < $operand2));
+                } elseif ($useLowercaseFirstComparison) {
+                    $result = $this->strcmpLowercaseFirst($operand1, $operand2) <= 0;
+                } else {
+                    $result = $this->strcmpAllowNull($operand1, $operand2) <= 0;
+                }
+
+                break;
+            //    Inequality
+            case '<>':
+                if (is_numeric($operand1) && is_numeric($operand2)) {
+                    $result = (abs($operand1 - $operand2) > 1E-14);
+                } else {
+                    $result = $this->strcmpAllowNull($operand1, $operand2) != 0;
+                }
+
+                break;
+
+            default:
+                throw new Exception('Unsupported binary comparison operation');
+        }
+
+        //    Log the result details
+        $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($result));
+>>>>>>> forked/LAE_400_PACKAGE
         //    And push the result onto the stack
         $stack->push('Value', $result);
 
@@ -5117,6 +6108,38 @@ class Calculation
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Compare two strings in the same way as strcmp() except that lowercase come before uppercase letters.
+     *
+     * @param null|string $str1 First string value for the comparison
+     * @param null|string $str2 Second string value for the comparison
+     *
+     * @return int
+     */
+    private function strcmpLowercaseFirst($str1, $str2)
+    {
+        $inversedStr1 = Shared\StringHelper::strCaseReverse($str1);
+        $inversedStr2 = Shared\StringHelper::strCaseReverse($str2);
+
+        return strcmp($inversedStr1 ?? '', $inversedStr2 ?? '');
+    }
+
+    /**
+     * PHP8.1 deprecates passing null to strcmp.
+     *
+     * @param null|string $str1 First string value for the comparison
+     * @param null|string $str2 Second string value for the comparison
+     *
+     * @return int
+     */
+    private function strcmpAllowNull($str1, $str2)
+    {
+        return strcmp($str1 ?? '', $str2 ?? '');
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * @param mixed $operand1
      * @param mixed $operand2
      * @param mixed $operation
@@ -5149,7 +6172,11 @@ class Calculation
                 $matrixResult = $matrix->$matrixFunction($operand2);
                 $result = $matrixResult->getArray();
             } catch (\Exception $ex) {
+<<<<<<< HEAD
                 $this->debugLog->writeDebugLog('JAMA Matrix Exception: %s', $ex->getMessage());
+=======
+                $this->debugLog->writeDebugLog('JAMA Matrix Exception: ', $ex->getMessage());
+>>>>>>> forked/LAE_400_PACKAGE
                 $result = '#VALUE!';
             }
         } else {
@@ -5158,7 +6185,11 @@ class Calculation
                 ((is_string($operand1) && !is_numeric($operand1) && strlen($operand1) > 0) ||
                     (is_string($operand2) && !is_numeric($operand2) && strlen($operand2) > 0))
             ) {
+<<<<<<< HEAD
                 $result = Information\ExcelError::VALUE();
+=======
+                $result = Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 //    If we're dealing with non-matrix operations, execute the necessary operation
                 switch ($operation) {
@@ -5181,8 +6212,13 @@ class Calculation
                     case '/':
                         if ($operand2 == 0) {
                             //    Trap for Divide by Zero error
+<<<<<<< HEAD
                             $stack->push('Error', ExcelError::DIV0());
                             $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails(ExcelError::DIV0()));
+=======
+                            $stack->push('Error', '#DIV/0!');
+                            $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails('#DIV/0!'));
+>>>>>>> forked/LAE_400_PACKAGE
 
                             return false;
                         }
@@ -5202,7 +6238,11 @@ class Calculation
         }
 
         //    Log the result details
+<<<<<<< HEAD
         $this->debugLog->writeDebugLog('Evaluation Result is %s', $this->showTypeDetails($result));
+=======
+        $this->debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($result));
+>>>>>>> forked/LAE_400_PACKAGE
         //    And push the result onto the stack
         $stack->push('Value', $result);
 
@@ -5255,6 +6295,11 @@ class Calculation
             $aReferences = Coordinate::extractAllCellReferencesInRange($range);
             $range = "'" . $worksheetName . "'" . '!' . $range;
             if (!isset($aReferences[1])) {
+<<<<<<< HEAD
+=======
+                $currentCol = '';
+                $currentRow = 0;
+>>>>>>> forked/LAE_400_PACKAGE
                 //    Single cell in range
                 sscanf($aReferences[0], '%[A-Z]%d', $currentCol, $currentRow);
                 if ($worksheet->cellExists($aReferences[0])) {
@@ -5265,6 +6310,11 @@ class Calculation
             } else {
                 // Extract cell data for all cells in the range
                 foreach ($aReferences as $reference) {
+<<<<<<< HEAD
+=======
+                    $currentCol = '';
+                    $currentRow = 0;
+>>>>>>> forked/LAE_400_PACKAGE
                     // Extract range
                     sscanf($reference, '%[A-Z]%d', $currentCol, $currentRow);
                     if ($worksheet->cellExists($reference)) {
@@ -5300,9 +6350,15 @@ class Calculation
             }
 
             // Named range?
+<<<<<<< HEAD
             $namedRange = DefinedName::resolveName($range, /** @scrutinizer ignore-type */ $worksheet);
             if ($namedRange === null) {
                 return Information\ExcelError::REF();
+=======
+            $namedRange = DefinedName::resolveName($range, $worksheet);
+            if ($namedRange === null) {
+                return Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             $worksheet = $namedRange->getWorksheet();
@@ -5461,6 +6517,17 @@ class Calculation
         return $args;
     }
 
+<<<<<<< HEAD
+=======
+    private function getUnusedBranchStoreKey()
+    {
+        $storeKeyValue = 'storeKey-' . $this->branchStoreKeyCounter;
+        ++$this->branchStoreKeyCounter;
+
+        return $storeKeyValue;
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     private function getTokensAsString($tokens)
     {
         $tokensStr = array_map(function ($token) {
@@ -5483,7 +6550,11 @@ class Calculation
         $definedNameScope = $namedRange->getScope();
         if ($definedNameScope !== null && $definedNameScope !== $cellWorksheet) {
             // The defined name isn't in our current scope, so #REF
+<<<<<<< HEAD
             $result = Information\ExcelError::REF();
+=======
+            $result = Functions::REF();
+>>>>>>> forked/LAE_400_PACKAGE
             $stack->push('Error', $result, $namedRange->getName());
 
             return $result;
@@ -5497,7 +6568,11 @@ class Calculation
             $definedNameValue = '=' . $definedNameValue;
         }
 
+<<<<<<< HEAD
         $this->debugLog->writeDebugLog('Defined Name is a %s with a value of %s', $definedNameType, $definedNameValue);
+=======
+        $this->debugLog->writeDebugLog("Defined Name is a {$definedNameType} with a value of {$definedNameValue}");
+>>>>>>> forked/LAE_400_PACKAGE
 
         $recursiveCalculationCell = ($definedNameWorksheet !== null && $definedNameWorksheet !== $cellWorksheet)
             ? $definedNameWorksheet->getCell('A1')
@@ -5511,7 +6586,11 @@ class Calculation
             $cell->getRow() - 1
         );
 
+<<<<<<< HEAD
         $this->debugLog->writeDebugLog('Value adjusted for relative references is %s', $definedNameValue);
+=======
+        $this->debugLog->writeDebugLog("Value adjusted for relative references is {$definedNameValue}");
+>>>>>>> forked/LAE_400_PACKAGE
 
         $recursiveCalculator = new self($this->spreadsheet);
         $recursiveCalculator->getDebugLog()->setWriteDebugLog($this->getDebugLog()->getWriteDebugLog());
@@ -5520,7 +6599,11 @@ class Calculation
 
         if ($this->getDebugLog()->getWriteDebugLog()) {
             $this->debugLog->mergeDebugLog(array_slice($recursiveCalculator->getDebugLog()->getLog(), 3));
+<<<<<<< HEAD
             $this->debugLog->writeDebugLog('Evaluation Result for Named %s %s is %s', $definedNameType, $namedRange->getName(), $this->showTypeDetails($result));
+=======
+            $this->debugLog->writeDebugLog("Evaluation Result for Named {$definedNameType} {$namedRange->getName()} is {$this->showTypeDetails($result)}");
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $stack->push('Defined Name', $result, $namedRange->getName());

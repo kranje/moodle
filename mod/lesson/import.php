@@ -78,8 +78,13 @@ if ($data = $mform->get_data()) {
     $formatclass = 'qformat_'.$data->format;
     $formatclassfile = $CFG->dirroot.'/question/format/'.$data->format.'/format.php';
     if (!is_readable($formatclassfile)) {
+<<<<<<< HEAD
         throw new \moodle_exception('unknowformat', '', '', $data->format);
     }
+=======
+        print_error('unknowformat','', '', $data->format);
+            }
+>>>>>>> forked/LAE_400_PACKAGE
     require_once($formatclassfile);
     $format = new $formatclass();
 
@@ -87,17 +92,29 @@ if ($data = $mform->get_data()) {
 
     // Do anything before that we need to
     if (! $format->importpreprocess()) {
+<<<<<<< HEAD
                 throw new \moodle_exception('preprocesserror', 'lesson');
+=======
+                print_error('preprocesserror', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
     // Process the uploaded file
     if (! $format->importprocess($importfile, $lesson, $pageid)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('processerror', 'lesson');
+=======
+                print_error('processerror', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
     // In case anything needs to be done after
     if (! $format->importpostprocess()) {
+<<<<<<< HEAD
                 throw new \moodle_exception('postprocesserror', 'lesson');
+=======
+                print_error('postprocesserror', 'lesson');
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             echo "<hr>";

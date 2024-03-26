@@ -20,6 +20,7 @@ Feature: Email history
       | student2 | CF101 | student |
 
   @javascript
+<<<<<<< HEAD
   Scenario: View history when a student is unenrolled
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
@@ -54,6 +55,12 @@ Feature: Email history
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
     And I navigate to "CLAMPMail" in current page administration
+=======
+  Scenario: View and delete history
+    Given I log in as "teacher1"
+    And I am on "Test Course" course homepage
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "View history"
     Then I should see "You have no email history yet"
     And I press "Continue"
@@ -68,7 +75,11 @@ Feature: Email history
     And I should see "Hello World"
     When I follow "Open email"
     Then I should see "Selected recipients"
+<<<<<<< HEAD
     And the field "Message" matches value "Doom at 11"
+=======
+    And I should see "Doom at 11"
+>>>>>>> forked/LAE_400_PACKAGE
     When I set the following fields to these values:
       | Subject | Hello World Redux |
     And I press "Send email"
@@ -77,8 +88,14 @@ Feature: Email history
     And I log out
     And I log in as "admin"
     And I navigate to "Courses > Manage courses and categories" in site administration
+<<<<<<< HEAD
     And I am on "Test Course" course homepage
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I follow "Test Course"
+    And I follow "View"
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "View history"
     And I set the field "userid" to "Teacher 1"
     Then I should see "Hello World Redux"

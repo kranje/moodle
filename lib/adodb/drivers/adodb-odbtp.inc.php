@@ -393,7 +393,11 @@ class ADODB_odbtp extends ADOConnection{
 		return $arr2;
 	}
 
+<<<<<<< HEAD
 	public function metaForeignKeys($table, $owner = '', $upper = false, $associative = false)
+=======
+	function MetaForeignKeys($table, $owner='', $upper=false)
+>>>>>>> forked/LAE_400_PACKAGE
 	{
 	global $ADODB_FETCH_MODE;
 

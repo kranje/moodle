@@ -47,7 +47,11 @@ defined('MOODLE_INTERNAL') || die;
 class user extends tablelike implements selectable_items {
 
     /** @var array $categories A cache for grade_item categories */
+<<<<<<< HEAD
     private $categories = [];
+=======
+    private $categories = array();
+>>>>>>> forked/LAE_400_PACKAGE
 
     /** @var int $requirespaging Do we have more items than the paging limit? */
     private $requirespaging = true;
@@ -56,7 +60,11 @@ class user extends tablelike implements selectable_items {
      * Get the label for the select box that chooses items for this page.
      * @return string
      */
+<<<<<<< HEAD
     public function select_label(): string {
+=======
+    public function select_label() {
+>>>>>>> forked/LAE_400_PACKAGE
         return get_string('selectgrade', 'gradereport_singleview');
     }
 
@@ -65,7 +73,11 @@ class user extends tablelike implements selectable_items {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function description(): string {
+=======
+    public function description() {
+>>>>>>> forked/LAE_400_PACKAGE
         return get_string('gradeitems', 'grades');
     }
 
@@ -74,8 +86,13 @@ class user extends tablelike implements selectable_items {
      *
      * @return array
      */
+<<<<<<< HEAD
     public function options(): array {
         $result = [];
+=======
+    public function options() {
+        $result = array();
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($this->items as $itemid => $item) {
             $result[$itemid] = $item->get_name();
         }
@@ -87,7 +104,11 @@ class user extends tablelike implements selectable_items {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function item_type(): string {
+=======
+    public function item_type() {
+>>>>>>> forked/LAE_400_PACKAGE
         return 'grade';
     }
 
@@ -97,6 +118,10 @@ class user extends tablelike implements selectable_items {
      * @param bool $selfitemisempty Have we selected an item yet?
      */
     public function init($selfitemisempty = false) {
+<<<<<<< HEAD
+=======
+        global $DB;
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (!$selfitemisempty) {
             $validusers = $this->load_users();
@@ -109,9 +134,17 @@ class user extends tablelike implements selectable_items {
             }
         }
 
+<<<<<<< HEAD
         $seq = new grade_seq($this->courseid, true);
 
         $this->items = [];
+=======
+        $params = array('courseid' => $this->courseid);
+
+        $seq = new grade_seq($this->courseid, true);
+
+        $this->items = array();
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($seq->items as $itemid => $item) {
             if (grade::filter($item)) {
                 $this->items[$itemid] = $item;
@@ -122,9 +155,15 @@ class user extends tablelike implements selectable_items {
 
         $this->setup_structure();
 
+<<<<<<< HEAD
         $this->definition = [
             'finalgrade', 'feedback', 'override', 'exclude'
         ];
+=======
+        $this->definition = array(
+            'finalgrade', 'feedback', 'override', 'exclude'
+        );
+>>>>>>> forked/LAE_400_PACKAGE
         $this->set_headers($this->original_headers());
     }
 
@@ -133,6 +172,7 @@ class user extends tablelike implements selectable_items {
      *
      * @return array List of headers
      */
+<<<<<<< HEAD
     public function original_headers(): array {
         return [
             get_string('assessmentname', 'gradereport_singleview'),
@@ -144,15 +184,34 @@ class user extends tablelike implements selectable_items {
             get_string('override', 'gradereport_singleview'),
             get_string('exclude', 'gradereport_singleview'),
         ];
+=======
+    public function original_headers() {
+        return array(
+            '', // For filter icon.
+            get_string('assessmentname', 'gradereport_singleview'),
+            get_string('gradecategory', 'grades'),
+            get_string('range', 'grades'),
+            get_string('grade', 'grades'),
+            get_string('feedback', 'grades'),
+            $this->make_toggle_links('override'),
+            $this->make_toggle_links('exclude')
+        );
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Format each row of the table.
      *
      * @param grade_item $item
+<<<<<<< HEAD
      * @return array
      */
     public function format_line($item): array {
+=======
+     * @return string
+     */
+    public function format_line($item) {
+>>>>>>> forked/LAE_400_PACKAGE
         global $OUTPUT;
 
         $grade = $this->fetch_grade_or_default($item, $this->item->id);
@@ -167,6 +226,7 @@ class user extends tablelike implements selectable_items {
         }
         // Check both grade and grade item.
         if ($lockeditem || $lockeditemgrade) {
+<<<<<<< HEAD
              $lockicon = $OUTPUT->pix_icon('t/locked', 'grade is locked', 'moodle', ['class' => 'ml-3']);
         }
 
@@ -219,6 +279,46 @@ class user extends tablelike implements selectable_items {
         foreach ($line as $key => $value) {
             $cell = new \html_table_cell($value);
             if ($isheader = $i == 0) {
+=======
+             $lockicon = $OUTPUT->pix_icon('t/locked', 'grade is locked');
+        }
+
+        $iconstring = get_string('filtergrades', 'gradereport_singleview', $item->get_name());
+
+        // Create a fake gradetreeitem so we can call get_element_header().
+        // The type logic below is from grade_category->_get_children_recursion().
+        $gradetreeitem = array();
+        if (in_array($item->itemtype, array('course', 'category'))) {
+            $gradetreeitem['type'] = $item->itemtype.'item';
+        } else {
+            $gradetreeitem['type'] = 'item';
+        }
+        $gradetreeitem['object'] = $item;
+        $gradetreeitem['userid'] = $this->item->id;
+
+        $itemlabel = $this->structure->get_element_header($gradetreeitem, true, false, false, false, true);
+        $grade->label = $item->get_name();
+
+        $line = array(
+            $OUTPUT->action_icon($this->format_link('grade', $item->id), new pix_icon('t/editstring', ''), null,
+                    ['title' => $iconstring, 'aria-label' => $iconstring]),
+            $this->format_icon($item) . $lockicon . $itemlabel,
+            $this->category($item),
+            new range($item)
+        );
+        $lineclasses = array(
+            "action",
+            "gradeitem",
+            "category",
+            "range"
+        );
+
+        $outputline = array();
+        $i = 0;
+        foreach ($line as $key => $value) {
+            $cell = new \html_table_cell($value);
+            if ($isheader = $i == 1) {
+>>>>>>> forked/LAE_400_PACKAGE
                 $cell->header = $isheader;
                 $cell->scope = "row";
             }
@@ -229,7 +329,11 @@ class user extends tablelike implements selectable_items {
             $i++;
         }
 
+<<<<<<< HEAD
         return $outputline;
+=======
+        return $this->format_definition($outputline, $grade);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -238,12 +342,18 @@ class user extends tablelike implements selectable_items {
      * @param grade_item $item
      * @return string
      */
+<<<<<<< HEAD
     private function format_icon($item): string {
         $element = ['type' => 'item', 'object' => $item];
+=======
+    private function format_icon($item) {
+        $element = array('type' => 'item', 'object' => $item);
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->structure->get_element_icon($element);
     }
 
     /**
+<<<<<<< HEAD
      * Return the action menu HTML for the grade item.
      *
      * @param grade_item $item
@@ -271,6 +381,14 @@ class user extends tablelike implements selectable_items {
      * @return string
      */
     private function category(grade_item $item): string {
+=======
+     * Helper to get the category for an item.
+     *
+     * @param grade_item $item
+     * @return grade_category
+     */
+    private function category($item) {
+>>>>>>> forked/LAE_400_PACKAGE
         global $DB;
 
         if (empty($item->categoryid)) {
@@ -279,7 +397,11 @@ class user extends tablelike implements selectable_items {
                 return $this->course->fullname;
             }
 
+<<<<<<< HEAD
             $params = ['id' => $item->iteminstance];
+=======
+            $params = array('id' => $item->iteminstance);
+>>>>>>> forked/LAE_400_PACKAGE
             $elem = $DB->get_record('grade_categories', $params);
 
             return $elem->fullname;
@@ -299,7 +421,11 @@ class user extends tablelike implements selectable_items {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function heading(): string {
+=======
+    public function heading() {
+>>>>>>> forked/LAE_400_PACKAGE
         return get_string('gradeuser', 'gradereport_singleview', fullname($this->item));
     }
 
@@ -308,7 +434,11 @@ class user extends tablelike implements selectable_items {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function summary(): string {
+=======
+    public function summary() {
+>>>>>>> forked/LAE_400_PACKAGE
         return get_string('summaryuser', 'gradereport_singleview');
     }
 
@@ -317,7 +447,11 @@ class user extends tablelike implements selectable_items {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function pager(): string {
+=======
+    public function pager() {
+>>>>>>> forked/LAE_400_PACKAGE
         global $OUTPUT;
 
         if (!$this->supports_paging()) {
@@ -326,13 +460,21 @@ class user extends tablelike implements selectable_items {
 
         return $OUTPUT->paging_bar(
             count($this->items), $this->page, $this->perpage,
+<<<<<<< HEAD
             new moodle_url('/grade/report/singleview/index.php', [
+=======
+            new moodle_url('/grade/report/singleview/index.php', array(
+>>>>>>> forked/LAE_400_PACKAGE
                 'perpage' => $this->perpage,
                 'id' => $this->courseid,
                 'group' => $this->groupid,
                 'itemid' => $this->itemid,
                 'item' => 'user'
+<<<<<<< HEAD
             ])
+=======
+            ))
+>>>>>>> forked/LAE_400_PACKAGE
         );
     }
 
@@ -341,7 +483,11 @@ class user extends tablelike implements selectable_items {
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function supports_paging(): bool {
+=======
+    public function supports_paging() {
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->requirespaging;
     }
 
@@ -350,9 +496,15 @@ class user extends tablelike implements selectable_items {
      * Process the data from the form.
      *
      * @param array $data
+<<<<<<< HEAD
      * @return stdClass of warnings
      */
     public function process($data): stdClass {
+=======
+     * @return array of warnings
+     */
+    public function process($data) {
+>>>>>>> forked/LAE_400_PACKAGE
         $bulk = new bulk_insert($this->item);
         // Bulk insert messages the data to be passed in
         // ie: for all grades of empty grades apply the specified value.
@@ -382,10 +534,17 @@ class user extends tablelike implements selectable_items {
                     }
                     continue;
                 }
+<<<<<<< HEAD
                 $grade = grade_grade::fetch([
                     'itemid' => $gradeitemid,
                     'userid' => $userid
                 ]);
+=======
+                $grade = grade_grade::fetch(array(
+                    'itemid' => $gradeitemid,
+                    'userid' => $userid
+                ));
+>>>>>>> forked/LAE_400_PACKAGE
 
                 $data->$field = empty($grade) ? $null : $grade->finalgrade;
                 $data->{"old$field"} = $data->$field;
@@ -403,6 +562,7 @@ class user extends tablelike implements selectable_items {
                     continue;
                 }
 
+<<<<<<< HEAD
                 $gradeitem = grade_item::fetch([
                     'courseid' => $this->courseid,
                     'id' => $matches[1],
@@ -414,6 +574,20 @@ class user extends tablelike implements selectable_items {
 
                 if ($filter == 'all' || $empties) {
                     $data->$varname = ($isscale && empty($insertvalue)) ? -1 : $insertvalue;
+=======
+                $gradeitem = grade_item::fetch(array(
+                    'courseid' => $this->courseid,
+                    'id' => $matches[1]
+                ));
+
+                $isscale = ($gradeitem->gradetype == GRADE_TYPE_SCALE);
+
+                $empties = (trim($value) === '' or ($isscale and $value == -1));
+
+                if ($filter == 'all' or $empties) {
+                    $data->$varname = ($isscale and empty($insertvalue)) ?
+                        -1 : $insertvalue;
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
         }

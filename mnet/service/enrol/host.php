@@ -49,7 +49,11 @@ if (!$service->is_available()) {
 $hosts = $service->get_remote_publishers();
 
 if (empty($hosts[$hostid])) {
+<<<<<<< HEAD
     throw new \moodle_exception('wearenotsubscribedtothishost', 'mnetservice_enrol');
+=======
+    print_error('wearenotsubscribedtothishost', 'mnetservice_enrol');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $host = $hosts[$hostid];
 
@@ -59,7 +63,11 @@ if (!$usecache) {
 }
 $courses = $service->get_remote_courses($host->id, $usecache);
 if (is_string($courses)) {
+<<<<<<< HEAD
     throw new \moodle_exception('fetchingcourses', 'mnetservice_enrol', '', null, $service->format_error_message($courses));
+=======
+    print_error('fetchingcourses', 'mnetservice_enrol', '', null, $service->format_error_message($courses));
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 echo $OUTPUT->header();

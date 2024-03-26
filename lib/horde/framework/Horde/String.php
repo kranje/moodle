@@ -157,6 +157,7 @@ class Horde_String
 
         /* Try mbstring. */
         if (Horde_Util::extensionExists('mbstring')) {
+<<<<<<< HEAD
             try {
                 $out = @mb_convert_encoding($input, $to, self::_mbstringCharset($from));
                 if (!empty($out)) {
@@ -164,6 +165,11 @@ class Horde_String
                 }
             } catch (ValueError $e) {
                 // catch error thrown under PHP 8.0, if mbstring does not support the encoding
+=======
+            $out = @mb_convert_encoding($input, $to, self::_mbstringCharset($from));
+            if (!empty($out)) {
+                return $out;
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
 
@@ -199,11 +205,15 @@ class Horde_String
         if (!isset(self::$_lowers[$string])) {
             $language = setlocale(LC_CTYPE, 0);
             setlocale(LC_CTYPE, 'C');
+<<<<<<< HEAD
             if ($string === null) {
                 self::$_lowers[$string] = '';
             } else {
                 self::$_lowers[$string] = strtolower($string);
             }
+=======
+            self::$_lowers[$string] = strtolower($string);
+>>>>>>> forked/LAE_400_PACKAGE
             setlocale(LC_CTYPE, $language);
         }
 

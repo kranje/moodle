@@ -30,5 +30,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['language'] = 'Тіл';
+<<<<<<< HEAD
+=======
+$string['moodlelogo'] = 'Moodle логотипі';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['next'] = 'Келесі';
 $string['previous'] = 'Алдыңғы';

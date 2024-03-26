@@ -83,7 +83,10 @@ class XMLReader extends \XMLReader
      * @throws \Box\Spout\Reader\Exception\XMLProcessingException If an error/warning occurred
      * @return bool TRUE on success or FALSE on failure
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function read()
     {
         $this->useXMLInternalErrors();
@@ -120,7 +123,10 @@ class XMLReader extends \XMLReader
      * @throws \Box\Spout\Reader\Exception\XMLProcessingException If an error/warning occurred
      * @return bool TRUE on success or FALSE on failure
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function next($localName = null)
     {
         $this->useXMLInternalErrors();

@@ -68,7 +68,11 @@ Feature: Course index completion icons
     When I press "Mark as done"
     And I wait until "Done" "button" exists
     And I reload the page
+<<<<<<< HEAD
     Then "Done" "icon" should exist in the "courseindex-content" "region"
+=======
+    Then the manual completion button of "Activity sample 1" is displayed as "Done"
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario: Auto completion should appear in the course index

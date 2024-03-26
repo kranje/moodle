@@ -45,6 +45,7 @@ class custom_report_table_view extends custom_report_table {
     }
 
     /**
+<<<<<<< HEAD
      * Override base implementation, return pagesize as defined in table filterset
      *
      * @return int
@@ -56,6 +57,8 @@ class custom_report_table_view extends custom_report_table {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get the html for the download buttons
      *
      * @return string

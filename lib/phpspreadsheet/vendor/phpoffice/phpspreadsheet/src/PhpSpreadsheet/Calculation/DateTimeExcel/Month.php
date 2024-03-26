@@ -2,13 +2,19 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 
 class Month
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * EDATE.
      *
@@ -22,6 +28,7 @@ class Month
      *
      * @param mixed $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                        PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      * @param array|int $adjustmentMonths The number of months before or after start_date.
      *                                        A positive value for months yields a future date;
@@ -39,6 +46,17 @@ class Month
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $dateValue, $adjustmentMonths);
         }
 
+=======
+     * @param int $adjustmentMonths The number of months before or after start_date.
+     *                                        A positive value for months yields a future date;
+     *                                        a negative value yields a past date.
+     *
+     * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+     *                        depending on the value of the ReturnDateType flag
+     */
+    public static function adjust($dateValue, $adjustmentMonths)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $dateValue = Helpers::getDateValue($dateValue, false);
             $adjustmentMonths = Helpers::validateNumericNull($adjustmentMonths);
@@ -65,6 +83,7 @@ class Month
      *
      * @param mixed $dateValue Excel date serial value (float), PHP date timestamp (integer),
      *                                        PHP DateTime object, or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      * @param array|int $adjustmentMonths The number of months before or after start_date.
      *                                        A positive value for months yields a future date;
@@ -82,6 +101,17 @@ class Month
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $dateValue, $adjustmentMonths);
         }
 
+=======
+     * @param int $adjustmentMonths The number of months before or after start_date.
+     *                                        A positive value for months yields a future date;
+     *                                        a negative value yields a past date.
+     *
+     * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+     *                        depending on the value of the ReturnDateType flag
+     */
+    public static function lastDay($dateValue, $adjustmentMonths)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $dateValue = Helpers::getDateValue($dateValue, false);
             $adjustmentMonths = Helpers::validateNumericNull($adjustmentMonths);

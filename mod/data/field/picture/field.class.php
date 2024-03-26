@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -21,12 +22,37 @@
  * @copyright  2005 Martin Dougiamas
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+=======
+///////////////////////////////////////////////////////////////////////////
+//                                                                       //
+// NOTICE OF COPYRIGHT                                                   //
+//                                                                       //
+// Moodle - Modular Object-Oriented Dynamic Learning Environment         //
+//          http://moodle.org                                            //
+//                                                                       //
+// Copyright (C) 1999-onwards Moodle Pty Ltd  http://moodle.com          //
+//                                                                       //
+// This program is free software; you can redistribute it and/or modify  //
+// it under the terms of the GNU General Public License as published by  //
+// the Free Software Foundation; either version 2 of the License, or     //
+// (at your option) any later version.                                   //
+//                                                                       //
+// This program is distributed in the hope that it will be useful,       //
+// but WITHOUT ANY WARRANTY; without even the implied warranty of        //
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         //
+// GNU General Public License for more details:                          //
+//                                                                       //
+//          http://www.gnu.org/copyleft/gpl.html                         //
+//                                                                       //
+///////////////////////////////////////////////////////////////////////////
+>>>>>>> forked/LAE_400_PACKAGE
 
 class data_field_picture extends data_field_base {
     var $type = 'picture';
     var $previewwidth  = 50;
     var $previewheight = 50;
 
+<<<<<<< HEAD
     public function supports_preview(): bool {
         return true;
     }
@@ -50,6 +76,11 @@ class data_field_picture extends data_field_base {
         // Necessary for the constants used in args.
         require_once($CFG->dirroot . '/repository/lib.php');
 
+=======
+    function display_add_field($recordid = 0, $formdata = null) {
+        global $CFG, $DB, $OUTPUT, $USER, $PAGE;
+
+>>>>>>> forked/LAE_400_PACKAGE
         $file        = false;
         $content     = false;
         $alttext     = '';
@@ -201,17 +232,28 @@ class data_field_picture extends data_field_base {
     }
 
     function display_browse_field($recordid, $template) {
+<<<<<<< HEAD
         global $OUTPUT;
 
         $content = $this->get_data_content($recordid);
 
         if (!$content || empty($content->content)) {
+=======
+        global $CFG, $DB;
+
+        if (!$content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
+            return false;
+        }
+
+        if (empty($content->content)) {
+>>>>>>> forked/LAE_400_PACKAGE
             return '';
         }
 
         $alt   = $content->content1;
         $title = $alt;
 
+<<<<<<< HEAD
         $width  = $this->field->param1 ? ' width="' . s($this->field->param1) . '" ' : ' ';
         $height = $this->field->param2 ? ' height="' . s($this->field->param2) . '" ' : ' ';
 
@@ -238,6 +280,21 @@ class data_field_picture extends data_field_base {
         $img = '<img ' . $width . $height . ' src="' . $imgurl->out() . '" alt="' . s($alt) .
             '" title="' . s($title) . '" class="list_picture"/>';
         return '<a class="data-field-link" href="' . $url->out() . '">' . $img . '</a>';
+=======
+        if ($template == 'listtemplate') {
+            $src = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'.$this->context->id.'/mod_data/content/'.$content->id.'/'.'thumb_'.$content->content);
+            // no need to add width/height, because the thumb is resized properly
+            $str = '<a href="view.php?d='.$this->field->dataid.'&amp;rid='.$recordid.'"><img src="'.$src.'" alt="'.s($alt).'" title="'.s($title).'" class="list_picture"/></a>';
+
+        } else {
+            $src = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'.$this->context->id.'/mod_data/content/'.$content->id.'/'.$content->content);
+            $width  = $this->field->param1 ? ' width="'.s($this->field->param1).'" ':' ';
+            $height = $this->field->param2 ? ' height="'.s($this->field->param2).'" ':' ';
+            $str = '<a href="'.$src.'"><img '.$width.$height.' src="'.$src.'" alt="'.s($alt).'" title="'.s($title).'" class="list_picture"/></a>';
+        }
+
+        return $str;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     function update_field() {

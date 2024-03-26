@@ -40,6 +40,18 @@ function xmldb_enrol_lti_upgrade($oldversion) {
     global $CFG, $OUTPUT, $DB;
     $dbman = $DB->get_manager();
 
+<<<<<<< HEAD
+=======
+    // Automatically generated Moodle v3.6.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.7.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.8.0 release upgrade line.
+    // Put any upgrade step following this.
+
+>>>>>>> forked/LAE_400_PACKAGE
     // Automatically generated Moodle v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
@@ -450,7 +462,11 @@ function xmldb_enrol_lti_upgrade($oldversion) {
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     if ($oldversion < 2022061500) {
+=======
+    if ($oldversion < 2022041901) {
+>>>>>>> forked/LAE_400_PACKAGE
         // Disable all orphaned enrolment method instances.
         $sql = "id IN (SELECT t.enrolid
                          FROM {enrol_lti_tools} t
@@ -459,10 +475,17 @@ function xmldb_enrol_lti_upgrade($oldversion) {
         $DB->set_field_select('enrol', 'status', 1, $sql);
 
         // Lti savepoint reached.
+<<<<<<< HEAD
         upgrade_plugin_savepoint(true, 2022061500, 'enrol', 'lti');
     }
 
     if ($oldversion < 2022103100) {
+=======
+        upgrade_plugin_savepoint(true, 2022041901, 'enrol', 'lti');
+    }
+
+    if ($oldversion < 2022041902) {
+>>>>>>> forked/LAE_400_PACKAGE
         // Update lti user information for LTI 2.0 users having the wrong consumer secret recorded.
         // This applies to any LTI 2.0 user who has launched the tool (i.e. has lastaccess) and fixes a non-functional grade sync
         // for LTI 2.0 consumers.
@@ -480,10 +503,17 @@ function xmldb_enrol_lti_upgrade($oldversion) {
         $affectedltiusersrs->close();
 
         // Lti savepoint reached.
+<<<<<<< HEAD
         upgrade_plugin_savepoint(true, 2022103100, 'enrol', 'lti');
     }
 
     if ($oldversion < 2022110300) {
+=======
+        upgrade_plugin_savepoint(true, 2022041902, 'enrol', 'lti');
+    }
+
+    if ($oldversion < 2022041903) {
+>>>>>>> forked/LAE_400_PACKAGE
         // Update lti user information for any users missing a consumer secret.
         // This applies to any user who has launched the tool (i.e. has lastaccess) but who doesn't have a secret recorded.
         // This fixes a bug where enrol_lti_users records are created first during a member sync, and are missing the secret,
@@ -501,11 +531,17 @@ function xmldb_enrol_lti_upgrade($oldversion) {
         $affectedltiusersrs->close();
 
         // Lti savepoint reached.
+<<<<<<< HEAD
         upgrade_plugin_savepoint(true, 2022110300, 'enrol', 'lti');
     }
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
 
+=======
+        upgrade_plugin_savepoint(true, 2022041903, 'enrol', 'lti');
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     return true;
 }

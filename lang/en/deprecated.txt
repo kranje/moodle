@@ -5,9 +5,41 @@ myfilesmanage,core
 mypreferences,core_grades
 myprofile,core
 viewallmyentries,core_blog
+<<<<<<< HEAD
 searchallavailablecourses_desc,core_admin
 search:mycourse,core_search
 calendarurl,core_calendar
+=======
+messagecontactrequestsnotification,core_message
+messagecontactrequestsnotificationsubject,core_message
+searchallavailablecourses_desc,core_admin
+search:mycourse,core_search
+calendarurl,core_calendar
+documentation,core_webservice
+africa/asmera,core_timezones
+africa/timbuktu,core_timezones
+america/argentina/comodrivadavia,core_timezones
+america/indianapolis,core_timezones
+america/louisville,core_timezones
+america/montreal,core_timezones
+asia/calcutta,core_timezones
+asia/chongqing,core_timezones
+asia/harbin,core_timezones
+asia/kashgar,core_timezones
+asia/katmandu,core_timezones
+asia/rangoon,core_timezones
+asia/saigon,core_timezones
+atlantic/faeroe,core_timezones
+europe/belfast,core_timezones
+pacific/ponape,core_timezones
+pacific/truk,core_timezones
+pacific/yap,core_timezones
+editsettings,core_badges
+availablelicenses,core_admin
+managelicenses,core_admin
+userfilterplaceholder,core
+sitebackpackverify,core_badges
+>>>>>>> forked/LAE_400_PACKAGE
 filetypesnotwhitelisted,core_form
 modeloutputdirinfo,core_analytics
 backpackneedsupdate,core_badges
@@ -54,6 +86,7 @@ sendingvia,core_message
 sendingviawhen,core_message
 close,core_contentbank
 notflagged,core_question
+<<<<<<< HEAD
 cannotswitcheditmodeon,core_error
 multilangforceold,core_admin
 nopermissionmove,core_question
@@ -71,3 +104,5 @@ match,core_user
 matchofthefollowing,core_user
 placeholdertypeorselect,core_user
 selectfiltertype,core_user
+=======
+>>>>>>> forked/LAE_400_PACKAGE

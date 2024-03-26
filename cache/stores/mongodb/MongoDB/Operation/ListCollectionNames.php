@@ -6,7 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,7 +33,11 @@ use MongoDB\Model\CallbackIterator;
  *
  * @api
  * @see \MongoDB\Database::listCollectionNames()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/listCollections/
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/listCollections/
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class ListCollectionNames implements Executable
 {
@@ -41,6 +49,7 @@ class ListCollectionNames implements Executable
      *
      * Supported options:
      *
+<<<<<<< HEAD
      *  * authorizedCollections (boolean): Determines which collections are
      *    returned based on the user privileges.
      *
@@ -50,6 +59,8 @@ class ListCollectionNames implements Executable
      *
      *    This is not supported for servers versions < 4.4.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *  * filter (document): Query by which to filter collections.
      *
      *  * maxTimeMS (integer): The maximum amount of time to allow the query to
@@ -57,11 +68,20 @@ class ListCollectionNames implements Executable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string $databaseName Database name
      * @param array  $options      Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, array $options = [])
+=======
+    public function __construct($databaseName, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->listCollections = new ListCollectionsCommand($databaseName, ['nameOnly' => true] + $options);
     }
@@ -70,10 +90,18 @@ class ListCollectionNames implements Executable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return Iterator
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server): Iterator
+=======
+     * @param Server $server
+     * @return Iterator
+     * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
+     */
+    public function execute(Server $server) : Iterator
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return new CallbackIterator(
             $this->listCollections->execute($server),

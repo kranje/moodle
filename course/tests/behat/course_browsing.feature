@@ -17,11 +17,16 @@ Feature: Restricting access to course lists
       | English Y1 | ENG1      | ENG |
       | English Y2 | ENG2      | ENG |
       | Humanities Y1 | HUM2   | MISC |
+<<<<<<< HEAD
     Given the following "users" exist:
+=======
+    And the following "users" exist:
+>>>>>>> forked/LAE_400_PACKAGE
       | username | firstname | lastname | email |
       | user0 | User | Z | user0@example.com |
       | userb | User | B | userb@example.com |
       | usere | User | E | usere@example.com |
+<<<<<<< HEAD
     Given the following "roles" exist:
       | name            | shortname    | description      | archetype      |
       | Category viewer | coursebrowse | My custom role 1 |                |
@@ -35,6 +40,17 @@ Feature: Restricting access to course lists
     And I set the following system permissions of "Category viewer" role:
       | capability | permission |
       | moodle/category:viewcourselist | Allow |
+=======
+    And the following "roles" exist:
+      | name            | shortname    | description      | archetype      |
+      | Category viewer | coursebrowse | My custom role 1 |                |
+    And the following "role capability" exist:
+        | role         | moodle/category:viewcourselist |
+        | user         | prevent                        |
+        | guest        | prevent                        |
+        | coursebrowse | allow                          |
+    Given I log in as "admin"
+>>>>>>> forked/LAE_400_PACKAGE
     And I am on site homepage
     And I turn editing mode on
     And the following config values are set as admin:

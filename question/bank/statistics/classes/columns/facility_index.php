@@ -18,6 +18,10 @@ namespace qbank_statistics\columns;
 
 use core_question\local\bank\column_base;
 use qbank_statistics\helper;
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
 /**
  * This column show the average facility index for this question.
  *
@@ -28,11 +32,14 @@ use qbank_statistics\helper;
  */
 class facility_index extends column_base {
 
+<<<<<<< HEAD
     /**
      * Title for this column.
      *
      * @return string column title
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function get_title(): string {
         return get_string('facility_index', 'qbank_statistics');
     }
@@ -41,15 +48,19 @@ class facility_index extends column_base {
         return new \help_icon('facility_index', 'qbank_statistics');
     }
 
+<<<<<<< HEAD
     /**
      * Column name.
      *
      * @return string column name
      */
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function get_name(): string {
         return 'facility_index';
     }
 
+<<<<<<< HEAD
     /**
      * Output the contents of this column.
      * @param object $question the row from the $question table, augmented with extra information.
@@ -59,11 +70,24 @@ class facility_index extends column_base {
         global $PAGE;
         // Average facility index per quiz.
         $facility = helper::calculate_average_question_facility($question->id);
+=======
+    public function get_required_statistics_fields(): array {
+        return ['facility'];
+    }
+
+    protected function display_content($question, $rowclasses) {
+        global $PAGE;
+
+        $facility = $this->qbank->get_aggregate_statistic($question->id, 'facility');
+>>>>>>> forked/LAE_400_PACKAGE
         echo $PAGE->get_renderer('qbank_statistics')->render_facility_index($facility);
     }
 
     public function get_extra_classes(): array {
         return ['pr-3'];
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

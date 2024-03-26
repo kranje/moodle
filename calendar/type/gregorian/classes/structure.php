@@ -329,11 +329,19 @@ class structure extends type_base {
         date_default_timezone_set(\core_date::get_user_timezone($timezone));
 
         if ($fixday) {
+<<<<<<< HEAD
             $daystring  = ltrim(str_replace(array(' 0', ' '), '', date(' d', $time)));
             $datestring = str_replace('DD', $daystring, $datestring);
         }
         if ($fixhour) {
             $hourstring = ltrim(str_replace(array(' 0', ' '), '', date(' h', $time)));
+=======
+            $daystring  = ltrim(str_replace(array(' 0', ' '), '', strftime(' %d', $time)));
+            $datestring = str_replace('DD', $daystring, $datestring);
+        }
+        if ($fixhour) {
+            $hourstring = ltrim(str_replace(array(' 0', ' '), '', strftime(' %I', $time)));
+>>>>>>> forked/LAE_400_PACKAGE
             $datestring = str_replace('HH', $hourstring, $datestring);
         }
 

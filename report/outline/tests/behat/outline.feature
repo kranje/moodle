@@ -19,9 +19,15 @@ Feature: View an outline report
       | student1 | C1 | student |
       | student2 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                      | intro                    | course | idnumber |
       | forum      | Forum name                | Forum description        | C1     | forum1   |
       | book       | Book name                 |                          | C1     | book1    |
+=======
+      | activity   | name                      | course | idnumber |
+      | forum      | Forum name                | C1     | forum1   |
+      | book       | Book name                 | C1     | book1    |
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Course 1" course page logged in as admin
 
   Scenario: View the outline report when only the legacy log reader is enabled

@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,8 +39,11 @@ use MongoDB\Exception\UnexpectedValueException;
 use MongoDB\Exception\UnsupportedException;
 use MongoDB\MapReduceResult;
 use stdClass;
+<<<<<<< HEAD
 
 use function assert;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function current;
 use function is_array;
 use function is_bool;
@@ -41,8 +52,13 @@ use function is_object;
 use function is_string;
 use function MongoDB\create_field_path_type_map;
 use function MongoDB\is_mapreduce_output_inline;
+<<<<<<< HEAD
 use function trigger_error;
 
+=======
+use function MongoDB\server_supports_feature;
+use function trigger_error;
+>>>>>>> forked/LAE_400_PACKAGE
 use const E_USER_DEPRECATED;
 
 /**
@@ -50,10 +66,29 @@ use const E_USER_DEPRECATED;
  *
  * @api
  * @see \MongoDB\Collection::mapReduce()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/mapReduce/
  */
 class MapReduce implements Executable
 {
+=======
+ * @see https://docs.mongodb.com/manual/reference/command/mapReduce/
+ */
+class MapReduce implements Executable
+{
+    /** @var integer */
+    private static $wireVersionForCollation = 5;
+
+    /** @var integer */
+    private static $wireVersionForDocumentLevelValidation = 4;
+
+    /** @var integer */
+    private static $wireVersionForReadConcern = 4;
+
+    /** @var integer */
+    private static $wireVersionForWriteConcern = 4;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var string */
     private $databaseName;
 
@@ -101,11 +136,21 @@ class MapReduce implements Executable
      *    circumvent document level validation. This only applies when results
      *    are output to a collection.
      *
+<<<<<<< HEAD
      *  * collation (document): Collation specification.
      *
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    This is not supported for servers versions < 4.4.
+=======
+     *    For servers < 3.2, this option is ignored as document level validation
+     *    is not available.
+     *
+     *  * collation (document): Collation specification.
+     *
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      *  * finalize (MongoDB\BSON\JavascriptInterface): Follows the reduce method
      *    and modifies the output.
@@ -128,6 +173,12 @@ class MapReduce implements Executable
      *  * readConcern (MongoDB\Driver\ReadConcern): Read concern. This is not
      *    supported when results are returned inline.
      *
+<<<<<<< HEAD
+=======
+     *    This is not supported for server versions < 3.2 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * readPreference (MongoDB\Driver\ReadPreference): Read preference.
      *
      *    This option is ignored if results are output to a collection.
@@ -137,6 +188,11 @@ class MapReduce implements Executable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      *  * sort (document): Sorts the input documents. This option is useful for
      *    optimization. For example, specify the sort key to be the same as the
      *    emit key so that there are fewer reduce operations. The sort key must
@@ -151,6 +207,12 @@ class MapReduce implements Executable
      *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern. This only
      *    applies when results are output to a collection.
      *
+<<<<<<< HEAD
+=======
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string              $databaseName   Database name
      * @param string              $collectionName Collection name
      * @param JavascriptInterface $map            Map function
@@ -159,7 +221,11 @@ class MapReduce implements Executable
      * @param array               $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, string $collectionName, JavascriptInterface $map, JavascriptInterface $reduce, $out, array $options = [])
+=======
+    public function __construct($databaseName, $collectionName, JavascriptInterface $map, JavascriptInterface $reduce, $out, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (! is_string($out) && ! is_array($out) && ! is_object($out)) {
             throw InvalidArgumentException::invalidType('$out', $out, 'string or array or object');
@@ -225,10 +291,13 @@ class MapReduce implements Executable
             throw InvalidArgumentException::invalidType('"writeConcern" option', $options['writeConcern'], WriteConcern::class);
         }
 
+<<<<<<< HEAD
         if (isset($options['bypassDocumentValidation']) && ! $options['bypassDocumentValidation']) {
             unset($options['bypassDocumentValidation']);
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (isset($options['readConcern']) && $options['readConcern']->isDefault()) {
             unset($options['readConcern']);
         }
@@ -252,8 +321,13 @@ class MapReduce implements Executable
 
         $this->checkOutDeprecations($out);
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = (string) $collectionName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->map = $map;
         $this->reduce = $reduce;
         $this->out = $out;
@@ -264,19 +338,44 @@ class MapReduce implements Executable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return MapReduceResult
      * @throws UnexpectedValueException if the command response was malformed
      * @throws UnsupportedException if read concern or write concern is used and unsupported
+=======
+     * @param Server $server
+     * @return MapReduceResult
+     * @throws UnexpectedValueException if the command response was malformed
+     * @throws UnsupportedException if collation, read concern, or write concern is used and unsupported
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server)
     {
+<<<<<<< HEAD
+=======
+        if (isset($this->options['collation']) && ! server_supports_feature($server, self::$wireVersionForCollation)) {
+            throw UnsupportedException::collationNotSupported();
+        }
+
+        if (isset($this->options['readConcern']) && ! server_supports_feature($server, self::$wireVersionForReadConcern)) {
+            throw UnsupportedException::readConcernNotSupported();
+        }
+
+        if (isset($this->options['writeConcern']) && ! server_supports_feature($server, self::$wireVersionForWriteConcern)) {
+            throw UnsupportedException::writeConcernNotSupported();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $inTransaction = isset($this->options['session']) && $this->options['session']->isInTransaction();
         if ($inTransaction) {
             if (isset($this->options['readConcern'])) {
                 throw UnsupportedException::readConcernNotSupportedInTransaction();
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($this->options['writeConcern'])) {
                 throw UnsupportedException::writeConcernNotSupportedInTransaction();
             }
@@ -284,7 +383,11 @@ class MapReduce implements Executable
 
         $hasOutputCollection = ! is_mapreduce_output_inline($this->out);
 
+<<<<<<< HEAD
         $command = $this->createCommand();
+=======
+        $command = $this->createCommand($server);
+>>>>>>> forked/LAE_400_PACKAGE
         $options = $this->createOptions($hasOutputCollection);
 
         /* If the mapReduce operation results in a write, use
@@ -302,7 +405,10 @@ class MapReduce implements Executable
         }
 
         $result = current($cursor->toArray());
+<<<<<<< HEAD
         assert($result instanceof stdClass);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $getIterator = $this->createGetIteratorCallable($result, $server);
 
@@ -311,8 +417,14 @@ class MapReduce implements Executable
 
     /**
      * @param string|array|object $out
+<<<<<<< HEAD
      */
     private function checkOutDeprecations($out): void
+=======
+     * @return void
+     */
+    private function checkOutDeprecations($out)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (is_string($out)) {
             return;
@@ -331,8 +443,16 @@ class MapReduce implements Executable
 
     /**
      * Create the mapReduce command.
+<<<<<<< HEAD
      */
     private function createCommand(): Command
+=======
+     *
+     * @param Server $server
+     * @return Command
+     */
+    private function createCommand(Server $server)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $cmd = [
             'mapReduce' => $this->collectionName,
@@ -341,7 +461,11 @@ class MapReduce implements Executable
             'out' => $this->out,
         ];
 
+<<<<<<< HEAD
         foreach (['bypassDocumentValidation', 'comment', 'finalize', 'jsMode', 'limit', 'maxTimeMS', 'verbose'] as $option) {
+=======
+        foreach (['finalize', 'jsMode', 'limit', 'maxTimeMS', 'verbose'] as $option) {
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($this->options[$option])) {
                 $cmd[$option] = $this->options[$option];
             }
@@ -353,15 +477,33 @@ class MapReduce implements Executable
             }
         }
 
+<<<<<<< HEAD
+=======
+        if (! empty($this->options['bypassDocumentValidation']) &&
+            server_supports_feature($server, self::$wireVersionForDocumentLevelValidation)
+        ) {
+            $cmd['bypassDocumentValidation'] = $this->options['bypassDocumentValidation'];
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         return new Command($cmd);
     }
 
     /**
      * Creates a callable for MapReduceResult::getIterator().
      *
+<<<<<<< HEAD
      * @throws UnexpectedValueException if the command response was malformed
      */
     private function createGetIteratorCallable(stdClass $result, Server $server): callable
+=======
+     * @param stdClass $result
+     * @param Server   $server
+     * @return callable
+     * @throws UnexpectedValueException if the command response was malformed
+     */
+    private function createGetIteratorCallable(stdClass $result, Server $server)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         // Inline results can be wrapped with an ArrayIterator
         if (isset($result->results) && is_array($result->results)) {
@@ -390,10 +532,19 @@ class MapReduce implements Executable
     /**
      * Create options for executing the command.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-server.executereadcommand.php
      * @see https://php.net/manual/en/mongodb-driver-server.executereadwritecommand.php
      */
     private function createOptions(bool $hasOutputCollection): array
+=======
+     * @see http://php.net/manual/en/mongodb-driver-server.executereadcommand.php
+     * @see http://php.net/manual/en/mongodb-driver-server.executereadwritecommand.php
+     * @param boolean $hasOutputCollection
+     * @return array
+     */
+    private function createOptions($hasOutputCollection)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 

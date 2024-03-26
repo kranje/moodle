@@ -44,7 +44,11 @@ if ($userid) {
 require_login($course);
 
 if (!completion_can_view_data($user->id, $course)) {
+<<<<<<< HEAD
     throw new \moodle_exception('cannotviewreport');
+=======
+    print_error('cannotviewreport');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Load completion data.
@@ -54,15 +58,25 @@ $returnurl = new moodle_url('/course/view.php', array('id' => $id));
 
 // Don't display if completion isn't enabled.
 if (!$info->is_enabled()) {
+<<<<<<< HEAD
     throw new \moodle_exception('completionnotenabled', 'completion', $returnurl);
+=======
+    print_error('completionnotenabled', 'completion', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Check this user is enroled.
 if (!$info->is_tracked_user($user->id)) {
     if ($USER->id == $user->id) {
+<<<<<<< HEAD
         throw new \moodle_exception('notenroled', 'completion', $returnurl);
     } else {
         throw new \moodle_exception('usernotenroled', 'completion', $returnurl);
+=======
+        print_error('notenroled', 'completion', $returnurl);
+    } else {
+        print_error('usernotenroled', 'completion', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -248,7 +262,11 @@ if (empty($completions)) {
         // Completion data.
         echo html_writer::start_tag('td', array('class' => 'cell c5'));
         if ($row['timecompleted']) {
+<<<<<<< HEAD
             echo userdate($row['timecompleted'], get_string('strftimedatemonthtimeshort', 'langconfig'));
+=======
+            echo userdate($row['timecompleted'], get_string('strftimedate', 'langconfig'));
+>>>>>>> forked/LAE_400_PACKAGE
         } else {
             echo '-';
         }

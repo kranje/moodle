@@ -16,6 +16,10 @@
 
 namespace mod_data\output;
 
+<<<<<<< HEAD
+=======
+use moodle_url;
+>>>>>>> forked/LAE_400_PACKAGE
 use templatable;
 use renderable;
 
@@ -29,20 +33,31 @@ use renderable;
 class presets_action_bar implements templatable, renderable {
 
     /** @var int $id The database module id. */
+<<<<<<< HEAD
     private $cmid;
 
     /** @var \action_menu $actionsselect The presets actions selector object. */
     private $actionsselect;
+=======
+    private $id;
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * The class constructor.
      *
+<<<<<<< HEAD
      * @param int $cmid The database module id
      * @param \action_menu|null $actionsselect The presets actions selector object.
      */
     public function __construct(int $cmid, ?\action_menu $actionsselect) {
         $this->cmid = $cmid;
         $this->actionsselect = $actionsselect;
+=======
+     * @param int $id The database module id
+     */
+    public function __construct(int $id) {
+        $this->id = $id;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -52,6 +67,7 @@ class presets_action_bar implements templatable, renderable {
      * @return array
      */
     public function export_for_template(\renderer_base $output): array {
+<<<<<<< HEAD
         $data = [
             'id' => $this->cmid,
         ];
@@ -61,5 +77,12 @@ class presets_action_bar implements templatable, renderable {
         }
 
         return $data;
+=======
+        $importpresetlink = new moodle_url('/mod/data/preset.php', ['d' => $this->id, 'action' => 'import']);
+
+        return [
+            'importpreseturl' => $importpresetlink->out(false),
+        ];
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

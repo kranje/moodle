@@ -143,7 +143,11 @@ class block_recent_activity extends block_base {
                 FROM {block_recent_activity}
                 WHERE timecreated > ? AND courseid = ?
                 GROUP BY cmid
+<<<<<<< HEAD
                 ORDER BY MAX(timecreated) DESC";
+=======
+                ORDER BY MAX(timecreated) ASC";
+>>>>>>> forked/LAE_400_PACKAGE
         $params = array($timestart, $course->id);
         $logs = $DB->get_records_sql($sql, $params);
         if (isset($logs[0])) {

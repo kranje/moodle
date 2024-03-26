@@ -23,7 +23,11 @@ Feature: Block configuration
   Scenario: Reset system defaults
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Configuration"
     And I follow "Restore system defaults"
     And I should see "Changes saved"
@@ -37,14 +41,23 @@ Feature: Block configuration
   Scenario: Filter roles
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Configuration"
     And I set the following fields to these values:
       | Roles to filter by | student |
     And I press "Save changes"
     Then I should see "Changes saved"
+<<<<<<< HEAD
     And I am on "Test Course" course homepage
     And I navigate to "CLAMPMail" in current page administration
+=======
+    When I follow "Test Course"
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     Then the "roles" select box should contain "Student"
     And the "roles" select box should not contain "Teacher"
 
@@ -52,7 +65,11 @@ Feature: Block configuration
   Scenario: Prepend course name
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Configuration"
     And I set the following fields to these values:
       | Prepend course name | Short name |
@@ -64,22 +81,35 @@ Feature: Block configuration
   Scenario: Receive a copy
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Configuration"
     And I set the following fields to these values:
       | Receive a copy | Yes |
     And I press "Save changes"
     And I should see "Changes saved"
     Then I should see "Yes"
+<<<<<<< HEAD
     And I am on "Test Course" course homepage
     And I navigate to "CLAMPMail" in current page administration
+=======
+    When I follow "Test Course"
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     Then the field "receipt" matches value "1"
 
   @javascript
   Scenario: Group mode
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Configuration"
     And I set the following fields to these values:
       | Group mode | Visible groups |
@@ -91,11 +121,19 @@ Feature: Block configuration
   Scenario: Configure send email roles
     Given I log in as "student1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And "CLAMPMail" "link" should not exist in current page administration
     And I log out
     And I log in as "teacher1"
     And I am on "Test Course" course homepage
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And "Quickmail" "link" should not exist in current page administration
+    And I log out
+    And I log in as "teacher1"
+    And I am on "Test Course" course homepage
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Configuration"
     And I set the following fields to these values:
       | Roles that can send email | manager,coursecreator,editingteacher,teacher,student |
@@ -104,4 +142,8 @@ Feature: Block configuration
     And I log out
     And I log in as "student1"
     And I am on "Test Course" course homepage
+<<<<<<< HEAD
     And I navigate to "CLAMPMail" in current page administration
+=======
+    And I navigate to "Quickmail" in current page administration
+>>>>>>> forked/LAE_400_PACKAGE

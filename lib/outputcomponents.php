@@ -167,8 +167,14 @@ class user_picture implements renderable {
     public $link = true;
 
     /**
+<<<<<<< HEAD
      * @var int Size in pixels. Special values are (true/1 = 100px) and (false/0 = 35px) for backward compatibility.
      * Recommended values (supporting user initials too): 16, 35, 64 and 100.
+=======
+     * @var int Size in pixels. Special values are (true/1 = 100px) and
+     * (false/0 = 35px)
+     * for backward compatibility.
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public $size = 35;
 
@@ -920,6 +926,7 @@ class single_button implements renderable {
         }
 
         // Form parameters.
+<<<<<<< HEAD
         $params = $this->url->params();
         if ($this->method === 'post') {
             $params['sesskey'] = sesskey();
@@ -927,6 +934,13 @@ class single_button implements renderable {
         $data->params = array_map(function($key) use ($params) {
             return ['name' => $key, 'value' => $params[$key]];
         }, array_keys($params));
+=======
+        $actionurl = new moodle_url($this->url);
+        if ($this->method === 'post') {
+            $actionurl->param('sesskey', sesskey());
+        }
+        $data->params = $actionurl->export_params_for_template();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Button actions.
         $actions = $this->actions;
@@ -1128,6 +1142,7 @@ class single_select implements renderable, templatable {
         }, array_keys($attributes));
 
         // Form parameters.
+<<<<<<< HEAD
         $params = $this->url->params();
         if ($this->method === 'post') {
             $params['sesskey'] = sesskey();
@@ -1135,6 +1150,13 @@ class single_select implements renderable, templatable {
         $data->params = array_map(function($key) use ($params) {
             return ['name' => $key, 'value' => $params[$key]];
         }, array_keys($params));
+=======
+        $actionurl = new moodle_url($this->url);
+        if ($this->method === 'post') {
+            $actionurl->param('sesskey', sesskey());
+        }
+        $data->params = $actionurl->export_params_for_template();
+>>>>>>> forked/LAE_400_PACKAGE
 
         // Select options.
         $hasnothing = false;
@@ -2352,7 +2374,11 @@ class html_writer {
         if (!is_null($for)) {
             $attributes = array_merge($attributes, array('for' => $for));
         }
+<<<<<<< HEAD
         $text = trim($text ?? '');
+=======
+        $text = trim($text);
+>>>>>>> forked/LAE_400_PACKAGE
         $label = self::tag('label', $text, $attributes);
 
         // TODO MDL-12192 $colonize disabled for now yet
@@ -3502,7 +3528,14 @@ class custom_menu_item implements renderable, templatable {
      */
     public function __construct($text, moodle_url $url = null, $title = null, $sort = null, custom_menu_item $parent = null,
                                 array $attributes = []) {
+<<<<<<< HEAD
         $this->text = $text;
+=======
+
+        // Use class setter method for text to ensure it's always a string type.
+        $this->set_text($text);
+
+>>>>>>> forked/LAE_400_PACKAGE
         $this->url = $url;
         $this->title = $title;
         $this->sort = (int)$sort;
@@ -3779,7 +3812,11 @@ class custom_menu extends custom_menu_item {
             $settings = explode('|', $line);
             foreach ($settings as $i => $setting) {
                 $setting = trim($setting);
+<<<<<<< HEAD
                 if (!empty($setting)) {
+=======
+                if ($setting !== '') {
+>>>>>>> forked/LAE_400_PACKAGE
                     switch ($i) {
                         case 0: // Menu text.
                             $itemtext = ltrim($setting, '-');
@@ -4570,6 +4607,7 @@ class action_menu implements renderable, templatable {
     }
 
     /**
+<<<<<<< HEAD
      * Add classes to the action menu for an easier styling.
      *
      * @param string $class The class to add to attributes.
@@ -4583,6 +4621,8 @@ class action_menu implements renderable, templatable {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Export for template.
      *
      * @param renderer_base $output The renderer.

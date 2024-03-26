@@ -94,14 +94,20 @@ class qtype_truefalse extends question_type {
             // But we'll do it anyway, just for robustness.
             $options->trueanswer  = $trueid;
             $options->falseanswer = $falseid;
+<<<<<<< HEAD
             $options->showstandardinstruction = !empty($question->showstandardinstruction);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $DB->update_record('question_truefalse', $options);
         } else {
             $options = new stdClass();
             $options->question    = $question->id;
             $options->trueanswer  = $trueid;
             $options->falseanswer = $falseid;
+<<<<<<< HEAD
             $options->showstandardinstruction = !empty($question->showstandardinstruction);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $DB->insert_record('question_truefalse', $options);
         }
 
@@ -110,11 +116,14 @@ class qtype_truefalse extends question_type {
         return true;
     }
 
+<<<<<<< HEAD
     public function save_defaults_for_new_questions(stdClass $fromform): void {
         parent::save_defaults_for_new_questions($fromform);
         $this->set_default_value('showstandardinstruction', $fromform->showstandardinstruction);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Loads the question type specific options for the question.
      */
@@ -155,7 +164,10 @@ class qtype_truefalse extends question_type {
                 $answers[$questiondata->options->falseanswer]->feedbackformat;
         $question->trueanswerid =  $questiondata->options->trueanswer;
         $question->falseanswerid = $questiondata->options->falseanswer;
+<<<<<<< HEAD
         $question->showstandardinstruction = $questiondata->options->showstandardinstruction;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function delete_question($questionid, $contextid) {

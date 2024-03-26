@@ -4,7 +4,11 @@ Feature: The recording can be managed through the room page
 
   Background:  Make sure that import recording is enabled and course, activities and recording exists
     Given a BigBlueButton mock server is configured
+<<<<<<< HEAD
     And I enable "bigbluebuttonbn" "mod" plugin
+=======
+    And I accept dpa and enable bigbluebuttonbn plugin
+>>>>>>> forked/LAE_400_PACKAGE
     And the following "courses" exist:
       | fullname      | shortname | category |
       | Test Course 1 | C1        | 0        |
@@ -63,7 +67,10 @@ Feature: The recording can be managed through the room page
   @javascript
   Scenario: I can delete a recording
     Given I am on the "RoomRecordings" "bigbluebuttonbn activity" page logged in as admin
+<<<<<<< HEAD
     And I change window size to "large"
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     When I click on "a[data-action='delete']" "css_element" in the "Recording 1" "table_row"
     And I click on "OK" "button" in the "Confirm" "dialogue"
     Then I should not see "Recording 1"

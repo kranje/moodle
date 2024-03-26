@@ -215,10 +215,13 @@ class Mustache_Tokenizer
             }
         }
 
+<<<<<<< HEAD
         if ($this->state !== self::IN_TEXT) {
             $this->throwUnclosedTagException();
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $this->flushBuffer();
 
         // Restore the user's encoding...
@@ -283,10 +286,13 @@ class Mustache_Tokenizer
         $close      = '=' . $this->ctag;
         $closeIndex = strpos($text, $close, $index);
 
+<<<<<<< HEAD
         if ($closeIndex === false) {
             $this->throwUnclosedTagException();
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $token = array(
             self::TYPE => self::T_DELIM_CHANGE,
             self::LINE => $this->line,
@@ -341,10 +347,13 @@ class Mustache_Tokenizer
     private function addPragma($text, $index)
     {
         $end    = strpos($text, $this->ctag, $index);
+<<<<<<< HEAD
         if ($end === false) {
             $this->throwUnclosedTagException();
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $pragma = trim(substr($text, $index + 2, $end - $index - 2));
 
         // Pragmas are hoisted to the front of the template.
@@ -356,6 +365,7 @@ class Mustache_Tokenizer
 
         return $end + $this->ctagLen - 1;
     }
+<<<<<<< HEAD
 
     private function throwUnclosedTagException()
     {
@@ -375,4 +385,6 @@ class Mustache_Tokenizer
             self::INDEX => $this->seenTag - $this->otagLen,
         ));
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -17,6 +17,12 @@
 /**
  * Task to cleanup old question statistics cache.
  *
+<<<<<<< HEAD
+=======
+ * This task is no longer required. It has been kept on stable branches for backwards-compatibility,
+ * and will be removed completely in Moodle 4.3.
+ *
+>>>>>>> forked/LAE_400_PACKAGE
  * @package    core
  * @copyright  2019 Simey Lameze <simey@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,6 +34,12 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * A task to cleanup old question statistics cache.
  *
+<<<<<<< HEAD
+=======
+ * This task is no longer required. It has been kept on stable branches for backwards-compatibility,
+ * and will be removed completely in Moodle 4.3.
+ *
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright  2019 Simey Lameze <simey@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -46,6 +58,7 @@ class question_stats_cleanup_task extends scheduled_task {
      * Perform the cleanup task.
      */
     public function execute() {
+<<<<<<< HEAD
         global $DB;
 
         mtrace("\n  Cleaning up old question statistics cache records...", '');
@@ -61,5 +74,8 @@ class question_stats_cleanup_task extends scheduled_task {
         $DB->delete_records_list('question_response_count', 'analysisid', $responseanlysisids);
 
         mtrace('done.');
+=======
+        mtrace("\nThis task is no longer required. If it is still running, please disable. Will be removed in Moodle 4.3.", '');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

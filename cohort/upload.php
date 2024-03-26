@@ -37,7 +37,11 @@ if ($contextid) {
     $context = context_system::instance();
 }
 if ($context->contextlevel != CONTEXT_COURSECAT && $context->contextlevel != CONTEXT_SYSTEM) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcontext');
+=======
+    print_error('invalidcontext');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_capability('moodle/cohort:manage', $context);
@@ -69,7 +73,10 @@ if ($uploadform->is_cancelled()) {
 }
 
 $strheading = get_string('uploadcohorts', 'cohort');
+<<<<<<< HEAD
 $PAGE->set_title($strheading);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $PAGE->navbar->add($strheading);
 
 echo $OUTPUT->header();

@@ -312,7 +312,11 @@ abstract class moodleform {
         // the _qf__.$this->_formname serves as a marker that form was actually submitted
         if (array_key_exists('_qf__'.$this->_formname, $submission) and $submission['_qf__'.$this->_formname] == 1) {
             if (!confirm_sesskey()) {
+<<<<<<< HEAD
                 throw new \moodle_exception('invalidsesskey');
+=======
+                print_error('invalidsesskey');
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $files = $_FILES;
         } else {
@@ -3195,7 +3199,11 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
             $html = str_replace('{groupname}', 'data-groupname="'.$group->getName().'"', $html);
             $html = str_replace('{typeclass}', 'fgroup', $html);
             $html = str_replace('{type}', 'group', $html);
+<<<<<<< HEAD
             $html = str_replace('{class}', $group->getAttribute('class') ?? '', $html);
+=======
+            $html = str_replace('{class}', $group->getAttribute('class'), $html);
+>>>>>>> forked/LAE_400_PACKAGE
             $emptylabel = '';
             if ($group->getLabel() == '') {
                 $emptylabel = 'femptylabel';
@@ -3261,7 +3269,11 @@ class MoodleQuickForm_Renderer extends HTML_QuickForm_Renderer_Tableless{
             $html = str_replace('{type}', $element->getType(), $html);
             $html = str_replace('{name}', $element->getName(), $html);
             $html = str_replace('{groupname}', '', $html);
+<<<<<<< HEAD
             $html = str_replace('{class}', $element->getAttribute('class') ?? '', $html);
+=======
+            $html = str_replace('{class}', $element->getAttribute('class'), $html);
+>>>>>>> forked/LAE_400_PACKAGE
             $emptylabel = '';
             if ($element->getLabel() == '') {
                 $emptylabel = 'femptylabel';

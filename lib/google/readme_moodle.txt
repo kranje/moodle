@@ -43,13 +43,20 @@ Local changes (to reapply until upstream upgrades contain them):
     * MDL-73523 php80 compliance. openssl_xxx_free() methods deprecated. I've been unable to
       find any issue upstream and the current library versions are way different from the ones
       we are using here.
+<<<<<<< HEAD
     * MDL-76355 php81 compliance. Class methods require overriding methods to declare a
       compatible return type.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 Information
 -----------
 
+<<<<<<< HEAD
 Repository: https://github.com/googleapis/google-api-php-client
+=======
+Repository: https://github.com/google/google-api-php-client
+>>>>>>> forked/LAE_400_PACKAGE
 Documentation: https://developers.google.com/api-client-library/php/
 Global documentation: https://developers.google.com
 

@@ -155,6 +155,7 @@ class meeting_test extends \advanced_testcase {
         $meeting->update_cache();
         $meetinginfo = $meeting->get_meeting_info();
         $this->assertFalse($meetinginfo->statusrunning);
+<<<<<<< HEAD
 
         if ($type == instance::TYPE_ALL) {
             $this->assertTrue($meetinginfo->features['showroom']);
@@ -166,6 +167,8 @@ class meeting_test extends \advanced_testcase {
             $this->assertFalse($meetinginfo->features['showroom']);
             $this->assertTrue($meetinginfo->features['showrecordings']);
         }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -302,6 +305,57 @@ class meeting_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Test can join is working if the "user limit" setting is set and reached.
+     *
+     * @covers ::join
+     * @covers ::join_meeting
+     */
+    public function test_join_user_limit_reached() {
+        $this->resetAfterTest();
+        set_config('bigbluebuttonbn_userlimit_editable', true);
+        $this->setAdminUser();
+        $bbbgenerator = $this->getDataGenerator()->get_plugin_generator('mod_bigbluebuttonbn');
+        $moderator = $this->getDataGenerator()->create_and_enrol($this->get_course(), 'editingteacher');
+        $student1 = $this->getDataGenerator()->create_and_enrol($this->get_course());
+        $student2 = $this->getDataGenerator()->create_and_enrol($this->get_course());
+        $meetinginfo = [
+            'course' => $this->get_course()->id,
+            'type' => instance::TYPE_ALL,
+            'userlimit' => 2,
+        ];
+        $activity = $bbbgenerator->create_instance($meetinginfo, [
+            'userlimit' => 2,
+        ]);
+        $instance = instance::get_from_instanceid($activity->id);
+        $meeting = new meeting($instance);
+        $bbbgenerator->create_meeting([
+            'instanceid' => $instance->get_instance_id(),
+        ]);
+        // Moderator joins the meeting.
+        $this->setUser($moderator);
+        $this->join_meeting($meeting->join(logger::ORIGIN_BASE));
+        $meeting->update_cache();
+        $this->assertEquals(1, $meeting->get_participant_count());
+
+        // Student1 joins the meeting.
+        $this->setUser($student1);
+        $this->join_meeting($meeting->join(logger::ORIGIN_BASE));
+        $meeting->update_cache();
+        $this->assertEquals(2, $meeting->get_participant_count());
+        $this->assertTrue($instance->has_user_limit_been_reached($meeting->get_participant_count()));
+
+        // Student2 tries to join but the limit has been reached.
+        $this->setUser($student2);
+        $meeting->update_cache();
+        $this->assertFalse($meeting->can_join());
+        $this->expectException(\mod_bigbluebuttonbn\local\exceptions\meeting_join_exception::class);
+        meeting::join_meeting($instance);
+    }
+
+    /**
+>>>>>>> forked/LAE_400_PACKAGE
      * Test that attendees returns the right list of attendees
      *
      * @covers ::get_attendees
@@ -336,18 +390,30 @@ class meeting_test extends \advanced_testcase {
         $meeting->update_cache();
         $meetinginfo = $meeting->get_meeting_info();
         $this->assertEquals(1, $meetinginfo->participantcount);
+<<<<<<< HEAD
+=======
+        $this->assertEquals(1, $meetinginfo->totalusercount);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals(0, $meetinginfo->moderatorcount);
         $this->setUser($usernotingroup);
         $this->join_meeting($meeting->join(logger::ORIGIN_BASE));
         $meeting->update_cache();
         $meetinginfo = $meeting->get_meeting_info();
         $this->assertEquals(2, $meetinginfo->participantcount);
+<<<<<<< HEAD
+=======
+        $this->assertEquals(2, $meetinginfo->totalusercount);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals(0, $meetinginfo->moderatorcount);
         $this->setAdminUser();
         $this->join_meeting($meeting->join(logger::ORIGIN_BASE));
         $meeting->update_cache();
         $meetinginfo = $meeting->get_meeting_info();
         $this->assertEquals(2, $meetinginfo->participantcount);
+<<<<<<< HEAD
+=======
+        $this->assertEquals(3, $meetinginfo->totalusercount);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals(1, $meetinginfo->moderatorcount);
     }
     /**

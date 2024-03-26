@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --# vim: et sw=4 sts=4
 HTML.TargetNoopener
 TYPE: bool
@@ -8,3 +9,15 @@ If enabled, noopener rel attributes are added to links which have
 a target attribute associated with them.  This prevents malicious
 destinations from overwriting the original window.
 --# vim: et sw=4 sts=4
+=======
+--# vim: et sw=4 sts=4
+HTML.TargetNoopener
+TYPE: bool
+VERSION: 4.8.0
+DEFAULT: TRUE
+--DESCRIPTION--
+If enabled, noopener rel attributes are added to links which have
+a target attribute associated with them.  This prevents malicious
+destinations from overwriting the original window.
+--# vim: et sw=4 sts=4
+>>>>>>> forked/LAE_400_PACKAGE

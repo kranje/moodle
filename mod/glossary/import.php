@@ -21,6 +21,7 @@ if ($hook !== 'ALL') {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('glossary', $id)) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcoursemodule');
 }
 
@@ -30,6 +31,17 @@ if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
 
 if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
     throw new \moodle_exception('invalidid', 'glossary');
+=======
+    print_error('invalidcoursemodule');
+}
+
+if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+    print_error('coursemisconf');
+}
+
+if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
+    print_error('invalidid', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course, false, $cm);
@@ -185,7 +197,11 @@ if ($xml = glossary_read_imported_file($result)) {
         $newentry->concept = trim($xmlentry['#']['CONCEPT'][0]['#']);
         $definition = $xmlentry['#']['DEFINITION'][0]['#'];
         if (!is_string($definition)) {
+<<<<<<< HEAD
             throw new \moodle_exception('errorparsingxml', 'glossary');
+=======
+            print_error('errorparsingxml', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $newentry->definition = trusttext_strip($definition);
         if ( isset($xmlentry['#']['CASESENSITIVE'][0]['#']) ) {

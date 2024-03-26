@@ -83,6 +83,7 @@ abstract class datasource extends base {
      */
     public function add_default_columns(): void {
         $reportid = $this->get_report_persistent()->get('id');
+<<<<<<< HEAD
 
         // Retrieve default column sorting, and track index of both sorted/non-sorted columns.
         $columnidentifiers = $this->get_default_columns();
@@ -104,6 +105,11 @@ abstract class datasource extends base {
             } else if (!empty($defaultcolumnsorting)) {
                 $column->set('sortorder', $columnnonsortingindex++)->update();
             }
+=======
+        $columnidentifiers = $this->get_default_columns();
+        foreach ($columnidentifiers as $uniqueidentifier) {
+            report::add_report_column($reportid, $uniqueidentifier);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -115,6 +121,7 @@ abstract class datasource extends base {
     abstract public function get_default_columns(): array;
 
     /**
+<<<<<<< HEAD
      * Return the default sorting that will be added to the report once it is created
      *
      * @return int[] array [column identifier => SORT_ASC/SORT_DESC]
@@ -124,6 +131,8 @@ abstract class datasource extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Return all configured report columns
      *
      * @return column[]
@@ -266,9 +275,12 @@ abstract class datasource extends base {
         foreach ($conditionidentifiers as $uniqueidentifier) {
             report::add_report_condition($reportid, $uniqueidentifier);
         }
+<<<<<<< HEAD
 
         // Set the default condition values if they have been set in the datasource.
         $this->set_condition_values($this->get_default_condition_values());
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -279,6 +291,7 @@ abstract class datasource extends base {
     abstract public function get_default_conditions(): array;
 
     /**
+<<<<<<< HEAD
      * Return the default condition values that will be added to the report once is created
      *
      * For any of the default conditions returned by the method {@see get_default_conditions} is
@@ -291,6 +304,8 @@ abstract class datasource extends base {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Return all configured report conditions
      *
      * @return filter[]
@@ -308,6 +323,7 @@ abstract class datasource extends base {
 
         return $conditions;
     }
+<<<<<<< HEAD
 
     /**
      * Adds all columns/filters/conditions from the given entity to the report at once
@@ -328,4 +344,6 @@ abstract class datasource extends base {
             $this->add_all_from_entity($entity->get_entity_name());
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

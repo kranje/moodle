@@ -15,14 +15,25 @@ class LtiServiceConnector implements ILtiServiceConnector
 {
     public const NEXT_PAGE_REGEX = '/<([^>]*)>; ?rel="next"/i';
 
+<<<<<<< HEAD
+=======
+    public const METHOD_GET = 'GET';
+    public const METHOD_POST = 'POST';
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $cache;
     private $client;
     private $debuggingMode = false;
 
+<<<<<<< HEAD
     public function __construct(
         ICache $cache,
         IHttpClient $client
     ) {
+=======
+    public function __construct(ICache $cache, IHttpClient $client)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         $this->cache = $cache;
         $this->client = $client;
     }
@@ -64,6 +75,7 @@ class LtiServiceConnector implements ILtiServiceConnector
             'scope' => implode(' ', $scopes),
         ];
 
+<<<<<<< HEAD
         // Get Access
         $request = new ServiceRequest(
             ServiceRequest::METHOD_POST,
@@ -73,6 +85,23 @@ class LtiServiceConnector implements ILtiServiceConnector
         $request->setPayload(['form_params' => $authRequest]);
         $response = $this->makeRequest($request);
 
+=======
+        $url = $registration->getAuthTokenUrl();
+
+        // Get Access
+        $tokenRequest = new ServiceRequest('POST', $url);
+        $tokenRequest->setBody(http_build_query($authRequest, '', '&'));
+        $tokenRequest->setContentType('application/x-www-form-urlencoded');
+        $tokenRequest->setAccept('application/json');
+        $response = $this->client->request(
+            $tokenRequest->getMethod(),
+            $tokenRequest->getUrl(),
+            [
+                'headers' => $tokenRequest->getPayload()['headers'],
+                'body' => $tokenRequest->getPayload()['body']
+            ]
+        );
+>>>>>>> forked/LAE_400_PACKAGE
         $tokenData = $this->getResponseBody($response);
 
         // Cache access token
@@ -81,13 +110,21 @@ class LtiServiceConnector implements ILtiServiceConnector
         return $tokenData['access_token'];
     }
 
+<<<<<<< HEAD
     public function makeRequest(IServiceRequest $request)
     {
         $response = $this->client->request(
+=======
+
+    public function makeRequest(IServiceRequest $request)
+    {
+        return $this->client->request(
+>>>>>>> forked/LAE_400_PACKAGE
             $request->getMethod(),
             $request->getUrl(),
             $request->getPayload()
         );
+<<<<<<< HEAD
 
         if ($this->debuggingMode) {
             $this->logRequest(
@@ -108,6 +145,8 @@ class LtiServiceConnector implements ILtiServiceConnector
         });
 
         return $responseHeaders;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function getResponseBody(IHttpResponse $response): ?array
@@ -124,12 +163,18 @@ class LtiServiceConnector implements ILtiServiceConnector
         bool $shouldRetry = true
     ): array {
         $request->setAccessToken($this->getAccessToken($registration, $scopes));
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $response = $this->makeRequest($request);
         } catch (IHttpException $e) {
             $status = $e->getResponse()->getStatusCode();
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             // If the error was due to invalid authentication and the request
             // should be retried, clear the access token and retry it.
             if ($status === 401 && $shouldRetry) {
@@ -138,6 +183,7 @@ class LtiServiceConnector implements ILtiServiceConnector
 
                 return $this->makeServiceRequest($registration, $scopes, $request, false);
             }
+<<<<<<< HEAD
 
             throw $e;
         }
@@ -145,6 +191,28 @@ class LtiServiceConnector implements ILtiServiceConnector
         return [
             'headers' => $this->getResponseHeaders($response),
             'body' => $this->getResponseBody($response),
+=======
+            throw $e;
+        }
+
+        $responseHeaders = $response->getHeaders();
+        $responseBody = $this->getResponseBody($response);
+
+        if ($this->debuggingMode) {
+            error_log('Syncing grade for this lti_user_id: '.
+                json_decode($request->getPayload()['body'])->userId.' '.print_r([
+                    'request_method' => $request->getMethod(),
+                    'request_url' => $request->getUrl(),
+                    'request_body' => $request->getPayload()['body'],
+                    'response_headers' => $responseHeaders,
+                    'response_body' => json_encode($responseBody),
+                ], true));
+        }
+
+        return [
+            'headers' => $responseHeaders,
+            'body' => $responseBody,
+>>>>>>> forked/LAE_400_PACKAGE
             'status' => $response->getStatusCode(),
         ];
     }
@@ -155,7 +223,11 @@ class LtiServiceConnector implements ILtiServiceConnector
         IServiceRequest $request,
         string $key = null
     ): array {
+<<<<<<< HEAD
         if ($request->getMethod() !== ServiceRequest::METHOD_GET) {
+=======
+        if ($request->getMethod() !== static::METHOD_GET) {
+>>>>>>> forked/LAE_400_PACKAGE
             throw new \Exception('An invalid method was specified by an LTI service requesting all items.');
         }
 
@@ -177,6 +249,7 @@ class LtiServiceConnector implements ILtiServiceConnector
         return $results;
     }
 
+<<<<<<< HEAD
     private function logRequest(
         IServiceRequest $request,
         array $responseHeaders,
@@ -202,6 +275,8 @@ class LtiServiceConnector implements ILtiServiceConnector
         ])));
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     private function getAccessTokenCacheKey(ILtiRegistration $registration, array $scopes)
     {
         sort($scopes);
@@ -213,7 +288,11 @@ class LtiServiceConnector implements ILtiServiceConnector
     private function getNextUrl(array $headers)
     {
         $subject = $headers['Link'] ?? '';
+<<<<<<< HEAD
         preg_match(static::NEXT_PAGE_REGEX, $subject, $matches);
+=======
+        preg_match(LtiServiceConnector::NEXT_PAGE_REGEX, $subject, $matches);
+>>>>>>> forked/LAE_400_PACKAGE
 
         return $matches[1] ?? null;
     }

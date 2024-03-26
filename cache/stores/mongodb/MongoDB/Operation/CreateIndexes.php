@@ -1,12 +1,20 @@
 <?php
 /*
+<<<<<<< HEAD
  * Copyright 2015-present MongoDB, Inc.
+=======
+ * Copyright 2015-2017 MongoDB, Inc.
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
+<<<<<<< HEAD
  *   https://www.apache.org/licenses/LICENSE-2.0
+=======
+ *   http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> forked/LAE_400_PACKAGE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +33,10 @@ use MongoDB\Driver\WriteConcern;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Exception\UnsupportedException;
 use MongoDB\Model\IndexInput;
+<<<<<<< HEAD
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use function array_map;
 use function is_array;
 use function is_integer;
@@ -39,11 +50,24 @@ use function sprintf;
  * @api
  * @see \MongoDB\Collection::createIndex()
  * @see \MongoDB\Collection::createIndexes()
+<<<<<<< HEAD
  * @see https://mongodb.com/docs/manual/reference/command/createIndexes/
+=======
+ * @see http://docs.mongodb.org/manual/reference/command/createIndexes/
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class CreateIndexes implements Executable
 {
     /** @var integer */
+<<<<<<< HEAD
+=======
+    private static $wireVersionForCollation = 5;
+
+    /** @var integer */
+    private static $wireVersionForWriteConcern = 5;
+
+    /** @var integer */
+>>>>>>> forked/LAE_400_PACKAGE
     private static $wireVersionForCommitQuorum = 9;
 
     /** @var string */
@@ -55,6 +79,12 @@ class CreateIndexes implements Executable
     /** @var array */
     private $indexes = [];
 
+<<<<<<< HEAD
+=======
+    /** @var boolean */
+    private $isCollationUsed = false;
+
+>>>>>>> forked/LAE_400_PACKAGE
     /** @var array */
     private $options = [];
 
@@ -63,10 +93,13 @@ class CreateIndexes implements Executable
      *
      * Supported options:
      *
+<<<<<<< HEAD
      *  * comment (mixed): BSON value to attach as a comment to this command.
      *
      *    This is not supported for servers versions < 4.4.
      *
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      *  * commitQuorum (integer|string): Specifies how many data-bearing members
      *    of a replica set, including the primary, must complete the index
      *    builds successfully before the primary marks the indexes as ready.
@@ -76,15 +109,29 @@ class CreateIndexes implements Executable
      *
      *  * session (MongoDB\Driver\Session): Client session.
      *
+<<<<<<< HEAD
      *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern.
      *
+=======
+     *    Sessions are not supported for server versions < 3.6.
+     *
+     *  * writeConcern (MongoDB\Driver\WriteConcern): Write concern.
+     *
+     *    This is not supported for server versions < 3.4 and will result in an
+     *    exception at execution time if used.
+     *
+>>>>>>> forked/LAE_400_PACKAGE
      * @param string  $databaseName   Database name
      * @param string  $collectionName Collection name
      * @param array[] $indexes        List of index specifications
      * @param array   $options        Command options
      * @throws InvalidArgumentException for parameter/option parsing errors
      */
+<<<<<<< HEAD
     public function __construct(string $databaseName, string $collectionName, array $indexes, array $options = [])
+=======
+    public function __construct($databaseName, $collectionName, array $indexes, array $options = [])
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (empty($indexes)) {
             throw new InvalidArgumentException('$indexes is empty');
@@ -101,6 +148,13 @@ class CreateIndexes implements Executable
                 throw InvalidArgumentException::invalidType(sprintf('$index[%d]', $i), $index, 'array');
             }
 
+<<<<<<< HEAD
+=======
+            if (isset($index['collation'])) {
+                $this->isCollationUsed = true;
+            }
+
+>>>>>>> forked/LAE_400_PACKAGE
             $this->indexes[] = new IndexInput($index);
 
             $expectedIndex += 1;
@@ -126,8 +180,13 @@ class CreateIndexes implements Executable
             unset($options['writeConcern']);
         }
 
+<<<<<<< HEAD
         $this->databaseName = $databaseName;
         $this->collectionName = $collectionName;
+=======
+        $this->databaseName = (string) $databaseName;
+        $this->collectionName = (string) $collectionName;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->options = $options;
     }
 
@@ -135,12 +194,29 @@ class CreateIndexes implements Executable
      * Execute the operation.
      *
      * @see Executable::execute()
+<<<<<<< HEAD
      * @return string[] The names of the created indexes
      * @throws UnsupportedException if write concern is used and unsupported
+=======
+     * @param Server $server
+     * @return string[] The names of the created indexes
+     * @throws UnsupportedException if collation or write concern is used and unsupported
+>>>>>>> forked/LAE_400_PACKAGE
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     public function execute(Server $server)
     {
+<<<<<<< HEAD
+=======
+        if ($this->isCollationUsed && ! server_supports_feature($server, self::$wireVersionForCollation)) {
+            throw UnsupportedException::collationNotSupported();
+        }
+
+        if (isset($this->options['writeConcern']) && ! server_supports_feature($server, self::$wireVersionForWriteConcern)) {
+            throw UnsupportedException::writeConcernNotSupported();
+        }
+
+>>>>>>> forked/LAE_400_PACKAGE
         $inTransaction = isset($this->options['session']) && $this->options['session']->isInTransaction();
         if ($inTransaction && isset($this->options['writeConcern'])) {
             throw UnsupportedException::writeConcernNotSupportedInTransaction();
@@ -156,9 +232,16 @@ class CreateIndexes implements Executable
     /**
      * Create options for executing the command.
      *
+<<<<<<< HEAD
      * @see https://php.net/manual/en/mongodb-driver-server.executewritecommand.php
      */
     private function createOptions(): array
+=======
+     * @see http://php.net/manual/en/mongodb-driver-server.executewritecommand.php
+     * @return array
+     */
+    private function createOptions()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $options = [];
 
@@ -177,9 +260,16 @@ class CreateIndexes implements Executable
      * Create one or more indexes for the collection using the createIndexes
      * command.
      *
+<<<<<<< HEAD
      * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
      */
     private function executeCommand(Server $server): void
+=======
+     * @param Server $server
+     * @throws DriverRuntimeException for other driver errors (e.g. connection errors)
+     */
+    private function executeCommand(Server $server)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $cmd = [
             'createIndexes' => $this->collectionName,
@@ -196,10 +286,15 @@ class CreateIndexes implements Executable
             $cmd['commitQuorum'] = $this->options['commitQuorum'];
         }
 
+<<<<<<< HEAD
         foreach (['comment', 'maxTimeMS'] as $option) {
             if (isset($this->options[$option])) {
                 $cmd[$option] = $this->options[$option];
             }
+=======
+        if (isset($this->options['maxTimeMS'])) {
+            $cmd['maxTimeMS'] = $this->options['maxTimeMS'];
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $server->executeWriteCommand($this->databaseName, new Command($cmd), $this->createOptions());

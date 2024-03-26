@@ -218,7 +218,11 @@ class externallib_test extends externallib_advanced_testcase {
      * Test get_chats_by_courses
      */
     public function test_get_chats_by_courses() {
+<<<<<<< HEAD
         global $DB, $CFG;
+=======
+        global $DB, $USER, $CFG;
+>>>>>>> forked/LAE_400_PACKAGE
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
@@ -250,7 +254,11 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertCount(1, $chats['chats']);
         $this->assertEquals('First Chat', $chats['chats'][0]['name']);
         // We see 12 fields.
+<<<<<<< HEAD
         $this->assertCount(13, $chats['chats'][0]);
+=======
+        $this->assertCount(12, $chats['chats'][0]);
+>>>>>>> forked/LAE_400_PACKAGE
 
         // As Student you cannot see some chat properties like 'section'.
         $this->assertFalse(isset($chats['chats'][0]['section']));
@@ -273,7 +281,11 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals('Second Chat', $chats['chats'][0]['name']);
         $this->assertEquals('header_js', $chats['chats'][0]['chatmethod']);
         // We see 17 fields.
+<<<<<<< HEAD
         $this->assertCount(18, $chats['chats'][0]);
+=======
+        $this->assertCount(17, $chats['chats'][0]);
+>>>>>>> forked/LAE_400_PACKAGE
         // As an Admin you can see some chat properties like 'section'.
         $this->assertEquals(0, $chats['chats'][0]['section']);
 

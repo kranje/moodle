@@ -24,18 +24,34 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 $capabilities = [
     'gradereport/user:view' => [
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
+=======
+$capabilities = array(
+
+    'gradereport/user:view' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+>>>>>>> forked/LAE_400_PACKAGE
             'student' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
+<<<<<<< HEAD
         ]
     ],
 ];
+=======
+        )
+    ),
+);
+>>>>>>> forked/LAE_400_PACKAGE
 
 

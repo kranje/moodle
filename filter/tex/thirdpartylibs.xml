@@ -3,6 +3,7 @@
   <library>
     <location>mimetex.*</location>
     <name>mimeTeX</name>
+<<<<<<< HEAD
     <description>Compiled C program to convert TeX into GIFs</description>
     <version>1.77</version>
     <license>GPL</license>
@@ -12,5 +13,10 @@
       <copyright>2002-2004 John Forkosh Associates, Inc</copyright>
     </copyrights>
     <upgradable>false</upgradable>
+=======
+    <license>GPL</license>
+    <version>1.77</version>
+    <licenseversion>3.0+</licenseversion>
+>>>>>>> forked/LAE_400_PACKAGE
   </library>
 </libraries>

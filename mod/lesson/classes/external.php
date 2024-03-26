@@ -54,7 +54,10 @@ class mod_lesson_external extends external_api {
 
         $lesson = new lesson($lessonrecord);
         $lesson->update_effective_access($USER->id);
+<<<<<<< HEAD
         $lessonrecord->lang = $lesson->get_cm()->lang;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $lessonavailable = $lesson->get_time_restriction_status() === false;
         $lessonavailable = $lessonavailable && $lesson->get_password_restriction_status($password) === false;
         $lessonavailable = $lessonavailable && $lesson->get_dependencies_restriction_status() === false;

@@ -1438,6 +1438,7 @@ function mod_assign_output_fragment_gradingpanel($args) {
     $assign = new assign($context, null, null);
 
     $userid = clean_param($args['userid'], PARAM_INT);
+<<<<<<< HEAD
 
     $participant = $assign->get_participant($userid);
     $isfiltered = $assign->is_userid_filtered($userid);
@@ -1446,6 +1447,8 @@ function mod_assign_output_fragment_gradingpanel($args) {
         return '';
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     $attemptnumber = clean_param($args['attemptnumber'], PARAM_INT);
     $formdata = array();
     if (!empty($args['jsonformdata'])) {

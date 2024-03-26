@@ -36,7 +36,11 @@ $PAGE->set_url($url);
 
 require_login();
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('noguest');
+=======
+    print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $usercontext = context_user::instance($USER->id);

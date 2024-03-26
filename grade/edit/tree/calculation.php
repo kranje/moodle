@@ -39,7 +39,11 @@ if ($section !== 'calculation') {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidcourseid');
+=======
+    print_error('invalidcourseid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 require_login($course);
@@ -55,7 +59,11 @@ $gpr = new grade_plugin_return();
 $returnurl = $gpr->get_return_url($CFG->wwwroot.'/grade/report/index.php?id='.$course->id);
 
 if (!$grade_item = grade_item::fetch(array('id'=>$id, 'courseid'=>$course->id))) {
+<<<<<<< HEAD
     throw new \moodle_exception('invaliditemid');
+=======
+    print_error('invaliditemid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // activity items and items without grade can not have calculation

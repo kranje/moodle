@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @block @block_activity_results @javascript
+=======
+@block @block_activity_results
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: The activity results block displays student in separate groups scores
   In order to be display student scores
   As a user
@@ -46,6 +50,7 @@ Feature: The activity results block displays student in separate groups scores
       | course                        | C1              |
       | idnumber                      | 0001            |
       | name                          | Test assignment |
+<<<<<<< HEAD
       | intro                         | Offline text    |
       | section                       | 1               |
       | assignsubmission_file_enabled | 0               |
@@ -61,6 +66,21 @@ Feature: The activity results block displays student in separate groups scores
     And I give the grade "70.00" to the user "Student 6" for the grade item "Test assignment"
     And I press "Save changes"
     And I am on "Course 1" course homepage
+=======
+      | section                       | 1               |
+      | assignsubmission_file_enabled | 0               |
+      | groupmode                     | 1               |
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade  |
+      | Test assignment | student1 | 100.00 |
+      | Test assignment | student2 | 90.00  |
+      | Test assignment | student3 | 90.00  |
+      | Test assignment | student4 | 80.00  |
+      | Test assignment | student5 | 80.00  |
+      | Test assignment | student6 | 70.00  |
+    And I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+>>>>>>> forked/LAE_400_PACKAGE
 
   Scenario: Configure the block on the course page to show 1 high score
     Given I add the "Activity results" block
@@ -88,9 +108,13 @@ Feature: The activity results block displays student in separate groups scores
     And I press "Save changes"
     Then I should see "Group 1" in the "Activity results" "block"
     And I should see "95.00/100.00" in the "Activity results" "block"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Student 1" in the "Activity results" "block"
     And I should see "100.00/100.00" in the "Activity results" "block"
 
@@ -106,9 +130,13 @@ Feature: The activity results block displays student in separate groups scores
     And I press "Save changes"
     Then I should see "Group 1" in the "Activity results" "block"
     And I should see "95.00" in the "Activity results" "block"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Student 1" in the "Activity results" "block"
     And I should see "100.00" in the "Activity results" "block"
 
@@ -129,9 +157,13 @@ Feature: The activity results block displays student in separate groups scores
     And I should see "85%" in the "Activity results" "block"
     And I should see "Group 3" in the "Activity results" "block"
     And I should see "75%" in the "Activity results" "block"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Student 1" in the "Activity results" "block"
     And I should see "100%" in the "Activity results" "block"
     And I should see "Student 2" in the "Activity results" "block"
@@ -153,9 +185,13 @@ Feature: The activity results block displays student in separate groups scores
     And I should see "85.00/100.00" in the "Activity results" "block"
     And I should see "Group 3" in the "Activity results" "block"
     And I should see "75.00/100.00" in the "Activity results" "block"
+<<<<<<< HEAD
     And I log out
     And I log in as "student3"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as student3
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Student 3" in the "Activity results" "block"
     And I should see "90.00/100.00" in the "Activity results" "block"
     And I should see "Student 4" in the "Activity results" "block"
@@ -177,9 +213,13 @@ Feature: The activity results block displays student in separate groups scores
     And I should see "85.00" in the "Activity results" "block"
     And I should see "Group 3" in the "Activity results" "block"
     And I should see "75.00" in the "Activity results" "block"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Student 1" in the "Activity results" "block"
     And I should see "100.00" in the "Activity results" "block"
     And I should see "Student 2" in the "Activity results" "block"
@@ -201,10 +241,15 @@ Feature: The activity results block displays student in separate groups scores
     And I should see "95.00%" in the "Activity results" "block"
     And I should see "85.00%" in the "Activity results" "block"
     And I should see "75.00%" in the "Activity results" "block"
+<<<<<<< HEAD
     And I log out
     # Students cannot see user identity fields.
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    # Students cannot see user identity fields.
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "User" in the "Activity results" "block"
     And I should not see "User S1" in the "Activity results" "block"
     And I should see "100.00%" in the "Activity results" "block"
@@ -225,9 +270,13 @@ Feature: The activity results block displays student in separate groups scores
     And I should see "95.00%" in the "Activity results" "block"
     And I should see "85.00%" in the "Activity results" "block"
     And I should see "75.00%" in the "Activity results" "block"
+<<<<<<< HEAD
     And I log out
     And I log in as "student1"
     And I am on "Course 1" course homepage
+=======
+    And I am on the "Course 1" course page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "User" in the "Activity results" "block"
     And I should see "100.00%" in the "Activity results" "block"
     And I should see "90.00%" in the "Activity results" "block"

@@ -54,7 +54,11 @@ class assignfeedback_file_import_zip_form extends moodleform implements renderab
         $update = false;
 
         if (!$importer) {
+<<<<<<< HEAD
             throw new \moodle_exception('invalidarguments');
+=======
+            print_error('invalidarguments');
+>>>>>>> forked/LAE_400_PACKAGE
             return;
         }
 

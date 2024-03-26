@@ -66,6 +66,7 @@ class provider implements
                 'userid' => 'privacy:metadata:userid',
                 'coursemoduleid' => 'privacy:metadata:coursemoduleid',
                 'completionstate' => 'privacy:metadata:completionstate',
+<<<<<<< HEAD
                 'overrideby' => 'privacy:metadata:overrideby',
                 'timemodified' => 'privacy:metadata:timemodified'
             ], 'privacy:metadata:coursemodulesummary');
@@ -74,6 +75,12 @@ class provider implements
             'coursemoduleid' => 'privacy:metadata:coursemoduleid',
             'timecreated' => 'privacy:metadata:timecreated',
         ], 'privacy:metadata:coursemodulesummary');
+=======
+                'viewed' => 'privacy:metadata:viewed',
+                'overrideby' => 'privacy:metadata:overrideby',
+                'timemodified' => 'privacy:metadata:timemodified'
+            ], 'privacy:metadata:coursemodulesummary');
+>>>>>>> forked/LAE_400_PACKAGE
         $collection->add_database_table('course_completion_crit_compl', [
                 'userid' => 'privacy:metadata:userid',
                 'course' => 'privacy:metadata:course',
@@ -95,18 +102,29 @@ class provider implements
     public static function get_course_completion_join_sql(int $userid, string $prefix, string $joinfield) : array {
         $cccalias = "{$prefix}_ccc"; // Course completion criteria.
         $cmcalias = "{$prefix}_cmc"; // Course modules completion.
+<<<<<<< HEAD
         $cmvalias = "{$prefix}_cmv"; // Course modules viewed.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $ccccalias = "{$prefix}_cccc"; // Course completion criteria completion.
 
         $join = "JOIN {course_completion_criteria} {$cccalias} ON {$joinfield} = {$cccalias}.course
              LEFT JOIN {course_modules_completion} {$cmcalias} ON {$cccalias}.moduleinstance = {$cmcalias}.coursemoduleid
                         AND {$cmcalias}.userid = :{$prefix}_moduleuserid
+<<<<<<< HEAD
              LEFT JOIN {course_modules_viewed} {$cmvalias} ON {$cccalias}.moduleinstance = {$cmvalias}.coursemoduleid
                         AND {$cmvalias}.userid = :{$prefix}_moduleuserid2
              LEFT JOIN {course_completion_crit_compl} {$ccccalias} ON {$ccccalias}.criteriaid = {$cccalias}.id
                         AND {$ccccalias}.userid = :{$prefix}_courseuserid";
         $where = "{$cmcalias}.id IS NOT NULL OR {$ccccalias}.id IS NOT NULL OR {$cmvalias}.id IS NOT NULL";
         $params = ["{$prefix}_moduleuserid" => $userid, "{$prefix}_moduleuserid2" => $userid, "{$prefix}_courseuserid" => $userid];
+=======
+             LEFT JOIN {course_completion_crit_compl} {$ccccalias} ON {$ccccalias}.criteriaid = {$cccalias}.id
+                        AND {$ccccalias}.userid = :{$prefix}_courseuserid";
+        $where = "{$cmcalias}.id IS NOT NULL OR {$ccccalias}.id IS NOT NULL";
+        $params = ["{$prefix}_moduleuserid" => $userid, "{$prefix}_courseuserid" => $userid];
+
+>>>>>>> forked/LAE_400_PACKAGE
         return [$join, $where, $params];
     }
 
@@ -132,6 +150,7 @@ class provider implements
 
         $userlist->add_from_sql('userid', $sql, $params);
 
+<<<<<<< HEAD
         $sql = "SELECT cmv.userid
                   FROM {course} c
                   JOIN {course_completion_criteria} ccc ON ccc.course = c.id
@@ -140,6 +159,8 @@ class provider implements
 
         $userlist->add_from_sql('userid', $sql, $params);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $sql = "SELECT ccc_compl.userid
                  FROM {course} c
                  JOIN {course_completion_criteria} ccc ON ccc.course = c.id
@@ -245,7 +266,10 @@ class provider implements
         if (isset($courseid)) {
 
             $usersql = isset($user) ? 'AND cmc.userid = :userid' : '';
+<<<<<<< HEAD
             $usercmvsql = isset($user) ? 'AND cmv.userid = :userid' : '';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $params = isset($user) ? ['course' => $courseid, 'userid' => $user->id] : ['course' => $courseid];
 
             // Find records relating to course modules.
@@ -260,6 +284,7 @@ class provider implements
                 $deletesql = 'id ' . $deletesql;
                 $DB->delete_records_select('course_modules_completion', $deletesql, $deleteparams);
             }
+<<<<<<< HEAD
             // Find records relating to course modules completion viewed.
             $sql = "SELECT cmv.id
                       FROM {course_completion_criteria} ccc
@@ -273,6 +298,8 @@ class provider implements
                 $DB->delete_records_select('course_modules_viewed', $deletesql, $deleteparams);
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $DB->delete_records('course_completion_crit_compl', $params);
             $DB->delete_records('course_completions', $params);
         }
@@ -301,7 +328,10 @@ class provider implements
             // Only delete the record for course modules completion.
             $sql = "coursemoduleid = :coursemoduleid AND userid {$useridsql}";
             $DB->delete_records_select('course_modules_completion', $sql, $params);
+<<<<<<< HEAD
             $DB->delete_records_select('course_modules_viewed', $sql, $params);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             return;
         }
 
@@ -321,6 +351,7 @@ class provider implements
                 $DB->delete_records_select('course_modules_completion', $deletesql, $deleteparams);
             }
 
+<<<<<<< HEAD
             // Find records relating to course modules.
             $sql = "SELECT cmv.id
                       FROM {course_completion_criteria} ccc
@@ -334,6 +365,8 @@ class provider implements
                 $DB->delete_records_select('course_modules_viewed', $deletesql, $deleteparams);
             }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             $sql = "course = :course AND userid {$useridsql}";
             $DB->delete_records_select('course_completion_crit_compl', $sql, $params);
             $DB->delete_records_select('course_completions', $sql, $params);

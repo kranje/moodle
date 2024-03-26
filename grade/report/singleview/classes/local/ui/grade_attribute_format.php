@@ -24,8 +24,11 @@
 
 namespace gradereport_singleview\local\ui;
 
+<<<<<<< HEAD
 use grade_grade;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -37,6 +40,7 @@ defined('MOODLE_INTERNAL') || die;
  */
 abstract class grade_attribute_format extends attribute_format implements unique_name {
 
+<<<<<<< HEAD
     /**
      * The first part of the name attribute of the form input
      * @var string $name
@@ -53,6 +57,15 @@ abstract class grade_attribute_format extends attribute_format implements unique
      * The grade_grade of the input
      * @var grade_grade $grade
      */
+=======
+    /** @var string $name The first part of the name attribute of the form input */
+    public $name;
+
+    /** @var string $label The label of the input */
+    public $label;
+
+    /** @var grade_grade $grade The grade_grade of the input */
+>>>>>>> forked/LAE_400_PACKAGE
     public $grade;
 
     /**
@@ -69,7 +82,11 @@ abstract class grade_attribute_format extends attribute_format implements unique
      *
      * @return string The form input name attribute.
      */
+<<<<<<< HEAD
     public function get_name(): string {
+=======
+    public function get_name() {
+>>>>>>> forked/LAE_400_PACKAGE
         return "{$this->name}_{$this->grade->itemid}_{$this->grade->userid}";
     }
 
@@ -79,5 +96,9 @@ abstract class grade_attribute_format extends attribute_format implements unique
      * @param string $value The value from the form.
      * @return string Any error message
      */
+<<<<<<< HEAD
     abstract public function set($value);
+=======
+    public abstract function set($value);
+>>>>>>> forked/LAE_400_PACKAGE
 }

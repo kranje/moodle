@@ -51,12 +51,27 @@ if ($hostid && $DB->get_field('mnet_host', 'deleted', array('id' => $hostid)) !=
 $PAGE->set_url('/admin/mnet/peers.php');
 admin_externalpage_setup($adminsection);
 
+<<<<<<< HEAD
 if (!extension_loaded('openssl')) {
     throw new \moodle_exception('requiresopenssl', 'mnet');
 }
 
 if (!function_exists('curl_init') ) {
     throw new \moodle_exception('nocurl', 'mnet');
+=======
+$deprecatenotify = mnet_get_deprecation_notice();
+
+if (!extension_loaded('openssl')) {
+    print_error('requiresopenssl', 'mnet');
+}
+
+if (!function_exists('curl_init') ) {
+    print_error('nocurl', 'mnet');
+}
+
+if (!function_exists('xmlrpc_encode_request')) {
+    print_error('xmlrpc-missing', 'mnet');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 if (!isset($CFG->mnet_dispatcher_mode)) {
@@ -86,6 +101,10 @@ if ($formdata = $simpleform->get_data()) {
     $formdata->oldpublickey = $mnet_peer->public_key; // set this so we can confirm on form post without having to recreate the mnet_peer object
     $reviewform->set_data($mnet_peer);
     echo $OUTPUT->header();
+<<<<<<< HEAD
+=======
+    echo $OUTPUT->render($deprecatenotify);
+>>>>>>> forked/LAE_400_PACKAGE
     echo $OUTPUT->box_start();
     $reviewform->display();
     echo $OUTPUT->box_end();
@@ -169,10 +188,18 @@ if ($formdata = $reviewform->get_data()) {
     if ($mnet_peer->commit()) {
         redirect(new moodle_url('/admin/mnet/peers.php', array('hostid' => $mnet_peer->id)), get_string('changessaved'));
     } else {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidaction', 'error', 'index.php');
     }
 } else if ($reviewform->is_submitted()) { // submitted, but errors
     echo $OUTPUT->header();
+=======
+        print_error('invalidaction', 'error', 'index.php');
+    }
+} else if ($reviewform->is_submitted()) { // submitted, but errors
+    echo $OUTPUT->header();
+    echo $OUTPUT->render($deprecatenotify);
+>>>>>>> forked/LAE_400_PACKAGE
     echo $OUTPUT->box_start();
     $reviewform->display();
     echo $OUTPUT->box_end();
@@ -183,6 +210,10 @@ if ($formdata = $reviewform->get_data()) {
 
 // normal flow - just display all hosts with links
 echo $OUTPUT->header();
+<<<<<<< HEAD
+=======
+echo $OUTPUT->render($deprecatenotify);
+>>>>>>> forked/LAE_400_PACKAGE
 $hosts = mnet_get_hosts(true);
 
 // print the table to display the register all hosts setting

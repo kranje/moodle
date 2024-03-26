@@ -74,6 +74,7 @@ Feature: A Teacher can comment in a question
 
   @javascript
   Scenario: Teacher with comment permissions for their own questions but not others questions
+<<<<<<< HEAD
     Given I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability                  | permission |
@@ -81,6 +82,13 @@ Feature: A Teacher can comment in a question
       | moodle/question:commentall  | Prevent    |
     And I log out
     Given I am on the "Test quiz" "mod_quiz > question bank" page logged in as "teacher1"
+=======
+    Given the following "role capability" exists:
+      | role                        | editingteacher |
+      | moodle/question:commentmine | allow          |
+      | moodle/question:commentall  | prevent        |
+    And I am on the "Test quiz" "mod_quiz > question bank" page logged in as "teacher1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I set the field "Select a category" to "Test questions"
     And I choose "Preview" action for "First question" in the question bank
     Then I should not see "Save comment"
@@ -131,6 +139,7 @@ Feature: A Teacher can comment in a question
     And I switch to "questionpreview" window
     And I press "Comments"
     Then I should not see "Some new comment"
+<<<<<<< HEAD
 
   @javascript
   Scenario: Comments modal can change the version using dropdown
@@ -151,3 +160,5 @@ Feature: A Teacher can comment in a question
     And I should see "Version 1"
     And I set the field "question_version_dropdown" to "Version 1"
     And I should see "Answer the first question"
+=======
+>>>>>>> forked/LAE_400_PACKAGE

@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\Engineering;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,6 +11,12 @@ class ErfC
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class ErfC
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * ERFC.
      *
@@ -24,6 +31,7 @@ class ErfC
      *        ERFC(x)
      *
      * @param mixed $value The float lower bound for integrating ERFC
+<<<<<<< HEAD
      *                      Or can be an array of values
      *
      * @return array|float|string
@@ -35,12 +43,24 @@ class ErfC
         if (is_array($value)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $value);
         }
+=======
+     *
+     * @return float|string
+     */
+    public static function ERFC($value)
+    {
+        $value = Functions::flattenSingleValue($value);
+>>>>>>> forked/LAE_400_PACKAGE
 
         if (is_numeric($value)) {
             return self::erfcValue($value);
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     //
@@ -54,7 +74,11 @@ class ErfC
             return 1 - Erf::erfValue($value);
         }
         if ($value < 0) {
+<<<<<<< HEAD
             return 2 - self::erfcValue(-$value);
+=======
+            return 2 - self::ERFC(-$value);
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $a = $n = 1;
         $b = $c = $value;

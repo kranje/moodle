@@ -437,7 +437,11 @@ class mnetservice_enrol {
     }
 
     /**
+<<<<<<< HEAD
      * Prepares error messages returned by our XML-RPC requests to be send as debug info to {@see \moodle_exception()}
+=======
+     * Prepares error messages returned by our XML-RPC requests to be send as debug info to {@link print_error()}
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * MNet client-side methods in this class return request error as serialized array.
      *

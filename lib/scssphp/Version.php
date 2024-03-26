@@ -19,5 +19,9 @@ namespace ScssPhp\ScssPhp;
  */
 class Version
 {
+<<<<<<< HEAD
     const VERSION = '1.11.0';
+=======
+    const VERSION = '1.10.0';
+>>>>>>> forked/LAE_400_PACKAGE
 }

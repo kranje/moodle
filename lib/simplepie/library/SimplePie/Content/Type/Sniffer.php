@@ -316,5 +316,8 @@ class SimplePie_Content_Type_Sniffer
 		return 'text/html';
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie_Content_Type_Sniffer', 'SimplePie\Content\Type\Sniffer', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

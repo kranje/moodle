@@ -97,6 +97,7 @@ class meeting_info extends external_api {
                 bigbluebutton_proxy::get_server_not_available_url($instance),
                 bigbluebutton_proxy::get_server_not_available_message($instance));
         }
+<<<<<<< HEAD
         $meetinginfo = (array) meeting::get_meeting_info_for_instance($instance, $updatecache);
 
         // Make the structure WS friendly.
@@ -104,6 +105,9 @@ class meeting_info extends external_api {
             $value = ['name' => $key, 'isenabled' => (bool) $value];
         });
         return $meetinginfo;
+=======
+        return (array) meeting::get_meeting_info_for_instance($instance, $updatecache);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -117,7 +121,10 @@ class meeting_info extends external_api {
                 'cmid' => new external_value(PARAM_INT, 'CM id'),
                 'userlimit' => new external_value(PARAM_INT, 'User limit'),
                 'bigbluebuttonbnid' => new external_value(PARAM_RAW, 'bigbluebuttonbn instance id'),
+<<<<<<< HEAD
                 'groupid' => new external_value(PARAM_INT, 'bigbluebuttonbn group id', VALUE_DEFAULT, 0),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
                 'meetingid' => new external_value(PARAM_RAW, 'Meeting id'),
                 'openingtime' => new external_value(PARAM_INT, 'Opening time', VALUE_OPTIONAL),
                 'closingtime' => new external_value(PARAM_INT, 'Closing time', VALUE_OPTIONAL),
@@ -141,6 +148,7 @@ class meeting_info extends external_api {
                     ])
                 ),
                 'joinurl' => new external_value(PARAM_URL, 'Join URL'),
+<<<<<<< HEAD
                 'guestaccessenabled' => new external_value(PARAM_BOOL, 'Guest access enabled', VALUE_OPTIONAL),
                 'guestjoinurl' => new external_value(PARAM_URL, 'Guest URL', VALUE_OPTIONAL),
                 'guestpassword' => new external_value(PARAM_RAW, 'Guest join password', VALUE_OPTIONAL),
@@ -150,6 +158,8 @@ class meeting_info extends external_api {
                         'isenabled' => new external_value(PARAM_BOOL, 'Whether the feature is enabled.'),
                     ]), 'List of features for the instance', VALUE_OPTIONAL
                 ),
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             ]
         );
     }

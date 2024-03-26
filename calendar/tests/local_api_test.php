@@ -28,7 +28,10 @@ require_once(__DIR__ . '/helpers.php');
  * @package    core_calendar
  * @copyright  2017 Mark Nelson <markn@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
  * @coversDefaultClass \core_calendar\local\api
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  */
 class local_api_test extends \advanced_testcase {
 
@@ -287,7 +290,10 @@ class local_api_test extends \advanced_testcase {
 
     /**
      * Test get_calendar_action_events_by_timesort with search feature.
+<<<<<<< HEAD
      * @covers ::get_action_events_by_timesort
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function test_get_calendar_action_events_by_timesort_with_search() {
         // Generate data.
@@ -319,7 +325,10 @@ class local_api_test extends \advanced_testcase {
         $event6 = create_event(array_merge($params, ['name' => 'Event 6', 'timesort' => 6]));
         $event7 = create_event(array_merge($params, ['name' => 'Event 7', 'timesort' => 7]));
         $event8 = create_event(array_merge($params, ['name' => 'Event 8', 'timesort' => 8]));
+<<<<<<< HEAD
         $event9 = create_event(array_merge($params, ['name' => 'Assign with advanced name', 'timesort' => 9]));
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->setUser($user);
 
@@ -328,6 +337,7 @@ class local_api_test extends \advanced_testcase {
         $this->assertEmpty($result);
 
         // Search for event name called 'Event 1'.
+<<<<<<< HEAD
         $result = \core_calendar\local\api::get_action_events_by_timesort(0, 10, null, 20, false, null, 'Event 1');
         $this->assertCount(1, $result);
         $this->assertEquals('Event 1', $result[0]->get_name());
@@ -347,6 +357,15 @@ class local_api_test extends \advanced_testcase {
         // Search for activity type called 'assign'.
         $result = \core_calendar\local\api::get_action_events_by_timesort(0, 10, null, 20, false, null, 'assign');
         $this->assertCount(9, $result);
+=======
+        $result = \core_calendar\local\api::get_action_events_by_timesort(0, 8, null, 20, false, null, 'Event 1');
+        $this->assertCount(1, $result);
+        $this->assertEquals('Event 1', $result[0]->get_name());
+
+        // Search for activity type called 'assign'.
+        $result = \core_calendar\local\api::get_action_events_by_timesort(0, 8, null, 20, false, null, 'assign');
+        $this->assertCount(8, $result);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertEquals('Event 1', $result[0]->get_name());
         $this->assertEquals('Event 2', $result[1]->get_name());
         $this->assertEquals('Event 3', $result[2]->get_name());
@@ -355,7 +374,10 @@ class local_api_test extends \advanced_testcase {
         $this->assertEquals('Event 6', $result[5]->get_name());
         $this->assertEquals('Event 7', $result[6]->get_name());
         $this->assertEquals('Event 8', $result[7]->get_name());
+<<<<<<< HEAD
         $this->assertEquals('Assign with advanced name', $result[8]->get_name());
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -713,6 +735,7 @@ class local_api_test extends \advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test get_action_events_by_courses with search feature.
      * @covers ::get_action_events_by_courses
      */
@@ -785,6 +808,8 @@ class local_api_test extends \advanced_testcase {
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Test that the get_legacy_events() function only returns activity events that are enabled.
      */
     public function test_get_legacy_events_with_disabled_module() {

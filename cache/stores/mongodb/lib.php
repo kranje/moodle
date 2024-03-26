@@ -158,7 +158,11 @@ class cachestore_mongodb extends cache_store implements cache_is_configurable {
      * @return bool
      */
     public static function are_requirements_met() {
+<<<<<<< HEAD
         return version_compare(phpversion('mongodb'), '1.14', 'ge');
+=======
+        return version_compare(phpversion('mongodb'), '1.8', 'ge');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

@@ -48,7 +48,11 @@ class select extends screen {
 
         $roleids = explode(',', get_config('moodle', 'gradebookroles'));
 
+<<<<<<< HEAD
         $this->items = [];
+=======
+        $this->items = array();
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($roleids as $roleid) {
             // Keeping the first user appearance.
             $this->items = $this->items + get_role_users(
@@ -57,15 +61,25 @@ class select extends screen {
                 $this->perpage * $this->page, $this->perpage
             );
         }
+<<<<<<< HEAD
         $this->item = $DB->get_record('course', ['id' => $this->courseid]);
+=======
+        $this->item = $DB->get_record('course', array('id' => $this->courseid));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * Get the type of items on this screen, not valid so return false.
      *
+<<<<<<< HEAD
      * @return string|null
      */
     public function item_type(): ?string {
+=======
+     * @return bool
+     */
+    public function item_type() {
+>>>>>>> forked/LAE_400_PACKAGE
         return false;
     }
 
@@ -74,6 +88,7 @@ class select extends screen {
      *
      * @return string
      */
+<<<<<<< HEAD
     public function html(): string {
         global $OUTPUT, $COURSE;
 
@@ -95,6 +110,14 @@ class select extends screen {
         $html = '';
 
         $types = gradereport_singleview\report\singleview::valid_screens();
+=======
+    public function html() {
+        global $OUTPUT;
+
+        $html = '';
+
+        $types = gradereport_singleview::valid_screens();
+>>>>>>> forked/LAE_400_PACKAGE
 
         foreach ($types as $type) {
             $classname = "gradereport_singleview\\local\\screen\\${type}";
@@ -111,6 +134,7 @@ class select extends screen {
                 continue;
             }
 
+<<<<<<< HEAD
             $params = [
                 'id' => $this->courseid,
                 'item' => $screen->item_type(),
@@ -121,6 +145,18 @@ class select extends screen {
 
             $select = new \single_select($url, 'itemid', $options, '', ['' => $screen->select_label()]);
             $select->set_label($screen->select_label(), ['class' => 'accesshide']);
+=======
+            $params = array(
+                'id' => $this->courseid,
+                'item' => $screen->item_type(),
+                'group' => $this->groupid
+            );
+
+            $url = new moodle_url('/grade/report/singleview/index.php', $params);
+
+            $select = new \single_select($url, 'itemid', $options, '', array('' => $screen->select_label()));
+            $select->set_label($screen->select_label(), array('class'=>'accesshide'));
+>>>>>>> forked/LAE_400_PACKAGE
             $html .= $OUTPUT->render($select);
         }
         $html = $OUTPUT->container($html, 'selectitems');
@@ -136,6 +172,7 @@ class select extends screen {
      * Should we show the next prev selector?
      * @return bool
      */
+<<<<<<< HEAD
     public function supports_next_prev(): bool {
         return false;
     }
@@ -166,6 +203,9 @@ class select extends screen {
      * @return bool
      */
     public function supports_paging(): bool {
+=======
+    public function supports_next_prev() {
+>>>>>>> forked/LAE_400_PACKAGE
         return false;
     }
 }

@@ -3,7 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\Statistical;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Deviations
 {
@@ -25,7 +28,11 @@ class Deviations
 
         $aMean = Averages::average($aArgs);
         if (!is_numeric($aMean)) {
+<<<<<<< HEAD
             return ExcelError::NAN();
+=======
+            return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Return value
@@ -46,7 +53,11 @@ class Deviations
             }
         }
 
+<<<<<<< HEAD
         return $aCount === 0 ? ExcelError::VALUE() : $returnValue;
+=======
+        return $aCount === 0 ? Functions::VALUE() : $returnValue;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -66,7 +77,11 @@ class Deviations
         $aArgs = Functions::flattenArrayIndexed($args);
         $mean = Averages::average($aArgs);
         if (!is_numeric($mean)) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $stdDev = StandardDeviations::STDEV($aArgs);
 
@@ -91,7 +106,11 @@ class Deviations
             }
         }
 
+<<<<<<< HEAD
         return ExcelError::DIV0();
+=======
+        return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -111,11 +130,19 @@ class Deviations
         $aArgs = Functions::flattenArrayIndexed($args);
         $mean = Averages::average($aArgs);
         if (!is_numeric($mean)) {
+<<<<<<< HEAD
             return ExcelError::DIV0();
         }
         $stdDev = StandardDeviations::STDEV($aArgs);
         if ($stdDev === 0.0 || is_string($stdDev)) {
             return ExcelError::DIV0();
+=======
+            return Functions::DIV0();
+        }
+        $stdDev = StandardDeviations::STDEV($aArgs);
+        if ($stdDev === 0.0 || is_string($stdDev)) {
+            return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $count = $summer = 0;
@@ -123,7 +150,11 @@ class Deviations
         foreach ($aArgs as $k => $arg) {
             if ((is_bool($arg)) && (!Functions::isMatrixValue($k))) {
             } elseif (!is_numeric($arg)) {
+<<<<<<< HEAD
                 return ExcelError::VALUE();
+=======
+                return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
             } else {
                 // Is it a numeric value?
                 if ((is_numeric($arg)) && (!is_string($arg))) {
@@ -137,6 +168,10 @@ class Deviations
             return $summer * ($count / (($count - 1) * ($count - 2)));
         }
 
+<<<<<<< HEAD
         return ExcelError::DIV0();
+=======
+        return Functions::DIV0();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

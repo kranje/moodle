@@ -16,7 +16,11 @@ class Title
     /**
      * Title Layout.
      *
+<<<<<<< HEAD
      * @var ?Layout
+=======
+     * @var Layout
+>>>>>>> forked/LAE_400_PACKAGE
      */
     private $layout;
 
@@ -78,7 +82,16 @@ class Title
         return $this;
     }
 
+<<<<<<< HEAD
     public function getLayout(): ?Layout
+=======
+    /**
+     * Get Layout.
+     *
+     * @return Layout
+     */
+    public function getLayout()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return $this->layout;
     }

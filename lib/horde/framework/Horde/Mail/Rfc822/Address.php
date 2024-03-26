@@ -99,7 +99,11 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
             break;
 
         case 'personal':
+<<<<<<< HEAD
             $this->_personal = !empty($value)
+=======
+            $this->_personal = strlen($value)
+>>>>>>> forked/LAE_400_PACKAGE
                 ? Horde_Mime::decode($value)
                 : null;
             break;
@@ -144,7 +148,11 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
                 : $this->_personal;
 
         case 'personal':
+<<<<<<< HEAD
             return $this->_personal === null || (strcasecmp($this->_personal, $this->bare_address) === 0)
+=======
+            return (strcasecmp($this->_personal, $this->bare_address) === 0)
+>>>>>>> forked/LAE_400_PACKAGE
                 ? null
                 : $this->_personal;
 
@@ -152,7 +160,11 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
             return Horde_Mime::encode($this->personal);
 
         case 'valid':
+<<<<<<< HEAD
             return !empty($this->mailbox);
+=======
+            return (bool)strlen($this->mailbox);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 
@@ -164,11 +176,19 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
 
         $address = $rfc822->encode($this->mailbox, 'address');
         $host = empty($opts['idn']) ? $this->host : $this->host_idn;
+<<<<<<< HEAD
         if (!empty($host)) {
             $address .= '@' . $host;
         }
         $personal = $this->personal;
         if (!empty($personal)) {
+=======
+        if (strlen($host)) {
+            $address .= '@' . $host;
+        }
+        $personal = $this->personal;
+        if (strlen($personal)) {
+>>>>>>> forked/LAE_400_PACKAGE
             if (!empty($opts['encode'])) {
                 $personal = Horde_Mime::encode($this->personal, $opts['encode']);
             }
@@ -182,7 +202,11 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
             }
         }
 
+<<<<<<< HEAD
         return (!empty($personal) && ($personal != $address))
+=======
+        return (strlen($personal) && ($personal != $address))
+>>>>>>> forked/LAE_400_PACKAGE
             ? ltrim($personal) . ' <' . $address . '>'
             : $address;
     }

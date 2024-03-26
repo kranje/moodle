@@ -25,7 +25,11 @@
 require_once("../../../../config.php");
 
 if (isguestuser()) {
+<<<<<<< HEAD
     throw new \moodle_exception('noguest');
+=======
+    print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $courseid = required_param('courseid', PARAM_INT);

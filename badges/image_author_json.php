@@ -29,7 +29,11 @@ require_once(__DIR__ . '/../config.php');
 require_once($CFG->libdir . '/badgeslib.php');
 
 if (empty($CFG->enablebadges)) {
+<<<<<<< HEAD
     throw new \moodle_exception('badgesdisabled', 'badges');
+=======
+    print_error('badgesdisabled', 'badges');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $id = required_param('id', PARAM_INT); // Unique hash of badge assertion.

@@ -46,13 +46,21 @@ $PAGE->set_url('/enrol/unenroluser.php', array('ue'=>$ueid, 'ifilter'=>$filter))
 require_login($course);
 
 if (!enrol_is_enabled($instance->enrol)) {
+<<<<<<< HEAD
     throw new \moodle_exception('erroreditenrolment', 'enrol');
+=======
+    print_error('erroreditenrolment', 'enrol');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $plugin = enrol_get_plugin($instance->enrol);
 
 if (!$plugin->allow_unenrol_user($instance, $ue) or !has_capability("enrol/$instance->enrol:unenrol", $context)) {
+<<<<<<< HEAD
     throw new \moodle_exception('erroreditenrolment', 'enrol');
+=======
+    print_error('erroreditenrolment', 'enrol');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $manager = new course_enrolment_manager($PAGE, $course, $filter);

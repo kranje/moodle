@@ -4,7 +4,11 @@ H5PEditor.language.core = {
   selectLibrary: 'Выберите библиотеку, которую вы хотите использовать для своего контента.',
   unknownFieldPath: 'Невозможно найти ":path".',
   notImageField: '":path" это не изображение.',
+<<<<<<< HEAD
   notImageOrDimensionsField: '":path" не является изображением или полем для размеров.',
+=======
+  notImageOrDimensionsField: '":path" is not an image or dimensions field.',
+>>>>>>> forked/LAE_400_PACKAGE
   requiredProperty: 'Это :property обязательно и должно иметь значение.',
   onlyNumbers: 'Это :property значение может содержать только цифры.',
   illegalDecimalNumber: 'Это :property может содержать только числа с максимальным количеством :decimals десятичных знаков.',
@@ -31,7 +35,11 @@ H5PEditor.language.core = {
   commonFields: 'Переопределение текста и переводы',
   commonFieldsDescription: 'Здесь вы можете редактировать настройки или переводить тексты, используемые в этом контенте.',
   uploading: 'Загрузка, пожалуйста, подождите ...',
+<<<<<<< HEAD
   noFollow: 'Недопустимо использовать поле ":path".',
+=======
+  noFollow: 'Cannot follow field ":path".',
+>>>>>>> forked/LAE_400_PACKAGE
   editCopyright: 'Изменить авторское право',
   close: 'Закрыть',
   tutorial: 'Руководство',
@@ -49,12 +57,20 @@ H5PEditor.language.core = {
   selectFiletoUpload: 'Выберите файл для загрузки',
   or: 'или',
   enterAudioUrl: 'Введите URL аудио источника',
+<<<<<<< HEAD
   enterVideoUrl: 'Enter video URL',
+=======
+  enterVideoUrl: 'Введите URL источника видео или ссылку на YouTube',
+>>>>>>> forked/LAE_400_PACKAGE
   enterAudioTitle: 'Вставить ссылку или другой URL источника аудио',
   enterVideoTitle: 'Вставить ссылку на YouTube или другой источник видео',
   uploadAudioTitle: 'Загрузить аудио файл',
   uploadVideoTitle: 'Загрузить видео файл',
+<<<<<<< HEAD
   addVideoDescription: 'H5P supports all external video sources formatted as mp4, webm or ogv, like Vimeo Pro, and has support for YouTube and Panopto links.',
+=======
+  addVideoDescription: 'H5P поддерживает все внешние источники видео, отформатированные как mp4, webm или ogv, например Vimeo Pro, и поддерживает ссылки на YouTube.',
+>>>>>>> forked/LAE_400_PACKAGE
   insert: 'Вставить',
   cancel: 'Отмена',
   height: 'высота',
@@ -111,7 +127,11 @@ H5PEditor.language.core = {
   recentlyUsedFirst: 'Сначала недавно использованные',
   popularFirst: 'Сначала популярные',
   newestFirst: 'Сначала самые новые',
+<<<<<<< HEAD
   aToZ: 'от A к Z',
+=======
+  aToZ: 'A к Z',
+>>>>>>> forked/LAE_400_PACKAGE
   noResultsFound: 'Результаты не найдены',
   noResultsFoundDesc: 'Нет типа контента, соответствующего вашим критериям поиска.',
   readMore: 'Читать больше',
@@ -151,9 +171,15 @@ H5PEditor.language.core = {
   previousImage: 'Предыдущее изображение',
   screenshots: 'Скриншоты',
   reloadButtonLabel: 'Обновить',
+<<<<<<< HEAD
   videoQuality: 'Надпись разрешения видео',
   videoQualityDescription: 'Эта надпись помогает пользователю определить текущее качество видео. Например. 1080p, 720p, HD или мобильный',
   videoQualityDefaultLabel: 'Разрешение видео :index',
+=======
+  videoQuality: 'Надпись качества видео',
+  videoQualityDescription: 'Эта надпись помогает пользователю определить текущее качество видео. Например. 1080p, 720p, HD или мобильный',
+  videoQualityDefaultLabel: 'Качество :index',
+>>>>>>> forked/LAE_400_PACKAGE
   noContentTypesAvailable: 'Нет доступных типов контента',
   noContentTypesAvailableDesc: 'У вашего сайта проблемы с подключением к H5P.org и списку доступных типов контента.',
   contentTypeCacheOutdated: 'Список типов контента устарел',
@@ -193,10 +219,17 @@ H5PEditor.language.core = {
   pasteAndReplaceFromClipboard: 'Replace existing content with H5P Content from the clipboard',
   pasteNoContent: 'Нет содержимого H5P в буфере обмена',
   pasteError: 'Не удалось вставить из буфера обмена',
+<<<<<<< HEAD
   pasteContentNotSupported: 'Содержимое в буфере обмена H5P не поддерживается в этом контексте.',
   pasteContentRestricted: 'Содержимое буфера обмена было ограничено на этом сайте.',
   pasteTooOld: 'Содержимое буфера обмена H5P имеет более низкую версию (:clip), чем поддерживаемое в данном контексте (:local), если возможно, попытайтесь вставить обновленное содержимое, скопировать его снова и вставить его сюда.',
   pasteTooNew: 'Содержимое буфера обмена H5P имеет более высокую версию (:clip), чем поддерживаемое в данном контексте (:local), по возможности сначала попытайтесь обновить это содержимое, а затем попытайтесь вставить его сюда снова.',
+=======
+  pasteContentNotSupported: 'The content in the H5P clipboard is not supported in this context',
+  pasteContentRestricted: 'The content in the clipboard has been restricted on this site',
+  pasteTooOld: 'The content in the H5P clipboard is of a lower version (:clip) than what is supported in this context (:local), if possible try to have the content you want to paste upgraded, copy it again and try pasting it here.',
+  pasteTooNew: 'The content in the H5P clipboard is of a higher version (:clip) than what is supported in this context (:local), if possible try to have this content upgraded first, and then try pasting the content here again.',
+>>>>>>> forked/LAE_400_PACKAGE
   ok: 'ОК',
   avTablistLabel: 'Вставить с помощью',
   tabTitleBasicFileUpload: 'Загрузка файла',
@@ -215,8 +248,12 @@ H5PEditor.language.core = {
   unknownLibrary: 'К сожалению, выбранный тип контента \'%lib\' isn\ не установлен в этой системе.',
   proceedButtonLabel: 'Перейти к сохранению',
   enterFullscreenButtonLabel: 'Войти в полноэкранный режим',
+<<<<<<< HEAD
   exitFullscreenButtonLabel: 'Покинуть полноэкранный режим',
   a11yTitleShowLabel: 'Show label for AT',
   a11yTitleHideLabel: 'Hide label for AT',
   reuseSuccess: ':title was successfully imported from the H5P Hub.',
+=======
+  exitFullscreenButtonLabel: 'Покинуть полноэкранный режим'
+>>>>>>> forked/LAE_400_PACKAGE
 };

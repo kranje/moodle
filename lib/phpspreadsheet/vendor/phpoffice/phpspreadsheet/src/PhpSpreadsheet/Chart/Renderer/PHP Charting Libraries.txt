@@ -5,10 +5,14 @@ GraPHPite
 	http://graphpite.sourceforge.net/
 
 JpGraph
+<<<<<<< HEAD
 	https://jpgraph.net/
 	Used composer packages:
         https://packagist.org/packages/jpgraph/jpgraph (\PhpOffice\PhpSpreadsheet\Chart\Renderer\JpGraph)
         https://packagist.org/packages/mitoteam/jpgraph (\PhpOffice\PhpSpreadsheet\Chart\Renderer\MtJpGraphRenderer)
+=======
+	http://www.aditus.nu/jpgraph/
+>>>>>>> forked/LAE_400_PACKAGE
 
 LibChart
 	https://naku.dohcrew.com/libchart/pages/introduction/
@@ -20,4 +24,8 @@ TeeChart
 	https://www.steema.com/
 
 PHPGraphLib
+<<<<<<< HEAD
     http://www.ebrueggeman.com/phpgraphlib
+=======
+    http://www.ebrueggeman.com/phpgraphlib
+>>>>>>> forked/LAE_400_PACKAGE

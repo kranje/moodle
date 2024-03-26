@@ -44,7 +44,13 @@ abstract class bulk_action_base {
      *
      * @return string
      */
+<<<<<<< HEAD
     abstract function get_key(): string;
+=======
+    public function get_bulk_action_key(): string {
+        return '';
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 
     /**
      * URL of the bulk action redirect page.
@@ -69,11 +75,16 @@ abstract class bulk_action_base {
         return null;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * A unique key for the bulk action, this will be used in the api to identify the action data.
      * Every bulk must have a unique key to perform the action as a part of the form post in the base view.
      * When questions are selected, it will post according to the key its selected from the dropdown.
      *
+<<<<<<< HEAD
      * @return string
      * @deprecated since Moodle 4.1
      * @see get_key()
@@ -82,5 +93,17 @@ abstract class bulk_action_base {
     public function get_bulk_action_key() {
         debugging(__FUNCTION__ . " is deprecated and should no longer be used. Please use get_key() instead.", DEBUG_DEVELOPER);
         return $this->get_key();
+=======
+     * Note: This method is the first towards moving from get_bulk_action_key() to get_key().
+     *
+     * @return string
+     */
+    public function get_key(): string {
+        if (!empty($this->get_bulk_action_key())) {
+            return $this->get_bulk_action_key();
+        }
+        throw new \coding_exception('Bulk actions must implement the get_key() or get_bulk_action_key() method. ' .
+            'In Moodle 4.1, get_bulk_action_key() is being deprecated and replaced by get_key().');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

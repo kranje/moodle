@@ -117,6 +117,7 @@ class block_filtered_course_list_rubric {
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_filtered_course_list_lib {
+<<<<<<< HEAD
     public static function get_filter_files() {
         global $CFG;
 
@@ -144,6 +145,8 @@ class block_filtered_course_list_lib {
         return $exfilters;
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Display a coursename according to the template
      *

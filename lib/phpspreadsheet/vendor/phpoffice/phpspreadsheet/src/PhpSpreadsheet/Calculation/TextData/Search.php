@@ -2,19 +2,28 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 
 class Search
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * FIND (case sensitive search).
      *
      * @param mixed $needle The string to look for
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $haystack The string in which to look
      *                         Or can be an array of values
@@ -31,6 +40,15 @@ class Search
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $needle, $haystack, $offset);
         }
 
+=======
+     * @param mixed $haystack The string in which to look
+     * @param mixed $offset Integer offset within $haystack to start searching from
+     *
+     * @return int|string
+     */
+    public static function sensitive($needle, $haystack, $offset = 1)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $needle = Helpers::extractString($needle);
             $haystack = Helpers::extractString($haystack);
@@ -50,13 +68,18 @@ class Search
             }
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      * SEARCH (case insensitive search).
      *
      * @param mixed $needle The string to look for
+<<<<<<< HEAD
      *                         Or can be an array of values
      * @param mixed $haystack The string in which to look
      *                         Or can be an array of values
@@ -73,6 +96,15 @@ class Search
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $needle, $haystack, $offset);
         }
 
+=======
+     * @param mixed $haystack The string in which to look
+     * @param mixed $offset Integer offset within $haystack to start searching from
+     *
+     * @return int|string
+     */
+    public static function insensitive($needle, $haystack, $offset = 1)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $needle = Helpers::extractString($needle);
             $haystack = Helpers::extractString($haystack);
@@ -92,6 +124,10 @@ class Search
             }
         }
 
+<<<<<<< HEAD
         return ExcelError::VALUE();
+=======
+        return Functions::VALUE();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }

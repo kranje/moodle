@@ -27,6 +27,7 @@
  * This plugin now has a enrolment sync scheduled task. Scheduled tasks were
  * introduced in Moodle 2.7.  It is possible to override the scheduled tasks
  * configuration and run a single scheduled task immediately using the
+<<<<<<< HEAD
  * admin/cli/scheduled_task.php script. This is the recommended
  * method to use for immediate enrollment synchronisation.
  *
@@ -35,6 +36,16 @@
  *
  * Execute task:
  * $ sudo -u www-data /usr/bin/php admin/cli/scheduled_task.php /
+=======
+ * admin/tool/task/cli/schedule_task.php script. This is the recommended
+ * method to use for immediate enrollment synchronisation.
+ *
+ * Usage help:
+ * $ php admin/tool/task/cli/schedule_task.php -h
+ *
+ * Execute task:
+ * $ sudo -u www-data /usr/bin/php admin/tool/task/cli/schedule_task.php /
+>>>>>>> forked/LAE_400_PACKAGE
  * --execute=\\enrol_flatfile\\task\\flatfile_sync_task
  *
  * @package    enrol_flatfile

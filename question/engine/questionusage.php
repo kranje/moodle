@@ -1056,7 +1056,10 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
      *
      * @return question_attempt
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         return $this->offsetGet(current($this->slots));
     }
@@ -1066,7 +1069,10 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
      *
      * @return int
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return current($this->slots);
     }
@@ -1074,14 +1080,22 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
     /**
      * Standard part of the Iterator interface.
      */
+<<<<<<< HEAD
     public function next(): void {
+=======
+    public function next() {
+>>>>>>> forked/LAE_400_PACKAGE
         next($this->slots);
     }
 
     /**
      * Standard part of the Iterator interface.
      */
+<<<<<<< HEAD
     public function rewind(): void {
+=======
+    public function rewind() {
+>>>>>>> forked/LAE_400_PACKAGE
         reset($this->slots);
     }
 
@@ -1090,7 +1104,11 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
      *
      * @return bool
      */
+<<<<<<< HEAD
     public function valid(): bool {
+=======
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return current($this->slots) !== false;
     }
 
@@ -1100,7 +1118,11 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
      * @param int $slot
      * @return bool
      */
+<<<<<<< HEAD
     public function offsetExists($slot): bool {
+=======
+    public function offsetExists($slot) {
+>>>>>>> forked/LAE_400_PACKAGE
         return in_array($slot, $this->slots);
     }
 
@@ -1110,7 +1132,10 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
      * @param int $slot
      * @return question_attempt
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function offsetGet($slot) {
         return $this->quba->get_question_attempt($slot);
     }
@@ -1121,7 +1146,11 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
      * @param int $slot
      * @param question_attempt $value
      */
+<<<<<<< HEAD
     public function offsetSet($slot, $value): void {
+=======
+    public function offsetSet($slot, $value) {
+>>>>>>> forked/LAE_400_PACKAGE
         throw new coding_exception('You are only allowed read-only access to ' .
                 'question_attempt::states through a question_attempt_step_iterator. Cannot set.');
     }
@@ -1131,7 +1160,11 @@ class question_attempt_iterator implements Iterator, ArrayAccess {
      *
      * @param int $slot
      */
+<<<<<<< HEAD
     public function offsetUnset($slot): void {
+=======
+    public function offsetUnset($slot) {
+>>>>>>> forked/LAE_400_PACKAGE
         throw new coding_exception('You are only allowed read-only access to ' .
                 'question_attempt::states through a question_attempt_step_iterator. Cannot unset.');
     }

@@ -71,7 +71,11 @@ class create extends \moodleform {
         $eventtypes = $this->_customdata['eventtypes'];
 
         if (in_array(true, $eventtypes, true) === false) {
+<<<<<<< HEAD
             throw new \moodle_exception('nopermissiontoupdatecalendar');
+=======
+            print_error('nopermissiontoupdatecalendar');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $mform->setDisableShortforms();

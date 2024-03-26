@@ -33,7 +33,10 @@ use mod_data\external\database_summary_exporter;
 use mod_data\external\record_exporter;
 use mod_data\external\content_exporter;
 use mod_data\external\field_exporter;
+<<<<<<< HEAD
 use mod_data\manager;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * Database module external functions
@@ -207,6 +210,7 @@ class mod_data_external extends external_api {
         list($database, $course, $cm, $context) = self::validate_database($params['databaseid']);
 
         // Call the data/lib API.
+<<<<<<< HEAD
         $manager = manager::create_from_coursemodule($cm);
         $manager->set_module_viewed($course);
 
@@ -214,6 +218,13 @@ class mod_data_external extends external_api {
             'status' => true,
             'warnings' => $warnings,
         ];
+=======
+        data_view($database, $course, $cm, $context);
+
+        $result = array();
+        $result['status'] = true;
+        $result['warnings'] = $warnings;
+>>>>>>> forked/LAE_400_PACKAGE
         return $result;
     }
 
@@ -407,8 +418,11 @@ class mod_data_external extends external_api {
             }
         }
 
+<<<<<<< HEAD
         $manager = manager::create_from_instance($database);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         list($records, $maxcount, $totalcount, $page, $nowperpage, $sort, $mode) =
             data_search_entries($database, $cm, $context, 'list', $groupid, '', $params['sort'], $params['order'],
                 $params['page'], $params['perpage']);
@@ -451,8 +465,16 @@ class mod_data_external extends external_api {
 
         // Check if we should return the list rendered.
         if ($params['returncontents']) {
+<<<<<<< HEAD
             $parser = $manager->get_template('listtemplate', ['page' => $page]);
             $result['listviewcontents'] = $parser->parse_entries($records);
+=======
+            ob_start();
+            // The return parameter stops the execution after the first record.
+            data_print_template('listtemplate', $records, $database, '', $page, false);
+            $result['listviewcontents'] = ob_get_contents();
+            ob_end_clean();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $result;
@@ -517,8 +539,11 @@ class mod_data_external extends external_api {
         $canmanageentries = has_capability('mod/data:manageentries', $context);
         data_require_time_available($database, $canmanageentries);
 
+<<<<<<< HEAD
         $manager = manager::create_from_instance($database);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if ($record->groupid != 0) {
             if (!groups_group_visible($record->groupid, $course, $cm)) {
                 throw new moodle_exception('notingroup');
@@ -527,7 +552,11 @@ class mod_data_external extends external_api {
 
         // Check correct record entry. Group check was done before.
         if (!data_can_view_record($database, $record, $record->groupid, $canmanageentries)) {
+<<<<<<< HEAD
             throw new moodle_exception('notapprovederror', 'data');
+=======
+            throw new moodle_exception('notapproved', 'data');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $related = array('context' => $context, 'database' => $database, 'user' => null);
@@ -547,8 +576,12 @@ class mod_data_external extends external_api {
         // Check if we should return the entry rendered.
         if ($params['returncontents']) {
             $records = [$record];
+<<<<<<< HEAD
             $parser = $manager->get_template('singletemplate');
             $result['entryviewcontents'] = $parser->parse_entries($records);
+=======
+            $result['entryviewcontents'] = data_print_template('singletemplate', $records, $database, '', 0, true);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $result;
@@ -719,8 +752,11 @@ class mod_data_external extends external_api {
         // Check database is open in time.
         data_require_time_available($database, null, $context);
 
+<<<<<<< HEAD
         $manager = manager::create_from_instance($database);
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         if (!empty($params['groupid'])) {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
@@ -786,8 +822,16 @@ class mod_data_external extends external_api {
 
         // Check if we should return the list rendered.
         if ($params['returncontents']) {
+<<<<<<< HEAD
             $parser = $manager->get_template('listtemplate', ['page' => $page]);
             $result['listviewcontents'] = $parser->parse_entries($records);
+=======
+            ob_start();
+            // The return parameter stops the execution after the first record.
+            data_print_template('listtemplate', $records, $database, '', $page, false);
+            $result['listviewcontents'] = ob_get_contents();
+            ob_end_clean();
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $result;
@@ -982,12 +1026,15 @@ class mod_data_external extends external_api {
         $fieldnotifications = array();
 
         list($database, $course, $cm, $context) = self::validate_database($params['databaseid']);
+<<<<<<< HEAD
 
         $fields = $DB->get_records('data_fields', ['dataid' => $database->id]);
         if (empty($fields)) {
             throw new moodle_exception('nofieldindatabase', 'data');
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         // Check database is open in time.
         data_require_time_available($database, null, $context);
 
@@ -1015,6 +1062,10 @@ class mod_data_external extends external_api {
             $datarecord->{'field_' . $data['fieldid'] . $subfield} = json_decode($data['value']);
         }
         // Validate to ensure that enough data was submitted.
+<<<<<<< HEAD
+=======
+        $fields = $DB->get_records('data_fields', array('dataid' => $database->id));
+>>>>>>> forked/LAE_400_PACKAGE
         $processeddata = data_process_submission($database, $fields, $datarecord);
 
         // Format notifications.

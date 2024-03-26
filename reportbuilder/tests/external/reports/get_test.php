@@ -70,19 +70,26 @@ class get_test extends externallib_advanced_testcase {
         $this->assertNotEmpty($result['javascript']);
         $this->assertFalse($result['filterspresent']);
         $this->assertEmpty($result['filtersform']);
+<<<<<<< HEAD
         $this->assertTrue($result['editmode']);
 
         // Confirm editor-specific data is returned.
         $this->assertNotEmpty($result['sidebarmenucards']);
         $this->assertNotEmpty($result['conditions']);
         $this->assertNotEmpty($result['filters']);
+=======
+        $this->assertEquals(1, $result['editmode']);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->assertTrue($result['filters']['hasavailablefilters']);
         $this->assertNotEmpty($result['filters']['availablefilters']);
         $this->assertTrue($result['filters']['hasactivefilters']);
         $this->assertEquals($filterfullname->get('id'), $result['filters']['activefilters'][0]['id']);
         $this->assertEquals($filteremail->get('id'), $result['filters']['activefilters'][1]['id']);
+<<<<<<< HEAD
         $this->assertNotEmpty($result['sorting']);
         $this->assertNotEmpty($result['cardview']);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -115,6 +122,7 @@ class get_test extends externallib_advanced_testcase {
         $this->assertNotEmpty($result['javascript']);
         $this->assertTrue($result['filterspresent']);
         $this->assertNotEmpty($result['filtersform']);
+<<<<<<< HEAD
         $this->assertFalse($result['editmode']);
 
         // Confirm editor-specific data is not returned.
@@ -123,6 +131,13 @@ class get_test extends externallib_advanced_testcase {
         $this->assertArrayNotHasKey('filters', $result);
         $this->assertArrayNotHasKey('sorting', $result);
         $this->assertArrayNotHasKey('cardview', $result);
+=======
+        $this->assertEquals(0, $result['editmode']);
+        $this->assertEmpty($result['filters']);
+        $this->assertEmpty($result['conditions']);
+        $this->assertEmpty($result['sorting']);
+        $this->assertEmpty($result['cardview']);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**

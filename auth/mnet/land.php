@@ -40,7 +40,11 @@ $PAGE->set_context(context_system::instance());
 $site = get_site();
 
 if (!is_enabled_auth('mnet')) {
+<<<<<<< HEAD
     throw new \moodle_exception('mnetdisable');
+=======
+    print_error('mnetdisable');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // confirm the MNET session

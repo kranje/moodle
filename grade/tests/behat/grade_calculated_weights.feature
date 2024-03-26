@@ -29,10 +29,14 @@ Feature: We can understand the gradebook user report
     And I log in as "admin"
     And I set the following administration settings values:
       | grade_aggregations_visible | Mean of grades,Weighted mean of grades,Simple weighted mean of grades,Mean of grades (with extra credits),Median of grades,Lowest grade,Highest grade,Mode of grades,Natural |
+<<<<<<< HEAD
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "View > Grader report" in the course gradebook
+=======
+    And I am on the "Course 1" "grades > Grader report > View" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I turn editing mode on
     And I give the grade "60.00" to the user "Student 1" for the grade item "EN Test assignment one"
     And I give the grade "20.00" to the user "Student 1" for the grade item "EN Test assignment two"
@@ -62,7 +66,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "Course 1":
       | Aggregation | Mean of grades |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -87,7 +95,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "EN Sub category":
       | Item weight | 1.0 |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -108,7 +120,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "EN Test assignment three":
       | Extra credit | 1 |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -127,7 +143,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "EN Test assignment three":
       | Extra credit weight | 1.0 |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -144,7 +164,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "Course 1":
       | Aggregation | Median of grades |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -161,7 +185,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "Course 1":
       | Aggregation | Lowest grade |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -178,7 +206,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "Course 1":
       | Aggregation | Highest grade |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -195,7 +227,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "Course 1":
       | Aggregation | Mode of grades |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -216,7 +252,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "EN Test assignment three":
       | Extra credit | 1 |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:
@@ -235,7 +275,11 @@ Feature: We can understand the gradebook user report
     And I set the following settings for grade item "EN Test assignment three":
       | Extra credit | 1 |
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
     And I click on "Student 1" in the "user" search widget
+=======
+    And I set the field "Select all or one user" to "Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
 
     # Check the values in the weights column.
     Then the following should exist in the "user-grade" table:

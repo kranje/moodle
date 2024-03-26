@@ -25,6 +25,10 @@
 
 import $ from 'jquery';
 import CustomEvents from 'core/custom_interaction_events';
+<<<<<<< HEAD
+=======
+import {dispatchEvent} from 'core/event_dispatcher';
+>>>>>>> forked/LAE_400_PACKAGE
 import 'core/inplace_editable';
 import Notification from 'core/notification';
 import Pending from 'core/pending';
@@ -33,6 +37,10 @@ import SortableList from 'core/sortable_list';
 import {get_string as getString} from 'core/str';
 import Templates from 'core/templates';
 import {add as addToast} from 'core/toast';
+<<<<<<< HEAD
+=======
+import * as reportEvents from 'core_reportbuilder/local/events';
+>>>>>>> forked/LAE_400_PACKAGE
 import * as reportSelectors from 'core_reportbuilder/local/selectors';
 import {addFilter, deleteFilter, reorderFilter} from 'core_reportbuilder/local/repository/filters';
 
@@ -137,7 +145,14 @@ export const init = initialized => {
                 return deleteFilter(reportElement.dataset.reportId, filterContainer.dataset.filterId)
                     .then(data => reloadSettingsFiltersRegion(reportElement, data))
                     .then(() => addToast(getString('filterdeleted', 'core_reportbuilder', filterName)))
+<<<<<<< HEAD
                     .then(() => pendingPromise.resolve())
+=======
+                    .then(() => {
+                        dispatchEvent(reportEvents.tableReload, {}, reportElement);
+                        return pendingPromise.resolve();
+                    })
+>>>>>>> forked/LAE_400_PACKAGE
                     .catch(Notification.exception);
             }).catch(() => {
                 return;

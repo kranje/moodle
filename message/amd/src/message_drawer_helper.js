@@ -20,6 +20,7 @@
  * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 
 import {publish, subscribe} from 'core/pubsub';
 import MessageDrawerEvents from 'core_message/message_drawer_events';
@@ -93,3 +94,106 @@ export const markDrawerReady = () => {
     drawerMarkedReady = true;
     publish(MessageDrawerEvents.READY);
 };
+=======
+define(
+[
+    'core/pubsub',
+    'core_message/message_drawer_events'
+],
+function(
+    PubSub,
+    MessageDrawerEvents
+) {
+
+    /** @property {boolean} Whether the drawer is ready or not */
+    var drawerMarkedReady = false;
+
+    /**
+     * Trigger an event to create a new conversation in the message drawer.
+     *
+     * @param {object} args
+     * @param {Number} args.userId The user id to start a conversation.
+     */
+    var createConversationWithUser = function(args) {
+        waitForDrawerToLoad().then(function() {
+            PubSub.publish(MessageDrawerEvents.CREATE_CONVERSATION_WITH_USER, args);
+            return;
+        }).catch();
+    };
+
+    /**
+     * Trigger an event to hide the message drawer.
+     */
+    var hide = function() {
+        waitForDrawerToLoad().then(function() {
+            PubSub.publish(MessageDrawerEvents.HIDE);
+            return;
+        }).catch();
+    };
+
+    /**
+     * Trigger an event to show the message drawer.
+     */
+    var show = function() {
+        waitForDrawerToLoad().then(function() {
+            PubSub.publish(MessageDrawerEvents.SHOW);
+            return;
+        }).catch();
+    };
+
+    /**
+     * Trigger an event to show the given conversation.
+     *
+     * @param {object} args
+     * @param {int} args.conversationId Id for the conversation to show.
+     */
+    var showConversation = function(args) {
+        waitForDrawerToLoad().then(function() {
+            PubSub.publish(MessageDrawerEvents.SHOW_CONVERSATION, args);
+            return;
+        }).catch();
+    };
+
+    /**
+     * Trigger an event to show messaging settings.
+     */
+    var showSettings = function() {
+        waitForDrawerToLoad().then(function() {
+            PubSub.publish(MessageDrawerEvents.SHOW_SETTINGS);
+            return;
+        }).catch();
+    };
+
+    /**
+     * Helper to wait for the drawer to be ready before performing an action.
+     *
+     * @returns {Promise<void>}
+     */
+    var waitForDrawerToLoad = function() {
+        return new Promise(function(resolve) {
+            if (drawerMarkedReady) {
+                resolve();
+            } else {
+                PubSub.subscribe(MessageDrawerEvents.READY, resolve);
+            }
+        });
+    };
+
+    /**
+     * Helper to allow the drawer to mark itself as ready.
+     */
+    var markDrawerReady = function() {
+        drawerMarkedReady = true;
+        PubSub.publish(MessageDrawerEvents.READY);
+    };
+
+    return {
+        createConversationWithUser: createConversationWithUser,
+        hide: hide,
+        show: show,
+        showConversation: showConversation,
+        showSettings: showSettings,
+        markDrawerReady: markDrawerReady,
+    };
+});
+>>>>>>> forked/LAE_400_PACKAGE

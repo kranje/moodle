@@ -38,7 +38,11 @@ $string['clitypevaluedefault'] = 'ierakstiet vērtību, nospiediet taustiņu Ent
 $string['cliunknowoption'] = 'Neatpazītas opcijas:
    {$a}
 Lūdzu, izmantojiet opciju --help.';
+<<<<<<< HEAD
 $string['cliyesnoprompt'] = 'ierakstiet y (nozīmē jā) vai n (nozīmē nē)';
+=======
+$string['cliyesnoprompt'] = 'ierakstiet j (nozīmē jā) vai n (nozīmē nē)';
+>>>>>>> forked/LAE_400_PACKAGE
 $string['environmentrequireinstall'] = 'nepieciešams instalēt/iespējot';
 $string['environmentrequireversion'] = 'nepieciešama versija {$a->needed}, bet jūs izmantojat versiju {$a->current}';
 $string['upgradekeyset'] = 'Jaunināšanas atslēga (lai to neiestatītu, atstājiet tukšu)';

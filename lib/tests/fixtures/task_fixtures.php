@@ -26,6 +26,7 @@
 namespace core\task;
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 /**
  * Test class.
  *
@@ -63,10 +64,14 @@ class adhoc_test_task extends \core\task\adhoc_task {
     /**
      * Execute.
      */
+=======
+class adhoc_test_task extends \core\task\adhoc_task {
+>>>>>>> forked/LAE_400_PACKAGE
     public function execute() {
     }
 }
 
+<<<<<<< HEAD
 /**
  * Test class.
  *
@@ -105,6 +110,11 @@ class adhoc_test4_task extends adhoc_test_task {
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class adhoc_test5_task extends adhoc_test_task {
+=======
+class adhoc_test2_task extends \core\task\adhoc_task {
+    public function execute() {
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 class scheduled_test_task extends \core\task\scheduled_task {

@@ -33,7 +33,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package SimplePie
+<<<<<<< HEAD
  * @version 1.6.0
+=======
+ * @version 1.5.6
+>>>>>>> forked/LAE_400_PACKAGE
  * @copyright 2004-2017 Ryan Parman, Sam Sneddon, Ryan McCue
  * @author Ryan Parman
  * @author Sam Sneddon
@@ -50,7 +54,11 @@ define('SIMPLEPIE_NAME', 'SimplePie');
 /**
  * SimplePie Version
  */
+<<<<<<< HEAD
 define('SIMPLEPIE_VERSION', '1.6.0');
+=======
+define('SIMPLEPIE_VERSION', '1.5.6');
+>>>>>>> forked/LAE_400_PACKAGE
 
 /**
  * SimplePie Build
@@ -425,6 +433,7 @@ class SimplePie
 	public $error;
 
 	/**
+<<<<<<< HEAD
 	 * @var int HTTP status code
 	 * @see SimplePie::status_code()
 	 * @access private
@@ -432,6 +441,8 @@ class SimplePie
 	public $status_code;
 
 	/**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @var object Instance of SimplePie_Sanitize (or other class)
 	 * @see SimplePie::set_sanitize_class()
 	 * @access private
@@ -651,6 +662,7 @@ class SimplePie
 	public $strip_htmltags = array('base', 'blink', 'body', 'doctype', 'embed', 'font', 'form', 'frame', 'frameset', 'html', 'iframe', 'input', 'marquee', 'meta', 'noscript', 'object', 'param', 'script', 'style');
 
 	/**
+<<<<<<< HEAD
 	 * @var array Stores the default attributes to be renamed by rename_attributes().
 	 * @see SimplePie::rename_attributes()
 	 * @access private
@@ -658,6 +670,8 @@ class SimplePie
 	public $rename_attributes = array();
 
 	/**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @var bool Should we throw exceptions, or use the old-style error property?
 	 * @access private
 	 */
@@ -923,6 +937,7 @@ class SimplePie
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Return the filename (i.e. hash, without path and without extension) of the file to cache a given URL.
 	 * @param string $url The URL of the feed to be cached.
 	 * @return string A filename (i.e. hash, without path and without extension).
@@ -956,6 +971,8 @@ class SimplePie
 	}
 
 	/**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	 * Set whether feed items should be sorted into reverse chronological order
 	 *
 	 * @param bool $enable Sort as reverse chronological order.
@@ -1193,7 +1210,10 @@ class SimplePie
 			$this->strip_attributes(false);
 			$this->add_attributes(false);
 			$this->set_image_handler(false);
+<<<<<<< HEAD
 			$this->set_https_domains(array());
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		}
 	}
 
@@ -1230,6 +1250,7 @@ class SimplePie
 		$this->sanitize->encode_instead_of_strip($enable);
 	}
 
+<<<<<<< HEAD
 	public function rename_attributes($attribs = '')
 	{
 		if ($attribs === '')
@@ -1239,6 +1260,8 @@ class SimplePie
 		$this->sanitize->rename_attributes($attribs);
 	}
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	public function strip_attributes($attribs = '')
 	{
 		if ($attribs === '')
@@ -1306,6 +1329,7 @@ class SimplePie
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Set the list of domains for which to force HTTPS.
 	 * @see SimplePie_Sanitize::set_https_domains()
 	 * @param array List of HTTPS domains. Example array('biz', 'example.com', 'example.org', 'www.example.net').
@@ -1319,6 +1343,8 @@ class SimplePie
 	}
 
 	/**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	 * Set the handler to enable the display of cached images.
 	 *
 	 * @param string $page Web-accessible path to the handler_image.php file.
@@ -1443,8 +1469,13 @@ class SimplePie
 			// Decide whether to enable caching
 			if ($this->cache && $parsed_feed_url['scheme'] !== '')
 			{
+<<<<<<< HEAD
 				$filename = $this->get_cache_filename($this->feed_url);
 				$cache = $this->registry->call('Cache', 'get_handler', array($this->cache_location, $filename, 'spc'));
+=======
+				$url = $this->feed_url . ($this->force_feed ? '#force_feed' : '');
+				$cache = $this->registry->call('Cache', 'get_handler', array($this->cache_location, call_user_func($this->cache_name_function, $url), 'spc'));
+>>>>>>> forked/LAE_400_PACKAGE
 			}
 
 			// Fetch the data via SimplePie_File into $this->raw_data
@@ -1584,7 +1615,11 @@ class SimplePie
 	 * Fetch the data via SimplePie_File
 	 *
 	 * If the data is already cached, attempt to fetch it from there instead
+<<<<<<< HEAD
 	 * @param SimplePie_Cache_Base|false $cache Cache handler, or false to not load from the cache
+=======
+	 * @param SimplePie_Cache|false $cache Cache handler, or false to not load from the cache
+>>>>>>> forked/LAE_400_PACKAGE
 	 * @return array|true Returns true if the data was loaded from the cache, or an array of HTTP headers and sniffed type
 	 */
 	protected function fetch_data(&$cache)
@@ -1647,7 +1682,10 @@ class SimplePie
 						}
 
 						$file = $this->registry->create('File', array($this->feed_url, $this->timeout/10, 5, $headers, $this->useragent, $this->force_fsockopen, $this->curl_options));
+<<<<<<< HEAD
 						$this->status_code = $file->status_code;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 						if ($file->success)
 						{
@@ -1702,8 +1740,11 @@ class SimplePie
 				$file = $this->registry->create('File', array($this->feed_url, $this->timeout, 5, $headers, $this->useragent, $this->force_fsockopen, $this->curl_options));
 			}
 		}
+<<<<<<< HEAD
 		$this->status_code = $file->status_code;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 		// If the file connection has an error, set SimplePie::error to that and quit
 		if (!$file->success && !($file->method & SIMPLEPIE_FILE_SOURCE_REMOTE === 0 || ($file->status_code === 200 || $file->status_code > 206 && $file->status_code < 300)))
 		{
@@ -1801,7 +1842,11 @@ class SimplePie
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Get the error message for the occurred error
+=======
+	 * Get the error message for the occured error
+>>>>>>> forked/LAE_400_PACKAGE
 	 *
 	 * @return string|array Error message, or array of messages for multifeeds
 	 */
@@ -1811,6 +1856,7 @@ class SimplePie
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Get the last HTTP status code
 	 *
 	 * @return int Status code
@@ -1821,6 +1867,8 @@ class SimplePie
 	}
 
 	/**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 	 * Get the raw XML
 	 *
 	 * This is the same as the old `$feed->enable_xml_dump(true)`, but returns
@@ -2215,7 +2263,11 @@ class SimplePie
 	 */
 	public function get_base($element = array())
 	{
+<<<<<<< HEAD
 		if (!empty($element['xml_base_explicit']) && isset($element['xml_base']))
+=======
+		if (!($this->get_type() & SIMPLEPIE_TYPE_RSS_SYNDICATION) && !empty($element['xml_base_explicit']) && isset($element['xml_base']))
+>>>>>>> forked/LAE_400_PACKAGE
 		{
 			return $element['xml_base'];
 		}
@@ -2663,6 +2715,7 @@ class SimplePie
 			}
 		}
 
+<<<<<<< HEAD
 		if (isset($this->data['headers']['link']))
 		{
 			$link_headers = $this->data['headers']['link'];
@@ -2676,6 +2729,15 @@ class SimplePie
 		}
 
 		if (isset($this->data['links'][$rel]))
+=======
+		if (isset($this->data['headers']['link']) &&
+		    preg_match('/<([^>]+)>; rel='.preg_quote($rel).'/',
+		               $this->data['headers']['link'], $match))
+		{
+			return array($match[1]);
+		}
+		else if (isset($this->data['links'][$rel]))
+>>>>>>> forked/LAE_400_PACKAGE
 		{
 			return $this->data['links'][$rel];
 		}
@@ -3332,5 +3394,8 @@ class SimplePie
 		}
 	}
 }
+<<<<<<< HEAD
 
 class_alias('SimplePie', 'SimplePie\SimplePie', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

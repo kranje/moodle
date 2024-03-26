@@ -181,7 +181,11 @@ class CFDictionary extends CFType implements Iterator
     * @uses $iteratorPosition set to 0
     * @uses $iteratorKeys store keys of {@link $value}
     */
+<<<<<<< HEAD
     public function rewind(): void
+=======
+    public function rewind()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->iteratorPosition = 0;
         $this->iteratorKeys = array_keys($this->value);
@@ -189,11 +193,18 @@ class CFDictionary extends CFType implements Iterator
    /**
     * Get Iterator's current {@link CFType} identified by {@link $iteratorPosition}
     * @link http://php.net/manual/en/iterator.current.php
+<<<<<<< HEAD
     * @return mixed current Item
     * @uses $iteratorPosition identify current key
     * @uses $iteratorKeys identify current value
     */
     #[\ReturnTypeWillChange]
+=======
+    * @return CFType current Item
+    * @uses $iteratorPosition identify current key
+    * @uses $iteratorKeys identify current value
+    */
+>>>>>>> forked/LAE_400_PACKAGE
     public function current()
     {
         return $this->value[$this->iteratorKeys[$this->iteratorPosition]];
@@ -201,11 +212,18 @@ class CFDictionary extends CFType implements Iterator
    /**
     * Get Iterator's current key identified by {@link $iteratorPosition}
     * @link http://php.net/manual/en/iterator.key.php
+<<<<<<< HEAD
     * @return mixed key of the current Item
     * @uses $iteratorPosition identify current key
     * @uses $iteratorKeys identify current value
     */
     #[\ReturnTypeWillChange]
+=======
+    * @return string key of the current Item
+    * @uses $iteratorPosition identify current key
+    * @uses $iteratorKeys identify current value
+    */
+>>>>>>> forked/LAE_400_PACKAGE
     public function key()
     {
         return $this->iteratorKeys[$this->iteratorPosition];
@@ -216,18 +234,30 @@ class CFDictionary extends CFType implements Iterator
     * @return void
     * @uses $iteratorPosition increment by 1
     */
+<<<<<<< HEAD
     public function next(): void
+=======
+    public function next()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $this->iteratorPosition++;
     }
    /**
     * Test if {@link $iteratorPosition} addresses a valid element of {@link $value}
     * @link http://php.net/manual/en/iterator.valid.php
+<<<<<<< HEAD
     * @return bool true if current position is valid, false else
     * @uses $iteratorPosition test if within {@link $iteratorKeys}
     * @uses $iteratorPosition test if within {@link $value}
     */
     public function valid(): bool
+=======
+    * @return boolean true if current position is valid, false else
+    * @uses $iteratorPosition test if within {@link $iteratorKeys}
+    * @uses $iteratorPosition test if within {@link $value}
+    */
+    public function valid()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return isset($this->iteratorKeys[$this->iteratorPosition]) && isset($this->value[$this->iteratorKeys[$this->iteratorPosition]]);
     }

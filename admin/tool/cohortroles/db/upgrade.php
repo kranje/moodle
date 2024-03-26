@@ -47,8 +47,18 @@ function xmldb_tool_cohortroles_upgrade($oldversion) {
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+=======
+    if ($oldversion < 2022041901) {
+        // Delete any tool_cohortroles mappings for users who no longer exist.
+        $DB->delete_records_select('tool_cohortroles', 'userid NOT IN (SELECT id FROM {user} WHERE deleted = 0)');
+
+        // Cohortroles savepoint reached.
+        upgrade_plugin_savepoint(true, 2022041901, 'tool', 'cohortroles');
+    }
+>>>>>>> forked/LAE_400_PACKAGE
 
     return true;
 }

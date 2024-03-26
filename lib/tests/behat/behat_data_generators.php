@@ -121,7 +121,11 @@ class behat_data_generators extends behat_base {
     }
 
     /**
+<<<<<<< HEAD
      * Creates the specified element.
+=======
+     * Creates the specified (singular) element.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * See the class comment for an overview.
      *

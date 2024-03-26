@@ -25,7 +25,11 @@ $PAGE->set_url('/mod/chat/gui_sockets/chatinput.php', array('chat_sid' => $chats
 $PAGE->set_popup_notification_allowed(false);
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
+<<<<<<< HEAD
     throw new \moodle_exception('notlogged', 'chat');
+=======
+    print_error('notlogged', 'chat');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 // Get the user theme.

@@ -3,13 +3,19 @@
 namespace PhpOffice\PhpSpreadsheet;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Shared\File;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Worksheet\Iterator;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 class Spreadsheet
 {
@@ -316,7 +322,11 @@ class Spreadsheet
                 break;
             case 'target':
             case 'data':
+<<<<<<< HEAD
                 if (is_array($this->ribbonXMLData)) {
+=======
+                if (is_array($this->ribbonXMLData) && isset($this->ribbonXMLData[$what])) {
+>>>>>>> forked/LAE_400_PACKAGE
                     $returnData = $this->ribbonXMLData[$what];
                 }
 
@@ -611,7 +621,11 @@ class Spreadsheet
     /**
      * Add sheet.
      *
+<<<<<<< HEAD
      * @param Worksheet $worksheet The worksheet to add
+=======
+     * @param Worksheet $worksheet The worskeet to add
+>>>>>>> forked/LAE_400_PACKAGE
      * @param null|int $sheetIndex Index where sheet should go (0,1,..., or null for last)
      *
      * @return Worksheet
@@ -725,6 +739,7 @@ class Spreadsheet
     }
 
     /**
+<<<<<<< HEAD
      * Get sheet by name, throwing exception if not found.
      */
     public function getSheetByNameOrThrow(string $worksheetName): Worksheet
@@ -738,6 +753,8 @@ class Spreadsheet
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Get index for sheet.
      *
      * @return int index
@@ -885,6 +902,7 @@ class Spreadsheet
             $cell->setXfIndex($cell->getXfIndex() + $countCellXfs);
         }
 
+<<<<<<< HEAD
         // update the column dimensions Xfs
         foreach ($worksheet->getColumnDimensions() as $columnDimension) {
             $columnDimension->setXfIndex($columnDimension->getXfIndex() + $countCellXfs);
@@ -898,6 +916,8 @@ class Spreadsheet
             }
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         return $this->addSheet($worksheet, $sheetIndex);
     }
 
@@ -1136,6 +1156,7 @@ class Spreadsheet
      */
     public function copy()
     {
+<<<<<<< HEAD
         $filename = File::temporaryFilename();
         $writer = new XlsxWriter($this);
         $writer->setIncludeCharts(true);
@@ -1154,6 +1175,30 @@ class Spreadsheet
         throw new Exception(
             'Do not use clone on spreadsheet. Use spreadsheet->copy() instead.'
         );
+=======
+        $copied = clone $this;
+
+        $worksheetCount = count($this->workSheetCollection);
+        for ($i = 0; $i < $worksheetCount; ++$i) {
+            $this->workSheetCollection[$i] = $this->workSheetCollection[$i]->copy();
+            $this->workSheetCollection[$i]->rebindParent($this);
+        }
+
+        return $copied;
+    }
+
+    /**
+     * Implement PHP __clone to create a deep clone, not just a shallow copy.
+     */
+    public function __clone()
+    {
+        // @phpstan-ignore-next-line
+        foreach ($this as $key => $val) {
+            if (is_object($val) || (is_array($val))) {
+                $this->{$key} = unserialize(serialize($val));
+            }
+        }
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -1574,7 +1619,11 @@ class Spreadsheet
      *       Workbook window is hidden and cannot be shown in the
      *       user interface.
      *
+<<<<<<< HEAD
      * @param null|string $visibility visibility status of the workbook
+=======
+     * @param string $visibility visibility status of the workbook
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function setVisibility($visibility): void
     {
@@ -1608,7 +1657,11 @@ class Spreadsheet
      */
     public function setTabRatio($tabRatio): void
     {
+<<<<<<< HEAD
         if ($tabRatio >= 0 && $tabRatio <= 1000) {
+=======
+        if ($tabRatio >= 0 || $tabRatio <= 1000) {
+>>>>>>> forked/LAE_400_PACKAGE
             $this->tabRatio = (int) $tabRatio;
         } else {
             throw new Exception('Tab ratio must be between 0 and 1000.');
@@ -1627,6 +1680,7 @@ class Spreadsheet
             }
         }
     }
+<<<<<<< HEAD
 
     /**
      * Silliness to mollify Scrutinizer.
@@ -1637,4 +1691,6 @@ class Spreadsheet
     {
         return new Style();
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

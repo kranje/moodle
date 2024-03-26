@@ -104,7 +104,10 @@ class filter implements Countable, Iterator, JsonSerializable {
     /**
      * Return the current filter value.
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         if ($this->iteratorposition === null) {
             $this->rewind();
@@ -122,7 +125,10 @@ class filter implements Countable, Iterator, JsonSerializable {
      *
      * @return int
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         if ($this->iteratorposition === null) {
             $this->rewind();
@@ -260,7 +266,10 @@ class filter implements Countable, Iterator, JsonSerializable {
      *
      * @return mixed|object
      */
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function jsonSerialize() {
         return (object) [
             'name' => $this->get_name(),

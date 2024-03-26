@@ -2,6 +2,7 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -10,11 +11,19 @@ class Round
 {
     use ArrayEnabled;
 
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+
+class Round
+{
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * ROUND.
      *
      * Returns the result of builtin function round after validating args.
      *
+<<<<<<< HEAD
      * @param mixed $number Should be numeric, or can be an array of numbers
      * @param mixed $precision Should be int, or can be an array of numbers
      *
@@ -28,6 +37,15 @@ class Round
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $precision);
         }
 
+=======
+     * @param mixed $number Should be numeric
+     * @param mixed $precision Should be int
+     *
+     * @return float|string Rounded number
+     */
+    public static function round($number, $precision)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
             $precision = Helpers::validateNumericNullBool($precision);
@@ -43,6 +61,7 @@ class Round
      *
      * Rounds a number up to a specified number of decimal places
      *
+<<<<<<< HEAD
      * @param array|float $number Number to round, or can be an array of numbers
      * @param array|int $digits Number of digits to which you want to round $number, or can be an array of numbers
      *
@@ -56,6 +75,15 @@ class Round
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $digits);
         }
 
+=======
+     * @param float $number Number to round
+     * @param int $digits Number of digits to which you want to round $number
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function up($number, $digits)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
             $digits = (int) Helpers::validateNumericNullSubstitution($digits, null);
@@ -79,6 +107,7 @@ class Round
      *
      * Rounds a number down to a specified number of decimal places
      *
+<<<<<<< HEAD
      * @param array|float $number Number to round, or can be an array of numbers
      * @param array|int $digits Number of digits to which you want to round $number, or can be an array of numbers
      *
@@ -92,6 +121,15 @@ class Round
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $digits);
         }
 
+=======
+     * @param float $number Number to round
+     * @param int $digits Number of digits to which you want to round $number
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function down($number, $digits)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
             $digits = (int) Helpers::validateNumericNullSubstitution($digits, null);
@@ -115,6 +153,7 @@ class Round
      *
      * Rounds a number to the nearest multiple of a specified value
      *
+<<<<<<< HEAD
      * @param mixed $number Expect float. Number to round, or can be an array of numbers
      * @param mixed $multiple Expect int. Multiple to which you want to round, or can be an array of numbers.
      *
@@ -128,6 +167,15 @@ class Round
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $multiple);
         }
 
+=======
+     * @param mixed $number Expect float. Number to round.
+     * @param mixed $multiple Expect int. Multiple to which you want to round.
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function multiple($number, $multiple)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullSubstitution($number, 0);
             $multiple = Helpers::validateNumericNullSubstitution($multiple, null);
@@ -144,7 +192,11 @@ class Round
             return round($number * $multiplier) / $multiplier;
         }
 
+<<<<<<< HEAD
         return ExcelError::NAN();
+=======
+        return Functions::NAN();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -159,6 +211,7 @@ class Round
      * Excel Function:
      *        EVEN(number)
      *
+<<<<<<< HEAD
      * @param array|float $number Number to round, or can be an array of numbers
      *
      * @return array|float|string Rounded Number, or a string containing an error
@@ -171,6 +224,14 @@ class Round
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number to round
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function even($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {
@@ -185,6 +246,7 @@ class Round
      *
      * Returns number rounded up to the nearest odd integer.
      *
+<<<<<<< HEAD
      * @param array|float $number Number to round, or can be an array of numbers
      *
      * @return array|float|string Rounded Number, or a string containing an error
@@ -197,6 +259,14 @@ class Round
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
         }
 
+=======
+     * @param float $number Number to round
+     *
+     * @return float|string Rounded Number, or a string containing an error
+     */
+    public static function odd($number)
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $number = Helpers::validateNumericNullBool($number);
         } catch (Exception $e) {

@@ -76,7 +76,11 @@ class HTML_QuickForm_RuleRegistry
      */
     function registerRule($ruleName, $type, $data1, $data2 = null)
     {
+<<<<<<< HEAD
         $type = strtolower($type ?? '');
+=======
+        $type = strtolower($type);
+>>>>>>> forked/LAE_400_PACKAGE
         if ($type == 'regex') {
             // Regular expression
             $rule =& $this->getRule('regex');

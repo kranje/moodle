@@ -60,11 +60,21 @@ Feature: The my overview block allows users to hide their courses
     And I click on ".coursemenubtn" "css_element" in the "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
     And I click on "Restore to view" "link" in the "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
     And I reload the page
+<<<<<<< HEAD
     And I click on "Removed from view" "button" in the "Course overview" "block"
     When I click on "All" "link" in the "Course overview" "block"
     Then I should see "Course 2" in the "Course overview" "block"
 
   Scenario: Test show toggle functionality w/ favorites
+=======
+    And I should not see "Course 2" in the "Course overview" "block"
+    And I click on "Removed from view" "button" in the "Course overview" "block"
+    When I click on "All" "link" in the "Course overview" "block"
+    And I reload the page
+    Then I should see "Course 2" in the "Course overview" "block"
+
+  Scenario: Test star and unstar functionality
+>>>>>>> forked/LAE_400_PACKAGE
     Given I am on the "My courses" page logged in as "student1"
     And I click on "All" "button" in the "Course overview" "block"
     And I click on "All" "link" in the "Course overview" "block"
@@ -92,6 +102,10 @@ Feature: The my overview block allows users to hide their courses
     When I click on "All" "link" in the "Course overview" "block"
     And I click on ".coursemenubtn" "css_element" in the "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
     And I click on "Remove from view" "link" in the "//div[@class='card dashboard-card' and contains(.,'Course 2')]" "xpath_element"
+<<<<<<< HEAD
+=======
+    And I wait "1" seconds
+>>>>>>> forked/LAE_400_PACKAGE
     Then I should not see "Course 2" in the "Course overview" "block"
 
   Scenario: Test a course is never hidden with "All (including removed from view)" courses

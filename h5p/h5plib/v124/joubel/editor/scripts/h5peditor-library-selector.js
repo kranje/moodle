@@ -29,6 +29,7 @@ ns.LibrarySelector = function (libraries, defaultLibrary, defaultParams) {
   this.defaultLibraryParameterized = defaultLibrary ? defaultLibrary.replace('.', '-').toLowerCase() : undefined;
 
   //Add tutorial and example link:
+<<<<<<< HEAD
   this.$tutorialUrl = ns.$(
     '<a class="h5p-tutorial-url" target="_blank">' +
       '<span class="h5p-tutorial-url-label">' +
@@ -43,6 +44,10 @@ ns.LibrarySelector = function (libraries, defaultLibrary, defaultParams) {
       '</span>' +
     '</a>'
   ).hide();
+=======
+  this.$tutorialUrl = ns.$('<a class="h5p-tutorial-url" target="_blank">' + ns.t('core', 'tutorial') + '</a>').hide();
+  this.$exampleUrl = ns.$('<a class="h5p-example-url" target="_blank">' + ns.t('core', 'example') + '</a>').hide();
+>>>>>>> forked/LAE_400_PACKAGE
 
   // Create confirm dialog
   var changeLibraryDialog = new H5P.ConfirmationDialog({
@@ -144,7 +149,11 @@ ns.LibrarySelector.prototype.appendTo = function ($element) {
   /*
     Start Moodle change
     This line is commented out to prevent display of the hub selector in Moodle.
+<<<<<<< HEAD
     For more information see MDL-67814.
+=======
+    For more information see MDL-67814
+>>>>>>> forked/LAE_400_PACKAGE
   */
   //this.$selector.appendTo($element);
   /* End Moodle change */

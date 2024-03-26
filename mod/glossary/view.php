@@ -23,6 +23,7 @@ $show       = optional_param('show', '', PARAM_ALPHA);           // [ concept | 
 
 if (!empty($id)) {
     if (! $cm = get_coursemodule_from_id('glossary', $id)) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
@@ -30,10 +31,20 @@ if (!empty($id)) {
     }
     if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
         throw new \moodle_exception('invalidid', 'glossary');
+=======
+        print_error('invalidcoursemodule');
+    }
+    if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+        print_error('coursemisconf');
+    }
+    if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
+        print_error('invalidid', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 } else if (!empty($g)) {
     if (! $glossary = $DB->get_record("glossary", array("id"=>$g))) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidid', 'glossary');
     }
     if (! $course = $DB->get_record("course", array("id"=>$glossary->course))) {
@@ -45,6 +56,19 @@ if (!empty($id)) {
     $id = $cm->id;
 } else {
     throw new \moodle_exception('invalidid', 'glossary');
+=======
+        print_error('invalidid', 'glossary');
+    }
+    if (! $course = $DB->get_record("course", array("id"=>$glossary->course))) {
+        print_error('invalidcourseid');
+    }
+    if (!$cm = get_coursemodule_from_instance("glossary", $glossary->id, $course->id)) {
+        print_error('invalidcoursemodule');
+    }
+    $id = $cm->id;
+} else {
+    print_error('invalidid', 'glossary');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 $cm = cm_info::create($cm);
 

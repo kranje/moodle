@@ -64,6 +64,7 @@ class provider implements
         ];
 
         $collection->add_database_table('auth_oauth2_linked_login', $authfields, 'privacy:metadata:auth_oauth2:tableexplanation');
+<<<<<<< HEAD
 
         // Regarding this block, we are unable to export or purge this data, as
         // it would damage the oauth2 data across the whole site.
@@ -78,6 +79,8 @@ class provider implements
             ], 'privacy:metadata:auth_oauth2:tableexplanation');
         }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         $collection->link_subsystem('core_auth', 'privacy:metadata:auth_oauth2:authsubsystem');
 
         return $collection;

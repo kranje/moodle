@@ -263,6 +263,7 @@ $card-gutter : $card-deck-margin * 2;
     #block-region-content & [data-region="more-items-button-container"] {
         display: none;
     }
+<<<<<<< HEAD
 
     a.dashboard-card {
         @include hover-focus {
@@ -275,6 +276,8 @@ $card-gutter : $card-deck-margin * 2;
             color: $body-color;
         }
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .block_myoverview {

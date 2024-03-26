@@ -20,7 +20,11 @@ namespace core_reportbuilder\external;
 
 use renderer_base;
 use core\external\exporter;
+<<<<<<< HEAD
 use core_reportbuilder\datasource;
+=======
+use core_reportbuilder\local\report\base;
+>>>>>>> forked/LAE_400_PACKAGE
 use core_reportbuilder\local\models\filter;
 use core_reportbuilder\output\filter_heading_editable;
 
@@ -40,7 +44,11 @@ class custom_report_filters_exporter extends exporter {
      */
     protected static function define_related(): array {
         return [
+<<<<<<< HEAD
             'report' => datasource::class,
+=======
+            'report' => base::class,
+>>>>>>> forked/LAE_400_PACKAGE
         ];
     }
 
@@ -53,6 +61,10 @@ class custom_report_filters_exporter extends exporter {
         return [
             'hasavailablefilters' => [
                 'type' => PARAM_BOOL,
+<<<<<<< HEAD
+=======
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
             'availablefilters' => [
                 'type' => [
@@ -70,9 +82,17 @@ class custom_report_filters_exporter extends exporter {
                     ],
                 ],
                 'multiple' => true,
+<<<<<<< HEAD
             ],
             'hasactivefilters' => [
                 'type' => PARAM_BOOL,
+=======
+                'optional' => true
+            ],
+            'hasactivefilters' => [
+                'type' => PARAM_BOOL,
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
             'activefilters' => [
                 'type' => [
@@ -84,9 +104,17 @@ class custom_report_filters_exporter extends exporter {
                     'entityname' => ['type' => PARAM_TEXT],
                 ],
                 'multiple' => true,
+<<<<<<< HEAD
             ],
             'helpicon' => [
                 'type' => PARAM_RAW,
+=======
+                'optional' => true
+            ],
+            'helpicon' => [
+                'type' => PARAM_RAW,
+                'optional' => true,
+>>>>>>> forked/LAE_400_PACKAGE
             ],
         ];
     }
@@ -98,7 +126,11 @@ class custom_report_filters_exporter extends exporter {
      * @return array
      */
     protected function get_other_values(renderer_base $output): array {
+<<<<<<< HEAD
         /** @var datasource $report */
+=======
+        /** @var base $report */
+>>>>>>> forked/LAE_400_PACKAGE
         $report = $this->related['report'];
 
         // Current filters added to the report.
@@ -141,7 +173,11 @@ class custom_report_filters_exporter extends exporter {
 
             $entityname = $filterinstance->get_entity_name();
             $displayvalue = $filterinstance->get_header();
+<<<<<<< HEAD
             $editable = new filter_heading_editable(0, $filter);
+=======
+            $editable = new filter_heading_editable($filter->get('id'));
+>>>>>>> forked/LAE_400_PACKAGE
 
             $activefilters[] = [
                 'id' => $filter->get('id'),

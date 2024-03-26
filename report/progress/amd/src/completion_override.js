@@ -22,8 +22,13 @@
  * @since      3.1
  */
 define(['jquery', 'core/ajax', 'core/str', 'core/modal_factory', 'core/modal_events', 'core/notification',
+<<<<<<< HEAD
         'core/custom_interaction_events', 'core/templates'],
     function($, Ajax, Str, ModalFactory, ModalEvents, Notification, CustomEvents, Templates) {
+=======
+        'core/custom_interaction_events', 'core/templates', 'core/pending'],
+    function($, Ajax, Str, ModalFactory, ModalEvents, Notification, CustomEvents, Templates, Pending) {
+>>>>>>> forked/LAE_400_PACKAGE
 
         /**
          * @var {String} the full name of the current user.
@@ -56,6 +61,10 @@ define(['jquery', 'core/ajax', 'core/str', 'core/modal_factory', 'core/modal_eve
          * @private
          */
         var setOverride = function(override) {
+<<<<<<< HEAD
+=======
+            const pendingPromise = new Pending('report_progress/compeletion_override/setOverride');
+>>>>>>> forked/LAE_400_PACKAGE
             // Generate a loading spinner while we're working.
             Templates.render('core/loading', {}).then(function(html) {
                 // Append the loading spinner to the trigger element.
@@ -92,6 +101,13 @@ define(['jquery', 'core/ajax', 'core/str', 'core/modal_factory', 'core/modal_eve
                 }).catch(Notification.exception);
 
                 return;
+<<<<<<< HEAD
+=======
+            })
+            .then(() => {
+                pendingPromise.resolve();
+                return;
+>>>>>>> forked/LAE_400_PACKAGE
             }).catch(Notification.exception);
         };
 

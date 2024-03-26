@@ -151,13 +151,18 @@ abstract class Horde_Imap_Client_Cache_Backend implements Serializable
      */
     public function serialize()
     {
+<<<<<<< HEAD
         return serialize($this->__serialize());
+=======
+        return serialize($this->_params);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
      */
     public function unserialize($data)
     {
+<<<<<<< HEAD
         $this->__unserialize(unserialize($data));
     }
 
@@ -172,6 +177,10 @@ abstract class Horde_Imap_Client_Cache_Backend implements Serializable
     public function __unserialize(array $data)
     {
         $this->_params = $data;
+=======
+        $this->_params = unserialize($data);
+        $this->_initOb();
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
 }

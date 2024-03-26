@@ -40,5 +40,9 @@ interface filterable_items {
      * @param mixed $item (user or grade_item)
      * @return bool
      */
+<<<<<<< HEAD
     public static function filter($item): bool;
+=======
+    public static function filter($item);
+>>>>>>> forked/LAE_400_PACKAGE
 }

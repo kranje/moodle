@@ -55,7 +55,11 @@ if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
     if (!empty($userstoadd)) {
         foreach ($userstoadd as $user) {
             if (!groups_add_member($groupid, $user->id)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('erroraddremoveuser', 'group', $returnurl);
+=======
+                print_error('erroraddremoveuser', 'group', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $groupmembersselector->invalidate_selected_users();
             $potentialmembersselector->invalidate_selected_users();
@@ -68,11 +72,19 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
     if (!empty($userstoremove)) {
         foreach ($userstoremove as $user) {
             if (!groups_remove_member_allowed($groupid, $user->id)) {
+<<<<<<< HEAD
                 throw new \moodle_exception('errorremovenotpermitted', 'group', $returnurl,
                         $user->fullname);
             }
             if (!groups_remove_member($groupid, $user->id)) {
                 throw new \moodle_exception('erroraddremoveuser', 'group', $returnurl);
+=======
+                print_error('errorremovenotpermitted', 'group', $returnurl,
+                        $user->fullname);
+            }
+            if (!groups_remove_member($groupid, $user->id)) {
+                print_error('erroraddremoveuser', 'group', $returnurl);
+>>>>>>> forked/LAE_400_PACKAGE
             }
             $groupmembersselector->invalidate_selected_users();
             $potentialmembersselector->invalidate_selected_users();

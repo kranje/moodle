@@ -36,7 +36,11 @@ if ($eid) {
     $entries = glossary_get_entries_search($concept, $courseid);
 
 } else {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidelementid');
+=======
+    print_error('invalidelementid');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $PAGE->set_pagelayout('incourse');

@@ -34,7 +34,11 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 	var $_genSeq2SQL     = 'INSERT INTO %s VALUES(%s)';
 	var $_dropSeqSQL     = 'DROP TABLE %s';
 	var $concat_operator = '||';
+<<<<<<< HEAD
 	var $pdoDriver       = false;
+=======
+    var $pdoDriver       = false;
+>>>>>>> forked/LAE_400_PACKAGE
 	var $random='abs(random())';
 
 	function _init($parentDriver)
@@ -156,6 +160,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
     // mark newnham
 	function MetaColumns($tab,$normalize=true)
 	{
+<<<<<<< HEAD
 		global $ADODB_FETCH_MODE;
 
 		$parent = $this->pdoDriver;
@@ -198,6 +203,42 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 		$rs->Close();
 		$ADODB_FETCH_MODE = $save;
 		return $arr;
+=======
+	  global $ADODB_FETCH_MODE;
+
+	  $parent = $this->pdoDriver;
+	  $false = false;
+	  $save = $ADODB_FETCH_MODE;
+	  $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+	  if ($parent->fetchMode !== false) $savem = $parent->SetFetchMode(false);
+	  $rs = $parent->Execute("PRAGMA table_info('$tab')");
+	  if (isset($savem)) $parent->SetFetchMode($savem);
+	  if (!$rs) {
+	    $ADODB_FETCH_MODE = $save;
+	    return $false;
+	  }
+	  $arr = array();
+	  while ($r = $rs->FetchRow()) {
+	    $type = explode('(',$r['type']);
+	    $size = '';
+	    if (sizeof($type)==2)
+	    $size = trim($type[1],')');
+	    $fn = strtoupper($r['name']);
+	    $fld = new ADOFieldObject;
+	    $fld->name = $r['name'];
+	    $fld->type = $type[0];
+	    $fld->max_length = $size;
+	    $fld->not_null = $r['notnull'];
+	    $fld->primary_key = $r['pk'];
+	    $fld->default_value = $r['dflt_value'];
+	    $fld->scale = 0;
+	    if ($save == ADODB_FETCH_NUM) $arr[] = $fld;
+	    else $arr[strtoupper($fld->name)] = $fld;
+	  }
+	  $rs->Close();
+	  $ADODB_FETCH_MODE = $save;
+	  return $arr;
+>>>>>>> forked/LAE_400_PACKAGE
 	}
 
 	function MetaTables($ttype=false,$showSchema=false,$mask=false)
@@ -216,6 +257,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 			$this->metaTablesSQL = $save;
 		}
 		return $ret;
+<<<<<<< HEAD
 	}
 
 	/**
@@ -230,4 +272,7 @@ class ADODB_pdo_sqlite extends ADODB_pdo {
 	{
 		return sprintf(':%s', $name);
 	}
+=======
+   }
+>>>>>>> forked/LAE_400_PACKAGE
 }

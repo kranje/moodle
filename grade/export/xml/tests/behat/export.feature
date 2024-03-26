@@ -19,6 +19,7 @@ Feature: I need to export grades as xml
       | student1 | C1 | student |
       | student2 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity | course | idnumber | name | intro |
       | assign | C1 | a1 | Test assignment name | Submit something! |
     And I log in as "teacher1"
@@ -28,6 +29,15 @@ Feature: I need to export grades as xml
     And I give the grade "80.00" to the user "Student 1" for the grade item "Test assignment name"
     And I give the grade "42.00" to the user "Student 2" for the grade item "Test assignment name"
     And I press "Save changes"
+=======
+      | activity | course | idnumber | name                 |
+      | assign   | C1     | a1       | Test assignment name |
+    And the following "grade grades" exist:
+      | gradeitem            | user     | grade |
+      | Test assignment name | student1 | 80.00 |
+      | Test assignment name | student2 | 42.00 |
+    And I am on the "Course 1" course page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
 
   @javascript
   Scenario: Export grades as XML

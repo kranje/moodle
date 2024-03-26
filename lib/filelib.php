@@ -368,7 +368,11 @@ function file_get_unused_draft_itemid() {
 
     if (isguestuser() or !isloggedin()) {
         // guests and not-logged-in users can not be allowed to upload anything!!!!!!
+<<<<<<< HEAD
         throw new \moodle_exception('noguest');
+=======
+        print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $contextid = context_user::instance($USER->id)->id;
@@ -518,9 +522,15 @@ function file_rewrite_pluginfile_urls($text, $file, $contextid, $component, $fil
     }
 
     if (!empty($options['reverse'])) {
+<<<<<<< HEAD
         return str_replace($baseurl, '@@PLUGINFILE@@/', $text ?? '');
     } else {
         return str_replace('@@PLUGINFILE@@/', $baseurl, $text ?? '');
+=======
+        return str_replace($baseurl, '@@PLUGINFILE@@/', $text);
+    } else {
+        return str_replace('@@PLUGINFILE@@/', $baseurl, $text);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 }
 
@@ -785,7 +795,11 @@ function file_get_drafarea_files($draftitemid, $filepath = '/') {
             }
             // find the file this draft file was created from and count all references in local
             // system pointing to that file
+<<<<<<< HEAD
             $source = @unserialize($file->get_source() ?? '');
+=======
+            $source = @unserialize($file->get_source());
+>>>>>>> forked/LAE_400_PACKAGE
             if (isset($source->original)) {
                 $item->refcount = $fs->search_references_count($source->original);
             }
@@ -905,7 +919,11 @@ function file_get_submitted_draft_itemid($elname) {
  * @return stored_file
  */
 function file_restore_source_field_from_draft_file($storedfile) {
+<<<<<<< HEAD
     $source = @unserialize($storedfile->get_source() ?? '');
+=======
+    $source = @unserialize($storedfile->get_source());
+>>>>>>> forked/LAE_400_PACKAGE
     if (!empty($source)) {
         if (is_object($source)) {
             $restoredsource = $source->source;
@@ -928,7 +946,11 @@ function file_remove_editor_orphaned_files($editor) {
     // Find those draft files included in the text, and generate their hashes.
     $context = context_user::instance($USER->id);
     $baseurl = $CFG->wwwroot . '/draftfile.php/' . $context->id . '/user/draft/' . $editor['itemid'] . '/';
+<<<<<<< HEAD
     $pattern = "/" . preg_quote($baseurl, '/') . "(.+?)[\?\"']/";
+=======
+    $pattern = "/" . preg_quote($baseurl, '/') . "(.+?)[\?\"'<>\s:\\\\]/";
+>>>>>>> forked/LAE_400_PACKAGE
     preg_match_all($pattern, $editor['text'], $matches);
     $usedfilehashes = [];
     foreach ($matches[1] as $matchedfilename) {
@@ -1199,7 +1221,11 @@ function file_save_draft_area_files($draftitemid, $contextid, $component, $filea
             // Let's check if we can update this file or we need to delete and create.
             if ($newfile->is_directory()) {
                 // Directories are always ok to just update.
+<<<<<<< HEAD
             } else if (($source = @unserialize($newfile->get_source() ?? '')) && isset($source->original)) {
+=======
+            } else if (($source = @unserialize($newfile->get_source())) && isset($source->original)) {
+>>>>>>> forked/LAE_400_PACKAGE
                 // File has the 'original' - we need to update the file (it may even have not been changed at all).
                 $original = file_storage::unpack_reference($source->original);
                 if ($original['filename'] !== $oldfile->get_filename() || $original['filepath'] !== $oldfile->get_filepath()) {
@@ -1235,7 +1261,11 @@ function file_save_draft_area_files($draftitemid, $contextid, $component, $filea
             // Field files.source for draftarea files contains serialised object with source and original information.
             // We only store the source part of it for non-draft file area.
             $newsource = $newfile->get_source();
+<<<<<<< HEAD
             if ($source = @unserialize($newfile->get_source() ?? '')) {
+=======
+            if ($source = @unserialize($newfile->get_source())) {
+>>>>>>> forked/LAE_400_PACKAGE
                 $newsource = $source->source;
             }
             if ($oldfile->get_source() !== $newsource) {
@@ -1269,7 +1299,11 @@ function file_save_draft_area_files($draftitemid, $contextid, $component, $filea
         // the size and subdirectory tests are extra safety only, the UI should prevent it
         foreach ($newhashes as $file) {
             $file_record = array('contextid'=>$contextid, 'component'=>$component, 'filearea'=>$filearea, 'itemid'=>$itemid, 'timemodified'=>time());
+<<<<<<< HEAD
             if ($source = @unserialize($file->get_source() ?? '')) {
+=======
+            if ($source = @unserialize($file->get_source())) {
+>>>>>>> forked/LAE_400_PACKAGE
                 // Field files.source for draftarea files contains serialised object with source and original information.
                 // We only store the source part of it for non-draft file area.
                 $file_record['source'] = $source->source;
@@ -1478,7 +1512,11 @@ function format_postdata_for_curlcall($postdata) {
                 $currentdata = urlencode($k);
                 format_array_postdata_for_curlcall($v, $currentdata, $data);
             }  else {
+<<<<<<< HEAD
                 $data[] = urlencode($k).'='.urlencode($v ?? '');
+=======
+                $data[] = urlencode($k).'='.urlencode($v);
+>>>>>>> forked/LAE_400_PACKAGE
             }
         }
         $convertedpostdata = implode('&', $data);
@@ -1771,7 +1809,11 @@ function mimeinfo($element, $filename) {
     $mimeinfo = & get_mimetypes_array();
     static $iconpostfixes = array(256=>'-256', 128=>'-128', 96=>'-96', 80=>'-80', 72=>'-72', 64=>'-64', 48=>'-48', 32=>'-32', 24=>'-24', 16=>'');
 
+<<<<<<< HEAD
     $filetype = strtolower(pathinfo($filename ?? '', PATHINFO_EXTENSION));
+=======
+    $filetype = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+>>>>>>> forked/LAE_400_PACKAGE
     if (empty($filetype)) {
         $filetype = 'xxx'; // file without extension
     }
@@ -2028,8 +2070,13 @@ function get_mimetype_description($obj, $capitalise=false) {
     }
 
     // MIME types may include + symbol but this is not permitted in string ids.
+<<<<<<< HEAD
     $safemimetype = str_replace('+', '_', $mimetype ?? '');
     $safemimetypestr = str_replace('+', '_', $mimetypestr ?? '');
+=======
+    $safemimetype = str_replace('+', '_', $mimetype);
+    $safemimetypestr = str_replace('+', '_', $mimetypestr);
+>>>>>>> forked/LAE_400_PACKAGE
     $customdescription = mimeinfo('customdescription', $filename);
     if ($customdescription) {
         // Call format_string on the custom description so that multilang
@@ -2137,8 +2184,12 @@ function send_file_not_found() {
     }
 
     send_header_404();
+<<<<<<< HEAD
     throw new \moodle_exception('filenotfound', 'error',
         $CFG->wwwroot.'/course/view.php?id='.$COURSE->id); // This is not displayed on IIS?
+=======
+    print_error('filenotfound', 'error', $CFG->wwwroot.'/course/view.php?id='.$COURSE->id); //this is not displayed on IIS??
+>>>>>>> forked/LAE_400_PACKAGE
 }
 /**
  * Helper function to send correct 404 for server.
@@ -2373,7 +2424,11 @@ function send_temp_file($path, $filename, $pathisstring=false) {
     if (!$pathisstring) {
         if (!file_exists($path)) {
             send_header_404();
+<<<<<<< HEAD
             throw new \moodle_exception('filenotfound', 'error', $CFG->wwwroot.'/');
+=======
+            print_error('filenotfound', 'error', $CFG->wwwroot.'/');
+>>>>>>> forked/LAE_400_PACKAGE
         }
         // executed after normal finish or abort
         core_shutdown_manager::register_function('send_temp_file_finished', array($path));
@@ -2919,7 +2974,11 @@ function file_overwrite_existing_draftfile(stored_file $newfile, stored_file $ex
 
     $fs = get_file_storage();
     // Remember original file source field.
+<<<<<<< HEAD
     $source = @unserialize($existingfile->get_source() ?? '');
+=======
+    $source = @unserialize($existingfile->get_source());
+>>>>>>> forked/LAE_400_PACKAGE
     // Remember the original sortorder.
     $sortorder = $existingfile->get_sortorder();
     if ($newfile->is_external_file()) {
@@ -2943,7 +3002,11 @@ function file_overwrite_existing_draftfile(stored_file $newfile, stored_file $ex
     $newfile = $fs->create_file_from_storedfile($newfilerecord, $newfile);
     // Preserve original file location (stored in source field) for handling references.
     if (isset($source->original)) {
+<<<<<<< HEAD
         if (!($newfilesource = @unserialize($newfile->get_source() ?? ''))) {
+=======
+        if (!($newfilesource = @unserialize($newfile->get_source()))) {
+>>>>>>> forked/LAE_400_PACKAGE
             $newfilesource = new stdClass();
         }
         $newfilesource->original = $source->original;
@@ -3054,6 +3117,7 @@ function file_is_svg_image_from_mimetype(string $mimetype): bool {
 }
 
 /**
+<<<<<<< HEAD
  * Returns the moodle proxy configuration as a formatted url
  *
  * @return string the string to use for proxy settings.
@@ -3086,6 +3150,8 @@ function get_moodle_proxy_url() {
 
 
 /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
  * RESTful cURL class
  *
  * This is a wrapper class for curl, it is quite easy to use:
@@ -4367,16 +4433,26 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
     global $DB, $CFG, $USER;
     // relative path must start with '/'
     if (!$relativepath) {
+<<<<<<< HEAD
         throw new \moodle_exception('invalidargorconf');
     } else if ($relativepath[0] != '/') {
         throw new \moodle_exception('pathdoesnotstartslash');
+=======
+        print_error('invalidargorconf');
+    } else if ($relativepath[0] != '/') {
+        print_error('pathdoesnotstartslash');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     // extract relative path components
     $args = explode('/', ltrim($relativepath, '/'));
 
     if (count($args) < 3) { // always at least context, component and filearea
+<<<<<<< HEAD
         throw new \moodle_exception('invalidarguments');
+=======
+        print_error('invalidarguments');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     $contextid = (int)array_shift($args);
@@ -4400,7 +4476,11 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
         }
 
         if (empty($CFG->enableblogs)) {
+<<<<<<< HEAD
             throw new \moodle_exception('siteblogdisable', 'blog');
+=======
+            print_error('siteblogdisable', 'blog');
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         $entryid = (int)array_shift($args);
@@ -4410,7 +4490,11 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
         if ($CFG->bloglevel < BLOG_GLOBAL_LEVEL) {
             require_login();
             if (isguestuser()) {
+<<<<<<< HEAD
                 throw new \moodle_exception('noguest');
+=======
+                print_error('noguest');
+>>>>>>> forked/LAE_400_PACKAGE
             }
             if ($CFG->bloglevel == BLOG_USER_LEVEL) {
                 if ($USER->id != $entry->userid) {
@@ -5140,6 +5224,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
             send_file_not_found();
         }
 
+<<<<<<< HEAD
         $componentargs = fullclone($args);
         $itemid = (int)array_shift($args);
         $filename = array_pop($args);
@@ -5160,6 +5245,18 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null, $offlin
                 send_stored_file($file, 0, 0, true, $sendfileoptions); // Must force download - security!
             }
         }
+=======
+        $itemid = (int)array_shift($args);
+        $filename = array_pop($args);
+        $filepath = $args ? '/'.implode('/', $args).'/' : '/';
+        if (!$file = $fs->get_file($context->id, $component, $filearea, $itemid, $filepath, $filename) or
+            $file->is_directory()) {
+            send_file_not_found();
+        }
+
+        \core\session\manager::write_close(); // Unlock session during file serving.
+        send_stored_file($file, 0, 0, true, $sendfileoptions); // must force download - security!
+>>>>>>> forked/LAE_400_PACKAGE
     } else if (strpos($component, 'mod_') === 0) {
         $modname = substr($component, 4);
         if (!file_exists("$CFG->dirroot/mod/$modname/lib.php")) {

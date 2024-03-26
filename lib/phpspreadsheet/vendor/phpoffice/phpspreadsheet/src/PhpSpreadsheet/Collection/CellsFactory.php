@@ -12,8 +12,14 @@ abstract class CellsFactory
      *
      * @param Worksheet $worksheet Enable cell caching for this worksheet
      *
+<<<<<<< HEAD
      * */
     public static function getInstance(Worksheet $worksheet): Cells
+=======
+     * @return Cells
+     * */
+    public static function getInstance(Worksheet $worksheet)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         return new Cells($worksheet, Settings::getCache());
     }

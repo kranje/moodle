@@ -63,6 +63,7 @@ extends Horde_Imap_Client_Data_SearchCharset
     {
     }
 
+<<<<<<< HEAD
     /**
      * @return array
      */
@@ -75,4 +76,6 @@ extends Horde_Imap_Client_Data_SearchCharset
     {
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

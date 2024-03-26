@@ -17,6 +17,7 @@ Feature: Teachers can edit or delete any forum post
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name              | intro                    | course | section | idnumber |
       | forum      | Test forum name   | Test forum description   | C1     | 1       | forum1   |
     And I log in as "teacher1"
@@ -36,6 +37,19 @@ Feature: Teachers can edit or delete any forum post
     And I log in as "teacher1"
     When I am on "Course 1" course homepage
     And I follow "Test forum name"
+=======
+      | activity   | name              | course | idnumber |
+      | forum      | Test forum name   | C1     | forum1   |
+    And the following "mod_forum > discussions" exist:
+      | forum  | course | user     | name                 | message              |
+      | forum1 | C1     | teacher1 | Teacher post subject | Teacher post message |
+    And the following "mod_forum > posts" exist:
+      | user     | parentsubject        | subject              | message              |
+      | student1 | Teacher post subject | Student post subject | Student post message |
+
+  Scenario: A teacher can delete another user's posts
+    When I am on the "Test forum name" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Teacher post subject"
     And I click on "Delete" "link" in the "//div[contains(concat(' ', normalize-space(@class), ' '), ' forumpost ')][contains(., 'Student post subject')]" "xpath_element"
     And I press "Continue"
@@ -43,10 +57,14 @@ Feature: Teachers can edit or delete any forum post
     And I should not see "Student post message"
 
   Scenario: A teacher can edit another user's posts
+<<<<<<< HEAD
     Given I log out
     And I log in as "teacher1"
     When I am on "Course 1" course homepage
     And I follow "Test forum name"
+=======
+    When I am on the "Test forum name" "forum activity" page logged in as teacher1
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Teacher post subject"
     And I click on "Edit" "link" in the "//div[contains(concat(' ', normalize-space(@class), ' '), ' forumpost ')][contains(., 'Student post subject')]" "xpath_element"
     And I set the following fields to these values:
@@ -57,7 +75,11 @@ Feature: Teachers can edit or delete any forum post
     And I should see "Edited by Teacher 1 - original submission"
 
   Scenario: A student can't edit or delete another user's posts
+<<<<<<< HEAD
     When I follow "Test forum name"
+=======
+    When I am on the "Test forum name" "forum activity" page logged in as student1
+>>>>>>> forked/LAE_400_PACKAGE
     And I follow "Teacher post subject"
     Then I should not see "Edit" in the "//div[contains(concat(' ', normalize-space(@class), ' '), ' forumpost ')][contains(., 'Teacher post subject')]" "xpath_element"
     And I should not see "Delete" in the "//div[contains(concat(' ', normalize-space(@class), ' '), ' forumpost ')][contains(., 'Teacher post subject')]" "xpath_element"

@@ -79,6 +79,7 @@ class user_test extends advanced_testcase {
         $usernames = $DB->get_fieldset_select('user', 'username', $select, $params);
         $this->assertEqualsCanonicalizing($expectedusernames, $usernames);
     }
+<<<<<<< HEAD
 
     /**
      * Test getting filter SQL using specific user selection operator/value
@@ -108,4 +109,6 @@ class user_test extends advanced_testcase {
         $usernames = $DB->get_fieldset_select('user', 'username', $select, $params);
         $this->assertEquals([$user02->username], $usernames);
     }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 }

@@ -173,6 +173,7 @@ class column_test extends advanced_testcase {
      * Test adding params to field, and retrieving them
      */
     public function test_add_field_with_params(): void {
+<<<<<<< HEAD
         $param = database::generate_param_name();
 
         $column = $this->create_column('test')
@@ -186,6 +187,34 @@ class column_test extends advanced_testcase {
 
         $this->assertArrayHasKey('paramname', $matches);
         $this->assertEquals([$matches['paramname'] => 'bar'], $column->get_params());
+=======
+        $param0 = database::generate_param_name();
+        $param1 = database::generate_param_name();
+
+        $column = $this->create_column('test')
+            ->set_index(1)
+            ->add_field(":{$param0}", 'foo', [$param0 => 'foo'])
+            ->add_field(":{$param1}", 'bar', [$param1 => 'bar']);
+
+        // Select will look like the following: "p<index>_rbparam<counter>", where index is the column index and counter is
+        // a static value of the report helper class.
+        $fields = $column->get_fields();
+        $this->assertCount(2, $fields);
+
+        preg_match('/:(?<paramname>p1_rbparam[\d]+) AS c1_foo/', $fields[0], $matches);
+        $this->assertArrayHasKey('paramname', $matches);
+        $fieldparam0 = $matches['paramname'];
+
+        preg_match('/:(?<paramname>p1_rbparam[\d]+) AS c1_bar/', $fields[1], $matches);
+        $this->assertArrayHasKey('paramname', $matches);
+        $fieldparam1 = $matches['paramname'];
+
+        // Ensure column parameters have been renamed appropriately.
+        $this->assertEquals([
+            $fieldparam0 => 'foo',
+            $fieldparam1 => 'bar',
+        ], $column->get_params());
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -311,11 +340,19 @@ class column_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Data provider for {@see test_get_default_value} and {@see test_format_value}
      *
      * @return array[]
      */
     public function column_type_provider(): array {
+=======
+     * Data provider for {@see test_format_value}
+     *
+     * @return array[]
+     */
+    public function format_value_provider(): array {
+>>>>>>> forked/LAE_400_PACKAGE
         return [
             [column::TYPE_INTEGER, 42],
             [column::TYPE_TEXT, 'Hello'],
@@ -327,12 +364,17 @@ class column_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
      * Test default value is returned from selected values, with correct type
+=======
+     * Test that column value is returned as correctly (value plus type)
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @param int $columntype
      * @param mixed $value
      * @param mixed|null $expected Expected value, or null to indicate it should be identical to value
      *
+<<<<<<< HEAD
      * @dataProvider column_type_provider
      */
     public function test_get_default_value(int $columntype, $value, $expected = null): void {
@@ -352,6 +394,9 @@ class column_test extends advanced_testcase {
      * @param mixed|null $expected Expected value, or null to indicate it should be identical to value
      *
      * @dataProvider column_type_provider
+=======
+     * @dataProvider format_value_provider
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public function test_format_value(int $columntype, $value, $expected = null): void {
         $column = $this->create_column('test')

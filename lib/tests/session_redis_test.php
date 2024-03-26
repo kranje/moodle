@@ -40,11 +40,14 @@ class session_redis_test extends \advanced_testcase {
     protected $keyprefix = null;
     /** @var $redis The current testing redis connection */
     protected $redis = null;
+<<<<<<< HEAD
     /** @var int $acquiretimeout how long we wait for session lock in seconds when testing Redis */
     protected $acquiretimeout = 1;
     /** @var int $lockexpire how long to wait in seconds before expiring the lock when testing Redis */
     protected $lockexpire = 70;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     public function setUp(): void {
         global $CFG;
@@ -71,8 +74,13 @@ class session_redis_test extends \advanced_testcase {
 
         // Set a very short lock timeout to ensure tests run quickly.  We are running single threaded,
         // so unless we lock and expect it to be there, we will always see a lock.
+<<<<<<< HEAD
         $CFG->session_redis_acquire_lock_timeout = $this->acquiretimeout;
         $CFG->session_redis_lock_expire = $this->lockexpire;
+=======
+        $CFG->session_redis_acquire_lock_timeout = 1;
+        $CFG->session_redis_lock_expire = 70;
+>>>>>>> forked/LAE_400_PACKAGE
 
         $this->redis = new Redis();
         $this->redis->connect(TEST_SESSION_REDIS_HOST);
@@ -164,9 +172,13 @@ class session_redis_test extends \advanced_testcase {
             $sessblocked->handler_read('sess1');
             $this->fail('Session lock must fail to be obtained.');
         } catch (\core\session\exception $e) {
+<<<<<<< HEAD
             $this->assertStringContainsString("Unable to obtain lock for session id sess1", $e->getMessage());
             $this->assertStringContainsString('within 1 sec.', $e->getMessage());
             $this->assertStringContainsString('session lock timeout (1 min 10 secs) ', $e->getMessage());
+=======
+            $this->assertStringContainsString("Unable to obtain session lock", $e->getMessage());
+>>>>>>> forked/LAE_400_PACKAGE
             $this->assertStringContainsString('Cannot obtain session lock for sid: sess1', file_get_contents($errorlog));
         }
 

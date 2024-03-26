@@ -44,8 +44,12 @@ Feature: link to gradebook on the end of lesson page
     Then I should see "Congratulations - end of lesson reached"
     And I should see "View grades"
     And I follow "View grades"
+<<<<<<< HEAD
     And I should see "User report" in the "page-header" "region"
     And I should see "Student 1" in the "region-main" "region"
+=======
+    And I should see "User report - Student 1"
+>>>>>>> forked/LAE_400_PACKAGE
     And I should see "Test lesson"
 
   Scenario: No link to gradebook for non graded lesson
@@ -83,10 +87,16 @@ Feature: link to gradebook on the end of lesson page
     And I should not see "View grades"
 
   Scenario: No link to gradebook if no gradereport/user:view capability
+<<<<<<< HEAD
     Given I log in as "admin"
     And I set the following system permissions of "Student" role:
       | capability | permission |
       | gradereport/user:view | Prevent |
+=======
+    Given the following "role capability" exists:
+      | role                  | student |
+      | gradereport/user:view | prevent |
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Test lesson" "lesson activity" page logged in as student1
     And I press "Next page"
     And I press "Next page"

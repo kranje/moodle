@@ -85,7 +85,10 @@ $string['eventgroupinggroupassigned'] = 'Group assigned to grouping';
 $string['eventgroupinggroupunassigned'] = 'Group unassigned from grouping';
 $string['eventgroupingupdated'] = 'Grouping updated';
 $string['existingmembers'] = 'Existing members: {$a}';
+<<<<<<< HEAD
 $string['exportgroupsgroupings'] = 'Download groups and groupings as';
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 $string['filtergroups'] = 'Filter groups by:';
 $string['group'] = 'Group';
 $string['groupaddedsuccesfully'] = 'Group {$a} added successfully';

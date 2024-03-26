@@ -6,7 +6,11 @@
     require_once("../../config.php");
 
     if (!filter_is_enabled('algebra')) {
+<<<<<<< HEAD
         throw new \moodle_exception('filternotenabled');
+=======
+        print_error('filternotenabled');
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     require_once($CFG->libdir.'/filelib.php');

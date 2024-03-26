@@ -48,4 +48,8 @@ if ($action === 'filtertext') {
     die();
 }
 
+<<<<<<< HEAD
 throw new \moodle_exception('invalidarguments');
+=======
+print_error('invalidarguments');
+>>>>>>> forked/LAE_400_PACKAGE

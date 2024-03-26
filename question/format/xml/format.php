@@ -1125,7 +1125,11 @@ class qformat_xml extends qformat_default {
      * @return string the string, wrapped in CDATA if necessary.
      */
     public function xml_escape($string) {
+<<<<<<< HEAD
         if (!empty($string) && htmlspecialchars($string, ENT_COMPAT) != $string) {
+=======
+        if (!empty($string) && htmlspecialchars($string) != $string) {
+>>>>>>> forked/LAE_400_PACKAGE
             // If the string contains something that looks like the end
             // of a CDATA section, then we need to avoid errors by splitting
             // the string between two CDATA sections.
@@ -1220,7 +1224,11 @@ class qformat_xml extends qformat_default {
 
         $idnumber = '';
         if (isset($question->idnumber)) {
+<<<<<<< HEAD
             $idnumber = htmlspecialchars($question->idnumber, ENT_COMPAT);
+=======
+            $idnumber = htmlspecialchars($question->idnumber);
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         // Categories are a special case.

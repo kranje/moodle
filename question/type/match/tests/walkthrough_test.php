@@ -396,7 +396,11 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         $this->displayoptions->history = 1;
         $this->check_current_output(
                 new \question_pattern_expectation('/' .
+<<<<<<< HEAD
                         preg_quote(htmlspecialchars($rightresponsesummary, ENT_COMPAT), '/') . '/'));
+=======
+                        preg_quote(htmlspecialchars($rightresponsesummary), '/') . '/'));
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     public function test_match_clear_wrong() {

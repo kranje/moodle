@@ -228,6 +228,7 @@ class Number extends Node implements \ArrayAccess
     }
 
     /**
+<<<<<<< HEAD
      * Returns true if the number has any units
      *
      * @return bool
@@ -238,6 +239,8 @@ class Number extends Node implements \ArrayAccess
     }
 
     /**
+=======
+>>>>>>> forked/LAE_400_PACKAGE
      * Checks whether the number has exactly this unit
      *
      * @param string $unit
@@ -276,6 +279,7 @@ class Number extends Node implements \ArrayAccess
         try {
             return Util::checkRange('', new Range($min, $max), $this);
         } catch (RangeException $e) {
+<<<<<<< HEAD
             throw SassScriptException::forArgument(sprintf('Expected %s to be within %s%s and %s%3$s.', $this, $min, $this->unitStr(), $max), $name);
         }
     }
@@ -297,6 +301,9 @@ class Number extends Node implements \ArrayAccess
             return Util::checkRange('', new Range($min, $max), $this);
         } catch (RangeException $e) {
             throw SassScriptException::forArgument(sprintf('Expected %s to be within %s%s and %s%3$s.', $this, $min, $unit, $max), $name);
+=======
+            throw SassScriptException::forArgument(sprintf('Expected %s to be within %s%s and %s%3$s', $this, $min, $this->unitStr(), $max), $name);
+>>>>>>> forked/LAE_400_PACKAGE
         }
     }
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_blog
+=======
+@core @core_blog @javascript
+>>>>>>> forked/LAE_400_PACKAGE
 Feature: Comment on a blog entry
   In order to respond to a blog post
   As a user
@@ -25,10 +29,15 @@ Feature: Comment on a blog entry
     And I press "Save changes"
     And I log out
 
+<<<<<<< HEAD
   @javascript
   Scenario: Commenting on my own blog entry
     Given I am on site homepage
     And I log in as "testuser"
+=======
+  Scenario: Commenting on my own blog entry
+    Given I log in as "testuser"
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Site pages" "list_item" in the "Navigation" "block"
     And I click on "Site blogs" "link" in the "Navigation" "block"
     And I follow "Blog post from user 1"
@@ -41,10 +50,15 @@ Feature: Comment on a blog entry
     And I follow "Save comment"
     And I should see "Comments (2)" in the ".comment-link" "css_element"
 
+<<<<<<< HEAD
   @javascript
   Scenario: Deleting my own comment
     Given I am on site homepage
     And I log in as "testuser"
+=======
+  Scenario: Deleting my own comment
+    Given I log in as "testuser"
+>>>>>>> forked/LAE_400_PACKAGE
     And I click on "Site pages" "list_item" in the "Navigation" "block"
     And I click on "Site blogs" "link" in the "Navigation" "block"
     And I follow "Blog post from user 1"
@@ -61,7 +75,10 @@ Feature: Comment on a blog entry
     And I should not see "$My own >nasty< \"string\"!"
     And I should see "Comments (0)" in the ".comment-link" "css_element"
 
+<<<<<<< HEAD
   @javascript
+=======
+>>>>>>> forked/LAE_400_PACKAGE
   Scenario: Commenting on someone's blog post
     Given I am on site homepage
     And I log in as "testuser2"

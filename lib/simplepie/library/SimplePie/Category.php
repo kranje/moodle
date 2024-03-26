@@ -79,7 +79,11 @@ class SimplePie_Category
 
 	/**
 	 * Category type
+<<<<<<< HEAD
 	 *
+=======
+	 * 
+>>>>>>> forked/LAE_400_PACKAGE
 	 * category for <category>
 	 * subject for <dc:subject>
 	 *
@@ -161,4 +165,7 @@ class SimplePie_Category
 	}
 }
 
+<<<<<<< HEAD
 class_alias('SimplePie_Category', 'SimplePie\Category', false);
+=======
+>>>>>>> forked/LAE_400_PACKAGE

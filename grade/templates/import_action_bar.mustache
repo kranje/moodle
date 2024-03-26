@@ -23,6 +23,7 @@
     Example context (json):
     {
         "generalnavselector": {
+<<<<<<< HEAD
             "name": "Gradebook tertiary navigation selector",
             "value": "opt2",
             "baseid": "select-menu56788",
@@ -100,6 +101,60 @@
                 window.location.href = e.target.value;
                 });
             {{/js}}
+=======
+            "id": "url_select12345",
+            "action": "https://example.com/get",
+            "classes": "urlselect",
+            "formid": "gradesactionselect",
+            "sesskey": "sesskey",
+            "label": "",
+            "helpicon": false,
+            "showbutton": null,
+            "options": [{
+                "name": "View", "isgroup": true, "options":
+                [
+                    {"name": "Grader report", "isgroup": false, "value": "/grade/report/grader/index.php"}
+                ]},
+                {"name": "Setup", "isgroup": true, "options":
+                [
+                    {"name": "Gradebook setup", "isgroup": false, "value": "/grade/edit/tree/index.php"}
+                ]}],
+            "disabled": false,
+            "title": null
+        },
+        "importselector": {
+            "id": "url_select56789",
+            "action": "https://example.com/get",
+            "formid": "gradesimportactionselect",
+            "sesskey": "sesskey",
+            "classes": "urlselect",
+            "label": "",
+            "helpicon": false,
+            "showbutton": null,
+            "options": [
+                {
+                    "name": "CSV file",
+                    "value": "/grade/import/csv/index.php",
+                    "selected": true
+                }
+            ],
+            "disabled": false,
+            "title": null
+        }
+    }
+}}
+<div class="container-fluid tertiary-navigation">
+    <div class="row">
+        {{#generalnavselector}}
+            <div class="navitem">
+                {{>core/url_select}}
+            </div>
+        {{/generalnavselector}}
+        {{#importselector}}
+            <div class="navitem">
+                {{>core/url_select}}
+            </div>
+>>>>>>> forked/LAE_400_PACKAGE
         {{/importselector}}
     </div>
 </div>

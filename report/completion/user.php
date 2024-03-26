@@ -47,7 +47,11 @@ if ($USER->id != $user->id and has_capability('moodle/user:viewuseractivitiesrep
 
 if (!report_completion_can_access_user_report($user, $course)) {
     // this should never happen
+<<<<<<< HEAD
     throw new \moodle_exception('nocapability', 'report_completion');
+=======
+    print_error('nocapability', 'report_completion');
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 $stractivityreport = get_string('activityreport');

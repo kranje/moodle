@@ -18,7 +18,11 @@ class TextData
      *
      * @param string $character Value
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function CHARACTER($character)
     {
@@ -34,7 +38,11 @@ class TextData
      *
      * @param mixed $stringValue Value to check
      *
+<<<<<<< HEAD
      * @return null|array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function TRIMNONPRINTABLE($stringValue = '')
     {
@@ -50,7 +58,11 @@ class TextData
      *
      * @param mixed $stringValue Value to check
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function TRIMSPACES($stringValue = '')
     {
@@ -64,9 +76,15 @@ class TextData
      *
      * @see Use the code() method in the TextData\CharacterConvert class instead
      *
+<<<<<<< HEAD
      * @param array|string $characters Value
      *
      * @return array|int|string A string if arguments are invalid
+=======
+     * @param string $characters Value
+     *
+     * @return int|string A string if arguments are invalid
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function ASCIICODE($characters)
     {
@@ -102,7 +120,11 @@ class TextData
      *                                    If decimals is negative, number is rounded to the left of the decimal point.
      *                                    If you omit decimals, it is assumed to be 2
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function DOLLAR($value = 0, $decimals = 2)
     {
@@ -110,17 +132,29 @@ class TextData
     }
 
     /**
+<<<<<<< HEAD
      * FIND.
+=======
+     * SEARCHSENSITIVE.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @Deprecated 1.18.0
      *
      * @see Use the sensitive() method in the TextData\Search class instead
      *
+<<<<<<< HEAD
      * @param array|string $needle The string to look for
      * @param array|string $haystack The string in which to look
      * @param array|int $offset Offset within $haystack
      *
      * @return array|int|string
+=======
+     * @param string $needle The string to look for
+     * @param string $haystack The string in which to look
+     * @param int $offset Offset within $haystack
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function SEARCHSENSITIVE($needle, $haystack, $offset = 1)
     {
@@ -128,17 +162,29 @@ class TextData
     }
 
     /**
+<<<<<<< HEAD
      * SEARCH.
+=======
+     * SEARCHINSENSITIVE.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @Deprecated 1.18.0
      *
      * @see Use the insensitive() method in the TextData\Search class instead
      *
+<<<<<<< HEAD
      * @param array|string $needle The string to look for
      * @param array|string $haystack The string in which to look
      * @param array|int $offset Offset within $haystack
      *
      * @return array|int|string
+=======
+     * @param string $needle The string to look for
+     * @param string $haystack The string in which to look
+     * @param int $offset Offset within $haystack
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function SEARCHINSENSITIVE($needle, $haystack, $offset = 1)
     {
@@ -156,7 +202,11 @@ class TextData
      * @param int $decimals
      * @param bool $no_commas
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function FIXEDFORMAT($value, $decimals = 2, $no_commas = false)
     {
@@ -170,10 +220,17 @@ class TextData
      *
      * @see Use the left() method in the TextData\Extract class instead
      *
+<<<<<<< HEAD
      * @param array|string $value Value
      * @param array|int $chars Number of characters
      *
      * @return array|string
+=======
+     * @param string $value Value
+     * @param int $chars Number of characters
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function LEFT($value = '', $chars = 1)
     {
@@ -187,11 +244,19 @@ class TextData
      *
      * @see Use the mid() method in the TextData\Extract class instead
      *
+<<<<<<< HEAD
      * @param array|string $value Value
      * @param array|int $start Start character
      * @param array|int $chars Number of characters
      *
      * @return array|string
+=======
+     * @param string $value Value
+     * @param int $start Start character
+     * @param int $chars Number of characters
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function MID($value = '', $start = 1, $chars = null)
     {
@@ -205,10 +270,17 @@ class TextData
      *
      * @see Use the right() method in the TextData\Extract class instead
      *
+<<<<<<< HEAD
      * @param array|string $value Value
      * @param array|int $chars Number of characters
      *
      * @return array|string
+=======
+     * @param string $value Value
+     * @param int $chars Number of characters
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function RIGHT($value = '', $chars = 1)
     {
@@ -224,7 +296,11 @@ class TextData
      *
      * @param string $value Value
      *
+<<<<<<< HEAD
      * @return array|int
+=======
+     * @return int
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function STRINGLENGTH($value = '')
     {
@@ -234,15 +310,25 @@ class TextData
     /**
      * LOWERCASE.
      *
+<<<<<<< HEAD
      * Converts a string value to lower case.
+=======
+     * Converts a string value to upper case.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @Deprecated 1.18.0
      *
      * @see Use the lower() method in the TextData\CaseConvert class instead
      *
+<<<<<<< HEAD
      * @param array|string $mixedCaseString
      *
      * @return array|string
+=======
+     * @param string $mixedCaseString
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function LOWERCASE($mixedCaseString)
     {
@@ -260,7 +346,11 @@ class TextData
      *
      * @param string $mixedCaseString
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function UPPERCASE($mixedCaseString)
     {
@@ -270,15 +360,25 @@ class TextData
     /**
      * PROPERCASE.
      *
+<<<<<<< HEAD
      * Converts a string value to proper/title case.
+=======
+     * Converts a string value to upper case.
+>>>>>>> forked/LAE_400_PACKAGE
      *
      * @Deprecated 1.18.0
      *
      * @see Use the proper() method in the TextData\CaseConvert class instead
      *
+<<<<<<< HEAD
      * @param array|string $mixedCaseString
      *
      * @return array|string
+=======
+     * @param string $mixedCaseString
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function PROPERCASE($mixedCaseString)
     {
@@ -297,7 +397,11 @@ class TextData
      * @param int $chars Number of characters
      * @param string $newText String to replace in defined position
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function REPLACE($oldText, $start, $chars, $newText)
     {
@@ -316,7 +420,11 @@ class TextData
      * @param string $toText To Value
      * @param int $instance Instance Number
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function SUBSTITUTE($text = '', $fromText = '', $toText = '', $instance = 0)
     {
@@ -332,7 +440,11 @@ class TextData
      *
      * @param mixed $testValue Value to check
      *
+<<<<<<< HEAD
      * @return null|array|string
+=======
+     * @return null|string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function RETURNSTRING($testValue = '')
     {
@@ -349,7 +461,11 @@ class TextData
      * @param mixed $value Value to check
      * @param string $format Format mask to use
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function TEXTFORMAT($value, $format)
     {
@@ -365,7 +481,11 @@ class TextData
      *
      * @param mixed $value Value to check
      *
+<<<<<<< HEAD
      * @return array|DateTimeInterface|float|int|string A string if arguments are invalid
+=======
+     * @return DateTimeInterface|float|int|string A string if arguments are invalid
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function VALUE($value = '')
     {
@@ -383,7 +503,11 @@ class TextData
      * @param string $decimalSeparator decimal separator, defaults to locale defined value
      * @param string $groupSeparator group/thosands separator, defaults to locale defined value
      *
+<<<<<<< HEAD
      * @return array|float|string
+=======
+     * @return float|string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function NUMBERVALUE($value = '', $decimalSeparator = null, $groupSeparator = null)
     {
@@ -402,7 +526,11 @@ class TextData
      * @param mixed $value1
      * @param mixed $value2
      *
+<<<<<<< HEAD
      * @return array|bool
+=======
+     * @return bool
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function EXACT($value1, $value2)
     {
@@ -420,7 +548,11 @@ class TextData
      * @param mixed $ignoreEmpty
      * @param mixed $args
      *
+<<<<<<< HEAD
      * @return array|string
+=======
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function TEXTJOIN($delimiter, $ignoreEmpty, ...$args)
     {
@@ -436,10 +568,17 @@ class TextData
      *
      * @see Use the builtinREPT() method in the TextData\Concatenate class instead
      *
+<<<<<<< HEAD
      * @param array|string $str Should be numeric
      * @param mixed $number Should be int
      *
      * @return array|string
+=======
+     * @param string $str Should be numeric
+     * @param mixed $number Should be int
+     *
+     * @return string
+>>>>>>> forked/LAE_400_PACKAGE
      */
     public static function builtinREPT($str, $number)
     {

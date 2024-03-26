@@ -22,15 +22,46 @@
 defined('MOODLE_INTERNAL') || die();
 
 function xmldb_data_upgrade($oldversion) {
+<<<<<<< HEAD
     global $DB;
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
+=======
+    global $CFG, $DB;
+
+    // Automatically generated Moodle v3.6.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v3.7.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    if ($oldversion < 2019052001) {
+
+        $columns = $DB->get_columns('data');
+
+        $oldclass = "mod-data-default-template ##approvalstatus##";
+        $newclass = "mod-data-default-template ##approvalstatusclass##";
+
+        // Update existing classes.
+        $DB->replace_all_text('data', $columns['singletemplate'], $oldclass, $newclass);
+        $DB->replace_all_text('data', $columns['listtemplate'], $oldclass, $newclass);
+        $DB->replace_all_text('data', $columns['addtemplate'], $oldclass, $newclass);
+        $DB->replace_all_text('data', $columns['rsstemplate'], $oldclass, $newclass);
+        $DB->replace_all_text('data', $columns['asearchtemplate'], $oldclass, $newclass);
+
+        // Data savepoint reached.
+        upgrade_mod_savepoint(true, 2019052001, 'data');
+    }
+    // Automatically generated Moodle v3.8.0 release upgrade line.
+    // Put any upgrade step following this.
+>>>>>>> forked/LAE_400_PACKAGE
 
     // Automatically generated Moodle v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
     if ($oldversion < 2022081600) {
         // Define key userid (foreign) to be added to data_records.
         $table = new xmldb_table('data_records');
@@ -44,6 +75,8 @@ function xmldb_data_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
     return true;
 }

@@ -228,7 +228,12 @@ $tasks = array(
         'hour' => '*',
         'day' => '*',
         'dayofweek' => '*',
+<<<<<<< HEAD
         'month' => '*'
+=======
+        'month' => '*',
+        'disabled' => true,
+>>>>>>> forked/LAE_400_PACKAGE
     ),
     array(
         'classname' => 'core\task\registration_cron_task',
@@ -428,6 +433,7 @@ $tasks = array(
         'month' => '*',
         'dayofweek' => '*',
     ),
+<<<<<<< HEAD
     [
         'classname' => 'core\task\task_lock_cleanup_task',
         'blocking' => 0,
@@ -437,4 +443,6 @@ $tasks = array(
         'dayofweek' => '*',
         'month' => '*'
     ]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 );

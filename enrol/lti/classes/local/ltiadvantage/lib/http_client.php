@@ -65,9 +65,13 @@ class http_client implements IHttpClient {
             $this->curlclient->setHeader($headers);
         }
         if ($method == 'POST') {
+<<<<<<< HEAD
             $body = $options['body'] ?? null;
             $body = $body ?? (!empty($options['form_params']) ? http_build_query($options['form_params'], '' , '&') : null);
             $res = $this->curlclient->post($url, $body, ['CURLOPT_HEADER' => 1]);
+=======
+            $res = $this->curlclient->post($url, $options['body'] ?? null, ['CURLOPT_HEADER' => 1]);
+>>>>>>> forked/LAE_400_PACKAGE
         } else if ($method == 'GET') {
             $res = $this->curlclient->get($url, [], ['CURLOPT_HEADER' => 1]);
         } else {
@@ -78,8 +82,13 @@ class http_client implements IHttpClient {
         if (!$this->curlclient->get_errno() && !$this->curlclient->error) {
             // No errors, so format the response.
             $headersize = $info['header_size'];
+<<<<<<< HEAD
             $resheaders = substr($res ?? '', 0, $headersize);
             $resbody = substr($res ?? '', $headersize);
+=======
+            $resheaders = substr($res, 0, $headersize);
+            $resbody = substr($res, $headersize);
+>>>>>>> forked/LAE_400_PACKAGE
             $headerlines = array_filter(explode("\r\n", $resheaders));
             $parsedresponseheaders = [
                 'httpstatus' => array_shift($headerlines)

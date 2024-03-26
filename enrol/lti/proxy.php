@@ -50,19 +50,31 @@ if (!\enrol_lti\helper::verify_proxy_token($toolid, $token)) {
 $tool = \enrol_lti\helper::get_lti_tool($toolid);
 
 if (!is_enabled_auth('lti')) {
+<<<<<<< HEAD
     throw new \moodle_exception('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
+=======
+    print_error('pluginnotenabled', 'auth', '', get_string('pluginname', 'auth_lti'));
+>>>>>>> forked/LAE_400_PACKAGE
     exit();
 }
 
 // Check if the enrolment plugin is disabled.
 if (!enrol_is_enabled('lti')) {
+<<<<<<< HEAD
     throw new \moodle_exception('enrolisdisabled', 'enrol_lti');
+=======
+    print_error('enrolisdisabled', 'enrol_lti');
+>>>>>>> forked/LAE_400_PACKAGE
     exit();
 }
 
 // Check if the enrolment instance is disabled.
 if ($tool->status != ENROL_INSTANCE_ENABLED) {
+<<<<<<< HEAD
     throw new \moodle_exception('enrolisdisabled', 'enrol_lti');
+=======
+    print_error('enrolisdisabled', 'enrol_lti');
+>>>>>>> forked/LAE_400_PACKAGE
     exit();
 }
 
@@ -70,7 +82,11 @@ $messagetype = required_param('lti_message_type', PARAM_TEXT);
 
 // Only accept proxy registration requests from this endpoint.
 if ($messagetype != "ToolProxyRegistrationRequest") {
+<<<<<<< HEAD
     throw new \moodle_exception('invalidrequest', 'enrol_lti');
+=======
+    print_error('invalidrequest', 'enrol_lti');
+>>>>>>> forked/LAE_400_PACKAGE
     exit();
 }
 

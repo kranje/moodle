@@ -178,6 +178,7 @@ class lineitem extends resource_base {
             }
             $gbs->tag = $tag;
             $gbs->resourceid = $resourceid;
+<<<<<<< HEAD
             $incomingurl = null;
             $incomingparams = null;
             if (isset($json->submissionReview)) {
@@ -191,6 +192,8 @@ class lineitem extends resource_base {
                 $gbs->subreviewurl = $incomingurl;
                 $gbs->subreviewparams = $incomingparams;
             }
+=======
+>>>>>>> forked/LAE_400_PACKAGE
         }
         $ltilinkid = null;
         if (isset($json->resourceLinkId)) {
@@ -270,9 +273,13 @@ class lineitem extends resource_base {
                     'baseurl' => $baseurl,
                     'ltilinkid' => $ltilinkid,
                     'resourceid' => $resourceid,
+<<<<<<< HEAD
                     'tag' => $gbs->tag,
                     'subreviewurl' => $gbs->subreviewurl,
                     'subreviewparams' => $gbs->subreviewparams
+=======
+                    'tag' => $gbs->tag
+>>>>>>> forked/LAE_400_PACKAGE
             ));
         }
 
@@ -330,6 +337,7 @@ class lineitem extends resource_base {
             }
             $id = optional_param('id', 0, PARAM_INT); // Course Module ID.
             if (empty($id)) {
+<<<<<<< HEAD
                 $hint = optional_param('lti_message_hint', "", PARAM_TEXT);
                 if ($hint) {
                     $hintdec = json_decode($hint);
@@ -337,6 +345,9 @@ class lineitem extends resource_base {
                         $id = $hintdec->cmid;
                     }
                 }
+=======
+                $id = optional_param('lti_message_hint', 0, PARAM_INT);
+>>>>>>> forked/LAE_400_PACKAGE
             }
             if (!empty($id)) {
                 $cm = get_coursemodule_from_id('lti', $id, 0, false, MUST_EXIST);

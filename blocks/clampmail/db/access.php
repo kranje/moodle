@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die;
 $capabilities = array(
 
     'block/clampmail:addinstance' => array(
+<<<<<<< HEAD
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -34,6 +35,15 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
+=======
+        'captype'       => 'write',
+        'contextlevel'  => CONTEXT_COURSE,
+        'archetypes'    => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+        'clonepermissionsfrom'  => 'moodle/site:manageblocks'
+>>>>>>> forked/LAE_400_PACKAGE
     ),
     'block/clampmail:cansend' => array(
         'captype' => 'write',
@@ -77,6 +87,10 @@ $capabilities = array(
             'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW
         ),
+<<<<<<< HEAD
         'clonepermissionsfrom' => 'moodle/site:accessallgroups'
+=======
+        'clonepermissionsfrom'  => 'moodle/site:accessallgroups'
+>>>>>>> forked/LAE_400_PACKAGE
     )
 );

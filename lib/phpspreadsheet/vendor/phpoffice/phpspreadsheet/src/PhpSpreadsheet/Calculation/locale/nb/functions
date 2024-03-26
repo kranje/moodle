@@ -245,7 +245,10 @@ ROWS = RADER
 RTD = RTD
 TRANSPOSE = TRANSPONER
 VLOOKUP = FINN.RAD
+<<<<<<< HEAD
 *RC = RK
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 
 ##
 ## Matematikk- og trigonometrifunksjoner (Math & Trig Functions)

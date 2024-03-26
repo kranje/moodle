@@ -228,9 +228,14 @@ class calculator {
 
                 $this->sumofmarkvariance += $this->stats->for_slot($slot)->markvariance;
 
+<<<<<<< HEAD
                 $covariancewithoverallmark = $this->stats->for_slot($slot)->covariancewithoverallmark;
                 if (null !== $covariancewithoverallmark && $covariancewithoverallmark >= 0) {
                     $sumofcovariancewithoverallmark += sqrt($covariancewithoverallmark);
+=======
+                if ($this->stats->for_slot($slot)->covariancewithoverallmark >= 0) {
+                    $sumofcovariancewithoverallmark += sqrt($this->stats->for_slot($slot)->covariancewithoverallmark);
+>>>>>>> forked/LAE_400_PACKAGE
                 }
             }
             $this->progress->end_progress();

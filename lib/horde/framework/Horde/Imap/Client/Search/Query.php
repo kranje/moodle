@@ -859,6 +859,7 @@ class Horde_Imap_Client_Search_Query implements Serializable
 
     /* Serializable methods. */
 
+<<<<<<< HEAD
     public function serialize()
     {
         return serialize($this->__serialize());
@@ -874,12 +875,18 @@ class Horde_Imap_Client_Search_Query implements Serializable
         $this->__unserialize($data);
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * Serialization.
      *
      * @return string  Serialized data.
      */
+<<<<<<< HEAD
     public function __serialize()
+=======
+    public function serialize()
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $data = array(
             // Serialized data ID.
@@ -891,7 +898,11 @@ class Horde_Imap_Client_Search_Query implements Serializable
             $data[] = $this->_charset;
         }
 
+<<<<<<< HEAD
         return $data;
+=======
+        return serialize($data);
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     /**
@@ -901,8 +912,14 @@ class Horde_Imap_Client_Search_Query implements Serializable
      *
      * @throws Exception
      */
+<<<<<<< HEAD
     public function __unserialize($data)
     {
+=======
+    public function unserialize($data)
+    {
+        $data = @unserialize($data);
+>>>>>>> forked/LAE_400_PACKAGE
         if (!is_array($data) ||
             !isset($data[0]) ||
             ($data[0] != self::VERSION)) {

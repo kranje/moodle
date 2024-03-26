@@ -385,6 +385,7 @@
 .video-js.vjs-1-1 {
   width: 100%;
   max-width: 100%;
+<<<<<<< HEAD
 }
 
 .video-js.vjs-fluid:not(.vjs-audio-only-mode),
@@ -412,6 +413,28 @@
 }
 
 .video-js.vjs-fill:not(.vjs-audio-only-mode) {
+=======
+  height: 0;
+}
+
+.video-js.vjs-16-9 {
+  padding-top: 56.25%;
+}
+
+.video-js.vjs-4-3 {
+  padding-top: 75%;
+}
+
+.video-js.vjs-9-16 {
+  padding-top: 177.7777777778%;
+}
+
+.video-js.vjs-1-1 {
+  padding-top: 100%;
+}
+
+.video-js.vjs-fill {
+>>>>>>> forked/LAE_400_PACKAGE
   width: 100%;
   height: 100%;
 }
@@ -424,10 +447,13 @@
   height: 100%;
 }
 
+<<<<<<< HEAD
 .video-js.vjs-audio-only-mode .vjs-tech {
   display: none;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 body.vjs-full-window {
   padding: 0;
   margin: 0;
@@ -763,8 +789,12 @@ body.vjs-full-window {
   background-color: rgba(43, 51, 63, 0.7);
 }
 
+<<<<<<< HEAD
 .vjs-has-started .vjs-control-bar,
 .vjs-audio-only-mode .vjs-control-bar {
+=======
+.vjs-has-started .vjs-control-bar {
+>>>>>>> forked/LAE_400_PACKAGE
   display: flex;
   visibility: visible;
   opacity: 1;
@@ -784,11 +814,17 @@ body.vjs-full-window {
   display: none !important;
 }
 
+<<<<<<< HEAD
 .vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar,
 .vjs-audio-only-mode.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+=======
+.vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+  opacity: 1;
+  visibility: visible;
+>>>>>>> forked/LAE_400_PACKAGE
 }
 
 .vjs-has-started.vjs-no-flex .vjs-control-bar {
@@ -805,12 +841,15 @@ body.vjs-full-window {
   flex: none;
 }
 
+<<<<<<< HEAD
 .video-js .vjs-control.vjs-visible-text {
   width: auto;
   padding-left: 1em;
   padding-right: 1em;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .vjs-button > .vjs-icon-placeholder:before {
   font-size: 1.8em;
   line-height: 1.67;
@@ -826,7 +865,11 @@ body.vjs-full-window {
   text-shadow: 0em 0em 1em white;
 }
 
+<<<<<<< HEAD
 .video-js *:not(.vjs-visible-text) > .vjs-control-text {
+=======
+.video-js .vjs-control-text {
+>>>>>>> forked/LAE_400_PACKAGE
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -1248,6 +1291,7 @@ body.vjs-full-window {
   height: 100%;
 }
 
+<<<<<<< HEAD
 .vjs-has-started .vjs-poster,
 .vjs-using-native-controls .vjs-poster {
   display: none;
@@ -1258,6 +1302,20 @@ body.vjs-full-window {
   display: block;
 }
 
+=======
+.vjs-has-started .vjs-poster {
+  display: none;
+}
+
+.vjs-audio.vjs-has-started .vjs-poster {
+  display: block;
+}
+
+.vjs-using-native-controls .vjs-poster {
+  display: none;
+}
+
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js .vjs-live-control {
   display: flex;
   align-items: flex-start;
@@ -1365,7 +1423,10 @@ body.vjs-full-window {
   pointer-events: none;
 }
 
+<<<<<<< HEAD
 .video-js.vjs-controls-disabled .vjs-text-track-display,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js.vjs-user-inactive.vjs-playing .vjs-text-track-display {
   bottom: 1em;
 }
@@ -1392,7 +1453,10 @@ video::-webkit-media-text-track-display {
   transform: translateY(-3em);
 }
 
+<<<<<<< HEAD
 .video-js.vjs-controls-disabled video::-webkit-media-text-track-display,
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js.vjs-user-inactive.vjs-playing video::-webkit-media-text-track-display {
   transform: translateY(-1.5em);
 }
@@ -1401,18 +1465,24 @@ video::-webkit-media-text-track-display {
   cursor: pointer;
   flex: none;
 }
+<<<<<<< HEAD
 .video-js.vjs-audio-only-mode .vjs-picture-in-picture-control {
   display: none;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js .vjs-fullscreen-control {
   cursor: pointer;
   flex: none;
 }
+<<<<<<< HEAD
 .video-js.vjs-audio-only-mode .vjs-fullscreen-control {
   display: none;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .vjs-playback-rate > .vjs-menu-button,
 .vjs-playback-rate .vjs-playback-rate-value {
   position: absolute;
@@ -1568,18 +1638,24 @@ video::-webkit-media-text-track-display {
     border-top-color: #73859f;
   }
 }
+<<<<<<< HEAD
 .video-js.vjs-audio-only-mode .vjs-captions-button {
   display: none;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .vjs-chapters-button .vjs-menu ul {
   width: 24em;
 }
 
+<<<<<<< HEAD
 .video-js.vjs-audio-only-mode .vjs-descriptions-button {
   display: none;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js .vjs-subs-caps-button + .vjs-menu .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
   vertical-align: middle;
   display: inline-block;
@@ -1593,10 +1669,13 @@ video::-webkit-media-text-track-display {
   line-height: inherit;
 }
 
+<<<<<<< HEAD
 .video-js.vjs-audio-only-mode .vjs-subs-caps-button {
   display: none;
 }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js .vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
   vertical-align: middle;
   display: inline-block;
@@ -1615,16 +1694,40 @@ video::-webkit-media-text-track-display {
 .video-js.vjs-layout-small .vjs-duration,
 .video-js.vjs-layout-small .vjs-remaining-time,
 .video-js.vjs-layout-small .vjs-playback-rate,
+<<<<<<< HEAD
+=======
+.video-js.vjs-layout-small .vjs-chapters-button,
+.video-js.vjs-layout-small .vjs-descriptions-button,
+.video-js.vjs-layout-small .vjs-captions-button,
+.video-js.vjs-layout-small .vjs-subtitles-button,
+.video-js.vjs-layout-small .vjs-audio-button,
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js.vjs-layout-small .vjs-volume-control, .video-js.vjs-layout-x-small .vjs-current-time,
 .video-js.vjs-layout-x-small .vjs-time-divider,
 .video-js.vjs-layout-x-small .vjs-duration,
 .video-js.vjs-layout-x-small .vjs-remaining-time,
 .video-js.vjs-layout-x-small .vjs-playback-rate,
+<<<<<<< HEAD
+=======
+.video-js.vjs-layout-x-small .vjs-chapters-button,
+.video-js.vjs-layout-x-small .vjs-descriptions-button,
+.video-js.vjs-layout-x-small .vjs-captions-button,
+.video-js.vjs-layout-x-small .vjs-subtitles-button,
+.video-js.vjs-layout-x-small .vjs-audio-button,
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js.vjs-layout-x-small .vjs-volume-control, .video-js.vjs-layout-tiny .vjs-current-time,
 .video-js.vjs-layout-tiny .vjs-time-divider,
 .video-js.vjs-layout-tiny .vjs-duration,
 .video-js.vjs-layout-tiny .vjs-remaining-time,
 .video-js.vjs-layout-tiny .vjs-playback-rate,
+<<<<<<< HEAD
+=======
+.video-js.vjs-layout-tiny .vjs-chapters-button,
+.video-js.vjs-layout-tiny .vjs-descriptions-button,
+.video-js.vjs-layout-tiny .vjs-captions-button,
+.video-js.vjs-layout-tiny .vjs-subtitles-button,
+.video-js.vjs-layout-tiny .vjs-audio-button,
+>>>>>>> forked/LAE_400_PACKAGE
 .video-js.vjs-layout-tiny .vjs-volume-control {
   display: none;
 }
@@ -1632,6 +1735,7 @@ video::-webkit-media-text-track-display {
   width: auto;
   width: initial;
 }
+<<<<<<< HEAD
 .video-js.vjs-layout-x-small .vjs-progress-control, .video-js.vjs-layout-tiny .vjs-progress-control {
   display: none;
 }
@@ -1642,6 +1746,21 @@ video::-webkit-media-text-track-display {
 .video-js.vjs-layout-x-small.vjs-no-flex .vjs-custom-control-spacer {
   width: auto;
 }
+=======
+.video-js.vjs-layout-x-small:not(.vjs-liveui) .vjs-subs-caps-button, .video-js.vjs-layout-x-small:not(.vjs-live) .vjs-subs-caps-button, .video-js.vjs-layout-tiny .vjs-subs-caps-button {
+  display: none;
+}
+.video-js.vjs-layout-x-small.vjs-liveui .vjs-custom-control-spacer, .video-js.vjs-layout-tiny .vjs-custom-control-spacer {
+  flex: auto;
+  display: block;
+}
+.video-js.vjs-layout-x-small.vjs-liveui.vjs-no-flex .vjs-custom-control-spacer, .video-js.vjs-layout-tiny.vjs-no-flex .vjs-custom-control-spacer {
+  width: auto;
+}
+.video-js.vjs-layout-x-small.vjs-liveui .vjs-progress-control, .video-js.vjs-layout-tiny .vjs-progress-control {
+  display: none;
+}
+>>>>>>> forked/LAE_400_PACKAGE
 
 .vjs-modal-dialog.vjs-text-track-settings {
   background-color: #2B333F;

@@ -54,11 +54,17 @@ Feature: Non anonymous feedback
 
   @javascript
   Scenario: Complete non anonymous feedback and view analysis on the front page as an authenticated user
+<<<<<<< HEAD
     And I log in as "admin"
     And I set the following system permissions of "Authenticated user on site home" role:
       | capability                   | permission |
       | mod/feedback:viewanalysepage | Allow      |
     And I log out
+=======
+    Given the following "role capability" exists:
+      | role                         | frontpage |
+      | mod/feedback:viewanalysepage | allow     |
+>>>>>>> forked/LAE_400_PACKAGE
     When I am on the "Site feedback" "feedback activity" page logged in as user1
     And I follow "Answer the questions"
     And I should see "Do you like our site?"

@@ -2,11 +2,15 @@
 
 namespace PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Styles as StyleReader;
+=======
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\ConditionalDataBar;
 use PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\ConditionalFormattingRuleExtension;
 use PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\ConditionalFormatValueObject;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Style\Style as Style;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use SimpleXMLElement;
@@ -26,6 +30,17 @@ class ConditionalStyles
     private $ns;
 
     /** @var array */
+=======
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use SimpleXMLElement;
+
+class ConditionalStyles
+{
+    private $worksheet;
+
+    private $worksheetXml;
+
+>>>>>>> forked/LAE_400_PACKAGE
     private $dxfs;
 
     public function __construct(Worksheet $workSheet, SimpleXMLElement $worksheetXml, array $dxfs = [])
@@ -44,6 +59,7 @@ class ConditionalStyles
         );
     }
 
+<<<<<<< HEAD
     public function loadFromExt(StyleReader $styleReader): void
     {
         $this->ns = $this->worksheetXml->getNamespaces(true);
@@ -151,6 +167,9 @@ class ConditionalStyles
     }
 
     private function readConditionalStyles(SimpleXMLElement $xmlSheet): array
+=======
+    private function readConditionalStyles($xmlSheet)
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $conditionals = [];
         foreach ($xmlSheet->conditionalFormatting as $conditional) {
@@ -166,6 +185,7 @@ class ConditionalStyles
         return $conditionals;
     }
 
+<<<<<<< HEAD
     private function setConditionalStyles(Worksheet $worksheet, array $conditionals, SimpleXMLElement $xmlExtLst): void
     {
         foreach ($conditionals as $cellRangeReference => $cfRules) {
@@ -174,17 +194,34 @@ class ConditionalStyles
 
             // Extract all cell references in $cellRangeReference
             $cellBlocks = explode(' ', str_replace('$', '', strtoupper($cellRangeReference)));
+=======
+    private function setConditionalStyles(Worksheet $worksheet, array $conditionals, $xmlExtLst): void
+    {
+        foreach ($conditionals as $ref => $cfRules) {
+            ksort($cfRules);
+            $conditionalStyles = $this->readStyleRules($cfRules, $xmlExtLst);
+
+            // Extract all cell references in $ref
+            $cellBlocks = explode(' ', str_replace('$', '', strtoupper($ref)));
+>>>>>>> forked/LAE_400_PACKAGE
             foreach ($cellBlocks as $cellBlock) {
                 $worksheet->getStyle($cellBlock)->setConditionalStyles($conditionalStyles);
             }
         }
     }
 
+<<<<<<< HEAD
     private function readStyleRules(array $cfRules, SimpleXMLElement $extLst): array
     {
         $conditionalFormattingRuleExtensions = ConditionalFormattingRuleExtension::parseExtLstXml($extLst);
         $conditionalStyles = [];
 
+=======
+    private function readStyleRules($cfRules, $extLst)
+    {
+        $conditionalFormattingRuleExtensions = ConditionalFormattingRuleExtension::parseExtLstXml($extLst);
+        $conditionalStyles = [];
+>>>>>>> forked/LAE_400_PACKAGE
         foreach ($cfRules as $cfRule) {
             $objConditional = new Conditional();
             $objConditional->setConditionType((string) $cfRule['type']);
@@ -192,14 +229,18 @@ class ConditionalStyles
 
             if ((string) $cfRule['text'] != '') {
                 $objConditional->setText((string) $cfRule['text']);
+<<<<<<< HEAD
             } elseif ((string) $cfRule['timePeriod'] != '') {
                 $objConditional->setText((string) $cfRule['timePeriod']);
+=======
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             if (isset($cfRule['stopIfTrue']) && (int) $cfRule['stopIfTrue'] === 1) {
                 $objConditional->setStopIfTrue(true);
             }
 
+<<<<<<< HEAD
             if (count($cfRule->formula) >= 1) {
                 foreach ($cfRule->formula as $formulax) {
                     $formula = (string) $formulax;
@@ -213,11 +254,23 @@ class ConditionalStyles
                 }
             } else {
                 $objConditional->addCondition('');
+=======
+            if (count($cfRule->formula) > 1) {
+                foreach ($cfRule->formula as $formula) {
+                    $objConditional->addCondition((string) $formula);
+                }
+            } else {
+                $objConditional->addCondition((string) $cfRule->formula);
+>>>>>>> forked/LAE_400_PACKAGE
             }
 
             if (isset($cfRule->dataBar)) {
                 $objConditional->setDataBar(
+<<<<<<< HEAD
                     $this->readDataBarOfConditionalRule($cfRule, $conditionalFormattingRuleExtensions) // @phpstan-ignore-line
+=======
+                    $this->readDataBarOfConditionalRule($cfRule, $conditionalFormattingRuleExtensions)
+>>>>>>> forked/LAE_400_PACKAGE
                 );
             } else {
                 $objConditional->setStyle(clone $this->dxfs[(int) ($cfRule['dxfId'])]);
@@ -229,10 +282,14 @@ class ConditionalStyles
         return $conditionalStyles;
     }
 
+<<<<<<< HEAD
     /**
      * @param SimpleXMLElement|stdClass $cfRule
      */
     private function readDataBarOfConditionalRule($cfRule, array $conditionalFormattingRuleExtensions): ConditionalDataBar
+=======
+    private function readDataBarOfConditionalRule($cfRule, $conditionalFormattingRuleExtensions): ConditionalDataBar
+>>>>>>> forked/LAE_400_PACKAGE
     {
         $dataBar = new ConditionalDataBar();
         //dataBar attribute
@@ -264,10 +321,14 @@ class ConditionalStyles
         return $dataBar;
     }
 
+<<<<<<< HEAD
     /**
      * @param SimpleXMLElement|stdClass $cfRule
      */
     private function readDataBarExtLstOfConditionalRule(ConditionalDataBar $dataBar, $cfRule, array $conditionalFormattingRuleExtensions): void
+=======
+    private function readDataBarExtLstOfConditionalRule(ConditionalDataBar $dataBar, $cfRule, $conditionalFormattingRuleExtensions): void
+>>>>>>> forked/LAE_400_PACKAGE
     {
         if (isset($cfRule->extLst)) {
             $ns = $cfRule->extLst->getNamespaces(true);

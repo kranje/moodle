@@ -88,7 +88,10 @@ class Horde_Imap_Client_Data_Format_List extends Horde_Imap_Client_Data_Format i
 
     /**
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function count()
     {
         return count($this->_data);
@@ -99,7 +102,10 @@ class Horde_Imap_Client_Data_Format_List extends Horde_Imap_Client_Data_Format i
     /**
      * Iterator loops through the data elements contained in this list.
      */
+<<<<<<< HEAD
     #[ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function getIterator()
     {
         return new ArrayIterator($this->_data);

@@ -15,6 +15,7 @@ Feature: A user can view their posts and discussions
       | user | course | role |
       | student1 | C1 | student |
     And the following "activities" exist:
+<<<<<<< HEAD
       | activity   | name                   | intro       | course | idnumber     | groupmode |
       | forum      | Test forum name        | Test forum  | C1     | forum        | 0         |
     And I log in as "student1"
@@ -24,6 +25,17 @@ Feature: A user can view their posts and discussions
       | Message | How awesome is this forum discussion? |
     And I reply "Forum discussion 1" post from "Test forum name" forum with:
       | Message | Actually, I've seen better. |
+=======
+      | activity   | name                   | course | idnumber     | groupmode |
+      | forum      | Test forum name        | C1     | forum        | 0         |
+    And the following "mod_forum > discussions" exist:
+      | user     | forum | name               | message                               |
+      | student1 | forum | Forum discussion 1 | How awesome is this forum discussion? |
+    And the following "mod_forum > posts" exist:
+      | user     | parentsubject             | subject                     | message                     |
+      | student1 | Forum discussion 1        | Actually, I've seen better. | Actually, I've seen better. |
+    And I log in as "student1"
+>>>>>>> forked/LAE_400_PACKAGE
     When I follow "Profile" in the user menu
     And I follow "Forum posts"
     Then I should see "How awesome is this forum discussion?"

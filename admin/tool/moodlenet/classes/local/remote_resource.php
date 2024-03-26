@@ -60,8 +60,13 @@ class remote_resource {
     public function __construct(\curl $curl, url $url, \stdClass $metadata) {
         $this->curl = $curl;
         $this->url = $url;
+<<<<<<< HEAD
         $this->filename = pathinfo($this->url->get_path() ?? '', PATHINFO_FILENAME);
         $this->extension = pathinfo($this->url->get_path() ?? '', PATHINFO_EXTENSION);
+=======
+        $this->filename = pathinfo($this->url->get_path(), PATHINFO_FILENAME);
+        $this->extension = pathinfo($this->url->get_path(), PATHINFO_EXTENSION);
+>>>>>>> forked/LAE_400_PACKAGE
         $this->metadata = $metadata;
     }
 

@@ -4,20 +4,29 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
 use DateInterval;
 use DateTime;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception;
+use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+>>>>>>> forked/LAE_400_PACKAGE
 use PhpOffice\PhpSpreadsheet\Shared\Date as SharedDateHelper;
 
 class Difference
 {
+<<<<<<< HEAD
     use ArrayEnabled;
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     /**
      * DATEDIF.
      *
      * @param mixed $startDate Excel date serial value, PHP date/time stamp, PHP DateTime object
      *                                    or a standard date string
+<<<<<<< HEAD
      *                         Or can be an array of date values
      * @param mixed $endDate Excel date serial value, PHP date/time stamp, PHP DateTime object
      *                                    or a standard date string
@@ -35,11 +44,25 @@ class Difference
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $startDate, $endDate, $unit);
         }
 
+=======
+     * @param mixed $endDate Excel date serial value, PHP date/time stamp, PHP DateTime object
+     *                                    or a standard date string
+     * @param string $unit
+     *
+     * @return int|string Interval between the dates
+     */
+    public static function interval($startDate, $endDate, $unit = 'D')
+    {
+>>>>>>> forked/LAE_400_PACKAGE
         try {
             $startDate = Helpers::getDateValue($startDate);
             $endDate = Helpers::getDateValue($endDate);
             $difference = self::initialDiff($startDate, $endDate);
+<<<<<<< HEAD
             $unit = strtoupper($unit);
+=======
+            $unit = strtoupper(Functions::flattenSingleValue($unit));
+>>>>>>> forked/LAE_400_PACKAGE
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -65,14 +88,22 @@ class Difference
         $retVal = self::replaceRetValue($retVal, $unit, 'YD') ?? self::datedifYD($difference, $startYears, $endYears, $PHPStartDateObject, $PHPEndDateObject);
         $retVal = self::replaceRetValue($retVal, $unit, 'YM') ?? self::datedifYM($PHPDiffDateObject);
 
+<<<<<<< HEAD
         return is_bool($retVal) ? ExcelError::VALUE() : $retVal;
+=======
+        return is_bool($retVal) ? Functions::VALUE() : $retVal;
+>>>>>>> forked/LAE_400_PACKAGE
     }
 
     private static function initialDiff(float $startDate, float $endDate): float
     {
         // Validate parameters
         if ($startDate > $endDate) {
+<<<<<<< HEAD
             throw new Exception(ExcelError::NAN());
+=======
+            throw new Exception(Functions::NAN());
+>>>>>>> forked/LAE_400_PACKAGE
         }
 
         return $endDate - $startDate;

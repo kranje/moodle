@@ -40,25 +40,43 @@ class backup_array_iterator implements iterator {
         $this->arr = $arr;
     }
 
+<<<<<<< HEAD
     public function rewind(): void {
         reset($this->arr);
     }
 
     #[\ReturnTypeWillChange]
+=======
+    public function rewind() {
+        return reset($this->arr);
+    }
+
+>>>>>>> forked/LAE_400_PACKAGE
     public function current() {
         return current($this->arr);
     }
 
+<<<<<<< HEAD
     #[\ReturnTypeWillChange]
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     public function key() {
         return key($this->arr);
     }
 
+<<<<<<< HEAD
     public function next(): void {
         next($this->arr);
     }
 
     public function valid(): bool {
+=======
+    public function next() {
+        return next($this->arr);
+    }
+
+    public function valid() {
+>>>>>>> forked/LAE_400_PACKAGE
         return key($this->arr) !== null;
     }
 

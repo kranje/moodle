@@ -32,6 +32,7 @@ class data_field_menu extends data_field_base {
      */
     protected static $priority = self::HIGH_PRIORITY;
 
+<<<<<<< HEAD
     public function supports_preview(): bool {
         return true;
     }
@@ -52,6 +53,8 @@ class data_field_menu extends data_field_base {
         ];
     }
 
+=======
+>>>>>>> forked/LAE_400_PACKAGE
     function display_add_field($recordid = 0, $formdata = null) {
         global $DB, $OUTPUT;
 
