@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Form definition for configuring the block.
+ *
  * @package   block_clampmail
  * @copyright 2012 Louisiana State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,7 +28,17 @@ defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Form definition for configuring the block.
+ *
+ * @package   block_clampmail
+ * @copyright 2012 Louisiana State University
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class config_form extends \moodleform {
+    /**
+     * Code that defines the form.
+     */
     public function definition() {
         $mform =& $this->_form;
 
@@ -38,12 +50,16 @@ class config_form extends \moodleform {
         );
         $mform->addElement('static', 'reset', '', $resetlink);
 
-        $studentselect = array(0 => get_string('no'), 1 => get_string('yes'));
+        $roles = users::get_roles();
+        $filterroles =& $mform->addElement('select', 'roleselection',
+            get_string('select_roles', 'block_clampmail'), $roles);
 
-        $roles =& $mform->addElement('select', 'roleselection',
-            get_string('select_roles', 'block_clampmail'), $this->_customdata['roles']);
+        $filterroles->setMultiple(true);
 
-        $roles->setMultiple(true);
+        $cansend =& $mform->addElement('select', 'cansend',
+            get_string('select_cansend', 'block_clampmail'), $roles);
+        $cansend->setMultiple(true);
+        $mform->addHelpButton('cansend', 'select_cansend', 'block_clampmail');
 
         $options = array(
             0 => get_string('none'),
@@ -54,6 +70,7 @@ class config_form extends \moodleform {
         $mform->addElement('select', 'prepend_class',
             get_string('prepend_class', 'block_clampmail'), $options);
 
+        $studentselect = array(0 => get_string('no'), 1 => get_string('yes'));
         $mform->addElement('select', 'receipt',
             get_string('receipt', 'block_clampmail'), $studentselect);
 
@@ -72,5 +89,6 @@ class config_form extends \moodleform {
         $mform->setType('courseid', PARAM_INT);
 
         $mform->addRule('roleselection', null, 'required');
+        $mform->addRule('cansend', null, 'required');
     }
 }

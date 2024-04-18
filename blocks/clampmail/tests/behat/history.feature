@@ -20,6 +20,36 @@ Feature: Email history
       | student2 | CF101 | student |
 
   @javascript
+  Scenario: View history when a student is unenrolled
+    Given I log in as "teacher1"
+    And I am on "Test Course" course homepage
+    And I navigate to "Quickmail" in current page administration
+    And I follow "View history"
+    Then I should see "You have no email history yet"
+    And I press "Continue"
+    And I should see "Selected recipients"
+    And I set the following fields to these values:
+      | from_users | Student 1, Student 2 |
+      | Subject | Hello World |
+      | Message | Doom at 11 |
+    And I press "Add"
+    When I press "Send email"
+    Then I should see "View history"
+    And I should see "Hello World"
+    When I follow "Open email"
+    Then I should see "Selected recipients"
+    And I am on "Test Course" course homepage
+    And I navigate to course participants
+    When I click on "Unenrol" "icon" in the "student1" "table_row"
+    And I click on "Unenrol" "button" in the "Unenrol" "dialogue"
+    And I am on "Test Course" course homepage
+    And I navigate to "Quickmail" in current page administration
+    And I follow "View history"
+    And I follow "Open email"
+    And I should see "The recipient with the id"
+    And I should see "is no longer enrolled in this course"
+
+  @javascript
   Scenario: View and delete history
     Given I log in as "teacher1"
     And I am on "Test Course" course homepage
@@ -47,8 +77,7 @@ Feature: Email history
     And I log out
     And I log in as "admin"
     And I navigate to "Courses > Manage courses and categories" in site administration
-    And I follow "Test Course"
-    And I follow "View"
+    And I am on "Test Course" course homepage
     And I navigate to "Quickmail" in current page administration
     And I follow "View history"
     And I set the field "userid" to "Teacher 1"

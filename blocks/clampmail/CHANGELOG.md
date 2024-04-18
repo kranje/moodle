@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.11.1 (January 31, 2023)
+
+- Drop support for Moodle 3.11
+- Migrate CI builds to Github Actions
+- Fixed bug which prevented viewing history when an unenrolled user was one of the recipients
+
+## 3.11.0 (August 25, 2021)
+
+- Added student-use feature to configuration
+- Change default branch to "main"
+- Update CI tool to version 3
+- Update PHPDocs
+- Drop support for Moodle 3.6-3.10
+- Update deprecated userfields call
+
 ## 3.6.1 (March 16, 2020)
 
 - Allow site administrator to configure maximum attachment size

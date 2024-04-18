@@ -43,7 +43,7 @@ Feature: Block configuration
       | Roles to filter by | student |
     And I press "Save changes"
     Then I should see "Changes saved"
-    When I follow "Test Course"
+    And I am on "Test Course" course homepage
     And I navigate to "Quickmail" in current page administration
     Then the "roles" select box should contain "Student"
     And the "roles" select box should not contain "Teacher"
@@ -71,7 +71,7 @@ Feature: Block configuration
     And I press "Save changes"
     And I should see "Changes saved"
     Then I should see "Yes"
-    When I follow "Test Course"
+    And I am on "Test Course" course homepage
     And I navigate to "Quickmail" in current page administration
     Then the field "receipt" matches value "1"
 
@@ -86,3 +86,22 @@ Feature: Block configuration
     And I press "Save changes"
     And I should see "Changes saved"
     And I should see "Visible groups"
+
+  @javascript
+  Scenario: Configure send email roles
+    Given I log in as "student1"
+    And I am on "Test Course" course homepage
+    And "Quickmail" "link" should not exist in current page administration
+    And I log out
+    And I log in as "teacher1"
+    And I am on "Test Course" course homepage
+    And I navigate to "Quickmail" in current page administration
+    And I follow "Configuration"
+    And I set the following fields to these values:
+      | Roles that can send email | manager,coursecreator,editingteacher,teacher,student |
+    And I press "Save changes"
+    And I should see "Changes saved"
+    And I log out
+    And I log in as "student1"
+    And I am on "Test Course" course homepage
+    And I navigate to "Quickmail" in current page administration

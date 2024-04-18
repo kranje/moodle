@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Language strings for the plugin.
+ *
  * @package   block_clampmail
  * @copyright 2012 Louisiana State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -87,6 +89,7 @@ $string['manage_signatures'] = 'Manage signatures';
 $string['maximumupload'] = 'Maximum attachment size';
 $string['maximumupload_desc'] = 'Maximum attachment size for an individual email.';
 $string['message'] = 'Message';
+$string['missing_recipient'] = 'The recipient with the id {$a} is no longer enrolled in this course.';
 $string['newsignature'] = 'New signature';
 $string['no_alternates'] = 'No alternate emails found for {$a->fullname}. Continue to make one.';
 $string['no_course'] = 'Invalid course with id of {$a}';
@@ -130,6 +133,8 @@ $string['required'] = 'Please fill in the required fields.';
 $string['reset'] = 'Restore system defaults';
 $string['role_filter'] = 'Role filter';
 $string['save_draft'] = 'Save draft';
+$string['select_cansend'] = 'Roles that can send email';
+$string['select_cansend_help'] = 'This option sets and removes capability overrides for the block/clampmail:cansend capabililty';
 $string['select_roles'] = 'Roles to filter by';
 $string['select_users'] = 'Select users ...';
 $string['selected'] = 'Selected recipients';

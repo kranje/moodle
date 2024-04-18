@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Interface for sending an email.
+ *
  * @package   block_clampmail
  * @copyright 2012 Louisiana State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -47,12 +49,12 @@ if (!empty($type) and empty($typeid)) {
     print_error('no_typeid', 'block_clampmail', '', $string);
 }
 
-$config = block_clampmail\config::load_configuration($course);
-
 $context = context_course::instance($courseid);
 if (!has_capability('block/clampmail:cansend', $context)) {
     print_error('no_permission', 'block_clampmail');
 }
+
+$config = block_clampmail\config::load_configuration($course);
 
 $sigs = $DB->get_records('block_clampmail_signatures',
     array('userid' => $USER->id), 'default_flag DESC');
@@ -147,11 +149,16 @@ $editoroptions = array(
 $email = file_prepare_standard_editor($email, 'message', $editoroptions,
     $context, 'block_clampmail', $type, $email->id);
 
+$warnings = array();
 $selected = array();
 if (!empty($email->mailto)) {
     foreach (explode(',', $email->mailto) as $id) {
-        $selected[$id] = $users[$id];
-        unset($users[$id]);
+        if (array_key_exists($id, $users)) {
+            $selected[$id] = $users[$id];
+            unset($users[$id]);
+        } else {
+            $warnings[] = get_string('missing_recipient', 'block_clampmail', $id);
+        }
     }
 }
 
@@ -168,8 +175,6 @@ $form = new block_clampmail\email_form(null,
         'alternates' => $alternates
     )
 );
-
-$warnings = array();
 
 if ($form->is_cancelled()) {
     redirect(new moodle_url('/course/view.php?id='.$courseid));
@@ -317,7 +322,7 @@ if ($form->get_user_count() == 0) {
 } else {
     foreach ($warnings as $type => $warning) {
         // Must use strict equality operator, as ("success" == 0) returns true,
-        // and $type can be a numeric index
+        // and $type can be a numeric index.
         $class = ($type === 'success') ? 'success' : 'error';
         echo $OUTPUT->notification($warning, $class);
     }

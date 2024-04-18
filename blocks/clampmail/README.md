@@ -1,12 +1,12 @@
 # Quickmail
 
-[![Build Status](https://travis-ci.org/CLAMP-IT/clampmail.svg)](https://travis-ci.org/CLAMP-IT/clampmail)
+![Moodle Plugin CI](https://github.com/CLAMP-IT/clampmail/workflows/Moodle%20Plugin%20CI/badge.svg)
 
 Quickmail is a Moodle block that provides selective, bulk emailing within courses. CLAMPMail is a fork maintained by the Collaborative Liberal Arts Moodle Project which sends attachments via email instead of providing a download link within Moodle.
 
 ## Requirements
 
-- Moodle 3.6 (build 2018120300 or later)
+- Moodle 3.11 (build 2021051700 or later)
 
 ## Features
 
