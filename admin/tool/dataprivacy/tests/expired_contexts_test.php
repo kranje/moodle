@@ -33,7 +33,7 @@ class expired_contexts_test extends \advanced_testcase {
      * @param   string  $course Retention policy for courses.
      * @param   string  $activity Retention policy for activities.
      */
-    protected function setup_basics(string $system, string $user, string $course = null, string $activity = null) : \stdClass {
+    protected function setup_basics(string $system, string $user, string $course = null, string $activity = null): \stdClass {
         $this->resetAfterTest();
 
         $purposes = (object) [
@@ -59,7 +59,7 @@ class expired_contexts_test extends \advanced_testcase {
      * @param   int     $contextlevel
      * @return  purpose
      */
-    protected function create_and_set_purpose_for_contextlevel(string $retention, int $contextlevel) : purpose {
+    protected function create_and_set_purpose_for_contextlevel(string $retention, int $contextlevel): purpose {
         $purpose = new purpose(0, (object) [
             'name' => 'Test purpose ' . rand(1, 1000),
             'retentionperiod' => $retention,
@@ -1921,7 +1921,7 @@ class expired_contexts_test extends \advanced_testcase {
      *
      * @return  array
      */
-    public function can_process_deletion_provider() : array {
+    public function can_process_deletion_provider(): array {
         return [
             'Pending' => [
                 expired_context::STATUS_EXPIRED,
@@ -1959,7 +1959,7 @@ class expired_contexts_test extends \advanced_testcase {
      *
      * @return  array
      */
-    public function is_complete_provider() : array {
+    public function is_complete_provider(): array {
         return [
             'Pending' => [
                 expired_context::STATUS_EXPIRED,
@@ -1994,7 +1994,7 @@ class expired_contexts_test extends \advanced_testcase {
      *
      * @return  array
      */
-    public function is_fully_expired_provider() : array {
+    public function is_fully_expired_provider(): array {
         return [
             'Fully expired' => [
                 [
@@ -2082,7 +2082,6 @@ class expired_contexts_test extends \advanced_testcase {
         $rc = new \ReflectionClass(\tool_dataprivacy\expired_contexts_manager::class);
         $rcm = $rc->getMethod('get_progress');
 
-        $rcm->setAccessible(true);
         $this->assertInstanceOf(\text_progress_trace::class, $rcm->invoke($manager));
     }
 
@@ -2097,7 +2096,6 @@ class expired_contexts_test extends \advanced_testcase {
         $rc = new \ReflectionClass(\tool_dataprivacy\expired_contexts_manager::class);
         $rcm = $rc->getMethod('get_progress');
 
-        $rcm->setAccessible(true);
         $this->assertSame($mytrace, $rcm->invoke($manager));
     }
 

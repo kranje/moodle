@@ -334,7 +334,7 @@ class manager {
 
             // Allow plugins to callback as soon possible after user has passed MFA.
             $hook = new \tool_mfa\hook\after_user_passed_mfa();
-            \core\hook\manager::get_instance()->dispatch($hook);
+            \core\di::get(\core\hook\manager::class)->dispatch($hook);
 
             // Add/update record in DB for users last mfa auth.
             self::update_pass_time();
@@ -349,12 +349,10 @@ class manager {
             try {
                 // Clear locked user factors, they may now reauth with anything.
                 @$DB->set_field('tool_mfa', 'lockcounter', 0, ['userid' => $USER->id]);
-            // @codingStandardsIgnoreStart
+                // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
             } catch (\Exception $e) {
                 // This occurs when upgrade.php hasn't been run. Nothing to do here.
-                // Coding standards ignored, they break on empty catches.
             }
-            // @codingStandardsIgnoreEnd
 
             // Fire post pass state factor actions.
             $factors = factor::get_active_user_factor_types();

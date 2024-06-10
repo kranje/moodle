@@ -49,8 +49,8 @@ abstract class info {
     /** @var tree Availability configuration, decoded from JSON; null if unset */
     protected $availabilitytree;
 
-    /** @var array The groups the current user belongs to. */
-    protected $groups;
+    /** @var array The groups each user belongs to. */
+    protected $groups = [];
 
     /** @var array|null Array of information about current restore if any */
     protected static $restoreinfo = null;
@@ -61,14 +61,12 @@ abstract class info {
      * @param \stdClass $course Course object
      * @param int $visible Value of visible flag (eye icon)
      * @param string $availability Availability definition (JSON format) or null
-     * @throws \coding_exception If data is not valid JSON format
      */
     public function __construct($course, $visible, $availability) {
         // Set basic values.
         $this->course = $course;
         $this->visible = (bool)$visible;
         $this->availability = $availability;
-        $this->groups = null;
     }
 
     /**
@@ -85,7 +83,7 @@ abstract class info {
      *
      * @return \context Context for this item
      */
-    public abstract function get_context();
+    abstract public function get_context();
 
     /**
      * Obtains the modinfo associated with this availability information.
@@ -382,7 +380,7 @@ abstract class info {
      *
      * @return string Name of item
      */
-    protected abstract function get_thing_name();
+    abstract protected function get_thing_name();
 
     /**
      * Stores an updated availability tree JSON structure into the relevant
@@ -390,7 +388,7 @@ abstract class info {
      *
      * @param string $availabilty New JSON value
      */
-    protected abstract function set_in_database($availabilty);
+    abstract protected function set_in_database($availabilty);
 
     /**
      * In rare cases the system may want to change all references to one ID
@@ -666,7 +664,7 @@ abstract class info {
      *
      * @return string Name of capability used to view hidden items of this type
      */
-    protected abstract function get_view_hidden_capability();
+    abstract protected function get_view_hidden_capability();
 
     /**
      * Obtains SQL that returns a list of enrolled users that has been filtered
@@ -806,22 +804,26 @@ abstract class info {
     }
 
     /**
-     * Returns groups that the current user belongs to on the course. Note: If not already
+     * Returns groups that the given user belongs to on the course. Note: If not already
      * available, this may make a database query.
      *
      * This will include groups the user is not allowed to see themselves, so check visibility
      * before displaying groups to the user.
      *
      * @param int $groupingid Grouping ID or 0 (default) for all groups
+     * @param int $userid User ID or 0 (default) for current user
      * @return int[] Array of int (group id) => int (same group id again); empty array if none
      */
-    public function get_groups(int $groupingid = 0): array {
+    public function get_groups(int $groupingid = 0, int $userid = 0): array {
         global $USER;
-        if (is_null($this->groups)) {
-            $allgroups = groups_get_user_groups($this->course->id, $USER->id, true);
-            $this->groups = $allgroups;
+        if (empty($userid)) {
+            $userid = $USER->id;
+        }
+        if (!array_key_exists($userid, $this->groups)) {
+            $allgroups = groups_get_user_groups($this->course->id, $userid, true);
+            $this->groups[$userid] = $allgroups;
         } else {
-            $allgroups = $this->groups;
+            $allgroups = $this->groups[$userid];
         }
         if (!isset($allgroups[$groupingid])) {
             return [];

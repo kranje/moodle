@@ -111,7 +111,6 @@ $string['cannotinsertrecord'] = 'Could not insert new record ID {$a}';
 $string['cannotmailconfirm'] = 'Error sending password change confirmation email';
 $string['cannotmanualctrack'] = 'Activity does not provide manual completion tracking';
 $string['cannotmapfield'] = 'Mapping collision detected - two fields maps to the same grade item {$a}';
-$string['cannotmarktopic'] = 'Could not mark that topic for this course';
 $string['cannotmigratedatacomments'] = 'Cannot migrate data module comments';
 $string['cannotmodulename'] = 'Cannot get the module name in build navigation';
 $string['cannotmoduletype'] = 'Cannot get the module type in build navigation';
@@ -504,6 +503,7 @@ $string['pagenotexist'] = '<p>An unusual error occurred trying to view a page th
 $string['passwordexceeded'] = 'The password can\'t be more than {$a} characters.';
 $string['pathdoesnotstartslash'] = 'No valid arguments supplied, path does not start with slash!';
 $string['pleasereport'] = 'If you have time, please let us know what you were trying to do when the error occurred:';
+$string['pluginnotexist'] = '{$a} plugin doesn\'t exist';
 $string['pluginrequirementsnotmet'] = 'Plugin "{$a->pluginname}" ({$a->pluginversion}) could not be installed.  It requires a newer version of Moodle (currently you are using {$a->currentmoodle}, you need {$a->requiremoodle}).';
 $string['pluginunsupported'] = 'Plugin "{$a->pluginname}" {$a->pluginversion} does not support this version of Moodle {$a->moodleversion}. Seek plugin information to find supported versions.';
 $string['prefixcannotbeempty'] = '<p>Error: database table prefix cannot be empty ({$a})</p>
@@ -512,6 +512,7 @@ $string['privatefilesupload'] = 'Uploading directly to user private files area i
 $string['processingstops'] = 'Processing stops here. Remaining records ignored.';
 $string['querystringcannotbeempty'] = 'The query string cannot be empty.';
 $string['redirecterrordetected'] = 'Unsupported redirect detected, script execution terminated';
+$string['redissessionhandlerproblem'] = 'Setting up of redis session failed. Please notify the server administrator.';
 $string['refoundto'] = 'Can be refunded to {$a}';
 $string['refoundtoorigi'] = 'Refunded to original amount: {$a}';
 $string['registrationdisabled'] = 'Registration is disabled on this site';
@@ -587,7 +588,6 @@ $string['unknowncourserequest'] = 'Unknown course request';
 $string['unknownevent'] = 'Unknown event';
 $string['unknownfiletype'] = 'Error unknown filtertype';
 $string['unknowngroup'] = 'Unknown group "{$a}"';
-$string['unknownhelp'] = 'Unknown help topic {$a}';
 $string['unknownjsinrequirejs'] = 'Cannot find JavaScript library {$a}.';
 $string['unknownmodulename'] = 'Unknown module name for form';
 $string['unknownrole'] = 'Unknown role "{$a}"';
@@ -655,3 +655,7 @@ $string['cannotswitcheditmodeon'] = 'Could not switch edit mode on';
 // Deprecated since Moodle 4.3.
 $string['prefixtoolong'] = '<p>Error: database table prefix is too long ({$a->dbfamily})</p>
 <p>The site administrator must fix this problem. Maximum length for table prefixes in {$a->dbfamily} is {$a->maxlength} characters.</p>';
+
+// Deprecated since Moodle 4.4.
+$string['cannotmarktopic'] = 'Could not mark that section for this course';
+$string['unknownhelp'] = 'Unknown help section {$a}';

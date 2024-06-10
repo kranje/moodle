@@ -142,7 +142,7 @@ class post {
      *
      * @return int
      */
-    public function get_id() : int {
+    public function get_id(): int {
         return $this->id;
     }
 
@@ -151,7 +151,7 @@ class post {
      *
      * @return int
      */
-    public function get_discussion_id() : int {
+    public function get_discussion_id(): int {
         return $this->discussionid;
     }
 
@@ -160,7 +160,7 @@ class post {
      *
      * @return int
      */
-    public function get_parent_id() : int {
+    public function get_parent_id(): int {
         return $this->parentid;
     }
 
@@ -169,7 +169,7 @@ class post {
      *
      * @return bool
      */
-    public function has_parent() : bool {
+    public function has_parent(): bool {
         return $this->get_parent_id() > 0;
     }
 
@@ -178,7 +178,7 @@ class post {
      *
      * @return int
      */
-    public function get_author_id() : int {
+    public function get_author_id(): int {
         return $this->authorid;
     }
 
@@ -187,7 +187,7 @@ class post {
      *
      * @return int
      */
-    public function get_time_created() : int {
+    public function get_time_created(): int {
         return $this->timecreated;
     }
 
@@ -196,7 +196,7 @@ class post {
      *
      * @return int
      */
-    public function get_time_modified() : int {
+    public function get_time_modified(): int {
         return $this->timemodified;
     }
 
@@ -205,7 +205,7 @@ class post {
      *
      * @return bool
      */
-    public function has_been_mailed() : bool {
+    public function has_been_mailed(): bool {
         return $this->mailed;
     }
 
@@ -214,7 +214,7 @@ class post {
      *
      * @return string
      */
-    public function get_subject() : string {
+    public function get_subject(): string {
         return $this->subject;
     }
 
@@ -223,7 +223,7 @@ class post {
      *
      * @return string
      */
-    public function get_message() : string {
+    public function get_message(): string {
         return $this->message;
     }
 
@@ -232,7 +232,7 @@ class post {
      *
      * @return int
      */
-    public function get_message_format() : int {
+    public function get_message_format(): int {
         return $this->messageformat;
     }
 
@@ -241,7 +241,7 @@ class post {
      *
      * @return bool
      */
-    public function is_message_trusted() : bool {
+    public function is_message_trusted(): bool {
         return $this->messagetrust;
     }
 
@@ -250,7 +250,7 @@ class post {
      *
      * @return bool
      */
-    public function has_attachments() : bool {
+    public function has_attachments(): bool {
         return $this->hasattachments;
     }
 
@@ -259,7 +259,7 @@ class post {
      *
      * @return int
      */
-    public function get_total_score() : int {
+    public function get_total_score(): int {
         return $this->totalscore;
     }
 
@@ -268,7 +268,7 @@ class post {
      *
      * @return bool
      */
-    public function should_mail_now() : bool {
+    public function should_mail_now(): bool {
         return $this->mailnow;
     }
 
@@ -277,7 +277,7 @@ class post {
      *
      * @return bool
      */
-    public function is_deleted() : bool {
+    public function is_deleted(): bool {
         return $this->deleted;
     }
 
@@ -286,7 +286,7 @@ class post {
      *
      * @return bool
      */
-    public function is_private_reply() : bool {
+    public function is_private_reply(): bool {
         return !empty($this->privatereplyto);
     }
 
@@ -315,7 +315,7 @@ class post {
      *
      * @return int
      */
-    public function get_private_reply_recipient_id() : int {
+    public function get_private_reply_recipient_id(): int {
         return $this->privatereplyto;
     }
 
@@ -325,7 +325,7 @@ class post {
      *
      * @return int
      */
-    public function get_age() : int {
+    public function get_age(): int {
         return time() - $this->get_time_created();
     }
 
@@ -335,7 +335,7 @@ class post {
      * @param stdClass $user The user to check.
      * @return bool
      */
-    public function is_owned_by_user(stdClass $user) : bool {
+    public function is_owned_by_user(stdClass $user): bool {
         if ($this->get_hiddenuserid() != 0) {
             return $this->get_hiddenuserid() == $user->id;
         } else {
@@ -349,7 +349,7 @@ class post {
      * @param stdClass $user The user to check.
      * @return bool
      */
-    public function is_private_reply_intended_for_user(stdClass $user) : bool {
+    public function is_private_reply_intended_for_user(stdClass $user): bool {
         return $this->get_private_reply_recipient_id() == $user->id;
     }
 
@@ -358,7 +358,7 @@ class post {
      *
      * @return int|null
      */
-    public function get_wordcount() : ?int {
+    public function get_wordcount(): ?int {
         return $this->wordcount;
     }
 
@@ -367,7 +367,7 @@ class post {
      *
      * @return int|null
      */
-    public function get_charcount() : ?int {
+    public function get_charcount(): ?int {
         return $this->charcount;
     }
 
@@ -377,7 +377,7 @@ class post {
      * @param \stdClass $record A record ready to be inserted / updated in DB.
      * @return void.
      */
-    public static function add_message_counts(\stdClass $record) : void {
+    public static function add_message_counts(\stdClass $record): void {
         if (!empty($record->message)) {
             $record->wordcount = count_words($record->message, $record->messageformat);
             $record->charcount = count_letters($record->message, $record->messageformat);

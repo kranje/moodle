@@ -1400,6 +1400,8 @@ function assign_pluginfile($course,
 function mod_assign_output_fragment_gradingpanel($args) {
     global $CFG;
 
+    \core\session\manager::write_close(); // No changes to session in this function.
+
     $context = $args['context'];
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -1787,7 +1789,7 @@ function mod_assign_user_preferences(): array {
  * @param  array  $args The path (the part after the filearea and before the filename).
  * @return array The itemid and the filepath inside the $args path, for the defined filearea.
  */
-function mod_assign_get_path_from_pluginfile(string $filearea, array $args) : array {
+function mod_assign_get_path_from_pluginfile(string $filearea, array $args): array {
     // Assign never has an itemid (the number represents the revision but it's not stored in database).
     array_shift($args);
 

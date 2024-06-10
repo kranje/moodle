@@ -1235,7 +1235,7 @@ class restore_groups_structure_step extends restore_structure_step {
      */
     public function process_groupcustomfield($data) {
         $newgroup = $this->get_mapping('group', $data['groupid']);
-        $data['groupid'] = $newgroup->newitemid;
+        $data['groupid'] = $newgroup->newitemid ?? $data['groupid'];
         $handler = \core_group\customfield\group_handler::create();
         $handler->restore_instance_data_from_backup($this->task, $data);
     }
@@ -1292,7 +1292,7 @@ class restore_groups_structure_step extends restore_structure_step {
      */
     public function process_groupingcustomfield($data) {
         $newgroup = $this->get_mapping('grouping', $data['groupingid']);
-        $data['groupingid'] = $newgroup->newitemid;
+        $data['groupingid'] = $newgroup->newitemid ?? $data['groupingid'];
         $handler = \core_group\customfield\grouping_handler::create();
         $handler->restore_instance_data_from_backup($this->task, $data);
     }
@@ -1629,6 +1629,8 @@ class restore_section_structure_step extends restore_structure_step {
                             $data, true);
                 }
             }
+            $section->component = $data->component ?? null;
+            $section->itemid = $data->itemid ?? null;
             $newitemid = $DB->insert_record('course_sections', $section);
             $section->id = $newitemid;
 
@@ -2008,7 +2010,11 @@ class restore_course_structure_step extends restore_structure_step {
      */
     public function process_customfield($data) {
         $handler = core_course\customfield\course_handler::create();
-        $handler->restore_instance_data_from_backup($this->task, $data);
+        $newid = $handler->restore_instance_data_from_backup($this->task, $data);
+
+        if ($newid) {
+            $handler->restore_define_structure($this, $newid, $data['id']);
+        }
     }
 
     /**
@@ -2018,7 +2024,7 @@ class restore_course_structure_step extends restore_structure_step {
      * @throws base_step_exception
      * @throws dml_exception
      */
-    public function process_course_format_option(array $data) : void {
+    public function process_course_format_option(array $data): void {
         global $DB;
 
         if ($data['sectionid']) {
