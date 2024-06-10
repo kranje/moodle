@@ -71,8 +71,8 @@ class groupconcat_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['Bob', 'Apple, Banana, Banana'],
-            ['Anonymous', 'User'],
             ['Admin', 'User'],
+            ['Anonymous', 'User'],
         ], array_map('array_values', $content));
     }
 

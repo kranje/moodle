@@ -66,8 +66,8 @@ class countdistinct_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['Bob', 2],
-            ['Anonymous', 1],
             ['Admin', 1],
+            ['Anonymous', 1],
         ], array_map('array_values', $content));
     }
 

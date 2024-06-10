@@ -177,7 +177,7 @@ class users_test extends core_reportbuilder_testcase {
             $theme,
             $tag,
             $cohortname,
-        ] = array_values($content[1]);
+        ] = array_values($content[2]);
 
         $this->assertStringContainsString(fullname($user), $fullnamewithlink);
         $this->assertStringContainsString(fullname($user), $fullnamewithpicture);
@@ -419,7 +419,7 @@ class users_test extends core_reportbuilder_testcase {
             'Filter timemodified (no match)' => ['user:timemodified', [
                 'user:timemodified_operator' => date::DATE_RANGE,
                 'user:timemodified_to' => 1622502000,
-            ], false],
+            ], true, 'anonymous_user'],
             'Filter lastaccess' => ['user:lastaccess', [
                 'user:lastaccess_operator' => date::DATE_EMPTY,
             ], true],

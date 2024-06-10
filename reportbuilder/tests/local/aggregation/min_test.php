@@ -65,8 +65,8 @@ class min_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['Bob', 'Yes'],
-            ['Anonymous', 'No'],
             ['Admin', 'No'],
+            ['Anonymous', 'No'],
         ], array_map('array_values', $content));
     }
 }

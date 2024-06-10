@@ -39,7 +39,7 @@ class courserole_test extends advanced_testcase {
      */
     public static function get_sql_filter_provider(): array {
         return [
-            'Empty filter' => ['', '', '', ['admin', 'guest', 'user1', 'user2', 'user3', 'user4']],
+            'Empty filter' => ['', '', '', ['admin', 'anonymous_user', 'guest', 'user1', 'user2', 'user3', 'user4']],
             'Filter by role' => ['editingteacher', '', '', ['user1', 'user3', 'user4']],
             'Filter by role in category' => ['editingteacher', 'cat2', '', ['user1', 'user3']],
             'Filter by role in category and course' => ['editingteacher', 'cat2', 'course2', ['user1']],
