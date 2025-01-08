@@ -131,6 +131,9 @@ class di {
                 return new \core\system_clock();
             },
             \Psr\Clock\ClockInterface::class => \DI\get(\core\clock::class),
+
+            // Note: libphonenumber PhoneNumberUtil uses a singleton.
+            \libphonenumber\PhoneNumberUtil::class => fn() => \libphonenumber\PhoneNumberUtil::getInstance(),
         ]);
 
         // Add any additional definitions using hooks.

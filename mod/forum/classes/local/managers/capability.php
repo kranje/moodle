@@ -108,7 +108,7 @@ class capability {
      * @param int|null $groupid The current activity group id
      * @return bool
      */
-    public function can_create_discussions(stdClass $user, int $groupid = null): bool {
+    public function can_create_discussions(stdClass $user, ?int $groupid = null): bool {
         if (isguestuser($user) or !isloggedin()) {
             return false;
         }
@@ -726,7 +726,7 @@ class capability {
      * @param stdClass $gradee The user being graded
      * @return bool
      */
-    public function can_grade(stdClass $grader, stdClass $gradee = null): bool {
+    public function can_grade(stdClass $grader, ?stdClass $gradee = null): bool {
         if (!has_capability('mod/forum:grade', $this->get_context(), $grader)) {
             return false;
         }
