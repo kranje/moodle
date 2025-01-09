@@ -406,10 +406,11 @@ final class user_profile_fields_test extends core_reportbuilder_testcase {
      * @param string $filtername
      * @param array $filtervalues
      * @param string|null $expectmatch
+     * @param int $expectmatchnumber
      *
      * @dataProvider custom_report_filter_provider
      */
-    public function test_custom_report_filter(string $filtername, array $filtervalues, ?string $expectmatch = null): void {
+    public function test_custom_report_filter(string $filtername, array $filtervalues, ?string $expectmatch = null, ?int $expectmatchnumber = 1): void {
         $this->resetAfterTest();
         $this->setAdminUser();
 
@@ -437,7 +438,7 @@ final class user_profile_fields_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'), 0, $filtervalues);
 
         if ($expectmatch !== null) {
-            $this->assertCount(2, $content);
+            $this->assertCount($expectmatchnumber, $content);
             $this->assertEquals($expectmatch, reset($content[0]));
         } else {
             $this->assertEmpty($content);
