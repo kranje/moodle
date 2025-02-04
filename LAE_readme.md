@@ -1,4 +1,4 @@
-# [Moodle Liberal Arts Edition v4.4.5-LAE26.0.4]
+# [Moodle Liberal Arts Edition v4.5.1-LAE27.0.0]
 
 Welcome to the Moodle Liberal Arts Edition. The goal of the LAE is to provide a coherent package for modules, patches, and code developed (or improved) by the Collaborative Liberal Arts Moodle Project (CLAMP).
 
@@ -16,7 +16,7 @@ https://www.clamp-it.org/collaboration-and-development-tools/
 
 ## Contents
 
-Moodle 4.4.5+LAE26.0.4 consists of the core Moodle 4.4.5 release plus a number of CLAMP-developed features and bug fixes.
+Moodle 4.5.1+LAE27.0.0 consists of the core Moodle 4.5.1 release plus a number of CLAMP-developed features and bug fixes.
 
 The following core features are included:
 
@@ -55,6 +55,10 @@ A course report which displays the user pictures for everyone enrolled in a cour
 
 This report plugin, developed by Tim Hunt at the Open University,  allows Administrators to set up arbitrary database queries to act as ad-hoc reports.
 
+### Accessibility Filescan
+
+A local plugin and accompanying block for displaying accessibility information about PDF uploads in a course to the instructors.
+
 ## Downloading the LAE
 
 You can get the LAE in two ways:
@@ -62,15 +66,15 @@ You can get the LAE in two ways:
 * Download the tar and zip packages from the CLAMP web site: <http://www.clamp-it.org/code/>
 * Download the current release branch from the CLAMP code repository:
 
-    git clone https://github.com/CLAMP-IT/moodle v4.4.5-LAE26.0.4
-    git checkout -b v4.4.5-LAE26.0.4
+    git clone https://github.com/CLAMP-IT/moodle v4.5.1-LAE27.0.0
+    git checkout -b v4.5.1-LAE27.0.0
 
-By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v4.4.5-LAE26.0.4-base tag instead.
+By default this is the "Package" version which includes the contributed modules. If you just want the core version of the LAE checkout the v4.5.1-LAE27.0.0-base tag instead.
 
 CLAMP maintains two branches for each major version:
 
-* LAE\_404\_STABLE contains the core code only
-* LAE\_404\_PACKAGE includes the contributed modules
+* LAE\_405\_STABLE contains the core code only
+* LAE\_405\_PACKAGE includes the contributed modules
 
 ## Installing the LAE
 
