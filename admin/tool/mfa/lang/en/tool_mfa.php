@@ -71,7 +71,6 @@ $string['factorsetup'] = '\'{$a}\' successfully set up.';
 $string['fallback'] = 'Fallback factor';
 $string['fallback_info'] = 'This factor is a fallback if no other factors are configured. This factor will always fail.';
 $string['guidance'] = 'Multi-factor authentication user guide';
-$string['inputrequired'] = 'User input';
 $string['ipatcreation'] = 'IP address when factor created';
 $string['lastused'] = 'Last used';
 $string['locked'] = '{$a} (Unavailable)';
@@ -152,7 +151,6 @@ $string['settings:weight'] = 'Factor weight';
 $string['settings:weight_help'] = 'The weight of this factor if passed. A user needs at least 100 points to log in.';
 $string['setupfactor'] = 'Set up factor';
 $string['setupfactorbuttonadditional'] = 'Add additional factor';
-$string['setuprequired'] = 'User setup';
 $string['state:fail'] = 'Fail';
 $string['state:locked'] = 'Locked';
 $string['state:neutral'] = 'Neutral';
@@ -175,9 +173,6 @@ $string['weight'] = 'Weight';
 $string['yesremove'] = 'Yes, remove';
 $string['yesreplace'] = 'Yes, replace';
 
-// Deprecated since Moodle 4.4.
-$string['created'] = 'Created';
-$string['createdfromip'] = 'Created from IP';
-$string['lastverified'] = 'Last verified';
-$string['revoke'] = 'Revoke';
-$string['setup'] = 'Setup';
+// Deprecated since Moodle 5.0.
+$string['inputrequired'] = 'User input';
+$string['setuprequired'] = 'User setup';

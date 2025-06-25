@@ -54,8 +54,6 @@ define('SCORM_DISPLAY_ATTEMPTSTATUS_ENTRY', 3);
 define('SCORM_EVENT_TYPE_OPEN', 'open');
 define('SCORM_EVENT_TYPE_CLOSE', 'close');
 
-require_once(__DIR__ . '/deprecatedlib.php');
-
 /**
  * Return an array of status options
  *
@@ -1105,13 +1103,6 @@ function scorm_debug_log_remove($type, $scoid) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
- */
-function scorm_print_overview() {
-    throw new coding_exception('scorm_print_overview() can not be used any more and is obsolete.');
-}
-
-/**
  * Return a list of page types
  * @param string $pagetype current page type
  * @param stdClass $parentcontext Block's parent context
@@ -1463,7 +1454,6 @@ function mod_scorm_get_fontawesome_icon_map() {
     return [
         'mod_scorm:asset' => 'fa-regular fa-file-zipper',
         'mod_scorm:assetc' => 'fa-regular fa-file-zipper',
-        'mod_scorm:browsed' => 'fa-book',
         'mod_scorm:completed' => 'fa-regular fa-square-check',
         'mod_scorm:failed' => 'fa-xmark',
         'mod_scorm:incomplete' => 'fa-regular fa-pen-to-square',

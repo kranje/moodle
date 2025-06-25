@@ -1079,6 +1079,7 @@ function purify_html($text, $options = array()) {
 
         $config->set('HTML.DefinitionID', 'moodlehtml');
         $config->set('HTML.DefinitionRev', 7);
+        $config->set('CSS.Proprietary', true);
         $config->set('Cache.SerializerPath', $cachedir);
         $config->set('Cache.SerializerPermissions', $CFG->directorypermissions);
         $config->set('Core.NormalizeNewlines', false);
@@ -1237,15 +1238,9 @@ function text_to_html($text, $smileyignored = null, $para = true, $newlines = tr
  * @return string Converted text
  */
 function markdown_to_html($text) {
-    global $CFG;
-
     if ($text === '' or $text === null) {
         return $text;
     }
-
-    require_once($CFG->libdir .'/markdown/MarkdownInterface.php');
-    require_once($CFG->libdir .'/markdown/Markdown.php');
-    require_once($CFG->libdir .'/markdown/MarkdownExtra.php');
 
     return \Michelf\MarkdownExtra::defaultTransform($text);
 }

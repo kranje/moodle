@@ -569,7 +569,6 @@ abstract class backup_controller_dbops extends backup_dbops {
                         'backup_general_userscompletion'    => 'userscompletion',
                         'backup_general_logs'               => 'logs',
                         'backup_general_histories'          => 'grade_histories',
-                        'backup_general_questionbank'       => 'questionbank',
                         'backup_general_groups'             => 'groups',
                         'backup_general_competencies'       => 'competencies',
                         'backup_general_customfield'        => 'customfield',
@@ -588,7 +587,6 @@ abstract class backup_controller_dbops extends backup_dbops {
                         'backup_import_badges'             => 'badges',
                         'backup_import_calendarevents'     => 'calendarevents',
                         'backup_import_permissions'        => 'permissions',
-                        'backup_import_questionbank'       => 'questionbank',
                         'backup_import_groups'             => 'groups',
                         'backup_import_competencies'       => 'competencies',
                         'backup_import_customfield'        => 'customfield',
@@ -603,7 +601,6 @@ abstract class backup_controller_dbops extends backup_dbops {
                          'activities',
                          'blocks',
                          'filters',
-                         'questionbank'
                     );
                     self::force_enable_settings($controller, $settings);
                     // Badges are not included by default when duplicating activities.
@@ -625,7 +622,6 @@ abstract class backup_controller_dbops extends backup_dbops {
                         'backup_auto_userscompletion'    => 'userscompletion',
                         'backup_auto_logs'               => 'logs',
                         'backup_auto_histories'          => 'grade_histories',
-                        'backup_auto_questionbank'       => 'questionbank',
                         'backup_auto_groups'             => 'groups',
                         'backup_auto_competencies'       => 'competencies',
                         'backup_auto_customfield'        => 'customfield',

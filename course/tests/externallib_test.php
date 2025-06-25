@@ -1907,8 +1907,6 @@ final class externallib_test extends externallib_advanced_testcase {
         list($course, $forumcm, $datacm, $pagecm, $labelcm, $urlcm) = $this->prepare_get_course_contents_test();
 
         // Add subsection.
-        $manager = \core_plugin_manager::resolve_plugininfo_class('mod');
-        $manager::enable_plugin('subsection', 1);
         $modsubsection = $this->getDataGenerator()->create_module('subsection', ['course' => $course->id, 'section' => 2]);
 
         // This is needed until MDL-76728 is resolved.
@@ -2849,7 +2847,7 @@ final class externallib_test extends externallib_advanced_testcase {
             foreach ($course['options'] as $option) {
                 $navoptions->{$option['name']} = $option['available'];
             }
-            $this->assertCount(9, $course['options']);
+            $this->assertCount(10, $course['options']);
             if ($course['id'] == SITEID) {
                 $this->assertTrue($navoptions->blogs);
                 $this->assertFalse($navoptions->notes);
@@ -2860,6 +2858,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 $this->assertFalse($navoptions->search);
                 $this->assertTrue($navoptions->competencies);
                 $this->assertFalse($navoptions->communication);
+                $this->assertFalse($navoptions->overview);
             } else {
                 $this->assertTrue($navoptions->blogs);
                 $this->assertFalse($navoptions->notes);
@@ -2870,6 +2869,7 @@ final class externallib_test extends externallib_advanced_testcase {
                 $this->assertFalse($navoptions->search);
                 $this->assertTrue($navoptions->competencies);
                 $this->assertFalse($navoptions->communication);
+                $this->assertTrue($navoptions->overview);
             }
         }
     }

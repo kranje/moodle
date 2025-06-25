@@ -15,10 +15,6 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace tool_mfa;
-use tool_mfa\tool_mfa_trait;
-
-defined('MOODLE_INTERNAL') || die();
-require_once(__DIR__ . '/tool_mfa_trait.php');
 
 /**
  * Tests for MFA manager class.
@@ -30,7 +26,7 @@ require_once(__DIR__ . '/tool_mfa_trait.php');
  */
 final class manager_test extends \advanced_testcase {
 
-    use tool_mfa_trait;
+    use \tool_mfa\tests\mfa_settings_trait;
 
     /**
      * Tests getting the factor total weight
@@ -89,6 +85,9 @@ final class manager_test extends \advanced_testcase {
         // Create and login a user.
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user);
+
+        // Disable the email factor (enabled by default).
+        set_config('enabled', 0, 'factor_email');
 
         // Check for fail status with no factors.
         $this->assertEquals(\tool_mfa\plugininfo\factor::STATE_FAIL, \tool_mfa\manager::get_status());
@@ -389,6 +388,8 @@ final class manager_test extends \advanced_testcase {
         $this->setUser($user);
         set_config('enabled', 1, 'factor_nosetup');
         set_config('enabled', 1, 'tool_mfa');
+        // Disable the email factor (enabled by default).
+        set_config('enabled', 0, 'factor_email');
 
         // Capability Check.
         $this->assertTrue(\tool_mfa\manager::is_ready());

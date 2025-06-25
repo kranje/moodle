@@ -2156,7 +2156,7 @@ EOF;
     }
 
     /**
-     * Checks if database family used is using one of the specified, else skip. (mysql, postgres, mssql, oracle, etc.)
+     * Checks if database family used is using one of the specified, else skip. (mysql, postgres, mssql, etc.)
      *
      * @Given /^database family used is one of the following:$/
      * @param TableNode $databasefamilies list of database.
@@ -2448,7 +2448,7 @@ EOF;
         }
 
         // Make the provided editor the default one in $CFG->texteditors by
-        // moving it to the first [editor],atto,tiny,textarea on the list.
+        // moving it to the first [editor],tiny,textarea on the list.
         $list = explode(',', $CFG->texteditors);
         array_unshift($list, $editor);
         $list = array_unique($list);

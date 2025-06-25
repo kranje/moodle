@@ -515,6 +515,7 @@ $string['defaulthomepage'] = 'Start page for users';
 $string['defaultrequestcategory'] = 'Default category for course requests';
 $string['defaultsettinginfo'] = 'Default: {$a}';
 $string['defaultuserroleid'] = 'Default role for all users';
+$string['deletedplugintypesdetected'] = 'A deleted plugin, \'{$a}\', was detected. This should have been migrated/uninstalled during the deprecation window. This is now an unsupported plugin type and installation/upgrade cannot continue until this plugin is uninstalled.';
 $string['deleteincompleteusers'] = 'Delete incomplete users after';
 $string['deleteunconfirmed'] = 'Delete not fully setup users after';
 $string['deleteuser'] = 'Delete user';
@@ -760,12 +761,7 @@ $string['choosefiletoedit'] = 'Choose file to edit';
 $string['h5pgetcontenttypestask'] = 'Download available H5P content types from h5p.org';
 $string['taskh5pcleanup'] = 'Unused H5P files cleanup';
 $string['iconvrequired'] = 'Installing ICONV extension is required.';
-$string['igbinary322buggyversion'] = 'The php-igbinary extension installed on the site can lead to problems when running with PHP 7.2. You are recommended to either upgrade to php-igbinary 3.2.5 or later, or alternatively to upgrade to PHP 7.3 or later.';
 $string['ignore'] = 'Ignore';
-$string['importantupdates_content'] = '<p>In Moodle 5.0, Chat and Survey activities are removed from core Moodle. They are available as plugins in the
-<a href="https://moodle.org/plugins/">Moodle plugins directory</a>.</p>
-<p>If you wish to continue using Chat or Survey on your site, you can install them as plugins when upgrading to Moodle 5.0.</p>';
-$string['importantupdates_title'] = 'Important update about Chat and Survey activities';
 $string['includemoduleuserdata'] = 'Include module user data';
 $string['incompatibleblocks'] = 'Incompatible blocks';
 $string['indexdata'] = 'Index data';
@@ -920,6 +916,8 @@ $string['minpasswordnonalphanum'] = 'Non-alphanumeric characters';
 $string['minpasswordupper'] = 'Uppercase letters';
 $string['misc'] = 'Miscellaneous';
 $string['mlbackendsettings'] = 'Machine learning backend settings';
+$string['navfilter'] = 'Filter custom menu';
+$string['navfilter_desc'] = 'Process the custom menu through Moodle filters that are set to apply to <strong>Content and Headings</strong>. Useful for enabling dynamic custom menu items.';
 $string['mnetrestore_extusers'] = '<strong>Note:</strong> This backup file contains remote Moodle Network user accounts which will be restored as part of the process.';
 $string['mnetrestore_extusers_admin'] = '<strong>Note:</strong> This backup file seems to come from a different Moodle installation and contains remote Moodle Network user accounts. The restore process will try to match the Moodle Network hosts for all created users. Those not matching will be automatically switched to internal authentication (instead of mnet one). The restore log will inform you about that.';
 $string['mnetrestore_extusers_mismatch'] = '<strong>Note:</strong> This backup file apparently originates from a different Moodle installation and contains remote Moodle Network user accounts that may fail to restore. This operation is unsupported. If you are certain that it was created on this Moodle installation, or you can ensure that all the needed Moodle Network Hosts are configured, you may want to still try the restore.';
@@ -988,7 +986,6 @@ $string['opensslrecommended'] = 'Installing the optional OpenSSL library is high
 $string['opensslrequired'] = 'The OpenSSL PHP extension is now required by Moodle to provide stronger cryptographic services.';
 $string['opentowebcrawlers'] = 'Open to search engines';
 $string['optionalmaintenancemessage'] = 'Optional maintenance message';
-$string['oracledatabaseinuse'] = 'Oracle DB support is to be removed. Moodle 4.5 will be the last version with Oracle DB support. For details, see the announcement on moodle.org <a href="https://moodle.org/mod/forum/discuss.php?d=456122">Oracle database support in LMS deprecation</a>.';
 $string['order1'] = 'First';
 $string['order2'] = 'Second';
 $string['order3'] = 'Third';
@@ -1163,6 +1160,7 @@ $string['purgecachesconfirm'] = 'Moodle can cache themes, JavaScript, language s
 $string['purgecachesfinished'] = 'All caches were purged.';
 $string['purgecachesnoneselected'] = 'Select one or more caches to purge';
 $string['purgecachespage'] = 'Purge caches';
+$string['purgecoursecache'] = 'Courses';
 $string['purgefiltercache'] = 'Text filters';
 $string['purgejscache'] = 'JavaScript';
 $string['purgelangcache'] = 'Language strings';
@@ -1625,43 +1623,16 @@ $string['cachesessionhelp'] = 'User specific cache that expires when the user\'s
 $string['cacheapplication'] = 'Application cache';
 $string['cacheapplicationhelp'] = 'Cached items are shared among all users and expire by a determined time to live (ttl).';
 
-// Deprecated since Moodle 4.2.
-$string['blockunprotect'] = 'Unprotect';
-
-// Deprecated since Moodle 4.3.
-$string['configenabledevicedetection'] = 'Enables detection of mobiles, smartphones, tablets or default devices (desktop PCs, laptops, etc) for the application of themes and other features.';
-$string['devicedetectregex'] = 'Device detection regular expressions';
-$string['devicedetectregex_desc'] = '<p>By default, Moodle can detect devices of the type default (desktop PCs, laptops, etc), mobile (phones and small hand held devices), tablet (iPads, Android tablets) and legacy (Internet Explorer 6 users).  The theme selector can be used to apply separate themes to all of these.  This setting allows regular expressions that allow the detection of extra device types (these take precedence over the default types).</p>
-<p>For example, you could enter the regular expression \'/(MIDP-1.0|Maemo|Windows CE)/\' to detect some commonly used feature phones add the return value \'featurephone\'.  This adds \'featurephone\' on the theme selector that would allow you to add a theme that would be used on these devices.  Other phones would still use the theme selected for the mobile device type.</p>';
-$string['devicedetectregexexpression'] = 'Regular expression';
-$string['devicedetectregexvalue'] = 'Return value';
-$string['enabledevicedetection'] = 'Enable device detection';
-$string['selectdevice'] = 'Select device';
-$string['selecttheme'] = 'Select theme for {$a} device';
-$string['themenoselected'] = 'No theme selected';
-$string['unsettheme'] = 'Unset theme';
-
-// Deprecated since Moodle 4.4.
-$string['taskdeletecachetext'] = 'Delete old text cache records';
-$string['themesettings'] = 'Theme settings';
-$string['linkcoursesections'] = 'Always link course sections';
-$string['linkcoursesections_help'] = 'Always try to provide a link for course sections. Course sections are usually only shown as links if the course format displays a single section per page. If this setting is enabled a link will always be provided.';
-$string['moodleapp'] = 'Moodle app';
-$string['moodleapp_help'] = '<p>The free Moodle app enables users to access their courses on mobile devices. Additional app features are available with a Pro or Premium app plan.</p>
-<a href="https://moodle.com/mobile-app">Get the Moodle app</a><br />
-<a href="https://apps.moodle.com">Moodle Apps Portal</a>';
-$string['moodlebrandedapp_help'] = '<p>The Branded Moodle app has all the functionality of our free mobile app for Moodle combined with your own custom branding.</p>
-<a href="https://moodle.com/branded-app">About the Branded Moodle app</a>';
-$string['moodlepartners'] = 'Moodle Partners';
-$string['moodlepartners_help'] = '<p>Moodle Partners are services providers that are certified by Moodle HQ to provide high quality Moodle services for your organisation\'s online learning environment.</p>
-<a href="https://moodle.com/about-partners/">About our Partners</a><br />
-<a href="https://moodle.com/partners">Find a Partner</a>';
-$string['moodleservices'] = 'Moodle services';
-$string['moodleservices_help'] = 'Make sure you get the best from your Moodle learning environment by using these Moodle services:';
-
 // Deprecated since Moodle 4.5.
 $string['registration_help'] = 'By registering:
 
 * You will receive security alerts
 * You can activate mobile app push notifications from your site
 * You are contributing to our Moodle statistics of the worldwide community';
+
+// Deprecated since Moodle 5.0.
+$string['importantupdates_content'] = '<p>In Moodle 5.0, Chat and Survey activities are removed from core Moodle. They are available as plugins in the
+<a href="https://moodle.org/plugins/">Moodle plugins directory</a>.</p>
+<p>If you wish to continue using Chat or Survey on your site, you can install them as plugins when upgrading to Moodle 5.0.</p>';
+$string['importantupdates_title'] = 'Important update about Chat and Survey activities';
+$string['igbinary322buggyversion'] = 'The php-igbinary extension installed on the site can lead to problems when running with PHP 7.2. You are recommended to either upgrade to php-igbinary 3.2.5 or later, or alternatively to upgrade to PHP 7.3 or later.';
