@@ -42,11 +42,11 @@ final class audience_test extends advanced_testcase {
      */
     public static function get_sql_filter_provider(): array {
         return [
-            [select::ANY_VALUE, null, ['user1', 'user2', 'admin', 'guest']],
+            [select::ANY_VALUE, null, ['user1', 'user2', 'admin', 'anonymous_user', 'guest']],
             [select::EQUAL_TO, 'audience1', ['user1']],
             [select::EQUAL_TO, 'audience2', ['user2']],
-            [select::NOT_EQUAL_TO, 'audience1', ['user2', 'admin', 'guest']],
-            [select::NOT_EQUAL_TO, 'audience2', ['user1', 'admin', 'guest']],
+            [select::NOT_EQUAL_TO, 'audience1', ['user2', 'admin', 'anonymous_user', 'guest']],
+            [select::NOT_EQUAL_TO, 'audience2', ['user1', 'admin', 'anonymous_user', 'guest']],
         ];
     }
 

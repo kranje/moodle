@@ -75,7 +75,7 @@ final class date_test extends core_reportbuilder_testcase {
 
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
-            ['', 'Admin'],
+            ['', 'Admin,Anonymous'],
             ['Tuesday, 1 June 2021', 'Andy, Bob'],
             ['Wednesday, 2 June 2021', 'Charlie'],
         ], array_map('array_values', $content));
