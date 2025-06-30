@@ -846,8 +846,8 @@ final class report_test extends advanced_testcase {
         $generator = $this->getDataGenerator()->get_plugin_generator('core_reportbuilder');
         $report = $generator->create_report(['name' => 'My report', 'source' => users::class]);
 
-        // There are two users, the admin plus the user we just created.
-        $this->assertEquals(2, report::get_report_row_count($report->get('id')));
+        // There are three users, the admin and anonymous user plus the user we just created.
+        $this->assertEquals(3, report::get_report_row_count($report->get('id')));
     }
 
     /**
@@ -873,7 +873,7 @@ final class report_test extends advanced_testcase {
 
         // There are two users, the admin plus the user we just created.
         $this->assertEquals(
-            2,
+            3,
             report::get_report_row_count($reportaccesslist->get('id'), ['id' => $report->get('id')],
         ));
     }

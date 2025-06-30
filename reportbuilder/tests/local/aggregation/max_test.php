@@ -63,8 +63,8 @@ final class max_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['Bob', 'Yes'],
-            ['Admin', 'No'],
             ['Anonymous', 'No'],
+            ['Admin', 'No'],
         ], array_map('array_values', $content));
     }
 

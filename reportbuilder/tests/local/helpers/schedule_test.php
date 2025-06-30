@@ -264,7 +264,7 @@ final class schedule_test extends advanced_testcase {
         // There are only two rows in the report (admin and anonymous users).
         $count = schedule::get_schedule_report_count($schedule);
         $this->assertDebuggingCalled();
-        $this->assertEquals(3, $count);
+        $this->assertEquals(2, $count);
     }
 
     /**
