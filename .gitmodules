@@ -106,3 +106,24 @@
 [submodule "plugins/mod/attendance"]
 	path = plugins/mod/attendance
 	url = https://github.com/danmarsden/moodle-mod_attendance.git
+[submodule "plugins/lib/editor/tiny/plugins/wordimport"]
+	path = plugins/lib/editor/tiny/plugins/wordimport
+	url = https://codeberg.org/linos/moodle-tiny_wordimport.git
+[submodule "plugins/lib/editor/tiny/plugins/cloze"]
+	path = plugins/lib/editor/tiny/plugins/cloze
+	url = https://github.com/srobotta/moodle-tiny_cloze.git
+[submodule "plugins/lib/editor/tiny/plugins/fontcolor"]
+	path = plugins/lib/editor/tiny/plugins/fontcolor
+	url = https://github.com/bfh/moodle-tiny_fontcolor.git
+[submodule "plugins/lib/editor/tiny/plugins/poodll"]
+	path = plugins/lib/editor/tiny/plugins/poodll
+	url = https://github.com/justinhunt/moodle-tiny_poodll.git
+[submodule "plugins/lib/editor/tiny/plugins/wordlimit"]
+	path = plugins/lib/editor/tiny/plugins/wordlimit
+	url = https://codeberg.org/linos/moodle-tiny_wordlimit.git
+[submodule "plugins/lib/editor/tiny/plugins/panoptoltibutton"]
+	path = plugins/lib/editor/tiny/plugins/panoptoltibutton
+	url = https://github.com/Panopto/moodle-tiny_panoptoltibutton.git
+[submodule "plugins/filter/poodll"]
+	path = plugins/filter/poodll
+	url = https://github.com/justinhunt/moodle-filter_poodll.git
