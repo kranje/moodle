@@ -1,0 +1,108 @@
+[submodule "plugins/mod/checklist"]
+	path = plugins/mod/checklist
+	url = https://github.com/davosmith/moodle-checklist.git
+[submodule "plugins/mod/checkmark"]
+	path = plugins/mod/checkmark
+	url = https://github.com/academic-moodle-cooperation/moodle-mod_checkmark.git
+[submodule "plugins/mod/diary"]
+	path = plugins/mod/diary
+	url = https://github.com/drachels/moodle-mod_diary.git
+[submodule "plugins/mod/journal"]
+	path = plugins/mod/journal
+	url = https://github.com/elearningsoftware/moodle-mod_journal.git
+[submodule "plugins/mod/mootimeter"]
+	path = plugins/mod/mootimeter
+	url = https://github.com/mebis-lp/moodle-mod_mootimeter.git
+[submodule "plugins/mod/organizer"]
+	path = plugins/mod/organizer
+	url = https://github.com/academic-moodle-cooperation/moodle-mod_organizer.git
+[submodule "plugins/mod/oublog"]
+	path = plugins/mod/oublog
+	url = https://github.com/moodleou/moodle-mod_oublog.git
+[submodule "plugins/mod/panopto"]
+	path = plugins/mod/panopto
+	url = https://github.com/Panopto/Moodle-2.0-plugin-for-Panopto.git
+[submodule "plugins/mod/panoptosubmission"]
+	path = plugins/mod/panoptosubmission
+	url = https://github.com/Panopto/moodle-mod_panoptosubmission.git
+[submodule "plugins/mod/questionnaire"]
+	path = plugins/mod/questionnaire
+	url = https://github.com/PoetOS/moodle-mod_questionnaire.git
+[submodule "plugins/mod/scheduler"]
+	path = plugins/mod/scheduler
+	url = https://github.com/bostelm/moodle-mod_scheduler.git
+[submodule "plugins/mod/publication"]
+	path = plugins/mod/publication
+	url = https://github.com/academic-moodle-cooperation/moodle-mod_publication.git
+[submodule "plugins/mod/subcourse"]
+	path = plugins/mod/subcourse
+	url = https://github.com/catalyst/moodle-mod_subcourse.git
+[submodule "plugins/mod/vpl"]
+	path = plugins/mod/vpl
+	url = https://github.com/CentreCyberKnight/moodle-mod_vplAnte.git
+[submodule "plugins/mod/book/tool/wordimport"]
+	path = plugins/mod/book/tool/wordimport
+	url = https://github.com/ecampbell/moodle-booktool_wordimport.git
+[submodule "plugins/mod/assign/feedback/cloudpoodll"]
+	path = plugins/mod/assign/feedback/cloudpoodll
+	url = https://github.com/justinhunt/moodle-assignfeedback_cloudpoodll.git
+[submodule "plugins/mod/assign/submission/cloudpoodll"]
+	path = plugins/mod/assign/submission/cloudpoodll
+	url = https://github.com/justinhunt/moodle-assignsubmission_cloudpoodll.git
+[submodule "plugins/mod/data/field/poodll"]
+	path = plugins/mod/data/field/poodll
+	url = https://github.com/justinhunt/moodle-mod_data_field_poodll.git
+[submodule "plugins/question/type/cloudpoodll"]
+	path = plugins/question/type/cloudpoodll
+	url = https://github.com/justinhunt/moodle-qtype_cloudpoodll.git
+[submodule "plugins/question/type/multichoiceset"]
+	path = plugins/question/type/multichoiceset
+	url = https://github.com/ecampbell/moodle-qtype_multichoiceset.git
+[submodule "plugins/question/type/stack"]
+	path = plugins/question/type/stack
+	url = https://github.com/maths/moodle-qtype_stack.git
+[submodule "plugins/question/type/vplquestion"]
+	path = plugins/question/type/vplquestion
+	url = https://gricad-gitlab.univ-grenoble-alpes.fr/moodle-plugins/moodle-qtype_vplquestion.git
+[submodule "plugins/question/type/dfcbmexplicitvalidate"]
+	path = plugins/question/type/dfcbmexplicitvalidate
+	url = https://github.com/maths/moodle-qbehaviour_dfcbmexplicitvaildate.git
+[submodule "plugins/question/type/dfexplicitvalidate"]
+	path = plugins/question/type/dfexplicitvalidate
+	url = https://github.com/maths/moodle-qbehaviour_dfexplicitvaildate.git
+[submodule "plugins/question/type/deferredallnothing"]
+	path = plugins/question/type/deferredallnothing
+	url = https://github.com/dthies/moodle-qbehaviour_deferredallnothing.git
+[submodule "plugins/question/type/adaptiveallnothing"]
+	path = plugins/question/type/adaptiveallnothing
+	url = https://github.com/dthies/moodle-qbehaviour_adaptiveallnothing.git
+[submodule "plugins/question/format/wordtable"]
+	path = plugins/question/format/wordtable
+	url = https://github.com/ecampbell/moodle-qformat_wordtable.git
+[submodule "plugins/mod/quiz/report/essaydownload"]
+	path = plugins/mod/quiz/report/essaydownload
+	url = https://github.com/PhilippImhof/moodle-quiz_essaydownload.git
+[submodule "plugins/blocks/xp"]
+	path = plugins/blocks/xp
+	url = https://github.com/FMCorz/moodle-block_xp.git
+[submodule "plugins/blocks/checklist"]
+	path = plugins/blocks/checklist
+	url = https://github.com/davosmith/moodle-block_checklist.git
+[submodule "plugins/blocks/cinfo"]
+	path = plugins/blocks/cinfo
+	url = https://github.com/sokunthearithmakara/block_cinfo.git
+[submodule "plugins/blocks/microsoft"]
+	path = plugins/blocks/microsoft
+	url = https://github.com/microsoft/moodle-block_microsoft.git
+[submodule "plugins/blocks/panopto"]
+	path = plugins/blocks/panopto
+	url = https://github.com/Panopto/Moodle-2.0-plugin-for-Panopto.git
+[submodule "plugins/blocks/sharing_cart"]
+	path = plugins/blocks/sharing_cart
+	url = https://github.com/donhinkelman/moodle-block_sharing_cart.git
+[submodule "plugins/blocks/rbreport"]
+	path = plugins/blocks/rbreport
+	url = https://github.com/moodleworkplace/moodle-block_rbreport.git
+[submodule "plugins/mod/attendance"]
+	path = plugins/mod/attendance
+	url = https://github.com/danmarsden/moodle-mod_attendance.git
