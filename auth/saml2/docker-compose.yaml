@@ -1,5 +1,0 @@
-services:
-  saml2:
-    build: .
-    volumes:
-      - "./:/code"

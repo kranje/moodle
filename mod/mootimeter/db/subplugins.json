@@ -1,8 +1,0 @@
-{
-    "subplugintypes": {
-        "mootimetertool": "tools"
-    },
-    "plugintypes": {
-        "mootimetertool": "mod/mootimeter/tools"
-    }
-}
