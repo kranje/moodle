@@ -33,7 +33,7 @@ import {
   markerClass, markerSpan,
   isNull, strdecode, strencode, indexOfNode,
   getUuid, getFractionOptions, getQuestionTypes,
-  hasInvalidChars, hasOddBracketCount, isCustomGrade, setStr,
+  hasInvalidChars, isCustomGrade, setStr,
   selectCustomPercent
 } from './cloze';
 
@@ -181,7 +181,6 @@ const _getStr = async() => {
     {key: 'err_none_correct', component},
     {key: 'err_not_numeric', component},
     {key: 'err_invalid_chars', component},
-    {key: 'err_invalid_brackets', component},
   ];
   let langKeys = [
     'answer',
@@ -223,7 +222,6 @@ const _getStr = async() => {
     'err_none_correct',
     'err_not_numeric',
     'err_invalid_chars',
-    'err_invalid_brackets',
   ];
   if (hasQtypeMultianswerrgx(_editor)) {
     strToFetch.push({key: 'regexp', component: 'qtype_regexp'});
@@ -907,7 +905,6 @@ const _processFormData = function(validate) {
         }
         if (err === 'answer_not_numeric' || err === 'empty_answer'
           || err === 'correct_but_empty' || err === 'answer_invalid_chars'
-          || err === 'answer_odd_bracket_count'
         ) {
           answers.item(i).classList.add('error');
         } else if (err === 'tolerance_not_numeric') {
@@ -954,15 +951,9 @@ const _validateAnswers = function() {
         _answerdata[i].hasErrors.push('tolerance_not_numeric');
       }
     }
-    // We found a correct answer, when grade is marked as 100 or "=" and the answer is not empty.
-    if (_answerdata[i].fraction === '100' || _answerdata[i].fraction === '=') {
-      if (_answerdata[i].raw !== '') {
-        _answerdata[i].isCorrect = true;
-        hasCorrect = true;
-      } else {
-        _answerdata[i].hasErrors.push('correct_but_empty');
-        continue;
-      }
+    // Regex answers can use the . ^ $ * + { } \ / as a literal only (preceeded by a backslash).
+    if ((_qtype === 'REGEXP' || _qtype === 'REGEXP_C') && hasInvalidChars(_answerdata[i].raw)) {
+      _answerdata[i].hasErrors.push('answer_invalid_chars');
     }
     // Check the custom grade, that must be a percentage number between -100 and 100.
     if (_answerdata[i].isCustomGrade &&
@@ -971,19 +962,13 @@ const _validateAnswers = function() {
     ) {
       _answerdata[i].hasErrors.push('error_custom_rate');
     }
-    // Regex explanation is here: https://docs.moodle.org/500/en/Regular_Expression_Short-Answer_question_type
-    if (_qtype === 'REGEXP' || _qtype === 'REGEXP_C') {
-      // If the answer is somehat correct (positive grade), then the regex can use
-      // the . ^ $ * + { } \ / as literals only (preceeded by a backslash).
-      if ((_answerdata[i].isCorrect || _answerdata[i].isCustomGrade && _answerdata[i].fraction > 0) &&
-        hasInvalidChars(_answerdata[i].raw)
-      ) {
-        _answerdata[i].hasErrors.push('answer_invalid_chars');
-      }
-      // Check that any used braket that is not used as a literal, has
-      // as many opening as well as closing brakets.
-      if (hasOddBracketCount(_answerdata[i].raw)) {
-        _answerdata[i].hasErrors.push('answer_odd_bracket_count');
+    // We found a correct answer, when grade is marked as 100 or "=" and the answer is not empty.
+    if (_answerdata[i].fraction === '100' || _answerdata[i].fraction === '=') {
+      if (_answerdata[i].raw !== '') {
+        _answerdata[i].isCorrect = true;
+        hasCorrect = true;
+      } else {
+        _answerdata[i].hasErrors.push('correct_but_empty');
       }
     }
     errors = errors.concat(_answerdata[i].hasErrors);
@@ -1014,7 +999,6 @@ const _translateGlobalErrors = function(hasCorrectAnswer, errors) {
     errorcustomrate: STR.err_custom_rate,
     nonecorrect: STR.err_none_correct,
     answerinvalidchars: STR.err_invalid_chars,
-    answeroddbracketcount: STR.err_invalid_brackets,
   };
   for (const err of errors) {
     // If there's at least one correct answer, we filter out all empty answers and therefore do not
