@@ -106,23 +106,23 @@
 [submodule "mod/attendance"]
 	path = mod/attendance
 	url = https://github.com/danmarsden/moodle-mod_attendance.git
-[submodule "lib/editor/tiny/wordimport"]
-	path = lib/editor/tiny/wordimport
+[submodule "lib/editor/tiny/plugins/wordimport"]
+	path = lib/editor/tiny/plugins/wordimport
 	url = https://codeberg.org/linos/moodle-tiny_wordimport.git
-[submodule "lib/editor/tiny/cloze"]
-	path = lib/editor/tiny/cloze
+[submodule "lib/editor/tiny/plugins/cloze"]
+	path = lib/editor/tiny/plugins/cloze
 	url = https://github.com/srobotta/moodle-tiny_cloze.git
-[submodule "lib/editor/tiny/fontcolor"]
-	path = lib/editor/tiny/fontcolor
+[submodule "lib/editor/tiny/plugins/fontcolor"]
+	path = lib/editor/tiny/plugins/fontcolor
 	url = https://github.com/bfh/moodle-tiny_fontcolor.git
-[submodule "lib/editor/tiny/poodll"]
-	path = lib/editor/tiny/poodll
+[submodule "lib/editor/tiny/plugins/poodll"]
+	path = lib/editor/tiny/plugins/poodll
 	url = https://github.com/justinhunt/moodle-tiny_poodll.git
-[submodule "lib/editor/tiny/wordlimit"]
-	path = lib/editor/tiny/wordlimit
+[submodule "lib/editor/tiny/plugins/wordlimit"]
+	path = lib/editor/tiny/plugins/wordlimit
 	url = https://codeberg.org/linos/moodle-tiny_wordlimit.git
-[submodule "lib/editor/tiny/panoptoltibutton"]
-	path = lib/editor/tiny/panoptoltibutton
+[submodule "lib/editor/tiny/plugins/panoptoltibutton"]
+	path = lib/editor/tiny/plugins/panoptoltibutton
 	url = https://github.com/Panopto/moodle-tiny_panoptoltibutton.git
 [submodule "filter/poodll"]
 	path = filter/poodll
