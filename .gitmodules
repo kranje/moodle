@@ -112,9 +112,6 @@
 [submodule "mod/vpl"]
 	path = mod/vpl
 	url = https://github.com/CentreCyberKnight/moodle-mod_vplAnte.git
-[submodule "question/type/deferredallnothing"]
-	path = question/type/deferredallnothing
-	url = https://github.com/dthies/moodle-qbehaviour_deferredallnothing.git
 [submodule "mod/subcourse"]
 	path = mod/subcourse
 	url = https://github.com/catalyst/moodle-mod_subcourse.git
@@ -151,9 +148,6 @@
 [submodule "lib/editor/tiny/plugins/wordimport"]
 	path = lib/editor/tiny/plugins/wordimport
 	url = https://codeberg.org/linos/moodle-tiny_wordimport.git
-[submodule "question/type/dfexplicitvalidate"]
-	path = question/type/dfexplicitvalidate
-	url = https://github.com/maths/moodle-qbehaviour_dfexplicitvaildate.git
 [submodule "grade/grading/form/rubric_ranges"]
 	path = grade/grading/form/rubric_ranges
 	url = https://github.com/catalyst/moodle-gradingform_rubric_ranges.git
@@ -217,3 +211,6 @@
 [submodule "question/type/stack"]
 	path = question/type/stack
 	url = https://github.com/maths/moodle-qtype_stack.git
+[submodule "question/behaviour/dfcbmexplicitvaildate"]
+	path = question/behaviour/dfcbmexplicitvaildate
+	url = https://github.com/maths/moodle-qbehaviour_dfcbmexplicitvaildate.git
