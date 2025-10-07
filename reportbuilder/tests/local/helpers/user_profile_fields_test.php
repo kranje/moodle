@@ -368,7 +368,7 @@ final class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by menu profile field (default)' => ['user:profilefield_menu', [
                 'user:profilefield_menu_operator' => select::EQUAL_TO,
                 'user:profilefield_menu_value' => 'Cat',
-            ], 'anonymous_user', 2],
+            ], 'admin', 2],
             'Filter by menu profile field (no match)' => ['user:profilefield_menu', [
                 'user:profilefield_menu_operator' => select::EQUAL_TO,
                 'user:profilefield_menu_value' => 'Fish',
@@ -388,7 +388,7 @@ final class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by text profile field (default)' => ['user:profilefield_text', [
                 'user:profilefield_text_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_text_value' => 'default',
-            ], 'anonymous_user', 2],
+            ], 'admin', 2],
             'Filter by text profile field (no match)' => ['user:profilefield_text', [
                 'user:profilefield_text_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_text_value' => 'hola',
@@ -400,7 +400,7 @@ final class user_profile_fields_test extends core_reportbuilder_testcase {
             'Filter by textarea profile field (default)' => ['user:profilefield_textarea', [
                 'user:profilefield_textarea_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_textarea_value' => 'Default',
-            ], 'anonymous_user', 2],
+            ], 'admin', 2],
             'Filter by textarea profile field (no match)' => ['user:profilefield_textarea', [
                 'user:profilefield_textarea_operator' => text::IS_EMPTY,
                 'user:profilefield_textarea_value' => 'Adios',
