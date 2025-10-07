@@ -352,7 +352,7 @@ final class user_profile_fields_test extends core_reportbuilder_testcase {
             ], 'testuser'],
             'Filter by checkbox profile field (default)' => ['user:profilefield_checkbox', [
                 'user:profilefield_checkbox_operator' => boolean_select::CHECKED,
-            ], 'anonymous_user', 2],
+            ], 'admin', 2],
             'Filter by datetime profile field' => ['user:profilefield_datetime', [
                 'user:profilefield_datetime_operator' => date::DATE_RANGE,
                 'user:profilefield_datetime_from' => 1622502000,

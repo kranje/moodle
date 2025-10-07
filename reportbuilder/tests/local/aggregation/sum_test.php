@@ -63,8 +63,8 @@ final class sum_test extends core_reportbuilder_testcase {
         $content = $this->get_custom_report_content($report->get('id'));
         $this->assertEquals([
             ['Bob', 2],
-            ['Admin', 0],
             ['Anonymous', 0],
+            ['Admin', 0],
         ], array_map('array_values', $content));
     }
 
