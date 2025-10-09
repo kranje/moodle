@@ -230,7 +230,7 @@ final class users_test extends core_reportbuilder_testcase {
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:fullnamewithpicturelink']);
 
         $content = $this->get_custom_report_content($report->get('id'));
-        $this->assertCount(2, $content);
+        $this->assertCount(3, $content);
 
         // Admin row.
         [
@@ -251,7 +251,7 @@ final class users_test extends core_reportbuilder_testcase {
             $fullnamewithlink,
             $fullnamewithpicture,
             $fullnamewithpicturelink
-        ] = array_values($content[1]);
+        ] = array_values($content[2]);
 
         $this->assertEquals('(JS) John Smith', $fullname);
         $this->assertStringContainsString('(JS) John Smith', $fullnamewithlink);
