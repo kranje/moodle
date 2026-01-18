@@ -477,7 +477,9 @@ final class users_test extends core_reportbuilder_testcase {
             ], true],
             'Filter confirmed (no match)' => ['user:confirmed', [
                 'user:confirmed_operator' => boolean_select::NOT_CHECKED,
-            ], true, 'anonymous_user'],
+                'user:username_operator' => text::IS_NOT_EQUAL_TO,
+                'user:username_value' => 'anonymous_user',
+            ], false],
             'Filter timecreated' => ['user:timecreated', [
                 'user:timecreated_operator' => date::DATE_RANGE,
                 'user:timecreated_from' => 1622502000,
@@ -494,7 +496,9 @@ final class users_test extends core_reportbuilder_testcase {
             'Filter timemodified (no match)' => ['user:timemodified', [
                 'user:timemodified_operator' => date::DATE_RANGE,
                 'user:timemodified_to' => 1622502000,
-            ], true, 'anonymous_user'],
+                'user:username_operator' => text::IS_NOT_EQUAL_TO,
+                'user:username_value' => 'anonymous_user',
+            ], false],
             'Filter firstaccess' => ['user:firstaccess', [
                 'user:firstaccess_operator' => date::DATE_EMPTY,
             ], true],
@@ -556,7 +560,7 @@ final class users_test extends core_reportbuilder_testcase {
      *
      * @dataProvider datasource_filters_provider
      */
-    public function test_datasource_filters(string $filtername, array $filtervalues, bool $expectmatch, string $expectmatchuser = 'zoe1'): void {
+    public function test_datasource_filters(string $filtername, array $filtervalues, bool $expectmatch): void {
         $this->resetAfterTest();
 
         $user = $this->getDataGenerator()->create_user([

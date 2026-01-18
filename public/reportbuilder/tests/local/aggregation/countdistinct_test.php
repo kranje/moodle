@@ -131,6 +131,7 @@ final class countdistinct_test extends core_reportbuilder_testcase {
         $this->assertEquals([
             ['Bob', '2 users'],
             ['Admin', '1 users'],
+            ['Anonymous', '1 users'],
         ], array_map('array_values', $content));
     }
 }

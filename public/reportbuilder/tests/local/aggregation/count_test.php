@@ -108,6 +108,7 @@ final class count_test extends core_reportbuilder_testcase {
         $this->assertEquals([
             ['Bob', '3 users'],
             ['Admin', '1 users'],
+            ['Anonymous', '1 users'],
         ], array_map('array_values', $content));
     }
 }
