@@ -23,21 +23,19 @@
 
 $string['additionaloptions'] = 'Additional options';
 $string['allornothing'] = 'All or nothing';
-$string['allowasynceval'] = 'Allow asynchronous evaluations';
-$string['allowasynceval_desc'] = 'If enabled, teachers will be able to configure VPL Questions to be evaluated via adhoc tasks.';
 $string['answertemplate'] = 'Answer template';
 $string['answertemplate_help'] = 'Write here what code will be prefilled in the answer box for the student.';
+$string['asynceval'] = 'Asynchronous evaluations';
+$string['asynceval_desc'] = 'If set on "Disable", VPL Questions will always be evaluated synchronously. This may create long web requests when submitting attempts.<br>If set on "Allow", teachers will be able to configure VPL Questions to be evaluated via adhoc tasks when possible \*.<br>If set on "Force", VPL Question will always be evaluated via adhoc tasks when possible \*.<br>\* This excludes dry regrades and question preview.';
 $string['awaitingasyncevaluation'] = 'Awaiting evaluation';
 $string['cannotimportquestionvplnotfound'] = 'Import warning: the VPL module id specified in VPL Question "{$a}" is invalid.';
 $string['cannotimportquestionvplunreachable'] = 'Import warning: the VPL specified in VPL Question "{$a}" is not in this course.';
 $string['choose'] = 'Choose...';
-$string['closerecievednoretrieve'] = 'Operation aborted by execution server. Execution resources limits may have been exceeded.
-Reason: {$a}';
+$string['closerecievednoretrieve'] = 'Operation aborted by execution server. Execution resources limits may have been exceeded.Reason: {$a}';
 $string['compilation'] = 'Compilation:';
 $string['correction'] = 'Correction';
 $string['deletesubmissions'] = 'Delete VPL submissions';
-$string['deletesubmissions_help'] = 'Whether or not submissions of VPL Questions made on the VPL should be discarded on question evaluation.<br>
-Caution: this will delete all submissions for concerned user on base VPL upon question evaluation. Make sure that the base VPL is only used for VPL Questions.';
+$string['deletesubmissions_help'] = 'Whether or not submissions of VPL Questions made on the VPL should be discarded on question evaluation.<br>Caution: this will delete all submissions for concerned user on base VPL upon question evaluation. Make sure that the base VPL is only used for VPL Questions.';
 $string['editorfontsize'] = 'Editor font size:';
 $string['editoroptions'] = 'Editor options';
 $string['editortheme'] = 'Editor theme:';
@@ -53,26 +51,22 @@ $string['eventquestionevaluationfailed'] = 'VPL Question evaluation failed';
 $string['eventquestionevaluationqueued'] = 'VPL Question evaluation queued for evaluation';
 $string['execerror'] = 'Execution error:';
 $string['execfiles'] = 'Execution files';
-$string['execfiles_help'] = 'You can edit here execution files. These are only sent during evaluation (and Pre-check if files are the same), and not during run (except for files specified as "to keep when running" in the VPL).<br>
-To add files, add them in the VPL as execution files.<br>
-Files marked as "Inherit from VPL" are not saved and use the contents of the corresponding execution file from the VPL activity.<br>
-<em>Legacy</em>: Files starting with "UNUSED" will effectively inherit the VPL file contents. Please consider using the "Inherit from VPL" feature for these files.';
+$string['execfiles_help'] = 'You can edit here execution files. These are only sent during evaluation (and Pre-check if files are the same), and not during run (except for files specified as "to keep when running" in the VPL).<br>To add files, add them in the VPL as execution files.<br>Files marked as "Inherit from VPL" are not saved and use the contents of the corresponding execution file from the VPL activity.<br><em>Legacy</em>: Files starting with "UNUSED" will effectively inherit the VPL file contents. Please consider using the "Inherit from VPL" feature for these files.';
 $string['execfilesevalsettings'] = 'Execution files and evaluate settings';
 $string['execution'] = 'Execution error:';
 $string['flagifproblem'] = 'If you think this is a problem with the question, please flag it and contact your teacher.';
+$string['forcedisabled'] = 'Disabled at site level';
+$string['forceenabled'] = 'Enabled at site level';
 $string['gradehaschangedreload'] = 'The grade may just have changed. You can <a {$a->aattr}>reload the page</a> to see the new grade.';
 $string['gradetypeerror'] = 'It seems that the evaluation yielded a non-numeric grade.';
 $string['gradingmethod'] = 'Grading';
-$string['gradingmethod_help'] = 'Determines grading method for this question.
-<ul><li>If "All or nothing" is selected, the student will earn either 100% or 0% of the mark for this question, depending on whether they got perfect VPL grade or not.</li>
-<li>If "Scaling" is selected, the student\'s mark for this question will scale with their VPL grade.</li></ul>';
+$string['gradingmethod_help'] = 'Determines grading method for this question.<ul><li>If "All or nothing" is selected, the student will earn either 100% or 0% of the mark for this question, depending on whether they got perfect VPL grade or not.</li><li>If "Scaling" is selected, the student\'s mark for this question will scale with their VPL grade.</li></ul>';
 $string['informationtext'] = 'VPL Question';
 $string['inheritfromvpl'] = 'Inherit from VPL';
 $string['lastservermessage'] = 'Last execution server message recieved: "{$a}"';
 $string['merge'] = 'Merge';
 $string['noanswertag'] = 'Required {{ANSWER}} tag not found. Please include it in the template where student code will be placed.';
-$string['nogradeerror'] = 'An error occured during question grading (no grade obtained).
-{$a}';
+$string['nogradeerror'] = 'An error occured during question grading (no grade obtained).{$a}';
 $string['nogradenoerror'] = 'No error raised - raw grade recieved is "{$a}".';
 $string['noprecheck'] = 'No Pre-check';
 $string['noprevplrun'] = 'This template VPL has no pre_vpl_run.sh file!';
@@ -83,12 +77,10 @@ $string['overwrite'] = 'Overwrite';
 $string['overwriteexecfile'] = 'Replace';
 $string['pleaseanswer'] = 'Please provide an answer.';
 $string['pluginname'] = 'VPL Question';
-$string['pluginname_help'] = 'VPL Questions allow you to make simple coding exercises.<br>
-It works with a VPL, but is designed to be a lot simpler on the students\' side.';
+$string['pluginname_help'] = 'VPL Questions allow you to make simple coding exercises.<br>It works with a VPL, but is designed to be a lot simpler on the students\' side.';
 $string['pluginnameadding'] = 'Adding a VPL Question';
 $string['pluginnameediting'] = 'Editing a VPL Question';
-$string['pluginnamesummary'] = 'VPL Questions allow you to make simple coding exercises.<br>
-It works with a VPL, but is designed to be a lot simpler on the students\' side.';
+$string['pluginnamesummary'] = 'VPL Questions allow you to make simple coding exercises.<br>It works with a VPL, but is designed to be a lot simpler on the students\' side.';
 $string['possiblesolution'] = 'Possible solution:';
 $string['precheck'] = 'Pre-check';
 $string['precheckexecfiles'] = 'Pre-check execution files';
@@ -98,11 +90,8 @@ $string['precheckhassamefiles'] = 'Pre-check uses the same execution files as Ch
 $string['precheckhelp'] = 'Evaluate your answer on a subset of tests';
 $string['precheckisdebug'] = 'Pre-check is Debug';
 $string['precheckpreference'] = 'Pre-check preference';
-$string['precheckpreference_help'] = 'Determines whether the student will have access to a "Pre-check" button during question attempt (with unlimited use).
-<ul><li>If "No Pre-check" is selected, no such button will be available.</li>
-<li>If "Pre-check is Debug" is selected, the button will act as the "Debug" button on a VPL. Please note that it however does not provide usual graphic interface.</li>
-<li>If "Pre-check uses the same execution files as Check" is selected, the button will evaluate the answer with execution files above.</li>
-<li>If "Pre-check uses its own execution files" is selected, you will be able to edit specific execution files and they will be used for Pre-check. This is the recommended option, as it allows you to specify a subset of tests the student has access to during attempt.</li></ul>';
+$string['precheckpreference_help'] = 'Determines whether the student will have access to a "Pre-check" button during question attempt (with unlimited use).<ul><li>If "No Pre-check" is selected, no such button will be available.</li><li>If "Pre-check is Debug" is selected, the button will act as the "Debug" button on a VPL. Please note that it however does not provide usual graphic interface.</li><li>If "Pre-check uses the same execution files as Check" is selected, the button will evaluate the answer with execution files above.</li><li>If "Pre-check uses its own execution files" is selected, you will be able to edit specific execution files and they will be used for Pre-check. This is the recommended option, as it allows you to specify a subset of tests the student has access to during attempt.</li></ul>';
+$string['privacy:metadata:vplquestion_queue'] = 'This table contains currently queued evaluations for a given user. This data is deleted right after evaluation is complete.';
 $string['privacy:preference:defaultmark'] = 'The default mark set for a given question.';
 $string['privacy:preference:deletesubmissions'] = 'Whether VPL submissions should be discarded on question evaluation.';
 $string['privacy:preference:gradingmethod'] = 'Whether the grade should scale with VPL grade or be all-or-nothing.';
@@ -116,30 +105,24 @@ $string['scaling'] = 'Scaling';
 $string['selectavpl'] = '<a href="{$a}">Select a template VPL</a> to edit execution files.';
 $string['serverexecutionerrorstudentmessage'] = 'This might be caused by an external factor. Please try to evaluate again or contact your teacher.';
 $string['serverexecutionerrorteachermessage'] = 'This might be caused by an external factor, which means this is not necessarily something you did wrong. Please try to evaluate again or contact the support.';
-$string['servermessages'] = 'Server messages:
-{$a}';
+$string['servermessages'] = 'Server messages:{$a}';
 $string['serverwassilent'] = 'Execution server was silent - no message received';
 $string['switchbacktodefaultfile'] = 'Switching to Inherit mode';
 $string['switchbacktodefaultfileprompt'] = 'You are about to change the file mode to "Inherit from VPL". This will overwrite the current content of the question file. Proceed?';
-$string['teachercorrection'] = 'Teacher Correction';
+$string['teachercorrection'] = 'Teacher correction';
 $string['teachercorrection_help'] = 'Write here your correction for this question.';
 $string['templatecontext'] = 'Edit template';
-$string['templatecontext_help'] = 'You can edit here the code that will be executed (ie. the content of the required file).<br>
-The "{{ANSWER}}" tag will be replaced by the student\'s answer. You can move the tag where you want, but please do not remove it!';
+$string['templatecontext_help'] = 'You can edit here the code that will be executed (ie. the content of the required file).<br>The "{{ANSWER}}" tag will be replaced by the student\'s answer. You can move the tag where you want, but please do not remove it!';
 $string['templatevpl'] = 'Template VPL';
-$string['templatevpl_help'] = 'Select the VPL this question will be based on.<br>
-<b>Note:</b> Please select a VPL dedicated to this purpose, especially if "Delete VPL submissions" is set to "Yes" below.';
+$string['templatevpl_help'] = 'Select the VPL this question will be based on.<br><b>Note:</b> Please select a VPL dedicated to this purpose, especially if "Delete VPL submissions" is set to "Yes" below.';
+$string['templatevplautosetnotice'] = 'Import notice: the VPL template for VPL Question "{$a}" has been automatically changed to the one existing in this course with the same name.';
 $string['templatevplchange'] = 'Template VPL change';
-$string['templatevplchange_help'] = 'The template VPL code and execution files currently have content.<br>
-Changing the template VPL will overwrite this content, unless you decide to merge the current content into the new one.<br>
-Please note that the merge will only work on files with the same name. Files with no name correspondance will be overwritten.';
+$string['templatevplchange_help'] = 'The template VPL code and execution files currently have content.<br>Changing the template VPL will overwrite this content, unless you decide to merge the current content into the new one.<br>Please note that the merge will only work on files with the same name. Files with no name correspondance will be overwritten.';
 $string['templatevplchangeprompt'] = 'What do you want to do with the current content of template and execution files?';
-$string['unexpectedendofws'] = 'Unexpected end of communication with the execution server.
-Reason: {$a}';
-$string['unexpectederror'] = 'An unexpected error occured during evaluation.
-{$a}';
+$string['unexpectedendofws'] = 'Unexpected end of communication with the execution server.Reason: {$a}';
+$string['unexpectederror'] = 'An unexpected error occured during evaluation.{$a}';
 $string['useasyncevaluation'] = 'Use asynchronous evaluation';
-$string['useasyncevaluation_help'] = 'If set to "Yes", the evaluation of the question will be done from adhoc asynchronous tasks. This allows the quiz to be more responsive.';
+$string['useasyncevaluation_help'] = 'If enabled, the evaluation of the question will be done from adhoc asynchronous tasks when possible (excludes dry regrades and preview).<br>This allows the quiz to be more responsive.';
 $string['validateonsave'] = 'Validate';
 $string['validateonsave_help'] = 'If checked, the provided code will be tested against provided test cases before saving this question.';
 $string['vplnotavailablewarning'] = 'Warning! The VPL this question is based on is not available for students. The question may not function properly.';

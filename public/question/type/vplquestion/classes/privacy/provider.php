@@ -24,6 +24,8 @@
 namespace qtype_vplquestion\privacy;
 
 use core_privacy\local\metadata\collection;
+use core_privacy\local\metadata\provider as metadata_provider;
+use core_privacy\local\request\user_preference_provider;
 use core_privacy\local\request\transform;
 use core_privacy\local\request\writer;
 
@@ -33,13 +35,15 @@ use core_privacy\local\request\writer;
  * @copyright  2024 Astor Bizard, 2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\provider, \core_privacy\local\request\user_preference_provider {
+class provider implements metadata_provider, user_preference_provider {
     /**
      * Returns meta data about this system.
      * @param collection $collection The initialised collection to add items to.
      * @return collection A listing of user data stored through this system.
      */
     public static function get_metadata(collection $collection): collection {
+        $collection->add_database_table('question_vplquestion_queue', [ 'userid' ], 'privacy:metadata:vplquestion_queue');
+
         $collection->add_user_preference('qtype_vplquestion_defaultmark', 'privacy:preference:defaultmark');
         $collection->add_user_preference('qtype_vplquestion_penalty', 'privacy:preference:penalty');
         $collection->add_user_preference('qtype_vplquestion_precheckpreference', 'privacy:preference:precheckpreference');

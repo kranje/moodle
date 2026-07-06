@@ -18,7 +18,7 @@
     @template qtype_vplquestion/question
 
     Classes required for JS:
-    * qvpl-buttons
+    * none
 
     Data attributes required for JS:
     * data-text
@@ -60,22 +60,22 @@
         "teachercorrection": "System.out.print(\"Hello\\\\ World!\\\\n\\n\");"
     }
 }}
-<div class="qvpl-editor-menu float-right">
+<div class="text-right">
     {{^ readonly}}
     {{# correction}}
-    <span id="qvpl_correction_q{{qid}}" class="btn-link clickable" data-text="{{teachercorrection}}">{{# str}} correction, qtype_vplquestion {{/ str}}</span>
+    <button type="button" data-role="qvpl_set_text" class="btn btn-link p-0 align-baseline invisible" data-text="{{teachercorrection}}">{{# str}} correction, qtype_vplquestion {{/ str}}</button>
     &nbsp;|&nbsp;
     {{/ correction}}
-    <span id="qvpl_reset_q{{qid}}" class="btn-link clickable" data-text="{{answertemplate}}">{{# str}} reset {{/ str}}</span>
+    <button type="button" data-role="qvpl_set_text" class="btn btn-link p-0 align-baseline invisible" data-text="{{answertemplate}}">{{# str}} reset {{/ str}}</button>
     &nbsp;|&nbsp;
     {{/ readonly}}
-    <span id="qvpl_editor_preferences{{qid}}" class="btn-link clickable" style="visibility:hidden"><i class="fa fa-cog"></i></span>
+    <button type="button" data-role="qvpl_open_editor_preferences" class="btn btn-link p-0 align-baseline invisible" title="{{# str}} editoroptions, qtype_vplquestion {{/ str}}"><i class="fa fa-cog" aria-hidden="true"></i></button>
 </div>
 <div contenteditable="true" spellcheck="false">
     <textarea name="{{inputname}}" rows="1" {{# readonly}}readonly="readonly"{{/ readonly}} data-role="code-editor" data-lineoffset="{{lineoffset}}" data-templatelang="{{templatelang}}">{{lastanswer}}</textarea>
 </div>
 {{^ readonly}}
-<div id="qvpl_buttons_q{{qid}}" class="qvpl-buttons">
+<div data-role="qvpl-buttons">
 {{# run}}
 <button class="btn btn-secondary mr-1 my-1" type="button" data-action="run">{{# str}} run, qtype_vplquestion {{/ str}}</button>
 {{/ run}}
@@ -83,6 +83,6 @@
 <button class="btn btn-secondary mr-1 my-1" type="button" data-action="{{precheckaction}}" title="{{# str}} precheckhelp, qtype_vplquestion {{/ str}}">{{# str}} precheck, qtype_vplquestion {{/ str}}</button>
 {{/ precheck}}
 </div>
-<pre id="terminal_wrapper_q{{qid}}" class="terminal-wrapper no-scrolling mb-0"></pre>
-<div id="vpl_result_q{{qid}}" class="bg-white mt-1 p-2 border text-body" style="display:none;"></div>
+<pre id="terminal_q{{qid}}" class="mb-0 w-100 h-100 no-scrolling"></pre>
+<div id="vpl_result_q{{qid}}" class="bg-white mt-1 p-2 border text-body" hidden=""></div>
 {{/ readonly}}

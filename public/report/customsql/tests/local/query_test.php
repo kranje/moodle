@@ -27,12 +27,13 @@ require_once($CFG->dirroot . '/report/customsql/locallib.php');
  * @package   report_customsql
  * @copyright 2021 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers \report_customsql\local\query
  */
-class query_test extends \advanced_testcase {
+final class query_test extends \advanced_testcase {
     /**
      * Test create query.
      */
-    public function test_create_query() {
+    public function test_create_query(): void {
         $this->resetAfterTest();
         $this->setAdminUser();
 
@@ -41,7 +42,7 @@ class query_test extends \advanced_testcase {
             'displayname' => 'Query 1',
             'runable' => 'daily',
             'capability' => 'moodle/site:config',
-            'lastrun' => 0
+            'lastrun' => 0,
         ];
 
         $query = new query($fakerecord);
@@ -51,8 +52,10 @@ class query_test extends \advanced_testcase {
         $this->assertStringContainsString('view.php?id=1', $query->get_url());
         $this->assertStringContainsString('edit.php?id=1', $query->get_edit_url());
         $this->assertStringContainsString('delete.php?id=1', $query->get_delete_url());
-        $this->assertEquals('<span class="admin_note">This query has not yet been run.</span>',
-              $query->get_time_note());
+        $this->assertEquals(
+            '<span class="admin_note">This query has not yet been run.</span>',
+            $query->get_time_note(),
+        );
         $this->assertEquals('Only administrators (moodle/site:config)', $query->get_capability_string());
         // Admin user should have capability to edit and view queries.
         $this->assertEquals(true, $query->can_edit(\context_system::instance()));

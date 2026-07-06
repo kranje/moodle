@@ -26,7 +26,6 @@ namespace qtype_vplquestion\task;
 use core\task\adhoc_task;
 use context_module;
 use mod_quiz\quiz_attempt;
-use mod_quiz\quiz_settings;
 use moodle_exception;
 use question_attempt_pending_step;
 use question_engine;

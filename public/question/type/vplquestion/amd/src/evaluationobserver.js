@@ -18,52 +18,56 @@
  * @copyright  2024 Astor Bizard
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define(['jquery', 'core/url', 'core/log'], function($, url, log) {
-
+define(['core/log', 'qtype_vplquestion/repository'], function(log, Repository) {
     /**
      * Check if evaluation is finished and update displayed message.
      * @param {String} divid HTML id of question wrapping div.
-     * @param {String|Object} questiondata Data for checkevaluationstate.json.php.
+     * @param {Number} usageid Question usage ID.
+     * @param {Number} slot Question slot.
+     * @param {String} url Current url.
      */
-    function updateEvaluationState(divid, questiondata) {
-        $.ajax({
-            url: url.relativeUrl('/question/type/vplquestion/ajax/checkevaluationstate.json.php'),
-            data: questiondata,
-        })
-        .then(function(outcome) {
-            if (!outcome.success) {
-                throw new Error(outcome.error);
-            }
+    async function updateEvaluationState(divid, usageid, slot, url) {
+        try {
+            var response = await Repository.checkEvaluationState(usageid, slot, url);
 
-            var $qdiv = $('#' + divid);
+            var qdiv = document.getElementById(divid);
 
-            var response = outcome.response;
             if (response.finished) {
-
+                var evaluationResults = response.evaluationresults;
                 // Update the question feedback.
-                $qdiv.find('.feedback, .im-feedback').remove();
-                $qdiv.find('.outcome').prepend(response.qfeedback + response.bfeedback);
-                $qdiv.append(response.javascript);
-                if ($qdiv.find('.outcome').html() == $qdiv.find('.outcome .accesshide')[0].outerHTML) {
+                qdiv.querySelector('.feedback')?.remove();
+                qdiv.querySelector('.im-feedback')?.remove();
+                var outcomeDiv = qdiv.querySelector('.outcome');
+                outcomeDiv.insertAdjacentHTML('afterbegin', evaluationResults.qfeedback + evaluationResults.bfeedback);
+                var scripts = document.createElement('div');
+                scripts.innerHTML = evaluationResults.javascript;
+                scripts.querySelectorAll('script').forEach(function(script) {
+                    // For some reason, appending script directly does not work (it is not executed), but this works.
+                    var scriptNode = document.createElement('script');
+                    scriptNode.innerHTML = script.innerHTML;
+                    qdiv.appendChild(scriptNode);
+                });
+                if (outcomeDiv.innerHTML === outcomeDiv.querySelector('.accesshide').outerHTML) {
                     // No feedback: remove.
-                    $qdiv.find('.outcome').remove();
+                    outcomeDiv.remove();
                 }
 
                 // Update the state and grade in the question info block.
-                $qdiv.find('.info .state').html(response.qinfo.state);
-                $qdiv.find('.info .grade').html(response.qinfo.grade);
+                qdiv.querySelector('.info .state').innerHTML = evaluationResults.state;
+                qdiv.querySelector('.info .grade').innerHTML = evaluationResults.grade;
 
                 // Update the navigation button color and title according to question state.
-                $('#' + response.navbutton.id)
-                .attr('title', response.navbutton.title)
-                .removeClass(response.navbutton.oldclass).addClass(response.navbutton.newclass);
+                var navbutton = document.getElementById(evaluationResults.navbutton.id);
+                navbutton.setAttribute('title', evaluationResults.navbutton.title);
+                navbutton.classList.remove(evaluationResults.navbutton.oldclass);
+                navbutton.classList.add(evaluationResults.navbutton.newclass);
 
                 // Add a message in the summary table if there is one, indicating that the overall quiz grade may have changed.
                 var reviewSummaryTable = document.querySelector('table.quizreviewsummary');
                 var messageRole = 'qtype_vplquestion-reload-page-message';
                 if (reviewSummaryTable !== null && reviewSummaryTable.querySelector('[data-role="' + messageRole + '"]') === null) {
                     var message = M.util.get_string('gradehaschangedreload', 'qtype_vplquestion',
-                            {aattr: 'href="#" onclick="window.location.reload();return false;"'});
+                                {aattr: 'href="#" onclick="window.location.reload();return false;"'});
                     var icon = '<i class="icon fa fa-info-circle text-info"></i>';
                     var messageElement = document.createElement('tr');
                     messageElement.dataset.role = messageRole;
@@ -72,24 +76,23 @@ define(['jquery', 'core/url', 'core/log'], function($, url, log) {
                 }
 
                 // Update step history with new state and new marks.
-                $qdiv.find('.history thead th').each(function(i) {
-                    if ($(this).text() == M.util.get_string('state', 'question')) {
-                        $qdiv.find('.history tbody tr.current td.c' + i).text(response.qinfo.state);
-                    } else if ($(this).text() == M.util.get_string('marks', 'question')) {
-                        $qdiv.find('.history tbody tr.current td.c' + i).text(response.qinfo.marks);
+                qdiv.querySelectorAll('.history thead th').forEach(function(header, i) {
+                    if (header.textContent == M.util.get_string('state', 'question')) {
+                        qdiv.querySelector('.history tbody tr.current td.c' + i).textContent = evaluationResults.state;
+                    } else if (header.textContent == M.util.get_string('marks', 'question')) {
+                        qdiv.querySelector('.history tbody tr.current td.c' + i).textContent = evaluationResults.marks;
                     }
                 });
             } else {
-                $qdiv.find('[data-qtype_vplquestion-role="async-eval-info"]').text(response.progressmessage);
+                qdiv.querySelector('[data-qtype_vplquestion-role="async-eval-info"]').textContent = response.progressmessage;
                 setTimeout(function() {
                     // Retry in 2 seconds.
-                    updateEvaluationState(divid, questiondata);
+                    updateEvaluationState(divid, usageid, slot, url);
                 }, 2000);
             }
-
-            return outcome;
-        })
-        .fail(log.error);
+        } catch (error) {
+            log.error(error);
+        }
     }
 
     return {

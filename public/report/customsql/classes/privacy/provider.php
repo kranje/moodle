@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Privacy Subsystem implementation for report_customsql.
  *
@@ -34,12 +35,11 @@ use core_privacy\local\request;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
-    // This plugin has data.
     \core_privacy\local\metadata\provider,
-    // This plugin currently implements the original plugin\provider interface.
-    \core_privacy\local\request\plugin\provider,
-    \core_privacy\local\request\core_userlist_provider {
-
+    // This plugin currently implements the original plugin_provider interface.
+    \core_privacy\local\request\core_userlist_provider,
+    // This plugin has data.
+    \core_privacy\local\request\plugin\provider {
     /**
      * Returns meta data about this system.
      *
@@ -68,7 +68,7 @@ class provider implements
                 'customdir' => 'privacy:metadata:reportcustomsqlqueries:customdir',
                 'usermodified' => 'privacy:metadata:reportcustomsqlqueries:usermodified',
                 'timecreated' => 'privacy:metadata:reportcustomsqlqueries:timecreated',
-                'timemodified' => 'privacy:metadata:reportcustomsqlqueries:timemodified'
+                'timemodified' => 'privacy:metadata:reportcustomsqlqueries:timemodified',
             ],
             'privacy:metadata:reportcustomsqlqueries'
         );
@@ -156,7 +156,7 @@ class provider implements
                 }
 
                 $subcontext = [
-                    get_string('privacy:metadata:reportcustomsqlqueries', 'report_customsql')
+                    get_string('privacy:metadata:reportcustomsqlqueries', 'report_customsql'),
                 ];
                 request\writer::with_context($context)->export_data($subcontext, (object)$exportdata);
             }
@@ -193,8 +193,12 @@ class provider implements
                 $userid = $contextlist->get_user()->id;
                 $adminuserid = get_admin()->id;
 
-                $DB->set_field('report_customsql_queries', 'usermodified',
-                    $adminuserid, ['usermodified' => $userid]);
+                $DB->set_field(
+                    'report_customsql_queries',
+                    'usermodified',
+                    $adminuserid,
+                    ['usermodified' => $userid],
+                );
             }
         }
     }
@@ -212,10 +216,15 @@ class provider implements
         $context = $userlist->get_context();
         if ($context->contextlevel === CONTEXT_SYSTEM) {
             $userids = $userlist->get_userids();
-            list($sqlcondition, $params) = $DB->get_in_or_equal($userids);
+            [$sqlcondition, $params] = $DB->get_in_or_equal($userids);
             $adminuserid = get_admin()->id;
-            $DB->set_field_select('report_customsql_queries', 'usermodified', $adminuserid,
-                 'usermodified ' . $sqlcondition, $params);
+            $DB->set_field_select(
+                'report_customsql_queries',
+                'usermodified',
+                $adminuserid,
+                'usermodified ' . $sqlcondition,
+                $params,
+            );
         }
     }
 

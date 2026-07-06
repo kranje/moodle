@@ -36,7 +36,7 @@ class qtype_vplquestion_renderer extends qtype_renderer {
      * @see qtype_renderer::formulation_and_controls()
      */
     public function formulation_and_controls(question_attempt $qa, question_display_options $options) {
-        global $USER, $COURSE;
+        global $USER;
 
         $question = $qa->get_question();
 
@@ -50,22 +50,23 @@ class qtype_vplquestion_renderer extends qtype_renderer {
             $lastanswer = $question->answertemplate;
         }
 
-        $html = parent::formulation_and_controls($qa, $options) . $this->output->box_start();
+        $html = parent::formulation_and_controls($qa, $options);
+        $html .= html_writer::start_div('mt-1 mb-3');
 
         global $CFG;
         require_once($CFG->dirroot . '/mod/vpl/vpl.class.php');
         try {
             $vpl = new mod_vpl($vplid);
             [ $course, $cm ] = get_course_and_cm_from_cmid($vplid, 'vpl');
-            if ($course->id != $COURSE->id) {
+            if ($course->id != $this->page->course->id) {
                 $html .= $this->output->notification(get_string('vplnotincoursewarning', 'qtype_vplquestion'), 'warning');
-            } else if (!$cm->visible) {
+            } else if (!$cm->visible && !(method_exists('mod_vpl', 'is_vpl_question_mode') && $vpl->is_vpl_question_mode())) {
                 $html .= $this->output->notification(get_string('vplnotavailablewarning', 'qtype_vplquestion'), 'warning');
             }
         } catch (moodle_exception $e) {
             // Something went wrong instantiating the VPL, the question is badly configured.
             $html .= $this->output->notification(get_string('vplnotfounderror', 'qtype_vplquestion', $e->getMessage()), 'error');
-            return $html . $this->output->box_end();
+            return $html . html_writer::end_div();
         }
 
         $this->output->page->requires->strings_for_js([
@@ -90,15 +91,7 @@ class qtype_vplquestion_renderer extends qtype_renderer {
         );
 
         // Store installed ace themes in hidden element for editor preferences form.
-        require_once($CFG->dirroot . '/mod/vpl/editor/editor_utility.php');
-        $installedthemes = [];
-        foreach (locallib::get_ace_themes() as $id => $name) {
-            $installedthemes[] = (object) [ 'id' => $id, 'name' => $name ];
-        }
-        $html .= html_writer::div('', 'd-none', [
-                'data-role' => 'qvpl_installedthemes',
-                'data-themes' => json_encode($installedthemes),
-        ]);
+        $html .= locallib::get_installed_themes_html_fragment_for_js();
 
         // Find the line where the {{ANSWER}} tag is located, to offset line numbers on Ace editor.
         // This offset is useful for compilation errors, so that error line will match editor line.
@@ -120,11 +113,11 @@ class qtype_vplquestion_renderer extends qtype_renderer {
         $templatecontext->precheck = $question->precheckpreference != 'none';
         $templatecontext->precheckaction = $question->precheckpreference == 'dbg' ? 'debug' : 'evaluate';
         $templatecontext->answertemplate = $question->answertemplate;
-        $templatecontext->correction = has_capability('moodle/course:update', context_course::instance($COURSE->id));
+        $templatecontext->correction = has_capability('moodle/question:editall', $this->page->context);
         $templatecontext->teachercorrection = $question->teachercorrection;
         $html .= $this->output->render_from_template('qtype_vplquestion/question', $templatecontext);
 
-        $html .= $this->output->box_end();
+        $html .= html_writer::end_div();
 
         return $html;
     }
@@ -160,7 +153,7 @@ class qtype_vplquestion_renderer extends qtype_renderer {
                 // Keep this piece of code to handle old question attempts.
                 $evaldata = $qa->get_response_summary();
             }
-            $displayid = 'vpl_eval_details_q' . $qa->get_question()->id;
+            $displayid = 'vpl_eval_details_qa' . $qa->get_database_id();
             $feedback .= '<div class="mt-1">
                             <h5>' . get_string('evaluationdetails', 'qtype_vplquestion') . '</h5>
                             <div id="' . $displayid . '" class="bg-white p-2 border text-body" data-result="' . s($evaldata) . '">
@@ -203,16 +196,15 @@ class qtype_vplquestion_renderer extends qtype_renderer {
             // Evaluation is not queued, there is no information about async task to display.
             return '';
         }
-        $questiondata = [
-                'usageid' => $usageid,
-                'slot' => $slot,
-                'url' => $this->page->url->out(false),
-        ];
         // Call js to check when this task is finished.
         $this->page->requires->strings_for_js([ 'state', 'marks' ], 'question');
         $this->page->requires->string_for_js('gradehaschangedreload', 'qtype_vplquestion');
-        $divid = $qa->get_outer_question_div_unique_id();
-        $this->page->requires->js_call_amd('qtype_vplquestion/evaluationobserver', 'init', [ $divid, $questiondata ]);
+        $this->page->requires->js_call_amd('qtype_vplquestion/evaluationobserver', 'init', [
+                $qa->get_outer_question_div_unique_id(),
+                $usageid,
+                $slot,
+                $this->page->url->out(false),
+        ]);
         $message = html_writer::span($message, '', [ 'data-qtype_vplquestion-role' => 'async-eval-info' ]);
         $loadingicon = html_writer::span($this->output->render_from_template('core/loading', []), 'mx-1');
         return html_writer::div($loadingicon . $message, 'mt-1');

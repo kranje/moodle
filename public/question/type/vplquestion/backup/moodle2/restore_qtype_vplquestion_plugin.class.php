@@ -54,6 +54,23 @@ class restore_qtype_vplquestion_plugin extends restore_qtype_extrafields_plugin 
         global $DB;
         foreach ($this->questions as $question) {
             $newtemplatevpl = $this->get_mappingid('course_module', $question['oldtemplatevpl']);
+            if (!$newtemplatevpl) {
+                // Fallback: resolve old templatevpl id to name, then match by name in restored course.
+                // This is needed in case of partial restore of a course: VPL questions without the VPL activity.
+                $oldcm = get_coursemodule_from_id('vpl', $question['oldtemplatevpl']);
+                if ($oldcm && $oldcm->name && $oldcm->course != $this->task->get_courseid()) {
+                    $vplsincourse = array_column(get_coursemodules_in_course('vpl', $this->task->get_courseid()), 'name', 'id');
+                    $newtemplatevpl = array_search(format_string($oldcm->name), array_map('format_string', $vplsincourse), true);
+                    if ($newtemplatevpl) {
+                        $qname = $DB->get_field('question', 'name', [ 'id' => $question['qid'] ]);
+                        $message = get_string('templatevplautosetnotice', 'qtype_vplquestion', $qname);
+                        // Since asynchronous backup, it seems impossible to display a notification to user about restore process.
+                        // We still log it so the information exists somewhere.
+                        $this->task->log($message, backup::LOG_INFO);
+                        core\notification::info($message);
+                    }
+                }
+            }
             if ($newtemplatevpl) {
                 $qrecord = $DB->get_record('question_vplquestion', [ 'questionid' => $question['qid'] ]);
                 $qrecord->templatevpl = $newtemplatevpl;

@@ -80,21 +80,50 @@ class qtype_vplquestion extends question_type {
      * @see question_type::import_from_xml()
      */
     public function import_from_xml($data, $question, qformat_xml $format, $extra = null) {
-        global $COURSE, $OUTPUT;
+        global $COURSE;
         $importdata = parent::import_from_xml($data, $question, $format, $extra);
-        try {
-            if (get_course_and_cm_from_cmid($importdata->templatevpl, 'vpl')[0]->id != $COURSE->id) {
-                echo $OUTPUT->notification(
-                    get_string('cannotimportquestionvplunreachable', 'qtype_vplquestion', $importdata->name),
-                    'warning'
-                );
+        $oldcm = get_coursemodule_from_id('vpl', $importdata->templatevpl);
+        if ($oldcm) {
+            $templatevplname = $format->getpath($data, [ '#', 'templatevplname', 0, '#' ], false, true);
+            if ($oldcm->course != $COURSE->id && $templatevplname) {
+                $vplsincourse = array_column(get_coursemodules_in_course('vpl', $COURSE->id), 'name', 'id');
+                $cmid = array_search(format_string($templatevplname), array_map('format_string', $vplsincourse), true);
+                if ($cmid) {
+                    $importdata->templatevpl = (int) $cmid;
+                    core\notification::info(get_string('templatevplautosetnotice', 'qtype_vplquestion', $importdata->name));
+                } else {
+                    core\notification::warning(
+                        get_string('cannotimportquestionvplunreachable', 'qtype_vplquestion', $importdata->name)
+                    );
+                }
             }
-        } catch (moodle_exception $e) {
-            echo $OUTPUT->notification(
-                get_string('cannotimportquestionvplnotfound', 'qtype_vplquestion', $importdata->name),
-                'warning'
-            );
+        } else {
+            core\notification::warning(get_string('cannotimportquestionvplnotfound', 'qtype_vplquestion', $importdata->name));
         }
         return $importdata;
+    }
+
+    /**
+     * Export question to the Moodle XML format
+     *
+     * Adds templatevplname (readable name of the template VPL) for reference in the export.
+     * @param object $question question to be exported into XML format
+     * @param qformat_xml $format format class exporting the question
+     * @param object $extra extra information (not required for exporting this question in this format)
+     * @return string containing the question data in XML format
+     * @see question_type::export_to_xml()
+     */
+    public function export_to_xml($question, qformat_xml $format, $extra = null) {
+        $output = parent::export_to_xml($question, $format, $extra);
+        if ($output === false) {
+            return false;
+        }
+        $templatevplname = get_coursemodule_from_id('vpl', $question->options->templatevpl)->name ?? '';
+        if ($templatevplname) {
+            $tag = "    <templatevplname>" . $format->xml_escape($templatevplname) . "</templatevplname>\n";
+            // Insert right after </templatevpl> so the new field stays with question options.
+            $output = str_replace("</templatevpl>\n", "</templatevpl>\n" . $tag, $output);
+        }
+        return $output;
     }
 }

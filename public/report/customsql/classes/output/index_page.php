@@ -52,15 +52,21 @@ class index_page implements renderable, templatable {
 
     /** Build the index page renderable object.
      *
-     * @param array $categories Categories for renderer.
-     * @param array $queries Queries for renderer.
-     * @param context $context Context to check the capability.
+     * @param \stdClass[] $categories Categories for renderer.
+     * @param \stdClass[] $queries Queries for renderer.
+     * @param context $context Context to check the capability (will be system context).
      * @param moodle_url $returnurl Return url for edit/delete link.
      * @param int $showcat Showing Category Id.
      * @param int $hidecat Hiding Category Id.
      */
-    public function __construct(array $categories, array $queries, context $context, moodle_url $returnurl,
-            int $showcat = 0, int $hidecat = 0) {
+    public function __construct(
+        array $categories,
+        array $queries,
+        context $context,
+        moodle_url $returnurl,
+        int $showcat = 0,
+        int $hidecat = 0
+    ) {
         $this->categories = $categories;
         $this->queries = $queries;
         $this->context = $context;
@@ -69,6 +75,7 @@ class index_page implements renderable, templatable {
         $this->hidecat = $hidecat;
     }
 
+    #[\Override]
     public function export_for_template(renderer_base $output) {
         $categoriesdata = [];
         $grouppedqueries = utils::group_queries_by_category($this->queries);
@@ -76,19 +83,33 @@ class index_page implements renderable, templatable {
             $category = new report_category($record);
             $queries = $grouppedqueries[$record->id] ?? [];
             $category->load_queries_data($queries);
-            $categorywidget = new category($category, $this->context, true, $this->showcat, $this->hidecat, true,
-                false, $this->returnurl);
+            $categorywidget = new category(
+                $category,
+                $this->context,
+                true,
+                $this->showcat,
+                $this->hidecat,
+                true,
+                false,
+                $this->returnurl,
+            );
             $categoriesdata[] = ['category' => $output->render($categorywidget)];
         }
 
         $addquerybutton = $managecategorybutton = '';
         if (has_capability('report/customsql:definequeries', $this->context)) {
-            $addquerybutton = $output->single_button(report_customsql_url('edit.php', ['returnurl' => $this->returnurl]),
-                get_string('addreport', 'report_customsql'), 'post', ['class' => 'mb-1']);
+            $addquerybutton = $output->single_button(
+                report_customsql_url('edit.php', ['returnurl' => $this->returnurl]),
+                get_string('addreport', 'report_customsql'),
+                'post',
+                ['class' => 'mb-1'],
+            );
         }
         if (has_capability('report/customsql:managecategories', $this->context)) {
-            $managecategorybutton = $output->single_button(report_customsql_url('manage.php'),
-                get_string('managecategories', 'report_customsql'));
+            $managecategorybutton = $output->single_button(
+                report_customsql_url('manage.php'),
+                get_string('managecategories', 'report_customsql')
+            );
         }
 
         $data = [
@@ -96,7 +117,7 @@ class index_page implements renderable, templatable {
             'expandcollapselinkattheend' => (count($this->categories) >= 5),
             'categories' => $categoriesdata,
             'addquerybutton' => $addquerybutton,
-            'managecategorybutton' => $managecategorybutton
+            'managecategorybutton' => $managecategorybutton,
         ];
         return $data;
     }

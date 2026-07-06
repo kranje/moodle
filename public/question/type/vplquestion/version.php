@@ -24,10 +24,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_vplquestion';
-$plugin->version   = 2026030501;
-$plugin->requires  = 2023042400; // Moodle 4.2.
+$plugin->version   = 2026061702;
+$plugin->requires  = 2023100900; // Moodle 4.3.
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '3.4.2 for Moodle 4.2+';
+$plugin->release   = '3.5.2 for Moodle 4.3+';
 
 $plugin->dependencies = [
         'mod_vpl' => 2023072516, // VPL 4.2.0 (requires VPLUI module).

@@ -20,15 +20,11 @@
  */
 
 define([
-    'jquery',
     'core/config',
-    'core/modal_factory',
-    'core/modal_events',
-    'core/templates',
     'qtype_vplquestion/codeeditors',
     'mod_vpl/vplterminal',
-    'qtype_vplquestion/vplservice'
-    ], function($, cfg, ModalFactory, ModalEvents, Templates, CodeEditors, VPLTerminal, VPLService) {
+    'qtype_vplquestion/vplservice',
+    ], function(cfg, CodeEditors, VPLTerminal, VPLService) {
 
     // Since VPL version 4.4.0, VPLTerminal is not exported as a module but as an object so we need this fix.
     if (typeof VPLTerminal.VPLTerminal !== 'undefined') {
@@ -50,18 +46,6 @@ define([
             case 'connection_closed': return 'exited]';
             default: return key;
         }
-    }
-
-    /**
-     * Escape special html characters in a text.
-     * @param {String} text HTML text to escape.
-     * @return {String} Escaped text.
-     */
-    function escapeHtml(text) {
-        var map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'};
-        return text.replace(/[&<>"']/g, function(c) {
-            return map[c];
-        });
     }
 
     /**
@@ -203,32 +187,49 @@ define([
      * @param {Object} result Evaluation/execution result object.
      * @param {String} field Field of result to display.
      * @param {String} level CSS class fragment for error level.
-     * @param {Boolean} pre Whether the result should be wrapped in a preformatted or interpreted.
+     * @param {Boolean} wrapInPre Whether the result should be wrapped in a preformatted or interpreted.
      * @return {String} Formatted result as HTML fragment.
      */
-    function makeResultHtml(result, field, level, pre) {
+    function makeResultHtml(result, field, level, wrapInPre) {
         if (result[field]) {
             var formattedText = '';
-            var text = pre ? escapeHtml(result[field]) : sanitizeHTML(result[field]);
-            text.split(/\n|<br\s*\/?>/).forEach(function(line) {
-                if (pre) {
-                    formattedText += line + '\n';
-                } else {
+            if (wrapInPre) {
+                var pre = document.createElement('pre');
+                pre.classList.add('pb-3', 'mb-0'); // Make room for horizontal scrollbar if needed.
+                if (typeof result[field] === 'string') {
+                    pre.textContent = result[field].replace(/\r\n|\r/g, '\n').trim();
+                } else if (typeof result[field].message !== 'undefined') { // Likely execerror object.
+                    pre.textContent = result[field].message.replace(/\r\n|\r/g, '\n').trim();
+                }
+                formattedText = pre.outerHTML;
+            } else {
+                var lines = sanitizeHTML(result[field]).split(/\r\n|\r|\n|<br\s*\/?>/);
+                // Trim empty lines from beginning and end of array.
+                while (lines[0].trim() == '') {
+                    lines.shift();
+                }
+                while (lines[lines.length - 1].trim() == '') {
+                    lines.pop();
+                }
+                lines.forEach(function(line) {
                     line = line.trim();
                     if (line.charAt(0) == '-') {
+                        // Title.
                         formattedText += '<b class="vpl-test-title rounded px-1">' + line.substring(1) + '</b><br>';
                     } else if (line.substring(0, 4) == '&gt;') {
+                        // Preformatted.
                         formattedText += '<pre class="m-0">' + line.substring(4) + '</pre>';
                     } else {
                         // Add an effective carriage return that works for both inline and block elements, and for empty lines.
-                        formattedText += line + (line > '' ? '<div class="clearfix"></div>' : '<br>');
+                        formattedText += line + (line > '' ? '<div class="clearfix" aria-hidden="true"></div>' : '<br>');
                     }
-                }
-            });
-            return '<span class="vpl-result-title vpl-title-' + level + ' d-block font-weight-bold border border-dark pl-1 mb-1">' +
+                });
+                formattedText = formattedText.replaceAll('</pre><pre class="m-0">', '\n'); // Fuse consecutive <pre> elements.
+            }
+            return '<h6 class="vpl-result-title vpl-title-' + level + ' border border-dark px-1">' +
                         M.util.get_string(field, 'qtype_vplquestion') +
-                    '</span>' +
-                    (pre ? '<pre>' + formattedText.trim() + '</pre>' : formattedText.trim());
+                    '</h6>' +
+                    formattedText;
         }
         return '';
     }
@@ -240,10 +241,9 @@ define([
      * @param {?Object} result Evaluation/execution result object, or null.
      */
     function displayResult(displayId, result) {
-        var $display = $('#' + displayId);
+        var display = document.getElementById(displayId);
         if (result === null) {
-            // This method parses the JSON by itself - no need to parse it.
-            result = $display.data('result');
+            result = JSON.parse(display.dataset.result);
         }
         var html = makeResultHtml(result, 'compilation', 'error', true)
             + makeResultHtml(result, 'evaluation', 'info', false)
@@ -252,177 +252,133 @@ define([
         if (!html) {
             html = makeResultHtml(result, 'execution', 'error', true);
         }
-        $display[html ? 'show' : 'hide']();
-        $display.html(html);
+        display.hidden = !html;
+        display.innerHTML = html;
     }
 
     /**
      * Set up student answer box (ace editor, terminal and reset/correction, run and pre-check buttons).
-     * @param {String|Number} questionId Question ID, used for DOM identifiers.
+     * @param {String|Number} questionId Question ID, used for DOM identifiers and executions.
      * @param {String|Number} vplId VPL ID, used for ajax calls.
      * @param {String|Number} userId User ID, used for ajax calls.
      * @param {String} textareaName HTML name attribute of textarea used for student answer.
      */
-    function setup(questionId, vplId, userId, textareaName) {
+    async function setup(questionId, vplId, userId, textareaName) {
         // This is the textarea that will recieve student's answer.
-        var $textarea = $('textarea[name="' + textareaName + '"]');
+        var textarea = document.getElementsByName(textareaName)[0];
 
-        var $resetAndCorrectionButtons = $('#qvpl_reset_q' + questionId + ', #qvpl_correction_q' + questionId);
+        var questionOuterDiv = textarea.closest('.que.vplquestion');
+
+        if (textareaName === document.querySelectorAll('.que.vplquestion textarea')[0].getAttribute('name')) {
+            // Setup editor preferences form once for all the page if we are the first editor.
+            // We do this by textarea name presence because for questions with errors, editor is not shown.
+            CodeEditors.setupEditorPreferencesForm('[data-role="qvpl_open_editor_preferences"]');
+        }
 
         // Setup ace editor THEN buttons (so Run and Check correctly take current ace text).
-        CodeEditors.setupQuestionEditor($textarea, $resetAndCorrectionButtons, $textarea.data('lineoffset'))
-        .done(function() {
-            if ($textarea.attr('readonly') == 'readonly') {
-                // We are in review (readonly) mode - do nothing more.
+        await CodeEditors.setupQuestionEditor(textarea, questionOuterDiv.querySelectorAll('[data-role="qvpl_set_text"]'));
+
+        if (textarea.hasAttribute('readonly')) {
+            // We are in review (readonly) mode - do nothing more.
+            return;
+        }
+
+        // Initialize the terminal on the wrapper.
+        var wrapperId = 'terminal_q' + questionId;
+        var terminal = new VPLTerminal(wrapperId, wrapperId, str);
+
+        // Deactivate message function (it normally displays a ticking timer, which is annoying).
+        terminal.setMessage = function() {
+            return;
+        };
+
+        // Move the terminal to a nice place within the question box.
+        var qvplButtons = questionOuterDiv.querySelector('[data-role="qvpl-buttons"]');
+        var globalTerminalWrapper = document.getElementById(wrapperId).parentElement;
+        globalTerminalWrapper.style.zIndex = 1000; // It sets itself to 2000 which is too much for Moodle navigation.
+        qvplButtons.after(globalTerminalWrapper);
+
+        // Show resize handle for terminal.
+        globalTerminalWrapper.querySelector('.ui-resizable-s').classList.add('resize-handle');
+
+        // Replace titlebar class for two reasons: styling and removing jQueryUI managing drag-and-drop of terminal to move it.
+        var titleBar = globalTerminalWrapper.querySelector('.ui-dialog-titlebar');
+        titleBar.classList.remove('ui-dialog-titlebar');
+        titleBar.classList.add('terminal-titlebar');
+
+        // Remove console buttons (clipboard, etc.) as we do not manage it.
+        globalTerminalWrapper.querySelector('.console-title-buttons').remove();
+
+        // Override show function, that indirectly sets the terminal to be displayed somewhere else.
+        var oldShow = terminal.show;
+        var firstShow = true;
+        terminal.show = function() {
+            if (firstShow) {
+                // Set terminal size once (so resize by user is persistent across executions).
+                globalTerminalWrapper.querySelector('.xterm-screen').style.height = '200px';
+                firstShow = false;
+            }
+            oldShow.apply(terminal, arguments);
+            globalTerminalWrapper.style.top = 0;
+            globalTerminalWrapper.style.left = 0;
+        };
+
+        // Change close button style to match the general question style.
+        var closeTerminalButton = globalTerminalWrapper.querySelector('.ui-dialog-titlebar-close');
+        closeTerminalButton.innerHTML = '<i class="fa fa-close" aria-hidden="true"></i>';
+        closeTerminalButton.classList.add('btn', 'btn-secondary', 'close-terminal');
+
+        // Setup a VPL button (run, debug, or evaluate).
+        var setupButton = function(action, iconClass, filestype) {
+            var button = qvplButtons.querySelector('button[data-action="' + action + '"]');
+            if (!button) {
+                // This action is not available.
                 return;
             }
+            var icon = document.createElement('i');
+            icon.classList.add('fa', 'fa-' + iconClass, 'ml-2');
+            icon.setAttribute('aria-hidden', 'true');
+            button.appendChild(icon);
 
-            // Initialize the terminal on the wrapper.
-            var wrapperId = 'terminal_wrapper_q' + questionId;
-            var terminal = new VPLTerminal(wrapperId, wrapperId, str);
-            $('#' + wrapperId).dialog('option', 'draggable', false);
-
-            // Deactivate message function (it normally displays a ticking timer, which is annoying).
-            terminal.setMessage = function() {
-                return;
+            var reenableButtons = function() {
+                icon.classList.add('fa-' + iconClass);
+                icon.classList.remove('fa-refresh', 'fa-spin');
+                // Reactivate all buttons on the page.
+                document.querySelectorAll('[data-role="qvpl-buttons"] button').forEach(function(button) {
+                    button.removeAttribute('disabled');
+                });
             };
 
-            // Move the terminal to a nice place within the question box.
-            var qvplButtons = '#qvpl_buttons_q' + questionId;
-            var $globalTerminalWrapper = $('#' + wrapperId).parent();
-            $globalTerminalWrapper.insertAfter(qvplButtons);
-
-            // Override connect function, that indirectly sets the terminal to be displayed somewhere else.
-            var oldConnect = terminal.connect;
-            terminal.connect = function() {
-                oldConnect.apply(terminal, arguments);
-                $globalTerminalWrapper.css('top', 0).css('left', 0);
-                $('body > .ui-widget-overlay.ui-front').first().remove(); // Remove the modal lock overlay.
-            };
-
-            // Change close button style to match the general question style.
-            $globalTerminalWrapper.find('.ui-dialog-titlebar-close')
-            .html('<i class="fa fa-close"></i>')
-            .addClass('btn btn-secondary close-terminal');
-
-            // Setup a VPL button (run, debug, or evaluate).
-            var setupButton = function(action, icon, filestype) {
-                var $button = $(qvplButtons + ' button[data-action="' + action + '"]');
-                var $icon = $('<i class="fa fa-' + icon + ' ml-2"></i>');
-                $icon.appendTo($button);
-                var reenableButtons = function() {
-                    $icon.addClass('fa-' + icon).removeClass('fa-refresh fa-spin');
-                    $('.qvpl-buttons *').removeAttr('disabled');
-                };
-
-                $button.click(function() {
-                    $('.qvpl-buttons *').attr('disabled', 'disabled');
-                    $('.close-terminal').trigger('click');
-                    $icon.addClass('fa-refresh fa-spin').removeClass('fa-' + icon);
-                    // We got nested callbacks, but we can't promisify them,
+            button.addEventListener('click', async function() {
+                // Deactivate all buttons on the page.
+                document.querySelectorAll('[data-role="qvpl-buttons"] button').forEach(function(button) {
+                    button.setAttribute('disabled', 'disabled');
+                });
+                closeTerminalButton.click();
+                icon.classList.add('fa-refresh', 'fa-spin');
+                icon.classList.remove('fa-' + iconClass);
+                try {
+                    await VPLService.call('save', questionId, textarea.value, filestype);
+                    // We got nested callback, but we can't promisify it,
                     // as callback may be called several times depending on the underlying websocket messages order.
-                    VPLService.call('save', vplId, questionId, $textarea.val(), filestype)
-                    .then(function() {
-                        return VPLService.call('exec', action, vplId, userId, terminal, function(result) {
-                            displayResult('vpl_result_q' + questionId, result);
-                            reenableButtons();
-                        });
-                    })
-                    .fail(function(details) {
-                        displayResult('vpl_result_q' + questionId, {execerror: details});
+                    await VPLService.call('exec', action, vplId, userId, terminal, function(result) {
+                        displayResult('vpl_result_q' + questionId, result);
                         reenableButtons();
                     });
-                });
-            };
-
-            setupButton('run', 'rocket', 'run');
-            setupButton('debug', 'check-square-o', 'precheck');
-            setupButton('evaluate', 'check-square-o', 'precheck');
-        });
-
-        // First render the form. We do not send the promise to ModalFactory.create(),
-        // because we will need to access rendered elements immediately.
-        Templates.render('qtype_vplquestion/editorpreferencesform', {
-            qid: questionId,
-            installedthemes: JSON.parse(document.querySelector('[data-role=qvpl_installedthemes]').dataset.themes),
-        }).done(function(formHTML) {
-            $.when(
-                CodeEditors.getEditorPreferences(),
-                ModalFactory.create({
-                    type: ModalFactory.types.SAVE_CANCEL,
-                    title: '<i class="fa fa-fw fa-cog icon"></i>' + M.util.get_string('editoroptions', 'qtype_vplquestion'),
-                    body: formHTML,
-                }),
-            )
-            .done(function(prefs, modal) {
-                // Explicitly attach to DOM, so other similar modals can interact with it and maintain consistency across forms.
-                modal.attachToDOM();
-
-                var $fontSizeInput = modal.getBody().find('[name="vpl_fontsize' + questionId + '"]');
-                $fontSizeInput.val(prefs.fontSize);
-
-                var $aceThemeInput = modal.getBody().find('[name="vpl_editortheme' + questionId + '"]');
-                $aceThemeInput.val(prefs.aceTheme);
-
-                // Some validation around font size.
-                var prevFontSize = $fontSizeInput.val();
-                $fontSizeInput.on('input', function() {
-                    var newFontSize = Number($(this).val());
-                    if (isNaN(newFontSize)) {
-                        $(this).val(prevFontSize);
-                    } else {
-                        // Clamp in [1..48].
-                        newFontSize = Math.min(Math.max(newFontSize, 1), 48);
-                        $(this).val(newFontSize);
-                        prevFontSize = newFontSize;
-                        CodeEditors.changeFontSize(newFontSize); // Apply changes as a preview.
-                    }
-                });
-
-                // Setup increase and decrease font size buttons.
-                modal.getBody().find('[data-role="fontsizeincr"]').click(function() {
-                    $fontSizeInput.val(Number($fontSizeInput.val()) + 1);
-                    $fontSizeInput.trigger('input');
-                });
-                modal.getBody().find('[data-role="fontsizedecr"]').click(function() {
-                    $fontSizeInput.val(Number($fontSizeInput.val()) - 1);
-                    $fontSizeInput.trigger('input');
-                });
-
-                $aceThemeInput.on('change', function() {
-                    CodeEditors.changeTheme($(this).val()); // Apply changes as a preview.
-                });
-
-                modal.getRoot().on(ModalEvents.save, function() {
-                    $fontSizeInput.data('save', $fontSizeInput.val());
-                    $aceThemeInput.data('save', $aceThemeInput.val());
-                    CodeEditors.saveEditorPreferences($aceThemeInput.val(), $fontSizeInput.val());
-                });
-
-                modal.getRoot().on(ModalEvents.shown, function() {
-                    $fontSizeInput.data('save', $fontSizeInput.val());
-                    $aceThemeInput.data('save', $aceThemeInput.val());
-                });
-
-                modal.getRoot().on(ModalEvents.hidden, function() {
-                    $fontSizeInput.val($fontSizeInput.data('save'));
-                    $aceThemeInput.val($aceThemeInput.data('save'));
-                    CodeEditors.changeFontSize($fontSizeInput.val());
-                    CodeEditors.changeTheme($aceThemeInput.val());
-                    // Set all the preferences forms to the same values for consistency.
-                    $('[name^="vpl_fontsize"]').val($fontSizeInput.val());
-                    $('[name^="vpl_editortheme"]').val($aceThemeInput.val());
-                });
-
-                $('#qvpl_editor_preferences' + questionId).css('visibility', 'visible').click(function() {
-                    modal.show();
-                });
+                } catch (error) {
+                    displayResult('vpl_result_q' + questionId, {execerror: error});
+                    reenableButtons();
+                }
             });
-        });
+        };
+
+        setupButton('run', 'rocket', 'run');
+        setupButton('debug', 'check-square-o', 'precheck');
+        setupButton('evaluate', 'check-square-o', 'precheck');
     }
 
     return {
         setup: setup,
-        displayResult: displayResult
+        displayResult: displayResult,
     };
 });

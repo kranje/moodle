@@ -24,7 +24,6 @@
     * data-role
 
     Context variables required for this template:
-    * qid Question ID.
     * installedthemes Available themes for ace editor.
         * id Theme id (xxxx in /mod/vpl/editor/ace9/theme-xxxx.js).
         * name Human-friendly name of the theme.
@@ -40,11 +39,11 @@
         ]
     }
 }}
-<div id="qvpl_editor_preferences_form{{qid}}" class="px-3">
+<div id="qvpl_editor_preferences_form" class="px-3">
     <div class="position-relative mt-2" style="height: 36.5px;">
         <label>
             <span class="mr-1">{{# str}} editorfontsize, qtype_vplquestion {{/ str}}</span>
-            <input type="text" size="2" name="vpl_fontsize{{qid}}" class="form-control d-inline" style="width:initial">
+            <input type="text" size="2" name="vpl_fontsize" class="form-control d-inline" style="width:initial">
         </label>
         <button data-role="fontsizeincr" type="button" class="position-absolute d-inline-flex justify-content-center align-items-center bg-white border px-2 clickable h-50" style="top: 0;color: #333;outline: none;">
             <i class="fa fa-angle-up position-absolute"></i>
@@ -56,7 +55,7 @@
     <div class="my-2">
         <label>
             <span class="mr-1">{{# str}} editortheme, qtype_vplquestion {{/ str}}</span>
-            <select name="vpl_editortheme{{qid}}" class="custom-select">
+            <select name="vpl_editortheme" class="custom-select">
                 {{# installedthemes}}
                 <option value="{{id}}">{{name}}</option>
                 {{/ installedthemes}}

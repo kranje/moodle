@@ -16,10 +16,12 @@
 
 namespace report_customsql\external;
 
-defined('MOODLE_INTERNAL') || die();
-
-global $CFG;
-require_once($CFG->libdir . '/externallib.php');
+use core_external\external_api;
+use core_external\external_description;
+use core_external\external_function_parameters;
+use core_external\external_multiple_structure;
+use core_external\external_single_structure;
+use core_external\external_value;
 
 /**
  * Web service used by form autocomplete to get a list of users with a given capability.
@@ -28,16 +30,16 @@ require_once($CFG->libdir . '/externallib.php');
  * @copyright 2020 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class get_users extends \external_api {
+class get_users extends external_api {
     /**
      * Parameter declaration.
      *
-     * @return \external_function_parameters Parameters
+     * @return external_function_parameters Parameters
      */
-    public static function execute_parameters(): \external_function_parameters {
-        return new \external_function_parameters([
-            'query' => new \external_value(PARAM_RAW, 'Contents of the search box.'),
-            'capability' => new \external_value(PARAM_CAPABILITY, 'Return only users with this capability in the system context.'),
+    public static function execute_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'query' => new external_value(PARAM_RAW, 'Contents of the search box.'),
+            'capability' => new external_value(PARAM_CAPABILITY, 'Return only users with this capability in the system context.'),
         ]);
     }
 
@@ -52,8 +54,12 @@ class get_users extends \external_api {
     public static function execute(string $query, string $capability): array {
         global $CFG, $DB;
 
-        [$query, $capability] = array_values(self::validate_parameters(self::execute_parameters(),
-                ['query' => $query, 'capability' => $capability]));
+        [$query, $capability] = array_values(
+            self::validate_parameters(
+                self::execute_parameters(),
+                ['query' => $query, 'capability' => $capability],
+            )
+        );
 
         $context = \context_system::instance();
         self::validate_context($context);
@@ -61,8 +67,16 @@ class get_users extends \external_api {
 
         if (class_exists('\core_user\fields')) {
             $extrafields = \core_user\fields::for_identity($context, false)->get_required_fields();
-            $fields = \core_user\fields::for_identity($context,
-                    false)->with_userpic()->get_sql('u', false, '', '', false)->selects;
+            $fields = \core_user\fields::for_identity(
+                $context,
+                false
+            )->with_userpic()->get_sql(
+                'u',
+                false,
+                '',
+                '',
+                false,
+            )->selects;
         } else {
             $extrafields = get_extra_user_fields($context);
             $fields = \user_picture::fields('u', $extrafields);
@@ -136,16 +150,17 @@ class get_users extends \external_api {
     /**
      * Returns type for declaration.
      *
-     * @return \external_description Result type
+     * @return external_description Result type
      */
-    public static function execute_returns(): \external_description {
-        return new \external_multiple_structure(
-            new \external_single_structure([
-                'id' => new \external_value(PARAM_INT, 'User id.'),
-                'fullname' => new \external_value(PARAM_RAW, 'User full name.'),
-                'identity' => new \external_value(PARAM_RAW, 'Additional user identifying info.'),
-                'hasidentity' => new \external_value(PARAM_BOOL, 'Whether identity is non-blank.'),
-                'profileimageurlsmall' => new \external_value(PARAM_RAW, 'URL of the user profile image.'),
-            ]));
+    public static function execute_returns(): external_description {
+        return new external_multiple_structure(
+            new external_single_structure([
+                'id' => new external_value(PARAM_INT, 'User id.'),
+                'fullname' => new external_value(PARAM_RAW, 'User full name.'),
+                'identity' => new external_value(PARAM_RAW, 'Additional user identifying info.'),
+                'hasidentity' => new external_value(PARAM_BOOL, 'Whether identity is non-blank.'),
+                'profileimageurlsmall' => new external_value(PARAM_RAW, 'URL of the user profile image.'),
+            ])
+        );
     }
 }

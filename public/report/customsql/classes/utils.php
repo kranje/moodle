@@ -23,18 +23,17 @@ namespace report_customsql;
  * @copyright 2021 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class utils {
-
-
     /**
      * Return the current timestamp, or a fixed timestamp specified by an automated test.
      *
      * @return int The timestamp
      */
     public static function time(): int {
-        if ((defined('BEHAT_SITE_RUNNING') || PHPUNIT_TEST) &&
-                $time = get_config('report_customsql', 'behat_fixed_time')) {
+        if (
+            (defined('BEHAT_SITE_RUNNING') || PHPUNIT_TEST) &&
+            $time = get_config('report_customsql', 'behat_fixed_time')
+        ) {
             return $time;
         } else {
             return time();
@@ -60,21 +59,11 @@ class utils {
         return $grouppedqueries;
     }
 
-    public function get_queries_data($queries) {
-
-    }
-
     /**
-     * Get queries for each type.
+     * Retrieves and processes data for the given queries.
      *
-     * @param array $queries Array of queries.
-     * @param string $type Type to filter.
-     * @return array All queries of type.
+     * @param array $queries An array of query objects.
      */
-    public static function get_number_of_report_by_type(array $queries, string $type) {
-        return array_filter($queries, function($query) use ($type) {
-            return $query->runable == $type;
-        }, ARRAY_FILTER_USE_BOTH);
+    public function get_queries_data($queries) {
     }
-
 }

@@ -21,20 +21,21 @@
 
 /* globals ace */
 define([
-    'jquery',
     'core/log',
     'core/modal',
-    'core/modal_registry',
-    'core/modal_factory',
+    'core/modal_save_cancel',
     'core/modal_events',
     'core/custom_interaction_events',
     'qtype_vplquestion/vplservice',
     'qtype_vplquestion/codeeditors',
-    ], function($, log, Modal, ModalRegistry, ModalFactory, ModalEvents, CustomEvents, VPLService, CodeEditors) {
+    ], function(log, Modal, ModalSaveCancel, ModalEvents, CustomEvents, VPLService, CodeEditors) {
 
     var execfilesEditor = null;
     var precheckExecfilesEditor = null;
     var programaticChangeEditor = null;
+
+    var execfilesHiddenField = document.getElementsByName('execfiles')[0];
+    var precheckExecfilesHiddenField = document.getElementsByName('precheckexecfiles')[0];
 
     /**
      * Set editor content to a new content.
@@ -56,27 +57,23 @@ define([
      * This does not include file tabs nor content updating. This is only a visibility update on some elements.
      */
     function updateExecfilesVisibility() {
-        var selectedVpl = $('#id_templatevpl').val() > '';
-        $('[data-role="novplmessage"]').toggle(!selectedVpl);
-        $(`#execfileslist,
-           #fitem_id_execfile,
-           #fitem_id_execfileslist [data-role="scrollerarrow"],
-           #fitem_id_execfileslist [data-role="filemanagement"]`).toggle(selectedVpl);
+        var selectedVpl = document.getElementById('id_templatevpl').value > '';
+        document.querySelectorAll('[data-role="novplmessage"]').forEach(function(message) {
+            message.hidden = selectedVpl;
+        });
+        document.getElementById('execfilesnavigation').hidden = !selectedVpl;
+        document.getElementById('fitem_id_execfile').hidden = !selectedVpl;
 
-        var showPrecheckSection = $('#id_precheckpreference').val() == 'diff';
+        var showPrecheckSection = document.getElementById('id_precheckpreference').value == 'diff';
         var showPrecheckEditor = selectedVpl && showPrecheckSection;
-        $('#fitem_id_precheckexecfileslist').toggle(showPrecheckSection);
-        $(`#precheckexecfileslist,
-           #fitem_id_precheckexecfile,
-           #fitem_id_precheckexecfileslist [data-role="scrollerarrow"],
-           #fitem_id_precheckexecfileslist [data-role="filemanagement"]`).toggle(showPrecheckEditor);
+        document.getElementById('fitem_id_precheckexecfileslist').hidden = !showPrecheckSection;
+        document.getElementById('precheckexecfilesnavigation').hidden = !showPrecheckEditor;
+        document.getElementById('fitem_id_precheckexecfile').hidden = !showPrecheckEditor;
 
         // Refresh previously hidden editor (which otherwise does not display correctly).
-        if ($('#ace_placeholder_precheckexecfile').length) {
+        if (document.getElementById('ace_placeholder_precheckexecfile')) {
             ace.edit('ace_placeholder_precheckexecfile').resize();
         }
-
-        $('[data-role="filesloadicon"]').hide();
     }
 
     /**
@@ -84,55 +81,55 @@ define([
      * @param {Boolean} keepContents Whether editors contents should be kept.
      *  This is typically false on initialization, true otherwise.
      */
-    function applyTemplateChoice(keepContents) {
-        var selectedVpl = $('#id_templatevpl').val();
-        $('#fitem_id_templatecontext').toggle(selectedVpl > '');
+    async function applyTemplateChoice(keepContents) {
+        var selectedVpl = document.getElementById('id_templatevpl').value;
+        document.getElementById('fitem_id_templatecontext').hidden = !selectedVpl;
         updateExecfilesVisibility();
-        if (selectedVpl) {
+        if (!selectedVpl) {
+            // No template VPL selected, no files to fetch.
+            return;
+        }
+        try {
             // Update template content.
-            VPLService.call('info', 'reqfile', selectedVpl)
-            .then(function(reqfile) {
-                // Check that a required file is present. If not, display a warning.
-                $('[data-role="noreqfile-warning"]').toggle(!reqfile);
-                reqfile = reqfile || {name: 'ERROR.txt', contents: ''}; // Fill reqfile with default value if needed.
+            var reqfile = await VPLService.call('info', 'reqfile', selectedVpl);
+            // Check that a required file is present. If not, display a warning.
+            document.querySelector('[data-role="noreqfile-warning"]').hidden = !!reqfile;
+            reqfile = reqfile || {name: 'ERROR.txt', contents: ''}; // Fill reqfile with default value if needed.
 
-                var lang = VPLService.langOfFile(reqfile.name);
-                // Apply language change on editors.
-                $('[data-role="code-editor"]:not([data-manylangs])~.ace-placeholder').each(function() {
-                    ace.edit(this).getSession().setMode('ace/mode/' + lang);
-                });
-
-                // Store lang in hidden form element.
-                $('[name=templatelang]').val(lang);
-
-                if (!keepContents) {
-                    // Choice changed (it is not initialization):
-                    // Reinitialize template content to its original (VPL) state.
-                    updateEditorContent(ace.edit('ace_placeholder_templatecontext'), reqfile.contents, true);
-                }
-                return reqfile;
-            })
-            .fail(function(message) { // The .catch method doesn't exist as it is a $.Deferred object (and not Promise).
-                log.error(message, 'Error retrieving required files info for VPL ' + selectedVpl);
+            var lang = VPLService.langOfFile(reqfile.name);
+            // Apply language change on editors.
+            document.querySelectorAll('[data-role="code-editor"]:not([data-manylangs])~.ace-placeholder')
+            .forEach(function(placeholder) {
+                ace.edit(placeholder).getSession().setMode('ace/mode/' + lang);
             });
 
+            // Store lang in hidden form element.
+            document.getElementsByName('templatelang')[0].value = lang;
+
+            if (!keepContents) {
+                // Choice changed (it is not initialization):
+                // Reinitialize template content to its original (VPL) state.
+                updateEditorContent(ace.edit('ace_placeholder_templatecontext'), reqfile.contents, true);
+            }
+        } catch (error) {
+            log.error(error, 'Error retrieving required files info for VPL ' + selectedVpl);
+        }
+
+        try {
             // Update execution files.
-            VPLService.call('info', 'execfiles', selectedVpl)
-            .then(function(execfiles) {
-                // Check that pre_vpl_run.sh is present. If not, display a warning.
-                $('[data-role="noprevplrun-warning"]').toggle(!execfiles.find((execfile) => execfile.name == 'pre_vpl_run.sh'));
-                // Filter new exec files to exclude standard scripts.
-                var standardScripts = ['vpl_run.sh', 'vpl_debug.sh', 'vpl_evaluate.sh', 'pre_vpl_run.sh'];
-                execfiles = execfiles.filter((execfile) => !standardScripts.includes(execfile.name));
-
-                updateNewExecfiles(execfiles, keepContents, '#execfileslist', execfilesEditor, $('[name=execfiles]'));
-                updateNewExecfiles(execfiles, keepContents, '#precheckexecfileslist', precheckExecfilesEditor,
-                        $('[name=precheckexecfiles]'));
-                return execfiles;
-            })
-            .fail(function(message) { // The .catch method doesn't exist as it is a $.Deferred object (and not Promise).
-                log.error(message, 'Error retrieving execution files info for VPL ' + selectedVpl);
-            });
+            var execfiles = await VPLService.call('info', 'execfiles', selectedVpl);
+            // Check that pre_vpl_run.sh is present. If not, display a warning.
+            var hasprevplrun = execfiles.find((execfile) => execfile.name === 'pre_vpl_run.sh');
+            document.querySelector('[data-role="noprevplrun-warning"]').hidden = hasprevplrun;
+            // Filter new exec files to exclude standard scripts.
+            var standardScripts = ['vpl_run.sh', 'vpl_debug.sh', 'vpl_evaluate.sh', 'pre_vpl_run.sh'];
+            execfiles = execfiles.filter((execfile) => !standardScripts.includes(execfile.name));
+            updateNewExecfiles(execfiles, keepContents,
+                'execfileslist', execfilesEditor, execfilesHiddenField);
+            updateNewExecfiles(execfiles, keepContents,
+                'precheckexecfileslist', precheckExecfilesEditor, precheckExecfilesHiddenField);
+        } catch (error) {
+            log.error(error, 'Error retrieving execution files info for VPL ' + selectedVpl);
         }
     }
 
@@ -142,73 +139,77 @@ define([
      * @returns {String} HTML fragment.
      */
     function getStatusChipHTML(status) {
-        return '<span class="d-inline-block ml-1 status-chip status-chip-' + status + '" data-status-chip="' + status + '"></span>';
+        return '<span class="d-inline-block ml-1 status-chip" data-status="' + status + '" aria-hidden="true"></span>';
     }
 
     /**
      * Setup one editor for execution files (with file tabs). Call this once on loading, then use updateNewExecfiles when changing.
-     * @param {String} fileTabs Tabs selector for execution files.
+     * @param {String} fileTabsSelector Tabs selector for execution files.
      * @param {Editor} aceEditor Ace editor object.
-     * @param {jQuery} $hiddenField Hidden form field in which files data is stored.
+     * @param {HTMLElement} hiddenField Hidden form field in which files data is stored.
      */
-    function setupExecfilesEditor(fileTabs, aceEditor, $hiddenField) {
-        var $fileTabs = $(fileTabs);
-        $fileTabs.parent().find('[data-role="scrollerarrow"]')
-        .click(function() {
-            if ($(this).data('direction') === 'left') {
-                $fileTabs[0].scrollLeft = Math.max($fileTabs[0].scrollLeft - 42, 0);
-            } else {
-                $fileTabs[0].scrollLeft = Math.min($fileTabs[0].scrollLeft + 42, $fileTabs[0].scrollLeftMax);
-            }
+    function setupExecfilesEditor(fileTabsSelector, aceEditor, hiddenField) {
+        var fileTabs = document.querySelector(fileTabsSelector);
+        fileTabs.parentElement.querySelectorAll('[data-role="scrollerarrow"]').forEach(function(arrow) {
+            arrow.addEventListener('click', function() {
+                if (arrow.dataset.direction === 'left') {
+                    fileTabs.scrollLeft = Math.max(fileTabs.scrollLeft - 42, 0);
+                } else {
+                    fileTabs.scrollLeft = Math.min(fileTabs.scrollLeft + 42, fileTabs.scrollLeftMax);
+                }
+            });
         });
 
         // On form submit, write current editor value to the field that will be saved.
-        $('input[type=submit]').click(function() {
-            var $fileTab = $(fileTabs + ' .currentfile');
-            var status = $fileTab.find('[data-status-chip]').data('status-chip');
-            storeExecfile($fileTab.text(), status == 'overwrite' ? aceEditor.getValue() : null, $hiddenField);
+        document.querySelectorAll('input[type=submit]').forEach(function(submitButton) {
+            submitButton.addEventListener('click', function() {
+                var fileTab = fileTabs.querySelector('.currentfile');
+                var status = fileTab.querySelector('.status-chip').dataset.status;
+                storeExecfile(fileTab.textContent, status == 'overwrite' ? aceEditor.getValue() : null, hiddenField);
+            });
         });
 
-        var $filemanagement = $fileTabs.siblings('[data-role="filemanagement"]');
-        $filemanagement.find('input:radio')
-        .each(function() {
+        var filemanagement = fileTabs.parentElement.querySelector('[data-role="filemanagement"]');
+        filemanagement.querySelectorAll('input[type=radio]').forEach(function(radio) {
             // Add status chip to radio button for readability.
-            $(this).closest('label').append(getStatusChipHTML($(this).val()));
-        })
-        .click(function() {
-            // Update status chip on current file.
-            var newStatus = $(this).val();
-            $fileTabs.find('.currentfile [data-status-chip]').replaceWith(getStatusChipHTML(newStatus));
+            radio.closest('label').insertAdjacentHTML('beforeend', getStatusChipHTML(radio.value));
+            radio.addEventListener('click', function() {
+                // Update status chip on current file.
+                fileTabs.querySelector('.currentfile .status-chip').outerHTML = getStatusChipHTML(radio.value);
+            });
         });
 
         // Display a confirmation dialog when user switches back to "Inherit" mode.
-        ModalFactory.create({
-            type: ModalFactory.types.SAVE_CANCEL,
+        ModalSaveCancel.create({
             title: M.util.get_string('switchbacktodefaultfile', 'qtype_vplquestion'),
             body: '<div class="py-3">' + M.util.get_string('switchbacktodefaultfileprompt', 'qtype_vplquestion') + '</div>',
         })
-        .done(function(modal) {
+        .then(function(modal) {
             modal.setSaveButtonText(M.util.get_string('confirm', 'moodle'));
 
-            // By default, consider a close action as a cancel.
-            var isConfirmed = false;
-
+            var isConfirmed;
+            modal.getRoot().on(ModalEvents.shown, function() {
+                isConfirmed = false;
+            });
             modal.getRoot().on(ModalEvents.save, function() {
                 isConfirmed = true;
+                var fileName = fileTabs.querySelector('.currentfile').textContent;
+                updateEditorContent(aceEditor, hiddenField.dataset['default_' + fileName], false);
             });
             modal.getRoot().on(ModalEvents.hidden, function() {
-                if (isConfirmed) {
-                    updateEditorContent(aceEditor, $hiddenField.data('default_' + $fileTabs.find('.currentfile').text()), false);
-                } else {
-                    $filemanagement.find('input:radio[value="overwrite"]').click();
+                if (!isConfirmed) {
+                    filemanagement.querySelector('input[type=radio][value="overwrite"]').click();
                 }
             });
 
-            $filemanagement.find('input:radio[value="inherit"]').click(function() {
-                if ($hiddenField.data('default_' + $fileTabs.find('.currentfile').text()).trim() !== aceEditor.getValue().trim()) {
+            filemanagement.querySelector('input[type=radio][value="inherit"]').addEventListener('click', function() {
+                var fileName = fileTabs.querySelector('.currentfile').textContent;
+                if (hiddenField.dataset['default_' + fileName].trim() !== aceEditor.getValue().trim()) {
                     modal.show();
                 }
             });
+
+            return modal;
         });
     }
 
@@ -218,17 +219,18 @@ define([
      * @param {String} execfiles.name File name.
      * @param {?String} execfiles.contents File contents, null means inherit from VPL.
      * @param {Boolean} keepContents Whether current contents should be kept, or overwritten.
-     * @param {String} fileTabs Tabs selector for execution files.
+     * @param {String} fileTabsID Tabs ID for execution files.
      * @param {Editor} aceEditor Ace editor object.
-     * @param {jQuery} $hiddenField Hidden form field in which files data is stored.
+     * @param {HTMLElement} hiddenField Hidden form field in which files data is stored.
      */
-    function updateNewExecfiles(execfiles, keepContents, fileTabs, aceEditor, $hiddenField) {
+    function updateNewExecfiles(execfiles, keepContents, fileTabsID, aceEditor, hiddenField) {
         // Empty exec files list.
-        var $fileTabs = $(fileTabs).html('');
+        var fileTabs = document.getElementById(fileTabsID);
+        fileTabs.innerHTML = '';
 
         // Create exec files object to store in hidden form element, and create file tabs.
         var execfilesObj = {};
-        var initialContents = $hiddenField.val().length > 0 ? JSON.parse($hiddenField.val()) : {};
+        var initialContents = hiddenField.value.length > 0 ? JSON.parse(hiddenField.value) : {};
         execfiles.forEach(function(execfile) {
             var content = keepContents ? initialContents[execfile.name] : execfile.contents;
             var status = (keepContents && content !== undefined) ? 'overwrite' : 'inherit';
@@ -241,21 +243,22 @@ define([
             if (status == 'overwrite') {
                 execfilesObj[execfile.name] = content;
             }
-            $fileTabs.append('<li class="execfilename">' +
-                                 '<span class="clickable rounded-top">' +
+            fileTabs.insertAdjacentHTML('beforeend',
+                                 '<button type="button" class="btn execfilename"' +
+                                    'role="tab" aria-controls="' + aceEditor.container.getAttribute('id') + '">' +
                                      execfile.name + getStatusChipHTML(status) +
-                                 '</span>' +
-                             '</li>');
-            $hiddenField.data('default_' + execfile.name, defaultContent);
+                                 '</button>');
+            hiddenField.dataset['default_' + execfile.name] = defaultContent;
         });
-        $hiddenField.val(JSON.stringify(execfilesObj));
+        hiddenField.value = JSON.stringify(execfilesObj);
 
         // Setup file tabs navigation.
-        $(fileTabs + ' .execfilename > span').click(function(event) {
-            if (!$(this).is('.currentfile')) {
-                updateExecfile($(fileTabs + ' .currentfile'), $(this), aceEditor, $hiddenField);
-            }
-            event.preventDefault();
+        fileTabs.querySelectorAll('.execfilename').forEach(function(fileTab) {
+            fileTab.addEventListener('click', function() {
+                if (!fileTab.classList.contains('currentfile')) {
+                    updateExecfile(fileTabs.querySelector('.currentfile'), fileTab, aceEditor, hiddenField);
+                }
+            });
         });
 
         aceEditor.on('change', function() {
@@ -264,68 +267,73 @@ define([
                 return;
             }
             // When user types something, change status to "overwrite".
-            $fileTabs.siblings('[data-role="filemanagement"]').find('input:radio[value="overwrite"]').click();
+            fileTabs.parentElement.querySelector('[data-role="filemanagement"] input[type=radio][value="overwrite"]').click();
         });
 
         // Initialize/re-initialize editor.
-        updateExecfile(null, $(fileTabs + ' .execfilename > span').first(), aceEditor, $hiddenField);
+        updateExecfile(null, fileTabs.querySelector('.execfilename'), aceEditor, hiddenField);
     }
 
     /**
      * Store a file's content to hidden form element.
      * @param {String} fileName File name.
      * @param {String} fileContent File content.
-     * @param {jQuery} $hiddenField Hidden form field in which files data is stored.
+     * @param {HTMLElement} hiddenField Hidden form field in which files data is stored.
      */
-    function storeExecfile(fileName, fileContent, $hiddenField) {
-        var execfiles = JSON.parse($hiddenField.val());
+    function storeExecfile(fileName, fileContent, hiddenField) {
+        var execfiles = JSON.parse(hiddenField.value);
         if (fileContent === null) {
             delete execfiles[fileName];
         } else {
             execfiles[fileName] = fileContent;
         }
-        $hiddenField.val(JSON.stringify(execfiles));
+        hiddenField.value = JSON.stringify(execfiles);
     }
 
     /**
      * Update Ace editor and tabs after user swapped to another file.
-     * @param {jQuery} $prevFile The previously selected tab.
-     * @param {jQuery} $newFile The new tab selected by the user.
+     * @param {HTMLElement} prevFile The previously selected tab.
+     * @param {HTMLElement} newFile The new tab selected by the user.
      * @param {Editor} aceEditor Ace editor object.
-     * @param {jQuery} $hiddenField Hidden form field in which files data is stored.
+     * @param {HTMLElement} hiddenField Hidden form field in which files data is stored.
      */
-    function updateExecfile($prevFile, $newFile, aceEditor, $hiddenField) {
-        if ($prevFile !== null) {
-            $prevFile.removeClass('currentfile');
-            var prevStatus = $prevFile.find('[data-status-chip]').data('status-chip');
-            storeExecfile($prevFile.text(), prevStatus == 'overwrite' ? aceEditor.getValue() : null, $hiddenField);
+    function updateExecfile(prevFile, newFile, aceEditor, hiddenField) {
+        if (prevFile !== null) {
+            prevFile.classList.remove('currentfile');
+            prevFile.removeAttribute('aria-selected');
+            var prevStatus = prevFile.querySelector('.status-chip').dataset.status;
+            storeExecfile(prevFile.textContent, prevStatus == 'overwrite' ? aceEditor.getValue() : null, hiddenField);
         }
-        $newFile.addClass('currentfile');
-        var $fileManagement = $newFile.closest('ul').siblings('[data-role="filemanagement"]');
+        newFile.classList.add('currentfile');
+        newFile.setAttribute('aria-selected', true);
+        var fileManagement = newFile.parentElement.parentElement.querySelector('[data-role="filemanagement"]');
 
         // Update radio selection.
-        var newStatus = $newFile.find('[data-status-chip]').data('status-chip');
-        $fileManagement.find('input:radio[value="' + newStatus + '"]').prop('checked', true);
+        var newStatus = newFile.querySelector('.status-chip').dataset.status;
+        fileManagement.querySelector('input[type=radio][value="' + newStatus + '"]').checked = true;
 
-        var newFileName = $newFile.text();
+        var newFileName = newFile.textContent;
 
         if (VPLService.isBinary(newFileName)) {
             // If binary file, replace editor with blank space (and display "Binary file").
-            $(aceEditor.container).addClass('invisible');
-            $('<pre class="visible bg-white text-center h-100 p-3 position-relative" style="z-index:1" data-role="binaryfile">')
-            .text(M.util.get_string('binaryfile', 'mod_vpl'))
-            .appendTo($(aceEditor.container));
-            $fileManagement.find('input:radio[value="overwrite"]').attr('disabled', 'disabled');
+            aceEditor.container.classList.add('invisible');
+            var binaryFileLabel = document.createElement('pre');
+            binaryFileLabel.classList.add('visible', 'bg-white', 'text-center', 'h-100', 'p-3', 'position-relative');
+            binaryFileLabel.style.zIndex = 1;
+            binaryFileLabel.dataset.role = 'binaryfile';
+            binaryFileLabel.textContent = M.util.get_string('binaryfile', 'mod_vpl');
+            aceEditor.container.appendChild(binaryFileLabel);
+            fileManagement.querySelector('input[type=radio][value="overwrite"]').setAttribute('disabled', 'disabled');
         } else {
             // Normal file, display editor.
-            $(aceEditor.container).find('[data-role="binaryfile"]').remove();
-            $(aceEditor.container).removeClass('invisible');
-            $fileManagement.find('input:radio[value="overwrite"]').removeAttr('disabled');
+            aceEditor.container.querySelector('[data-role="binaryfile"]')?.remove();
+            aceEditor.container.classList.remove('invisible');
+            fileManagement.querySelector('input[type=radio][value="overwrite"]').removeAttribute('disabled');
 
             aceEditor.getSession().setMode('ace/mode/' + VPLService.langOfFile(newFileName));
-            var newFileContents = JSON.parse($hiddenField.val())[newFileName];
+            var newFileContents = JSON.parse(hiddenField.value)[newFileName];
             if (newFileContents === undefined) {
-                newFileContents = $hiddenField.data('default_' + newFileName);
+                newFileContents = hiddenField.dataset['default_' + newFileName];
             }
             updateEditorContent(aceEditor, newFileContents, true);
         }
@@ -350,78 +358,67 @@ define([
                 Modal.prototype.registerEventListeners.call(this);
 
                 Object.keys(TemplateVPLChangeModal.buttonsEvents).forEach(function(buttonAction) {
-                    this.getModal().on(CustomEvents.events.activate, '[data-action="' + buttonAction + '"]', function(e, data) {
-                        var event = $.Event(TemplateVPLChangeModal.buttonsEvents[buttonAction]);
-                        this.getRoot().trigger(event, this);
-
-                        if (!event.isDefaultPrevented()) {
-                            this.hide();
-                            data.originalEvent.preventDefault();
-                        }
+                    this.getModal().on(CustomEvents.events.activate, '[data-action="' + buttonAction + '"]', function() {
+                        this.getRoot().trigger(TemplateVPLChangeModal.buttonsEvents[buttonAction], this);
+                        this.hide();
                     }.bind(this));
                 }.bind(this));
             }
         }
-        if (!ModalRegistry.get(TemplateVPLChangeModal.TYPE)) {
-            ModalRegistry.register(TemplateVPLChangeModal.TYPE, TemplateVPLChangeModal, TemplateVPLChangeModal.TEMPLATE);
-        }
 
-        ModalFactory.create({
-            type: TemplateVPLChangeModal.TYPE,
-        })
-        .done(function(modal) {
+        TemplateVPLChangeModal.create()
+        .then(function(modal) {
             modal.getBody().find('div').append(helpButton);
 
-            var $templateSelect = $('#id_templatevpl');
+            var templateSelect = document.getElementById('id_templatevpl');
+            // Save the previous value to manage cancel.
+            templateSelect.dataset.current = templateSelect.value;
 
             modal.getRoot().on(TemplateVPLChangeModal.buttonsEvents.overwrite, function() {
                 // Apply the change without merging.
-                $templateSelect.data('current', $templateSelect.val());
+                templateSelect.dataset.current = templateSelect.value;
                 applyTemplateChoice(false);
             });
 
             modal.getRoot().on(TemplateVPLChangeModal.buttonsEvents.merge, function() {
                 // Apply the change with merging.
-                $templateSelect.data('current', $templateSelect.val());
+                templateSelect.dataset.current = templateSelect.value;
                 applyTemplateChoice(true);
             });
 
             modal.getRoot().on(ModalEvents.hidden, function() {
-                $templateSelect.val($templateSelect.data('current'));
+                templateSelect.value = templateSelect.dataset.current;
             });
 
-            $templateSelect.focus(function() {
-                // Save the previous value to manage cancel.
-                $(this).data('current', $(this).val());
-            }).change(function() {
-                if ($templateSelect.val() && $('[name=execfiles]').val() != '') {
+            templateSelect.addEventListener('change', function() {
+                if (templateSelect.value && execfilesHiddenField.value != '') {
                     // There is data to merge/overwrite, open a dialog to prompt the user.
                     modal.show();
                 } else {
                     // There is nothing to merge/overwrite, simply apply the change.
-                    $templateSelect.data('current', $templateSelect.val());
+                    templateSelect.dataset.current = templateSelect.value;
                     applyTemplateChoice(false);
                 }
             });
 
+            return modal;
         });
     }
 
     return {
-        setup: function(templateChangeHelpButton) {
+        setup: async function(templateChangeHelpButton) {
             // Setup all form editors.
-            CodeEditors.setupFormEditors()
-            .done(function() {
-                execfilesEditor = ace.edit('ace_placeholder_execfile');
-                precheckExecfilesEditor = ace.edit('ace_placeholder_precheckexecfile');
-                setupExecfilesEditor('#execfileslist', execfilesEditor, $('[name=execfiles]'));
-                setupExecfilesEditor('#precheckexecfileslist', precheckExecfilesEditor, $('[name=precheckexecfiles]'));
-                // Setup form behavior (VPL template, execution files, etc).
-                applyTemplateChoice(true);
-                // Manage VPL template change.
-                setupTemplateChangeManager(templateChangeHelpButton);
-                $('#id_precheckpreference').change(updateExecfilesVisibility);
-            });
+            await CodeEditors.setupFormEditors();
+            execfilesEditor = ace.edit('ace_placeholder_execfile');
+            precheckExecfilesEditor = ace.edit('ace_placeholder_precheckexecfile');
+            setupExecfilesEditor('#execfileslist', execfilesEditor, execfilesHiddenField);
+            setupExecfilesEditor('#precheckexecfileslist', precheckExecfilesEditor, precheckExecfilesHiddenField);
+            // Setup form behavior (VPL template, execution files, etc).
+            applyTemplateChoice(true);
+            // Manage VPL template change.
+            setupTemplateChangeManager(templateChangeHelpButton);
+            document.getElementById('id_precheckpreference').addEventListener('change', updateExecfilesVisibility);
+            CodeEditors.setupEditorPreferencesForm('[data-role="qvpl_open_editor_preferences"]');
         }
     };
 });

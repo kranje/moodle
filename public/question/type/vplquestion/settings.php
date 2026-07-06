@@ -24,9 +24,9 @@
 defined('MOODLE_INTERNAL') || die;
 
 $settings->add(new admin_setting_configselect(
-    'qtype_vplquestion/allowasynceval',
-    get_string('allowasynceval', 'qtype_vplquestion'),
-    get_string('allowasynceval_desc', 'qtype_vplquestion'),
+    'qtype_vplquestion/asynceval',
+    get_string('asynceval', 'qtype_vplquestion'),
+    get_string('asynceval_desc', 'qtype_vplquestion'),
     1,
-    [ get_string('no'), get_string('yes') ]
+    [ get_string('disable'), get_string('allow'), get_string('force') ]
 ));

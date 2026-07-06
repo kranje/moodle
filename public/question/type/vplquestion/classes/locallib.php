@@ -51,7 +51,7 @@ class locallib {
         $formattedfiles = [];
         foreach ($execfiles as $name => $content) {
             if ($selector === null || in_array($name, $selector)) {
-                if (substr($content, 0, 6) != 'UNUSED') {
+                if (substr($content, 0, 6) !== 'UNUSED') {
                     $formattedfiles[$name . '_qvpl'] = $content;
                 }
             }
@@ -344,6 +344,22 @@ class locallib {
                 'usageid' => $qa->usageid,
                 'slot' => $qa->slot,
         ];
+    }
+
+    /**
+     * Get an HTML hidden field that contains data about currently installed themes for Ace editor.
+     * @return string HTML fragment.
+     */
+    public static function get_installed_themes_html_fragment_for_js() {
+        // Store installed ace themes in hidden element for editor preferences form.
+        $installedthemes = [];
+        foreach (static::get_ace_themes() as $id => $name) {
+            $installedthemes[] = (object) [ 'id' => $id, 'name' => $name ];
+        }
+        return \html_writer::div('', 'd-none', [
+                'data-role' => 'qvpl_installedthemes',
+                'data-themes' => json_encode($installedthemes),
+        ]);
     }
 
     /**

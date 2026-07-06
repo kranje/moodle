@@ -173,12 +173,14 @@ class qtype_vplquestion_question extends question_graded_automatically {
      */
     public function use_async_evaluation() {
         // Check that the question uses async evaluation, that it is allowed from admin settigns and that a step is set.
-        // For dry regrades, do not use async evaluation (because we can not properly apply the "needs grading" state).
+        // For dry regrades and preview, do not use async evaluation (because we can not properly apply the "needs grading" state).
+        $asyncevaladminsetting = get_config('qtype_vplquestion', 'asynceval');
+        $isenabledforquestion = $asyncevaladminsetting == 2 || ($asyncevaladminsetting == 1 && !empty($this->useasynceval));
         $isdryregrade = optional_param('regradealldry', 0, PARAM_BOOL)
             || optional_param('regradealldrydo', 0, PARAM_BOOL)
             || optional_param('dryrunregrade', 0, PARAM_BOOL);
-        return !empty($this->useasynceval) && $this->step !== null && get_config('qtype_vplquestion', 'allowasynceval')
-            && !$isdryregrade && !optional_param('previewid', 0, PARAM_INT);
+        $ispreview = optional_param('previewid', 0, PARAM_INT);
+        return $isenabledforquestion && $this->step !== null && !$isdryregrade && !$ispreview;
     }
 
     /**

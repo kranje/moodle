@@ -55,15 +55,16 @@ class qtype_vplquestion_edit_form extends question_edit_form {
         $PAGE->requires->jquery_plugin('ui'); // Load jQueryUI because mod_vpl scripts need it.
         $templatechangehelp = $OUTPUT->help_icon('templatevplchange', 'qtype_vplquestion', get_string('help'));
         $PAGE->requires->strings_for_js([
-                'merge',
-                'overwrite',
+                'editoroptions',
                 'templatevplchange',
                 'templatevplchangeprompt',
                 'switchbacktodefaultfile',
                 'switchbacktodefaultfileprompt',
         ], 'qtype_vplquestion');
-        $PAGE->requires->strings_for_js([ 'confirm', 'cancel' ], 'moodle');
+        $PAGE->requires->string_for_js('confirm', 'moodle');
         $PAGE->requires->string_for_js('binaryfile', 'mod_vpl');
+        // Store installed ace themes in hidden element for editor preferences form.
+        $mform->addElement('html', locallib::get_installed_themes_html_fragment_for_js());
         $PAGE->requires->js_call_amd('qtype_vplquestion/editform', 'setup', [ $templatechangehelp ]);
     }
 
@@ -78,15 +79,15 @@ class qtype_vplquestion_edit_form extends question_edit_form {
         $basevpls = array_map('format_string', array_column(get_coursemodules_in_course('vpl', $COURSE->id), 'name', 'id'));
         $basevpls = [ '' => get_string('choose', 'qtype_vplquestion') ] + $basevpls;
         $group = [];
-        $group[] =& $mform->createElement('select', 'templatevpl', null, $basevpls);
+        $group[] =& $mform->createElement('select', 'templatevpl', get_string('templatevpl', 'qtype_vplquestion'), $basevpls);
         // Add warnings for the case where template VPL has no pre_vpl_run.sh file or no required file.
         foreach ([ 'noprevplrun', 'noreqfile' ] as $reason) {
-            $icon = '<i class="fa fa-warning text-warning mx-1"></i>';
+            $icon = '<i class="fa fa-warning text-warning mx-1" title="' . get_string('warning') . '"></i>';
             $message = get_string($reason, 'qtype_vplquestion') . $OUTPUT->help_icon($reason, 'qtype_vplquestion', true);
-            $html = '<div data-role="' . $reason . '-warning" style="display:none">' . $icon . $message . '</div>';
+            $html = '<div data-role="' . $reason . '-warning" hidden="true">' . $icon . $message . '</div>';
             $group[] =& $mform->createElement('html', $html);
         }
-        $mform->addGroup($group, 'templatevplgroup', get_string('templatevpl', 'qtype_vplquestion'), null, false);
+        $mform->addGroup($group, 'templatevplgroup', get_string('templatevpl', 'qtype_vplquestion'), '', false);
         $mform->addRule('templatevplgroup', null, 'required', null, 'client');
         $mform->addHelpButton('templatevplgroup', 'templatevpl', 'qtype_vplquestion');
 
@@ -126,7 +127,7 @@ class qtype_vplquestion_edit_form extends question_edit_form {
     protected function add_execfiles_field($mform) {
         $this->create_header($mform, 'execfilesevalsettings');
 
-        $this->add_fileset_editor($mform, 'execfiles', 'execfileslist', 'execfile');
+        $this->add_fileset_editor($mform, 'execfiles', 'execfile');
 
         $mform->addElement('select', 'precheckpreference', get_string('precheckpreference', 'qtype_vplquestion'), [
                 'none' => get_string('noprecheck', 'qtype_vplquestion'),
@@ -137,7 +138,7 @@ class qtype_vplquestion_edit_form extends question_edit_form {
         $mform->setDefault('precheckpreference', $this->get_default_value('precheckpreference', 'same'));
         $mform->addHelpButton('precheckpreference', 'precheckpreference', 'qtype_vplquestion');
 
-        $this->add_fileset_editor($mform, 'precheckexecfiles', 'precheckexecfileslist', 'precheckexecfile');
+        $this->add_fileset_editor($mform, 'precheckexecfiles', 'precheckexecfile');
 
         $mform->addElement('select', 'gradingmethod', get_string('gradingmethod', 'qtype_vplquestion'), [
                 get_string('allornothing', 'qtype_vplquestion'),
@@ -156,17 +157,25 @@ class qtype_vplquestion_edit_form extends question_edit_form {
 
         $mform->addElement('selectyesno', 'deletesubmissions', get_string('deletesubmissions', 'qtype_vplquestion'));
         // If legacy config is still present, use it to keep consistency, else default 0.
-        $default = get_config('qtype_vplquestion')->deletevplsubmissions ?? 0;
+        $pluginconfig = get_config('qtype_vplquestion');
+        $default = $pluginconfig->deletevplsubmissions ?? 0;
         $mform->setDefault('deletesubmissions', $this->get_default_value('deletesubmissions', $default));
         $mform->addHelpButton('deletesubmissions', 'deletesubmissions', 'qtype_vplquestion');
 
-        if (get_config('qtype_vplquestion', 'allowasynceval')) {
+        if ($pluginconfig->asynceval == 1) {
             $mform->addElement('selectyesno', 'useasynceval', get_string('useasyncevaluation', 'qtype_vplquestion'));
-            $mform->setDefault('useasynceval', $this->get_default_value('useasynceval', 0));
+            $mform->setDefault('useasynceval', $this->get_default_value('useasynceval', 1));
             $mform->addHelpButton('useasynceval', 'useasyncevaluation', 'qtype_vplquestion');
         } else {
-            $mform->addElement('hidden', 'useasynceval', 0);
+            $mform->addElement('hidden', 'useasynceval', 1);
             $mform->setType('useasynceval', PARAM_BOOL);
+            $mform->addElement(
+                'static',
+                'useasynceval_info',
+                get_string('useasyncevaluation', 'qtype_vplquestion'),
+                get_string($pluginconfig->asynceval ? 'forceenabled' : 'forcedisabled', 'qtype_vplquestion')
+            );
+            $mform->addHelpButton('useasynceval_info', 'useasyncevaluation', 'qtype_vplquestion');
         }
     }
 
@@ -174,23 +183,22 @@ class qtype_vplquestion_edit_form extends question_edit_form {
      * Add an editor managing several files (with tabs).
      * @param MoodleQuickForm $mform the form being built.
      * @param string $name the name of the (hidden) field in which the files will be written.
-     * @param string $listname the id of the file tabs element in DOM.
      * @param string $editorname the name of the editor.
      */
-    private function add_fileset_editor($mform, $name, $listname, $editorname) {
+    private function add_fileset_editor($mform, $name, $editorname) {
         global $OUTPUT;
         $mform->addElement('hidden', $name);
         $mform->setType($name, PARAM_RAW);
         $mform->addElement(
             'static',
-            $listname,
+            $name . 'list',
             get_string($name, 'qtype_vplquestion'),
-            $OUTPUT->render_from_template('qtype_vplquestion/fileseteditor', [ 'listname' => $listname ])
+            $OUTPUT->render_from_template('qtype_vplquestion/fileseteditor', [ 'listname' => $name ])
         );
-        $mform->addHelpButton($listname, $name, 'qtype_vplquestion');
+        $mform->addHelpButton($name . 'list', $name, 'qtype_vplquestion');
         $mform->addElement('textarea', $editorname, '', [
                 'rows' => 1,
-                'class' => 'code-editor withfiletabs',
+                'class' => 'withfiletabs',
                 'data-role' => 'code-editor',
                 'data-manylangs' => true,
         ]);

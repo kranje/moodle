@@ -19,7 +19,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['jquery', 'core/url', 'mod_vpl/vplutil', 'mod_vpl/vplui'], function($, url, VPLUtil, VPLUI) {
+define(['core/url', 'mod_vpl/vplutil', 'mod_vpl/vplui', 'qtype_vplquestion/repository'], function(url, VPLUtil, VPLUI, Repository) {
 
     // Since VPL version 4.4.0, VPLUtil and VPLUI are not exported as modules but as objects so we need this fix.
     if (typeof VPLUtil.VPLUtil !== 'undefined') {
@@ -37,7 +37,7 @@ define(['jquery', 'core/url', 'mod_vpl/vplutil', 'mod_vpl/vplui'], function($, u
      * @return {String} The ajax url built.
      */
     function getAjaxUrl(vplId, userId, file) {
-        if (file === undefined) {
+        if (typeof file === 'undefined') {
             file = 'edit';
         }
         return url.relativeUrl('/mod/vpl/forms') + '/' + file + '.json.php?id=' + vplId + '&userId=' + userId + '&action=';
@@ -53,42 +53,29 @@ define(['jquery', 'core/url', 'mod_vpl/vplutil', 'mod_vpl/vplui'], function($, u
 
     // Retrieve specified files from the VPL (either 'reqfile' or 'execfile').
     // Note : these files are stored in cache. To clear it, the user has to reload the page.
-    VPLService.info = function(filesType, vplId) {
-        if (cache[filesType][vplId] != undefined) {
-            return $.Deferred().resolve(cache[filesType][vplId]).promise();
-        } else {
-            var deferred = filesType == 'reqfile' ?
-                VPLUI.requestAction('resetfiles', '', {}, getAjaxUrl(vplId, '')) :
-                VPLUI.requestAction('load', '', {}, getAjaxUrl(vplId, '', 'executionfiles'));
-            return deferred
-            .then(function(response) {
-                var files = filesType == 'reqfile' ?
-                    response.files[0] :
-                    response.files;
-                cache[filesType][vplId] = files;
-                return files;
-            }).promise();
+    VPLService.info = async function(filesType, vplId) {
+        if (typeof cache[filesType][vplId] === 'undefined') {
+            if (filesType === 'reqfile') {
+                cache.reqfile[vplId] = (await VPLUI.requestAction('resetfiles', '', {}, getAjaxUrl(vplId, ''))).files[0];
+            } else if (filesType === 'execfiles') {
+                cache.execfiles[vplId] = (await VPLUI.requestAction('load', '', {}, getAjaxUrl(vplId, '', 'executionfiles'))).files;
+            } else {
+                return null; // Not supposed to happen anyway.
+            }
         }
+        return cache[filesType][vplId];
     };
 
     // Save student answer to VPL, by replacing {{ANSWER}} in the template by the student answer.
-    VPLService.save = function(vplId, questionId, answer, filestype) {
-        return $.ajax(url.relativeUrl('/question/type/vplquestion/ajax/savetovpl.json.php'), {
-            data: {
-                id: vplId,
-                qid: questionId,
-                answer: answer,
-                filestype: filestype
-            },
-            method: 'POST'
-        }).promise();
+    VPLService.save = async function(questionId, answer, filestype) {
+        return await Repository.saveFilesToVPL(questionId, answer, filestype);
     };
 
     // Execute the specified action (should be 'run' or 'evaluate').
     // Note that this function does not call save, it has to be called beforehand if needed.
     // Note also that callback may be called several times
     // (especially one time with (false) execution error and one time right after with execution result).
-    VPLService.exec = function(action, vplId, userId, terminal, callback) {
+    VPLService.exec = async function(action, vplId, userId, terminal, callback) {
         // Build the options object for VPLUI.
         var options = {
             ajaxurl: getAjaxUrl(vplId, userId),
@@ -147,14 +134,13 @@ define(['jquery', 'core/url', 'mod_vpl/vplutil', 'mod_vpl/vplui'], function($, u
             };
         };
 
-        return VPLUI.requestAction(action, '', {}, options.ajaxurl)
-        .done(function(response) {
-            VPLUI.webSocketMonitor(response, '', '', options);
-        }).promise();
+        var response = await VPLUI.requestAction(action, '', {}, options.ajaxurl);
+        VPLUI.webSocketMonitor(response, '', '', options);
+        return response;
     };
 
     return {
-        call: function(service, ...args) {
+        call: async function(service, ...args) {
             // Deactivate VPLUI progress bar, as we have our own progress indicator.
             VPLUI.progressBar = function() {
                 this.setLabel = function() {
