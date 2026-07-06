@@ -38,12 +38,12 @@ $CFG = new stdClass();
 // will be stored.  This database must already have been created         //
 // and a username/password created to access it.                         //
 
-$CFG->dbtype    = 'pgsql';                  // 'pgsql', 'mariadb', 'mysqli', 'auroramysql', or 'sqlsrv'
+$CFG->dbtype    = 'mysqli';                  // 'pgsql', 'mariadb', 'mysqli', 'auroramysql', or 'sqlsrv'
 $CFG->dblibrary = 'native';                 // 'native' only at the moment
 $CFG->dbhost    = 'localhost';              // eg 'localhost' or 'db.isp.com' or IP
 $CFG->dbname    = 'moodle';                 // database name, eg moodle
-$CFG->dbuser    = 'username';               // your database username
-$CFG->dbpass    = 'password';               // your database password
+$CFG->dbuser    = 'moodleuser';               // your database username
+$CFG->dbpass    = 'P0stgres4M00dle';               // your database password
 $CFG->prefix    = 'mdl_';                   // prefix to use for all table names
 $CFG->dboptions = [
     'dbpersist' => false,                   // Should persistent database connections be
@@ -173,7 +173,7 @@ $CFG->dboptions = [
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 
-$CFG->wwwroot   = 'http://example.com/moodle';
+$CFG->wwwroot   = 'http://courses-new.centre.edu';
 
 //=========================================================================
 // 3. DATA FILES LOCATION
@@ -188,7 +188,7 @@ $CFG->wwwroot   = 'http://example.com/moodle';
 //
 // - On Windows systems you might specify something like 'c:\moodledata'
 
-$CFG->dataroot  = '/home/example/moodledata';
+$CFG->dataroot  = '/var/moodledata';
 
 // Whether the Moodle router is fully configured.
 //
