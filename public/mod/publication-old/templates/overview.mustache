@@ -1,0 +1,140 @@
+{{!
+    This file is part of mod_publication for Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_publication/overview
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * obtainstudentapprovaltitle Title for the student approval
+    * obtainteacherapproval Description of the teacher approval
+    * mode Mode of the publication (team, individual, etc.)
+    * obtainstudentapproval Description of the student approval
+    * timeremaining Time remaining for the assignment
+    * isteacher Boolean indicating if the user is a teacher
+    * studentcount Number of students in the publication
+    * allfilescount Total number of files submitted
+    * allfiles_url URL to view all files
+    * allfiles_empty Boolean indicating if there are no files
+    * assign Assignment object
+    * notset Boolean indicating if the assignment is not set
+    * notfound Boolean indicating if the assignment is not found
+    * url URL for the assignment
+    * name Name of the assignment
+    * myfilestitle Title for the user's files
+    * myfiles Array of user's files
+    * hasmyfiles Boolean indicating if the user has files
+    * myfilesform Form for the user's files
+
+    Example context (json):
+    {
+        "obtainstudentapprovaltitle": "Student approval",
+        "obtainteacherapproval": "Automatic",
+        "mode": "Upload files directly in the current activity",
+        "obtainstudentapproval": "Automatic",
+        "timeremaining": "Deadline of editing period passed",
+        "isteacher": true,
+        "studentcount": 2,
+        "allfilescount": 1,
+        "allfiles_url": "http://example.com",
+        "allfiles_empty": false,
+        "assign": {
+            "notset": false,
+            "notfound": false,
+            "url": "http://example.com",
+            "name": "Assignment 1"
+        },
+        "myfilestitle": "Own files",
+        "myfiles": [
+            [
+                "",
+                "<a href='filepath'>file.pdf</a>",
+                "<span class='' title='Approved by student automatically. Approved by teacher automatically.'><i class='fa fa-check fa-fw text-success' ></i></span>"
+            ]
+        ],
+        "hasmyfiles": true,
+        "myfilesform": "<form>...</form>"
+    }
+}}
+
+{{#isteacher}}
+    {{#showapprovalrequired}}
+        <a href="{{viewall_approvalneeded_url}}" class="btn btn-primary">{{#str}}giveapproval,publication{{/str}}</a>
+    {{/showapprovalrequired}}
+{{/isteacher}}
+{{^isteacher}}
+    {{{myfilesform}}}
+{{/isteacher}}
+<div class="my-3">
+    {{#isteacher}}
+        <h3>{{#str}}overview,publication{{/str}}</h3>
+
+    {{/isteacher}}
+    <table class="table table-striped w-100">
+        {{#isteacher}}
+            <tr>
+                <th>{{#str}}mode,publication{{/str}}</th>
+                <td>{{mode}}</td>
+            </tr>
+            {{#assign}}
+                <tr>
+                    <th>{{#str}}assignment,publication{{/str}}</th>
+                    <td>
+                        {{#name}}
+                            <a href="{{url}}">{{name}}</a>
+                        {{/name}}
+                        {{#notset}}
+                            <span class="alert-warning">{{#str}}assignment_notset,publication{{/str}}</span>
+                        {{/notset}}
+                        {{#notfound}}
+                            <span class="alert-warning">{{#str}}assignment_notfound,publication{{/str}}</span>
+                        {{/notfound}}
+                    </td>
+                </tr>
+            {{/assign}}
+            <tr>
+                <th>{{#str}}obtainteacherapproval,publication{{/str}}</th>
+                <td>{{obtainteacherapproval}}</td>
+            </tr>
+            <tr>
+                <th>{{obtainstudentapprovaltitle}}</th>
+                <td>{{obtainstudentapproval}}</td>
+            </tr>
+            <tr>
+                <th>{{studentcounttitle}}</th>
+                <td>{{studentcount}}</td>
+            </tr>
+            <tr>
+                <th>{{#str}}submitted,assign{{/str}}</th>
+                <td>{{^allfiles_empty}}<a href="{{allfiles_url}}">{{allfilescount}}</a>{{/allfiles_empty}}{{#allfiles_empty}}0{{/allfiles_empty}}</td>
+            </tr>
+            {{#showapprovalrequired}}
+                <tr>
+                    <th>{{#str}}approval_required,publication{{/str}}</th>
+                    <td><a href="{{viewall_approvalneeded_url}}">{{approvalrequiredcount}}</a></td>
+                </tr>
+            {{/showapprovalrequired}}
+        {{/isteacher}}
+    </table>
+</div>
+{{#isteacher}}
+    {{{myfilesform}}}
+{{/isteacher}}

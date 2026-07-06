@@ -1,0 +1,6 @@
+--2026-04-10 17:23:58--  https://moodle.org/plugins/view.php?plugin=local_o365
+Resolving moodle.org (moodle.org)... 172.66.175.83, 104.20.33.175, 2606:4700:10::6814:21af, ...
+Connecting to moodle.org (moodle.org)|172.66.175.83|:443... connected.
+HTTP request sent, awaiting response... 403 Forbidden
+2026-04-10 17:23:58 ERROR 403: Forbidden.
+
