@@ -85,6 +85,12 @@ select {
     }
 }
 
+.path-mod-choice {
+    .responseaction select.singleselect {
+        display: inline-block;
+    }
+}
+
 // Forum module
 
 .path-mod-forum .forumsearch {
@@ -1026,6 +1032,10 @@ div#dock {
     }
     .fitem .felement .form-select {
         align-self: flex-start;
+    }
+    .mediaplugin,
+    .mediaplugin video {
+        min-width: 200px;
     }
 }
 .path-mod-lesson .table td {
