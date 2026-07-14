@@ -1,7 +1,7 @@
 <?php
 // Respondus LockDown Browser Extension for Moodle
-// Copyright (c) 2011-2024 Respondus, Inc.  All Rights Reserved.
-// Date: May 10, 2024.
+// Copyright (c) 2011-2026 Respondus, Inc.  All Rights Reserved.
+// Date: January 22, 2026.
 
 require_once(dirname(dirname(dirname(__FILE__))) . "/config.php");
 require_once("$CFG->dirroot/blocks/lockdownbrowser/locklib.php");

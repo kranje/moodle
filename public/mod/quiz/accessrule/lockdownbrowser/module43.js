@@ -1,6 +1,6 @@
 // Respondus LockDown Browser Extension for Moodle
-// Copyright (c) 2011-2024 Respondus, Inc.  All Rights Reserved.
-// Date: May 10, 2024.
+// Copyright (c) 2011-2026 Respondus, Inc.  All Rights Reserved.
+// Date: January 22, 2026.
 
 // Moodle 4.3.0+
 // This file is based on /mod/quiz/module.js
@@ -287,11 +287,13 @@ M.quizaccess_lockdownbrowser.secure_window = {
         if (window.location.href.substring(0, 4) == 'file') {
             window.location = 'about:blank';
         }
+        if (document.cookie.includes("cbLDBex=1") === false) { // Trac #9914
+            Y.delegate('selectstart', M.quizaccess_lockdownbrowser.secure_window.prevent_selection, document, '*');
+            Y.delegate('mousedown',   M.quizaccess_lockdownbrowser.secure_window.prevent_mouse, 'body', '*');
+            Y.delegate('mouseup',     M.quizaccess_lockdownbrowser.secure_window.prevent_mouse, 'body', '*');
+        }
         Y.delegate('contextmenu', M.quizaccess_lockdownbrowser.secure_window.prevent, document, '*');
-        Y.delegate('mousedown',   M.quizaccess_lockdownbrowser.secure_window.prevent_mouse, 'body', '*');
-        Y.delegate('mouseup',     M.quizaccess_lockdownbrowser.secure_window.prevent_mouse, 'body', '*');
         Y.delegate('dragstart',   M.quizaccess_lockdownbrowser.secure_window.prevent, document, '*');
-        Y.delegate('selectstart', M.quizaccess_lockdownbrowser.secure_window.prevent_selection, document, '*');
         Y.delegate('cut',         M.quizaccess_lockdownbrowser.secure_window.prevent, document, '*');
         // Trac #5456
         //Y.delegate('copy',        M.quizaccess_lockdownbrowser.secure_window.prevent, document, '*');

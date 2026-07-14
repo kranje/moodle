@@ -44,14 +44,14 @@
     {{#isediting}}
     <ul class="format-letstudy__sections format-letstudy__sections--{{sectionlayout}}" data-for="course_sectionlist">
         {{#initialsection}}
-        {{$ core_courseformat/local/content }}
-            {{> core_courseformat/local/content }}
-        {{/ core_courseformat/local/content }}
+        {{$ core_courseformat/local/content/section }}
+            {{> core_courseformat/local/content/section }}
+        {{/ core_courseformat/local/content/section }}
         {{/initialsection}}
         {{#sections}}
-        {{$ core_courseformat/local/content }}
-            {{> core_courseformat/local/content }}
-        {{/ core_courseformat/local/content }}
+        {{$ core_courseformat/local/content/section }}
+            {{> core_courseformat/local/content/section }}
+        {{/ core_courseformat/local/content/section }}
         {{/sections}}
     </ul>
     {{/isediting}}

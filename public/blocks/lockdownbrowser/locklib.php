@@ -1,7 +1,7 @@
 <?php
 // Respondus LockDown Browser Extension for Moodle
-// Copyright (c) 2011-2024 Respondus, Inc.  All Rights Reserved.
-// Date: May 10, 2024.
+// Copyright (c) 2011-2026 Respondus, Inc.  All Rights Reserved.
+// Date: January 22, 2026.
 
 define("LOCKDOWNBROWSER_LOCKLIB_ENABLE_LOG", false); // set true to enable logging to temp file
 define("LOCKDOWNBROWSER_LOCKLIB_LOG", "ldb_locklib.log");

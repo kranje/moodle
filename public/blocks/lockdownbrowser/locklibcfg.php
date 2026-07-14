@@ -1,10 +1,10 @@
 <?php
 // Respondus LockDown Browser Extension for Moodle
-// Copyright (c) 2011-2024 Respondus, Inc.  All Rights Reserved.
-// Date: May 10, 2024.
+// Copyright (c) 2011-2026 Respondus, Inc.  All Rights Reserved.
+// Date: January 22, 2026.
 
 // ----- never edit these
-define('LDB_SERVERNAME', 'Moodle+%40+Centre');
+define('LDB_SERVERNAME', 'Moodle+Courses');
 define('LDB_SERVERID', '722233975');
 define('LDB_SERVERSECRET', 'centre');
 define('LDB_SERVERTYPE', '0');

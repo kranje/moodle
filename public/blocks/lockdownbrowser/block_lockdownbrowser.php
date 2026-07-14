@@ -1,7 +1,7 @@
 <?php
 // Respondus LockDown Browser Extension for Moodle
-// Copyright (c) 2011-2024 Respondus, Inc.  All Rights Reserved.
-// Date: May 10, 2024.
+// Copyright (c) 2011-2026 Respondus, Inc.  All Rights Reserved.
+// Date: January 22, 2026.
 
 class block_lockdownbrowser extends block_base {
 
@@ -16,6 +16,7 @@ class block_lockdownbrowser extends block_base {
     public function get_content() {
 
         global $CFG, $COURSE;
+        global $DB; // Trac #9465
 
         if ($this->content != null) {
 
@@ -33,13 +34,37 @@ class block_lockdownbrowser extends block_base {
             $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
         }
 
+        $this->content->footer = '';
+
         if (has_capability('moodle/course:manageactivities', $context)
           || has_capability('moodle/course:viewhiddenactivities', $context) // Trac #3595
            ) {
-            $this->content->footer = '<a href="' . $CFG->wwwroot . '/blocks/lockdownbrowser/dashboard.php?course=' .
-                $COURSE->id . '">' . get_string('dashboard', 'block_lockdownbrowser') . ' ...</a>';
-        } else {
-            $this->content->footer = '';
+            // Trac #9465
+            //$this->content->footer = '<a href="' . $CFG->wwwroot . '/blocks/lockdownbrowser/dashboard.php?course=' .
+            //  $COURSE->id . '">' . get_string('dashboard', 'block_lockdownbrowser') . ' ...</a>';
+            $tableName = "lti_types";
+            $table = new xmldb_table($tableName);
+            $dbman = $DB->get_manager();
+            $tableExists = $dbman->table_exists($table);
+            $recordExists = false;
+            if ($tableExists === true) {
+                $records = $DB->get_records($tableName);
+                if (count($records) > 0) {
+                    foreach ($records as $rec) {
+                        if (strcmp($rec->baseurl, "https://smc-service-cloud.respondus2.com/MONServer/moodle/lti-login.do") === 0
+                          && $rec->state === 1
+                          ) {
+                            $recordExists = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if ($recordExists === false) {
+                // LTI dashboard not present, display link to local dashboard
+                $this->content->footer = '<a href="' . $CFG->wwwroot . '/blocks/lockdownbrowser/dashboard.php?course=' .
+                  $COURSE->id . '">' . get_string('dashboard', 'block_lockdownbrowser') . ' ...</a>';
+             }
         }
 
         return $this->content;

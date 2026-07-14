@@ -1,7 +1,7 @@
 <?php
 // Respondus LockDown Browser Extension for Moodle
-// Copyright (c) 2011-2024 Respondus, Inc.  All Rights Reserved.
-// Date: May 10, 2024.
+// Copyright (c) 2011-2026 Respondus, Inc.  All Rights Reserved.
+// Date: January 22, 2026.
 
 require_once(dirname(dirname(dirname(__FILE__))) . "/config.php");
 require_once("$CFG->libdir/sessionlib.php");
@@ -56,6 +56,7 @@ if ($lockdownbrowser_quiz->attempts == 0) {
         print_error("nomoreattempts", "mod_quiz");
     }
 }
+
 // init SDK2015 session info
 $_SESSION['lockdownbrowser_sdk2015_session']['active'] = true;
 $_SESSION['lockdownbrowser_sdk2015_session']['challenge'] = $lockdownbrowser_challenge_value;
@@ -146,7 +147,9 @@ $lockdownbrowser_page_html = "<html>\r\n"
   . "</div>\r\n"
   . "<form name='startexam' method='post' style='display:none;' action='$lockdownbrowser_exam_url'>\r\n"
   . "<input type='hidden' name='cmid' value='$lockdownbrowser_examid_parm_value'/>\r\n"
-  . "<input type='hidden' name='sesskey' value='$lockdownbrowser_session_key'/>\r\n"
+  . "<input type='hidden' name='sesskey' value='$lockdownbrowser_session_key'/>\r\n";
+
+$lockdownbrowser_page_html = $lockdownbrowser_page_html
   . "</form>\r\n"
   . "</body>\r\n"
   . "</html>\r\n";

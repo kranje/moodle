@@ -47,6 +47,16 @@ class Blowfish {
   const BLOWFISH_PADDING_RFC  = 21;
   const BLOWFISH_PADDING_ZERO = 22;
 
+  // added by Respondus for Trac #9203
+  // avoids PHP 8.2 warning about deprecation of dynamic properties
+  public $mode;
+  public $padding;
+  public $N;
+  public $blockSize;
+  public $IV;
+  public $P;
+  public $S;
+
   // modified by Respondus
   //function Blowfish($key, $mode, $padding, $iv=NULL) {
   function __construct($key, $mode, $padding, $iv=NULL) {
